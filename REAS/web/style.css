@@ -72,11 +72,25 @@ a.navbar-item:hover{
 
 .search-bar {
     width: 80%;
+    border: 1px solid #D9AB73;
+    background: #FDF7FB;
+}
+ 
+.field .button-search  {
+    border: 1px solid #D9AB73;
+    background: #000;
+    width: 100%;
+    color: #D9AB73;
+    text-align: center;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.button-search {
-
-    width: 100%;
+.field .button-search:hover {
+    color: #fff;
+    background-color: #000;
 }
 
 .button-search-container {
@@ -84,7 +98,8 @@ a.navbar-item:hover{
     justify-content: center;
     align-items: center;
     width: 15%;
-
+    border: 2px solid #FFF;
+    background: #000;
 }
 
 .search-container {

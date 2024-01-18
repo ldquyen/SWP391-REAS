@@ -66,8 +66,8 @@
                         <input class="input" type="text" placeholder="Find a repository">
                     </div>
                     <div class="control button-search-container">
-                        <a class="button button-search is-info">
-                            Search
+                        <a class="button is-info button-search">
+                            Tìm kiếm
                         </a>
                     </div>
                 </div>
