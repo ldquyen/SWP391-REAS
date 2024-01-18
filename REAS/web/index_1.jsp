@@ -44,14 +44,32 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <div class="buttons" >
-                            <a class="button is-light">
-                                <strong>ĐĂNG NHẬP</strong>
-                            </a>
-                            <a class="button is-light">
-                                <strong>ĐĂNG KÝ</strong>
-                            </a>
+                        <div class="navbar-container-1">
+                            <p class="navbar-1">DS đấu giá</p>                  
                         </div>
+                        <div class="navbar-container-1">
+                            <p class="navbar-1">Đăng tin</p>                  
+                        </div>
+                        <div class="navbar-container-1">
+                            <p class="navbar-1">10.000.000</p>                  
+                        </div>
+                        <div class="navbar-container-1">
+                            <p class="navbar-1-list">ABCXYZ</p>                  
+                        </div>
+
+                        <!--                        
+                                                <div style="width: 100%; height: 100%; background: black; border-radius: 30px; border: 3px #D9AB73 solid">
+                                                    <div style="width: 100%; height: 100%; text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">DS đấu giá</div>
+                                                </div>
+                                                <div style="width: 100%; height: 100%; background: black; border-radius: 30px; border: 3px #D9AB73 solid">
+                                                    <div style="width: 100%; height: 100%; text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">Đăng tin</div>
+                                                </div>
+                                                <div style="width: 100%; height: 100%; background: black; border-radius: 30px; border: 3px #D9AB73 solid">
+                                                    <div style="width: 100%; height: 100%; text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">10.000.000</div>
+                                                </div>
+                                                <div style="width: 100%; height: 100%; background: black; border: 3px #D9AB73 solid">
+                                                    <div style="width: 100%; height: 100%; text-align: center; color: #D9AB73; font-size: 24px; font-family: Inter; font-weight: 700; word-wrap: break-word">ABCXYZ</div>
+                                                </div>-->
                     </div>
                 </div>
             </div>
@@ -70,7 +88,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                        <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>
