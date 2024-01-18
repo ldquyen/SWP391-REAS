@@ -17,7 +17,7 @@
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="https://bulma.io">
-                    <img class="logo-header" src="image/logo.png" href="" width="100" height="28" />
+                    <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
                 </a>
 
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -58,12 +58,20 @@
         </nav>
 
         <footer class="footer"> 
-            <div class="content has-text-centered">
-                <p>
-                    <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-                    <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-                    is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-                </p>
+            <div>
+                <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
+                <div class="footer-container">
+                    <div class="footer-left-content"> Liên hệ:<br/>
+                        Email: reas@gmail.com<br/>
+                        Điện thoại: +84 (24) 8888 9999<br/>
+                        <br/>
+                    </div>
+                    <div class="footer-mid-content"> Trụ sở chính:<br/>
+                        Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
+                        <br/>
+                    </div>
+                        <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                </div>
             </div>
         </footer>
     </body>

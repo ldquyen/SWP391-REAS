@@ -32,7 +32,58 @@ a.navbar-item:hover{
 
 .footer {
     position: fixed;
-   width: 1440px;
-    height: 203px;
+    width: 1440px;
     flex-shrink: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #000;
+    color: white;
+    padding: 15px 0 0 0
+}
+
+.footer-container{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 12px;
+}
+
+.footer_content1 {
+    color: #D9AB73;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-align: center;
+}
+
+.footer-left-content {
+    width: 424px;
+    flex-shrink: 0;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer-mid-content {
+    width: 607px;
+    flex-shrink: 0;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer-right-content {
+    width: 200px;
+    height: 65px;
+    flex-shrink: 0;
+    max-height: 50%;
+    background: lightgray 50% / cover no-repeat;
 }
