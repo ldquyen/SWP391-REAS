@@ -63,7 +63,7 @@
             <div class="search-wrap">
                 <div class="field has-addons">
                     <div class="control search-bar">
-                        <input class="input" type="text" placeholder="Find a repository">
+                        <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
                     </div>
                     <div class="control button-search-container">
                         <a class="button is-info button-search">
@@ -75,28 +75,34 @@
                     <div class="control">
                         <div class="select">
                             <select>
-                                <option>Select dropdown</option>
+                                <option>Loại hình bds</option>
+                                <option>Chung cư</option>
+                                <option>Biệt thự</option>
+                                <option>Nhà đất</option>
+                                <option>Condotel</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select>
+                                <option>Thành phố</option>
                                 <option>With options</option>
                             </select>
                         </div>
                         <div class="select">
                             <select>
-                                <option>Select dropdown</option>
+                                <option>Diện tích</option>
                                 <option>With options</option>
                             </select>
                         </div>
                         <div class="select">
                             <select>
-                                <option>Select dropdown</option>
+                                <option>Mức giá</option>
                                 <option>With options</option>
                             </select>
                         </div>
-                        <div class="select">
-                            <select>
-                                <option>Select dropdown</option>
-                                <option>With options</option>
-                            </select>
-                        </div>
+                    </div>
+                    <div class="realestate-quantity">
+                        <p>Hiện có 99 dự án</p>
                     </div>
                 </div>
             </div>
