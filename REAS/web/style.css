@@ -72,12 +72,11 @@ a.navbar-item:hover{
 
 .search-bar {
     width: 80%;
-    border: 1px solid #D9AB73;
+    border: 3px solid #D9AB73;
     background: #FDF7FB;
 }
- 
+
 .field .button-search  {
-    border: 1px solid #D9AB73;
     background: #000;
     width: 100%;
     color: #D9AB73;
@@ -98,15 +97,21 @@ a.navbar-item:hover{
     justify-content: center;
     align-items: center;
     width: 15%;
-    border: 2px solid #FFF;
     background: #000;
+    margin-left: 10px;
+    border: 2px solid #FFF;
+
+}
+
+.button-search-container:hover {
+    border: 2px solid #D9AB73;
 }
 
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 30px
+    padding-top: 30px;
 }
 
 .search-wrap {
@@ -122,6 +127,32 @@ a.navbar-item:hover{
 }
 
 .search-container .field {
+    display: flex;
+    justify-content: center;
+}
+
+.search-detail-container .control .select:after {
+    /*    content: '\25BC';  Unicode character for down arrow 
+                font-size: 16px;
+                color: #ff6600;  Change this to the desired arrow color 
+                position: absolute;
+                top: 50%;
+                right: 5px;
+                transform: translateY(-50%);*/
+}
+
+.realestate-quantity {
+    width: 230px;
+    height: 40px;
+    flex-shrink: 0;
+    color: #D9AB73;
+    text-align: right;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    align-items: center;
     display: flex;
     justify-content: center;
 }
