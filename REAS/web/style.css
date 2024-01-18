@@ -66,6 +66,10 @@ a.navbar-item:hover{
     border: 30px; border: 3px #D9AB73 solid;
 }
 
+.search-container {
+    
+}
+
 .footer {
     position: fixed;
     width: 1440px;

@@ -56,11 +56,20 @@
                 </div>
             </div>
         </nav>
-        
-       
+
+
         <!-- BODY -->
-        <div>
-            
+        <div class="search-container">
+            <div class="field has-addons">
+                <div class="control">
+                    <input class="input" type="text" placeholder="Find a repository">
+                </div>
+                <div class="control">
+                    <a class="button is-info">
+                        Search
+                    </a>
+                </div>
+            </div>
         </div>
 
         <footer class="footer"> 
@@ -76,7 +85,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                        <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>
