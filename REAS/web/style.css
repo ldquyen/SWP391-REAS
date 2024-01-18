@@ -11,8 +11,15 @@ and open the template in the editor.
     background-color: black;
 }
 
+.navbar-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .navbar-item img{
-    max-height: 65px;
+    max-height: 45px;
+    max-width: 85%;
 }
 
 .navbar-start a{
@@ -76,7 +83,7 @@ a.navbar-item:hover{
 .footer_content1 {
     color: #D9AB73;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
@@ -87,7 +94,7 @@ a.navbar-item:hover{
     flex-shrink: 0;
     color: #FFF;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -98,7 +105,7 @@ a.navbar-item:hover{
     flex-shrink: 0;
     color: #FFF;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
