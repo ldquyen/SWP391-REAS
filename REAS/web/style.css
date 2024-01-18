@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 18, 2024, 3:44:04 PM
+    Author     : tranl
+*/
+.navbar {
+    background-color: black;
+}
+
+.navbar-item img{
+    max-height: 65px;
+}
+
+.navbar-start a{
+    color: #fff;
+}
+
+a.navbar-item:hover{
+    color: #000;
+    background-color: #fff
+}
+
+.navbar-end .navbar-item .buttons a{
+    color: #D9AB73;
+    background-color: #000;
+    margin-right: 0px
+}
+
+.footer {
+    position: fixed;
+   width: 1440px;
+    height: 203px;
+    flex-shrink: 0;
+}
