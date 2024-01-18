@@ -56,11 +56,50 @@
                 </div>
             </div>
         </nav>
-        
-       
+
+
         <!-- BODY -->
-        <div>
-            
+        <div class="search-container">
+            <div class="search-wrap">
+                <div class="field has-addons">
+                    <div class="control search-bar">
+                        <input class="input" type="text" placeholder="Find a repository">
+                    </div>
+                    <div class="control button-search-container">
+                        <a class="button is-info button-search">
+                            Tìm kiếm
+                        </a>
+                    </div>
+                </div>
+                <div class="search-detail-container">
+                    <div class="control">
+                        <div class="select">
+                            <select>
+                                <option>Select dropdown</option>
+                                <option>With options</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select>
+                                <option>Select dropdown</option>
+                                <option>With options</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select>
+                                <option>Select dropdown</option>
+                                <option>With options</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select>
+                                <option>Select dropdown</option>
+                                <option>With options</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <footer class="footer"> 
@@ -76,7 +115,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                        <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>

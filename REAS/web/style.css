@@ -15,6 +15,7 @@ and open the template in the editor.
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Inter;
 }
 
 .navbar-item img{
@@ -63,6 +64,66 @@ a.navbar-item:hover{
     font-weight: 700;
     word-wrap: break-word;
     border: 30px; border: 3px #D9AB73 solid;
+}
+
+.field {
+    padding: 15px 0px
+}
+
+.search-bar {
+    width: 80%;
+    border: 1px solid #D9AB73;
+    background: #FDF7FB;
+}
+ 
+.field .button-search  {
+    border: 1px solid #D9AB73;
+    background: #000;
+    width: 100%;
+    color: #D9AB73;
+    text-align: center;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.field .button-search:hover {
+    color: #fff;
+    background-color: #000;
+}
+
+.button-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    border: 2px solid #FFF;
+    background: #000;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px
+}
+
+.search-wrap {
+    width: 972px;
+    height: 148px;
+    flex-shrink: 0;
+    background-color: #000;
+}
+
+.search-detail-container {
+    display: flex;
+    justify-content: center;
+}
+
+.search-container .field {
+    display: flex;
+    justify-content: center;
 }
 
 .footer {
@@ -128,5 +189,5 @@ a.navbar-item:hover{
 }
 
 .buttons a {
-     padding: 8px 10px;
+    padding: 8px 10px;
 }
