@@ -45,16 +45,16 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="navbar-container-1">
-                            <p class="navbar-1">DS đấu giá</p>                  
+                            <a class="navbar-1">DS đấu giá</a>                  
                         </div>
                         <div class="navbar-container-1">
-                            <p class="navbar-1">Đăng tin</p>                  
+                            <a class="navbar-1">Đăng tin</a>                  
                         </div>
                         <div class="navbar-container-1">
-                            <p class="navbar-1">10.000.000</p>                  
+                            <a class="navbar-1">10.000.000</a>                  
                         </div>
                         <div class="navbar-container-1">
-                            <p class="navbar-1-list">ABCXYZ</p>                  
+                            <a class="navbar-1-list">ABCXYZ</a>                  
                         </div>
 
                         <!--                        

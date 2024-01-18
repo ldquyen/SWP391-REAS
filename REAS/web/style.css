@@ -11,8 +11,15 @@ and open the template in the editor.
     background-color: black;
 }
 
+.navbar-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .navbar-item img{
-    max-height: 65px;
+    max-height: 45px;
+    max-width: 85%;
 }
 
 .navbar-start a{
@@ -20,8 +27,8 @@ and open the template in the editor.
 }
 
 a.navbar-item:hover{
-    color: #000;
-    background-color: #fff
+    color: #D9AB73;
+    background-color: #000;
 }
 
 .navbar-end .navbar-item .buttons a{
@@ -32,6 +39,10 @@ a.navbar-item:hover{
 
 .navbar-container-1 {
     padding: 0 5px;
+}
+
+.navbar-container-1 a:hover {
+    color: #fff;
 }
 
 .navbar-1{
@@ -76,7 +87,7 @@ a.navbar-item:hover{
 .footer_content1 {
     color: #D9AB73;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
@@ -87,7 +98,7 @@ a.navbar-item:hover{
     flex-shrink: 0;
     color: #FFF;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -98,7 +109,7 @@ a.navbar-item:hover{
     flex-shrink: 0;
     color: #FFF;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -110,4 +121,12 @@ a.navbar-item:hover{
     flex-shrink: 0;
     max-height: 50%;
     background: lightgray 50% / cover no-repeat;
+}
+
+.buttons .button:not(:last-child):not(.is-fullwidth) {
+    margin-right: 0px;
+}
+
+.buttons a {
+     padding: 8px 10px;
 }
