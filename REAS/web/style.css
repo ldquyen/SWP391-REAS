@@ -118,3 +118,11 @@ a.navbar-item:hover{
     max-height: 50%;
     background: lightgray 50% / cover no-repeat;
 }
+
+.buttons .button:not(:last-child):not(.is-fullwidth) {
+    margin-right: 0px;
+}
+
+.buttons a {
+     padding: 8px 10px;
+}
