@@ -46,6 +46,7 @@ a.navbar-item:hover{
     display: flex;
     justify-content: space-around;
     padding-top: 12px;
+    max-height: 90px;
 }
 
 .footer_content1 {
@@ -59,7 +60,6 @@ a.navbar-item:hover{
 }
 
 .footer-left-content {
-    width: 424px;
     flex-shrink: 0;
     color: #FFF;
     font-family: Inter;
@@ -70,7 +70,7 @@ a.navbar-item:hover{
 }
 
 .footer-mid-content {
-    width: 607px;
+    width: 424px;
     flex-shrink: 0;
     color: #FFF;
     font-family: Inter;
