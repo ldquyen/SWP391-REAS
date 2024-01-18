@@ -60,14 +60,44 @@
 
         <!-- BODY -->
         <div class="search-container">
-            <div class="field has-addons">
-                <div class="control">
-                    <input class="input" type="text" placeholder="Find a repository">
+            <div class="search-wrap">
+                <div class="field has-addons">
+                    <div class="control search-bar">
+                        <input class="input" type="text" placeholder="Find a repository">
+                    </div>
+                    <div class="control button-search-container">
+                        <a class="button button-search is-info">
+                            Search
+                        </a>
+                    </div>
                 </div>
-                <div class="control">
-                    <a class="button is-info">
-                        Search
-                    </a>
+                <div class="search-detail-container">
+                    <div class="control">
+                        <div class="select">
+                            <select>
+                                <option>Select dropdown</option>
+                                <option>With options</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select>
+                                <option>Select dropdown</option>
+                                <option>With options</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select>
+                                <option>Select dropdown</option>
+                                <option>With options</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select>
+                                <option>Select dropdown</option>
+                                <option>With options</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

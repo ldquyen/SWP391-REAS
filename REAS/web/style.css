@@ -66,8 +66,49 @@ a.navbar-item:hover{
     border: 30px; border: 3px #D9AB73 solid;
 }
 
+.field {
+    padding: 15px 0px
+}
+
+.search-bar {
+    width: 80%;
+}
+
+.button-search {
+
+    width: 100%;
+}
+
+.button-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+
+}
+
 .search-container {
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px
+}
+
+.search-wrap {
+    width: 972px;
+    height: 148px;
+    flex-shrink: 0;
+    background-color: #000;
+}
+
+.search-detail-container {
+    display: flex;
+    justify-content: center;
+}
+
+.search-container .field {
+    display: flex;
+    justify-content: center;
 }
 
 .footer {
@@ -133,5 +174,5 @@ a.navbar-item:hover{
 }
 
 .buttons a {
-     padding: 8px 10px;
+    padding: 8px 10px;
 }
