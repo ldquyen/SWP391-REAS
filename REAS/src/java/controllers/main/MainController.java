@@ -1,4 +1,3 @@
-
 package controllers.main;
 
 import java.io.IOException;
@@ -14,8 +13,8 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           String action = request.getParameter("action");
-            String url = "index.jsp";
+            String action = request.getParameter("action");
+            String url = "";
             if (action == null) {
                 action = "";
             }
@@ -23,13 +22,16 @@ public class MainController extends HttpServlet {
                 case "":
                     url = "index.jsp";
                     break;
-                case "ĐĂNG NHẬP":
+                case "DN":
                     url = "login.jsp";
                     break;
-                
+                case "DK":
+                    url = "register.jsp";
+                    break;
+
             }
             request.getRequestDispatcher(url).forward(request, response);
-            
+
         }
     }
 
