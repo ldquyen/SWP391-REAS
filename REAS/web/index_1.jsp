@@ -34,21 +34,41 @@
                     </a>
 
                     <a class="navbar-item">
-                        VỀ CHÚNG TÔI
+                        <form action="MainController" method="post">
+                            <button type="submit" value="aboutus" name="action">
+                                <span>VỀ CHÚNG TÔI</span>
+                            </button>
+                        </form>
                     </a>
 
                     <a class="navbar-item">
-                        NỘI QUY
+                        <form action="MainController" method="post">
+                            <button type="submit" value="rule" name="action">
+                                <span>NỘI QUY</span>
+                            </button>
+                        </form>
                     </a>
                 </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="navbar-container-1">
-                            <a class="navbar-1">DS đấu giá</a>                  
+                            <a class="navbar-item">
+                                <form action="MainController" method="post">
+                                    <button type="submit" value="auctionList" name="action">
+                                        <span>DS ĐẤU GIÁ</span>
+                                    </button>
+                                </form>
+                            </a>                  
                         </div>
                         <div class="navbar-container-1">
-                            <a class="navbar-1">Đăng tin</a>                  
+                            <a class="navbar-item">
+                                <form action="MainController" method="post">
+                                    <button type="submit" value="postNew" name="action">
+                                        <span>ĐĂNG TIN</span>
+                                    </button>
+                                </form>
+                            </a>                  
                         </div>
                         <div class="navbar-container-1">
                             <a class="navbar-1">10.000.000</a>                  
@@ -56,6 +76,8 @@
                         <div class="navbar-container-1">
                             <a class="navbar-1-list">ABCXYZ</a>                  
                         </div>
+                        
+                        
 
                         <!--                        
                                                 <div style="width: 100%; height: 100%; background: black; border-radius: 30px; border: 3px #D9AB73 solid">
