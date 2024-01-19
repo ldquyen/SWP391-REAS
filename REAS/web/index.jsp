@@ -74,7 +74,7 @@
                 <div class="search-detail-container">
                     <div class="control">
                         <div class="select">
-                            <select>
+                            <select class="custom-select">
                                 <option>Loại hình bất động sản</option>
                                 <option>Chung cư</option>
                                 <option>Biệt thự</option>
@@ -83,13 +83,13 @@
                             </select>
                         </div>
                         <div class="select">
-                            <select>
+                            <select class="custom-select">
                                 <option>Thành phố</option>
                                 <option>With options</option>
                             </select>
                         </div>
                         <div class="select">
-                            <select>
+                            <select class="custom-select">
                                 <option>Diện tích</option>
                                 <option>0-100 m2</option>
                                 <option>100-500 m2</option>
@@ -98,7 +98,7 @@
                             </select>
                         </div>
                         <div class="select">
-                            <select>
+                            <select class="custom-select">
                                 <option>Mức giá</option>
                                 <option>0-5 tỷ</option>
                                 <option>5-10 tỷ</option>
