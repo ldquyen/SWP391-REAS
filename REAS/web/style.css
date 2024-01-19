@@ -32,10 +32,15 @@ a.navbar-item:hover{
     background-color: #000;
 }
 
-.navbar-end .navbar-item .buttons a{
+.navbar-end .navbar-item .buttons button{
     color: #D9AB73;
     background-color: #000;
-    margin-right: 0px
+    margin-right: 0px;
+    font-family: Inter;
+}
+
+.navbar-end .navbar-item .buttons button:hover{
+    color: #fff;
 }
 
 .navbar-container-1 {
@@ -223,7 +228,7 @@ a.navbar-item:hover{
     margin-right: 0px;
 }
 
-.buttons a {
+.buttons button {
     padding: 8px 10px;
 }
 
