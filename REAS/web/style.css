@@ -145,16 +145,6 @@ a.navbar-item:hover{
 }
 
 
-.custom-select:hover  {
-    background-color: #000 !important;
-    color: #fff; /* Optional: Change text color for better visibility */
-}
-
-.custom-select:after option {
-    background-color: #000 !important;
-    color: #fff; /* Optional: Change text color for better visibility */
-}
-
 .realestate-quantity {
     width: 230px;
     height: 40px;
