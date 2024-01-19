@@ -28,7 +28,12 @@ public class MainController extends HttpServlet {
                 case "DK":
                     url = "register.jsp";
                     break;
-
+                case "aboutus":
+                    url = "aboutUS.jsp";
+                    break;
+                case "rule":
+                    url = "rule.jsp";
+                    break;
             }
             request.getRequestDispatcher(url).forward(request, response);
 
