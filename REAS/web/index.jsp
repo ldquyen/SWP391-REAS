@@ -34,12 +34,22 @@
                     </a>
 
                     <a class="navbar-item">
-                        VỀ CHÚNG TÔI
+                        <form action="MainController" method="post">
+                            <button type="submit" value="aboutus" name="action">
+                                <span>VỀ CHÚNG TÔI</span>
+                            </button>
+                        </form>
                     </a>
 
                     <a class="navbar-item">
-                        NỘI QUY
+                        <form action="MainController" method="post">
+                            <button type="submit" value="rule" name="action">
+                                <span>NỘI QUY</span>
+                            </button>
+                        </form>
                     </a>
+
+
                 </div>
 
                 <div class="navbar-end">
@@ -50,7 +60,7 @@
                                     <span>ĐĂNG NHẬP</span>
                                 </button>
                             </form>
-                             <form action="MainController" method="post">
+                            <form action="MainController" method="post">
                                 <button class="button is-light" type="submit" value="DK" name="action">
                                     <span>ĐĂNG KÝ</span>
                                 </button>
