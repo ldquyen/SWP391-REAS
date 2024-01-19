@@ -16,7 +16,10 @@
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
+
                 <a class="navbar-item" href="">
+
+                <a class="navbar-item" href="#">
                     <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
                 </a>
 
@@ -45,12 +48,16 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons" >
-                            <a class="button is-light">
-                                <strong>ĐĂNG NHẬP</strong>
-                            </a>
-                            <a class="button is-light">
-                                <strong>ĐĂNG KÝ</strong>
-                            </a>
+                            <form action="MainController" method="post">
+                                <button class="button is-light" type="submit" value="DN" name="action">
+                                    <span>ĐĂNG NHẬP</span>
+                                </button>
+                            </form>
+                             <form action="MainController" method="post">
+                                <button class="button is-light" type="submit" value="DK" name="action">
+                                    <span>ĐĂNG KÝ</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
