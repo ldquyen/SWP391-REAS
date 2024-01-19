@@ -75,7 +75,7 @@
                     <div class="control">
                         <div class="select">
                             <select>
-                                <option>Loại hình bds</option>
+                                <option>Loại hình bất động sản</option>
                                 <option>Chung cư</option>
                                 <option>Biệt thự</option>
                                 <option>Nhà đất</option>
@@ -91,13 +91,20 @@
                         <div class="select">
                             <select>
                                 <option>Diện tích</option>
-                                <option>With options</option>
+                                <option>0-100 m2</option>
+                                <option>100-500 m2</option>
+                                <option>500-1000 m2</option>
+                                <option>Trên 1000 m2</option>
                             </select>
                         </div>
                         <div class="select">
                             <select>
                                 <option>Mức giá</option>
-                                <option>With options</option>
+                                <option>0-5 tỷ</option>
+                                <option>5-10 tỷ</option>
+                                <option>10-50 tỷ</option>
+                                <option>50-100 tỷ</option>
+                                <option>Trên 100 tỷ</option>
                             </select>
                         </div>
                     </div>
