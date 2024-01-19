@@ -67,7 +67,7 @@ a.navbar-item:hover{
 }
 
 .field {
-    padding: 15px 0px
+        padding: 8px 0 0 0;
 }
 
 .search-bar {
@@ -116,9 +116,12 @@ a.navbar-item:hover{
 
 .search-wrap {
     width: 972px;
-    height: 148px;
+    height: 115px;
     flex-shrink: 0;
     background-color: #000;
+        border: 2px solid #D9AB73;
+        border-radius: 15px ;
+        /*border-color: #D9AB73;*/
 }
 
 .search-detail-container {
