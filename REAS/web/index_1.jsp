@@ -53,22 +53,18 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="navbar-container-1">
-                            <a class="navbar-item">
                                 <form action="MainController" method="post">
-                                    <button type="submit" value="auctionList" name="action">
+                                    <button class="navbar-1" type="submit" value="auctionList" name="action">
                                         <span>DS ĐẤU GIÁ</span>
                                     </button>
                                 </form>
-                            </a>                  
                         </div>
                         <div class="navbar-container-1">
-                            <a class="navbar-item">
                                 <form action="MainController" method="post">
-                                    <button type="submit" value="postNew" name="action">
+                                    <button class="navbar-1" type="submit" value="postNew" name="action">
                                         <span>ĐĂNG TIN</span>
                                     </button>
                                 </form>
-                            </a>                  
                         </div>
                         <div class="navbar-container-1">
                             <a class="navbar-1">10.000.000</a>                  
