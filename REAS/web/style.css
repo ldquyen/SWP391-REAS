@@ -117,8 +117,8 @@ a.navbar-item:hover{
 }
 
 .navbar-end .navbar-item .navbar-link:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #D9AB73;
 }
 
 .field {
@@ -129,6 +129,14 @@ a.navbar-item:hover{
     width: 80%;
     border: 3px solid #D9AB73;
     background: #FDF7FB;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: #000;
+}
+
+.select:not(.is-multiple):not(.is-loading):hover::after {
+    border-color: #D9AB73;
 }
 
 .field .button-search  {
@@ -352,6 +360,17 @@ button {
 .navbar-dropdown a.navbar-item:focus {
     background-color: #000 !important;
 }
+
+.navbar-link:not(.is-arrowless)::after {
+    border-color: #D9AB73;; /* Default border color */
+}
+
+/* Styles when .navbar-link is focused */
+.navbar-item .navbar-link:focus {
+    background-color: #000;
+    color: #fff;
+}
+
 
 .navbar-divider  {
     background-color: #323232;
