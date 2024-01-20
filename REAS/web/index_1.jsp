@@ -72,7 +72,7 @@
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
-                                ABCXYZ
+                                USERNAME
                             </a>
                             <div class="fake-div"></div>
 

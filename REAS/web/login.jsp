@@ -74,6 +74,10 @@
             </div>
         </nav>
         
+        <div>
+            <img class="background-login" src="image/background-login.png" alt="background-login" />
+        </div>
+        
         <footer class="footer"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
