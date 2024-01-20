@@ -23,8 +23,29 @@ and open the template in the editor.
     max-width: 85%;
 }
 
+.navbar-start .navbar-item button{
+    color: #fff;
+    background-color: #000;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Inter;
+    font-size: 16px;
+}
+
+.navbar-start .navbar-item button:hover{
+    color: #D9AB73;
+    background-color: #000;
+}
+
 .navbar-start a{
     color: #fff;
+}
+
+.navbar-start button{
+    /*    color: #fff;
+        background-color: #000;*/
 }
 
 a.navbar-item:hover{
@@ -45,6 +66,25 @@ a.navbar-item:hover{
 
 .navbar-container-1 {
     padding: 0 5px;
+}
+
+.navbar-container-1  button{
+    /*padding: 0 5px;*/
+    background-color: #000;
+}
+
+.navbar-container-1  navbar-1{
+    padding: 5px 14px;
+    color: #D9AB73;
+    font-size: 18px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word;
+    border-radius: 30px; border: 3px #D9AB73 solid
+}
+
+.navbar-container-1  button:hover {
+    color: #fff;
 }
 
 .navbar-container-1 a:hover {
