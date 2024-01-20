@@ -69,67 +69,66 @@
                         <div class="navbar-container-1">
                             <a class="navbar-1">10.000.000</a>                  
                         </div>
-                        <div class="navbar-container-1">
-                            <a class="navbar-1-list">ABCXYZ</a>                  
-                        </div>
+
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
                                 ABCXYZ
                             </a>
+                            <div class="fake-div"></div>
 
                             <div class="navbar-dropdown">
-                                <div class="navbar-item">
+                                <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
                                             <span>Thông tin tài khoản</span>
                                         </button>
                                     </form>
-                                </div>
-                                <div class="navbar-item">
+                                </a>
+                                <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
                                             <span>Danh mục yêu thích</span>
                                         </button>
                                     </form>
-                                </div>
-                                <div class="navbar-item">
+                                </a>
+                                <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
                                             <span>Lịch sử đấu giá</span>
                                         </button>
                                     </form>
-                                </div>
-                                <div class="navbar-item">
+                                </a>
+                                <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
                                             <span>Quản lí tin đăng</span>
                                         </button>
                                     </form>
-                                </div>
-                                <div class="navbar-item">
+                                </a>
+                                <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
                                             <span>Thay đổi mật khẩu</span>
                                         </button>
                                     </form>
-                                </div>
-                                <div class="navbar-item">
+                                </a>
+                                <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
                                             <span>Thông tin thanh toán</span>
                                         </button>
                                     </form>
-                                </div>
-                                
+                                </a>
+
                                 <hr class="navbar-divider">
-                                <div class="navbar-item">
+                                <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
                                             <span>Đăng xuất</span>
                                         </button>
                                     </form>
-                                </div>
-                                
+                                </a>
+
                             </div>
                         </div>
 

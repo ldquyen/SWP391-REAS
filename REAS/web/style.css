@@ -111,8 +111,9 @@ a.navbar-item:hover{
     border: 30px; border: 3px #D9AB73 solid;
 }
 
-.hover-down {
+.navbar-end .hover-down {
     background-color: #000;
+    padding: 0 5px
 }
 
 .navbar-end .navbar-item .navbar-link:hover {
@@ -293,5 +294,71 @@ button {
     border: initial;
     color: initial;
     cursor: pointer;
+}
+
+.navbar-dropdown .navbar-item:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.navbar-dropdown .navbar-item button:hover {
+    background-color: #000; 
+    color: #fff;
+}
+
+@media screen and (min-width: 1024px){
+    .navbar-dropdown a.navbar-item {
+        padding-right: 16px !important;
+        color: #fff;
+    }
+}
+
+.navbar-dropdown {
+    background-color: #000;
+    border: 2px solid #D9AB73;
+    margin-top: 5px;
+}
+
+.fake-div {
+    height: 10px;
+    width: 10px;
+    background-color: transparent;
+    font-size: .875rem;
+    left: 0;
+    min-width: 100%;
+    position: absolute;
+    top: 100%;
+    z-index: 20;
+}
+
+.navbar-dropdown .navbar-item span {
+    color: #fff;
+}
+
+.navbar-dropdown .navbar-item span:hover {
+    color: #D9AB73 !important;  
+}
+
+.navbar-item .navbar-link:focus {
+    background-color: #000;
+    color: #D9AB73;
+}
+
+.navbar-dropdown a.navbar-item:hover {
+     background-color: initial; 
+     color: #D9AB73 !important;  
+}
+
+.navbar-dropdown a.navbar-item:focus {
+    background-color: #000 !important;
+}
+
+.navbar-divider  {
+    background-color: #323232;
+}
+
+.navbar-link:not(.is-arrowless) {
+    padding-right: 2.5em;
+    max-height: 36px;
 }
 
