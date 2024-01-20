@@ -111,6 +111,15 @@ a.navbar-item:hover{
     border: 30px; border: 3px #D9AB73 solid;
 }
 
+.hover-down {
+    background-color: #000;
+}
+
+.navbar-end .navbar-item .navbar-link:hover {
+    background-color: #000;
+    color: #fff;
+}
+
 .field {
     padding: 8px 0 0 0;
 }
@@ -270,5 +279,19 @@ a.navbar-item:hover{
 
 .buttons button {
     padding: 8px 10px;
+}
+
+
+/* login */
+.navbar-item .navbar-dropdown {
+    right:0;
+    left: initial
+}
+
+button {
+    background: initial;
+    border: initial;
+    color: initial;
+    cursor: pointer;
 }
 
