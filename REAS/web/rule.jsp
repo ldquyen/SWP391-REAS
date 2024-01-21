@@ -16,7 +16,7 @@
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
+                <a class="navbar-item" href="">
                     <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
                 </a>
 
@@ -235,7 +235,7 @@
         1. Đối với khách hàng tham gia đấu giá mà không trúng đấu giá và không vi phạm Quy chế đấu giá sẽ được hoàn trả khoản tiền đặt trước trong thời hạn 03 ngày làm việc kể từ ngày kết thúc cuộc đấu giá. 
         2. Tiền đặt trước sẽ được hoàn trả vào tài khoản mà khách hàng đã đăng ký trên Trang thông tin đấu giá trực tuyến. Khách hàng tự chịu trách nhiệm về thông tin tài khoản nhận lại tiền đặt trước và tự chịu mọi chi phí liên quan đến giao dịch khoản tiền đặt trước. Công ty không hoàn trả lại tiền đặt trước cho bất kỳ tài khoản nào khác, ngoài tài khoản khách hàng đã đăng ký với Công ty. 
 
-        <footer class="footer"> 
+        <footer class="footer" style="position: inherit;"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
                 <div class="footer-container">
