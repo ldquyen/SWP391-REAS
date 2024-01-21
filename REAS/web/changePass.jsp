@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Jan 17, 2024, 11:02:09 PM
+    Document   : changePass
+    Created on : Jan 22, 2024, 12:06:48 AM
     Author     : ASUS
 --%>
 
@@ -107,7 +107,7 @@
                                 </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="changePass" name="action">
+                                        <button type="submit" value="aboutus" name="action">
                                             <span>Thay đổi mật khẩu</span>
                                         </button>
                                     </form>
@@ -133,68 +133,26 @@
                         </div>
 
 
-                      
+
                     </div>
                 </div>
             </div>
         </nav>
-        
-         <!-- BODY -->
-        <div class="search-container">
-            <div class="search-wrap">
-                <div class="field has-addons">
-                    <div class="control search-bar">
-                        <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
-                    </div>
-                    <div class="control button-search-container">
-                        <a class="button is-info button-search">
-                            Tìm kiếm
-                        </a>
-                    </div>
-                </div>
-                <div class="search-detail-container">
-                    <div class="control">
-                        <div class="select">
-                            <select class="custom-select">
-                                <option>Loại hình bất động sản</option>
-                                <option>Chung cư</option>
-                                <option>Biệt thự</option>
-                                <option>Nhà đất</option>
-                                <option>Condotel</option>
-                            </select>
-                        </div>
-                        <div class="select">
-                            <select class="custom-select">
-                                <option>Thành phố</option>
-                                <option>With options</option>
-                            </select>
-                        </div>
-                        <div class="select">
-                            <select class="custom-select">
-                                <option>Diện tích</option>
-                                <option>0-100 m2</option>
-                                <option>100-500 m2</option>
-                                <option>500-1000 m2</option>
-                                <option>Trên 1000 m2</option>
-                            </select>
-                        </div>
-                        <div class="select">
-                            <select class="custom-select">
-                                <option>Mức giá</option>
-                                <option>0-5 tỷ</option>
-                                <option>5-10 tỷ</option>
-                                <option>10-50 tỷ</option>
-                                <option>50-100 tỷ</option>
-                                <option>Trên 100 tỷ</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="realestate-quantity">
-                        <p>Hiện có 99 dự án</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <!-- BODY -->
+
+        <form style="background-color: black; border-radius: 40px; width: 300px; height: 300px; padding: 20px; text-align: center; border: 6px solid #D9AB73; color: #D9AB73; position: fixed; top: 45%; left: 50%; transform: translate(-50%, -50%);" action="MainController" method="post">
+            <h1 style="font-weight: bold; margin-bottom: 20px ">THAY ĐỔI MẬT KHẨU</h1>
+            <p style="margin-bottom: 15px;"><input type="text" name="password" placeholder="Nhập mật khẩu cũ" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 250px"></p>
+            <p style="margin-bottom: 15px;"><input type="text" name="newpassword" placeholder="Nhập mật khẩu mới" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 250px"></p>
+            <p style="margin-bottom: 15px;"><input type="text" name="renewpassword" placeholder="Nhập lại mật khẩu mới" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 250px"></p>
+            <p style="margin-bottom: 25px;"><input type="text" name="cccd" placeholder="Xác nhận CCCD của bạn" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 250px"></p>
+            <button type="submit" value="changepass" name="action" style="border: 3px solid #D9AB73; color: #D9AB73;border-radius: 40px; width: 130px; height: 30px;">
+                <span>Đổi mật khẩu</span>
+            </button>
+        </form>
+
+
 
         <footer class="footer"> 
             <div>

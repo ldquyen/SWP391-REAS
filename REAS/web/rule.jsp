@@ -117,7 +117,7 @@
                                 </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
+                                        <button type="submit" value="changePass" name="action">
                                             <span>Thay đổi mật khẩu</span>
                                         </button>
                                     </form>
