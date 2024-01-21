@@ -432,6 +432,25 @@ button {
     vertical-align: middle;
 }
 
+.register-if-dont-have-container {
+    display: flex;
+}
+
+.container login {
+    text-align: center; /* Căn giữa nội dung trong container */
+}
+
+.register-if-dont-have-container,
+.register-here {
+    display: inline-block;
+    margin-right: 10px; /* Điều chỉnh khoảng cách giữa các phần tử */
+}
+
+.registration-form {
+    display: inline-block;
+    margin-right: 10px; /* Điều chỉnh khoảng cách giữa các phần tử */
+}
+
 /*.img-logo-login {
     max-width: 50px;
 }*/
