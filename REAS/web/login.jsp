@@ -86,18 +86,49 @@
                         <div class="container-login">
                             <p class="register-if-dont-have-container">Bạn chưa có tài khoản?</p>
                             <form action="MainController" method="post" class="registration-form">
-                                <button class="button is-light" type="submit" value="DN" name="action" style="
-                                        padding: 0;
-                                        height: unset;
-                                        background-color: transparent;
-                                        color: #fff;
-                                        text-decoration: underline;
-                                        line-height: 20px;
-                                        ">
-                                    <span>Đăng ký</span>
+                                <button class="button is-light sign-up-in-login" type="submit" value="DN" name="action"
+                                        <span>Đăng ký</span>
                                 </button>
                             </form>
                             <p class="register-here">tại đây</p>
+                        </div>
+
+                        <div class="form-login-container">
+                            <form action="MainController" method="post">
+                                <input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="username">
+                                <input class="input is-normal input-password" type="password" placeholder="Mật khẩu" name="password"></br>
+                                <button class="button is-light forgot-password" type="submit" value="DN" name="action"
+                                        <span>Quên mật khẩu?</span>
+                                </button></br>
+                                <button class="button is-light submit-login-btn" type="submit" value="Login" name="btAction" style="
+                                        background-color: transparent;
+                                        color: #D9AB73;
+                                        font-size: 18px;
+                                        font-family: Inter;
+                                        font-weight: 800;
+                                        word-wrap: break-word;
+                                        border-radius: 40px;
+                                        border: 3px solid #D9AB73" >
+                                    <span>ĐĂNG NHẬP</span>
+                                </button>
+                                <p style="font-size: 18px;
+                                   padding: 15px 0;
+                                   color: #fff;">
+                                    ------------------------------Hoặc------------------------------
+                                </p>
+                                <button class="button is-light submit-login-btn submit-with-gg-btn" type="submit" value="Login" name="btAction" style="
+                                        background-color: transparent;
+                                        color: #D9AB73;
+                                        font-size: 18px;
+                                        font-family: Inter;
+                                        font-weight: 600;
+                                        word-wrap: break-word;
+                                        border-radius: 40px;
+                                        border: 3px solid #D9AB73;
+                                        margin-bottom: 30px;" >
+                                    <span><img  style="margin-right: 5px" class="logo-header" src="image/google.png" alt="" href="" ></img>Đăng nhập với Google</span>
+                                </button>
+                            </form>
                         </div>
 
                     </header>

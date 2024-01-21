@@ -391,7 +391,7 @@ button {
 
 .login-container {
     position: fixed;
-    top: 10%;
+    top: 13%;
     left: 0;
     right: 0;
     bottom: 0;
@@ -412,7 +412,7 @@ button {
     min-height: 200px;
     max-width: calc(100% - 32px);
     animation: modalFadeIn ease 0.5s;
-    
+
 }
 
 .login-modal-container header .navbar-item:hover {
@@ -451,6 +451,88 @@ button {
     display: inline-block;
 }
 
+.submit-login-btn:hover {
+    color: #fff !important;
+    /*border-color: rgba(0, 0, 0, 0.70) !important;*/
+}
+
+.sign-up-in-login {
+    padding: 0;
+    height: unset;
+    background-color: transparent !important;
+    color: #fff !important;
+    line-height: 20px;
+}
+
+.sign-up-in-login:hover {
+    text-decoration: underline;
+}
+
+.input-username {
+    width: 70%;
+    background-color: transparent;
+    color: #fff;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.form-login-container {
+
+}
+
+.input-username::placeholder {
+    color: #fff;
+}
+
+.input-username:focus,
+.input-username:hover,
+.input-username:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-password {
+    width: 70%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-password:focus,
+.input-password:hover,
+.input-password:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-password::placeholder {
+    color: #fff;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.forgot-password {
+    display: block;
+    left: 15%;
+    padding: 5px 0 0 0;
+    height: unset;
+    background-color: transparent !important;
+    color: #fff !important;
+    line-height: 20px;
+}
+
+.submit-with-gg-btn {
+    color: #fff !important;
+}
+
+.submit-with-gg-btn:hover {
+    color: #333 !important;
+}
 /*.img-logo-login {
     max-width: 50px;
 }*/
