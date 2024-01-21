@@ -37,8 +37,8 @@
 
                     <div class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="aboutus" name="action">
-                                <span>VỀ CHÚNG TÔI</span>
+                            <button type="submit" value="news" name="action">
+                                <span>TIN TỨC</span>
                             </button>
                         </form>
                     </div>

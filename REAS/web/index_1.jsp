@@ -35,8 +35,8 @@
 
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="aboutus" name="action">
-                                <span>VỀ CHÚNG TÔI</span>
+                            <button type="submit" value="news" name="action">
+                                <span>TIN TỨC</span>
                             </button>
                         </form>
                     </a>
@@ -133,23 +133,68 @@
                         </div>
 
 
-                        <!--                        
-                                                <div style="width: 100%; height: 100%; background: black; border-radius: 30px; border: 3px #D9AB73 solid">
-                                                    <div style="width: 100%; height: 100%; text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">DS đấu giá</div>
-                                                </div>
-                                                <div style="width: 100%; height: 100%; background: black; border-radius: 30px; border: 3px #D9AB73 solid">
-                                                    <div style="width: 100%; height: 100%; text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">Đăng tin</div>
-                                                </div>
-                                                <div style="width: 100%; height: 100%; background: black; border-radius: 30px; border: 3px #D9AB73 solid">
-                                                    <div style="width: 100%; height: 100%; text-align: center; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">10.000.000</div>
-                                                </div>
-                                                <div style="width: 100%; height: 100%; background: black; border: 3px #D9AB73 solid">
-                                                    <div style="width: 100%; height: 100%; text-align: center; color: #D9AB73; font-size: 24px; font-family: Inter; font-weight: 700; word-wrap: break-word">ABCXYZ</div>
-                                                </div>-->
+                      
                     </div>
                 </div>
             </div>
         </nav>
+        
+         <!-- BODY -->
+        <div class="search-container">
+            <div class="search-wrap">
+                <div class="field has-addons">
+                    <div class="control search-bar">
+                        <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
+                    </div>
+                    <div class="control button-search-container">
+                        <a class="button is-info button-search">
+                            Tìm kiếm
+                        </a>
+                    </div>
+                </div>
+                <div class="search-detail-container">
+                    <div class="control">
+                        <div class="select">
+                            <select class="custom-select">
+                                <option>Loại hình bất động sản</option>
+                                <option>Chung cư</option>
+                                <option>Biệt thự</option>
+                                <option>Nhà đất</option>
+                                <option>Condotel</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select class="custom-select">
+                                <option>Thành phố</option>
+                                <option>With options</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select class="custom-select">
+                                <option>Diện tích</option>
+                                <option>0-100 m2</option>
+                                <option>100-500 m2</option>
+                                <option>500-1000 m2</option>
+                                <option>Trên 1000 m2</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select class="custom-select">
+                                <option>Mức giá</option>
+                                <option>0-5 tỷ</option>
+                                <option>5-10 tỷ</option>
+                                <option>10-50 tỷ</option>
+                                <option>50-100 tỷ</option>
+                                <option>Trên 100 tỷ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="realestate-quantity">
+                        <p>Hiện có 99 dự án</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <footer class="footer"> 
             <div>
