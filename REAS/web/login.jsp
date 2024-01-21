@@ -18,15 +18,15 @@
             <div class="navbar-brand">
 
 
-                    <a class="navbar-item" href="">
-                        <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
-                    </a>
+                <a class="navbar-item" href="">
+                    <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                </a>
 
-                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
 
             <div id="navbarBasicExample" class="navbar-menu">
@@ -78,15 +78,22 @@
             <div class="login-container">
                 <div class="login-modal-container">
                     <header class="header-login">
-                        <a class="navbar-item img-logo-login" href="">
-                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                        <a class="navbar-item img-logo-login" href="" style="padding-top: 16px;" >
+                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" style="max-height: 52px " />
                         </a>
-                        <p>KÍNH CHÀO QUÝ KHÁCH</p>
+                        <p style="font-size: 20px">KÍNH CHÀO QUÝ KHÁCH</p>
 
                         <div class="container-login">
                             <p class="register-if-dont-have-container">Bạn chưa có tài khoản?</p>
                             <form action="MainController" method="post" class="registration-form">
-                                <button class="button is-light" type="submit" value="DN" name="action">
+                                <button class="button is-light" type="submit" value="DN" name="action" style="
+                                        padding: 0;
+                                        height: unset;
+                                        background-color: transparent;
+                                        color: #fff;
+                                        text-decoration: underline;
+                                        line-height: 20px;
+                                        ">
                                     <span>Đăng ký</span>
                                 </button>
                             </form>
