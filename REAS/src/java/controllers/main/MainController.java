@@ -34,6 +34,9 @@ public class MainController extends HttpServlet {
                 case "rule":
                     url = "rule.jsp";
                     break;
+                case "news":
+                    url = "news.jsp";
+                    break;
             }
             request.getRequestDispatcher(url).forward(request, response);
 
