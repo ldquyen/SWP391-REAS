@@ -17,7 +17,6 @@
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
 
-                <a class="navbar-item" href="">
 
                     <a class="navbar-item" href="">
                         <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
@@ -82,6 +81,18 @@
                         <a class="navbar-item img-logo-login" href="">
                             <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
                         </a>
+                        <p>KÍNH CHÀO QUÝ KHÁCH</p>
+
+                        <div class="container-login">
+                            <p class="register-if-dont-have-container">Bạn chưa có tài khoản?</p>
+                            <form action="MainController" method="post" class="registration-form">
+                                <button class="button is-light" type="submit" value="DN" name="action">
+                                    <span>Đăng ký</span>
+                                </button>
+                            </form>
+                            <p class="register-here">tại đây</p>
+                        </div>
+
                     </header>
                 </div>
             </div>

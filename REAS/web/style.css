@@ -225,7 +225,7 @@ a.navbar-item:hover{
 }
 
 .footer {
-    position: inherit;
+    position: fixed;
     width: 1440px;
     flex-shrink: 0;
     left: 0;
@@ -430,6 +430,25 @@ button {
     max-width: 100%;
     height: auto;
     vertical-align: middle;
+}
+
+.register-if-dont-have-container {
+    display: flex;
+}
+
+.container login {
+    text-align: center; /* Căn giữa nội dung trong container */
+}
+
+.register-if-dont-have-container,
+.register-here {
+    display: inline-block;
+    margin-right: 10px; /* Điều chỉnh khoảng cách giữa các phần tử */
+}
+
+.registration-form {
+    display: inline-block;
+    margin-right: 10px; /* Điều chỉnh khoảng cách giữa các phần tử */
 }
 
 /*.img-logo-login {
