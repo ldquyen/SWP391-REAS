@@ -19,15 +19,15 @@
 
                 <a class="navbar-item" href="">
 
-                <a class="navbar-item" href="#">
-                    <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
-                </a>
+                    <a class="navbar-item" href="">
+                        <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                    </a>
 
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
             </div>
 
             <div id="navbarBasicExample" class="navbar-menu">
@@ -73,11 +73,20 @@
                 </div>
             </div>
         </nav>
-        
+
         <div>
             <img class="background-login" src="image/background-login.png" alt="background-login" />
+            <div class="login-container">
+                <div class="login-modal-container">
+                    <header class="header-login">
+                        <a class="navbar-item img-logo-login" href="">
+                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                        </a>
+                    </header>
+                </div>
+            </div>
         </div>
-        
+
         <footer class="footer"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
