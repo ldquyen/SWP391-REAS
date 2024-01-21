@@ -174,42 +174,66 @@
 
 
         <p>Điều 4. Quyền tiếp cận thông tin đối với Trang thông tin đấu giá trực tuyến biển số.</p>
-        1. Khách hàng truy cập Trang thông tin đấu giá trực tuyến để tham khảo các thông tin về Công ty, bất động sản đưa ra đấu giá, thông tin của đơn vị có tài sản công khai theo quy định.<br>
-        2. Khách hàng đã đăng ký tài khoản đăng nhập vào hệ thống có quyền:<br>
-        - Tiếp cận, tham khảo thông tin về bất động sản đã, đang và sắp tổ chức đấu giá;<br>
-        - Đăng ký tham gia đấu giá nộp tiền hồ sơ, tiền đặt trước, tham gia đấu giá theo thời gian quy định;<br>
-        - Tra cứu lịch sử tham gia đấu giá của mình;<br>
-        - Yêu cầu chỉnh sửa dữ liệu cá nhân trừ trường hợp pháp luật có quy định khác.<br>
-        - Được tiếp cận tài liệu hướng dẫn sử dụng, trên Trang thông tin đấu giá trực tuyến REAS.<br>
+        <p>
+            1. Khách hàng truy cập Trang thông tin đấu giá trực tuyến để tham khảo các thông tin về Công ty, bất động sản đưa ra đấu giá, thông tin của đơn vị có tài sản công khai theo quy định.<br>
+            2. Khách hàng đã đăng ký tài khoản đăng nhập vào hệ thống có quyền:<br>
+            - Tiếp cận, tham khảo thông tin về bất động sản đã, đang và sắp tổ chức đấu giá;<br>
+            - Đăng ký tham gia đấu giá nộp tiền hồ sơ, tiền đặt trước, tham gia đấu giá theo thời gian quy định;<br>
+            - Tra cứu lịch sử tham gia đấu giá của mình;<br>
+            - Yêu cầu chỉnh sửa dữ liệu cá nhân trừ trường hợp pháp luật có quy định khác.<br>
+            - Được tiếp cận tài liệu hướng dẫn sử dụng, trên Trang thông tin đấu giá trực tuyến REAS.<br>
+        </p>
 
-        CHƯƠNG II
-        TRÌNH TỰ, THỦ TỤC ĐẤU GIÁ BIỂN SỐ XE Ô TÔ
-
-
-        Điều 5. Trình tự thực hiện phiên đấu giá biển số xe ô tô bằng hình thức đấu giá trực tuyến.
-        1. Trong thời hạn ít nhất 30 ngày trước ngày tổ chức phiên đấu giá, Công ty thông báo công khai danh sách biển số xe ô tô đưa ra đấu giá trên Cổng thông tin điện tử quốc gia về đấu giá tài sản, Trang thông tin đấu giá trực tuyến và niêm yết tại trụ sở. Quy chế đấu giá phải được niêm yết, thông báo công khai trên Trang thông tin đấu giá trực tuyến, trụ sở của Công ty.
-        2. Khi đăng ký tham gia đấu giá, người tham gia đấu giá được cấp một tài khoản truy cập, được hướng dẫn về cách sử dụng tài khoản, cách trả giá và các nội dung khác trên Trang thông tin đấu giá trực tuyến để thực hiện việc đấu giá.
-        3. Người tham gia đấu giá truy cập vào Trang thông tin đấu giá trực tuyến bằng tài khoản truy cập của mình và thực hiện thủ tục đấu giá theo Quy chế đấu giá.
-        4. Tại thời điểm kết thúc cuộc đấu giá trực tuyến, Trang thông tin đấu giá trực tuyến xác định người trúng đấu giá, thông báo kết quả cuộc đấu giá, hiển thị biên bản đấu giá để người trúng đấu giá xác nhận, gửi vào hòm thư điện tử của người tham gia đấu giá đã đăng ký với Công ty.
-        5. Đấu giá viên chịu trách nhiệm điều hành cuộc đấu giá trực tuyến, xác thực vào biên bản đấu giá bằng chữ ký số để gửi cho người trúng đấu giá.
+        <h2>CHƯƠNG II</h2>
+        <h3>TRÌNH TỰ, THỦ TỤC ĐẤU GIÁ BIỂN SỐ XE Ô TÔ</h3>
 
 
-        Điều 6. Thông báo kết quả đấu giá trực tuyến biển số xe ô tô
-        1.  Trang thông tin đấu giá trực tuyến biển số thông báo kết quả trúng đấu giá cho người trúng đấu giá ngay sau khi có kết quả đấu giá trực tuyến biển số xe ô tô.
-        2. Trong thời hạn 07 ngày làm việc kể từ ngày nhận được kết quả đấu giá, biên bản đấu giá, danh sách người trúng đấu giá từ Công ty, Cục Cảnh sát giao thông - Bộ Công an ban hành văn bản phê duyệt kết quả đấu giá.
-        3. Thông báo kết quả trúng đấu giá:  
-        - Cục Cảnh sát giao thông - Bộ Công an thông báo kết quả trúng đấu giá biển số xe ô tô vào hòm thư điện tử và gửi tin nhắn thông báo tới số điện thoại đã đăng ký tại tài khoản truy cập cho người trúng đấu giá ngay sau khi phê duyệt kết quả đấu giá; thông báo kết quả trúng đấu giá biển số xe ô tô thay thế hợp đồng mua bán tài sản đấu giá hoặc hợp đồng bán tài sản nhà nước.
-        - Nội dung thông báo kết quả trúng đấu giá gồm: Biển số xe ô tô trúng đấu giá, tên, mã định danh của cá nhân, tổ chức (trường hợp tổ chức chưa được cấp mã định danh thì ghi mã số thuế hoặc số quyết định thành lập tổ chức), địa chỉ người trúng đấu giá, giá trúng đấu giá, số tiền phải nộp, số tài khoản chuyên thu do Bộ Công an mở tại ngân hàng, chi nhánh ngân hàng nước ngoài để nộp tiền trúng đấu giá, thời hạn nộp tiền trúng đấu giá, việc huỷ kết quả đấu giá nếu không nộp đủ số tiền trúng đấu giá theo quy định.
+        <p>Điều 5. Trình tự thực hiện phiên đấu giá biển số xe ô tô bằng hình thức đấu giá trực tuyến.</p>
+        <p>
+            1. Trong thời hạn ít nhất 30 ngày trước ngày tổ chức phiên đấu giá, Công ty thông báo công khai danh sách bất động sản đưa ra đấu giá trên Cổng thông tin điện tử quốc gia về đấu giá tài sản, Trang thông tin đấu giá trực tuyến và niêm yết tại trụ sở. Quy chế đấu giá phải được niêm yết, thông báo công khai trên Trang thông tin đấu giá trực tuyến, trụ sở của Công ty.<br>
+            2. Khi đăng ký tham gia đấu giá, người tham gia đấu giá được cấp một tài khoản truy cập, được hướng dẫn về cách sử dụng tài khoản, cách trả giá và các nội dung khác trên Trang thông tin đấu giá trực tuyến để thực hiện việc đấu giá.<br>
+            3. Người tham gia đấu giá truy cập vào Trang thông tin đấu giá trực tuyến bằng tài khoản truy cập của mình và thực hiện thủ tục đấu giá theo Quy chế đấu giá.<br>
+            4. Tại thời điểm kết thúc cuộc đấu giá trực tuyến, Trang thông tin đấu giá trực tuyến xác định người trúng đấu giá, thông báo kết quả cuộc đấu giá, hiển thị biên bản đấu giá để người trúng đấu giá xác nhận, gửi vào hòm thư điện tử của người tham gia đấu giá đã đăng ký với Công ty.<br>
+            5. Đấu giá viên chịu trách nhiệm điều hành cuộc đấu giá trực tuyến, xác thực vào biên bản đấu giá bằng chữ ký số để gửi cho người trúng đấu giá.<br>
+        </p>
 
 
-        Điều 7. Biên bản cuộc đấu giá trực tuyến biển số xe ô tô
-        1. Biên bản cuộc đấu giá trực tuyến phải ghi nhận thời điểm bắt đầu tiến hành đấu giá, thời điểm kết thúc cuộc đấu giá, số người tham gia đấu giá, giá trúng đấu giá, người trúng đấu giá. Diễn biến của cuộc đấu giá được hệ thống đấu giá trực tuyến ghi nhận phải được trích xuất, có xác nhận của Công ty và đính kèm biên bản đấu giá.
-        2. Biên bản cuộc đấu giá phải được lập tại thời điểm kết thúc việc trả giá. Đấu giá viên chịu trách nhiệm tổ chức thực hiện cuộc đấu giá trực tuyến, xác thực vào biên bản cuộc đấu giá bằng chữ ký số để gửi cho người trúng đấu giá.
-        3. Biên bản cuộc đấu giá được gửi cho khách hàng trúng đấu giá vào hòm thư điện tử và trong mục “Tài liệu của tôi”, khách hàng trúng đấu giá xác nhận trong vòng 120 phút kể từ thời điểm kết thúc cuộc đấu giá. Trường hợp khách hàng trúng đấu giá không xác nhận biên bản cuộc đấu giá thì coi như không chấp nhận giao kết hợp đồng mua bán tài sản đấu giá và sẽ bị hủy kết quả đấu giá. 
+        <p>Điều 6. Thông báo kết quả đấu giá trực tuyến biển số xe ô tô</p>
+        <p>
+            1.  Trang thông tin đấu giá trực tuyến biển số thông báo kết quả trúng đấu giá cho người trúng đấu giá ngay sau khi có kết quả đấu giá trực tuyến bất động sản.<br>    
+            2. Thông báo kết quả trúng đấu giá:  <br>
+            - Thông báo kết quả trúng đấu giá bất động sản vào hòm thư điện tử đã đăng ký tại tài khoản truy cập cho người trúng đấu giá ngay sau khi phê duyệt kết quả đấu giá; thông báo kết quả trúng đấu giá bất động sản thay thế hợp đồng mua bán tài sản đấu giá hoặc hợp đồng bán tài sản nhà nước.<br>
+            - Nội dung thông báo kết quả trúng đấu giá gồm: bất động sản trúng đấu giá, tên, mã định danh của cá nhân, tổ chức (trường hợp tổ chức chưa được cấp mã định danh thì ghi mã số thuế hoặc số quyết định thành lập tổ chức), địa chỉ người trúng đấu giá, giá trúng đấu giá, việc huỷ kết quả đấu giá nếu không nộp đủ số tiền trúng đấu giá theo quy định.<br>
+        </p>
 
 
-        CHƯƠNG III
-        QUY TRÌNH ĐẤU GIÁ
+        <p> Điều 7. Biên bản cuộc đấu giá trực tuyến bất động sản</p>
+        <p>
+            1. Biên bản cuộc đấu giá trực tuyến phải ghi nhận thời điểm bắt đầu tiến hành đấu giá, thời điểm kết thúc cuộc đấu giá, số người tham gia đấu giá, giá trúng đấu giá, người trúng đấu giá. Diễn biến của cuộc đấu giá được hệ thống đấu giá trực tuyến ghi nhận phải được trích xuất, có xác nhận của Công ty và đính kèm biên bản đấu giá.<br>
+            2. Biên bản cuộc đấu giá phải được lập tại thời điểm kết thúc việc trả giá. Đấu giá viên chịu trách nhiệm tổ chức thực hiện cuộc đấu giá trực tuyến.<br>
+            3. Biên bản cuộc đấu giá được gửi cho khách hàng trúng đấu giá vào hòm thư điện tử và trong mục “Lịch sử đấu giá”. Trường hợp khách hàng trúng đấu giá không xác nhận biên bản cuộc đấu giá thì coi như không chấp nhận giao kết hợp đồng mua bán tài sản đấu giá và sẽ bị hủy kết quả đấu giá. <br>
+        </p>
+
+
+
+        <h2>CHƯƠNG III</h2>
+        <h3>QUY TRÌNH THANH TOÁN</h3>
+
+
+        Điều 11. Quy trình thanh toán
+        1. Người đăng ký tham gia đấu giá trực tuyến biển số xe ô tô thanh toán tiền hồ sơ, tiền đặt trước tham gia đấu giá tài sản theo đúng quy định của pháp luật. 
+        - Khách hàng thanh toán tiền hồ sơ, tiền đặt trước bằng hình thức chuyển tiền vào tài khoản Công ty theo quy định tại Quy chế đấu giá.
+        - Nội dung chuyển tiền: Cụ thể đối với từng khách hàng trong trường thông tin Nội dung chuyển khoản tại mục “Thanh toán biển số xe”.
+        - Số tiền thanh toán: Cụ thể đối với từng khách hàng trong trường thông tin Số tiền tại mục “Thanh toán biển số xe”.
+        Lưu ý:
+        - Khách hàng bắt buộc chuyển đúng, đủ, không chỉnh sửa, không thay đổi nội dung chuyển khoản và số tiền thanh toán biển số xe ô tô.
+        - Đối với các trường hợp ghi sai nội dung chuyển khoản và không đúng, đủ số tiền thanh toán, khách hàng không nhận được mã đấu giá hoặc sau thời điểm chuyển tiền, khách hàng không nhận được mã đấu giá thì khách hàng liên hệ tổ chức đấu giá để được xem xét, giải quyết trước thời điểm tổ chức đấu giá 03 ngày. 
+        - Mọi chi phí phát sinh trong việc chuyển, nhận lại tiền đặt trước do khách hàng chi trả.
+
+
+        Điều 12. Phương thức hoàn trả tiền đặt trước
+        1. Đối với khách hàng tham gia đấu giá mà không trúng đấu giá và không vi phạm Quy chế đấu giá sẽ được hoàn trả khoản tiền đặt trước trong thời hạn 03 ngày làm việc kể từ ngày kết thúc cuộc đấu giá. 
+        2. Tiền đặt trước sẽ được hoàn trả vào tài khoản mà khách hàng đã đăng ký trên Trang thông tin đấu giá trực tuyến. Khách hàng tự chịu trách nhiệm về thông tin tài khoản nhận lại tiền đặt trước và tự chịu mọi chi phí liên quan đến giao dịch khoản tiền đặt trước. Công ty không hoàn trả lại tiền đặt trước cho bất kỳ tài khoản nào khác, ngoài tài khoản khách hàng đã đăng ký với Công ty. 
 
         <footer class="footer"> 
             <div>
