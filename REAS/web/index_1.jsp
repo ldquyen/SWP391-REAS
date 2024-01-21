@@ -53,27 +53,85 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="navbar-container-1">
-                                <form action="MainController" method="post">
-                                    <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                        <span>DS ĐẤU GIÁ</span>
-                                    </button>
-                                </form>
+                            <form action="MainController" method="post">
+                                <button class="navbar-1" type="submit" value="auctionList" name="action">
+                                    <span>DS ĐẤU GIÁ</span>
+                                </button>
+                            </form>
                         </div>
                         <div class="navbar-container-1">
-                                <form action="MainController" method="post">
-                                    <button class="navbar-1" type="submit" value="postNew" name="action">
-                                        <span>ĐĂNG TIN</span>
-                                    </button>
-                                </form>
+                            <form action="MainController" method="post">
+                                <button class="navbar-1" type="submit" value="postNew" name="action">
+                                    <span>ĐĂNG TIN</span>
+                                </button>
+                            </form>
                         </div>
                         <div class="navbar-container-1">
                             <a class="navbar-1">10.000.000</a>                  
                         </div>
-                        <div class="navbar-container-1">
-                            <a class="navbar-1-list">ABCXYZ</a>                  
+
+                        <div class="navbar-item hover-down has-dropdown is-hoverable">
+                            <a class="navbar-link navbar-1-list">
+                                USERNAME
+                            </a>
+                            <div class="fake-div"></div>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Thông tin tài khoản</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Danh mục yêu thích</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Lịch sử đấu giá</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Quản lí tin đăng</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Thay đổi mật khẩu</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Thông tin thanh toán</span>
+                                        </button>
+                                    </form>
+                                </a>
+
+                                <hr class="navbar-divider">
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Đăng xuất</span>
+                                        </button>
+                                    </form>
+                                </a>
+
+                            </div>
                         </div>
-                        
-                        
+
 
                         <!--                        
                                                 <div style="width: 100%; height: 100%; background: black; border-radius: 30px; border: 3px #D9AB73 solid">
