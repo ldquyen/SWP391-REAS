@@ -16,7 +16,7 @@
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
+                <a class="navbar-item" href="">
                     <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
                 </a>
 
@@ -211,7 +211,7 @@
         CHƯƠNG III
         QUY TRÌNH ĐẤU GIÁ
 
-        <footer class="footer"> 
+        <footer class="footer" style="position: inherit;"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
                 <div class="footer-container">

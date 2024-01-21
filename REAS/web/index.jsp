@@ -17,9 +17,8 @@
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
 
-                <a class="navbar-item" href="">
 
-                <a class="navbar-item" href="#">
+                <a class="navbar-item" href="">
                     <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
                 </a>
 
