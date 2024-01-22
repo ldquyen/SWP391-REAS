@@ -32,7 +32,7 @@ public class AccountDAO implements Serializable {
             if (con != null) { //connection is available
                 //2. connect sql string
                 String sql = "Select UserName "
-                        + "from AuctionSystem "
+                        + "from Account "
                         + "Where UserName = ? "
                         + "And Password = ?";
                 //3. create statement obj

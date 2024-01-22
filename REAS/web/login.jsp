@@ -100,7 +100,7 @@
                                 <button class="button is-light forgot-password" type="submit" value="changePass" name="action"
                                         <span>Quên mật khẩu?</span>
                                 </button></br>
-                                <button class="button is-light submit-login-btn" type="submit" value="Login" name="btAction" style="
+                                <button class="button is-light submit-login-btn" type="submit" value="Login" name="action" style="
                                         background-color: transparent;
                                         color: #D9AB73;
                                         font-size: 18px;
