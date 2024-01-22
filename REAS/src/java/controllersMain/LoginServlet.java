@@ -52,12 +52,32 @@ public class LoginServlet extends HttpServlet {
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
-            List<Account> dto = dao.checkLogin(username, password);
-            request.setAttribute("result", dto);
-
-            if (dao.) {
-                session.setAttribute("member", m);
-                request.getRequestDispatcher("index_1.jsp").forward(request, response);
+            Account dto =  dao.checkLogin(username, password);
+            
+            if (dto == null) {
+                // Authentication failed
+                error = true;
+                url = LOGINPAGE;
+            } else if ("A".equals(dto.getRoleID())) {
+                // Authentication successful, and the role is 'AD' (Admin)
+                System.out.println(dto.getRoleID());
+                url = "rule.jsp";
+                error = false;
+                HttpSession session = request.getSession();
+                session.setAttribute("member", "admin"); 
+//                session.setAttribute("A", );
+            } else if ("M".equals(dto.getRoleID())) {
+                // Authentication successful, and the role is 'AD' (Admin)
+                url = "news.jsp";
+                error = false;
+                HttpSession session = request.getSession();
+//                session.setAttribute("A", );
+            } else if ("S".equals(dto.getRoleID())) {
+                // Authentication successful, and the role is 'AD' (Admin)
+                url = "register.jsp";
+                error = false;
+                HttpSession session = request.getSession();
+//                session.setAttribute("A", );
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

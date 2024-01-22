@@ -18,21 +18,21 @@ import mylib.DBUtils;
 
 public class AccountDAO {
 
-    public List<Account> checkLogin(String username, String password)
+    public Account checkLogin(String username, String password)
             throws SQLException, NamingException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        List<Account> result = null;
+        Account result = null;
         try {
             //1. create connect
             con = DBUtils.getConnection();
             if (con != null) { //connection is available
                 //2. connect sql string
-                String sql = "Select UserName,FullName, RoleID, status"
-                        + "from Account "
-                        + "Where UserName = ? "
-                        + "And Password = ?";
+                String sql = "SELECT AccID, UserName, FullName, RoleID, Status "
+                        + "FROM Account "
+                        + "WHERE UserName = ? AND Password = ?";
+
                 //3. create statement obj
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
@@ -42,18 +42,13 @@ public class AccountDAO {
                 rs = stm.executeQuery();
                 //5. process
                 //1 dong if nhieu dong while username la primary key
-                
-                while (rs.next()) {
-                    if (result == null) {
-                        result = new ArrayList<Account>();
-                    }
-                    Account dto = new Account();
-                    dto.setAccID(rs.getString("accID"));
-                    dto.setFullname(rs.getString("fullname"));
-                    dto.setRoleID(rs.getString("roleID"));
-                    dto.setStatus(rs.getBoolean("status"));
 
-                    result.add(dto);
+                while (rs.next()) {
+                    result = new Account();
+                    result.setAccID(rs.getString("accID"));
+                    result.setFullname(rs.getString("fullname"));
+                    result.setRoleID(rs.getString("roleID"));
+                    result.setStatus(rs.getBoolean("status"));
                 }
                 //jdbc object khai bao dong no lai su dung
             }
