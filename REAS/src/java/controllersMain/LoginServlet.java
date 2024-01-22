@@ -52,42 +52,38 @@ public class LoginServlet extends HttpServlet {
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
-            Account dto =  dao.checkLogin(username, password);
-            
+            Account dto = dao.checkLogin(username, password);
+
             if (dto == null) {
                 // Authentication failed
                 error = true;
                 url = LOGINPAGE;
             } else if ("A".equals(dto.getRoleID())) {
-                // Authentication successful, and the role is 'AD' (Admin)
                 System.out.println(dto.getRoleID());
-                url = "rule.jsp";
+                url = "admin.jsp";
                 error = false;
                 HttpSession session = request.getSession();
-                session.setAttribute("member", "admin"); 
-//                session.setAttribute("A", );
+                Account a = dao.getAccount(username, password);
+                session.setAttribute("adnin", a);
+
             } else if ("M".equals(dto.getRoleID())) {
-                // Authentication successful, and the role is 'AD' (Admin)
-                url = "news.jsp";
+                url = "index_1.jsp";
                 error = false;
                 HttpSession session = request.getSession();
-//                session.setAttribute("A", );
+                Account m = dao.getAccount(username, password);
+                session.setAttribute("member", m);
             } else if ("S".equals(dto.getRoleID())) {
-                // Authentication successful, and the role is 'AD' (Admin)
-                url = "register.jsp";
+                url = "staff.jsp";
                 error = false;
                 HttpSession session = request.getSession();
-//                session.setAttribute("A", );
+                Account s = dao.getAccount(username, password);
+                session.setAttribute("staff", s);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (NamingException ex) {
             ex.printStackTrace();
         } finally {
-//            response.sendRedirect(url);
-//            RequestDispatcher rd = request.getRequestDispatcher(url);
-//            request.getRequestDispatcher(url).forward(request, response);
-
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
