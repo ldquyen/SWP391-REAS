@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dao.AccountDAO;
+import dto.Account;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,22 +44,22 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-         PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
         //1. get all paratmeter
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
         String url = LOGINPAGE;
-        try{
-             //2. call dao
-            //2.1 new dao
+        boolean error = false;
+        try {
             AccountDAO dao = new AccountDAO();
-            //2.2 call method of dao
-            boolean result = dao.checkLogin(username, password);
-            //3. process result
-            if (result) {
-                url = HOMEPAGE;
-            }//end username and password are verified
-        }catch (SQLException ex) {
+            List<Account> dto = dao.checkLogin(username, password);
+            request.setAttribute("result", dto);
+
+            if (dao.) {
+                session.setAttribute("member", m);
+                request.getRequestDispatcher("index_1.jsp").forward(request, response);
+            }
+        } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (NamingException ex) {
             ex.printStackTrace();
@@ -64,7 +67,7 @@ public class LoginServlet extends HttpServlet {
 //            response.sendRedirect(url);
 //            RequestDispatcher rd = request.getRequestDispatcher(url);
 //            request.getRequestDispatcher(url).forward(request, response);
-            
+
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
