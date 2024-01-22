@@ -18,8 +18,8 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            margin: 0; /* Reset margin to remove default body margin */
-            padding: 0; /* Reset padding to remove default body padding */
+            margin: 0; 
+            padding: 0; 
         }
         </style>
     </head>

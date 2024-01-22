@@ -1,4 +1,9 @@
-package controllers.main;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controllersAdmin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,7 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MainController extends HttpServlet {
+/**
+ *
+ * @author ASUS
+ */
+public class AdminController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -22,24 +31,7 @@ public class MainController extends HttpServlet {
                 case "":
                     url = "index.jsp";
                     break;
-                case "DN":
-                    url = "login.jsp";
-                    break;
-                case "DK":
-                    url = "register.jsp";
-                    break;
-                case "aboutus":
-                    url = "aboutUS.jsp";
-                    break;
-                case "rule":
-                    url = "rule.jsp";
-                    break;
-                case "news":
-                    url = "news.jsp";
-                    break;
-                case "changePass":
-                    url = "changePass.jsp";
-                    break;
+
             }
             request.getRequestDispatcher(url).forward(request, response);
 
