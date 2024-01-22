@@ -18,15 +18,15 @@
             <div class="navbar-brand">
 
 
-                    <a class="navbar-item" href="">
-                        <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
-                    </a>
+                <a class="navbar-item" href="">
+                    <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                </a>
 
-                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
 
             <div id="navbarBasicExample" class="navbar-menu">
@@ -78,19 +78,57 @@
             <div class="login-container">
                 <div class="login-modal-container">
                     <header class="header-login">
-                        <a class="navbar-item img-logo-login" href="">
-                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                        <a class="navbar-item img-logo-login" href="" style="padding-top: 16px;" >
+                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" style="max-height: 52px " />
                         </a>
-                        <p>KÍNH CHÀO QUÝ KHÁCH</p>
+                        <p style="font-size: 20px">KÍNH CHÀO QUÝ KHÁCH</p>
 
                         <div class="container-login">
                             <p class="register-if-dont-have-container">Bạn chưa có tài khoản?</p>
                             <form action="MainController" method="post" class="registration-form">
-                                <button class="button is-light" type="submit" value="DN" name="action">
-                                    <span>Đăng ký</span>
+                                <button class="button is-light sign-up-in-login" type="submit" value="DN" name="action"
+                                        <span>Đăng ký</span>
                                 </button>
                             </form>
                             <p class="register-here">tại đây</p>
+                        </div>
+
+                        <div class="form-login-container">
+                            <form action="MainController" method="post">
+                                <input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="username">
+                                <input class="input is-normal input-password" type="password" placeholder="Mật khẩu" name="password"></br>
+                                <button class="button is-light forgot-password" type="submit" value="DN" name="action"
+                                        <span>Quên mật khẩu?</span>
+                                </button></br>
+                                <button class="button is-light submit-login-btn" type="submit" value="Login" name="btAction" style="
+                                        background-color: transparent;
+                                        color: #D9AB73;
+                                        font-size: 18px;
+                                        font-family: Inter;
+                                        font-weight: 800;
+                                        word-wrap: break-word;
+                                        border-radius: 40px;
+                                        border: 3px solid #D9AB73" >
+                                    <span>ĐĂNG NHẬP</span>
+                                </button>
+                                <p style="font-size: 18px;
+                                   padding: 15px 0;
+                                   color: #fff;">
+                                    ------------------------------Hoặc------------------------------
+                                </p>
+                                <button class="button is-light submit-login-btn submit-with-gg-btn" type="submit" value="Login" name="btAction" style="
+                                        background-color: transparent;
+                                        color: #D9AB73;
+                                        font-size: 18px;
+                                        font-family: Inter;
+                                        font-weight: 600;
+                                        word-wrap: break-word;
+                                        border-radius: 40px;
+                                        border: 3px solid #D9AB73;
+                                        margin-bottom: 30px;" >
+                                    <span><img  style="margin-right: 5px" class="logo-header" src="image/google.png" alt="" href="" ></img>Đăng nhập với Google</span>
+                                </button>
+                            </form>
                         </div>
 
                     </header>
