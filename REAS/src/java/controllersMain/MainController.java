@@ -1,4 +1,4 @@
-package controllers.main;
+package controllersMain;
 
 import java.io.IOException;
 import java.io.PrintWriter;

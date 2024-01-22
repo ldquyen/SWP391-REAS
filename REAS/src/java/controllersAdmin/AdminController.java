@@ -1,5 +1,9 @@
-
-package controllers.staff;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controllersAdmin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,7 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class StaffController extends HttpServlet {
+/**
+ *
+ * @author ASUS
+ */
+public class AdminController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -23,7 +31,7 @@ public class StaffController extends HttpServlet {
                 case "":
                     url = "index.jsp";
                     break;
-                
+
             }
             request.getRequestDispatcher(url).forward(request, response);
 
