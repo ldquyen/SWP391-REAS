@@ -95,8 +95,8 @@
 
                         <div class="form-login-container">
                             <form action="MainController" method="post">
-                                <input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="username">
-                                <input class="input is-normal input-password" type="password" placeholder="Mật khẩu" name="password"></br>
+                                <input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="txtUsername" value="">
+                                <input class="input is-normal input-password" type="password" placeholder="Mật khẩu" name="txtPassword" value=""></br>
                                 <button class="button is-light forgot-password" type="submit" value="changePass" name="action"
                                         <span>Quên mật khẩu?</span>
                                 </button></br>

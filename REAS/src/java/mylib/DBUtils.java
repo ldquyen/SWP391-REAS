@@ -17,4 +17,27 @@ public class DBUtils {
         cn = DriverManager.getConnection(url, DB_USER_NAME, DB_PASSWORD);
         return cn;
     }
+    
+    // check connection to database
+//    public static void main(String[] args) {
+//        // Main method for testing the database connection
+//        try {
+//            // Attempt to get a database connection
+//            Connection connection = getConnection();
+//
+//            // Check if the connection is successful
+//            if (connection != null) {
+//                System.out.println("Connected to the database successfully!");
+//
+//                // Close the connection when done
+//                connection.close();
+//            } else {
+//                System.out.println("Failed to connect to the database.");
+//            }
+//
+//        } catch (ClassNotFoundException | SQLException e) {
+//            // Handle exceptions
+//            e.printStackTrace();
+//        }
+//    }
 }
