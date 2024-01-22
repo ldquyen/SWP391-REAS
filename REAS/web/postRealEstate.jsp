@@ -83,7 +83,6 @@
                 font-weight: bold;
                 color: black;
             }
-
         </style>
     </head>
     <body>
