@@ -26,8 +26,8 @@ import dao.AccountDAO;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-    private final String HOMEPAGE = "rule.jsp"; // bien la hang so phai lhai bao in hoa
-    private final String LOGINPAGE = "news.jsp";
+    private final String HOMEPAGE = "index_1.jsp"; // bien la hang so phai lhai bao in hoa
+    private final String LOGINPAGE = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
