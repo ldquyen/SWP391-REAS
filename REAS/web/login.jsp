@@ -86,7 +86,7 @@
                         <div class="container-login">
                             <p class="register-if-dont-have-container">Bạn chưa có tài khoản?</p>
                             <form action="MainController" method="post" class="registration-form">
-                                <button class="button is-light sign-up-in-login" type="submit" value="DN" name="action"
+                                <button class="button is-light sign-up-in-login" type="submit" value="DK" name="action"
                                         <span>Đăng ký</span>
                                 </button>
                             </form>
@@ -97,7 +97,7 @@
                             <form action="MainController" method="post">
                                 <input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="username">
                                 <input class="input is-normal input-password" type="password" placeholder="Mật khẩu" name="password"></br>
-                                <button class="button is-light forgot-password" type="submit" value="DN" name="action"
+                                <button class="button is-light forgot-password" type="submit" value="changePass" name="action"
                                         <span>Quên mật khẩu?</span>
                                 </button></br>
                                 <button class="button is-light submit-login-btn" type="submit" value="Login" name="btAction" style="
