@@ -1,8 +1,10 @@
 
 package controllersMember;
 
+import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,19 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 public class ChangePasswordServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ChangePassword</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ChangePassword at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+           String password = request.getParameter("password");
+           String newpassword = request.getParameter("newpassword");
+           String renewpassword = request.getParameter("renewpassword");
+           String cccd = request.getParameter("cccd");
+           
+           if(AccountDAO.checkPassword(password)){
+               
+           }
         }
     }
 
