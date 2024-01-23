@@ -28,9 +28,6 @@ public class MainController extends HttpServlet {
                 case "Login":
                     url = "LoginServlet";
                     break;
-                case "LoginGG":
-                    url = "LoginGoogleServlet";
-                    break;
                 case "DK":
                     url = "register.jsp";
                     break;
