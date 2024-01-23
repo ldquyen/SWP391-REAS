@@ -1,4 +1,3 @@
-
 package controllersMember;
 
 import java.io.IOException;
@@ -21,9 +20,15 @@ public class MemberController extends HttpServlet {
             }
             switch (action) {
                 case "":
-                    url = "index.jsp";
+                    url = "index_1.jsp";
                     break;
-                
+                case "changePassServlet":
+                    url = "ChangePasswordServlet";
+                    break;
+                case "changePass":
+                    url = "changePass.jsp";
+                    break;
+
             }
             request.getRequestDispatcher(url).forward(request, response);
 
