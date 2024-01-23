@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
                 error = false;
                 HttpSession session = request.getSession();
                 Account a = dao.getAccount(username, password);
-                session.setAttribute("adnin", a);
+                session.setAttribute("admin", a);
 
             } else if ("M".equals(dto.getRoleID())) {
                 url = "index_1.jsp";

@@ -168,4 +168,21 @@ public class AccountDAO {
         }
         return false;
     }
+    
+    public static boolean checkPassword(String Password) throws ClassNotFoundException, SQLException{
+        Connection cn = DBUtils.getConnection();
+        if(cn != null){
+            String sql = "SELECT [Password] FROM Account WHERE [Password] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, Password);
+            ResultSet rs = pst.executeQuery();
+            if(rs != null){
+                while(rs.next()){
+                    return true;
+                }
+            }
+            cn.close();
+        }
+        return false;
+    }
 }
