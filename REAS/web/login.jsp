@@ -129,6 +129,9 @@
                                         margin-bottom: 30px;" >
                                     <span><img  style="margin-right: 5px" class="logo-header" src="image/google.png" alt="" href="" ></img>Đăng nhập với Google</span>
                                 </button>
+                                
+                                <a href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/LoginGoogle/LoginGoogleHandler&response_type=code
+		   &client_id=your-key&approval_prompt=force">Login With Google</a>
                             </form>
                         </div>
 
