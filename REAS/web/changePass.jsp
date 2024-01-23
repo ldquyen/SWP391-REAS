@@ -137,23 +137,28 @@
         </nav>
 
         <!-- BODY -->
+        <c:if test="${not empty sessionScope.member.password }">
+            <c:set var="m" value="${sessionScope.member}"></c:set>
+            <form style="background-color: black; border-radius: 40px; width: 350px; height: 370px; padding: 20px; text-align: center; border: 6px solid #D9AB73; color: #D9AB73; position: fixed; top: 45%; left: 50%; transform: translate(-50%, -50%);" action="MainController" method="post">
+                <h1 style="font-weight: bold; margin-bottom: 20px; font-size: 20px">THAY ĐỔI MẬT KHẨU</h1>          
+                <p style="margin-bottom: 25px;"><input type="text" name="password" placeholder="Nhập mật khẩu cũ" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
+                
+                <input type="hidden" name="passmember" value="${m.password}">
+                
+                <p style="margin-bottom: 25px;"><input type="text" name="newpassword" placeholder="Nhập mật khẩu mới" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
 
-        <form style="background-color: black; border-radius: 40px; width: 350px; height: 370px; padding: 20px; text-align: center; border: 6px solid #D9AB73; color: #D9AB73; position: fixed; top: 45%; left: 50%; transform: translate(-50%, -50%);" action="MainController" method="post">
-            <h1 style="font-weight: bold; margin-bottom: 20px; font-size: 20px">THAY ĐỔI MẬT KHẨU</h1>          
-            <p style="margin-bottom: 25px;"><input type="text" name="password" placeholder="Nhập mật khẩu cũ" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
-            
-            <p style="margin-bottom: 25px;"><input type="text" name="newpassword" placeholder="Nhập mật khẩu mới" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
-            
-            <p style="margin-bottom: 25px;"><input type="text" name="renewpassword" placeholder="Nhập lại mật khẩu mới" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
-            
-            <p style="margin-bottom: 35px;"><input type="text" name="cccd" placeholder="Xác nhận CCCD của bạn" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
-            
-            <input type="hidden" name="accid" value="${member.accID}">
-            
-            <button type="submit" value="changePass" name="action" style="border: 5px solid #D9AB73; color: #D9AB73;border-radius: 40px; width: 150px; height: 50px; font-size: 18px">
-                <span>Đổi mật khẩu</span>
-            </button>
-        </form>
+                <p style="margin-bottom: 25px;"><input type="text" name="renewpassword" placeholder="Nhập lại mật khẩu mới" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
+
+                <p style="margin-bottom: 35px;"><input type="text" name="cccd" placeholder="Xác nhận CCCD của bạn" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
+
+                <input type="hidden" name="accid" value="${member.accID}">
+
+                <button type="submit" value="changePass" name="action" style="border: 5px solid #D9AB73; color: #D9AB73;border-radius: 40px; width: 150px; height: 50px; font-size: 18px">
+                    <span>Đổi mật khẩu</span>
+                </button>
+            </form>
+        </c:if>
+
 
 
 
