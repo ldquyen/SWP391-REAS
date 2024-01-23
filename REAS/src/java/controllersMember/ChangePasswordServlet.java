@@ -1,4 +1,3 @@
-
 package controllersMember;
 
 import dao.AccountDAO;
@@ -11,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class ChangePasswordServlet extends HttpServlet {
 
@@ -18,17 +18,22 @@ public class ChangePasswordServlet extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           String password = request.getParameter("password");
-           String newpassword = request.getParameter("newpassword");
-           String renewpassword = request.getParameter("renewpassword");
-           String cccd = request.getParameter("cccd");
-           
-           if(AccountDAO.checkPassword(password)){
-               
-           }
+            String password = request.getParameter("password");
+            String passmember = request.getParameter("passmember");
+            String newpassword = request.getParameter("newpassword");
+            String renewpassword = request.getParameter("renewpassword");
+            String cccd = request.getParameter("cccd");
+            String cccdmember = request.getParameter("cccdmember");
+            //check password = passmember / newpassword = renewpassmember / cccd = cccdmember
+            if(AccountDAO.checkEqual(password, passmember) && AccountDAO.checkEqual(newpassword, renewpassword) && AccountDAO.checkEqual(cccd, cccdmember)){
+                response.sendRedirect("admin.jsp");
+                
+            }else{
+                response.sendRedirect("staff.jsp");
+            }
         }
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

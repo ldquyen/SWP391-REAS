@@ -105,7 +105,8 @@ public class AccountDAO {
         }
         return a;
     }
-     public static boolean checkAccount(String AccID) throws Exception {
+
+    public static boolean checkAccount(String AccID) throws Exception {
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
             String sql = "select [AccID] from [dbo].[Account] WHERE [AccID] = ?";
@@ -126,7 +127,6 @@ public class AccountDAO {
         return false;
     }
 
-    
     public static boolean insertAccount(Account account) {
         Connection cn = null;
         PreparedStatement pst = null;
@@ -168,20 +168,10 @@ public class AccountDAO {
         }
         return false;
     }
-    
-    public static boolean checkPassword(String Password) throws ClassNotFoundException, SQLException{
-        Connection cn = DBUtils.getConnection();
-        if(cn != null){
-            String sql = "SELECT [Password] FROM Account WHERE [Password] = ?";
-            PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setString(1, Password);
-            ResultSet rs = pst.executeQuery();
-            if(rs != null){
-                while(rs.next()){
-                    return true;
-                }
-            }
-            cn.close();
+
+    public static boolean checkEqual(String string1, String string2) {
+        if (string1.equals(string2)) {
+            return true;
         }
         return false;
     }
