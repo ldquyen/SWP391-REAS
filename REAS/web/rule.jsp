@@ -10,17 +10,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Real Estate Auction System</title>
+        <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <style>
             body {
-            background-image: url(image/rulebg.png);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 0; 
-            padding: 0; 
-        }
+                background-image: url(image/rulebg.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0; 
+                padding: 0; 
+            }
         </style>
     </head>
     <body>
@@ -246,7 +247,7 @@
         <p style="margin-left: 20px; font-weight: bold; color: white"> Điều 9. Phương thức hoàn trả tiền đặt trước</p>
         <p style="margin-left: 35px; color: white">
             1. Đối với khách hàng tham gia đấu giá mà không trúng đấu giá và không vi phạm Quy chế đấu giá sẽ được hoàn trả khoản tiền đặt trước trong thời hạn 03 ngày làm việc kể từ ngày kết thúc cuộc đấu giá. <br>
-        2. Tiền đặt trước sẽ được hoàn trả vào tài khoản mà khách hàng đã đăng ký trên Trang thông tin đấu giá trực tuyến. Khách hàng tự chịu trách nhiệm về thông tin tài khoản nhận lại tiền đặt trước và tự chịu mọi chi phí liên quan đến giao dịch khoản tiền đặt trước. Công ty không hoàn trả lại tiền đặt trước cho bất kỳ tài khoản nào khác, ngoài tài khoản khách hàng đã đăng ký với Công ty. <br>
+            2. Tiền đặt trước sẽ được hoàn trả vào tài khoản mà khách hàng đã đăng ký trên Trang thông tin đấu giá trực tuyến. Khách hàng tự chịu trách nhiệm về thông tin tài khoản nhận lại tiền đặt trước và tự chịu mọi chi phí liên quan đến giao dịch khoản tiền đặt trước. Công ty không hoàn trả lại tiền đặt trước cho bất kỳ tài khoản nào khác, ngoài tài khoản khách hàng đã đăng ký với Công ty. <br>
         </p>
 
         <footer class="footer" style="position: inherit; margin-top: 30px"> 
