@@ -28,9 +28,6 @@ public class MainController extends HttpServlet {
                 case "Login":
                     url = "LoginServlet";
                     break;
-                case "LoginGG":
-                    url = "LoginGoogleServlet";
-                    break;
                 case "DK":
                     url = "register.jsp";
                     break;
@@ -40,11 +37,11 @@ public class MainController extends HttpServlet {
                 case "rule":
                     url = "rule.jsp";
                     break;
-                case "news":
-                    url = "news.jsp";
-                    break;
                 case "changePass":
                     url = "changePass.jsp";
+                    break;
+                case "news":
+                    url = "news.jsp";
                     break;
             }
             request.getRequestDispatcher(url).forward(request, response);
