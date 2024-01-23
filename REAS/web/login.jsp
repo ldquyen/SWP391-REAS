@@ -117,7 +117,8 @@
                                    color: #fff;">
                                     ------------------------------Hoặc------------------------------
                                 </p>
-                                <button class="button is-light submit-login-btn submit-with-gg-btn" type="submit" value="Login" name="btAction" style="
+                                <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8084/REAS/LoginGoogleServlet&response_type=code
+		   &client_id=741212369784-t2och2tr458etn9rb3tt3oiuo1tqhgsd.apps.googleusercontent.com&approval_prompt=force" class="button is-light submit-login-btn submit-with-gg-btn" type="submit" value="LoginGG" name="action" style="
                                         background-color: transparent;
                                         color: #D9AB73;
                                         font-size: 18px;
@@ -128,10 +129,7 @@
                                         border: 3px solid #D9AB73;
                                         margin-bottom: 30px;" >
                                     <span><img  style="margin-right: 5px" class="logo-header" src="image/google.png" alt="" href="" ></img>Đăng nhập với Google</span>
-                                </button>
-                                
-                                <a href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/LoginGoogle/LoginGoogleHandler&response_type=code
-		   &client_id=your-key&approval_prompt=force">Login With Google</a>
+                                </a>
                             </form>
                         </div>
 
