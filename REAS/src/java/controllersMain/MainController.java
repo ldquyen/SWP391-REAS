@@ -40,9 +40,9 @@ public class MainController extends HttpServlet {
                 case "news":
                     url = "news.jsp";
                     break;
-//                case "changePass":
-//                    url = "changePass.jsp";
-//                    break;
+                case "changePass":
+                    url = "changePass.jsp";
+                    break;
             }
             request.getRequestDispatcher(url).forward(request, response);
 
