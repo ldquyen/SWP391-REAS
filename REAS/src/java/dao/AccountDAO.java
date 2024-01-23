@@ -105,4 +105,67 @@ public class AccountDAO {
         }
         return a;
     }
+     public static boolean checkAccount(String AccID) throws Exception {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "select [AccID] from [dbo].[Account] WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, AccID);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String accID = rs.getString("AccID");
+                    if (accID != null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    
+    public static boolean insertAccount(Account account) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "INSERT INTO [dbo].[Account]([AccID],[RoleID],[UserName],[Password],[FullName],[Status],[Email],[Phone],[CCCD],[Address],[PlaceOfReg],[DateOfReg],[BankName],[BankCode])\n"
+                        + "VALUES (?,'M',?,?,?,0,?,?,?,?,?,?,?,?)";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, account.getAccID());
+                pst.setString(2, account.getUserName());
+                pst.setString(3, account.getPassword());
+                pst.setString(4, account.getFullname());
+                pst.setString(5, account.getEmail());
+                pst.setString(6, account.getPhone());
+                pst.setString(7, account.getCccd());
+                pst.setString(8, account.getAddress());
+                pst.setString(9, account.getPlaceOfReg());
+                pst.setString(10, account.getDateOfReg());
+                pst.setString(11, account.getBankName());
+                pst.setString(12, account.getBankCode());
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 }

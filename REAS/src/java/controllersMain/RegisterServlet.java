@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllersMain;
 
 import java.io.IOException;
@@ -7,45 +12,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MainController extends HttpServlet {
+/**
+ *
+ * @author TRUONG SON
+ */
+public class RegisterServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String action = request.getParameter("action");
-            String url = "";
-            if (action == null) {
-                action = "";
-            }
-            switch (action) {
-                case "":
-                    url = "index.jsp";
-                    break;
-                case "DN":
-                    url = "login.jsp";
-                    break;
-                case "Login":
-                    url = "LoginServlet";
-                    break;
-                case "DK":
-                    url = "register.jsp";
-                    break;
-                case "aboutus":
-                    url = "aboutUS.jsp";
-                    break;
-                case "rule":
-                    url = "rule.jsp";
-                    break;
-                case "news":
-                    url = "news.jsp";
-                    break;
-                case "changePass":
-                    url = "changePass.jsp";
-                    break;
-            }
-            request.getRequestDispatcher(url).forward(request, response);
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet RegisterServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
