@@ -94,13 +94,13 @@
                         </div>
 
                         <div class="form-login-container">
-                            <form action="MainController" method="post">
-                                <input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="txtUsername" value="">
-                                <input class="input is-normal input-password" type="password" placeholder="Mật khẩu" name="txtPassword" value=""></br>
-                                <button class="button is-light forgot-password" type="submit" value="changePass" name="action"
-                                        <span>Quên mật khẩu?</span>
+                            <form id="loginForm" action="MainController" method="post">
+                                <input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="txtUsername" value="" form="loginForm">
+                                <input class="input is-normal input-password" type="password" placeholder="Mật khẩu" name="txtPassword" value="" form="loginForm"></br>
+                                <button class="button is-light forgot-password" type="submit" value="" name="action">
+                                    <span>Quên mật khẩu?</span>
                                 </button></br>
-                                <button class="button is-light submit-login-btn" type="submit" value="Login" name="action" style="
+                                <button id="loginSubmitBtn" class="button is-light submit-login-btn" type="submit" value="Login" name="action" style="
                                         background-color: transparent;
                                         color: #D9AB73;
                                         font-size: 18px;
@@ -154,4 +154,13 @@
             </div>
         </footer>
     </body>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('loginSubmitBtn').click();
+            }
+        });
+    </script>
 </html>
