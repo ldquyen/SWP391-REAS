@@ -175,4 +175,16 @@ public class AccountDAO {
         }
         return false;
     }
+    
+    public static void changePassword(String accid, String newpassword) throws ClassNotFoundException, SQLException{
+        Connection cn = DBUtils.getConnection();
+        if(cn != null){
+            String sql = "UPDATE [dbo].[Account] SET [Password] = ? WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, newpassword);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
 }

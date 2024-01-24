@@ -24,12 +24,26 @@ public class ChangePasswordServlet extends HttpServlet {
             String renewpassword = request.getParameter("renewpassword");
             String cccd = request.getParameter("cccd");
             String cccdmember = request.getParameter("cccdmember");
+            String accidmember = request.getParameter("accidmember");
             //check password = passmember / newpassword = renewpassmember / cccd = cccdmember
-            if(AccountDAO.checkEqual(password, passmember) && AccountDAO.checkEqual(newpassword, renewpassword) && AccountDAO.checkEqual(cccd, cccdmember)){
-                response.sendRedirect("admin.jsp");
-                
+            if(AccountDAO.checkEqual(password, passmember) && AccountDAO.checkEqual(newpassword, renewpassword) && AccountDAO.checkEqual(cccd, cccdmember) && !AccountDAO.checkEqual(passmember, newpassword)){
+                AccountDAO.changePassword(accidmember, newpassword);
+                request.setAttribute("CHANGEPASSOKE", "Đã thay đổi mật khẩu");
+                request.getRequestDispatcher("MainController?action=changePass").forward(request, response);           
             }else{
-                response.sendRedirect("staff.jsp");
+                if(!AccountDAO.checkEqual(password, passmember)){
+                    request.setAttribute("WRONGPASSWORD", "MK cũ không đúng");
+                    request.getRequestDispatcher("MainController?action=changePass").forward(request, response);
+                }else if(AccountDAO.checkEqual(newpassword, passmember)){
+                    request.setAttribute("DUPLICATEOLDPASSWORD", "MK mới không được trùng với MK cũ");
+                    request.getRequestDispatcher("MainController?action=changePass").forward(request, response);
+                }else if(!AccountDAO.checkEqual(newpassword, renewpassword)){
+                    request.setAttribute("WRONGNEWPASSWORD", "Xác nhận MK mới không khớp");
+                    request.getRequestDispatcher("MainController?action=changePass").forward(request, response);
+                }else if(!AccountDAO.checkEqual(cccd, cccdmember)){
+                    request.setAttribute("WRONGCCCD", "Mã CCCD không hợp lệ");
+                    request.getRequestDispatcher("MainController?action=changePass").forward(request, response);
+                } 
             }
         }
     }
