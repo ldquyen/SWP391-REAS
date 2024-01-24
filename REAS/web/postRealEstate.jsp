@@ -13,78 +13,8 @@
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
-        <style>
-            body {
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                margin: 0; 
-                padding: 0; 
-            }
-            .form-post-real-estate {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-                border: 1px solid #ddd;
-            }
-            .TieuDe h1 {
-                text-align: center; 
-                margin-bottom: 30px;
-                font-size: 45px;
-                font-weight: bold;
-                color: black;
-            }
-            .formDangKy {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .form-group {
-                margin-bottom: 15px;  
-                text-indent: 20px;
-            }
-
-            .form-group1 {
-                margin-bottom: 15px;  
-                text-indent: 100px;
-            }
-            .form-control{
-                width: 250px; 
-                padding: 5px; 
-            }
-            .form-control1{
-                width: 100px; 
-                padding: 5px; 
-            }
-            label {
-                margin-right: 10px;
-                margin-left: 10px;
-                font-weight: bold;
-            }
-            input, select ,form-control1{
-                margin-right: 5px;
-                margin-left: 5px;
-            }
-            input, 
-            textarea, select,form-control1  {
-                padding: 8px 10px;
-                border: 1px solid #ccc;
-                border-radius: 3px;
-            }
-            input[type="datetime-local"] {
-                width: 200px;
-            }
-            button {
-                background: #D9AB73;
-                color: black;
-                border: none;
-                border-radius: 3px;
-                padding: 10px 15px;
-                font-size: 20px; 
-                font-weight: bold;
-                color: black;
-            }
-        </style>
+        <link rel="stylesheet" href="postRealEstate.css" type="text/css" >
+        
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -232,6 +162,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="thanhPho">3. Thành Phố</label>
+                        <input type="text" class="form-control" id="thanhPho" name="thanhPho" required>
+                    </div>
+                    
+<!--                    <div class="form-group">
                         <label for="tenDonViSoHuu">3. Tên đơn vị sở hữu tài sản</label>
                         <input type="text" class="form-control" id="tenDonViSuuHuu" name="tenDonViSuuHuu" required>
                     </div>
@@ -239,25 +174,25 @@
                     <div class="form-group">
                         <label for="diaChiDonViSoHuu">4. Địa chỉ đơn vị sở hữu tài sản</label>
                         <input type="text" class="form-control" id="diaChiDonViSuuHuu" name="diaChiDonViSuuHuu" required>
-                    </div>
+                    </div>-->
 
                     <div class="form-group">
-                        <label for="giaTriTaiSan">5. Giá trị tài sản</label>
+                        <label for="giaTriTaiSan">4. Giá trị tài sản</label>
 
                         <input type="text" class="form-control" id="giaTriTaiSan" name="giaTriTaiSan" placeholder="VNĐ" oninput="formatCurrency(this)" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="thoiGianDangKy">6. Thời gian đăng ký đấu giá</label>
+                        <label for="thoiGianDangKy">5. Thời gian đăng ký đấu giá</label>
                         <input type="datetime-local" class="form-control" id="thoiGianDangKy" name="thoiGianDangKy" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="thoiGianBanDauGia">7. Thời gian bán đấu giá</label>
+                        <label for="thoiGianBanDauGia">6. Thời gian bán đấu giá</label>
                         <input type="datetime-local" class="form-control" id="thoiGianBanDauGia" name="thoiGianBanDauGia" required>
                     </div>
 
-                    <div class="form-group">
+<!--                    <div class="form-group">
                         <label for="soDienThoaiLienHe">8. Số điện thoại liên hệ</label>
                         <input type="text" class="form-control" id="soDienThoaiLienHe" name="soDienThoaiLienHe" required>
                     </div>
@@ -275,14 +210,16 @@
                     <div class="form-group">
                         <label for="maSoThue">11. Mã số thuế</label>
                         <input type="text" class="form-control" id="maSoThue" name="maSoThue" required>
-                    </div>
+                    </div>-->
+
                     <div class="form-group">
-                        <label for="noiDungTaiSan">12. Nội dung tài sản</label>
+                        <label for="noiDungTaiSan">7. Nội dung tài sản</label>
                         <div class="form-group1">
                             <label for="loaTaiSan">Loại tài sản</label>
                             <select id="loaiTaiSan" name="loaiTaiSan" >
                                 <option value="" disabled selected hidden>-- Chọn --</option>
-                                <option value="nhaDat">Nhà đất</option>
+                                <option value="nhaDat">Nhà </option>
+                                <option value="nhaDat">Đất </option>
                                 <option value="chungCu">Chung cư</option>
                                 <option value="bietThu">Biệt thự</option>
                             </select>

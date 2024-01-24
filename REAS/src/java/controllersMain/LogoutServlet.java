@@ -39,7 +39,7 @@ public class LogoutServlet extends HttpServlet {
         String url =  HOME_PAGE_USER;
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
-        String button = request.getParameter("btAction");
+        String button = request.getParameter("action");
         try {
             if (button.equals("Logout")) {
                 HttpSession session = request.getSession(false);
