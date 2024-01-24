@@ -13,6 +13,7 @@
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
+
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
