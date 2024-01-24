@@ -4,6 +4,8 @@
     Author     : ASUS
 --%>
 
+<%@page import="dto.UserGoogle"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -73,7 +75,17 @@
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
-                                ${sessionScope.member.fullname}
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.member}">
+                                        ${sessionScope.member.fullname}
+                                    </c:when>
+                                    <c:when test="${not empty sessionScope.userGoogle}">
+                                        ${sessionScope.userGoogle.given_name}
+                                    </c:when>
+                                    <c:otherwise>
+                                        Guest
+                                    </c:otherwise>
+                                </c:choose>
                             </a>
                             <div class="fake-div"></div>
 
@@ -134,13 +146,13 @@
                         </div>
 
 
-                      
+
                     </div>
                 </div>
             </div>
         </nav>
-        
-         <!-- BODY -->
+
+        <!-- BODY -->
         <div class="search-container">
             <div class="search-wrap">
                 <div class="field has-addons">
