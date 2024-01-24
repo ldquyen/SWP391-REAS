@@ -123,7 +123,13 @@
                                    color: #D9AB73;
                                    font-size: 18px;
                                    border: 3px solid #D9AB73;
-                                   margin-bottom: 30px;" >
+                                   margin-bottom: 30px;
+                                   font-family: Inter;
+                                   font-weight: 800;
+                                   word-wrap: break-word;
+                                   border-radius: 40px;
+                                   padding: 5px 22px;
+                                   " >
                                     <span><img  style="margin-right: 5px" class="logo-header" src="image/google.png" alt="" href="" ></img>Đăng nhập với Google</span></a>
                             </form>
                         </div>
