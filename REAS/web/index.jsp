@@ -39,7 +39,7 @@
 
                     <div class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="news" name="action">
+                            <button type="submit" value="DN" name="action">
                                 <span>TIN TỨC</span>
                             </button>
                         </form>
@@ -47,7 +47,7 @@
 
                     <div class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="rule" name="action">
+                            <button type="submit" value="DN" name="action">
                                 <span>NỘI QUY</span>
                             </button>
                         </form>
@@ -77,61 +77,53 @@
 
 
         <!-- BODY -->
-        <div class="search-container">
-            <div class="search-wrap">
-                <div class="field has-addons">
-                    <div class="control search-bar">
-                        <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
-                    </div>
-                    <div class="control button-search-container">
-                        <a class="button is-info button-search">
-                            Tìm kiếm
-                        </a>
-                    </div>
-                </div>
-                <div class="search-detail-container">
-                    <div class="control">
-                        <div class="select">
-                            <select class="custom-select">
-                                <option>Loại hình bất động sản</option>
-                                <option>Chung cư</option>
-                                <option>Biệt thự</option>
-                                <option>Nhà đất</option>
-                                <option>Condotel</option>
-                            </select>
+        <form>
+            <div class="search-container">
+                <div class="search-wrap">
+                    <div class="field has-addons">
+                        <div class="control search-bar">
+                            <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
                         </div>
-                        <div class="select">
-                            <select class="custom-select">
-                                <option>Thành phố</option>
-                                <option>With options</option>
-                            </select>
-                        </div>
-                        <div class="select">
-                            <select class="custom-select">
-                                <option>Diện tích</option>
-                                <option>0-100 m2</option>
-                                <option>100-500 m2</option>
-                                <option>500-1000 m2</option>
-                                <option>Trên 1000 m2</option>
-                            </select>
-                        </div>
-                        <div class="select">
-                            <select class="custom-select">
-                                <option>Mức giá</option>
-                                <option>0-5 tỷ</option>
-                                <option>5-10 tỷ</option>
-                                <option>10-50 tỷ</option>
-                                <option>50-100 tỷ</option>
-                                <option>Trên 100 tỷ</option>
-                            </select>
+                        <div class="control button-search-container">
+                            <a class="button is-info button-search">
+                                Tìm kiếm
+                            </a>
                         </div>
                     </div>
-                    <div class="realestate-quantity">
-                        <p>Hiện có 99 dự án</p>
+                    <div class="search-detail-container">
+                        <div class="control">
+                            <div class="select">
+                                <select class="custom-select">
+                                    <option>Loại hình bất động sản</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select class="custom-select">
+                                    <option>Thành phố</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select class="custom-select">
+                                    <option>Diện tích</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select class="custom-select">
+                                    <option>Mức giá</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="realestate-quantity">
+                            <p>Hiện có ... dự án</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
 
         <footer class="footer"> 
             <div>
