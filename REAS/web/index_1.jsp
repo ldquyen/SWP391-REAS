@@ -82,6 +82,9 @@
                                     <c:when test="${not empty sessionScope.userGoogle}">
                                         ${sessionScope.userGoogle.given_name}
                                     </c:when>
+                                    <c:otherwise>
+                                        Guest
+                                    </c:otherwise>
                                 </c:choose>
                             </a>
 
@@ -134,7 +137,7 @@
                                 <hr class="navbar-divider">
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
+                                        <button type="submit" value="Logout" name="action">
                                             <span>Đăng xuất</span>
                                         </button>
                                     </form>

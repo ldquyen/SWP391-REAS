@@ -75,7 +75,17 @@
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
-                                ${sessionScope.member.fullname}
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.member}">
+                                        ${sessionScope.member.fullname}
+                                    </c:when>
+                                    <c:when test="${not empty sessionScope.userGoogle}">
+                                        ${sessionScope.userGoogle.given_name}
+                                    </c:when>
+                                    <c:otherwise>
+                                        Guest
+                                    </c:otherwise>
+                                </c:choose>
                             </a>
                             <div class="fake-div"></div>
 
