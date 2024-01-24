@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import javax.naming.NamingException;
 import mylib.DBUtils;
@@ -127,7 +128,70 @@ public class AccountDAO {
         return false;
     }
 
-    public static boolean insertAccount(Account account) {
+    public static boolean checkUsername(String username) throws Exception {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [UserName] FROM [dbo].[Account] WHERE [UserName] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String Username = rs.getString("UserName");
+                    if (Username != null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkEmail(String email) throws Exception {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [Email] FROM [dbo].[Account] WHERE [Email] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String Email = rs.getString("Email");
+                    if (Email != null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkPhone(String phone) throws Exception {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [Phone] FROM [dbo].[Account] WHERE [Phone] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, phone);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String Phone = rs.getString("Phone");
+                    if (Phone != null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean insertAccount(String accid, String username, String password, String fullname, String email, String phone, String cccd, String address, String cccdregplace, String cccdregdate, String bankname, String bankcode) {
         Connection cn = null;
         PreparedStatement pst = null;
 
@@ -137,18 +201,18 @@ public class AccountDAO {
                 String sql = "INSERT INTO [dbo].[Account]([AccID],[RoleID],[UserName],[Password],[FullName],[Status],[Email],[Phone],[CCCD],[Address],[PlaceOfReg],[DateOfReg],[BankName],[BankCode])\n"
                         + "VALUES (?,'M',?,?,?,0,?,?,?,?,?,?,?,?)";
                 pst = cn.prepareStatement(sql);
-                pst.setString(1, account.getAccID());
-                pst.setString(2, account.getUserName());
-                pst.setString(3, account.getPassword());
-                pst.setString(4, account.getFullname());
-                pst.setString(5, account.getEmail());
-                pst.setString(6, account.getPhone());
-                pst.setString(7, account.getCccd());
-                pst.setString(8, account.getAddress());
-                pst.setString(9, account.getPlaceOfReg());
-                pst.setString(10, account.getDateOfReg());
-                pst.setString(11, account.getBankName());
-                pst.setString(12, account.getBankCode());
+                pst.setString(1, accid);
+                pst.setString(2, username);
+                pst.setString(3, password);
+                pst.setString(4, fullname);
+                pst.setString(5, email);
+                pst.setString(6, phone);
+                pst.setString(7, cccd);
+                pst.setString(8, address);
+                pst.setString(9, cccdregplace);
+                pst.setString(10, cccdregdate);
+                pst.setString(11, bankname);
+                pst.setString(12, bankcode);
                 int rowsAffected = pst.executeUpdate();
                 return rowsAffected > 0;
             }
@@ -175,10 +239,10 @@ public class AccountDAO {
         }
         return false;
     }
-    
-    public static void changePassword(String accid, String newpassword) throws ClassNotFoundException, SQLException{
+
+    public static void changePassword(String accid, String newpassword) throws ClassNotFoundException, SQLException {
         Connection cn = DBUtils.getConnection();
-        if(cn != null){
+        if (cn != null) {
             String sql = "UPDATE [dbo].[Account] SET [Password] = ? WHERE [AccID] = ?";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, newpassword);
@@ -187,4 +251,25 @@ public class AccountDAO {
         }
         cn.close();
     }
+
+    public static String encodePassword(String password) throws Exception {
+        String str = password;
+        String encodedString = Base64.getEncoder().encodeToString(str.getBytes());
+        System.out.println(encodedString); // R1AgQ29kZXI=
+        return encodedString;
+    }
+
+    public static String decodePassword(String password) throws Exception {
+        byte[] decodedBytes = Base64.getDecoder().decode(password);
+        String decodedString = new String(decodedBytes);
+        //System.out.println(decodedString); // GP Coder
+        return decodedString;
+    }
+
+//    public static void main(String[] args) throws Exception {
+//        String a = "111";
+//        String b = encodePassword(a);
+//        String c = decodePassword(b);
+//        System.out.println(a + "---" + b + "---" + c);
+//    }
 }
