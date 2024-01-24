@@ -145,7 +145,7 @@
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
-                                USERNAME
+                                ${sessionScope.member.fullname}
                             </a>
                             <div class="fake-div"></div>
 
@@ -160,7 +160,7 @@
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
-                                            <span>Danh mục yêu thích</span>
+                                            <span>Danh mục đã đăng kí</span>
                                         </button>
                                     </form>
                                 </a>

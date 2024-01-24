@@ -94,7 +94,7 @@
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
-                                            <span>Danh mục yêu thích</span>
+                                            <span>Danh mục đã đăng kí</span>
                                         </button>
                                     </form>
                                 </a>
@@ -164,6 +164,7 @@
                 <p style="margin-bottom: 25px;"><input type="text" name="cccd" placeholder="Xác nhận CCCD của bạn" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
 
                 <input type="hidden" name="cccdmember" value="${m.cccd}">
+                <input type="hidden" name="usernamemember" value="${m.userName}">
                 <input type="hidden" name="accidmember" value="${m.accID}">
                 <button type="submit" value="changePassServlet" name="action" style="border: 5px solid #D9AB73; color: #D9AB73;border-radius: 40px; width: 150px; height: 50px; font-size: 18px;margin-bottom: 7px">
                     <span>Đổi mật khẩu</span>
