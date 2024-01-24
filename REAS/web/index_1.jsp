@@ -98,7 +98,7 @@
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="aboutus" name="action">
-                                            <span>Danh mục yêu thích</span>
+                                            <span>Danh mục đã đăng kí</span>
                                         </button>
                                     </form>
                                 </a>

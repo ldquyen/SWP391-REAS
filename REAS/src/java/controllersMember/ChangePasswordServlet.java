@@ -1,6 +1,7 @@
 package controllersMember;
 
 import dao.AccountDAO;
+import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ public class ChangePasswordServlet extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            AccountDAO accdao = new AccountDAO();
             String password = request.getParameter("password");
             String passmember = request.getParameter("passmember");
             String newpassword = request.getParameter("newpassword");
@@ -25,25 +27,29 @@ public class ChangePasswordServlet extends HttpServlet {
             String cccd = request.getParameter("cccd");
             String cccdmember = request.getParameter("cccdmember");
             String accidmember = request.getParameter("accidmember");
+            String usernamemember = request.getParameter("usernamemember");
             //check password = passmember / newpassword = renewpassmember / cccd = cccdmember
-            if(AccountDAO.checkEqual(password, passmember) && AccountDAO.checkEqual(newpassword, renewpassword) && AccountDAO.checkEqual(cccd, cccdmember) && !AccountDAO.checkEqual(passmember, newpassword)){
+            if (AccountDAO.checkEqual(password, passmember) && AccountDAO.checkEqual(newpassword, renewpassword) && AccountDAO.checkEqual(cccd, cccdmember) && !AccountDAO.checkEqual(passmember, newpassword)) {
                 AccountDAO.changePassword(accidmember, newpassword);
                 request.setAttribute("CHANGEPASSOKE", "Đã thay đổi mật khẩu");
-                request.getRequestDispatcher("MainController?action=changePass").forward(request, response);           
-            }else{
-                if(!AccountDAO.checkEqual(password, passmember)){
+                HttpSession session = request.getSession();
+                Account m = accdao.getAccount(usernamemember, newpassword);
+                session.setAttribute("member", m);
+                request.getRequestDispatcher("MainController?action=changePass").forward(request, response);
+            } else {
+                if (!AccountDAO.checkEqual(password, passmember)) {
                     request.setAttribute("WRONGPASSWORD", "MK cũ không đúng");
                     request.getRequestDispatcher("MainController?action=changePass").forward(request, response);
-                }else if(AccountDAO.checkEqual(newpassword, passmember)){
+                } else if (AccountDAO.checkEqual(newpassword, passmember)) {
                     request.setAttribute("DUPLICATEOLDPASSWORD", "MK mới không được trùng với MK cũ");
                     request.getRequestDispatcher("MainController?action=changePass").forward(request, response);
-                }else if(!AccountDAO.checkEqual(newpassword, renewpassword)){
+                } else if (!AccountDAO.checkEqual(newpassword, renewpassword)) {
                     request.setAttribute("WRONGNEWPASSWORD", "Xác nhận MK mới không khớp");
                     request.getRequestDispatcher("MainController?action=changePass").forward(request, response);
-                }else if(!AccountDAO.checkEqual(cccd, cccdmember)){
+                } else if (!AccountDAO.checkEqual(cccd, cccdmember)) {
                     request.setAttribute("WRONGCCCD", "Mã CCCD không hợp lệ");
                     request.getRequestDispatcher("MainController?action=changePass").forward(request, response);
-                } 
+                }
             }
         }
     }
