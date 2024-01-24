@@ -53,7 +53,7 @@ public class LoginGoogleServlet extends HttpServlet {
         String code = request.getParameter("code");
         String accessToken = getToken(code);
         UserGoogle user = getUserInfo(accessToken);
-        System.out.println(user);
+//        System.out.println(user);
         String url = HOMEPAGE;
 
         String inputString = user.toString();
@@ -66,7 +66,7 @@ public class LoginGoogleServlet extends HttpServlet {
         String jsonString = inputString.substring(start, end);
 
         // Hiển thị chuỗi JSON
-        System.out.println(jsonString);
+//        System.out.println(jsonString);
 
         // Chuyển đổi chuỗi JSON thành đối tượng Java
         UserGoogle userGoogle = parseJson(jsonString);
