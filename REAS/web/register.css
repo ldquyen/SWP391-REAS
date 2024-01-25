@@ -389,7 +389,7 @@ button {
 }
 
 .login-container {
-    position: fixed;
+    position: absolute;
     top: 13%;
     left: 0;
     right: 0;
