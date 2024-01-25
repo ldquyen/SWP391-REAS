@@ -23,15 +23,36 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .form-group {
     margin-bottom: 15px;  
     text-indent: 20px;
 }
+.form-group1 textarea {
+    float: right;
+    width: 300px; 
+    height: 100px; /* Đặt chiều cao theo mong muốn của bạn */
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    resize: none;
+    margin-left: 20px;
+}
 
 .form-group1 {
-    margin-bottom: 15px;  
+    margin : 15px;  
     text-indent: 100px;
+}
+.form-group label {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold;
+}
+.form-group1 label {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold;
 }
 .form-control{
     width: 250px; 
@@ -41,14 +62,10 @@ body {
     width: 100px; 
     padding: 5px; 
 }
-label {
-    margin-right: 10px;
-    margin-left: 10px;
-    font-weight: bold;
-}
+
 input, select ,form-control1{
-    margin-right: 5px;
-    margin-left: 5px;
+    /*    margin-right: 5px;*/
+    margin-left: 15px;
 }
 input, 
 textarea, select,form-control1  {
@@ -68,4 +85,15 @@ button {
     font-size: 20px; 
     font-weight: bold;
     color: black;
+}
+
+.danhSachHinhAnh img {
+    max-width: 100px;
+    max-height: 100px;
+    margin: 5px;
+}
+
+.danhSachHinhAnh button {
+    margin: 5px;
+    cursor: pointer;
 }
