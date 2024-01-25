@@ -20,7 +20,7 @@
             <div class="navbar-brand">
 
 
-                <a class="navbar-item" href="index_1.jsp">
+                <a class="navbar-item" href="index.jsp">
                     <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
                 </a>
 
@@ -73,19 +73,19 @@
             </div>
         </nav>
 
-
+        
         <!-- BODY -->
-        <form>
+        <form action="MainController" method="post">
             <div class="search-container">
                 <div class="search-wrap">
                     <div class="field has-addons">
                         <div class="control search-bar">
-                            <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
+                            <input class="input" type="text" name="nameRealEstate" placeholder="Nhập bất động sản yêu thích">
                         </div>
                         <div class="control button-search-container">
-                            <a class="button is-info button-search">
-                                Tìm kiếm
-                            </a>
+                            <button class="button is-info button-search" type="submit" value="DN" name="action">
+                                TÌM KIẾM
+                            </button>
                         </div>
                     </div>
                     <div class="search-detail-container">

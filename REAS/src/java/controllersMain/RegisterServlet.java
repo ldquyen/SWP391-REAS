@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controllersMain;
+
 import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,16 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RegisterServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String fullname = request.getParameter("txtFullname");
@@ -44,6 +39,8 @@ public class RegisterServlet extends HttpServlet {
             String repassword = request.getParameter("txtRepassword");
             String accid;
             AccountDAO acc = new AccountDAO();
+
+  
             int i = 0;
             String password2 = acc.encodePassword(password);
             if (!password.equals(repassword)) {
@@ -81,13 +78,6 @@ public class RegisterServlet extends HttpServlet {
         }
 
     }
-//    public static void main(String[] args) throws Exception {
-//        String a = "123";
-//           AccountDAO acc = new AccountDAO();
-//        String b = acc.encodePassword(a);
-//        String c = acc.decodePassword(b);
-//        System.out.println(a + "---" + b + "---" + c);
-//    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
