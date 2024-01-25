@@ -4,7 +4,9 @@
     Author     : ASUS
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -73,7 +75,7 @@
                 </div>
             </div>
         </nav>
-
+        
         <div style="display: flex">
             <img class="background-login background-register" src="image/background-login.png" alt="background-login" />
             <div class="login-container">

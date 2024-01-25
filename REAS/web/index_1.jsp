@@ -154,7 +154,7 @@
         </nav>
 
         <!-- BODY -->
-        <form>
+        <form action="MainController" method="post">
             <div class="search-container">
                 <div class="search-wrap">
                     <div class="field has-addons">
@@ -162,9 +162,9 @@
                             <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
                         </div>
                         <div class="control button-search-container">
-                            <a class="button is-info button-search">
-                                Tìm kiếm
-                            </a>
+                             <button class="button is-info button-search" type="submit" value="searchRealEstate" name="action">
+                                TÌM KIẾM
+                            </button>
                         </div>
                     </div>
                     <div class="search-detail-container">
