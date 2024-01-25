@@ -53,7 +53,7 @@ public class LoginGoogleServlet extends HttpServlet {
         String code = request.getParameter("code");
         String accessToken = getToken(code);
         UserGoogle user = getUserInfo(accessToken);
-//        System.out.println(user);
+        System.out.println(user);
         String url = HOMEPAGE;
 
         String inputString = user.toString();

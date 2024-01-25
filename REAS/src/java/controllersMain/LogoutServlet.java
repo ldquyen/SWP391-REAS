@@ -58,8 +58,8 @@ public class LogoutServlet extends HttpServlet {
                     }
                 }
                 url = HOME_PAGE_GUEST;
-                System.out.println(session);
-                System.out.println(cookies);
+//                System.out.println(session);
+//                System.out.println(cookies);
             }
         } finally {
             response.sendRedirect(url);
