@@ -6,11 +6,15 @@
  */
 package controllersMain;
 
+
+
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import controllersAdmin.Constants;
 import dao.AccountDAO;
 import dto.Account;
+import dao.GoogleDAO;
 import dto.UserGoogle;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,14 +58,23 @@ public class LoginGoogleServlet extends HttpServlet {
         String accessToken = getToken(code);
         UserGoogle userGoogle = getUserInfo(accessToken);
         String url = HOMEPAGE;
-        
+
         System.out.println(userGoogle);
-        
+
         HttpSession session = request.getSession();
         session.setAttribute("userGoogle", userGoogle);
+
+        String id = userGoogle.getGgAccID();
+        String email = userGoogle.getEmail();
+        boolean verified_email = userGoogle.isVerifiedEmail();
+        String name = userGoogle.getName();
+        String given_name = userGoogle.getGivenName();
+        String family_name = userGoogle.getFamilyName();
+        String picture = userGoogle.getPicture();
         
-        
-        String id = userGoogle.getId();
+        UserGoogle usergg = new UserGoogle();
+//        usergg.sa
+
         System.out.println(id);
 //            String username = request.getParameter("txtUsername");
 //            String email = request.getParameter("txtEmail");

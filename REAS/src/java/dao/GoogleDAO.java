@@ -36,12 +36,12 @@ public class GoogleDAO {
                 stm = con.prepareStatement(sql);
 
                 // Set values for the parameters
-                stm.setString(1, userGoogle.getId());
+                stm.setString(1, userGoogle.getGgAccID());
                 stm.setString(2, userGoogle.getEmail());
-                stm.setBoolean(3, userGoogle.isVerified_email());
+                stm.setBoolean(3, userGoogle.isVerifiedEmail());
                 stm.setString(4, userGoogle.getName());
-                stm.setString(5, userGoogle.getGiven_name());
-                stm.setString(6, userGoogle.getFamily_name());
+                stm.setString(5, userGoogle.getGivenName());
+                stm.setString(6, userGoogle.getFamilyName());
                 stm.setString(7, userGoogle.getPicture());
 
                 // Execute the query
