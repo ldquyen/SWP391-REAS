@@ -1,44 +1,44 @@
 
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dto;
 
+/**
+ *
+ * @author tranl
+ */
 public class UserGoogle {
-    private String ggAccID;
-    private String roleID;
+    private String id;
     private String email;
-    private boolean verifiedEmail;
+    private boolean verified_email;
     private String name;
-    private String givenName;
-    private String familyName;
+    private String given_name;
+    private String family_name;
     private String picture;
 
     public UserGoogle() {
     }
 
-    public UserGoogle(String ggAccID, String roleID, String email, boolean verifiedEmail, String name, String givenName, String familyName, String picture) {
-        this.ggAccID = ggAccID;
-        this.roleID = roleID;
+    public UserGoogle(String id, String email, boolean verified_email, String name, String given_name, String family_name, String picture) {
+        this.id = id;
         this.email = email;
-        this.verifiedEmail = verifiedEmail;
+        this.verified_email = verified_email;
         this.name = name;
-        this.givenName = givenName;
-        this.familyName = familyName;
+        this.given_name = given_name;
+        this.family_name = family_name;
         this.picture = picture;
     }
 
-    public String getGgAccID() {
-        return ggAccID;
+    public String getId() {
+        return id;
     }
 
-    public void setGgAccID(String ggAccID) {
-        this.ggAccID = ggAccID;
-    }
-
-    public String getRoleID() {
-        return roleID;
-    }
-
-    public void setRoleID(String roleID) {
-        this.roleID = roleID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -49,12 +49,12 @@ public class UserGoogle {
         this.email = email;
     }
 
-    public boolean isVerifiedEmail() {
-        return verifiedEmail;
+    public boolean isVerified_email() {
+        return verified_email;
     }
 
-    public void setVerifiedEmail(boolean verifiedEmail) {
-        this.verifiedEmail = verifiedEmail;
+    public void setVerified_email(boolean verified_email) {
+        this.verified_email = verified_email;
     }
 
     public String getName() {
@@ -65,20 +65,20 @@ public class UserGoogle {
         this.name = name;
     }
 
-    public String getGivenName() {
-        return givenName;
+    public String getGiven_name() {
+        return given_name;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setGiven_name(String given_name) {
+        this.given_name = given_name;
     }
 
-    public String getFamilyName() {
-        return familyName;
+    public String getFamily_name() {
+        return family_name;
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
+    public void setFamily_name(String family_name) {
+        this.family_name = family_name;
     }
 
     public String getPicture() {
@@ -91,6 +91,8 @@ public class UserGoogle {
 
     @Override
     public String toString() {
-        return "UserGoogle{" + "ggAccID=" + ggAccID + ", roleID=" + roleID + ", email=" + email + ", verifiedEmail=" + verifiedEmail + ", name=" + name + ", givenName=" + givenName + ", familyName=" + familyName + ", picture=" + picture + '}';
+        return "UserGoogle{" + "id=" + id + ", email=" + email + ", verified_email=" + verified_email + ", name=" + name + ", given_name=" + given_name + ", family_name=" + family_name + ", picture=" + picture + '}';
     }
+
+    
 }

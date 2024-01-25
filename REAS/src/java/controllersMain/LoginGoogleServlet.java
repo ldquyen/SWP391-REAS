@@ -1,20 +1,14 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package controllersMain;
-
-
-
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import controllersAdmin.Constants;
 import dao.AccountDAO;
 import dto.Account;
-import dao.GoogleDAO;
 import dto.UserGoogle;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,14 +24,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Form;
-
 /**
  *
  * @author tranl
  */
 @WebServlet(name = "LoginGoogleServlet", urlPatterns = {"/LoginGoogleServlet"})
 public class LoginGoogleServlet extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -48,34 +40,25 @@ public class LoginGoogleServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private final String HOMEPAGE = "index_1.jsp";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
         String code = request.getParameter("code");
         String accessToken = getToken(code);
         UserGoogle userGoogle = getUserInfo(accessToken);
         String url = HOMEPAGE;
-
+        
+        System.out.println(getUserInfo(accessToken));
+        
         System.out.println(userGoogle);
 
         HttpSession session = request.getSession();
         session.setAttribute("userGoogle", userGoogle);
 
-        String id = userGoogle.getGgAccID();
-        String email = userGoogle.getEmail();
-        boolean verified_email = userGoogle.isVerifiedEmail();
-        String name = userGoogle.getName();
-        String given_name = userGoogle.getGivenName();
-        String family_name = userGoogle.getFamilyName();
-        String picture = userGoogle.getPicture();
-        
-        UserGoogle usergg = new UserGoogle();
-//        usergg.sa
 
-        System.out.println(id);
+//        String id = userGoogle.getId();
+//        System.out.println(id);
 //            String username = request.getParameter("txtUsername");
 //            String email = request.getParameter("txtEmail");
 //            String phone = request.getParameter("txtPhone");
@@ -94,7 +77,6 @@ public class LoginGoogleServlet extends HttpServlet {
         rd.forward(request, response);
         out.close();
     }
-
     public static String getToken(String code) throws ClientProtocolException, IOException {
         // call api to get token
         String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
@@ -103,23 +85,18 @@ public class LoginGoogleServlet extends HttpServlet {
                         .add("redirect_uri", Constants.GOOGLE_REDIRECT_URI).add("code", code)
                         .add("grant_type", Constants.GOOGLE_GRANT_TYPE).build())
                 .execute().returnContent().asString();
-
         JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
         String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
         return accessToken;
     }
-
     public static UserGoogle getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
         //gui req len gg minh co authen token keu tra dl nguoi dung
-
         String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
-
         // va tra ve class nay dum minh
         UserGoogle googlePojo = new Gson().fromJson(response, UserGoogle.class);
         return googlePojo;
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the +
     // sign on the left to edit the code.">
     /**
@@ -135,7 +112,6 @@ public class LoginGoogleServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -149,7 +125,6 @@ public class LoginGoogleServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
     /**
      * Returns a short description of the servlet.
      *
@@ -159,5 +134,4 @@ public class LoginGoogleServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
