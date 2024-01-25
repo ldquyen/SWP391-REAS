@@ -59,6 +59,23 @@ public class LoginGoogleServlet extends HttpServlet {
         
         HttpSession session = request.getSession();
         session.setAttribute("userGoogle", userGoogle);
+        
+        
+        String id = userGoogle.getId();
+        System.out.println(id);
+//            String username = request.getParameter("txtUsername");
+//            String email = request.getParameter("txtEmail");
+//            String phone = request.getParameter("txtPhone");
+//            String cccd = request.getParameter("txtCCCD");
+//            String address = request.getParameter("txtAddress");
+//            String cccdregplace = request.getParameter("txtCCCDRegplace");
+//            String cccdregdate = request.getParameter("txtCCCDRegdate");
+//            String bankname = request.getParameter("txtBankname");
+//            String bankcode = request.getParameter("txtBankcode");
+//            String password = request.getParameter("txtPassword");
+//            String repassword = request.getParameter("txtRepassword");
+//            String accid;
+//            AccountDAO acc = new AccountDAO();
 
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
