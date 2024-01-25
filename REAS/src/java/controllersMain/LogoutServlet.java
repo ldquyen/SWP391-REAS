@@ -22,8 +22,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
 public class LogoutServlet extends HttpServlet {
 
-    private final String HOME_PAGE_GUEST = "index.jsp" ;
-    private final String HOME_PAGE_USER = "index1.jsp" ;
+    private final String HOME_PAGE_GUEST = "index.jsp";
+    private final String HOME_PAGE_USER = "index_1.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,10 +37,10 @@ public class LogoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url =  HOME_PAGE_USER;
+        String url = HOME_PAGE_USER;
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
-        String button = request.getParameter("btAction");
+        String button = request.getParameter("action");
         try {
             if (button.equals("Logout")) {
                 HttpSession session = request.getSession(false);
@@ -57,11 +58,13 @@ public class LogoutServlet extends HttpServlet {
                     }
                 }
                 url = HOME_PAGE_GUEST;
+                System.out.println(session);
+                System.out.println(cookies);
             }
         } finally {
             response.sendRedirect(url);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package controllersMain;
-
+import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -30,18 +30,64 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String fullname = request.getParameter("txtFullname");
+            String username = request.getParameter("txtUsername");
+            String email = request.getParameter("txtEmail");
+            String phone = request.getParameter("txtPhone");
+            String cccd = request.getParameter("txtCCCD");
+            String address = request.getParameter("txtAddress");
+            String cccdregplace = request.getParameter("txtCCCDRegplace");
+            String cccdregdate = request.getParameter("txtCCCDRegdate");
+            String bankname = request.getParameter("txtBankname");
+            String bankcode = request.getParameter("txtBankcode");
+            String password = request.getParameter("txtPassword");
+            String repassword = request.getParameter("txtRepassword");
+            String accid;
+            AccountDAO acc = new AccountDAO();
+            int i = 0;
+            String password2 = acc.encodePassword(password);
+            if (!password.equals(repassword)) {
+                request.setAttribute("FAILREPASSWORD", "Mật khẩu không trùng khớp, vui lòng đăng ký lại");
+                request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+            }
+            if (!fullname.isEmpty() && !username.isEmpty() && !email.isEmpty() && !phone.isEmpty() && !cccd.isEmpty() && !cccdregplace.isEmpty() && !cccdregdate.isEmpty() && !password.isEmpty() && !repassword.isEmpty() && !bankcode.isEmpty() && !bankname.isEmpty()) {
+                if (acc.checkUsername(username)) {
+                    request.setAttribute("FAILUSERNAME", "Username đã tồn tại, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                }
+                if (acc.checkEmail(email)) {
+                    request.setAttribute("FAILEMAIL", "Email đã tồn tại, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                }
+                if (acc.checkPhone(phone)) {
+                    request.setAttribute("FAILPHONE", "Phone đã tồn tại, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else {
+                    do {
+                        i++;
+                        String i1 = Integer.toString(i);
+                        accid = "M" + i1;
+                    } while (acc.checkAccount(accid));
+                    boolean bl = acc.insertAccount(accid, username, password2, fullname, email, phone, cccd, address, cccdregplace, cccdregdate, bankname, bankcode);
+                    request.setAttribute("SUCCESS", "Đăng ký thành công, vui lòng đăng nhập");
+                    request.getRequestDispatcher("MainController?action=DN").forward(request, response);
+                }
+            } else {
+                request.setAttribute("FAIL", "Đăng Ký thất bại, vui lòng đăng ký lại");
+                request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
+//    public static void main(String[] args) throws Exception {
+//        String a = "123";
+//           AccountDAO acc = new AccountDAO();
+//        String b = acc.encodePassword(a);
+//        String c = acc.decodePassword(b);
+//        System.out.println(a + "---" + b + "---" + c);
+//    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

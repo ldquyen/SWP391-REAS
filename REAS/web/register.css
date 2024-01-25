@@ -386,18 +386,22 @@ button {
 /*                                                           login                                                      */
 .background-login {
     width: 100%;
+}
+
+.background-register {
+    width: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: inherit;
-    max-height: calc(100vh - 125px);
-    min-height:  calc(100vh - 125px);
+    /*max-height: calc(100vh - 125px);*/
+    min-height:  110vh;
     margin: 0;
     padding: 0;
 }
 
 .login-container {
-    position: fixed;
+    position: absolute;
     top: 13%;
     left: 0;
     right: 0;
@@ -408,9 +412,10 @@ button {
     justify-content: center;
 }
 
-.login-modal-container {
+.register-modal-container {
     position: relative;
-    width: 435px;
+    width: 1000px;
+    height: 670px;
     margin: auto;
     border-radius: 57px;
     border: 3px solid #D9AB73;
@@ -419,10 +424,9 @@ button {
     min-height: 200px;
     max-width: calc(100% - 32px);
     animation: modalFadeIn ease 0.5s;
-
 }
 
-.login-modal-container header .navbar-item:hover {
+.regisre-modal-container header .navbar-item:hover {
     color: #D9AB73;
     background-color: initial;
 }
@@ -476,15 +480,11 @@ button {
 }
 
 .input-username {
-    width: 70%;
+    width: 30%;
     background-color: transparent;
     color: #fff;
     border-bottom: #D9AB73 3px solid;
     margin-top: 16px;
-}
-
-.form-login-container {
-
 }
 
 .input-username::placeholder {
@@ -500,7 +500,7 @@ button {
 }
 
 .input-password {
-    width: 70%;
+    width: 30%;
     color: #fff;
     background-color: transparent;
     border-bottom: #D9AB73 3px solid;
@@ -519,18 +519,104 @@ button {
     color: #fff;
 }
 
-.forgot-password:hover {
-    text-decoration: underline;
+.input-fullname {
+    width: 30%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
 }
 
-.forgot-password {
-    display: block;
-    left: 15%;
-    padding: 5px 0 0 0;
-    height: unset;
-    background-color: transparent !important;
-    color: #fff !important;
-    line-height: 20px;
+.input-fullname:focus,
+.input-fullname:hover,
+.input-fullname:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-fullname::placeholder {
+    color: #fff;
+}
+
+.input-phone {
+    width: 20%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-phone:focus,
+.input-phone:hover,
+.input-phone:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-phone::placeholder {
+    color: #fff;
+}
+
+.input-email {
+    width: 20%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-email:focus,
+.input-email:hover,
+.input-email:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-email::placeholder {
+    color: #fff;
+}
+
+.input-address {
+    width: 20%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-address:focus,
+.input-address:hover,
+.input-address:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-address::placeholder {
+    color: #fff;
+}
+
+.input-cccd {
+    width: 20%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-cccd:focus,
+.input-cccd:hover,
+.input-cccd:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-cccd::placeholder {
+    color: #fff;
 }
 
 .submit-with-gg-btn {
@@ -540,6 +626,108 @@ button {
 .submit-with-gg-btn:hover {
     color: #333 !important;
 }
+.inline {
+    display: inline-block;
+    margin-right: 10px; /* Điều này giúp tạo khoảng cách giữa các đối tượng */
+}
+
+/* Customize the label (the container) */
+.container {
+    display: inline; /* Sử dụng flexbox để căn chỉnh văn bản và checkbox trên cùng một dòng */
+    align-items: center; /* Canh chỉnh theo chiều dọc */
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 50%; /* Đặt top ở giữa container */
+    transform: translateY(-50%); /* Điều chỉnh để giữ checkbox chính giữa */
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 50%; /* Đặt top ở giữa container */
+    transform: translateY(-50%); /* Điều chỉnh để giữ checkmark chính giữa */
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.rule {
+    display: inline; /* Sử dụng flexbox để căn chỉnh văn bản và checkbox trên cùng một dòng */
+    align-items: center; /* Canh chỉnh theo chiều dọc */
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #000;
+    border: none;   
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.rule input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
 /*.img-logo-login {
     max-width: 50px;
 }*/
