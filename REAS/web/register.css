@@ -388,6 +388,18 @@ button {
     width: 100%;
 }
 
+.background-register {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    /*max-height: calc(100vh - 125px);*/
+    min-height:  110vh;
+    margin: 0;
+    padding: 0;
+}
+
 .login-container {
     position: absolute;
     top: 13%;

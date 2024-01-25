@@ -74,8 +74,8 @@
             </div>
         </nav>
 
-        <div>
-            <img class="background-login" src="image/background-login.png" alt="background-login" />
+        <div style="display: flex">
+            <img class="background-login background-register" src="image/background-login.png" alt="background-login" />
             <div class="login-container">
                 <div class="register-modal-container">
                     <header class="header-login">
