@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>REGISTER PAGE</title>
+        <title>Register Page</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="register.css" type="text/css" >
@@ -118,7 +118,6 @@
                                 <p>  <input class=" input is-normal input-password" type="password" placeholder="Mật Khẩu" name="txtPassword" value="" form="registerForm">
                                     <input class="input is-normal input-password" type="password" placeholder="Nhập Lại Mật Khẩu" name="txtRepassword" value="" form="registerForm"> </p>
                                 </br>
-                                <input type="hidden" id="actionInput" name="action" value="">
                                 <label class="container" for="agreeCheckbox">Tôi đồng ý với 
                                     <input type="checkbox" id="agreeCheckbox" name="agree">
                                     <span class="checkmark"></span>
@@ -126,7 +125,7 @@
                                         <span>Điều Khoản Sử Dụng</span>
                                     </button>
                                 </label>
-                                </br>
+                                </br>     
                                 <button  class="button is-light submit-login-btn" type="submit" value="dangky" name="action" style="
                                          background-color: transparent;
                                          color: #D9AB73;
@@ -140,60 +139,59 @@
                                 </button>
                             </form>
                         </div>
-
                     </header>
                 </div>
             </div>
         </div>
 
-        <footer class="footer" style="position: inherit;"> 
-            <div>
+         <footer class="footer" style="position: inherit;"> 
+                <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
-                <div class="footer-container">
-                    <div class="footer-left-content"> Liên hệ:<br/>
-                        Email: reas@gmail.com<br/>
-                        Điện thoại: +84 (24) 8888 9999<br/>
-                        <br/>
-                    </div>
-                    <div class="footer-mid-content"> Trụ sở chính:<br/>
-                        Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
-                        <br/>
-                    </div>
-                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
-                </div>
+        <div class="footer-container">
+            <div class="footer-left-content"> Liên hệ:<br/>
+                Email: reas@gmail.com<br/>
+                Điện thoại: +84 (24) 8888 9999<br/>
+                <br/>
             </div>
-        </footer>
-        <script>
-            function submitFormWithAction(action) {
-                // Set the action value in a hidden input field
-                document.getElementById('actionInput').value = action;
+            <div class="footer-mid-content"> Trụ sở chính:<br/>
+                Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
+                <br/>
+            </div>
+            <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+        </div>
+    </div>
+</footer>
+<script>
+    function submitFormWithAction(action) {
+        // Set the action value in a hidden input field
+        document.getElementById('actionInput').value = action;
 
-                // Submit the form
-                document.getElementById('registerForm').submit();
-            }
+        // Submit the form
+        document.getElementById('registerForm').submit();
+    }
 
-            function validateRegistration() {
-                var checkBox = document.getElementById("agreeCheckbox");
+    function validateRegistration() {
+        var checkBox = document.getElementById("agreeCheckbox");
 
-                if (!checkBox.checked) {
-                    alert("Vui lòng đọc và đồng ý với Điều Khoản Sử Dụng.");
-                    return false;
-                }
+        if (!checkBox.checked) {
+            alert("Vui lòng đọc và đồng ý với Điều Khoản Sử Dụng.");
+            return false;
+        }
 
-                // Continue with form submission
-                return true;
-            }
-        </script>
+        // Continue with form submission
+        return true;
+    }
+</script>
 
-    </body>
+</body>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.getElementById('loginSubmitBtn').click();
-            }
-        });
-    </script>
+<script>
+    document.getElementById('loginForm').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('loginSubmitBtn').click();
+        }
+    });
+</script>
 
 </html>
