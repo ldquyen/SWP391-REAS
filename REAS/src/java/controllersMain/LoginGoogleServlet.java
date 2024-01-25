@@ -52,72 +52,17 @@ public class LoginGoogleServlet extends HttpServlet {
 
         String code = request.getParameter("code");
         String accessToken = getToken(code);
-        UserGoogle user = getUserInfo(accessToken);
-//        System.out.println(user);
+        UserGoogle userGoogle = getUserInfo(accessToken);
         String url = HOMEPAGE;
-
-        String inputString = user.toString();
-
-        // Tìm vị trí bắt đầu và kết thúc của nội dung giữa dấu ngoặc nhọn {}
-        int start = inputString.indexOf("{");
-        int end = inputString.lastIndexOf("}") + 1;
-
-        // Lấy nội dung giữa dấu ngoặc nhọn {}
-        String jsonString = inputString.substring(start, end);
-
-        // Hiển thị chuỗi JSON
-//        System.out.println(jsonString);
-
-        // Chuyển đổi chuỗi JSON thành đối tượng Java
-        UserGoogle userGoogle = parseJson(jsonString);
-
-        // Hiển thị kết quả
+        
         System.out.println(userGoogle);
-
+        
         HttpSession session = request.getSession();
         session.setAttribute("userGoogle", userGoogle);
 
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
         out.close();
-    }
-
-    private static UserGoogle parseJson(String jsonString) {
-        // Trong thực tế, bạn có thể sử dụng thư viện JSON parsing như Jackson hoặc Gson
-        // Đây là một cách đơn giản chỉ để minh họa, không khuyến khích sử dụng trong ứng dụng thực tế
-        // Sử dụng thư viện JSON parsing để đảm bảo xử lý đúng cho các tình huống phức tạp hơn
-        String[] keyValuePairs = jsonString.split(",");
-        UserGoogle userGoogle = new UserGoogle();
-        for (String pair : keyValuePairs) {
-            String[] entry = pair.split("=");
-            String key = entry[0].trim();
-            String value = entry[1].trim();
-            switch (key) {
-                case "id":
-                    userGoogle.setId(value);
-                    break;
-                case "email":
-                    userGoogle.setEmail(value);
-                    break;
-                case "verified_email":
-                    userGoogle.setVerified_email(Boolean.parseBoolean(value));
-                    break;
-                case "name":
-                    userGoogle.setName(value);
-                    break;
-                case "given_name":
-                    userGoogle.setGiven_name(value);
-                    break;
-                case "family_name":
-                    userGoogle.setFamily_name(value);
-                    break;
-                case "picture":
-                    userGoogle.setPicture(value);
-                    break;
-                // Add more cases for other properties as needed
-            }
-        }
-        return userGoogle;
     }
 
     public static String getToken(String code) throws ClientProtocolException, IOException {

@@ -33,27 +33,25 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="index.jsp">
+                    <a class="navbar-item">
                         TRANG CHỦ
                     </a>
 
-                    <div class="navbar-item">
+                    <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="DN" name="action">
+                            <button type="submit" value="news" name="action">
                                 <span>TIN TỨC</span>
                             </button>
                         </form>
-                    </div>
+                    </a>
 
-                    <div class="navbar-item">
+                    <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="DN" name="action">
+                            <button type="submit" value="rule" name="action">
                                 <span>NỘI QUY</span>
                             </button>
                         </form>
-                    </div>
-
-
+                    </a>
                 </div>
 
                 <div class="navbar-end">
