@@ -40,6 +40,9 @@ public class MainController extends HttpServlet {
                 case "dangky":
                     url = "RegisterServlet";
                     break;
+                case "trangchu":
+                    url = "index_1.jsp";
+                    break;
                 case "aboutus":
                     url = "aboutUS.jsp";
                     break;
