@@ -50,8 +50,7 @@ public class RegisterServlet extends HttpServlet {
                 request.setAttribute("FAILREPASSWORD", "Mật khẩu không trùng khớp, vui lòng đăng ký lại");
                 request.getRequestDispatcher("MainController?action=DK").forward(request, response);
             }
-            if (!fullname.isEmpty() && !username.isEmpty() && !email.isEmpty() && !phone.isEmpty() && !cccd.isEmpty() && !cccdregplace.isEmpty() && !cccdregdate.isEmpty() && !password.isEmpty() && !repassword.isEmpty()) {
-
+            if (!fullname.isEmpty() && !username.isEmpty() && !email.isEmpty() && !phone.isEmpty() && !cccd.isEmpty() && !cccdregplace.isEmpty() && !cccdregdate.isEmpty() && !password.isEmpty() && !repassword.isEmpty() && !bankcode.isEmpty() && !bankname.isEmpty()) {
                 if (acc.checkUsername(username)) {
                     request.setAttribute("FAILUSERNAME", "Username đã tồn tại, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
@@ -82,7 +81,6 @@ public class RegisterServlet extends HttpServlet {
         }
 
     }
-
 //    public static void main(String[] args) throws Exception {
 //        String a = "123";
 //           AccountDAO acc = new AccountDAO();
