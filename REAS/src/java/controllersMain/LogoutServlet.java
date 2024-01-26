@@ -39,7 +39,6 @@ public class LogoutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = HOME_PAGE_USER;
         String username = request.getParameter("txtUsername");
-        String password = request.getParameter("txtPassword");
         String button = request.getParameter("action");
         try {
             if (button.equals("Logout")) {
@@ -51,7 +50,7 @@ public class LogoutServlet extends HttpServlet {
                 Cookie[] cookies = request.getCookies();
                 if (cookies != null) {
                     for (Cookie cookie : cookies) {
-                        if (cookie.getName().equals(username) && cookie.getValue().equals(sessionId)) {
+                        if ( cookie.getName().equals("JSESSIONID")) {
                             cookie.setMaxAge(0);
                             response.addCookie(cookie);
                         }
