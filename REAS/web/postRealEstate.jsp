@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -181,21 +182,6 @@
                         </div>
                     </div>
 
-                    <!--                    <div class="form-group">
-                                            <label for="thanhPho">3. Thành Phố</label>
-                                            <input type="text" class="form-control" id="thanhPho" name="thanhPho" required>
-                                        </div>-->
-
-                    <!--                    <div class="form-group">
-                                            <label for="tenDonViSoHuu">3. Tên đơn vị sở hữu tài sản</label>
-                                            <input type="text" class="form-control" id="tenDonViSuuHuu" name="tenDonViSuuHuu" required>
-                                        </div>
-                    
-                                        <div class="form-group">
-                                            <label for="diaChiDonViSoHuu">4. Địa chỉ đơn vị sở hữu tài sản</label>
-                                            <input type="text" class="form-control" id="diaChiDonViSuuHuu" name="diaChiDonViSuuHuu" required>
-                                        </div>-->
-
                     <div class="form-group">
                         <label for="giaTriTaiSan">3. Giá trị tài sản</label>
 
@@ -212,25 +198,7 @@
                         <input type="datetime-local" class="form-control" id="thoiGianBanDauGia" name="thoiGianBanDauGia" required>
                     </div>
 
-                    <!--                    <div class="form-group">
-                                            <label for="soDienThoaiLienHe">8. Số điện thoại liên hệ</label>
-                                            <input type="text" class="form-control" id="soDienThoaiLienHe" name="soDienThoaiLienHe" required>
-                                        </div>
                     
-                                        <div class="form-group">
-                                            <label for="diaChiEmail">8. Địa chỉ Email</label>
-                                            <input type="email" class="form-control" id="diaChiEmail" name="diaChiEmail" required>
-                                        </div>
-                    
-                                        <div class="form-group">
-                                            <label for="maChuyenKhoan">10. Mã chuyển khoản</label>
-                                            <input type="text" class="form-control" id="maChuyenKhoan" name="maChuyenKhoan" required>
-                                        </div>
-                    
-                                        <div class="form-group">
-                                            <label for="maSoThue">11. Mã số thuế</label>
-                                            <input type="text" class="form-control" id="maSoThue" name="maSoThue" required>
-                                        </div>-->
 
                     <div class="form-group">
                         <label for="noiDungTaiSan">6. Nội dung tài sản</label>
@@ -238,10 +206,10 @@
                             <label for="loaTaiSan">Loại tài sản</label>
                             <select id="loaiTaiSan" name="loaiTaiSan" >
                                 <option value="" disabled selected hidden>-- Chọn --</option>
-                                <option value="nhaDat">Nhà </option>
-                                <option value="nhaDat">Đất </option>
-                                <option value="chungCu">Chung cư</option>
-                                <option value="bietThu">Biệt thự</option>
+                                <option value="no">Nhà </option>
+                                <option value="dn">Đất </option>
+                                <option value="cc">Chung cư</option>
+                                <option value="bt">Biệt thự</option>
                             </select>
                         </div>
 

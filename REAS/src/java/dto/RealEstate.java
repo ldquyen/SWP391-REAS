@@ -1,9 +1,10 @@
 
 package dto;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class RealEstate {
+public class RealEstate implements Serializable{
     private String realEstateID;
     private String imageFolderID;
     private String accID;
