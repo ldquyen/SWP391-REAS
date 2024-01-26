@@ -127,18 +127,17 @@
                                 <p>  <input class=" input is-normal input-password" type="password" placeholder="Mật Khẩu(Trên 8 kí tự)" name="txtPassword" value="" form="registerForm">
                                     <input class="input is-normal input-password" type="password" placeholder="Nhập Lại Mật Khẩu" name="txtRepassword" value="" form="registerForm"> </p>
                                 </br>
-                                <div class="field">
+                                <div class="field" style="padding: 0px">
                                     <div class="control">
                                         <label class="checkbox rule-signup" style="display: flex; justify-content: center">
                                             <input type="checkbox" id="agreeCheckbox">
-                                            <p style="font-size: 25px; margin-right: 5px">Tôi đồng ý với</p>
+                                            <p style="font-size: 25px; margin-right: 5px; color: #D9AB73">Tôi đồng ý với</p>
                                                 <button class="button is-light sign-up-in-login" style="font-size: 20px" type="submit" value="rule" name="action">
                                                     <span>Điều Khoản Sử Dụng</span>
                                                 </button>
                                         </label>
                                     </div>
-                                </div>
-                                </br>     
+                                </div>   
                                 <button  class="button is-light submit-login-btn" type="submit" value="dangky" name="action" style="
                                          background-color: transparent;
                                          color: #D9AB73;
