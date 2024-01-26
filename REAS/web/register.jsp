@@ -85,20 +85,20 @@
                             <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" style="max-height: 52px " />
                         </a>
                         <p style="font-size: 20px">KÍNH CHÀO QUÝ KHÁCH</p>
-                        <h1>${requestScope.FAIL}</h1>
-                        <h1>${requestScope.FAILCCCD}</h1>
-                        <h1>${requestScope.FAILPHONEPATTERN}</h1>
-                        <h1>${requestScope.FAILPASSWORDLENGTH}</h1>
-                        <h1>${requestScope.FAILBANKNAMEPATTERN}</h1>
-                        <h1>${requestScope.FAILFULLNAME}</h1>
-                        <h1>${requestScope.FAILCCCDPATTERN}</h1>
-                        <h1>${requestScope.FAILBANKCODEPATTERN}</h1>
-                        <h1>${requestScope.FAILEMAILSYMBOL}</h1>
-                        <h1>${requestScope.FAILREPASSWORD}</h1>
-                        <h1>${requestScope.FAILEMAIL}</h1>
-                        <h1>${requestScope.FAILUSERNAME}</h1>
-                        <h1>${requestScope.FAILPHONE}</h1>
-                        <h1>${requestScope.SUCCESS}</h1>
+                        <h1 style="color: red">${requestScope.FAIL}</h1>
+                        <h1 style="color: red">${requestScope.FAILCCCD}</h1>
+                        <h1 style="color: red">${requestScope.FAILPHONEPATTERN}</h1>
+                        <h1 style="color: red">${requestScope.FAILPASSWORDLENGTH}</h1>
+                        <h1 style="color: red">${requestScope.FAILBANKNAMEPATTERN}</h1>
+                        <h1 style="color: red">${requestScope.FAILFULLNAME}</h1>
+                        <h1 style="color: red">${requestScope.FAILCCCDPATTERN}</h1>
+                        <h1 style="color: red">${requestScope.FAILBANKCODEPATTERN}</h1>
+                        <h1 style="color: red">${requestScope.FAILEMAILSYMBOL}</h1>
+                        <h1 style="color: red">${requestScope.FAILREPASSWORD}</h1>
+                        <h1 style="color: red">${requestScope.FAILEMAIL}</h1>
+                        <h1 style="color: red">${requestScope.FAILUSERNAME}</h1>
+                        <h1 style="color: red">${requestScope.FAILPHONE}</h1>
+                        <h1 style="color: red">${requestScope.SUCCESS}</h1>
                         <div class="container-login">
                             <p class="register-if-dont-have-container">Bạn đã có tài khoản?</p>
                             <form action="MainController" method="post" class="registration-form">
