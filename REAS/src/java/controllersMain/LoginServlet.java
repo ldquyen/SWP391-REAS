@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
         //1. get all paratmeter
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
-        String url = LOGINPAGE;
+        String url = HOMEPAGE;
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
@@ -56,27 +56,24 @@ public class LoginServlet extends HttpServlet {
             Account dto = dao.checkLogin(username, password2);
 
             if (dto == null) {
-                // Authentication failed
+                HttpSession session = request.getSession();
+                session.setAttribute("USERNAMEPASSNULL", "Tên đăng nhập hoặc mật khẩu không hợp lệ");
                 error = true;
                 url = LOGINPAGE;
             } else if ("A".equals(dto.getRoleID())) {
                 System.out.println(dto.getRoleID());
                 url = "admin.jsp";
-                error = false;
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 Account a = dao.getAccount(username, password2);
                 session.setAttribute("admin", a);
-
             } else if ("M".equals(dto.getRoleID())) {
                 url = "index_1.jsp";
-                error = false;
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 Account m = dao.getAccount(username, password2);
                 session.setAttribute("member", m);
             } else if ("S".equals(dto.getRoleID())) {
                 url = "staff.jsp";
-                error = false;
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 Account s = dao.getAccount(username, password2);
                 session.setAttribute("staff", s);
             }
@@ -87,7 +84,7 @@ public class LoginServlet extends HttpServlet {
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            out.close();
+
         }
     }
 

@@ -28,10 +28,6 @@
         <servlet-name>ListCityServlet</servlet-name>
         <servlet-class>controllersMain.ListCityServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>NewsServlet</servlet-name>
-        <servlet-class>controllersMember.NewsServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -59,10 +55,6 @@
     <servlet-mapping>
         <servlet-name>ListCityServlet</servlet-name>
         <url-pattern>/ListCityServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>NewsServlet</servlet-name>
-        <url-pattern>/NewsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

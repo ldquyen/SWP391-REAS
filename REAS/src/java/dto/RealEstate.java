@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 
 public class RealEstate implements Serializable {
-
     private String realEstateID;
     private String imageFolderID;
     private String accID;
@@ -20,6 +19,8 @@ public class RealEstate implements Serializable {
     private int area;
     private String address;
     private String detail;
+
+
 
     public RealEstate() {
     }

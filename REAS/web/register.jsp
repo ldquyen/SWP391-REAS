@@ -75,7 +75,7 @@
                 </div>
             </div>
         </nav>
-        
+
         <div style="display: flex">
             <img class="background-login background-register" src="image/background-login.png" alt="background-login" />
             <div class="login-container">
@@ -86,6 +86,13 @@
                         </a>
                         <p style="font-size: 20px">KÍNH CHÀO QUÝ KHÁCH</p>
                         <h1>${requestScope.FAIL}</h1>
+                        <h1>${requestScope.FAILPHONEPATTERN}</h1>
+                        <h1>${requestScope.FAILPASSWORDLENGTH}</h1>
+                        <h1>${requestScope.FAILBANKNAMEPATTERN}</h1>
+                        <h1>${requestScope.FAILFULLNAME}</h1>
+                        <h1>${requestScope.FAILCCCDPATTERN}</h1>
+                        <h1>${requestScope.FAILBANKCODEPATTERN}</h1>
+                        <h1>${requestScope.FAILEMAILSYMBOL}</h1>
                         <h1>${requestScope.FAILREPASSWORD}</h1>
                         <h1>${requestScope.FAILEMAIL}</h1>
                         <h1>${requestScope.FAILUSERNAME}</h1>
@@ -104,20 +111,20 @@
                         <div>
                             <form id="registerForm" action="MainController" method="post" onsubmit="return validateRegistration()">
                                 <p><input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="txtUsername" value="" form="registerForm">
-                                    <input class="input is-normal input-fullname" type="text" placeholder="Họ Và Tên" name="txtFullname" value="" form="registerForm"> </p>
+                                    <input class="input is-normal input-fullname" type="text" placeholder="Họ Và Tên(Chữ cái)" name="txtFullname" value="" form="registerForm"> </p>
                                 </br>
-                                <p>  <input class=" input is-normal input-phone" type="text" placeholder="Số Điện Thoại" name="txtPhone" value="" form="registerForm">
+                                <p>  <input class=" input is-normal input-phone" type="text" placeholder="Số Điện Thoại(10 chữ số)" name="txtPhone" value="" form="registerForm">
                                     <input class="input is-normal input-email" type="text" placeholder="Email" name="txtEmail" value="" form="registerForm">
                                     <input class="input is-normal input-address" type="text" placeholder="Địa chỉ" name="txtAddress" value="" form="registerForm"></p>
                                 </br>
-                                <p> <input class=" input is-normal input-cccd" type="text" placeholder="Số CCCD" name="txtCCCD" value="" form="registerForm">
+                                <p> <input class=" input is-normal input-cccd" type="text" placeholder="Số CCCD(12 chữ số)" name="txtCCCD" value="" form="registerForm">
                                     <input class="input is-normal input-cccd" type="text" placeholder="Nơi Cấp CCCD" name="txtCCCDRegplace" value="" form="registerForm"> 
                                     <input class=" input is-normal input-cccd" type="text" placeholder="Ngày Cấp CCCD" name="txtCCCDRegdate" value="" form="registerForm">  </p>
                                 </br>
-                                <p>  <input class=" input is-normal input-password" type="text" placeholder="Tên Ngân Hàng" name="txtBankname" value="" form="registerForm">
-                                    <input class="input is-normal input-password" type="text" placeholder="Số tài khoản ngân hàng" name="txtBankcode" value="" form="registerForm"> </p>
+                                <p>  <input class=" input is-normal input-password" type="text" placeholder="Tên Ngân Hàng(Chữ cái)" name="txtBankname" value="" form="registerForm">
+                                    <input class="input is-normal input-password" type="text" placeholder="Số tài khoản ngân hàng(Chữ số)" name="txtBankcode" value="" form="registerForm"> </p>
                                 </br>
-                                <p>  <input class=" input is-normal input-password" type="password" placeholder="Mật Khẩu" name="txtPassword" value="" form="registerForm">
+                                <p>  <input class=" input is-normal input-password" type="password" placeholder="Mật Khẩu(Trên 8 kí tự)" name="txtPassword" value="" form="registerForm">
                                     <input class="input is-normal input-password" type="password" placeholder="Nhập Lại Mật Khẩu" name="txtRepassword" value="" form="registerForm"> </p>
                                 </br>
                                 <label class="container" for="agreeCheckbox">Tôi đồng ý với 
@@ -146,54 +153,54 @@
             </div>
         </div>
 
-         <footer class="footer" style="position: inherit;"> 
-                <div>
+        <footer class="footer" style="position: inherit;"> 
+            <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
-        <div class="footer-container">
-            <div class="footer-left-content"> Liên hệ:<br/>
-                Email: reas@gmail.com<br/>
-                Điện thoại: +84 (24) 8888 9999<br/>
-                <br/>
+                <div class="footer-container">
+                    <div class="footer-left-content"> Liên hệ:<br/>
+                        Email: reas@gmail.com<br/>
+                        Điện thoại: +84 (24) 8888 9999<br/>
+                        <br/>
+                    </div>
+                    <div class="footer-mid-content"> Trụ sở chính:<br/>
+                        Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
+                        <br/>
+                    </div>
+                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                </div>
             </div>
-            <div class="footer-mid-content"> Trụ sở chính:<br/>
-                Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
-                <br/>
-            </div>
-            <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
-        </div>
-    </div>
-</footer>
-<script>
-    function submitFormWithAction(action) {
-        // Set the action value in a hidden input field
-        document.getElementById('actionInput').value = action;
+        </footer>
+        <script>
+            function submitFormWithAction(action) {
+                // Set the action value in a hidden input field
+                document.getElementById('actionInput').value = action;
 
-        // Submit the form
-        document.getElementById('registerForm').submit();
-    }
+                // Submit the form
+                document.getElementById('registerForm').submit();
+            }
 
-    function validateRegistration() {
-        var checkBox = document.getElementById("agreeCheckbox");
+            function validateRegistration() {
+                var checkBox = document.getElementById("agreeCheckbox");
 
-        if (!checkBox.checked) {
-            alert("Vui lòng đọc và đồng ý với Điều Khoản Sử Dụng.");
-            return false;
-        }
+                if (!checkBox.checked) {
+                    alert("Vui lòng đọc và đồng ý với Điều Khoản Sử Dụng.");
+                    return false;
+                }
 
-        // Continue with form submission
-        return true;
-    }
-</script>
+                // Continue with form submission
+                return true;
+            }
+        </script>
 
-</body>
+    </body>
 
-<script>
-    document.getElementById('loginForm').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            document.getElementById('loginSubmitBtn').click();
-        }
-    });
-</script>
+    <script>
+        document.getElementById('loginForm').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('loginSubmitBtn').click();
+            }
+        });
+    </script>
 
 </html>

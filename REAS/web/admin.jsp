@@ -13,6 +13,8 @@
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
+        <link rel="stylesheet" href="admin.css" type="text/css" >
+
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -53,14 +55,14 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        
+
                         <div class="navbar-container-1">
                             <a class="navbar-1">10.000.000</a>                  
                         </div>
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
-                                        ${sessionScope.admin.fullname} (ADMIN)                
+                                ${sessionScope.admin.fullname} (ADMIN)                
                             </a>
 
                             <div class="fake-div"></div>
@@ -128,9 +130,156 @@
             </div>
         </nav>
 
-        <!-- BODY -->
-        
 
-        
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <aside class="menu">
+                    <p class="menu-label">
+                        General
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Thống kê</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Thống kê</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Thống kê</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="menu-label">
+                        Administration
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Nhân viên</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Thành viên</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Thêm thành viên</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Doanh thu</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Doanh thu</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Doanh thu</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Đấu giá</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Đấu giá</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Đấu giá</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <p class="menu-label">
+                        Transactions
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Ví tiền</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Ví tiền</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Ví tiền</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    
+                </aside>
+            </div>
+            <div class="column">Auto</div>
+            <div class="column">Auto</div>
+        </div>
+
+        <!-- BODY -->
+
+
+
     </body>
 </html>
