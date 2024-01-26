@@ -46,16 +46,6 @@ public class LogoutServlet extends HttpServlet {
                 if (session != null) {
                     session.invalidate();
                 }
-                String sessionId = session.getId();
-                Cookie[] cookies = request.getCookies();
-                if (cookies != null) {
-                    for (Cookie cookie : cookies) {
-                        if ( cookie.getName().equals("JSESSIONID")) {
-                            cookie.setMaxAge(0);
-                            response.addCookie(cookie);
-                        }
-                    }
-                }
                 url = HOME_PAGE_GUEST;
 //                System.out.println(session);
 //                System.out.println(cookies);

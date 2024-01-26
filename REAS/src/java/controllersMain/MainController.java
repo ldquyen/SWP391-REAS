@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MainController extends HttpServlet {
 
-    private final String START_UP_CONTROLLER = "StartUpServlet";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
