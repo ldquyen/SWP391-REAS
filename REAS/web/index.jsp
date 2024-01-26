@@ -127,6 +127,7 @@
             <div>
                 <img src="${pageContext.request.contextPath}/${item.image.getImageLink1()}" alt="none"/>
                 <p>${item.realEstateName}</p>
+                <p>${item.priceNow}</p>
             </div>
         </c:forEach>
         <c:forEach begin="1" end="${requestScope.totalPage}" var="item">
