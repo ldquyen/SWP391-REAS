@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
         try {
             AccountDAO dao = new AccountDAO();
             String password2 = dao.encodePassword(password);
-            Account dto = dao.checkLogin(username, password);
+            Account dto = dao.checkLogin(username, password2);
 
             if (dto == null) {
                 // Authentication failed
@@ -63,17 +63,17 @@ public class LoginServlet extends HttpServlet {
                 System.out.println(dto.getRoleID());
                 url = "admin.jsp";
                 HttpSession session = request.getSession(true);
-                Account a = dao.getAccount(username, password);
+                Account a = dao.getAccount(username, password2);
                 session.setAttribute("admin", a);
             } else if ("M".equals(dto.getRoleID())) {
                 url = "index_1.jsp";
                 HttpSession session = request.getSession(true);
-                Account m = dao.getAccount(username, password);
+                Account m = dao.getAccount(username, password2);
                 session.setAttribute("member", m);
             } else if ("S".equals(dto.getRoleID())) {
                 url = "staff.jsp";
                 HttpSession session = request.getSession(true);
-                Account s = dao.getAccount(username, password);
+                Account s = dao.getAccount(username, password2);
                 session.setAttribute("staff", s);
             }
         } catch (SQLException ex) {
