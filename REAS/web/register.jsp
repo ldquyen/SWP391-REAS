@@ -86,6 +86,7 @@
                         </a>
                         <p style="font-size: 20px">KÍNH CHÀO QUÝ KHÁCH</p>
                         <h1>${requestScope.FAIL}</h1>
+                        <h1>${requestScope.FAILCCCD}</h1>
                         <h1>${requestScope.FAILPHONEPATTERN}</h1>
                         <h1>${requestScope.FAILPASSWORDLENGTH}</h1>
                         <h1>${requestScope.FAILBANKNAMEPATTERN}</h1>
