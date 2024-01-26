@@ -49,33 +49,32 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
         String url = LOGINPAGE;
-        boolean error = false;
+//        boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
             Account dto = dao.checkLogin(username, password);
 
             if (dto == null) {
                 // Authentication failed
-                error = true;
+//                error = true;
                 url = LOGINPAGE;
             } else if ("A".equals(dto.getRoleID())) {
                 System.out.println(dto.getRoleID());
                 url = "admin.jsp";
-                error = false;
-                HttpSession session = request.getSession();
+//                error = false;
+                HttpSession session = request.getSession(true);
                 Account a = dao.getAccount(username, password);
                 session.setAttribute("admin", a);
-
             } else if ("M".equals(dto.getRoleID())) {
                 url = "index_1.jsp";
-                error = false;
-                HttpSession session = request.getSession();
+//                error = false;
+                HttpSession session = request.getSession(true);
                 Account m = dao.getAccount(username, password);
                 session.setAttribute("member", m);
             } else if ("S".equals(dto.getRoleID())) {
                 url = "staff.jsp";
-                error = false;
-                HttpSession session = request.getSession();
+//                error = false;
+                HttpSession session = request.getSession(true);
                 Account s = dao.getAccount(username, password);
                 session.setAttribute("staff", s);
             }
@@ -86,7 +85,7 @@ public class LoginServlet extends HttpServlet {
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            out.close();
+
         }
     }
 

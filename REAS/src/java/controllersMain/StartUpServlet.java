@@ -5,8 +5,14 @@
  */
 package controllersMain;
 
+import dao.AccountDAO;
+import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -19,11 +25,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author ADMIN
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "StartUpServlet", urlPatterns = {"/StartUpServlet"})
+public class StartUpServlet extends HttpServlet {
 
-    private final String HOME_PAGE_GUEST = "index.jsp";
-    private final String HOME_PAGE_USER = "index_1.jsp";
+    private final String HOMEPAGE = "index_1.jsp";
+    private final String HOMEPAGE_GUEST = "index.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,33 +43,28 @@ public class LogoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = HOME_PAGE_USER;
-        String username = request.getParameter("txtUsername");
-        String button = request.getParameter("action");
+        String url = HOMEPAGE_GUEST;
         try {
-            if (button.equals("Logout")) {
-                HttpSession session = request.getSession(false);
-                if (session != null) {
-                    session.invalidate();
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                String username = (String)session.getAttribute("userID");
+                String password = (String)session.getAttribute("password");
+                AccountDAO dao = new AccountDAO();
+                Account dto = dao.checkLogin(username, password);
+                if (dto != null) {
+                    url = HOMEPAGE;
                 }
-                String sessionId = session.getId();
-                Cookie[] cookies = request.getCookies();
-                if (cookies != null) {
-                    for (Cookie cookie : cookies) {
-                        if ( cookie.getName().equals("JSESSIONID")) {
-                            cookie.setMaxAge(0);
-                            response.addCookie(cookie);
-                        }
-                    }
-                }
-                url = HOME_PAGE_GUEST;
-//                System.out.println(session);
-//                System.out.println(cookies);
             }
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StartUpServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             response.sendRedirect(url);
-        }
 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

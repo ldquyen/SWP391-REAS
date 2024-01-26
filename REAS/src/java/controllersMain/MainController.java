@@ -2,6 +2,7 @@ package controllersMain;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,20 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MainController extends HttpServlet {
 
+    private final String START_UP_CONTROLLER = "StartUpServlet";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String action = request.getParameter("action");
-            String url = "";
+        String action = request.getParameter("action");
+        String url = "";
+        try {
+ 
             if (action == null) {
                 action = "";
             }
             switch (action) {
                 case "":
-                    url = "index.jsp";
+                    url = START_UP_CONTROLLER;;
                     break;
                 case "DN":
                     url = "login.jsp";
@@ -58,7 +62,9 @@ public class MainController extends HttpServlet {
                     url = "news.jsp";
                     break;
             }
-            request.getRequestDispatcher(url).forward(request, response);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
 
         }
     }
