@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
+            throws ServletException, IOException, ClassNotFoundException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         //1. get all paratmeter
@@ -52,7 +52,8 @@ public class LoginServlet extends HttpServlet {
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
-            Account dto = dao.checkLogin(username, password);
+            String password2 = dao.encodePassword(password);
+            Account dto = dao.checkLogin(username, password2);
 
             if (dto == null) {
                 // Authentication failed
@@ -63,20 +64,20 @@ public class LoginServlet extends HttpServlet {
                 url = "admin.jsp";
                 error = false;
                 HttpSession session = request.getSession();
-                Account a = dao.getAccount(username, password);
+                Account a = dao.getAccount(username, password2);
                 session.setAttribute("admin", a);
 
             } else if ("M".equals(dto.getRoleID())) {
                 url = "index_1.jsp";
                 error = false;
                 HttpSession session = request.getSession();
-                Account m = dao.getAccount(username, password);
+                Account m = dao.getAccount(username, password2);
                 session.setAttribute("member", m);
             } else if ("S".equals(dto.getRoleID())) {
                 url = "staff.jsp";
                 error = false;
                 HttpSession session = request.getSession();
-                Account s = dao.getAccount(username, password);
+                Account s = dao.getAccount(username, password2);
                 session.setAttribute("staff", s);
             }
         } catch (SQLException ex) {
@@ -106,6 +107,8 @@ public class LoginServlet extends HttpServlet {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -123,6 +126,8 @@ public class LoginServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

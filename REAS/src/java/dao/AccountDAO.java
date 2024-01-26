@@ -6,6 +6,7 @@ package dao;
  * and open the template in the editor.
  */
 import dto.Account;
+import dao.AccountDAO;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,13 +20,14 @@ import mylib.DBUtils;
 
 public class AccountDAO {
 
-    public Account checkLogin(String username, String password)
+    public Account checkLogin(String username, String password2)
             throws SQLException, NamingException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         Account result = null;
         try {
+            
             //1. create connect
             con = DBUtils.getConnection();
             if (con != null) { //connection is available
@@ -37,7 +39,7 @@ public class AccountDAO {
                 //3. create statement obj
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
-                stm.setString(2, password);
+                stm.setString(2, password2);
 
                 //4. execute query
                 rs = stm.executeQuery();
