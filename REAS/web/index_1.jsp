@@ -80,7 +80,7 @@
                                         ${sessionScope.member.fullname}
                                     </c:when>
                                     <c:when test="${not empty sessionScope.userGoogle}">
-                                        ${sessionScope.GoogleAccount.given_name}
+                                        ${sessionScope.userGoogle.given_name}
                                     </c:when>
                                     <c:otherwise>
                                         Guest
