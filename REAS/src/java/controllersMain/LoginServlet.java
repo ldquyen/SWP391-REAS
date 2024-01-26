@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
         try {
             AccountDAO dao = new AccountDAO();
             String password2 = dao.encodePassword(password);
-            Account dto = dao.checkLogin(username, password2);
+            Account dto = dao.checkLogin(username, password);
 
             if (dto == null) {
                 // Authentication failed

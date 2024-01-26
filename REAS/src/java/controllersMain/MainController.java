@@ -26,7 +26,7 @@ public class MainController extends HttpServlet {
             }
             switch (action) {
                 case "":
-                    url = START_UP_CONTROLLER;;
+                    url = "";
                     break;
                 case "DN":
                     url = "login.jsp";
