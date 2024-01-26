@@ -107,7 +107,6 @@
                             </form>
                             <p class="register-here">tại đây</p>
                         </div>
-
                         <div>
                             <form id="registerForm" action="MainController" method="post" onsubmit="return validateRegistration()">
                                 <p><input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="txtUsername" value="" form="registerForm">
@@ -127,13 +126,17 @@
                                 <p>  <input class=" input is-normal input-password" type="password" placeholder="Mật Khẩu(Trên 8 kí tự)" name="txtPassword" value="" form="registerForm">
                                     <input class="input is-normal input-password" type="password" placeholder="Nhập Lại Mật Khẩu" name="txtRepassword" value="" form="registerForm"> </p>
                                 </br>
-                                <label class="container" for="agreeCheckbox">Tôi đồng ý với 
-                                    <input type="checkbox" id="agreeCheckbox" name="agree">
-                                    <span class="checkmark"></span>
-                                    <button class="rule" type="button" onclick="submitFormWithAction('rule')">
-                                        <span>Điều Khoản Sử Dụng</span>
-                                    </button>
-                                </label>
+                                <div class="field">
+                                    <div class="control">
+                                        <label class="checkbox rule-signup" style="display: flex; justify-content: center">
+                                            <input type="checkbox" id="agreeCheckbox">
+                                            <p style="font-size: 25px; margin-right: 5px">Tôi đồng ý với</p>
+                                                <button class="button is-light sign-up-in-login" style="font-size: 20px" type="submit" value="rule" name="action">
+                                                    <span>Điều Khoản Sử Dụng</span>
+                                                </button>
+                                        </label>
+                                    </div>
+                                </div>
                                 </br>     
                                 <button  class="button is-light submit-login-btn" type="submit" value="dangky" name="action" style="
                                          background-color: transparent;
@@ -171,22 +174,12 @@
             </div>
         </footer>
         <script>
-            function submitFormWithAction(action) {
-                // Set the action value in a hidden input field
-                document.getElementById('actionInput').value = action;
-
-                // Submit the form
-                document.getElementById('registerForm').submit();
-            }
-
             function validateRegistration() {
                 var checkBox = document.getElementById("agreeCheckbox");
-
                 if (!checkBox.checked) {
-                    alert("Vui lòng đọc và đồng ý với Điều Khoản Sử Dụng.");
+                    alert("Vui lòng tick để đọc và đồng ý với Điều Khoản Sử Dụng để đăng ký.");
                     return false;
                 }
-
                 // Continue with form submission
                 return true;
             }
