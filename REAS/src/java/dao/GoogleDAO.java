@@ -65,4 +65,25 @@ public class GoogleDAO {
         }
         return false;
     }
+    
+    public static boolean checkIDGoogle(String id) throws Exception {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [GgAccID] FROM [dbo].[GoogleAccount] WHERE [GgAccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String GgAccID = rs.getString("GgAccID");
+                    if (GgAccID != null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

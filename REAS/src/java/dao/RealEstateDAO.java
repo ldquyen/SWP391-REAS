@@ -3,7 +3,11 @@ package dao;
 import dto.RealEstate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import mylib.DBUtils;
@@ -27,13 +31,13 @@ public class RealEstateDAO {
 
             //2.create SQL String
             if (con != null) {
-                String sql =   "Insert into RealEstate("
-                        +"realEstateID, imageFolderID,  accID,  catID,  cityID,  realEstateName,  priceNow, timeUp,  timeDown,  cost,  status,  area,  detail,  city"
+                String sql = "Insert into RealEstate("
+                        + "realEstateID, imageFolderID,  accID,  catID,  cityID,  realEstateName,  priceNow, timeUp,  timeDown,  cost,  status,  area,  detail,  city"
                         + "Values("
-                        +"?,?,?,?,?,?,?,?,?,?,?,?,?,?"
-                        +")";
-                        //3.create Statement Obj
-                         stm = con.prepareStatement(sql);
+                        + "?,?,?,?,?,?,?,?,?,?,?,?,?,?"
+                        + ")";
+                //3.create Statement Obj
+                stm = con.prepareStatement(sql);
                 stm.setString(1, post.getRealEstateID());
                 stm.setString(2, post.getImageFolderID());
                 stm.setString(3, post.getAccID());
@@ -63,4 +67,40 @@ public class RealEstateDAO {
         return result;
     }
 
+    public static ArrayList<RealEstate> getRealEstateByStatus(int Status) throws ClassNotFoundException, SQLException {
+        ArrayList<RealEstate> list = new ArrayList<>();
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceNow], [TimeUp], [TimeDown], [Cost], [Status], [Area], [Address], [Detail] \n"
+                    + "FROM RealEstate WHERE [Status] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setInt(1, Status);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String realEstateID = rs.getString("RealEstateID");
+                    String imageFolderID = rs.getString("ImageFolderID");
+                    String accID = rs.getString("AccID");
+                    String catID = rs.getString("CatID");
+                    int cityID = rs.getInt("CityID");
+                    String realEstateName = rs.getString("RealEstateName");
+                    float priceNow = rs.getFloat("PriceNow");
+                    Time timeUpSql = rs.getTime("TimeUp");
+                    LocalTime timeUp = timeUpSql.toLocalTime();
+                    Time timeDownSql = rs.getTime("TimeDown");
+                    LocalTime timeDown = timeDownSql.toLocalTime();
+                    float cost = rs.getFloat("Cost");
+                    int status = rs.getInt("Status");
+                    int area = rs.getInt("Area");
+                    String address = rs.getString("Address");
+                    String detail = rs.getString("Detail");
+                    
+                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, status, area, address, detail);
+                    list.add(re);
+                }
+            }
+            cn.close();
+        }
+        return list;
+    }
 }

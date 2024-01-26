@@ -6,6 +6,7 @@ package dao;
  * and open the template in the editor.
  */
 import dto.Account;
+import dao.AccountDAO;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,6 +27,7 @@ public class AccountDAO {
         ResultSet rs = null;
         Account result = null;
         try {
+            
             //1. create connect
             con = DBUtils.getConnection();
             if (con != null) { //connection is available
@@ -267,7 +269,7 @@ public class AccountDAO {
     }
 
 //    public static void main(String[] args) throws Exception {
-//        String a = "111";
+//        String a = "admin1";
 //        String b = encodePassword(a);
 //        String c = decodePassword(b);
 //        System.out.println(a + "---" + b + "---" + c);

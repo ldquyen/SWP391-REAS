@@ -1,8 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : Jan 17, 2024, 11:02:09 PM
-    Author     : ASUS
---%>
 
 <%@page import="dto.UserGoogle"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
