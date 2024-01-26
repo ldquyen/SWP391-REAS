@@ -1,6 +1,4 @@
-
 package dao;
-
 
 import dto.RealEstate;
 import java.sql.Connection;
@@ -8,11 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import mylib.DBUtils;
 
 public class RealEstateDAO {
@@ -23,40 +24,50 @@ public class RealEstateDAO {
         return post;
     }
 
-    public boolean createPost(RealEstate post) throws SQLException, NamingException, ClassNotFoundException {
+    public boolean createPost(RealEstate post, HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         //mở connection
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
         try {
-            //1.create connection
             con = DBUtils.getConnection();
 
-            //2.create SQL String
             if (con != null) {
                 String sql = "Insert into RealEstate("
-                        + "realEstateID, imageFolderID,  accID,  catID,  cityID,  realEstateName,  priceNow, timeUp,  timeDown,  cost,  status,  area,  detail,  city"
-                        + "Values("
-                        + "?,?,?,?,?,?,?,?,?,?,?,?,?,?"
-                        + ")";
-                //3.create Statement Obj
+                        + "[RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceNow], [TimeUp], [TimeDown], [Cost], [Status], [Area], [Address], [Detail]"
+                        + " VALUES (realestate_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, post.getRealEstateID());
-                stm.setString(2, post.getImageFolderID());
-                stm.setString(3, post.getAccID());
-                stm.setString(4, post.getCatID());
 
-                //so nho hoac lon xuat hien loi unknown web
-                //4.excute Query
+                LocalDateTime ldt = LocalDateTime.now();
+
+                Instant instant = ldt.atZone(ZoneId.systemDefault()).toInstant();
+
+                Timestamp ts = Timestamp.from(instant);
+
+                HttpSession session = request.getSession();
+                String accID = (String) session.getAttribute("AccID");
+
+                stm.executeUpdate(sql);
+                
+                stm.setString(2, accID);
+                stm.setString(3, post.getCatID());
+                stm.setInt(4, post.getCityID());
+                stm.setString(5, post.getRealEstateName());
+                stm.setFloat(6, post.getPriceNow());
+                stm.setTimestamp(7, ts);
+                stm.setTimestamp(8, ts);
+                stm.setFloat(9, post.getCost());
+        //        stm.setInt(10, post.getStatus("0"));
+                stm.setFloat(11, post.getArea());
+                stm.setString(12, post.getDetail());
+                
+
                 int effectRows = stm.executeUpdate();
 
-                //end username and password are existed
-                //5.Process
                 if (effectRows > 0) {
                     result = true;
                 }
-            }//end connection í avaible
-
+            }
         } finally {
             //xoa,sua,insert khong tra du lieu
             //bo ResultSet
@@ -88,7 +99,7 @@ public class RealEstateDAO {
                     int cityID = rs.getInt("CityID");
                     String realEstateName = rs.getString("RealEstateName");
                     float priceNow = rs.getFloat("PriceNow");
-                    
+
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                     Timestamp timeDownSql = rs.getTimestamp("TimeDown");
 
@@ -100,7 +111,7 @@ public class RealEstateDAO {
                     int area = rs.getInt("Area");
                     String address = rs.getString("Address");
                     String detail = rs.getString("Detail");
-                    
+
                     RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, status, area, address, detail);
                     list.add(re);
                 }
@@ -109,4 +120,6 @@ public class RealEstateDAO {
         }
         return list;
     }
+    
+    
 }
