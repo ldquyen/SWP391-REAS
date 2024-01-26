@@ -20,7 +20,7 @@ import mylib.DBUtils;
 
 public class AccountDAO {
 
-    public Account checkLogin(String username, String password2)
+    public Account checkLogin(String username, String password)
             throws SQLException, NamingException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -39,7 +39,7 @@ public class AccountDAO {
                 //3. create statement obj
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
-                stm.setString(2, password2);
+                stm.setString(2, password);
 
                 //4. execute query
                 rs = stm.executeQuery();
@@ -269,7 +269,7 @@ public class AccountDAO {
     }
 
 //    public static void main(String[] args) throws Exception {
-//        String a = "111";
+//        String a = "admin1";
 //        String b = encodePassword(a);
 //        String c = decodePassword(b);
 //        System.out.println(a + "---" + b + "---" + c);
