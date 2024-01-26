@@ -1,7 +1,9 @@
 package controllersMember;
 
+import dao.CategoryDAO;
 import dao.CityDAO;
 import dao.RealEstateDAO;
+import dto.Category;
 import dto.City;
 import dto.RealEstate;
 import java.io.IOException;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class NewsServlet extends HttpServlet {
+public class NewServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
@@ -24,8 +26,10 @@ public class NewsServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             ArrayList<RealEstate> list = RealEstateDAO.getRealEstateByStatus(0);
             ArrayList<City> listCity = CityDAO.getCityList();
+            ArrayList<Category> listCategory = CategoryDAO.getListCategory();
             HttpSession session = request.getSession();
             session.setAttribute("CITYLIST", listCity);
+            session.setAttribute("CATEGORYLIST", listCategory);
             request.setAttribute("listRealEstateInNews", list);
             request.getRequestDispatcher("MemberController?action=newsjsp").forward(request, response);
         }
@@ -37,9 +41,9 @@ public class NewsServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(NewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(NewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -49,9 +53,9 @@ public class NewsServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(NewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(NewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

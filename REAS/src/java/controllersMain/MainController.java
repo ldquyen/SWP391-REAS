@@ -57,7 +57,7 @@ public class MainController extends HttpServlet {
                     url = "changePass.jsp";
                     break;
                 case "news":
-                    url = "NewsServlet";
+                    url = "NewServlet";
                     break;
             }
         } finally {
