@@ -94,7 +94,7 @@
                             </form>
                             <p class="register-here">tại đây</p>
                         </div>
-
+                        <h1 class="usernamepassnull">${sessionScope.USERNAMEPASSNULL}</h1>
                         <div class="form-login-container">
                             <form id="loginForm" action="MainController" method="post">
                                 <input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="txtUsername" value="" form="loginForm">
@@ -165,6 +165,35 @@
                 e.preventDefault();
                 document.getElementById('loginSubmitBtn').click();
             }
+        });
+
+        // chuc nang nhap sai username password hein đỏ và ngược lại
+        document.addEventListener("DOMContentLoaded", function () {
+            var usernamePassNull = "${sessionScope.USERNAMEPASSNULL}";
+
+            var usernameInput = document.querySelector('.input-username');
+            var passwordInput = document.querySelector('.input-password');
+            var h1UsernamePassNull = document.querySelector('.usernamepassnull');
+
+            if (!(usernamePassNull === null || usernamePassNull === "")) {
+                usernameInput.classList.add('is-danger');
+                passwordInput.classList.add('is-danger');
+            }
+
+            function handleFocus() {
+                // Remove 'is-danger' class from both input elements
+                usernameInput.classList.remove('is-danger');
+                passwordInput.classList.remove('is-danger');
+
+                // Remove the error message if it exists
+                if (h1UsernamePassNull) {
+                    h1UsernamePassNull.remove();
+                }
+            }
+
+            // Add event listener to both input elements
+            usernameInput.addEventListener('focus', handleFocus);
+            passwordInput.addEventListener('focus', handleFocus);
         });
     </script>
 </html>

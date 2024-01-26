@@ -48,16 +48,17 @@ public class LoginServlet extends HttpServlet {
         //1. get all paratmeter
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
-        String url = LOGINPAGE;
-//        boolean error = false;
+        String url = HOMEPAGE;
+        boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
             String password2 = dao.encodePassword(password);
             Account dto = dao.checkLogin(username, password2);
 
             if (dto == null) {
-                // Authentication failed
-//                error = true;
+                HttpSession session = request.getSession();
+                session.setAttribute("USERNAMEPASSNULL", "Tên đăng nhập hoặc mật khẩu không hợp lệ");
+                error = true;
                 url = LOGINPAGE;
             } else if ("A".equals(dto.getRoleID())) {
                 System.out.println(dto.getRoleID());
