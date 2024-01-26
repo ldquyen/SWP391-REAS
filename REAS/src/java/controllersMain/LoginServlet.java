@@ -62,39 +62,18 @@ public class LoginServlet extends HttpServlet {
             } else if ("A".equals(dto.getRoleID())) {
                 System.out.println(dto.getRoleID());
                 url = "admin.jsp";
-<<<<<<< HEAD
-//                error = false;
                 HttpSession session = request.getSession(true);
                 Account a = dao.getAccount(username, password);
-=======
-                error = false;
-                HttpSession session = request.getSession();
-                Account a = dao.getAccount(username, password2);
->>>>>>> 441a17d8f1b475b7faa06ac474a7799c7b00ca4d
                 session.setAttribute("admin", a);
             } else if ("M".equals(dto.getRoleID())) {
                 url = "index_1.jsp";
-<<<<<<< HEAD
-//                error = false;
                 HttpSession session = request.getSession(true);
                 Account m = dao.getAccount(username, password);
                 session.setAttribute("member", m);
             } else if ("S".equals(dto.getRoleID())) {
                 url = "staff.jsp";
-//                error = false;
-                HttpSession session = request.getSession(true);
-                Account s = dao.getAccount(username, password);
-=======
-                error = false;
-                HttpSession session = request.getSession();
-                Account m = dao.getAccount(username, password2);
-                session.setAttribute("member", m);
-            } else if ("S".equals(dto.getRoleID())) {
-                url = "staff.jsp";
-                error = false;
                 HttpSession session = request.getSession();
                 Account s = dao.getAccount(username, password2);
->>>>>>> 441a17d8f1b475b7faa06ac474a7799c7b00ca4d
                 session.setAttribute("staff", s);
             }
         } catch (SQLException ex) {
