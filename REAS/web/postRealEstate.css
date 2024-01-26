@@ -76,7 +76,7 @@ textarea, select,form-control1  {
 input[type="datetime-local"] {
     width: 200px;
 }
-button {
+.submit-form{
     background: #D9AB73;
     color: black;
     border: none;
@@ -86,6 +86,16 @@ button {
     font-weight: bold;
     color: black;
 }
+/*button {
+    background: #D9AB73;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+    font-size: 20px; 
+    font-weight: bold;
+    color: black;
+}*/
 
 .danhSachHinhAnh img {
     max-width: 100px;
