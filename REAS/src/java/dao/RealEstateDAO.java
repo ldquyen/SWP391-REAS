@@ -1,5 +1,6 @@
 package dao;
 
+import dto.Image;
 import dto.RealEstate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -81,7 +82,7 @@ public class RealEstateDAO {
         return result;
     }
 
-    public static ArrayList<RealEstate> getRealEstateByStatus(int Status) throws ClassNotFoundException, SQLException {
+    public static ArrayList<RealEstate> getRealEstateByStatus(int Status) throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<RealEstate> list = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
@@ -90,8 +91,10 @@ public class RealEstateDAO {
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setInt(1, Status);
             ResultSet rs = pst.executeQuery();
+            ImageDAO imageDAO = new ImageDAO();
             if (rs != null) {
                 while (rs.next()) {
+                    
                     String realEstateID = rs.getString("RealEstateID");
                     String imageFolderID = rs.getString("ImageFolderID");
                     String accID = rs.getString("AccID");
@@ -102,7 +105,7 @@ public class RealEstateDAO {
 
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                     Timestamp timeDownSql = rs.getTimestamp("TimeDown");
-
+                    Image imageByID = imageDAO.getImageByID(imageFolderID);
                     // Chuyển đổi Timestamp thành LocalDateTime
                     LocalDateTime timeUp = timeUpSql.toLocalDateTime();
                     LocalDateTime timeDown = timeDownSql.toLocalDateTime();
@@ -113,6 +116,7 @@ public class RealEstateDAO {
                     String detail = rs.getString("Detail");
 
                     RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, status, area, address, detail);
+                    re.setImage(imageByID);
                     list.add(re);
                 }
             }
