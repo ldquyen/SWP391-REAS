@@ -34,9 +34,9 @@ public class RealEstateDAO {
             con = DBUtils.getConnection();
 
             if (con != null) {
-                String sql = "Insert into RealEstate("
-                        + "[RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceNow], [TimeUp], [TimeDown], [Cost], [Status], [Area], [Address], [Detail]"
-                        + " VALUES (realestate_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                String sql = "Insert INTO [dbo].[RealEstate]("
+                        + "[RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceNow], [TimeUp], [TimeDown], [Cost], [Area], [Address], [Detail]"
+                        + " VALUES (NEXT VALUE FOR RealEstateID_Seq,'folder1',?,?,?,?,?,?,?,?,?,?,?,?)";
                 stm = con.prepareStatement(sql);
 
                 LocalDateTime ldt = LocalDateTime.now();
@@ -50,17 +50,17 @@ public class RealEstateDAO {
 
                 stm.executeUpdate(sql);
                 
-                stm.setString(2, accID);
-                stm.setString(3, post.getCatID());
-                stm.setInt(4, post.getCityID());
-                stm.setString(5, post.getRealEstateName());
-                stm.setFloat(6, post.getPriceNow());
+                stm.setString(1, accID);
+                stm.setString(2, post.getCatID());
+                stm.setInt(3, post.getCityID());
+                stm.setString(4, post.getRealEstateName());
+                stm.setString(5, post.getPriceNow());
+                stm.setTimestamp(6, ts);
                 stm.setTimestamp(7, ts);
-                stm.setTimestamp(8, ts);
-                stm.setFloat(9, post.getCost());
-        //        stm.setInt(10, post.getStatus("0"));
-                stm.setFloat(11, post.getArea());
-                stm.setString(12, post.getDetail());
+                stm.setFloat(8, post.getCost());
+                stm.setFloat(9, post.getArea());
+                stm.setString(10, post.getAddress());
+                stm.setString(11, post.getDetail());
                 
 
                 int effectRows = stm.executeUpdate();
@@ -101,7 +101,7 @@ public class RealEstateDAO {
                     String catID = rs.getString("CatID");
                     int cityID = rs.getInt("CityID");
                     String realEstateName = rs.getString("RealEstateName");
-                    float priceNow = rs.getFloat("PriceNow");
+                    String priceNow = rs.getString("PriceNow");
 
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                     Timestamp timeDownSql = rs.getTimestamp("TimeDown");
@@ -115,7 +115,8 @@ public class RealEstateDAO {
                     String address = rs.getString("Address");
                     String detail = rs.getString("Detail");
 
-                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, status, area, address, detail);
+                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, area, address, detail);
+
                     re.setImage(imageByID);
                     list.add(re);
                 }

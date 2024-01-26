@@ -16,7 +16,7 @@
 
     </head>
     <body>
-        <h1>${requestScope.SUCCESS}</h1>
+        <h1 style="color: red">${requestScope.SUCCESS}</h1>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
 
