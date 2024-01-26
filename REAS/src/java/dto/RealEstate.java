@@ -1,9 +1,10 @@
 
 package dto;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class RealEstate {
+public class RealEstate implements Serializable{
     private String realEstateID;
     private String imageFolderID;
     private String accID;
@@ -16,13 +17,14 @@ public class RealEstate {
     private float cost;
     private int status;
     private int area;
+    private String address;
     private String detail;
-    private String city;
+
 
     public RealEstate() {
     }
 
-    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, float priceNow, LocalTime timeUp, LocalTime timeDown, float cost, int status, int area, String detail, String city) {
+    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, float priceNow, LocalTime timeUp, LocalTime timeDown, float cost, int status, int area, String address, String detail) {
         this.realEstateID = realEstateID;
         this.imageFolderID = imageFolderID;
         this.accID = accID;
@@ -35,8 +37,8 @@ public class RealEstate {
         this.cost = cost;
         this.status = status;
         this.area = area;
+        this.address = address;
         this.detail = detail;
-        this.city = city;
     }
 
     public String getRealEstateID() {
@@ -135,6 +137,14 @@ public class RealEstate {
         this.area = area;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getDetail() {
         return detail;
     }
@@ -143,16 +153,8 @@ public class RealEstate {
         this.detail = detail;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     @Override
     public String toString() {
-        return "RealEstate{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", cityID=" + cityID + ", realEstateName=" + realEstateName + ", priceNow=" + priceNow + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", cost=" + cost + ", status=" + status + ", area=" + area + ", detail=" + detail + ", city=" + city + '}';
-    }
+        return "RealEstate{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", cityID=" + cityID + ", realEstateName=" + realEstateName + ", priceNow=" + priceNow + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", cost=" + cost + ", status=" + status + ", area=" + area + ", address=" + address + ", detail=" + detail + '}';
+    }  
 }
