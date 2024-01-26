@@ -65,6 +65,9 @@ public class RegisterServlet extends HttpServlet {
                 } else if (!acc.checkGmailContainSymbol(email)) {
                     request.setAttribute("FAILEMAILSYMBOL", "Email sai định dạng, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (acc.checkCCCD(cccd)) {
+                    request.setAttribute("FAILCCCD", "CCCD đã tồn tại, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
                 } else if (!cccd.matches("\\d{12}")) {
                     request.setAttribute("FAILCCCDPATTERN", "CCCD sai định dạng, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);

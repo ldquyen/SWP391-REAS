@@ -1,19 +1,22 @@
 <%-- 
-    Document   : news
-    Created on : Jan 21, 2024, 9:51:27 PM
+    Document   : index
+    Created on : Jan 17, 2024, 11:02:09 PM
     Author     : ASUS
 --%>
 
+<%@page import="dto.UserGoogle"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Real Estate Auction System</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
-        <title>News Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="style.css" type="text/css" >
     </head>
     <body>
-
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index_1.jsp">
@@ -151,7 +154,7 @@
         </nav>
 
         <!-- BODY -->
-        <h1 style="text-align: center; font-size: 30px; color: #D9AB73; margin-top: 10px; margin-bottom: 10px;">Những bất động sản đã trúng đấu giá</h1>
+        <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 10px;margin-bottom: 10px; ">Những bất động sản đã trúng đấu giá </p>
         <div style="text-align: center; border-radius: 45px;">
             <c:if test="${not empty requestScope.listRealEstateInNews}">
                 <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;">
@@ -177,7 +180,13 @@
                                         </c:if>
                                     </c:forEach>
                                 </td>
-                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.catID}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                    <c:forEach var="catList" items="${sessionScope.CATEGORYLIST}"> 
+                                        <c:if test="${catList.catID eq r.catID}">
+                                            ${catList.catName}
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
                                 <td style="border: 1px solid #D9AB73; padding: 8px;">${r.timeDown}</td>
                                 <td style="border: 1px solid #D9AB73; padding: 8px;">${r.cost}</td>
                             </tr>
@@ -186,6 +195,7 @@
                 </table>
             </c:if>
         </div>
+
 
         <footer class="footer"> 
             <div>

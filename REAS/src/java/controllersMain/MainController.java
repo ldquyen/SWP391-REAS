@@ -57,11 +57,14 @@ public class MainController extends HttpServlet {
                     url = "changePass.jsp";
                     break;
                 case "news":
-                    url = "NewsServlet";
+                    url = "NewServlet";
                     break;
                 case "postNew":
                     url = "postRealEstate.jsp";
                     break;
+                case "submitPost":
+                    url = "PostRealEstateServlet";
+                    break;    
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

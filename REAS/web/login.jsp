@@ -16,6 +16,7 @@
 
     </head>
     <body>
+        <h1 style="color: red">${requestScope.SUCCESS}</h1>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
 
@@ -47,7 +48,7 @@
 
                     <div class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="DN" name="action">
+                            <button type="submit" value="rule" name="action">
                                 <span>NỘI QUY</span>
                             </button>
                         </form>
