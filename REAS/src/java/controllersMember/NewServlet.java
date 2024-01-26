@@ -24,7 +24,7 @@ public class NewServlet extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ArrayList<RealEstate> list = RealEstateDAO.getRealEstateByStatus(0);
+            ArrayList<RealEstate> list = RealEstateDAO.getRealEstateByStatus(4);
             ArrayList<City> listCity = CityDAO.getCityList();
             ArrayList<Category> listCategory = CategoryDAO.getListCategory();
             HttpSession session = request.getSession();

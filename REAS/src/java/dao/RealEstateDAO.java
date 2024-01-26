@@ -124,6 +124,4 @@ public class RealEstateDAO {
         }
         return list;
     }
-    
-    
 }
