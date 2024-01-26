@@ -193,6 +193,27 @@ public class AccountDAO {
         }
         return false;
     }
+    
+    public static boolean checkCCCD(String cccd) throws Exception {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [CCCD] FROM [dbo].[Account] WHERE [CCCD] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, cccd);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String Cccd = rs.getString("CCCD");
+                    if (Cccd != null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     public static boolean insertAccount(String accid, String username, String password, String fullname, String email, String phone, String cccd, String address, String cccdregplace, String cccdregdate, String bankname, String bankcode) {
         Connection cn = null;
