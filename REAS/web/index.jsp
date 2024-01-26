@@ -4,6 +4,7 @@
     Author     : ASUS
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="i" %>
 <!DOCTYPE html>
@@ -73,7 +74,7 @@
             </div>
         </nav>
 
-        
+
         <!-- BODY -->
         <form action="MainController" method="post">
             <div class="search-container">
@@ -122,7 +123,15 @@
                 </div>
             </div>
         </form>
-
+        <c:forEach items="${requestScope.list}" var="item">
+            <div>
+                <img src="${pageContext.request.contextPath}/${item.image.getImageLink1()}" alt="none"/>
+                <p>${item.realEstateName}</p>
+            </div>
+        </c:forEach>
+        <c:forEach begin="1" end="${requestScope.totalPage}" var="item">
+            <a href="${pageContext.request.contextPath}/home?pagenum=${item}">${item}</a>
+        </c:forEach>
         <footer class="footer"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>

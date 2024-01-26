@@ -19,7 +19,7 @@ public class RealEstate implements Serializable {
     private int area;
     private String address;
     private String detail;
-
+    private Image image;
 
 
     public RealEstate() {
@@ -154,6 +154,15 @@ public class RealEstate implements Serializable {
         this.detail = detail;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    
     @Override
     public String toString() {
         return "RealEstate{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", cityID=" + cityID + ", realEstateName=" + realEstateName + ", priceNow=" + priceNow + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", cost=" + cost + ", status=" + status + ", area=" + area + ", address=" + address + ", detail=" + detail + '}';
