@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="postRealEstate.css" type="text/css" >
-        
+
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -136,7 +136,7 @@
                                 <hr class="navbar-divider">
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
+                                        <button type="submit" value="Logout" name="action" >
                                             <span>Đăng xuất</span>
                                         </button>
                                     </form>
@@ -168,62 +168,39 @@
 
                     <div class="form-group">
                         <label for="diaChiTaiSan">2. Địa chỉ tài sản đấu giá</label>
-                        <input type="text" class="form-control" id="diaChiTaiSan" name="diaChiTaiSan" required>
+
+                        <div class="form-group1">
+                            <label for="diaChi">Đia chỉ</label>
+                            <input type="text" class="form-control" id="diaChi" name="diaChi" required>
+                        </div>
+                        <div class="form-group1">
+                            <label for="thanhPho">Tỉnh Thành</label>
+                            <select class="form-control" id="tinhThanh" name="tinhThanh" required>
+                                <option value="" disabled selected hidden>-- Chọn tỉnh/thành phố --</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="thanhPho">3. Thành Phố</label>
-                        <input type="text" class="form-control" id="thanhPho" name="thanhPho" required>
-                    </div>
-                    
-<!--                    <div class="form-group">
-                        <label for="tenDonViSoHuu">3. Tên đơn vị sở hữu tài sản</label>
-                        <input type="text" class="form-control" id="tenDonViSuuHuu" name="tenDonViSuuHuu" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="diaChiDonViSoHuu">4. Địa chỉ đơn vị sở hữu tài sản</label>
-                        <input type="text" class="form-control" id="diaChiDonViSuuHuu" name="diaChiDonViSuuHuu" required>
-                    </div>-->
-
-                    <div class="form-group">
-                        <label for="giaTriTaiSan">4. Giá trị tài sản</label>
+                        <label for="giaTriTaiSan">3. Giá trị tài sản</label>
 
                         <input type="text" class="form-control" id="giaTriTaiSan" name="giaTriTaiSan" placeholder="VNĐ" oninput="formatCurrency(this)" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="thoiGianDangKy">5. Thời gian đăng ký đấu giá</label>
+                        <label for="thoiGianDangKy">4. Thời gian đăng ký đấu giá</label>
                         <input type="datetime-local" class="form-control" id="thoiGianDangKy" name="thoiGianDangKy" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="thoiGianBanDauGia">6. Thời gian bán đấu giá</label>
+                        <label for="thoiGianBanDauGia">5. Thời gian bán đấu giá</label>
                         <input type="datetime-local" class="form-control" id="thoiGianBanDauGia" name="thoiGianBanDauGia" required>
                     </div>
 
-<!--                    <div class="form-group">
-                        <label for="soDienThoaiLienHe">8. Số điện thoại liên hệ</label>
-                        <input type="text" class="form-control" id="soDienThoaiLienHe" name="soDienThoaiLienHe" required>
-                    </div>
+                    
 
                     <div class="form-group">
-                        <label for="diaChiEmail">8. Địa chỉ Email</label>
-                        <input type="email" class="form-control" id="diaChiEmail" name="diaChiEmail" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="maChuyenKhoan">10. Mã chuyển khoản</label>
-                        <input type="text" class="form-control" id="maChuyenKhoan" name="maChuyenKhoan" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="maSoThue">11. Mã số thuế</label>
-                        <input type="text" class="form-control" id="maSoThue" name="maSoThue" required>
-                    </div>-->
-
-                    <div class="form-group">
-                        <label for="noiDungTaiSan">7. Nội dung tài sản</label>
+                        <label for="noiDungTaiSan">6. Nội dung tài sản</label>
                         <div class="form-group1">
                             <label for="loaTaiSan">Loại tài sản</label>
                             <select id="loaiTaiSan" name="loaiTaiSan" >
@@ -246,7 +223,12 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="submit" value="Submit" name="btAction">Bước 1. LƯU NỘI DUNG THÔNG TIN</button>
+                    <div class="form-group">
+                        <label for="hinhAnh">7. Hình ảnh</label>
+                        <input type="file" id="hinhAnh" name="hinhAnh[]" accept="image/*" multiple required>
+                    </div>
+
+                    <button type="submit" value="Submit" name="action" class="submit-form">LƯU NỘI DUNG THÔNG TIN</button>
 
             </div>
         </div>
@@ -274,14 +256,31 @@
             function formatCurrency(input) {
                 // Xóa các ký tự không phải số từ giá trị input
                 let value = input.value.replace(/[^\d]/g, '');
-
                 // Định dạng số thành chuỗi có dấu phẩy ngăn cách nghìn
                 value = new Intl.NumberFormat().format(value);
-
                 // Gán giá trị đã định dạng vào input
                 input.value = value;
             }
         </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Fetch data from your JSON file
+                fetch('./City.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Populate the dropdown with fetched data
+                            const tinhThanhDropdown = document.getElementById('tinhThanh');
 
+                            data.provinces.forEach(provinces => {
+                                const option = document.createElement('option');
+                                option.value = provinces.id;
+                                option.text = provinces.province_name;
+                                tinhThanhDropdown.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching data:', error));
+            });
+        </script> 
+   
     </body>
 </html>

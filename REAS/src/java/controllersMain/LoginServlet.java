@@ -42,41 +42,39 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
+            throws ServletException, IOException, ClassNotFoundException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         //1. get all paratmeter
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
-        String url = LOGINPAGE;
+        String url = HOMEPAGE;
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
-            Account dto = dao.checkLogin(username, password);
+            String password2 = dao.encodePassword(password);
+            Account dto = dao.checkLogin(username, password2);
 
             if (dto == null) {
-                // Authentication failed
+                HttpSession session = request.getSession();
+                session.setAttribute("USERNAMEPASSNULL", "Tên đăng nhập hoặc mật khẩu không hợp lệ");
                 error = true;
                 url = LOGINPAGE;
             } else if ("A".equals(dto.getRoleID())) {
                 System.out.println(dto.getRoleID());
                 url = "admin.jsp";
-                error = false;
-                HttpSession session = request.getSession();
-                Account a = dao.getAccount(username, password);
+                HttpSession session = request.getSession(true);
+                Account a = dao.getAccount(username, password2);
                 session.setAttribute("admin", a);
-
             } else if ("M".equals(dto.getRoleID())) {
                 url = "index_1.jsp";
-                error = false;
-                HttpSession session = request.getSession();
-                Account m = dao.getAccount(username, password);
+                HttpSession session = request.getSession(true);
+                Account m = dao.getAccount(username, password2);
                 session.setAttribute("member", m);
             } else if ("S".equals(dto.getRoleID())) {
                 url = "staff.jsp";
-                error = false;
-                HttpSession session = request.getSession();
-                Account s = dao.getAccount(username, password);
+                HttpSession session = request.getSession(true);
+                Account s = dao.getAccount(username, password2);
                 session.setAttribute("staff", s);
             }
         } catch (SQLException ex) {
@@ -86,7 +84,7 @@ public class LoginServlet extends HttpServlet {
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            out.close();
+
         }
     }
 
@@ -106,6 +104,8 @@ public class LoginServlet extends HttpServlet {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -123,6 +123,8 @@ public class LoginServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

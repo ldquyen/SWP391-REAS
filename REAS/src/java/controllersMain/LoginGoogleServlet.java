@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,19 +5,18 @@
  */
 package controllersMain;
 
-
-
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import controllersAdmin.Constants;
 import dao.AccountDAO;
-import dto.Account;
 import dao.GoogleDAO;
+import dto.Account;
 import dto.UserGoogle;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,49 +48,47 @@ public class LoginGoogleServlet extends HttpServlet {
     private final String HOMEPAGE = "index_1.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        String code = request.getParameter("code");
-        String accessToken = getToken(code);
-        UserGoogle userGoogle = getUserInfo(accessToken);
+        boolean error = false;
         String url = HOMEPAGE;
 
-        System.out.println(userGoogle);
+        try {
+            String code = request.getParameter("code");
+            String accessToken = getToken(code);
+            UserGoogle userGoogle = getUserInfo(accessToken);
+            HttpSession session = request.getSession();
+            session.setAttribute("userGoogle", userGoogle);
 
-        HttpSession session = request.getSession();
-        session.setAttribute("userGoogle", userGoogle);
+            System.out.println(userGoogle);
 
-        String id = userGoogle.getGgAccID();
-        String email = userGoogle.getEmail();
-        boolean verified_email = userGoogle.isVerifiedEmail();
-        String name = userGoogle.getName();
-        String given_name = userGoogle.getGivenName();
-        String family_name = userGoogle.getFamilyName();
-        String picture = userGoogle.getPicture();
-        
-        UserGoogle usergg = new UserGoogle();
-//        usergg.sa
+            String id = userGoogle.getId();
+            String email = userGoogle.getEmail();
+            boolean verified_email = userGoogle.isVerified_email();
+            String name = userGoogle.getName();
+            String given_name = userGoogle.getGiven_name();
+            String family_name = userGoogle.getFamily_name();
+            String picture = userGoogle.getPicture();
 
-        System.out.println(id);
-//            String username = request.getParameter("txtUsername");
-//            String email = request.getParameter("txtEmail");
-//            String phone = request.getParameter("txtPhone");
-//            String cccd = request.getParameter("txtCCCD");
-//            String address = request.getParameter("txtAddress");
-//            String cccdregplace = request.getParameter("txtCCCDRegplace");
-//            String cccdregdate = request.getParameter("txtCCCDRegdate");
-//            String bankname = request.getParameter("txtBankname");
-//            String bankcode = request.getParameter("txtBankcode");
-//            String password = request.getParameter("txtPassword");
-//            String repassword = request.getParameter("txtRepassword");
-//            String accid;
-//            AccountDAO acc = new AccountDAO();
+            GoogleDAO ggacc = new GoogleDAO();
 
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
-        out.close();
+            if (ggacc.checkIDGoogle(id)) {
+                error = true;
+            } else {
+                boolean bl = ggacc.saveUserGoogle(id, email, verified_email, name, given_name, family_name, picture);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (NamingException ex) {
+            ex.printStackTrace();
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+            out.close();
+        }
     }
 
     public static String getToken(String code) throws ClientProtocolException, IOException {
@@ -103,7 +99,6 @@ public class LoginGoogleServlet extends HttpServlet {
                         .add("redirect_uri", Constants.GOOGLE_REDIRECT_URI).add("code", code)
                         .add("grant_type", Constants.GOOGLE_GRANT_TYPE).build())
                 .execute().returnContent().asString();
-
         JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
         String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
         return accessToken;
@@ -111,10 +106,8 @@ public class LoginGoogleServlet extends HttpServlet {
 
     public static UserGoogle getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
         //gui req len gg minh co authen token keu tra dl nguoi dung
-
         String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
-
         // va tra ve class nay dum minh
         UserGoogle googlePojo = new Gson().fromJson(response, UserGoogle.class);
         return googlePojo;
@@ -133,7 +126,11 @@ public class LoginGoogleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -147,7 +144,11 @@ public class LoginGoogleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -159,5 +160,4 @@ public class LoginGoogleServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

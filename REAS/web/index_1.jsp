@@ -32,7 +32,7 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="index_1.jsp">
                         TRANG CHỦ
                     </a>
 
@@ -162,7 +162,7 @@
                             <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
                         </div>
                         <div class="control button-search-container">
-                             <button class="button is-info button-search" type="submit" value="searchRealEstate" name="action">
+                            <button class="button is-info button-search" type="submit" value="searchRealEstate" name="action">
                                 TÌM KIẾM
                             </button>
                         </div>

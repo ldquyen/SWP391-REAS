@@ -6,11 +6,13 @@ package dao;
  * and open the template in the editor.
  */
 import dto.Account;
+import dao.AccountDAO;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -19,13 +21,14 @@ import mylib.DBUtils;
 
 public class AccountDAO {
 
-    public Account checkLogin(String username, String password)
+    public Account checkLogin(String username, String password2)
             throws SQLException, NamingException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         Account result = null;
         try {
+            
             //1. create connect
             con = DBUtils.getConnection();
             if (con != null) { //connection is available
@@ -37,7 +40,7 @@ public class AccountDAO {
                 //3. create statement obj
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
-                stm.setString(2, password);
+                stm.setString(2, password2);
 
                 //4. execute query
                 rs = stm.executeQuery();
@@ -190,6 +193,27 @@ public class AccountDAO {
         }
         return false;
     }
+    
+    public static boolean checkCCCD(String cccd) throws Exception {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [CCCD] FROM [dbo].[Account] WHERE [CCCD] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, cccd);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String Cccd = rs.getString("CCCD");
+                    if (Cccd != null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     public static boolean insertAccount(String accid, String username, String password, String fullname, String email, String phone, String cccd, String address, String cccdregplace, String cccdregdate, String bankname, String bankcode) {
         Connection cn = null;
@@ -265,7 +289,39 @@ public class AccountDAO {
         //System.out.println(decodedString); // GP Coder
         return decodedString;
     }
+    
+    public static boolean checkGmailContainSymbol(String str) {
+        // Sử dụng indexOf() để kiểm tra số lượng xuất hiện của ký tự @ trong chuỗi
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '@') {
+                count++;
+                if (count > 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
+    public static boolean containsOnlyLettersAndSpaces(String str) {
+        // Loại bỏ dấu từ chuỗi
+        String normalizedString = Normalizer.normalize(str, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "");
+
+        // Sử dụng vòng lặp để kiểm tra từng ký tự trong chuỗi
+        for (int i = 0; i < normalizedString.length(); i++) {
+            char currentChar = normalizedString.charAt(i);
+
+            // Kiểm tra xem ký tự có phải là chữ cái hoặc dấu cách không
+            if (!Character.isLetter(currentChar) && !Character.isWhitespace(currentChar)) {
+                return false;
+            }
+        }
+        return true;
+    }
+     
+     
 //    public static void main(String[] args) throws Exception {
 //        String a = "111";
 //        String b = encodePassword(a);

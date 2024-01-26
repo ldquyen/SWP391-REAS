@@ -40,7 +40,6 @@ public class RegisterServlet extends HttpServlet {
             String accid;
             AccountDAO acc = new AccountDAO();
 
-  
             int i = 0;
             String password2 = acc.encodePassword(password);
             if (!password.equals(repassword)) {
@@ -51,13 +50,35 @@ public class RegisterServlet extends HttpServlet {
                 if (acc.checkUsername(username)) {
                     request.setAttribute("FAILUSERNAME", "Username đã tồn tại, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
-                }
-                if (acc.checkEmail(email)) {
+                } else if (!acc.containsOnlyLettersAndSpaces(fullname)) {
+                    request.setAttribute("FAILFULLNAME", "Họ và tên sai định dạng, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (acc.checkPhone(phone)) {
+                    request.setAttribute("FAILPHONE", "Phone đã tồn tại, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (!phone.matches("\\d{10}")) {
+                    request.setAttribute("FAILPHONEPATTERN", "Phone sai định dạng, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (acc.checkEmail(email)) {
                     request.setAttribute("FAILEMAIL", "Email đã tồn tại, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
-                }
-                if (acc.checkPhone(phone)) {
-                    request.setAttribute("FAILPHONE", "Phone đã tồn tại, vui lòng đăng kí lại");
+                } else if (!acc.checkGmailContainSymbol(email)) {
+                    request.setAttribute("FAILEMAILSYMBOL", "Email sai định dạng, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (acc.checkCCCD(cccd)) {
+                    request.setAttribute("FAILCCCD", "CCCD đã tồn tại, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (!cccd.matches("\\d{12}")) {
+                    request.setAttribute("FAILCCCDPATTERN", "CCCD sai định dạng, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (!acc.containsOnlyLettersAndSpaces(bankname)) {
+                    request.setAttribute("FAILBANKNAMEPATTERN", "Tên ngân hàng sai định dạng, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (!bankcode.matches("\\d+")) {
+                    request.setAttribute("FAILBANKCODEPATTERN", "Số tài khoản ngân hàng sai định dạng, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (password.length() <= 8) {
+                    request.setAttribute("FAILPASSWORDLENGTH", "Mật khẩu sai định dạng, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
                 } else {
                     do {
@@ -79,6 +100,15 @@ public class RegisterServlet extends HttpServlet {
 
     }
 
+//    public static void main(String[] args) throws Exception {
+//        AccountDAO acc = new AccountDAO();
+//        String email = "1234567890wada";
+//        if (email.length() >= 8) {
+//            System.out.println("toan chu cai");
+//        } else {
+//            System.out.println("sai me r");
+//        }
+//    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
