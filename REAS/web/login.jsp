@@ -47,7 +47,7 @@
 
                     <div class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="DN" name="action">
+                            <button type="submit" value="rule" name="action">
                                 <span>NỘI QUY</span>
                             </button>
                         </form>

@@ -7,6 +7,26 @@ and open the template in the editor.
     Created on : Jan 18, 2024, 3:44:04 PM
     Author     : tranl
 */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: none;
+    -webkit-text-fill-color: #fff;
+    /*-webkit-box-shadow: 0 0 0px 1000px #000 inset;*/
+    background-color: transparent;
+    color: #fff;
+    border: #fff 1px solid;
+    border-bottom: #D9AB73 3px solid;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
 .navbar {
     background-color: black;
 }
