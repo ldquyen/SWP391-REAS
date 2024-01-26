@@ -5,7 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,10 +86,13 @@ public class RealEstateDAO {
                     int cityID = rs.getInt("CityID");
                     String realEstateName = rs.getString("RealEstateName");
                     float priceNow = rs.getFloat("PriceNow");
-                    Time timeUpSql = rs.getTime("TimeUp");
-                    LocalTime timeUp = timeUpSql.toLocalTime();
-                    Time timeDownSql = rs.getTime("TimeDown");
-                    LocalTime timeDown = timeDownSql.toLocalTime();
+                    
+                    Timestamp timeUpSql = rs.getTimestamp("TimeUp");
+                    Timestamp timeDownSql = rs.getTimestamp("TimeDown");
+
+                    // Chuyển đổi Timestamp thành LocalDateTime
+                    LocalDateTime timeUp = timeUpSql.toLocalDateTime();
+                    LocalDateTime timeDown = timeDownSql.toLocalDateTime();
                     float cost = rs.getFloat("Cost");
                     int status = rs.getInt("Status");
                     int area = rs.getInt("Area");

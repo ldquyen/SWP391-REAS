@@ -149,7 +149,41 @@
         </nav>
 
         <!-- BODY -->
-       
+        <h1 style="text-align: center; font-size: 30px; color: #D9AB73; margin-top: 10px; margin-bottom: 10px;">Những bất động sản đã trúng đấu giá</h1>
+        <div style="text-align: center; border-radius: 45px;">
+            <c:if test="${not empty requestScope.listRealEstateInNews}">
+                <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tên</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Địa chỉ</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Thành phố</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Loại hình BĐS</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Ngày trúng đấu giá</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Giá trúng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="r" items="${requestScope.listRealEstateInNews}">
+                            <tr>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.realEstateName}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.address}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                    <c:forEach var="cityList" items="${sessionScope.CITYLIST}"> 
+                                        <c:if test="${cityList.cityID eq r.cityID}">
+                                            ${cityList.cityName}
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.catID}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.timeDown}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.cost}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </c:if>
+        </div>
 
         <footer class="footer"> 
             <div>

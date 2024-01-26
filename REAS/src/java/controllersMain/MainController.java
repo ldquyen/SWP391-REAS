@@ -55,7 +55,7 @@ public class MainController extends HttpServlet {
                     url = "changePass.jsp";
                     break;
                 case "news":
-                    url = "news.jsp";
+                    url = "NewsServlet";
                     break;
             }
             request.getRequestDispatcher(url).forward(request, response);

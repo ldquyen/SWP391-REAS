@@ -1,10 +1,11 @@
-
 package dto;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
-public class RealEstate implements Serializable{
+
+public class RealEstate implements Serializable {
+
     private String realEstateID;
     private String imageFolderID;
     private String accID;
@@ -12,19 +13,18 @@ public class RealEstate implements Serializable{
     private int cityID;
     private String realEstateName;
     private float priceNow;
-    private LocalTime timeUp;
-    private LocalTime timeDown;
+    private LocalDateTime timeUp;
+    private LocalDateTime timeDown;
     private float cost;
     private int status;
     private int area;
     private String address;
     private String detail;
 
-
     public RealEstate() {
     }
 
-    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, float priceNow, LocalTime timeUp, LocalTime timeDown, float cost, int status, int area, String address, String detail) {
+    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, float priceNow, LocalDateTime timeUp, LocalDateTime timeDown, float cost, int status, int area, String address, String detail) {
         this.realEstateID = realEstateID;
         this.imageFolderID = imageFolderID;
         this.accID = accID;
@@ -97,19 +97,19 @@ public class RealEstate implements Serializable{
         this.priceNow = priceNow;
     }
 
-    public LocalTime getTimeUp() {
+    public LocalDateTime getTimeUp() {
         return timeUp;
     }
 
-    public void setTimeUp(LocalTime timeUp) {
+    public void setTimeUp(LocalDateTime timeUp) {
         this.timeUp = timeUp;
     }
 
-    public LocalTime getTimeDown() {
+    public LocalDateTime getTimeDown() {
         return timeDown;
     }
 
-    public void setTimeDown(LocalTime timeDown) {
+    public void setTimeDown(LocalDateTime timeDown) {
         this.timeDown = timeDown;
     }
 
@@ -156,5 +156,5 @@ public class RealEstate implements Serializable{
     @Override
     public String toString() {
         return "RealEstate{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", cityID=" + cityID + ", realEstateName=" + realEstateName + ", priceNow=" + priceNow + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", cost=" + cost + ", status=" + status + ", area=" + area + ", address=" + address + ", detail=" + detail + '}';
-    }  
+    }
 }

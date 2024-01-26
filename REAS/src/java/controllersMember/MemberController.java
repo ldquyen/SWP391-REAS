@@ -30,7 +30,9 @@ public class MemberController extends HttpServlet {
                 case "changePass":
                     url = "changePass.jsp";
                     break;
-
+                case "newsjsp":
+                    url = "news.jsp";
+                    break;
             }
             request.getRequestDispatcher(url).forward(request, response);
 
