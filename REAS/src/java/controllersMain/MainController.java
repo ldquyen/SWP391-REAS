@@ -18,7 +18,7 @@ public class MainController extends HttpServlet {
         String action = request.getParameter("action");
         String url = "";
         try {
- 
+
             if (action == null) {
                 action = "";
             }
@@ -58,6 +58,9 @@ public class MainController extends HttpServlet {
                     break;
                 case "news":
                     url = "NewsServlet";
+                    break;
+                case "postNew":
+                    url = "postRealEstate.jsp";
                     break;
             }
         } finally {

@@ -136,7 +136,7 @@
                                 <hr class="navbar-divider">
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
+                                        <button type="submit" value="Logout" name="action" >
                                             <span>Đăng xuất</span>
                                         </button>
                                     </form>
@@ -181,21 +181,6 @@
                         </div>
                     </div>
 
-                    <!--                    <div class="form-group">
-                                            <label for="thanhPho">3. Thành Phố</label>
-                                            <input type="text" class="form-control" id="thanhPho" name="thanhPho" required>
-                                        </div>-->
-
-                    <!--                    <div class="form-group">
-                                            <label for="tenDonViSoHuu">3. Tên đơn vị sở hữu tài sản</label>
-                                            <input type="text" class="form-control" id="tenDonViSuuHuu" name="tenDonViSuuHuu" required>
-                                        </div>
-                    
-                                        <div class="form-group">
-                                            <label for="diaChiDonViSoHuu">4. Địa chỉ đơn vị sở hữu tài sản</label>
-                                            <input type="text" class="form-control" id="diaChiDonViSuuHuu" name="diaChiDonViSuuHuu" required>
-                                        </div>-->
-
                     <div class="form-group">
                         <label for="giaTriTaiSan">3. Giá trị tài sản</label>
 
@@ -212,25 +197,7 @@
                         <input type="datetime-local" class="form-control" id="thoiGianBanDauGia" name="thoiGianBanDauGia" required>
                     </div>
 
-                    <!--                    <div class="form-group">
-                                            <label for="soDienThoaiLienHe">8. Số điện thoại liên hệ</label>
-                                            <input type="text" class="form-control" id="soDienThoaiLienHe" name="soDienThoaiLienHe" required>
-                                        </div>
                     
-                                        <div class="form-group">
-                                            <label for="diaChiEmail">8. Địa chỉ Email</label>
-                                            <input type="email" class="form-control" id="diaChiEmail" name="diaChiEmail" required>
-                                        </div>
-                    
-                                        <div class="form-group">
-                                            <label for="maChuyenKhoan">10. Mã chuyển khoản</label>
-                                            <input type="text" class="form-control" id="maChuyenKhoan" name="maChuyenKhoan" required>
-                                        </div>
-                    
-                                        <div class="form-group">
-                                            <label for="maSoThue">11. Mã số thuế</label>
-                                            <input type="text" class="form-control" id="maSoThue" name="maSoThue" required>
-                                        </div>-->
 
                     <div class="form-group">
                         <label for="noiDungTaiSan">6. Nội dung tài sản</label>
@@ -261,7 +228,7 @@
                         <input type="file" id="hinhAnh" name="hinhAnh[]" accept="image/*" multiple required>
                     </div>
 
-                    <button type="submit" class="submit" value="Submit" name="action">Bước 1. LƯU NỘI DUNG THÔNG TIN</button>
+                    <button type="submit" value="Submit" name="action" class="submit-form">LƯU NỘI DUNG THÔNG TIN</button>
 
             </div>
         </div>
