@@ -80,7 +80,7 @@
                                         ${sessionScope.member.fullname}
                                     </c:when>
                                     <c:when test="${not empty sessionScope.userGoogle}">
-                                        ${sessionScope.userGoogle.given_name}
+                                        ${sessionScope.GoogleAccount.given_name}
                                     </c:when>
                                     <c:otherwise>
                                         Guest
@@ -162,7 +162,7 @@
                             <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
                         </div>
                         <div class="control button-search-container">
-                             <button class="button is-info button-search" type="submit" value="searchRealEstate" name="action">
+                            <button class="button is-info button-search" type="submit" value="searchRealEstate" name="action">
                                 TÌM KIẾM
                             </button>
                         </div>

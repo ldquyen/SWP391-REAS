@@ -8,11 +8,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import controllersAdmin.Constants;
 import dao.AccountDAO;
+import dao.GoogleDAO;
 import dto.Account;
 import dto.UserGoogle;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,12 +52,31 @@ public class LoginGoogleServlet extends HttpServlet {
         UserGoogle userGoogle = getUserInfo(accessToken);
         String url = HOMEPAGE;
         
-        System.out.println(getUserInfo(accessToken));
+//        System.out.println(getUserInfo(accessToken));
         
-        System.out.println(userGoogle);
+//        System.out.println(userGoogle);
 
         HttpSession session = request.getSession();
         session.setAttribute("userGoogle", userGoogle);
+        
+        System.out.println(userGoogle);
+        
+        String id = userGoogle.getId();
+        String email = userGoogle.getEmail();
+        boolean verified_email = userGoogle.isVerified_email();
+        String name = userGoogle.getName();
+        String given_name = userGoogle.getGiven_name();
+        String family_name = userGoogle.getFamily_name();
+        String picture = userGoogle.getPicture();
+        
+        GoogleDAO ggacc = new GoogleDAO();
+        try {
+            boolean bl = ggacc.saveUserGoogle(id, email, verified_email, name, given_name, family_name, picture);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginGoogleServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println(email);
 
 
 //        String id = userGoogle.getId();

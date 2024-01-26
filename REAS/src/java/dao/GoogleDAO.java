@@ -20,7 +20,7 @@ import mylib.DBUtils;
 public class GoogleDAO {
 
     // Save UserGoogle information to the database
-    public boolean saveUserGoogle(UserGoogle userGoogle) throws ClassNotFoundException {
+    public boolean saveUserGoogle(String id, String email, boolean verified_email, String name, String given_name, String family_name, String picture) throws ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -30,19 +30,19 @@ public class GoogleDAO {
 
             if (con != null) {
                 // SQL query to insert user information
-                String sql = "INSERT INTO user_google (id, email, verified_email, name, given_name, family_name, picture) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO [dbo].[GoogleAccount] ([GgAccID],[RoleID],[Email],[VerifiedEmail],[Name],[GivenName],[FamilyName],[Picture]) "
+                        + "VALUES (?,'M', ?, ?, ?, ?, ?, ?)";
 
                 stm = con.prepareStatement(sql);
 
                 // Set values for the parameters
-                stm.setString(1, userGoogle.getId());
-                stm.setString(2, userGoogle.getEmail());
-                stm.setBoolean(3, userGoogle.isVerified_email());
-                stm.setString(4, userGoogle.getName());
-                stm.setString(5, userGoogle.getGiven_name());
-                stm.setString(6, userGoogle.getFamily_name());
-                stm.setString(7, userGoogle.getPicture());
+                stm.setString(1, id);
+                stm.setString(2, email);
+                stm.setBoolean(3, verified_email);
+                stm.setString(4, name);
+                stm.setString(5, given_name);
+                stm.setString(6, family_name);
+                stm.setString(7, picture);
 
                 // Execute the query
                 int rowsAffected = stm.executeUpdate();
