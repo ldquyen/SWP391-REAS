@@ -82,47 +82,47 @@ public class RealEstateDAO {
         return result;
     }
 
-//    public static ArrayList<RealEstate> getRealEstateByStatus(int Status) throws ClassNotFoundException, SQLException, NamingException {
-//        ArrayList<RealEstate> list = new ArrayList<>();
-//        Connection cn = DBUtils.getConnection();
-//        if (cn != null) {
-//            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceNow], [TimeUp], [TimeDown], [Cost], [Status], [Area], [Address], [Detail] \n"
-//                    + "FROM RealEstate WHERE [Status] = ?";
-//            PreparedStatement pst = cn.prepareStatement(sql);
-//            pst.setInt(1, Status);
-//            ResultSet rs = pst.executeQuery();
-//            ImageDAO imageDAO = new ImageDAO();
-//            if (rs != null) {
-//                while (rs.next()) {
-//                    
-//                    String realEstateID = rs.getString("RealEstateID");
-//                    String imageFolderID = rs.getString("ImageFolderID");
-//                    String accID = rs.getString("AccID");
-//                    String catID = rs.getString("CatID");
-//                    int cityID = rs.getInt("CityID");
-//                    String realEstateName = rs.getString("RealEstateName");
-//                    String priceNow = rs.getString("PriceNow");
-//
-//                    Timestamp timeUpSql = rs.getTimestamp("TimeUp");
-//                    Timestamp timeDownSql = rs.getTimestamp("TimeDown");
-//                    Image imageByID = imageDAO.getImageByID(imageFolderID);
-//                    // Chuyển đổi Timestamp thành LocalDateTime
-//                    LocalDateTime timeUp = timeUpSql.toLocalDateTime();
-//                    LocalDateTime timeDown = timeDownSql.toLocalDateTime();
-//                    float cost = rs.getFloat("Cost");
-//                    int status = rs.getInt("Status");
-//                    int area = rs.getInt("Area");
-//                    String address = rs.getString("Address");
-//                    String detail = rs.getString("Detail");
-//
-//                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, area, address, detail);
-//
-//                    re.setImage(imageByID);
-//                    list.add(re);
-//                }
-//            }
-//            cn.close();
-//        }
-//        return list;
-//    }
+    public static ArrayList<RealEstate> getRealEstateByStatus(int Status) throws ClassNotFoundException, SQLException, NamingException {
+        ArrayList<RealEstate> list = new ArrayList<>();
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceNow], [TimeUp], [TimeDown], [Cost], [Status], [Area], [Address], [Detail] \n"
+                    + "FROM RealEstate WHERE [Status] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setInt(1, Status);
+            ResultSet rs = pst.executeQuery();
+            ImageDAO imageDAO = new ImageDAO();
+            if (rs != null) {
+                while (rs.next()) {
+                    
+                    String realEstateID = rs.getString("RealEstateID");
+                    String imageFolderID = rs.getString("ImageFolderID");
+                    String accID = rs.getString("AccID");
+                    String catID = rs.getString("CatID");
+                    int cityID = rs.getInt("CityID");
+                    String realEstateName = rs.getString("RealEstateName");
+                    String priceNow = rs.getString("PriceNow");
+
+                    Timestamp timeUpSql = rs.getTimestamp("TimeUp");
+                    Timestamp timeDownSql = rs.getTimestamp("TimeDown");
+                    Image imageByID = imageDAO.getImageByID(imageFolderID);
+                    // Chuyển đổi Timestamp thành LocalDateTime
+                    LocalDateTime timeUp = timeUpSql.toLocalDateTime();
+                    LocalDateTime timeDown = timeDownSql.toLocalDateTime();
+                    float cost = rs.getFloat("Cost");
+                    int status = rs.getInt("Status");
+                    int area = rs.getInt("Area");
+                    String address = rs.getString("Address");
+                    String detail = rs.getString("Detail");
+
+                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, area, timeUp, timeDown, area, area, address, detail, imageByID);
+
+                    re.setImage(imageByID);
+                    list.add(re);
+                }
+            }
+            cn.close();
+        }
+        return list;
+    }
 }
