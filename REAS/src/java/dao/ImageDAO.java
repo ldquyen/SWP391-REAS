@@ -38,9 +38,9 @@ public class ImageDAO {
                 while (rs.next()) {
                     Image image = new Image();
                     image.setImageFolderID(folderID);
-                    image.setImageLink1(rs.getString("ImageLink1"));
-                    image.setImageLink2(rs.getString("ImageLink2"));
-                    image.setImageLink3(rs.getString("ImageLink3"));
+//                    image.setImageLink1(rs.getString("ImageLink1"));
+//                    image.setImageLink2(rs.getString("ImageLink2"));
+//                    image.setImageLink3(rs.getString("ImageLink3"));
                     return image;
                 }
                 //jdbc object khai bao dong no lai su dung
