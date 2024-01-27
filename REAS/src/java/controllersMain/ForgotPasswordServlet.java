@@ -5,26 +5,21 @@
  */
 package controllersMain;
 
-import Ulti.Pagination;
-import dao.RealEstateDAO;
-import dto.RealEstate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import mylib.MailService;
 
 /**
  *
  * @author sny12
  */
-public class HomeServlet extends HttpServlet {
+public class ForgotPasswordServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +38,10 @@ public class HomeServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeServlet</title>");            
+            out.println("<title>Servlet ForgotPasswordServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ForgotPasswordServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,21 +59,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int pageNum = request.getParameter("pagenum") != null ? Integer.parseInt(request.getParameter("pagenum")) : 1;
-            RealEstateDAO realEstateDAO = new RealEstateDAO();
-             String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
-                    + "FROM RealEstate WHERE [Status] = ?";
-            List<RealEstate> list = Pagination.paging(realEstateDAO.getRealEstateByStatus(sql, 1), pageNum);
-            int totalPage = realEstateDAO.getRealEstateByStatus(sql, 1).size() % 5 == 0? realEstateDAO.getRealEstateByStatus(sql, 1).size() / 5 : 
-                    (realEstateDAO.getRealEstateByStatus(sql, 1).size() / 5 + 1);
-            request.setAttribute("list", list);
-            request.setAttribute("totalPage", totalPage);
-            request.setAttribute("pagenum", pageNum);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } catch (ClassNotFoundException | SQLException | NamingException ex) {
-            Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -92,7 +73,32 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         String email = request.getParameter("email");
+        int otpValue = 0;
+        String url = "MainController";
+        HttpSession session = request.getSession();
+
+        if (email != null || !email.equals("")) {
+            //create otp
+            Random rand = new Random();
+            otpValue = rand.nextInt(1255650);
+
+            String sendTo = email;
+            String Title = "Your OTP to reset your password in REAS";
+            String content = "Your OTP is: " + otpValue + "\n Please do not share for anyone. Thank you.";
+            boolean result = MailService.sendMail(sendTo, Title, content);
+
+            if (result) {
+                session.setAttribute("otp", otpValue);
+                session.setAttribute("email", email);
+                url = "MainController?action=confirmOTP"; 
+            } else {
+                String message = "Your email is not correct";
+                session.setAttribute("otpMessage", message);
+                url = "forgotPassword.jsp"; 
+            }
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     /**

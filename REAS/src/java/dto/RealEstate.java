@@ -11,33 +11,40 @@ public class RealEstate implements Serializable {
     private String catID;
     private int cityID;
     private String realEstateName;
-    private long priceFirst;
+    private int priceNow;
     private LocalDateTime timeUp;
     private LocalDateTime timeDown;
-    private long priceLast;
-    private int status;
+    private int cost;
+    private int status = 0;
     private int area;
     private String address;
     private String detail;
+    private Image image;
+
+    @Override
+    public String toString() {
+        return "RealEstate{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", cityID=" + cityID + ", realEstateName=" + realEstateName + ", priceNow=" + priceNow + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", cost=" + cost + ", status=" + status + ", area=" + area + ", address=" + address + ", detail=" + detail + ", image=" + image + '}';
+    }
+
 
     public RealEstate() {
     }
 
-    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, int status, int area, String address, String detail) {
+    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, int priceNow, LocalDateTime timeUp, LocalDateTime timeDown, int cost, int area, String address, String detail, Image image) {
         this.realEstateID = realEstateID;
         this.imageFolderID = imageFolderID;
         this.accID = accID;
         this.catID = catID;
         this.cityID = cityID;
         this.realEstateName = realEstateName;
-        this.priceFirst = priceFirst;
+        this.priceNow = priceNow;
         this.timeUp = timeUp;
         this.timeDown = timeDown;
-        this.priceLast = priceLast;
-        this.status = status;
+        this.cost = cost;
         this.area = area;
         this.address = address;
         this.detail = detail;
+        this.image = image;
     }
 
     public String getRealEstateID() {
@@ -88,12 +95,12 @@ public class RealEstate implements Serializable {
         this.realEstateName = realEstateName;
     }
 
-    public long getPriceFirst() {
-        return priceFirst;
+    public int getPriceNow() {
+        return priceNow;
     }
 
-    public void setPriceFirst(long priceFirst) {
-        this.priceFirst = priceFirst;
+    public void setPriceNow(int priceNow) {
+        this.priceNow = priceNow;
     }
 
     public LocalDateTime getTimeUp() {
@@ -112,12 +119,12 @@ public class RealEstate implements Serializable {
         this.timeDown = timeDown;
     }
 
-    public long getPriceLast() {
-        return priceLast;
+    public int getCost() {
+        return cost;
     }
 
-    public void setPriceLast(long priceLast) {
-        this.priceLast = priceLast;
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public int getStatus() {
@@ -152,8 +159,15 @@ public class RealEstate implements Serializable {
         this.detail = detail;
     }
 
-    @Override
-    public String toString() {
-        return "RealEstate{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", cityID=" + cityID + ", realEstateName=" + realEstateName + ", priceFirst=" + priceFirst + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", priceLast=" + priceLast + ", status=" + status + ", area=" + area + ", address=" + address + ", detail=" + detail + '}';
+    public Image getImage() {
+        return image;
     }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    
+ 
+
 }

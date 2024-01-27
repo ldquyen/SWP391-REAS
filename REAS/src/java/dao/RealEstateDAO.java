@@ -2,7 +2,6 @@ package dao;
 
 import dto.Image;
 import dto.RealEstate;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,11 +54,11 @@ public class RealEstateDAO {
                 stm.setString(2, post.getCatID());
                 stm.setInt(3, post.getCityID());
                 stm.setString(4, post.getRealEstateName());
-//                stm.setString(5, post.getPriceNow());
+                stm.setInt(5, post.getPriceNow());
                 stm.setTimestamp(6, ts);
                 stm.setTimestamp(7, ts);
-//                stm.setFloat(8, post.getCost());
-                stm.setFloat(9, post.getArea());
+                stm.setInt(8, post.getCost());
+                stm.setInt(9, post.getArea());
                 stm.setString(10, post.getAddress());
                 stm.setString(11, post.getDetail());
                 
@@ -83,45 +82,47 @@ public class RealEstateDAO {
         return result;
     }
 
-    public static ArrayList<RealEstate> getRealEstateByStatus(int Status) throws ClassNotFoundException, SQLException, NamingException {
-        ArrayList<RealEstate> list = new ArrayList<>();
-        Connection cn = DBUtils.getConnection();
-        if (cn != null) {
-            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
-                    + "FROM RealEstate WHERE [Status] = ?";
-            PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setInt(1, Status);
-            ResultSet rs = pst.executeQuery();
-            
-            if (rs != null) {
-                while (rs.next()) {
-                    
-                    String realEstateID = rs.getString("RealEstateID");
-                    String imageFolderID = rs.getString("ImageFolderID");
-                    String accID = rs.getString("AccID");
-                    String catID = rs.getString("CatID");
-                    int cityID = rs.getInt("CityID");
-                    String realEstateName = rs.getString("RealEstateName");
-                    long priceFirst = rs.getLong("PriceFirst");
-
-                    Timestamp timeUpSql = rs.getTimestamp("TimeUp");
-                    Timestamp timeDownSql = rs.getTimestamp("TimeDown");
-                    
-                    // Chuyển đổi Timestamp thành LocalDateTime
-                    LocalDateTime timeUp = timeUpSql.toLocalDateTime();
-                    LocalDateTime timeDown = timeDownSql.toLocalDateTime();
-                    long priceLast = rs.getLong("PriceLast");
-                    int status = rs.getInt("Status");
-                    int area = rs.getInt("Area");
-                    String address = rs.getString("Address");
-                    String detail = rs.getString("Detail");
-
-                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown, priceLast, status, area, address, detail);
-                    list.add(re);     
-                }
-            }
-            cn.close();
-        }
-        return list;
-    }
+//    public static ArrayList<RealEstate> getRealEstateByStatus(int Status) throws ClassNotFoundException, SQLException, NamingException {
+//        ArrayList<RealEstate> list = new ArrayList<>();
+//        Connection cn = DBUtils.getConnection();
+//        if (cn != null) {
+//            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceNow], [TimeUp], [TimeDown], [Cost], [Status], [Area], [Address], [Detail] \n"
+//                    + "FROM RealEstate WHERE [Status] = ?";
+//            PreparedStatement pst = cn.prepareStatement(sql);
+//            pst.setInt(1, Status);
+//            ResultSet rs = pst.executeQuery();
+//            ImageDAO imageDAO = new ImageDAO();
+//            if (rs != null) {
+//                while (rs.next()) {
+//                    
+//                    String realEstateID = rs.getString("RealEstateID");
+//                    String imageFolderID = rs.getString("ImageFolderID");
+//                    String accID = rs.getString("AccID");
+//                    String catID = rs.getString("CatID");
+//                    int cityID = rs.getInt("CityID");
+//                    String realEstateName = rs.getString("RealEstateName");
+//                    String priceNow = rs.getString("PriceNow");
+//
+//                    Timestamp timeUpSql = rs.getTimestamp("TimeUp");
+//                    Timestamp timeDownSql = rs.getTimestamp("TimeDown");
+//                    Image imageByID = imageDAO.getImageByID(imageFolderID);
+//                    // Chuyển đổi Timestamp thành LocalDateTime
+//                    LocalDateTime timeUp = timeUpSql.toLocalDateTime();
+//                    LocalDateTime timeDown = timeDownSql.toLocalDateTime();
+//                    float cost = rs.getFloat("Cost");
+//                    int status = rs.getInt("Status");
+//                    int area = rs.getInt("Area");
+//                    String address = rs.getString("Address");
+//                    String detail = rs.getString("Detail");
+//
+//                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, area, address, detail);
+//
+//                    re.setImage(imageByID);
+//                    list.add(re);
+//                }
+//            }
+//            cn.close();
+//        }
+//        return list;
+//    }
 }
