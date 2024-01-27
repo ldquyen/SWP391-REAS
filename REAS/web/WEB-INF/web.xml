@@ -36,6 +36,10 @@
         <servlet-name>NewServlet</servlet-name>
         <servlet-class>controllersMember.NewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FilterInNewsServlet</servlet-name>
+        <servlet-class>controllersMember.FilterInNewsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterInNewsServlet</servlet-name>
+        <url-pattern>/FilterInNewsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

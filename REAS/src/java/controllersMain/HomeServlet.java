@@ -67,9 +67,11 @@ public class HomeServlet extends HttpServlet {
         try {
             int pageNum = request.getParameter("pagenum") != null ? Integer.parseInt(request.getParameter("pagenum")) : 1;
             RealEstateDAO realEstateDAO = new RealEstateDAO();
-            List<RealEstate> list = Pagination.paging(realEstateDAO.getRealEstateByStatus(1), pageNum);
-            int totalPage = realEstateDAO.getRealEstateByStatus(1).size() % 5 == 0? realEstateDAO.getRealEstateByStatus(1).size() / 5 : 
-                    (realEstateDAO.getRealEstateByStatus(1).size() / 5 + 1);
+             String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
+                    + "FROM RealEstate WHERE [Status] = ?";
+            List<RealEstate> list = Pagination.paging(realEstateDAO.getRealEstateByStatus(sql, 1), pageNum);
+            int totalPage = realEstateDAO.getRealEstateByStatus(sql, 1).size() % 5 == 0? realEstateDAO.getRealEstateByStatus(sql, 1).size() / 5 : 
+                    (realEstateDAO.getRealEstateByStatus(sql, 1).size() / 5 + 1);
             request.setAttribute("list", list);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("pagenum", pageNum);
