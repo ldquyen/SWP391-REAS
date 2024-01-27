@@ -569,3 +569,38 @@ button {
 /*.img-logo-login {
     max-width: 50px;
 }*/
+
+
+.column-home-real {
+    padding: 2.75em;
+    text-align: center;
+}
+
+.text-home-container {
+    background-color: #000;
+    color: #D9AB73
+}
+
+.text-home-1 {
+    color: white;
+    font-size: 22px;
+    font-family: Inter;
+    font-weight: 800;
+    word-wrap: break-word
+}
+
+.text-home-2 {
+    color: white;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 800;
+    word-wrap: break-word
+}
+
+.text-home-3 {
+    color: #D9AB73;
+    font-size: 22px;
+    font-family: Inter;
+    font-weight: 800;
+    word-wrap: break-word
+}
