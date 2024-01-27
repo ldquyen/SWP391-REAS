@@ -156,14 +156,14 @@
                     ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ
                 </h1>
             </div>
+
             <div class="form-post-real-estate" >
 
-
-                <form action="xulydangky.jsp" method="post" class="formDangKy" >
+                <form action="MainController" method="post" class="formDangKy" >
 
                     <div class="form-group">
                         <label for="tenTaiSan">1. Tên tài sản đấu giá</label>
-                        <input type="text" class="form-control" id="tenTaiSan" name="tenTaiSan" required>
+                        <input type="text" class="form-control" id="realEstateID" name="realEstateID" required>
                     </div>
 
                     <div class="form-group">
@@ -171,11 +171,11 @@
 
                         <div class="form-group1">
                             <label for="diaChi">Đia chỉ</label>
-                            <input type="text" class="form-control" id="diaChi" name="diaChi" required>
+                            <input type="text" class="form-control" id="address" name="address" required>
                         </div>
                         <div class="form-group1">
                             <label for="thanhPho">Tỉnh Thành</label>
-                            <select class="form-control" id="tinhThanh" name="tinhThanh" required>
+                            <select class="form-control" id="cityID" name="cityID" required>
                                 <option value="" disabled selected hidden>-- Chọn tỉnh/thành phố --</option>
                             </select>
                         </div>
@@ -184,52 +184,52 @@
                     <div class="form-group">
                         <label for="giaTriTaiSan">3. Giá trị tài sản</label>
 
-                        <input type="text" class="form-control" id="giaTriTaiSan" name="giaTriTaiSan" placeholder="VNĐ" oninput="formatCurrency(this)" required>
+                        <input type="text" class="form-control" id="priceNow" name="priceNow" placeholder="VNĐ" oninput="formatCurrency(this)" required>
                     </div>
 
                     <div class="form-group">
                         <label for="thoiGianDangKy">4. Thời gian đăng ký đấu giá</label>
-                        <input type="datetime-local" class="form-control" id="thoiGianDangKy" name="thoiGianDangKy" required>
+                        <input type="datetime-local" class="form-control" id="timeUp" name="timeUp" required>
                     </div>
 
                     <div class="form-group">
                         <label for="thoiGianBanDauGia">5. Thời gian bán đấu giá</label>
-                        <input type="datetime-local" class="form-control" id="thoiGianBanDauGia" name="thoiGianBanDauGia" required>
+                        <input type="datetime-local" class="form-control" id="timeDown" name="timeDown" required>
                     </div>
 
-                    
+
 
                     <div class="form-group">
                         <label for="noiDungTaiSan">6. Nội dung tài sản</label>
                         <div class="form-group1">
                             <label for="loaTaiSan">Loại tài sản</label>
-                            <select id="loaiTaiSan" name="loaiTaiSan" >
+                            <select id="loaiTaiSan" name="catID" >
                                 <option value="" disabled selected hidden>-- Chọn --</option>
-                                <option value="nhaDat">Nhà </option>
-                                <option value="nhaDat">Đất </option>
-                                <option value="chungCu">Chung cư</option>
-                                <option value="bietThu">Biệt thự</option>
+                                <option value="no">Nhà </option>
+                                <option value="dn">Đất </option>
+                                <option value="cc">Chung cư</option>
+                                <option value="bt">Biệt thự</option>
                             </select>
                         </div>
 
                         <div class="form-group1">
-                            <label for="dienTichTaiSan">Diện tích (m²)</label>
-                            <input type="text" class="form-control1" id="diaChiTaiSan" name="length" placeholder="Dài" required>
-                            <input type="text" class="form-control1" id="diaChiTaiSan" name="width" placeholder="Rộng" required>
+                            <label for="dienTichTaiSan">Diện tích </label>
+                            <input type="text" class="form-control1" id="diaChiTaiSan" name="area" placeholder="(m²)" required>
+
                         </div>
                         <div class="form-group1">
                             <label for="diaChiTaiSan" >Mô tả</label>          
-                            <textarea id="moTaTaiSan" name="moTaTaiSan" rows="4" cols="50" class="form-control" placeholder="Nhập mô tả tài sản..."></textarea>
+                            <textarea id="detail" name="detail" rows="4" cols="50" class="form-control" placeholder="Nhập mô tả tài sản..."></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="hinhAnh">7. Hình ảnh</label>
-                        <input type="file" id="hinhAnh" name="hinhAnh[]" accept="image/*" multiple required>
+                        <input type="file" id="imageFolderID" name="imageFolderID[]" accept="image/*" multiple required>
                     </div>
 
-                    <button type="submit" value="Submit" name="action" class="submit-form">LƯU NỘI DUNG THÔNG TIN</button>
-
+                    <button type="submit" value="submitPost" name="action" class="submit-form">LƯU NỘI DUNG THÔNG TIN</button>
+                </form>
             </div>
         </div>
         <!-- END BODY -->
@@ -269,7 +269,7 @@
                         .then(response => response.json())
                         .then(data => {
                             // Populate the dropdown with fetched data
-                            const tinhThanhDropdown = document.getElementById('tinhThanh');
+                            const tinhThanhDropdown = document.getElementById('cityID');
 
                             data.provinces.forEach(provinces => {
                                 const option = document.createElement('option');
@@ -281,6 +281,6 @@
                         .catch(error => console.error('Error fetching data:', error));
             });
         </script> 
-   
+
     </body>
 </html>

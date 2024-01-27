@@ -62,6 +62,9 @@ public class MainController extends HttpServlet {
                 case "postNew":
                     url = "postRealEstate.jsp";
                     break;
+                case "submitPost":
+                    url = "PostRealEstateServlet";
+                    break;    
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

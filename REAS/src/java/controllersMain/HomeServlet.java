@@ -3,22 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersMember;
+package controllersMain;
 
+import Ulti.Pagination;
+import dao.RealEstateDAO;
+import dto.RealEstate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author sny12
  */
-@WebServlet(name = "PostRealEstate", urlPatterns = {"/PostRealEstate"})
-public class PostRealEstate extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +39,16 @@ public class PostRealEstate extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet HomeServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet HomeServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -49,7 +64,19 @@ public class PostRealEstate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            int pageNum = request.getParameter("pagenum") != null ? Integer.parseInt(request.getParameter("pagenum")) : 1;
+            RealEstateDAO realEstateDAO = new RealEstateDAO();
+            List<RealEstate> list = Pagination.paging(realEstateDAO.getRealEstateByStatus(1), pageNum);
+            int totalPage = realEstateDAO.getRealEstateByStatus(1).size() % 5 == 0? realEstateDAO.getRealEstateByStatus(1).size() / 5 : 
+                    (realEstateDAO.getRealEstateByStatus(1).size() / 5 + 1);
+            request.setAttribute("list", list);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("pagenum", pageNum);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } catch (ClassNotFoundException | SQLException | NamingException ex) {
+            Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
