@@ -2,6 +2,7 @@ package dao;
 
 import dto.Image;
 import dto.RealEstate;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,12 +87,12 @@ public class RealEstateDAO {
         ArrayList<RealEstate> list = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
-            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceNow], [TimeUp], [TimeDown], [Cost], [Status], [Area], [Address], [Detail] \n"
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
                     + "FROM RealEstate WHERE [Status] = ?";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setInt(1, Status);
             ResultSet rs = pst.executeQuery();
-            ImageDAO imageDAO = new ImageDAO();
+            
             if (rs != null) {
                 while (rs.next()) {
                     
@@ -101,24 +102,22 @@ public class RealEstateDAO {
                     String catID = rs.getString("CatID");
                     int cityID = rs.getInt("CityID");
                     String realEstateName = rs.getString("RealEstateName");
-                    String priceNow = rs.getString("PriceNow");
+                    long priceFirst = rs.getLong("PriceFirst");
 
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                     Timestamp timeDownSql = rs.getTimestamp("TimeDown");
-                    Image imageByID = imageDAO.getImageByID(imageFolderID);
+                    
                     // Chuyển đổi Timestamp thành LocalDateTime
                     LocalDateTime timeUp = timeUpSql.toLocalDateTime();
                     LocalDateTime timeDown = timeDownSql.toLocalDateTime();
-                    float cost = rs.getFloat("Cost");
+                    long priceLast = rs.getLong("PriceLast");
                     int status = rs.getInt("Status");
                     int area = rs.getInt("Area");
                     String address = rs.getString("Address");
                     String detail = rs.getString("Detail");
 
-                    //RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, area, address, detail);
-
-                    //re.setImage(imageByID);
-                    //list.add(re);
+                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown, priceLast, status, area, address, detail);
+                    list.add(re);     
                 }
             }
             cn.close();
