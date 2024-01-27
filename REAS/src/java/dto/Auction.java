@@ -2,20 +2,21 @@
 package dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class Auction {
     private String auctionID;
     private String realEstateID;
     private String auctionName;
-    private float priceNow;
-    private float lamda;
-    private Date timeStart;
-    private Date timeEnd;
+    private long priceNow;
+    private long lamda;
+    private LocalDateTime timeStart;
+    private LocalDateTime timeEnd;
 
     public Auction() {
     }
 
-    public Auction(String auctionID, String realEstateID, String auctionName, float priceNow, float lamda, Date timeStart, Date timeEnd) {
+    public Auction(String auctionID, String realEstateID, String auctionName, long priceNow, long lamda, LocalDateTime timeStart, LocalDateTime timeEnd) {
         this.auctionID = auctionID;
         this.realEstateID = realEstateID;
         this.auctionName = auctionName;
@@ -49,35 +50,35 @@ public class Auction {
         this.auctionName = auctionName;
     }
 
-    public float getPriceNow() {
+    public long getPriceNow() {
         return priceNow;
     }
 
-    public void setPriceNow(float priceNow) {
+    public void setPriceNow(long priceNow) {
         this.priceNow = priceNow;
     }
 
-    public float getLamda() {
+    public long getLamda() {
         return lamda;
     }
 
-    public void setLamda(float lamda) {
+    public void setLamda(long lamda) {
         this.lamda = lamda;
     }
 
-    public Date getTimeStart() {
+    public LocalDateTime getTimeStart() {
         return timeStart;
     }
 
-    public void setTimeStart(Date timeStart) {
+    public void setTimeStart(LocalDateTime timeStart) {
         this.timeStart = timeStart;
     }
 
-    public Date getTimeEnd() {
+    public LocalDateTime getTimeEnd() {
         return timeEnd;
     }
 
-    public void setTimeEnd(Date timeEnd) {
+    public void setTimeEnd(LocalDateTime timeEnd) {
         this.timeEnd = timeEnd;
     }
 

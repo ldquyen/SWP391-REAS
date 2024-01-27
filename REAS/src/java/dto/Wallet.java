@@ -4,12 +4,12 @@ package dto;
 public class Wallet {
     private String walletID;
     private String accID;
-    private int accountBalance;
+    private long accountBalance;
 
     public Wallet() {
     }
 
-    public Wallet(String walletID, String accID, int accountBalance) {
+    public Wallet(String walletID, String accID, long accountBalance) {
         this.walletID = walletID;
         this.accID = accID;
         this.accountBalance = accountBalance;
@@ -31,11 +31,11 @@ public class Wallet {
         this.accID = accID;
     }
 
-    public int getAccountBalance() {
+    public long getAccountBalance() {
         return accountBalance;
     }
 
-    public void setAccountBalance(int accountBalance) {
+    public void setAccountBalance(long accountBalance) {
         this.accountBalance = accountBalance;
     }
 
