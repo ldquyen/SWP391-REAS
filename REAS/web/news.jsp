@@ -15,6 +15,7 @@
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
+
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -52,6 +53,8 @@
                         </form>
                     </a>
                 </div>
+
+
 
                 <div class="navbar-end">
                     <div class="navbar-item">
@@ -153,47 +156,92 @@
             </div>
         </nav>
 
+
+        <form action="MemberController" method="post" style="margin: 0 auto; width: 40%; margin-top: 20px">
+            <div class="field has-addons">
+                <div class="search-detail-container">
+                    <div class="control">
+                        <div class="select">
+                            <select class="custom-select" name="loaihinhbds">
+                                <option value="">Loại hình BĐS</option>
+                                <c:forEach var="locCategory" items="${sessionScope.CATEGORYLIST}">
+                                    <option value="${locCategory.catID}" <c:if test="${loaihinhbds eq locCategory.catID}">selected</c:if>>${locCategory.catName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="select" >
+                            <select class="custom-select" name="thanhpho">
+                                <option value="">Thành phố</option>
+                                <c:forEach var="locCity" items="${sessionScope.CITYLIST}">
+                                    <option value="${locCity.cityID}" <c:if test="${thanhpho eq locCity.cityID }">selected</c:if>>${locCity.cityName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <div class="select">
+                            <select class="custom-select" name="mucgia">
+                                <option value="">Mức giá</option>
+                                <option value="ASC" <c:if test="${mucgia == 'ASC'}">selected</c:if>>Tăng dần</option>
+                                <option value="DESC" <c:if test="${mucgia == 'DESC'}">selected</c:if>>Giảm dần</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="control button-search-container">
+                    <button class="button is-info button-search" type="submit" value="filterInNews" name="action">
+                        Lọc
+                    </button>
+                </div>
+            </div>
+        </form>
         <!-- BODY -->
-        <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 10px;margin-bottom: 10px; ">Những bất động sản đã trúng đấu giá </p>
-        <div style="text-align: center; border-radius: 45px;">
-            <c:if test="${not empty requestScope.listRealEstateInNews}">
-                <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;">
-                    <thead>
-                        <tr>
-                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tên</th>
-                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Địa chỉ</th>
-                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Thành phố</th>
-                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Loại hình BĐS</th>
-                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Ngày trúng đấu giá</th>
-                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Giá trúng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="r" items="${requestScope.listRealEstateInNews}">
+        <div>
+
+            <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 10px;margin-bottom: 10px; ">Những bất động sản đã trúng đấu giá </p>
+            <div style="text-align: center; border-radius: 45px;">
+                <c:if test="${not empty requestScope.listRealEstateInNews}">
+                    <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;">
+                        <thead>
                             <tr>
-                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.realEstateName}</td>
-                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.address}</td>
-                                <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                    <c:forEach var="cityList" items="${sessionScope.CITYLIST}"> 
-                                        <c:if test="${cityList.cityID eq r.cityID}">
-                                            ${cityList.cityName}
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                    <c:forEach var="catList" items="${sessionScope.CATEGORYLIST}"> 
-                                        <c:if test="${catList.catID eq r.catID}">
-                                            ${catList.catName}
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.timeDown}</td>
-                                <td style="border: 1px solid #D9AB73; padding: 8px;">${r.cost}</td>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tên</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Địa chỉ</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Thành phố</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Loại hình BĐS</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Ngày trúng đấu giá</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Giá trúng</th>
                             </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </c:if>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="r" items="${requestScope.listRealEstateInNews}">
+                                <tr>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${r.realEstateName}</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${r.address}</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        <c:forEach var="cityList" items="${sessionScope.CITYLIST}"> 
+                                            <c:if test="${cityList.cityID eq r.cityID}">
+                                                ${cityList.cityName}
+                                            </c:if>
+                                        </c:forEach>
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        <c:forEach var="catList" items="${sessionScope.CATEGORYLIST}"> 
+                                            <c:if test="${catList.catID eq r.catID}">
+                                                ${catList.catName}
+                                            </c:if>
+                                        </c:forEach>
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${r.timeDown}</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${r.priceLast}</td>
+                                </tr>
+                            </c:forEach>
+
+                        </tbody>
+                    </table>
+                </c:if>
+
+            </div>
         </div>
 
 

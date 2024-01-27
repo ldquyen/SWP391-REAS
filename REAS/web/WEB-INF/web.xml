@@ -29,12 +29,28 @@
         <servlet-class>controllersMain.ListCityServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>controllersMain.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>NewServlet</servlet-name>
         <servlet-class>controllersMember.NewServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>controllersMain.HomeServlet</servlet-class>
+        <servlet-name>FilterInNewsServlet</servlet-name>
+        <servlet-class>controllersMember.FilterInNewsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <servlet-class>controllersMain.ForgotPasswordServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmOTPServlet</servlet-name>
+        <servlet-class>controllersMain.ConfirmOTPServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <servlet-class>controllersMain.ResetPasswordServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -65,12 +81,28 @@
         <url-pattern>/ListCityServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/home</url-pattern>
+        <servlet-name>FilterInNewsServlet</servlet-name>
+        <url-pattern>/FilterInNewsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <url-pattern>/ForgotPasswordServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmOTPServlet</servlet-name>
+        <url-pattern>/ConfirmOTPServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <url-pattern>/ResetPasswordServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

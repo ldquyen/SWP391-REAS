@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MainController extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -64,7 +64,28 @@ public class MainController extends HttpServlet {
                     break;
                 case "submitPost":
                     url = "PostRealEstateServlet";
-                    break;    
+                    break;
+
+                case "forgotPassword":
+                    url = "forgotPassword.jsp";
+                    break;
+                case "sendMail":
+                    url = "ForgotPasswordServlet";
+                    break;
+                case "confirmOTP":
+                    url = "confirmOTP.jsp";
+                    break;
+                case "validateOTP":
+                    url = "ConfirmOTPServlet";
+                    break;
+                case "resetpasswordPage":
+                    url = "resetPassword.jsp";
+                    break;
+
+                case "resetPassword":
+                    url = "ResetPasswordServlet";
+                    break;
+
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

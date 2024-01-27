@@ -33,6 +33,9 @@ public class MemberController extends HttpServlet {
                 case "newsjsp":
                     url = "news.jsp";
                     break;
+                case "filterInNews":
+                    url = "FilterInNewsServlet";
+                    break;
             }
             request.getRequestDispatcher(url).forward(request, response);
 

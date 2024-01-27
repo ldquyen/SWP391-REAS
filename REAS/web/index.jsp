@@ -123,16 +123,53 @@
                 </div>
             </div>
         </form>
+
+        <div class="columns">
+            <div class="column column-home-real">
+                <img src="image/homereallestate.png" style="display: flex;" alt="none"/>
+                <div class="text-home-container">
+                    <p class="text-home-1">30/01/2024-22:00</p>
+                    <p class="text-home-2">Sala-TPHCM</p>
+                    <p class="text-home-3">28 tỷ 930 triệu</p>
+                </div>
+            </div>
+            <div class="column column-home-real column-home-real-2">
+                <img src="image/homereal2.png" style="display: flex;" alt="none"/>
+                <div class="text-home-container">
+                    <p class="text-home-1">30/01/2024-22:00</p>
+                    <p class="text-home-2">Grand Marina-TPHCM</p>
+                    <p class="text-home-3">30 tỷ 500 triệu</p>
+                </div>
+            </div>
+            <div class="column column-home-real">
+                <img src="image/homereallestate.png" style="display: flex;" alt="none"/>
+                <div class="text-home-container">
+                    <p class="text-home-1">30/01/2024-22:00</p>
+                    <p class="text-home-2">Sala-TPHCM</p>
+                    <p class="text-home-3">28 tỷ 930 triệu</p>
+                </div>
+            </div>
+            <div class="column column-home-real">
+                <img src="image/homereal2.png" style="display: flex;" alt="none"/>
+                <div class="text-home-container">
+                    <p class="text-home-1">30/01/2024-22:00</p>
+                    <p class="text-home-2">Grand Marina-TPHCM</p>
+                    <p class="text-home-3">30 tỷ 500 triệu</p>
+                </div>
+            </div>
+        </div>
+
         <c:forEach items="${requestScope.list}" var="item">
             <div>
                 <img src="${pageContext.request.contextPath}/${item.image.getImageLink1()}" alt="none"/>
                 <p>${item.realEstateName}</p>
+                <p>${item.priceNow}</p>
             </div>
         </c:forEach>
         <c:forEach begin="1" end="${requestScope.totalPage}" var="item">
             <a href="${pageContext.request.contextPath}/home?pagenum=${item}">${item}</a>
         </c:forEach>
-        <footer class="footer"> 
+        <footer class="footer" style="position: initial"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
                 <div class="footer-container">

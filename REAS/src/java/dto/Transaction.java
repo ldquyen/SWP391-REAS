@@ -2,17 +2,18 @@
 package dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class Transaction {
     private String transID;
     private String auctionHisID;
-    private float quantity;
-    private Date timePay;
+    private long quantity;
+    private LocalDateTime timePay;
 
     public Transaction() {
     }
 
-    public Transaction(String transID, String auctionHisID, float quantity, Date timePay) {
+    public Transaction(String transID, String auctionHisID, long quantity, LocalDateTime timePay) {
         this.transID = transID;
         this.auctionHisID = auctionHisID;
         this.quantity = quantity;
@@ -35,19 +36,19 @@ public class Transaction {
         this.auctionHisID = auctionHisID;
     }
 
-    public float getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(float quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 
-    public Date getTimePay() {
+    public LocalDateTime getTimePay() {
         return timePay;
     }
 
-    public void setTimePay(Date timePay) {
+    public void setTimePay(LocalDateTime timePay) {
         this.timePay = timePay;
     }
 
