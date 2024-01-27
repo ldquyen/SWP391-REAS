@@ -1,16 +1,21 @@
 package dto;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 public class Image {
 
     private String imageFolderID;
-    private String imageLink1;
-    private String imageLink2;
-    private String imageLink3;
+    private byte[] imageLink1;
+    private byte[] imageLink2;
+    private byte[] imageLink3;
 
     public Image() {
     }
 
-    public Image(String imageFolderID, String imageLink1, String imageLink2, String imageLink3) {
+    public Image(String imageFolderID, byte[] imageLink1, byte[] imageLink2, byte[] imageLink3) {
         this.imageFolderID = imageFolderID;
         this.imageLink1 = imageLink1;
         this.imageLink2 = imageLink2;
@@ -25,32 +30,47 @@ public class Image {
         this.imageFolderID = imageFolderID;
     }
 
-    public String getImageLink1() {
+    public byte[] getImageLink1() {
         return imageLink1;
     }
 
-    public void setImageLink1(String imageLink1) {
+    public void setImageLink1(byte[] imageLink1) {
         this.imageLink1 = imageLink1;
     }
 
-    public String getImageLink2() {
+    public byte[] getImageLink2() {
         return imageLink2;
     }
 
-    public void setImageLink2(String imageLink2) {
+    public void setImageLink2(byte[] imageLink2) {
         this.imageLink2 = imageLink2;
     }
 
-    public String getImageLink3() {
+    public byte[] getImageLink3() {
         return imageLink3;
     }
 
-    public void setImageLink3(String imageLink3) {
+    public void setImageLink3(byte[] imageLink3) {
         this.imageLink3 = imageLink3;
     }
 
     @Override
     public String toString() {
         return "Image{" + "imageFolderID=" + imageFolderID + ", imageLink1=" + imageLink1 + ", imageLink2=" + imageLink2 + ", imageLink3=" + imageLink3 + '}';
+    }
+    
+    public BufferedImage getImage1BufferedImage() throws IOException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(imageLink1);
+        return ImageIO.read(bis);
+    }
+
+    public BufferedImage getImage2BufferedImage() throws IOException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(imageLink2);
+        return ImageIO.read(bis);
+    }
+
+    public BufferedImage getImage3BufferedImage() throws IOException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(imageLink3);
+        return ImageIO.read(bis);
     }
 }

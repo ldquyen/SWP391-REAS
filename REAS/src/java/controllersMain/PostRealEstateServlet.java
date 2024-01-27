@@ -60,7 +60,7 @@ public class PostRealEstateServlet extends HttpServlet {
             realEstate.setRealEstateID(realEstateID);
             realEstate.setAddress(address);
             realEstate.setCityID(cityID);
-            realEstate.setPriceNow(priceNow);
+ //           realEstate.setPriceNow(priceNow);
             realEstate.setTimeUp(timeUp);
             realEstate.setTimeDown(timeDown);
             realEstate.setCatID(catID);

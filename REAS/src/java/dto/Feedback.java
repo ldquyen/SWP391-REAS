@@ -2,19 +2,20 @@
 package dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class Feedback {
     private String feedbackID;
     private String accID;
     private String auctionID;
-    private Date feedbackDate;
+    private LocalDateTime feedbackDate;
     private int star;
     private String detail;
 
     public Feedback() {
     }
 
-    public Feedback(String feedbackID, String accID, String auctionID, Date feedbackDate, int star, String detail) {
+    public Feedback(String feedbackID, String accID, String auctionID, LocalDateTime feedbackDate, int star, String detail) {
         this.feedbackID = feedbackID;
         this.accID = accID;
         this.auctionID = auctionID;
@@ -47,11 +48,11 @@ public class Feedback {
         this.auctionID = auctionID;
     }
 
-    public Date getFeedbackDate() {
+    public LocalDateTime getFeedbackDate() {
         return feedbackDate;
     }
 
-    public void setFeedbackDate(Date feedbackDate) {
+    public void setFeedbackDate(LocalDateTime feedbackDate) {
         this.feedbackDate = feedbackDate;
     }
 
@@ -74,5 +75,5 @@ public class Feedback {
     @Override
     public String toString() {
         return "Feedback{" + "feedbackID=" + feedbackID + ", accID=" + accID + ", auctionID=" + auctionID + ", feedbackDate=" + feedbackDate + ", star=" + star + ", detail=" + detail + '}';
-    }  
+    }
 }

@@ -2,18 +2,19 @@
 package dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class WalletTransactionHistory {
     private String walletTransID;
     private String walletID;
-    private int quantity;
-    private Date dateAndTime;
+    private long quantity;
+    private LocalDateTime dateAndTime;
     private String action;
 
     public WalletTransactionHistory() {
     }
 
-    public WalletTransactionHistory(String walletTransID, String walletID, int quantity, Date dateAndTime, String action) {
+    public WalletTransactionHistory(String walletTransID, String walletID, long quantity, LocalDateTime dateAndTime, String action) {
         this.walletTransID = walletTransID;
         this.walletID = walletID;
         this.quantity = quantity;
@@ -37,19 +38,19 @@ public class WalletTransactionHistory {
         this.walletID = walletID;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 
-    public Date getDateAndTime() {
+    public LocalDateTime getDateAndTime() {
         return dateAndTime;
     }
 
-    public void setDateAndTime(Date dateAndTime) {
+    public void setDateAndTime(LocalDateTime dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 

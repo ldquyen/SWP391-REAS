@@ -2,21 +2,22 @@
 package dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class AuctionHistory {
     private String auctionHisID;
     private String auctionID;
     private int status;
-    private float lamda;
-    private Date timeJoin;
-    private Date timeOut;
+    private long lamda;
+    private LocalDateTime timeJoin;
+    private LocalDateTime timeOut;
     private int numberOfBids;
-    private float startPrice;
+    private long startPrice;
 
     public AuctionHistory() {
     }
 
-    public AuctionHistory(String auctionHisID, String auctionID, int status, float lamda, Date timeJoin, Date timeOut, int numberOfBids, float startPrice) {
+    public AuctionHistory(String auctionHisID, String auctionID, int status, long lamda, LocalDateTime timeJoin, LocalDateTime timeOut, int numberOfBids, long startPrice) {
         this.auctionHisID = auctionHisID;
         this.auctionID = auctionID;
         this.status = status;
@@ -51,27 +52,27 @@ public class AuctionHistory {
         this.status = status;
     }
 
-    public float getLamda() {
+    public long getLamda() {
         return lamda;
     }
 
-    public void setLamda(float lamda) {
+    public void setLamda(long lamda) {
         this.lamda = lamda;
     }
 
-    public Date getTimeJoin() {
+    public LocalDateTime getTimeJoin() {
         return timeJoin;
     }
 
-    public void setTimeJoin(Date timeJoin) {
+    public void setTimeJoin(LocalDateTime timeJoin) {
         this.timeJoin = timeJoin;
     }
 
-    public Date getTimeOut() {
+    public LocalDateTime getTimeOut() {
         return timeOut;
     }
 
-    public void setTimeOut(Date timeOut) {
+    public void setTimeOut(LocalDateTime timeOut) {
         this.timeOut = timeOut;
     }
 
@@ -83,11 +84,11 @@ public class AuctionHistory {
         this.numberOfBids = numberOfBids;
     }
 
-    public float getStartPrice() {
+    public long getStartPrice() {
         return startPrice;
     }
 
-    public void setStartPrice(float startPrice) {
+    public void setStartPrice(long startPrice) {
         this.startPrice = startPrice;
     }
 

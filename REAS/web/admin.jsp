@@ -35,22 +35,6 @@
                     <a class="navbar-item" href="admin.jsp">
                         TRANG CHỦ
                     </a>
-
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="news" name="action">
-                                <span>TIN TỨC</span>
-                            </button>
-                        </form>
-                    </a>
-
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="rule" name="action">
-                                <span>NỘI QUY</span>
-                            </button>
-                        </form>
-                    </a>
                 </div>
 
                 <div class="navbar-end">
@@ -132,7 +116,7 @@
 
 
         <div class="columns">
-            <div class="column is-one-fifth">
+            <div class="column is-one-fifth" style="background-color: #D9D9D9; height: 100vh;">
                 <aside class="menu">
                     <p class="menu-label">
                         General
@@ -173,7 +157,7 @@
                                     <a class="navbar-item">
                                         <form action="MainController" method="post">
                                             <button type="submit" value="aboutus" name="action">
-                                                <span>Thành viên</span>
+                                                <span>Tìm kiếm</span>
                                             </button>
                                         </form>
                                     </a>
@@ -182,7 +166,7 @@
                                     <a class="navbar-item">
                                         <form action="MainController" method="post">
                                             <button type="submit" value="aboutus" name="action">
-                                                <span>Thêm thành viên</span>
+                                                <span>Thêm mới</span>
                                             </button>
                                         </form>
                                     </a>
@@ -223,7 +207,7 @@
                                     <a class="navbar-item">
                                         <form action="MainController" method="post">
                                             <button type="submit" value="aboutus" name="action">
-                                                <span>Đấu giá</span>
+                                                <span>Danh sách</span>
                                             </button>
                                         </form>
                                     </a>
@@ -232,7 +216,7 @@
                                     <a class="navbar-item">
                                         <form action="MainController" method="post">
                                             <button type="submit" value="aboutus" name="action">
-                                                <span>Đấu giá</span>
+                                                <span>Kết quả</span>
                                             </button>
                                         </form>
                                     </a>
@@ -240,7 +224,7 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <p class="menu-label">
                         Transactions
                     </p>
@@ -269,12 +253,11 @@
                             </ul>
                         </li>
                     </ul>
-                    
-                    
+
+
                 </aside>
             </div>
-            <div class="column">Auto</div>
-            <div class="column">Auto</div>
+            <div class="column" style="height: 100vh;">Auto</div>
         </div>
 
         <!-- BODY -->

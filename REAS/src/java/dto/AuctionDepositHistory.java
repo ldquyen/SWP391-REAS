@@ -2,18 +2,19 @@
 package dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class AuctionDepositHistory {
     private String auctionDepositHisID;
     private String walletID;
     private String auctionID;
-    private Date dateAndTime;
-    private float quantity;
+    private LocalDateTime dateAndTime;
+    private long quantity;
 
     public AuctionDepositHistory() {
     }
 
-    public AuctionDepositHistory(String auctionDepositHisID, String walletID, String auctionID, Date dateAndTime, float quantity) {
+    public AuctionDepositHistory(String auctionDepositHisID, String walletID, String auctionID, LocalDateTime dateAndTime, long quantity) {
         this.auctionDepositHisID = auctionDepositHisID;
         this.walletID = walletID;
         this.auctionID = auctionID;
@@ -45,19 +46,19 @@ public class AuctionDepositHistory {
         this.auctionID = auctionID;
     }
 
-    public Date getDateAndTime() {
+    public LocalDateTime getDateAndTime() {
         return dateAndTime;
     }
 
-    public void setDateAndTime(Date dateAndTime) {
+    public void setDateAndTime(LocalDateTime dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 
-    public float getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(float quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 
@@ -65,4 +66,6 @@ public class AuctionDepositHistory {
     public String toString() {
         return "AuctionDepositHistory{" + "auctionDepositHisID=" + auctionDepositHisID + ", walletID=" + walletID + ", auctionID=" + auctionID + ", dateAndTime=" + dateAndTime + ", quantity=" + quantity + '}';
     }
+
+    
 }

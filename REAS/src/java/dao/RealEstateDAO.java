@@ -54,10 +54,10 @@ public class RealEstateDAO {
                 stm.setString(2, post.getCatID());
                 stm.setInt(3, post.getCityID());
                 stm.setString(4, post.getRealEstateName());
-                stm.setString(5, post.getPriceNow());
+//                stm.setString(5, post.getPriceNow());
                 stm.setTimestamp(6, ts);
                 stm.setTimestamp(7, ts);
-                stm.setFloat(8, post.getCost());
+//                stm.setFloat(8, post.getCost());
                 stm.setFloat(9, post.getArea());
                 stm.setString(10, post.getAddress());
                 stm.setString(11, post.getDetail());
@@ -115,10 +115,10 @@ public class RealEstateDAO {
                     String address = rs.getString("Address");
                     String detail = rs.getString("Detail");
 
-                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, area, address, detail);
+                    //RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceNow, timeUp, timeDown, cost, area, address, detail);
 
-                    re.setImage(imageByID);
-                    list.add(re);
+                    //re.setImage(imageByID);
+                    //list.add(re);
                 }
             }
             cn.close();

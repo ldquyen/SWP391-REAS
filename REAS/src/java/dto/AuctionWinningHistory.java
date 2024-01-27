@@ -5,12 +5,12 @@ public class AuctionWinningHistory {
     private String auctionWinID;
     private String auctionHisID;
     private String accID;
-    private float finalPrice; 
+    private long finalPrice; 
 
     public AuctionWinningHistory() {
     }
 
-    public AuctionWinningHistory(String auctionWinID, String auctionHisID, String accID, float finalPrice) {
+    public AuctionWinningHistory(String auctionWinID, String auctionHisID, String accID, long finalPrice) {
         this.auctionWinID = auctionWinID;
         this.auctionHisID = auctionHisID;
         this.accID = accID;
@@ -41,16 +41,16 @@ public class AuctionWinningHistory {
         this.accID = accID;
     }
 
-    public float getFinalPrice() {
+    public long getFinalPrice() {
         return finalPrice;
     }
 
-    public void setFinalPrice(float finalPrice) {
+    public void setFinalPrice(long finalPrice) {
         this.finalPrice = finalPrice;
     }
 
     @Override
     public String toString() {
         return "AuctionWinningHistory{" + "auctionWinID=" + auctionWinID + ", auctionHisID=" + auctionHisID + ", accID=" + accID + ", finalPrice=" + finalPrice + '}';
-    } 
+    }
 }
