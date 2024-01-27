@@ -110,6 +110,35 @@ public class AccountDAO {
         return a;
     }
 
+    public boolean resetPassword(String password, String email) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+             con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE [dbo].[Account] SET [Password] = ? WHERE [Email] = ?";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.setString(1, password);
+                pst.setString(2, email);
+                int rowsAffected = pst.executeUpdate();
+                if (rowsAffected > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
     public static boolean checkAccount(String AccID) throws Exception {
         Connection cn = DBUtils.getConnection();
         if (cn != null) {

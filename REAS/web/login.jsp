@@ -100,7 +100,7 @@
                             <form id="loginForm" action="MainController" method="post">
                                 <input class="input is-normal input-username" type="text" placeholder="Tên đăng nhập" name="txtUsername" value="" form="loginForm">
                                 <input class="input is-normal input-password" type="password" placeholder="Mật khẩu" name="txtPassword" value="" form="loginForm"></br>
-                                <button class="button is-light forgot-password" type="submit" value="" name="action">
+                                <button class="button is-light forgot-password" type="submit" value="forgotPassword" name="action">
                                     <span>Quên mật khẩu?</span>
                                 </button></br>
                                 <button id="loginSubmitBtn" class="button is-light submit-login-btn" type="submit" value="Login" name="action" style="
