@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersMain;
+package controllersMember;
 
 import dao.AuctionDAO;
+import dao.CategoryDAO;
 import dao.CityDAO;
+import dao.RealEstateDAO;
 import dto.Auction;
+import dto.Category;
 import dto.City;
+import dto.RealEstate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -46,7 +50,20 @@ public class ListAuctionServlet extends HttpServlet {
         try {
             AuctionDAO auctionDAO = new AuctionDAO();
             List<Auction> auctions = auctionDAO.getAuctions();
-//            ArrayList<City> city = CityDAO.getCityList();
+            ArrayList<City> city = CityDAO.getCityList();
+            ArrayList<Category> category = CategoryDAO.getListCategory();
+
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
+                    + "FROM RealEstate WHERE [Status] = ?";
+            ArrayList<RealEstate> listRE2 = RealEstateDAO.getRealEstateByStatus(sql, 2);
+            ArrayList<RealEstate> listRE3 = RealEstateDAO.getRealEstateByStatus(sql, 3);
+
+            
+            request.setAttribute("listRE2", listRE2);
+            request.setAttribute("listRE3", listRE3);
+            request.setAttribute("city", city);
+            request.setAttribute("category", category);
+
 //            HttpSession session = request.getSession();
 //            session.setAttribute("CITYLIST", list);
             request.setAttribute("auctions", auctions);
