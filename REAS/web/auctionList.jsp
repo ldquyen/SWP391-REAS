@@ -20,12 +20,12 @@
                 <thead>
                     <tr>
                         <th>Auction ID</th>
-                        <th>Real Estate ID</th>
-                        <th>Auction Name</th>
-                        <th>Price Now</th>
-                        <th>Lamda</th>
-                        <th>Time Start</th>
-                        <th>Time End</th>
+                        <th>Tên dự án</th>
+                        <th>Tỉnh, TP</th>
+                        <th>Loại hình</th>
+                        <th>Giá khởi điểm</th>
+                        <th>Thời gian</th>
+                        <th>Đăng kí</th>
                     </tr>
                 </thead>
                 <tbody>
