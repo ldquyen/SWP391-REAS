@@ -432,8 +432,7 @@ button {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: inherit;
-    /*max-height: calc(100vh - 125px);*/
-    min-height:  110vh;
+    height: 95vh; /* Set the desired percentage of viewport height */
     margin: 0;
     padding: 0;
 }

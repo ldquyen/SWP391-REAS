@@ -331,28 +331,34 @@
                                 </div>
                             </div>
                         </form>
+                </div>
+                </header>
+            </div>
+        </div>
+    </div>
 
 
 
 
 
-                        <footer class="footer" style="position: inherit"> 
-                            <div>
-                                <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
-                                <div class="footer-container">
-                                    <div class="footer-left-content"> Liên hệ:<br/>
-                                        Email: reas@gmail.com<br/>
-                                        Điện thoại: +84 (24) 8888 9999<br/>
-                                        <br/>
-                                    </div>
-                                    <div class="footer-mid-content"> Trụ sở chính:<br/>
-                                        Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
-                                        <br/>
-                                    </div>
-                                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
-                                </div>
-                            </div>
-                        </footer>
-                        </body>
 
-                        </html>
+    <footer class="footer" style="position: inherit;"> 
+        <div>
+            <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
+            <div class="footer-container">
+                <div class="footer-left-content"> Liên hệ:<br/>
+                    Email: reas@gmail.com<br/>
+                    Điện thoại: +84 (24) 8888 9999<br/>
+                    <br/>
+                </div>
+                <div class="footer-mid-content"> Trụ sở chính:<br/>
+                    Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
+                    <br/>
+                </div>
+                <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
