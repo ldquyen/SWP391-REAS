@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllersMember;
 
 import java.io.IOException;
@@ -7,41 +12,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MemberController extends HttpServlet {
+/**
+ *
+ * @author TRUONG SON
+ */
+public class InformationChangeServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String action = request.getParameter("action");
-            String url = "";
-            if (action == null) {
-                action = "";
-            }
-            switch (action) {
-                case "":
-                    url = "index_1.jsp";
-                    break;
-                case "changePassServlet":
-                    url = "ChangePasswordServlet";
-                    break;
-                case "changePass":
-                    url = "changePass.jsp";
-                    break;
-                case "newsjsp":
-                    url = "news.jsp";
-                    break;
-                case "filterInNews":
-                    url = "FilterInNewsServlet";
-                    break;
-                case "changeInfo":
-                    url = "InformationChangeServlet";
-                    break;
-            }
-            request.getRequestDispatcher(url).forward(request, response);
-
+            /* TODO output your page here. You may use following sample code. */
+            String fullname = request.getParameter("txtFullname");
+            String email = request.getParameter("txtEmail");
+            String phone = request.getParameter("txtPhone");
+            String cccd = request.getParameter("txtCCCD");
+            String address = request.getParameter("txtAddress");
+            String cccdregplace = request.getParameter("txtCCCDRegplace");
+            String cccdregdate = request.getParameter("txtCCCDRegdate");
+            String bankname = request.getParameter("txtBankname");
+            String bankcode = request.getParameter("txtBankcode");
+            request.setAttribute("test", "hehe");
+            request.getRequestDispatcher("MainController?action=informationPage").forward(request, response);
         }
     }
 

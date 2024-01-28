@@ -132,9 +132,9 @@
                                         <label class="checkbox rule-signup" style="display: flex; justify-content: center">
                                             <input type="checkbox" id="agreeCheckbox">
                                             <p style="font-size: 25px; margin-right: 5px; color: #D9AB73">Tôi đồng ý với</p>
-                                                <button class="button is-light sign-up-in-login" style="font-size: 20px" type="submit" value="rule" name="action">
-                                                    <span>Điều Khoản Sử Dụng</span>
-                                                </button>
+                                            <button class="button is-light sign-up-in-login" style="font-size: 20px" type="submit" value="rule" name="action">
+                                                <span>Điều Khoản Sử Dụng</span>
+                                            </button>
                                         </label>
                                     </div>
                                 </div>   
