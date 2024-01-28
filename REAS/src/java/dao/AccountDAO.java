@@ -28,7 +28,7 @@ public class AccountDAO {
         ResultSet rs = null;
         Account result = null;
         try {
-            
+
             //1. create connect
             con = DBUtils.getConnection();
             if (con != null) { //connection is available
@@ -115,7 +115,7 @@ public class AccountDAO {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-             con = DBUtils.getConnection();
+            con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "UPDATE [dbo].[Account] SET [Password] = ? WHERE [Email] = ?";
                 PreparedStatement pst = con.prepareStatement(sql);
@@ -139,6 +139,7 @@ public class AccountDAO {
         }
         return false;
     }
+
     public static boolean checkAccount(String AccID) throws Exception {
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
@@ -222,7 +223,7 @@ public class AccountDAO {
         }
         return false;
     }
-    
+
     public static boolean checkCCCD(String cccd) throws Exception {
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
@@ -318,7 +319,7 @@ public class AccountDAO {
         //System.out.println(decodedString); // GP Coder
         return decodedString;
     }
-    
+
     public static boolean checkGmailContainSymbol(String str) {
         // Sử dụng indexOf() để kiểm tra số lượng xuất hiện của ký tự @ trong chuỗi
         int count = 0;
@@ -333,6 +334,22 @@ public class AccountDAO {
         return true;
     }
 
+    public static void changeFullname(String fullname, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [UserName]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, fullname);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
+
+    
+    
     public static boolean containsOnlyLettersAndSpaces(String str) {
         // Loại bỏ dấu từ chuỗi
         String normalizedString = Normalizer.normalize(str, Normalizer.Form.NFD)
@@ -349,8 +366,7 @@ public class AccountDAO {
         }
         return true;
     }
-     
-     
+
 //    public static void main(String[] args) throws Exception {
 //        String a = "111";
 //        String b = encodePassword(a);

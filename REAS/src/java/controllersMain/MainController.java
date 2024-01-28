@@ -68,7 +68,6 @@ public class MainController extends HttpServlet {
                 case "submitPost":
                     url = "PostRealEstateServlet";
                     break;
-
                 case "forgotPassword":
                     url = "forgotPassword.jsp";
                     break;
@@ -84,11 +83,12 @@ public class MainController extends HttpServlet {
                 case "resetpasswordPage":
                     url = "resetPassword.jsp";
                     break;
-
                 case "resetPassword":
                     url = "ResetPasswordServlet";
                     break;
-
+                case "informationPage":
+                    url = "informationPage.jsp";
+                    break;
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
