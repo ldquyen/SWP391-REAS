@@ -62,7 +62,7 @@ public class RegisterServlet extends HttpServlet {
                 } else if (acc.checkEmail(email)) {
                     request.setAttribute("FAILEMAIL", "Email đã tồn tại, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
-                } else if (!acc.checkGmailContainSymbol(email)) {
+                } else if (acc.checkGmailContainSymbol(email)) {
                     request.setAttribute("FAILEMAILSYMBOL", "Email sai định dạng, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
                 } else if (acc.checkCCCD(cccd)) {
@@ -100,15 +100,15 @@ public class RegisterServlet extends HttpServlet {
 
     }
 
-//    public static void main(String[] args) throws Exception {
-//        AccountDAO acc = new AccountDAO();
-//        String email = "1234567890wada";
-//        if (email.length() >= 8) {
-//            System.out.println("toan chu cai");
-//        } else {
-//            System.out.println("sai me r");
-//        }
-//    }
+    public static void main(String[] args) throws Exception {
+        AccountDAO acc = new AccountDAO();
+        String email = "1234567890wada";
+        if (acc.checkGmailContainSymbol(email)) {
+            System.out.println("toan chu cai");
+        } else {
+            System.out.println("sai me r");
+        }
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

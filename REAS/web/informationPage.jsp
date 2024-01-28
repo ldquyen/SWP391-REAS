@@ -6,7 +6,7 @@
 
 <%@page import="dto.UserGoogle"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -93,7 +93,7 @@
                             <div class="navbar-dropdown">
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
+                                        <button type="submit" value="informationPage" name="action">
                                             <span>Thông tin tài khoản</span>
                                         </button>
                                     </form>
@@ -160,14 +160,15 @@
                 <div class="register-modal-container">
                     <header class="header-login">
                         <h1 style="font-size: 20px;padding-top: 20px">THÔNG TIN TÀI KHOẢN</h1>
-                        <h1>${requestScope.test}</h1>
+                        <h2> ${requestScope.SUCCESS} </h2>
+                        <h2> ${requestScope.ERROR} </h2>
                         <form action="MemberController" method="post">
                             <div style="display: flex; justify-content: center">
                                 <div style="padding-right: 10px">
                                     <div>
                                         <p  class="title-single">Họ và tên: ${sessionScope.member.fullname}</p>
                                         <div style="display: flex;">
-                                            <input class="input is-normal input-fullname" type="text" placeholder="Họ Và Tên(Chữ cái)" name="txtFullname" value="">
+                                            <input class="input is-normal input-fullname" type="text" placeholder="Họ Và Tên(Chữ cái)" name="txtFullname">
                                             <button  class="button is-light submit-login-btn" type="submit" value="changeInfo" name="action" style="
                                                      background-color: transparent;
                                                      color: #D9AB73;
@@ -182,10 +183,13 @@
                                             </button>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="txtAccID" value="${not empty sessionScope.member ? sessionScope.member.accID : ''}">
+                                    <input type="hidden" name="txtUsername" value="${not empty sessionScope.member ? sessionScope.member.userName : ''}">
+                                    <input type="hidden" name="txtPassword" value="${not empty sessionScope.member ? sessionScope.member.password : ''}">
                                     <div>
                                         <p class="title-single" >Email: ${sessionScope.member.email}</p>
                                         <div style="display: flex">
-                                            <input class="input is-normal input-email" type="text" placeholder="Email" name="txtEmail" value="">
+                                            <input class="input is-normal input-email" type="text" placeholder="Email" name="txtEmail">
                                             <button  class="button is-light submit-login-btn" type="submit" value="changeInfo" name="action" style="
                                                      background-color: transparent;
                                                      color: #D9AB73;
@@ -203,7 +207,7 @@
                                     <div>
                                         <p class="title-single" >Số điện thoại: ${sessionScope.member.phone}</p>
                                         <div style="display: flex">
-                                            <input class=" input is-normal input-phone" type="text" placeholder="Số điện thoại(10 chữ số)" name="txtPhone" value="">
+                                            <input class=" input is-normal input-phone" type="text" placeholder="Số điện thoại(10 chữ số)" name="txtPhone">
                                             <button  class="button is-light submit-login-btn" type="submit" value="changeInfo" name="action" style="
                                                      background-color: transparent;
                                                      color: #D9AB73;
@@ -221,7 +225,7 @@
                                     <div>
                                         <p class="title-single" >Địa Chỉ: ${sessionScope.member.address}</p>
                                         <div style="display: flex">
-                                            <input class="input is-normal input-address" type="text" placeholder="Địa Chỉ" name="txtAddress" value="">
+                                            <input class="input is-normal input-address" type="text" placeholder="Địa Chỉ" name="txtAddress">
                                             <button  class="button is-light submit-login-btn" type="submit" value="changeInfo" name="action" style="
                                                      background-color: transparent;
                                                      color: #D9AB73;
@@ -239,7 +243,7 @@
                                     <div>
                                         <p class="title-single" >Số CCCD: ${sessionScope.member.cccd}</p>
                                         <div style="display: flex">
-                                            <input class=" input is-normal input-cccd" type="text" placeholder="Số CCCD(12 chữ số)" name="txtCCCD" value="">
+                                            <input class=" input is-normal input-cccd" type="text" placeholder="Số CCCD(12 chữ số)" name="txtCCCD">
                                             <button  class="button is-light submit-login-btn" type="submit" value="changeInfo" name="action" style="
                                                      background-color: transparent;
                                                      color: #D9AB73;
@@ -259,7 +263,7 @@
                                     <div>
                                         <p class="title-single" >Nơi Cấp CCCD: ${sessionScope.member.placeOfReg}</p>
                                         <div style="display: flex">
-                                            <input class=" input is-normal input-cccd" type="text" placeholder="Nơi cấp CCCD" name="txtCCCDRegplace" value="">
+                                            <input class=" input is-normal input-cccd" type="text" placeholder="Nơi cấp CCCD" name="txtCCCDRegplace">
                                             <button  class="button is-light submit-login-btn" type="submit" value="changeInfo" name="action" style="
                                                      background-color: transparent;
                                                      color: #D9AB73;
@@ -277,7 +281,7 @@
                                     <div>
                                         <p class="title-single" >Ngày Cấp CCCD: ${sessionScope.member.dateOfReg}</p>
                                         <div style="display: flex">
-                                            <input class=" input is-normal input-cccd" type="text" placeholder="Ngày cấp CCCD" name="txtCCCDRegdate" value="">
+                                            <input class=" input is-normal input-cccd" type="text" placeholder="Ngày cấp CCCD" name="txtCCCDRegdate">
                                             <button  class="button is-light submit-login-btn" type="submit" value="changeInfo" name="action" style="
                                                      background-color: transparent;
                                                      color: #D9AB73;
@@ -295,7 +299,7 @@
                                     <div>
                                         <p class="title-single" >Tên Ngân Hàng: ${sessionScope.member.bankName}</p>
                                         <div style="display: flex">
-                                            <input class=" input is-normal input-password" type="text" placeholder="Tên Ngân Hàng(Chữ cái)" name="txtBankname" value="">
+                                            <input class=" input is-normal input-password" type="text" placeholder="Tên Ngân Hàng(Chữ cái)" name="txtBankname">
                                             <button  class="button is-light submit-login-btn" type="submit" value="changeInfo" name="action" style="
                                                      background-color: transparent;
                                                      color: #D9AB73;
@@ -313,7 +317,7 @@
                                     <div>
                                         <p class="title-single" >Số tài khoản ngân hàng: ${sessionScope.member.bankCode}</p>
                                         <div style="display: flex">
-                                            <input class=" input is-normal input-password" type="text" placeholder="Số tài khoản ngân hàng(Chữ số)" name="txtBankcode" value="">
+                                            <input class=" input is-normal input-password" type="text" placeholder="Số tài khoản(Chữ số)" name="txtBankcode">
                                             <button  class="button is-light submit-login-btn" type="submit" value="changeInfo" name="action" style="
                                                      background-color: transparent;
                                                      color: #D9AB73;
