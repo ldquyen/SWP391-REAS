@@ -103,9 +103,14 @@ public class InformationChangeServlet extends HttpServlet {
                 request.getRequestDispatcher("MainController?action=informationPage").forward(request, response);
             }
             if (cccdregdate.length() > 1) {
-                acc.changeCCCDRegDate(cccdregdate, accId);
-                request.setAttribute("SUCCESS", "Thay đổi thông tin thành công, vui lòng đăng nhập lại");
-                request.getRequestDispatcher("MainController?action=informationPage").forward(request, response);
+                if (!cccdregdate.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                    request.setAttribute("ERROR", "Ngày cấp CCCD sai định dạng, vui lòng nhập lại");
+                    request.getRequestDispatcher("MainController?action=informationPage").forward(request, response);
+                } else {
+                    acc.changeCCCDRegDate(cccdregdate, accId);
+                    request.setAttribute("SUCCESS", "Thay đổi thông tin thành công, vui lòng đăng nhập lại");
+                    request.getRequestDispatcher("MainController?action=informationPage").forward(request, response);
+                }
             }
             if (cccdregplace.length() > 1) {
                 acc.changeCCCDRegPlace(cccdregplace, accId);
@@ -138,7 +143,6 @@ public class InformationChangeServlet extends HttpServlet {
 
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

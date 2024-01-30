@@ -160,8 +160,8 @@
                 <div class="register-modal-container">
                     <header class="header-login">
                         <h1 style="font-size: 20px;padding-top: 20px">THÔNG TIN TÀI KHOẢN</h1>
-                        <h2> ${requestScope.SUCCESS} </h2>
-                        <h2> ${requestScope.ERROR} </h2>
+                        <h2 style="color: greenyellow"> ${requestScope.SUCCESS} </h2>
+                        <h2 style="color: red"> ${requestScope.ERROR} </h2>
                         <form action="MemberController" method="post">
                             <div style="display: flex; justify-content: center">
                                 <div style="padding-right: 10px">
