@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -197,7 +199,7 @@
                                 <td>
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
-                                            ${auctions.timeStart}
+                                            ${fn:substring(auctions.timeStart, 11, 19)}
                                         </c:if>
                                     </c:forEach>
                                 </td>
@@ -239,7 +241,7 @@
                                 <td>
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
-                                            ${auctions.timeStart}
+                                            ${fn:substring(auctions.timeStart, 11, 19)}
                                         </c:if>
                                     </c:forEach>
                                 </td>
