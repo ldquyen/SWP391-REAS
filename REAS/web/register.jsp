@@ -92,6 +92,7 @@
                         <h1 style="color: red">${requestScope.FAILBANKNAMEPATTERN}</h1>
                         <h1 style="color: red">${requestScope.FAILFULLNAME}</h1>
                         <h1 style="color: red">${requestScope.FAILCCCDPATTERN}</h1>
+                        <h1 style="color: red">${requestScope.FAILCCCDREGDATEPATTERN}</h1>
                         <h1 style="color: red">${requestScope.FAILBANKCODEPATTERN}</h1>
                         <h1 style="color: red">${requestScope.FAILEMAILSYMBOL}</h1>
                         <h1 style="color: red">${requestScope.FAILREPASSWORD}</h1>
@@ -119,12 +120,12 @@
                                 </br>
                                 <p> <input class=" input is-normal input-cccd" type="text" placeholder="Số CCCD(12 chữ số)" name="txtCCCD" value="" form="registerForm">
                                     <input class="input is-normal input-cccd" type="text" placeholder="Nơi Cấp CCCD" name="txtCCCDRegplace" value="" form="registerForm"> 
-                                    <input class=" input is-normal input-cccd" type="text" placeholder="Ngày Cấp CCCD" name="txtCCCDRegdate" value="" form="registerForm">  </p>
+                                    <input class=" input is-normal input-cccd" type="text" placeholder="Ngày Cấp(dd/mm/yyyy)" name="txtCCCDRegdate" value="" form="registerForm">  </p>
                                 </br>
                                 <p>  <input class=" input is-normal input-password" type="text" placeholder="Tên Ngân Hàng(Chữ cái)" name="txtBankname" value="" form="registerForm">
                                     <input class="input is-normal input-password" type="text" placeholder="Số tài khoản ngân hàng(Chữ số)" name="txtBankcode" value="" form="registerForm"> </p>
                                 </br>
-                                <p>  <input class=" input is-normal input-password" type="password" placeholder="Mật Khẩu(Trên 8 kí tự)" name="txtPassword" value="" form="registerForm">
+                                <p>  <input class=" input is-normal input-password" type="password" placeholder="Mật Khẩu(Từ 8 kí tự)" name="txtPassword" value="" form="registerForm">
                                     <input class="input is-normal input-password" type="password" placeholder="Nhập Lại Mật Khẩu" name="txtRepassword" value="" form="registerForm"> </p>
                                 </br>
                                 <div class="field" style="padding: 0px">
