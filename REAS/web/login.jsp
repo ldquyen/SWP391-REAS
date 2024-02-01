@@ -16,7 +16,6 @@
 
     </head>
     <body>
-        <h1 style="color: red">${requestScope.SUCCESS}</h1>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
 
@@ -85,7 +84,7 @@
                             <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" style="max-height: 52px " />
                         </a>
                         <p style="font-size: 20px">KÍNH CHÀO QUÝ KHÁCH</p>
-
+                        <h1 style="color: greenyellow">${requestScope.SUCCESS}</h1>
                         <div class="container-login">
                             <p class="register-if-dont-have-container">Bạn chưa có tài khoản?</p>
                             <form action="MainController" method="post" class="registration-form">

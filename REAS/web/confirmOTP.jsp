@@ -691,10 +691,13 @@ max-width: 50px;
                                         }
                                     %>
                                     <% if (request.getAttribute("message") != null) {
-                                            out.print("<p class='text-danger ml-1'>" + request.getAttribute("message") + "</p>");
+                                            out.print("<p class='text-danger ml-1'>" + request.getAttribute("message") + "</p>");   
+
                                         }
                                     %>
+                                                                  
 
+                                    <div class="texmessaget-info ml-1">Your OTP just valid less than 3 minutes</div>
                                     <div class="panel-body">
 
                                         <form id="register-form" action="MainController" role="form"
@@ -705,9 +708,15 @@ max-width: 50px;
                                                     <span class="input-group-addon"><i
                                                             class="glyphicon glyphicon-envelope color-blue"></i></span>
                                                     <input id="opt" name="otp" placeholder="Enter OTP"
-                                                           class="form-control" type="text" required="required">
+                                                           class="form-control" type="text">
                                                 </div>
                                             </div>
+                                            
+                                             <div class="form-group">
+                                                <button name="action" class="btn btn-lg btn-primary btn-block"
+                                                        value="ResendOTP" type="submit">Resend OTP Code</button>
+                                            </div>
+                                                
                                             <div class="form-group">
                                                 <button name="action" class="btn btn-lg btn-primary btn-block"
                                                         value="validateOTP" type="submit">Confirm</button>

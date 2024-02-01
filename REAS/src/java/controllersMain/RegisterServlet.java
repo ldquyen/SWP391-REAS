@@ -71,13 +71,16 @@ public class RegisterServlet extends HttpServlet {
                 } else if (!cccd.matches("\\d{12}")) {
                     request.setAttribute("FAILCCCDPATTERN", "CCCD sai định dạng, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (!cccdregdate.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                    request.setAttribute("FAILCCCDREGDATEPATTERN", "Ngày cấp CCCD sai định dạng, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
                 } else if (!acc.containsOnlyLettersAndSpaces(bankname)) {
                     request.setAttribute("FAILBANKNAMEPATTERN", "Tên ngân hàng sai định dạng, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
                 } else if (!bankcode.matches("\\d+")) {
                     request.setAttribute("FAILBANKCODEPATTERN", "Số tài khoản ngân hàng sai định dạng, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
-                } else if (password.length() <= 8) {
+                } else if (password.length() < 8) {
                     request.setAttribute("FAILPASSWORDLENGTH", "Mật khẩu sai định dạng, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
                 } else {
@@ -100,15 +103,16 @@ public class RegisterServlet extends HttpServlet {
 
     }
 
-//    public static void main(String[] args) throws Exception {
-//        AccountDAO acc = new AccountDAO();
-//        String email = "1234567890wada";
-//        if (email.length() >= 8) {
-//            System.out.println("toan chu cai");
-//        } else {
-//            System.out.println("sai me r");
-//        }
-//    }
+    public static void main(String[] args) throws Exception {
+        AccountDAO acc = new AccountDAO();
+        String email = "1234567890@fpt";
+        if (!acc.checkGmailContainSymbol(email)) {
+            System.out.println("toan chu cai");
+        } else {
+            System.out.println("sai me r");
+        }
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

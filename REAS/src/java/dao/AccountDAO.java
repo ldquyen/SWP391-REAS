@@ -28,7 +28,7 @@ public class AccountDAO {
         ResultSet rs = null;
         Account result = null;
         try {
-            
+
             //1. create connect
             con = DBUtils.getConnection();
             if (con != null) { //connection is available
@@ -115,7 +115,7 @@ public class AccountDAO {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-             con = DBUtils.getConnection();
+            con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "UPDATE [dbo].[Account] SET [Password] = ? WHERE [Email] = ?";
                 PreparedStatement pst = con.prepareStatement(sql);
@@ -139,6 +139,7 @@ public class AccountDAO {
         }
         return false;
     }
+
     public static boolean checkAccount(String AccID) throws Exception {
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
@@ -222,7 +223,7 @@ public class AccountDAO {
         }
         return false;
     }
-    
+
     public static boolean checkCCCD(String cccd) throws Exception {
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
@@ -318,9 +319,13 @@ public class AccountDAO {
         //System.out.println(decodedString); // GP Coder
         return decodedString;
     }
-    
+
     public static boolean checkGmailContainSymbol(String str) {
-        // Sử dụng indexOf() để kiểm tra số lượng xuất hiện của ký tự @ trong chuỗi
+        // Kiểm tra xem chuỗi có chứa ký tự @ hay không
+        if (str == null) {
+            return false;
+        }
+
         int count = 0;
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '@') {
@@ -330,7 +335,133 @@ public class AccountDAO {
                 }
             }
         }
-        return true;
+        return count == 1;
+    }
+
+    public static void changeFullname(String fullname, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [FullName]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, fullname);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
+
+    public static void changeEmail(String Email, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [Email]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, Email);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
+
+    public static void changePhone(String phone, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [Phone]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, phone);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
+
+    public static void changeCCCD(String cccd, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [CCCD]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, cccd);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
+
+    public static void changeCCCDRegPlace(String cccdRegplace, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [PlaceOfReg]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, cccdRegplace);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
+
+    public static void changeCCCDRegDate(String cccdRegDate, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [DateOfReg]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, cccdRegDate);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
+
+    public static void changeAddress(String address, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [Address]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, address);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
+
+    public static void changeBankName(String bankname, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [BankName]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, bankname);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
+    }
+
+    public static void changeBankCode(String bankcode, String accid) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET  [BankCode]= ?\n"
+                    + "WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, bankcode);
+            pst.setString(2, accid);
+            int rowsAffected = pst.executeUpdate();
+        }
+        cn.close();
     }
 
     public static boolean containsOnlyLettersAndSpaces(String str) {
@@ -349,8 +480,7 @@ public class AccountDAO {
         }
         return true;
     }
-     
-     
+
 //    public static void main(String[] args) throws Exception {
 //        String a = "111";
 //        String b = encodePassword(a);

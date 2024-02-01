@@ -1,6 +1,9 @@
 package dao;
 
 import dto.Image;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,4 +62,55 @@ public class ImageDAO {
         return null;
     }
 
+    public static void saveImg(String imageFolderID, String imageLink1, String imageLink2, String imageLink3) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            try {
+                File imgFile1 = new File(imageLink1);
+                FileInputStream inputStream1 = new FileInputStream(imgFile1);
+                File imgFile2 = new File(imageLink2);
+                FileInputStream inputStream2 = new FileInputStream(imgFile2);
+                File imgFile3 = new File(imageLink3);
+                FileInputStream inputStream3 = new FileInputStream(imgFile3);
+
+                ByteArrayOutputStream buffer1 = new ByteArrayOutputStream();
+                ByteArrayOutputStream buffer2 = new ByteArrayOutputStream();
+                ByteArrayOutputStream buffer3 = new ByteArrayOutputStream();
+
+                int nRead1, nRead2, nRead3;
+                byte[] data1 = new byte[1024];
+                byte[] data2 = new byte[1024];
+                byte[] data3 = new byte[1024];
+
+                while ((nRead1 = inputStream1.read(data1, 0, data1.length)) != -1) {
+                    buffer1.write(data1, 0, nRead1);
+                }
+                while ((nRead2 = inputStream2.read(data2, 0, data2.length)) != -1) {
+                    buffer2.write(data2, 0, nRead2);
+                }
+                while ((nRead3 = inputStream3.read(data3, 0, data3.length)) != -1) {
+                    buffer3.write(data3, 0, nRead3);
+                }
+
+                buffer1.flush();
+                buffer2.flush();
+                buffer3.flush();
+
+                byte[] imgBytes1 = buffer1.toByteArray();
+                byte[] imgBytes2 = buffer2.toByteArray();
+                byte[] imgBytes3 = buffer3.toByteArray();
+
+                String sql = "INSERT INTO [dbo].[Image] ([ImageFolderID],[ImageLink1],[ImageLink2],[ImageLink3]) VALUES (?, ?, ?, ?)";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, imageFolderID);
+                pst.setBytes(2, imgBytes1);
+                pst.setBytes(3, imgBytes2);
+                pst.setBytes(4, imgBytes3);
+                pst.executeUpdate();
+
+            } catch (Exception e) {
+                cn.close();
+            }
+        }
+    }
 }

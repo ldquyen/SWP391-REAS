@@ -2,7 +2,6 @@ package dao;
 
 import dto.Image;
 import dto.RealEstate;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +25,7 @@ public class RealEstateDAO {
         return post;
     }
 
-    public boolean createPost(RealEstate post, HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
+     public boolean createPost(RealEstate post, HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         //mở connection
         Connection con = null;
         PreparedStatement stm = null;
@@ -123,6 +122,4 @@ public class RealEstateDAO {
         }
         return list;
     }
-    
- 
 }

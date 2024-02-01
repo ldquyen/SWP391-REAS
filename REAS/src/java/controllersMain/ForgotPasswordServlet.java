@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,7 @@ public class ForgotPasswordServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ForgotPasswordServlet</title>");            
+            out.println("<title>Servlet ForgotPasswordServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ForgotPasswordServlet at " + request.getContextPath() + "</h1>");
@@ -73,7 +74,7 @@ public class ForgotPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String email = request.getParameter("email");
+        String email = request.getParameter("email");
         int otpValue = 0;
         String url = "MainController";
         HttpSession session = request.getSession();
@@ -85,17 +86,23 @@ public class ForgotPasswordServlet extends HttpServlet {
 
             String sendTo = email;
             String Title = "Your OTP to reset your password in REAS";
-            String content = "Your OTP is: " + otpValue + "\n Please do not share for anyone. Thank you.";
+            String content = "Your OTP is: " + otpValue + "\n Please do not share for anyone. Thank you."
+                    + "\n Your is not valid more than 3 minutes";
+            
             boolean result = MailService.sendMail(sendTo, Title, content);
-
+   
             if (result) {
                 session.setAttribute("otp", otpValue);
                 session.setAttribute("email", email);
-                url = "MainController?action=confirmOTP"; 
+                Cookie myCookie = new Cookie("userEmail", email);
+                // tính bằng giây
+                myCookie.setMaxAge(60 * 3);
+                response.addCookie(myCookie);
+                url = "MainController?action=confirmOTP";
             } else {
                 String message = "Your email is not correct";
                 session.setAttribute("otpMessage", message);
-                url = "forgotPassword.jsp"; 
+                url = "forgotPassword.jsp";
             }
             request.getRequestDispatcher(url).forward(request, response);
         }

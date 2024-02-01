@@ -52,6 +52,14 @@
         <servlet-name>ResetPasswordServlet</servlet-name>
         <servlet-class>controllersMain.ResetPasswordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InformationChangeServlet</servlet-name>
+        <servlet-class>controllersMember.InformationChangeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResendOTPServlet</servlet-name>
+        <servlet-class>controllersMain.ResendOTPServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -103,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>ResetPasswordServlet</servlet-name>
         <url-pattern>/ResetPasswordServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InformationChangeServlet</servlet-name>
+        <url-pattern>/InformationChangeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResendOTPServlet</servlet-name>
+        <url-pattern>/ResendOTPServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
