@@ -694,10 +694,6 @@
                                         class="form-control" type="text" name="email" id="email-for-pass">
                                     <small class="form-text">Enter the registered email address . Then we'll email a OTP to this address.</small>
                                 </div>
-                                <% if (session.getAttribute("otpMessage") != null) {
-                                        out.print("<p class='text-danger ml-1'>" + request.getAttribute("message") + "</p>");
-                                    }
-                                %>
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-success" type="submit" name="action" value="sendMail">Get New

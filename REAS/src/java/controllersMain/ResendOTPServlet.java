@@ -7,18 +7,20 @@ package controllersMain;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import mylib.MailService;
 
 /**
  *
  * @author sny12
  */
-public class ConfirmOTPServlet extends HttpServlet {
+public class ResendOTPServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +39,10 @@ public class ConfirmOTPServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConfirmOTPServlet</title>");            
+            out.println("<title>Servlet ResendOTPServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ConfirmOTPServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ResendOTPServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,48 +74,47 @@ public class ConfirmOTPServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          String userEmail = request.getParameter("email");
-        String resendMail = "";
+        try {
 
-        Cookie[] cookies = request.getCookies();
-        String url = "";
+            Cookie[] cookies = request.getCookies();
+            int otpValue = 0;
+            String url = "MainController";
+            HttpSession session = request.getSession();
+            if (cookies != null) {
+                String sendTo = "";
+                //create otp
+                Random rand = new Random();
+                otpValue = rand.nextInt(1255650);
 
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("userEmail")) {
-                // Found the desired cookie
-                resendMail = cookie.getValue();
-                System.out.println("Cookie value: " + resendMail);
-                break;
-            }
-        }
-        if (resendMail.length() > 1) {
-            try {
-                int value = Integer.parseInt(request.getParameter("otp").trim());
-                HttpSession session = request.getSession();
-                // set this mail for resend
-                request.setAttribute("emailSent", userEmail);
-                int otp = (int) session.getAttribute("otp");
-                if (value == otp) {
-                    request.setAttribute("email", userEmail);
-                    request.setAttribute("Status", "Success");
-                    url = "MainController?action=resetpasswordPage";
-                } else {
-                    request.setAttribute("message", "Wrong OTP. Try Again");
-                    url = "MainController?action=confirmOTP";
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("userEmail")) {
+                        // Found the desired cookie
+                        sendTo = cookie.getValue();
+                        System.out.println("Cookie value: " + sendTo);
+                        break;
+                    }
                 }
-
-                request.getRequestDispatcher(url).forward(request, response);
-
-            } catch (Exception e) {
-                request.setAttribute("message", "Session is run out of time");
-                url = "MainController?action=confirmOTP";
-                request.getRequestDispatcher(url).forward(request, response);
-
+                if (sendTo.length() > 1) {
+                    String Title = "Your OTP to reset your password in REAS";
+                    String content = "Your OTP is: " + otpValue + "\n "
+                            + "Your OTP just able to 30s. \n"
+                            + "Please do not share for anyone. Thank you.";
+                    boolean result = MailService.sendMail(sendTo, Title, content);
+                    if (result) {
+                        session.setAttribute("otp", otpValue);
+                        // set time for otp
+                        session.setAttribute("email", sendTo);
+                        url = "MainController?action=confirmOTP";
+                    }
+                } else {
+                    String message = "Your email is not correct";
+                    session.setAttribute("otpMessage", message);
+                    url = "forgotPassword.jsp";
+                }
             }
-        } else {
-                request.setAttribute("message", "Your OTP is not valid please resend");
-                url = "MainController?action=confirmOTP";
-                request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
