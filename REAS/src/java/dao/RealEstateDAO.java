@@ -82,13 +82,13 @@ public class RealEstateDAO {
         return result;
     }
 
-    public static ArrayList<RealEstate> getRealEstateByStatus(String stringsql ,int Status) throws ClassNotFoundException, SQLException, NamingException {
+    public static ArrayList<RealEstate> getRealEstateByStatus(String stringsql ,int StatusID) throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<RealEstate> list = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
             String sql = stringsql;
             PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setInt(1, Status);
+            pst.setInt(1, StatusID);
             ResultSet rs = pst.executeQuery();
             
             if (rs != null) {

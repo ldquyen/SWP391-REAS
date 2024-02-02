@@ -53,7 +53,7 @@ public class ListAuctionServlet extends HttpServlet {
             ArrayList<City> city = CityDAO.getCityList();
             ArrayList<Category> category = CategoryDAO.getListCategory();
 
-            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address], [Status] ,[Detail] \n"
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address] ,[Detail] \n"
                     + "FROM RealEstate WHERE [StatusID] = ?";
             ArrayList<RealEstate> listRE2 = RealEstateDAO.getRealEstateByStatus(sql, 2);
             ArrayList<RealEstate> listRE3 = RealEstateDAO.getRealEstateByStatus(sql, 3);
