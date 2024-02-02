@@ -25,8 +25,8 @@ public class NewServlet extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
-                    + "FROM RealEstate WHERE [Status] = ?";
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address], [Detail] \n"
+                        + "FROM RealEstate WHERE [StatusID] = ?";
             ArrayList<RealEstate> listRE = RealEstateDAO.getRealEstateByStatus(sql, 4);
             ArrayList<City> listCity = CityDAO.getCityList();
             ArrayList<Category> listCategory = CategoryDAO.getListCategory();

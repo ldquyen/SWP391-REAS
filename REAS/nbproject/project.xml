@@ -41,12 +41,12 @@
                     <file>${file.reference.javax.mail.jar}</file>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.javax.mail.jar-1}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
+                    <file>${file.reference.lib-javax.activation-1.2}</file>
+                    <path-in-war>WEB-INF/classes</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.javax.activation-1.2.0.jar-1}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
+                    <file>${file.reference.lib-javax}</file>
+                    <path-in-war>WEB-INF/classes</path-in-war>
                 </library>
             </web-module-libraries>
             <web-module-additional-libraries/>

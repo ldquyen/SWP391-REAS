@@ -8,7 +8,6 @@ package controllersMain;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,50 +71,30 @@ public class ConfirmOTPServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          String userEmail = request.getParameter("email");
-        String resendMail = "";
-
-        Cookie[] cookies = request.getCookies();
+         String userEmail = request.getParameter("email");
         String url = "";
-
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("userEmail")) {
-                // Found the desired cookie
-                resendMail = cookie.getValue();
-                System.out.println("Cookie value: " + resendMail);
-                break;
-            }
-        }
-        if (resendMail.length() > 1) {
-            try {
-                int value = Integer.parseInt(request.getParameter("otp").trim());
-                HttpSession session = request.getSession();
-                // set this mail for resend
-                request.setAttribute("emailSent", userEmail);
-                int otp = (int) session.getAttribute("otp");
-                if (value == otp) {
-                    request.setAttribute("email", userEmail);
-                    request.setAttribute("Status", "Success");
-                    url = "MainController?action=resetpasswordPage";
-                } else {
-                    request.setAttribute("message", "Wrong OTP. Try Again");
-                    url = "MainController?action=confirmOTP";
-                }
-
-                request.getRequestDispatcher(url).forward(request, response);
-
-            } catch (Exception e) {
-                request.setAttribute("message", "Session is run out of time");
+        try {
+            int value = Integer.parseInt(request.getParameter("otp").trim());
+            HttpSession session = request.getSession();
+            request.setAttribute("emailSent", userEmail);
+            int otp = (int) session.getAttribute("otp");
+            if (value == otp) {
+                request.setAttribute("email", userEmail);
+                request.setAttribute("Status", "Success");
+                url = "MainController?action=resetpasswordPage";
+            } else {
+                request.setAttribute("message", "Wrong OTP. Try Again");
                 url = "MainController?action=confirmOTP";
-                request.getRequestDispatcher(url).forward(request, response);
-
             }
-        } else {
-                request.setAttribute("message", "Your OTP is not valid please resend");
-                url = "MainController?action=confirmOTP";
-                request.getRequestDispatcher(url).forward(request, response);
-        }
 
+            request.getRequestDispatcher(url).forward(request, response);
+
+        } catch (Exception e) {
+            request.setAttribute("message", "Wrong OTP. Try Again");
+            url = "MainController?action=confirmOTP";
+            request.getRequestDispatcher(url).forward(request, response);
+
+        }
     }
 
     /**
