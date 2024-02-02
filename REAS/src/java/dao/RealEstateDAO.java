@@ -109,13 +109,12 @@ public class RealEstateDAO {
                     LocalDateTime timeUp = timeUpSql.toLocalDateTime();
                     LocalDateTime timeDown = timeDownSql.toLocalDateTime();
                     long priceLast = rs.getLong("PriceLast");
-                    long pricePaid = rs.getLong("PricePaid");
-                    int statusid = rs.getInt("StatusID");
+                    int status = rs.getInt("Status");
                     int area = rs.getInt("Area");
                     String address = rs.getString("Address");
                     String detail = rs.getString("Detail");
 
-                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown, priceLast, pricePaid, statusid, area, address, detail);
+                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown, priceLast, status, area, address, detail);
                     list.add(re);     
                 }
             }
