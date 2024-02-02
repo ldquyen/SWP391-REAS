@@ -5,100 +5,148 @@
  */
 package controllersMain;
 
-
+import dao.ImageDAO;
 import dao.RealEstateDAO;
-import dto.RealEstate;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author ADMIN
  */
 @WebServlet(name = "PostRealEstateServlet", urlPatterns = {"/PostRealEstateServlet"})
+@MultipartConfig
 public class PostRealEstateServlet extends HttpServlet {
 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        /*1*/
+        String accID = request.getParameter("accID");
+        /*2*/
+        String realEstateID = request.getParameter("realEstateID");
+        /*3*/
+        String realEstateName = request.getParameter("realEstateName");
+        /*4*/
+        String catID = request.getParameter("catID");
+        /*5*/
+        int cityID = Integer.parseInt(request.getParameter("cityID"));
+        /*6*/
+        long priceFirst;
+        String priceFirstStr = request.getParameter("priceFirst");
+        if (priceFirstStr != null) {
+            priceFirstStr = priceFirstStr.replace(",", "");
+            if (priceFirstStr != null && !priceFirstStr.isEmpty()) {
+                // Nếu có thì parse sang long
+                priceFirst = Long.parseLong(priceFirstStr);
+            } else {
+                // Nếu không thì mặc định = 0
+                priceFirst = 0;
+            }
+        } else {
+            priceFirst = 0;
+        }
+        /*7*/
+        long priceLast;
+        String priceLastStr = request.getParameter("priceLast");
+        if (priceLastStr != null && !priceLastStr.isEmpty()) {
+            // Nếu có thì parse sang long
+            priceLast = Long.parseLong(priceLastStr);
+        } else {
+            // Nếu không thì mặc định = 0
+            priceLast = 0;
+        }
+        /*8*/
+        long pricePaid = (priceFirst * 105) / 100;
+        /*9*/
+        int statusID;
+        String statusStr = request.getParameter("status");
+
+        if (statusStr != null && !statusStr.isEmpty()) {
+            statusID = Integer.parseInt(statusStr);
+        } else {
+            statusID = 0;
+        }
+        /*10*/
+        String timeUpStr = request.getParameter("timeStart");
+        String timeDownStr = request.getParameter("timeEnd");
+
+        LocalDateTime timeUp = LocalDateTime.parse(timeUpStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+        LocalDateTime timeDown = LocalDateTime.parse(timeDownStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+        /*11*/
+        String address = request.getParameter("address");
+        /*12*/
+        int area = Integer.parseInt(request.getParameter("area"));
+        /*13*/
+        String detail = request.getParameter("detail");
+
+        /*14*/
+        Part imagePart1 = request.getPart("image1");
+        Part imagePart2 = request.getPart("image2");
+        Part imagePart3 = request.getPart("image3");
+
+        /*15*/
+        String imageFolderID = request.getParameter("realEstateID");
+
+        String url = "";
+        try {
+            RealEstateDAO dao = new RealEstateDAO();
+            ImageDAO.saveImg(imageFolderID, imagePart1, imagePart2, imagePart3);
+
+            boolean result = dao.createPost(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown,
+                    priceLast, pricePaid, statusID, area, address, detail);
+
+            if (result) {
+                url = "postRealEstate.jsp";
+            } else {
+                url = "rule.jsp";
+            }
+        } catch (ClassNotFoundException | SQLException | NamingException ex) {
+            Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
+    }
+
+//    public static void main(String[] args) throws SQLException, NamingException, ClassNotFoundException {
+//        String timeUpStr = "2022-02-01T22:10";
+//        String timeDownStr = "2022-02-01T22:10";
+//        long priceFirst = 10000;
+//        long pricePaid = (priceFirst * 105) / 100;
+//        LocalDateTime timeUp = LocalDateTime.parse(timeUpStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+//        LocalDateTime timeDown = LocalDateTime.parse(timeDownStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+//        RealEstateDAO dao = new RealEstateDAO();
+//        boolean result = dao.createPost("4", "1", "M1", "no", 1, "dep store", priceFirst, timeUp, timeDown,
+//                0, pricePaid, 0, 200, "29A", "depvl");
+//        if (result) {
+//        }
+//    }
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            // Retrieve data from the form
-            String realEstateID = request.getParameter("realEstateID");
-            String address = request.getParameter("address");
-            int cityID = Integer.parseInt(request.getParameter("cityID"));
-            String priceNow = request.getParameter("priceNow");
-            String timeUpStr = request.getParameter("timeUp");
-            String timeDownStr = request.getParameter("timeDown");
-            LocalDateTime timeUp = LocalDateTime.parse(timeUpStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-            LocalDateTime timeDown = LocalDateTime.parse(timeDownStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-            String catID = request.getParameter("catID");
-            float area = Float.parseFloat(request.getParameter("area"));
-            String detail = request.getParameter("detail");
-
-            // Assuming RealEstate is a class with appropriate getters and setters
-            RealEstate realEstate = new RealEstate();
-            realEstate.setRealEstateID(realEstateID);
-            realEstate.setAddress(address);
-            realEstate.setCityID(cityID);
- //           realEstate.setPriceNow(priceNow);
-            realEstate.setTimeUp(timeUp);
-            realEstate.setTimeDown(timeDown);
-            realEstate.setCatID(catID);
-            realEstate.setArea((int) area);
-            realEstate.setDetail(detail);
-
-            // Call your DAO class to insert into the database
-            RealEstateDAO realEstateDAO = new RealEstateDAO();
-            boolean result = realEstateDAO.createPost(realEstate, request);
-
-            if (result) {
-                // Insertion successful, you can redirect to a success page or do other actions
-                response.sendRedirect("postRealEstate");
-            } else {
-                // Insertion failed, you can redirect to an error page or do other actions
-                response.sendRedirect("index_1.jsp");
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -112,7 +160,7 @@ public class PostRealEstateServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -123,7 +171,7 @@ public class PostRealEstateServlet extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-        public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

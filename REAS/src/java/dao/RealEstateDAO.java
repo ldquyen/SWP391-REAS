@@ -1,31 +1,22 @@
 package dao;
 
-import dto.Image;
 import dto.RealEstate;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.List;
 import javax.naming.NamingException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import mylib.DBUtils;
 
 public class RealEstateDAO {
 
-    private List<RealEstate> post;
-
-    public List<RealEstate> getPost() {
-        return post;
-    }
-
-     public boolean createPost(RealEstate post, HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
+    public boolean createPost(String realEstateID, String imageFolderID, String accID, String catID, int cityID,
+            String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, long pricePaid, int statusID,
+            int area, String address, String detail) throws SQLException, NamingException, ClassNotFoundException {
         //mở connection
         Connection con = null;
         PreparedStatement stm = null;
@@ -34,37 +25,28 @@ public class RealEstateDAO {
             con = DBUtils.getConnection();
 
             if (con != null) {
-                String sql = "Insert INTO [dbo].[RealEstate]("
-                        + "[RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceNow], [TimeUp], [TimeDown], [Cost], [Area], [Address], [Detail]"
-                        + " VALUES (NEXT VALUE FOR RealEstateID_Seq,'folder1',?,?,?,?,?,?,?,?,?,?,?,?)";
+                String sql = "Insert INTO [dbo].[RealEstate]"
+                        + "([RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown],[PriceLast],[PricePaid], [statusID], [Area], [Address], [Detail])"
+                        + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 stm = con.prepareStatement(sql);
 
-                LocalDateTime ldt = LocalDateTime.now();
-
-                Instant instant = ldt.atZone(ZoneId.systemDefault()).toInstant();
-
-                Timestamp ts = Timestamp.from(instant);
-
-                HttpSession session = request.getSession();
-                String accID = (String) session.getAttribute("AccID");
-
-                stm.executeUpdate(sql);
+                stm.setString(1, realEstateID);
+                stm.setString(2, imageFolderID);
+                stm.setString(3, accID);
+                stm.setString(4, catID);
+                stm.setInt(5, cityID);
+                stm.setString(6, realEstateName);
+                stm.setLong(7, priceFirst);
+                stm.setTimestamp(8, Timestamp.valueOf(timeUp));
+                stm.setTimestamp(9, Timestamp.valueOf(timeDown));
+                stm.setLong(10, priceLast);
+                stm.setLong(11, pricePaid);
+                stm.setInt(12, statusID);
+                stm.setInt(13, area);
+                stm.setString(14, address);
+                stm.setString(15, detail);
                 
-                stm.setString(1, accID);
-                stm.setString(2, post.getCatID());
-                stm.setInt(3, post.getCityID());
-                stm.setString(4, post.getRealEstateName());
-//                stm.setString(5, post.getPriceNow());
-                stm.setTimestamp(6, ts);
-                stm.setTimestamp(7, ts);
-//                stm.setFloat(8, post.getCost());
-                stm.setFloat(9, post.getArea());
-                stm.setString(10, post.getAddress());
-                stm.setString(11, post.getDetail());
-                
-
                 int effectRows = stm.executeUpdate();
-
                 if (effectRows > 0) {
                     result = true;
                 }
@@ -82,7 +64,7 @@ public class RealEstateDAO {
         return result;
     }
 
-    public static ArrayList<RealEstate> getRealEstateByStatus(String stringsql ,int StatusID) throws ClassNotFoundException, SQLException, NamingException {
+    public static ArrayList<RealEstate> getRealEstateByStatus(String stringsql, int StatusID) throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<RealEstate> list = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
@@ -90,10 +72,10 @@ public class RealEstateDAO {
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setInt(1, StatusID);
             ResultSet rs = pst.executeQuery();
-            
+
             if (rs != null) {
                 while (rs.next()) {
-                    
+
                     String realEstateID = rs.getString("RealEstateID");
                     String imageFolderID = rs.getString("ImageFolderID");
                     String accID = rs.getString("AccID");
@@ -104,7 +86,7 @@ public class RealEstateDAO {
 
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                     Timestamp timeDownSql = rs.getTimestamp("TimeDown");
-                    
+
                     // Chuyển đổi Timestamp thành LocalDateTime
                     LocalDateTime timeUp = timeUpSql.toLocalDateTime();
                     LocalDateTime timeDown = timeDownSql.toLocalDateTime();
@@ -116,7 +98,7 @@ public class RealEstateDAO {
                     String detail = rs.getString("Detail");
 
                     RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown, priceLast, pricePaid, statusid, area, address, detail);
-                    list.add(re);     
+                    list.add(re);
                 }
             }
             cn.close();

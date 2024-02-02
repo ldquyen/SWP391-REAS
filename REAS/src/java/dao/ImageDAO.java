@@ -4,11 +4,13 @@ import dto.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.NamingException;
+import javax.servlet.http.Part;
 import mylib.DBUtils;
 
 public class ImageDAO {
@@ -62,16 +64,13 @@ public class ImageDAO {
         return null;
     }
 
-    public static void saveImg(String imageFolderID, String imageLink1, String imageLink2, String imageLink3) throws ClassNotFoundException, SQLException {
+    public static void saveImg(String imageFolderID, Part imageLink1, Part imageLink2, Part imageLink3) throws ClassNotFoundException, SQLException {
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
             try {
-                File imgFile1 = new File(imageLink1);
-                FileInputStream inputStream1 = new FileInputStream(imgFile1);
-                File imgFile2 = new File(imageLink2);
-                FileInputStream inputStream2 = new FileInputStream(imgFile2);
-                File imgFile3 = new File(imageLink3);
-                FileInputStream inputStream3 = new FileInputStream(imgFile3);
+                InputStream inputStream1 = imageLink1.getInputStream();
+                InputStream inputStream2 = imageLink2.getInputStream();
+                InputStream inputStream3 = imageLink3.getInputStream();
 
                 ByteArrayOutputStream buffer1 = new ByteArrayOutputStream();
                 ByteArrayOutputStream buffer2 = new ByteArrayOutputStream();
