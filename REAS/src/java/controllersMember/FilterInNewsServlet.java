@@ -45,8 +45,8 @@ public class FilterInNewsServlet extends HttpServlet {
                 locgia = " ORDER BY Area " + mucgia;
             }
             if (loaihinhbds.isEmpty() && thanhpho.isEmpty() && mucgia.isEmpty()) {
-                String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
-                        + "FROM RealEstate WHERE [Status] = ?";
+                String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address], [Detail] \n"
+                        + "FROM RealEstate WHERE [StatusID] = ?";
                 ArrayList<RealEstate> listRE = RealEstateDAO.getRealEstateByStatus(sql, 4);
                 ArrayList<City> listCity = CityDAO.getCityList();
                 ArrayList<Category> listCategory = CategoryDAO.getListCategory();
@@ -57,8 +57,8 @@ public class FilterInNewsServlet extends HttpServlet {
                 session.setAttribute("CATEGORYLIST", listCategory);
                 request.getRequestDispatcher("MemberController?action=newsjsp").forward(request, response);
             } else {
-                String sql1 = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
-                        + "FROM RealEstate WHERE [Status] = ?" + locbds + loctp + locgia;
+                String sql1 = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address], [Detail] \n"
+                        + "FROM RealEstate WHERE [StatusID] = ?" + locbds + loctp + locgia;
                 ArrayList<RealEstate> listRE = RealEstateDAO.getRealEstateByStatus(sql1, 4);
                 ArrayList<City> listCity = CityDAO.getCityList();
                 ArrayList<Category> listCategory = CategoryDAO.getListCategory();
@@ -70,6 +70,7 @@ public class FilterInNewsServlet extends HttpServlet {
                 request.setAttribute("mucgia", mucgia);
                 request.setAttribute("thanhpho", thanhpho);
                 request.setAttribute("loaihinhbds", loaihinhbds);
+                
                 request.getRequestDispatcher("MemberController?action=newsjsp").forward(request, response);
             }
 

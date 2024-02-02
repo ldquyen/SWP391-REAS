@@ -15,7 +15,8 @@ public class RealEstate implements Serializable {
     private LocalDateTime timeUp;
     private LocalDateTime timeDown;
     private long priceLast;
-    private int status;
+    private long pricePaid;
+    private int statusID;
     private int area;
     private String address;
     private String detail;
@@ -23,7 +24,7 @@ public class RealEstate implements Serializable {
     public RealEstate() {
     }
 
-    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, int status, int area, String address, String detail) {
+    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, long pricePaid, int statusID, int area, String address, String detail) {
         this.realEstateID = realEstateID;
         this.imageFolderID = imageFolderID;
         this.accID = accID;
@@ -34,7 +35,8 @@ public class RealEstate implements Serializable {
         this.timeUp = timeUp;
         this.timeDown = timeDown;
         this.priceLast = priceLast;
-        this.status = status;
+        this.pricePaid = pricePaid;
+        this.statusID = statusID;
         this.area = area;
         this.address = address;
         this.detail = detail;
@@ -120,12 +122,20 @@ public class RealEstate implements Serializable {
         this.priceLast = priceLast;
     }
 
-    public int getStatus() {
-        return status;
+    public long getPricePaid() {
+        return pricePaid;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setPricePaid(long pricePaid) {
+        this.pricePaid = pricePaid;
+    }
+
+    public int getStatusID() {
+        return statusID;
+    }
+
+    public void setStatusID(int statusID) {
+        this.statusID = statusID;
     }
 
     public int getArea() {
@@ -154,6 +164,6 @@ public class RealEstate implements Serializable {
 
     @Override
     public String toString() {
-        return "RealEstate{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", cityID=" + cityID + ", realEstateName=" + realEstateName + ", priceFirst=" + priceFirst + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", priceLast=" + priceLast + ", status=" + status + ", area=" + area + ", address=" + address + ", detail=" + detail + '}';
+        return "RealEstate{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", cityID=" + cityID + ", realEstateName=" + realEstateName + ", priceFirst=" + priceFirst + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", priceLast=" + priceLast + ", pricePaid=" + pricePaid + ", statusID=" + statusID + ", area=" + area + ", address=" + address + ", detail=" + detail + '}';
     }
 }
