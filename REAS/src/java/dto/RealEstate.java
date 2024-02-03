@@ -24,7 +24,9 @@ public class RealEstate implements Serializable {
     public RealEstate() {
     }
 
-    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, long pricePaid, int statusID, int area, String address, String detail) {
+    public RealEstate(String realEstateID, String imageFolderID, String accID, String catID, int cityID, String realEstateName, 
+            long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, long pricePaid, int statusID, int area, String address, String detail)
+    {
         this.realEstateID = realEstateID;
         this.imageFolderID = imageFolderID;
         this.accID = accID;
