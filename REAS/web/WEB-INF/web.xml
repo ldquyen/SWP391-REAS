@@ -66,6 +66,10 @@
         <servlet-name>InformationChangeServlet</servlet-name>
         <servlet-class>controllersMember.InformationChangeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchStaffServlet</servlet-name>
+        <servlet-class>controllersAdmin.SearchStaffServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -121,6 +125,10 @@
     <servlet-mapping>
         <servlet-name>InformationChangeServlet</servlet-name>
         <url-pattern>/InformationChangeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchStaffServlet</servlet-name>
+        <url-pattern>/SearchStaffServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -40,6 +40,9 @@ public class AdminController extends HttpServlet {
                 case "searchStaff":
                     url = "searchStaff.jsp";
                     break;
+                case "searchNameStaff":
+                    url = "SearchStaffServlet";
+                    break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);
