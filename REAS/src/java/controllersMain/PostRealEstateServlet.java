@@ -38,7 +38,7 @@ public class PostRealEstateServlet extends HttpServlet {
         /*1*/
         String accID = request.getParameter("accID");
         /*2*/
-        String realEstateID = request.getParameter("realEstateID");
+        String realEstateID;
         /*3*/
         String realEstateName = request.getParameter("realEstateName");
         /*4*/
@@ -100,11 +100,18 @@ public class PostRealEstateServlet extends HttpServlet {
         Part imagePart3 = request.getPart("image3");
 
         /*15*/
-        String imageFolderID = request.getParameter("realEstateID");
+        String imageFolderID;
 
         String url = "";
         try {
             RealEstateDAO dao = new RealEstateDAO();
+            int i = 0;
+            do {
+                i++;
+                String i1 = Integer.toString(i);
+                realEstateID = "M" + i1;
+            } while (dao.checkRealEstateIDExists(realEstateID));
+            imageFolderID = realEstateID;
             ImageDAO.saveImg(imageFolderID, imagePart1, imagePart2, imagePart3);
 
             boolean result = dao.createPost(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown,

@@ -161,7 +161,7 @@
             <div class="form-post-real-estate" >
                 <form action="MainController" method="post" enctype="multipart/form-data">
                     <input type="hidden" id="accID" name="accID" value="${sessionScope.member.accID}">
-                    <input type="text" id="realEstateID" name="realEstateID" required/></br>
+<!--                    <input type="text" id="realEstateID" name="realEstateID" required/></br>-->
                     <label>1. Tên tài sản đấu giá</label>
                     <input type="text" id="realEstateName" name="realEstateName" required></br>
                     <label>2.Địa chỉ</label>
@@ -442,25 +442,5 @@
                 input.value = value;
             }
         </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Fetch data from your JSON file
-                fetch('./City.json')
-                        .then(response => response.json())
-                        .then(data => {
-                            // Populate the dropdown with fetched data
-                            const tinhThanhDropdown = document.getElementById('cityID');
-
-                            data.provinces.forEach(provinces => {
-                                const option = document.createElement('option');
-                                option.value = provinces.id;
-                                option.text = provinces.province_name;
-                                tinhThanhDropdown.appendChild(option);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching data:', error));
-            });
-        </script> 
-
     </body>
 </html>

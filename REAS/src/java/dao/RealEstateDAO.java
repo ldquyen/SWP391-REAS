@@ -25,10 +25,10 @@ public class RealEstateDAO {
             con = DBUtils.getConnection();
 
             if (con != null) {
-                String sql = "Insert INTO [dbo].[RealEstate]"
+                String sql1 = "INSERT INTO [dbo].[RealEstate]"
                         + "([RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown],[PriceLast],[PricePaid], [statusID], [Area], [Address], [Detail])"
                         + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                stm = con.prepareStatement(sql);
+                stm = con.prepareStatement(sql1);
 
                 stm.setString(1, realEstateID);
                 stm.setString(2, imageFolderID);
@@ -45,9 +45,24 @@ public class RealEstateDAO {
                 stm.setInt(13, area);
                 stm.setString(14, address);
                 stm.setString(15, detail);
-                
+
                 int effectRows = stm.executeUpdate();
                 if (effectRows > 0) {
+                    String sql2 = "INSERT INTO [dbo].[Auction]"
+                            + "([AuctionID],[RealEstateID],[AuctionName],[PriceNow],[Lamda],[TimeStart],[TimeEnd])"
+                            + "VALUES (?,?,?,?,0,?,?)";
+                    try (PreparedStatement anotherStm = con.prepareStatement(sql2)) {
+                        anotherStm.setString(1, realEstateID);
+                        anotherStm.setString(2, realEstateID);
+                        anotherStm.setString(3, realEstateName);
+                        anotherStm.setLong(4, priceFirst);
+                        anotherStm.setTimestamp(5, Timestamp.valueOf(timeUp));
+                        anotherStm.setTimestamp(6, Timestamp.valueOf(timeDown));
+
+                        int anotherEffectRows = anotherStm.executeUpdate();
+                        // Xử lý kết quả hoặc thông báo
+
+                    }
                     result = true;
                 }
             }
@@ -62,6 +77,28 @@ public class RealEstateDAO {
             }
         }
         return result;
+    }
+
+    public static boolean checkRealEstateIDExists(String realEstateID) throws SQLException, ClassNotFoundException {
+        Connection cn = DBUtils.getConnection();
+        PreparedStatement pst = null;
+        if (cn != null) {
+            String sql = "select [RealEstateID] from [dbo].[RealEstate] WHERE [RealEstateID] = ?";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, realEstateID);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String RealEstateID = rs.getString("realEstateID");
+                    if (RealEstateID != null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public static ArrayList<RealEstate> getRealEstateByStatus(String stringsql, int StatusID) throws ClassNotFoundException, SQLException, NamingException {
