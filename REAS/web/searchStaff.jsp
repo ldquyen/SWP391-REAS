@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>  
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,10 +34,10 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="adminjsp" name="action" >
-                                <span style="color: white">TRANG CHỦ</span>
-                            </button>
-                        </form>
+                        <button type="submit" value="adminjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="navbar-end">
@@ -154,7 +155,7 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -200,7 +201,7 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -208,7 +209,65 @@
 
                 </aside>
             </div>
-            <div class="column" style="height: 100vh;">Auto</div>
+            <div class="column" style="height: 100vh;">
+                <form action="AdminController" method="post">
+                    <input type="text" placeholder="Nhập tên nhân viên" name="txtNameStaff" style="width: 400px; height: 30px" >
+                    <button type="submit" value="searchNameStaff" name="action" style="background-color: black; color: #D9AB73; padding: 6px 20px; ">
+                        <span style="font-size: 14px; font-weight: bold">Tìm kiếm</span>
+                    </button>
+                </form>
+
+                <p style="margin-top: 20px; font-size: 20px; font-weight: bold">Danh sách nhân viên</p><br>
+
+                <div>
+                    <s:if test="${not empty requestScope.staffList}">
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white;">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tài khoản</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Mật khẩu</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tên</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Email</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Số điện thoại</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">CCCD</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Địa chỉ</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">Helo</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">Helo</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">Helo</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">Helo</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">Helo</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">Helo</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">Helo</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">Helo</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">Block</td>
+
+
+
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </s:if>
+                </div>
+                
+                <div>
+                    <s:if test="${not empty requestScope.Fail}">
+                        <h1>Ngu</h1>
+                    </s:if>
+                </div>
+                
+
+
+
+            </div>
         </div>
 
         <!-- BODY -->

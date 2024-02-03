@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -92,7 +93,7 @@
                             <div class="navbar-dropdown">
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
+                                        <button type="submit" value="informationPage" name="action">
                                             <span>Thông tin tài khoản</span>
                                         </button>
                                     </form>
@@ -158,78 +159,257 @@
             </div>
 
             <div class="form-post-real-estate" >
+                <form action="MainController" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="accID" name="accID" value="${sessionScope.member.accID}">
+<!--                    <input type="text" id="realEstateID" name="realEstateID" required/></br>-->
+                    <label>1. Tên tài sản đấu giá</label>
+                    <input type="text" id="realEstateName" name="realEstateName" required></br>
+                    <label>2.Địa chỉ</label>
+                    <input type="text" id="address" name="address" required></br>
+                    <label>3.Loại</label>
+                    <select id="loaiTaiSan" name="catID" ></br>
+                        <option value="" disabled selected hidden>-- Chọn --</option>
+                        <option value="no">Nhà </option>
+                        <option value="dn">Đất </option>
+                        <option value="cc">Chung cư</option>
+                        <option value="bt">Biệt thự</option>
+                    </select></br>
+                    <label>4.Thành phố</label>
+                    <select id="cityID" name="cityID">
+                        <option value="" disabled selected hidden>Thành phố</option>
+                        <option value="1">An Giang</option>
+                        <option value="2">Bà Rịa - Vũng Tàu</option>
+                        <option value="3">Bắc Giang</option>
+                        <option value="4">Bắc Kạn</option>
+                        <option value="5">Bạc Liêu</option>
+                        <option value="6">Bắc Ninh</option>
+                        <option value="7">Bến Tre</option>
+                        <option value="8">Bình Định</option>
+                        <option value="9">Bình Bương</option>
+                        <option value="10">Bình Phước</option>
+                        <option value="11">Bình Thuận</option>
+                        <option value="12">Cà Mau</option>
+                        <option value="13">Cao Bằng</option>
+                        <option value="14">Cần Thơ</option>
+                        <option value="15">Đà Nẵng</option>
+                        <option value="16">Đắk Lắk</option>
+                        <option value="17">Đắk Nông</option>
+                        <option value="18">Điện Biên</option>
+                        <option value="19">Đồng Nai</option>
+                        <option value="20">Đồng Tháp</option>
+                        <option value="21">Gia Lai</option>
+                        <option value="22">Hà Giang</option>
+                        <option value="23">Hà Nam</option>
+                        <option value="24">Hà Tĩnh</option>
+                        <option value="25">Hà Nội</option>
+                        <option value="26">Hải Dương</option>
+                        <option value="27">Hải Phòng</option>
+                        <option value="28">Hậu Giang</option>
+                        <option value="29">Hòa Bình</option>
+                        <option value="30">Hưng Yên</option>
+                        <option value="31">Khánh Hòa</option>
+                        <option value="32">Kiên Giang</option>
+                        <option value="33">Kon Tum</option>
+                        <option value="34">Lai Châu</option>
+                        <option value="35">Lâm Đồng</option>
+                        <option value="36">Lạng Sơn</option>
+                        <option value="37">Lào Cai</option>
+                        <option value="38">Long An</option>
+                        <option value="39">Nam Định</option>
+                        <option value="40">Nghệ An</option>
+                        <option value="41">Ninh Bình</option>
+                        <option value="42">Ninh Thuận</option>
+                        <option value="43">Phú Thọ</option>
+                        <option value="44">Phú Yên</option>
+                        <option value="45">Quảng Bình</option>
+                        <option value="46">Quảng Nam</option>
+                        <option value="47">Quảng Ngãi</option>
+                        <option value="48">Quảng Ninh</option>
+                        <option value="49">Quảng Trị</option>
+                        <option value="50">Sóc Trăng</option>
+                        <option value="51">Sơn La</option>
+                        <option value="52">Tây Ninh</option>
+                        <option value="53">Thái Bình</option>
+                        <option value="54">Thái Nguyên</option>
+                        <option value="55">Thanh Hóa</option>
+                        <option value="56">Thừa Thiên Huế</option>
+                        <option value="57">Tiền Giang</option>
+                        <option value="58">Hồ Chí Minh</option>
+                        <option value="59">Trà Vinh</option>
+                        <option value="60">Tuyên Quang</option>
+                        <option value="61">Vĩnh Long</option>
+                        <option value="62">Vĩnh Phúc</option>
+                        <option value="63">Yên Bái</option>
+                    </select></br>
 
-                <form action="MainController" method="post" class="formDangKy" >
+                    <label>5.Giá</label>
+                    <input type="text" id="priceFirst" name="priceFirst" placeholder="VNĐ" oninput="formatCurrency(this)" required></br>
 
-                    <div class="form-group">
-                        <label for="tenTaiSan">1. Tên tài sản đấu giá</label>
-                        <input type="text" class="form-control" id="realEstateID" name="realEstateID" required>
+                    <label>6.Thời gian bắt đầu</label>
+                    <input type="datetime-local"  id="timeStart" name="timeStart" required></br>
+
+                    <label>7.Thời gian kết thúc</label>
+                    <input type="datetime-local"  id="timeEnd" name="timeEnd"  required></br>
+
+                    <label>8.Diện tích</label>
+                    <input type="text"  id="area" name="area" placeholder="(m²)" required></br>
+
+                    <label>9.Mô tả</label>
+                    <input type= "text" id="detail" name="detail" placeholder="Nhập mô tả tài sản...">
+
+                    <div>
+                        <label>10. Hình ảnh</label><br>
+                        <input type="file" name="image1">
+                        <input type="file" name="image2"> 
+                        <input type="file" name="image3">
                     </div>
+                    
+                    <button  type="submit" value="submitPost" name="action">
+                        Đăng tin
+                    </button>
 
-                    <div class="form-group">
-                        <label for="diaChiTaiSan">2. Địa chỉ tài sản đấu giá</label>
-
-                        <div class="form-group1">
-                            <label for="diaChi">Đia chỉ</label>
-                            <input type="text" class="form-control" id="address" name="address" required>
-                        </div>
-                        <div class="form-group1">
-                            <label for="thanhPho">Tỉnh Thành</label>
-                            <select class="form-control" id="cityID" name="cityID" required>
-                                <option value="" disabled selected hidden>-- Chọn tỉnh/thành phố --</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="giaTriTaiSan">3. Giá trị tài sản</label>
-
-                        <input type="text" class="form-control" id="priceNow" name="priceNow" placeholder="VNĐ" oninput="formatCurrency(this)" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="thoiGianDangKy">4. Thời gian đăng ký đấu giá</label>
-                        <input type="datetime-local" class="form-control" id="timeUp" name="timeUp" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="thoiGianBanDauGia">5. Thời gian bán đấu giá</label>
-                        <input type="datetime-local" class="form-control" id="timeDown" name="timeDown" required>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <label for="noiDungTaiSan">6. Nội dung tài sản</label>
-                        <div class="form-group1">
-                            <label for="loaTaiSan">Loại tài sản</label>
-                            <select id="loaiTaiSan" name="catID" >
-                                <option value="" disabled selected hidden>-- Chọn --</option>
-                                <option value="no">Nhà </option>
-                                <option value="dn">Đất </option>
-                                <option value="cc">Chung cư</option>
-                                <option value="bt">Biệt thự</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group1">
-                            <label for="dienTichTaiSan">Diện tích </label>
-                            <input type="text" class="form-control1" id="diaChiTaiSan" name="area" placeholder="(m²)" required>
-
-                        </div>
-                        <div class="form-group1">
-                            <label for="diaChiTaiSan" >Mô tả</label>          
-                            <textarea id="detail" name="detail" rows="4" cols="50" class="form-control" placeholder="Nhập mô tả tài sản..."></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="hinhAnh">7. Hình ảnh</label>
-                        <input type="file" id="imageFolderID" name="imageFolderID[]" accept="image/*" multiple required>
-                    </div>
-
-                    <button type="submit" value="submitPost" name="action" class="submit-form">LƯU NỘI DUNG THÔNG TIN</button>
                 </form>
+
+                <!--                <form action="MainController" method="post" class="formDangKy" enctype="multipart/form-data" >
+                                    
+                                    <input type="hidden" id="accID" name="accID" value="${sessionScope.member.accID}">
+                                    <input type="hidden" id="priceLast" name="priceLast" value="">
+                                    <input type="hidden" id="statusID" name="statusID" value="">
+                                    <div class="form-group">
+                                        <label for="tenTaiSan">0. ID</label>
+                                        <input type="text" class="form-control" id="realEstateID" name="realEstateID" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tenTaiSan">1. Tên tài sản đấu giá</label>
+                                        <input type="text" class="form-control" id="realEstateName" name="realEstateName" required>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <label for="diaChiTaiSan">2. Địa chỉ tài sản đấu giá</label>
+                
+                                        <div class="form-group1">
+                                            <label for="diaChi">Đia chỉ</label>
+                                            <input type="text" class="form-control" id="address" name="address" required>
+                                        </div>
+                                        <div class="form-group1">
+                                            <label for="thanhPho">Tỉnh Thành</label>
+                                            <select class="form-control" id="cityID" name="cityID" required>
+                                                <option value="" disabled selected hidden>Thành phố</option>
+                                                <option value="1">An Giang</option>
+                                                <option value="2">Bà Rịa - Vũng Tàu</option>
+                                                <option value="3">Bắc Giang</option>
+                                                <option value="4">Bắc Kạn</option>
+                                                <option value="5">Bạc Liêu</option>
+                                                <option value="6">Bắc Ninh</option>
+                                                <option value="7">Bến Tre</option>
+                                                <option value="8">Bình Định</option>
+                                                <option value="9">Bình Bương</option>
+                                                <option value="10">Bình Phước</option>
+                                                <option value="11">Bình Thuận</option>
+                                                <option value="12">Cà Mau</option>
+                                                <option value="13">Cao Bằng</option>
+                                                <option value="14">Cần Thơ</option>
+                                                <option value="15">Đà Nẵng</option>
+                                                <option value="16">Đắk Lắk</option>
+                                                <option value="17">Đắk Nông</option>
+                                                <option value="18">Điện Biên</option>
+                                                <option value="19">Đồng Nai</option>
+                                                <option value="20">Đồng Tháp</option>
+                                                <option value="21">Gia Lai</option>
+                                                <option value="22">Hà Giang</option>
+                                                <option value="23">Hà Nam</option>
+                                                <option value="24">Hà Tĩnh</option>
+                                                <option value="25">Hà Nội</option>
+                                                <option value="26">Hải Dương</option>
+                                                <option value="27">Hải Phòng</option>
+                                                <option value="28">Hậu Giang</option>
+                                                <option value="29">Hòa Bình</option>
+                                                <option value="30">Hưng Yên</option>
+                                                <option value="31">Khánh Hòa</option>
+                                                <option value="32">Kiên Giang</option>
+                                                <option value="33">Kon Tum</option>
+                                                <option value="34">Lai Châu</option>
+                                                <option value="35">Lâm Đồng</option>
+                                                <option value="36">Lạng Sơn</option>
+                                                <option value="37">Lào Cai</option>
+                                                <option value="38">Long An</option>
+                                                <option value="39">Nam Định</option>
+                                                <option value="40">Nghệ An</option>
+                                                <option value="41">Ninh Bình</option>
+                                                <option value="42">Ninh Thuận</option>
+                                                <option value="43">Phú Thọ</option>
+                                                <option value="44">Phú Yên</option>
+                                                <option value="45">Quảng Bình</option>
+                                                <option value="46">Quảng Nam</option>
+                                                <option value="47">Quảng Ngãi</option>
+                                                <option value="48">Quảng Ninh</option>
+                                                <option value="49">Quảng Trị</option>
+                                                <option value="50">Sóc Trăng</option>
+                                                <option value="51">Sơn La</option>
+                                                <option value="52">Tây Ninh</option>
+                                                <option value="53">Thái Bình</option>
+                                                <option value="54">Thái Nguyên</option>
+                                                <option value="55">Thanh Hóa</option>
+                                                <option value="56">Thừa Thiên Huế</option>
+                                                <option value="57">Tiền Giang</option>
+                                                <option value="58">Hồ Chí Minh</option>
+                                                <option value="59">Trà Vinh</option>
+                                                <option value="60">Tuyên Quang</option>
+                                                <option value="61">Vĩnh Long</option>
+                                                <option value="62">Vĩnh Phúc</option>
+                                                <option value="63">Yên Bái</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <label for="giaTriTaiSan">3. Giá trị tài sản</label>
+                                        <input type="text" class="form-control" id="priceFirst" name="priceFirst" placeholder="VNĐ" oninput="formatCurrency(this)" required>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <label for="thoiGianDangKy">4. Thời gian đăng ký đấu giá</label>
+                                        <input type="datetime-local" class="form-control" id="timeStart" name="timeStart" required>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <label for="thoiGianBanDauGia">5. Thời gian bán đấu giá</label>
+                                        <input type="datetime-local" class="form-control" id="timeEnd" name="timeEnd" required>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <label for="noiDungTaiSan">6. Nội dung tài sản</label>
+                                        <div class="form-group1">
+                                            <label for="loaTaiSan">Loại tài sản</label>
+                                            <select id="loaiTaiSan" name="catID" >
+                                                <option value="" disabled selected hidden>-- Chọn --</option>
+                                                <option value="no">Nhà </option>
+                                                <option value="dn">Đất </option>
+                                                <option value="cc">Chung cư</option>
+                                                <option value="bt">Biệt thự</option>
+                                            </select>
+                                        </div>
+                
+                                        <div class="form-group1">
+                                            <label for="dienTichTaiSan">Diện tích </label>
+                                            <input type="text" class="form-control1" id="diaChiTaiSan" name="area" placeholder="(m²)" required>
+                
+                                        </div>
+                                        <div class="form-group1">
+                                            <label for="diaChiTaiSan" >Mô tả</label>          
+                                            <textarea id="detail" name="detail" rows="4" cols="50" class="form-control" placeholder="Nhập mô tả tài sản..."></textarea>
+                                        </div>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <label for="hinhAnh"> Hình ảnh</label>
+                                        <input type="file" name="image1">
+                                        <input type="file" name="image2"> 
+                                        <input type="file" name="image3">
+                                    </div>
+                
+                                    <button type="submit" value="submitPost" name="action" class="submit-form">LƯU NỘI DUNG THÔNG TIN</button>
+                                </form>-->
             </div>
         </div>
         <!-- END BODY -->
@@ -262,25 +442,5 @@
                 input.value = value;
             }
         </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Fetch data from your JSON file
-                fetch('./City.json')
-                        .then(response => response.json())
-                        .then(data => {
-                            // Populate the dropdown with fetched data
-                            const tinhThanhDropdown = document.getElementById('cityID');
-
-                            data.provinces.forEach(provinces => {
-                                const option = document.createElement('option');
-                                option.value = provinces.id;
-                                option.text = provinces.province_name;
-                                tinhThanhDropdown.appendChild(option);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching data:', error));
-            });
-        </script> 
-
     </body>
 </html>

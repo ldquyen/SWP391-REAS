@@ -1,41 +1,55 @@
-package controllersMember;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controllersAdmin;
 
-import dao.CategoryDAO;
-import dao.CityDAO;
-import dao.RealEstateDAO;
-import dto.Category;
-import dto.City;
-import dto.RealEstate;
+import dao.AccountDAO;
+import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class NewServlet extends HttpServlet {
+public class SearchStaffServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException, NamingException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address], [Detail] \n"
-                        + "FROM RealEstate WHERE [StatusID] = ?";
-            ArrayList<RealEstate> listRE = RealEstateDAO.getRealEstateByStatus(sql, 4);
-            ArrayList<City> listCity = CityDAO.getCityList();
-            ArrayList<Category> listCategory = CategoryDAO.getListCategory();
-            
-            request.setAttribute("listRealEstateInNews", listRE);
-            HttpSession session = request.getSession();
-            session.setAttribute("CITYLIST", listCity);
-            session.setAttribute("CATEGORYLIST", listCategory);
-            request.getRequestDispatcher("MemberController?action=newsjsp").forward(request, response);         
+            String searchNameStaff = request.getParameter("txtNameStaff");
+
+            if (searchNameStaff.isEmpty()) {
+                ArrayList<Account> list = AccountDAO.getAllAccountByRole("S");
+                request.setAttribute("staffList", list);
+                request.getRequestDispatcher("AdminController?action=searchStaff").forward(request, response);
+            } else {
+                ArrayList<Account> list = AccountDAO.getAllAccountByName("S", searchNameStaff);
+                if (!list.isEmpty()) {
+                    request.setAttribute("staffList", list);
+                    request.getRequestDispatcher("AdminController?action=searchStaff").forward(request, response);
+                } else if (list.isEmpty()){
+                    request.setAttribute("Fail", "KO có nv");
+                    request.getRequestDispatcher("AdminController?action=searchStaff").forward(request, response);
+                }
+            }
+
         }
     }
 
@@ -54,11 +68,9 @@ public class NewServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -76,11 +88,9 @@ public class NewServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

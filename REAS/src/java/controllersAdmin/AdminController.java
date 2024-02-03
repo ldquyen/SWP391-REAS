@@ -31,7 +31,17 @@ public class AdminController extends HttpServlet {
             }
             switch (action) {
                 case "":
-                    url = "index.jsp";
+                    url = "admin.jsp";
+                    break;
+                case "adminjsp":
+                    url = "admin.jsp";
+                    break;
+                // nhan vien
+                case "searchStaff":
+                    url = "searchStaff.jsp";
+                    break;
+                case "searchNameStaff":
+                    url = "SearchStaffServlet";
                     break;
 
             }
