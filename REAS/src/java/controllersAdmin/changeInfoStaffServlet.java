@@ -17,40 +17,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class SearchStaffServlet extends HttpServlet {
+/**
+ *
+ * @author ASUS
+ */
+public class changeInfoStaffServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String searchNameStaff = request.getParameter("txtNameStaff");
-
-            if (searchNameStaff.isEmpty()) {
-                ArrayList<Account> list = AccountDAO.getAllAccountByRole("S");
-                request.setAttribute("staffList", list);
-                request.getRequestDispatcher("AdminController?action=searchStaff").forward(request, response);
-            } else {
-                ArrayList<Account> list = AccountDAO.getAllAccountByName("S", searchNameStaff);
-                if (!list.isEmpty()) {
-                    request.setAttribute("staffList", list);
-                    request.getRequestDispatcher("AdminController?action=searchStaff").forward(request, response);
-                } else if (list.isEmpty()) {
-                    request.setAttribute("Fail", "KO có nv");
-                    request.getRequestDispatcher("AdminController?action=searchStaff").forward(request, response);
-                }
-            }
-
+            String accid = request.getParameter("idChinhSua");
+            Account a  = AccountDAO.getAccountByID(accid);
+            request.setAttribute("staff", a);
+            request.getRequestDispatcher("AdminController?action=chinhsuajsp").forward(request, response);
         }
     }
 
@@ -69,9 +50,9 @@ public class SearchStaffServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(SearchStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,9 +70,9 @@ public class SearchStaffServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(SearchStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

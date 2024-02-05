@@ -1,6 +1,6 @@
 <%-- 
-    Document   : admin
-    Created on : Jan 22, 2024, 11:54:07 PM
+    Document   : changeInfoStaff
+    Created on : Feb 5, 2024, 2:05:06 PM
     Author     : ASUS
 --%>
 
@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="admin.css" type="text/css" >
-
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -210,93 +209,86 @@
                 </aside>
             </div>
             <div class="column" style="height: 100vh;">
-                <form action="AdminController" method="post">
-                    <input type="text" placeholder="Nhập tên nhân viên" name="txtNameStaff" style="width: 400px; height: 30px" >
-                    <button type="submit" value="searchNameStaff" name="action" style="background-color: black; color: #D9AB73; padding: 6px 20px; ">
-                        <span style="font-size: 14px; font-weight: bold">Tìm kiếm</span>
-                    </button>
-                </form>
-                
-                <div style="margin-top: 20px">
-                    <s:if test="${not empty requestScope.staffList}">
-                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white;">
-                            <thead>
-                                <tr>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tên</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Email</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Số điện thoại</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">CCCD</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Địa chỉ</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Trạng thái</th>
-                                </tr>
-                            </thead>
+                <span style="font-weight: bold; margin-right: 1px; color: #D9AB73; font-size: 20px">
+                    Thêm nhân viên mới
+                </span>  
+                <div style="margin-top: 10px">
+                    <form action="AdminController" method="post">
+                        <table style="border-collapse: collapse; border: 3px solid #D9AB73;background-color: black; color: white;">
                             <tbody>
-                                <s:forEach var="s" items="${requestScope.staffList}">
-                                    <tr>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${s.accID}</td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${s.fullname}</td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${s.email}</td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${s.phone}</td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${s.cccd}</td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${s.address}</td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            <s:if test="${s.status eq false}">
-                                                <form action="AdminController" method="post"> 
-                                                    <input type="hidden" name="idBUB" value="${s.accID}">
-                                                    <input type="hidden" name="statusBUB" value="${s.status}">
-                                                    <button style="background-color: black; border: 2px solid red" type="submit" value="blockUnblock" name="action"> 
-                                                        <span style="font-weight: bold; margin-right: 25px; color:red ">
-                                                            Khóa TK
-                                                        </span> 
-                                                    </button> 
-                                                </form>
-                                            </s:if>
-
-                                            <s:if test="${s.status eq true}">
-                                                <form action="AdminController" method="post"> 
-                                                    <input type="hidden" name="idBUB" value="${s.accID}">
-                                                    <input type="hidden" name="statusBUB" value="${s.status}">
-                                                    <button style="background-color: black; border: 2px solid green" type="submit" value="blockUnblock" name="action"> 
-                                                        <span style="font-weight: bold; margin-right: 1px; color:green ">
-                                                            Mở khóa TK
-                                                        </span> 
-                                                    </button> 
-                                                </form>
-                                            </s:if>
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            <form action="AdminController" method="post">
-                                                <input type="hidden" name="idChinhSua" value="${s.accID}">
-                                                <button style="background-color: black; border: 2px solid #D9AB73" type="submit" value="chinhsua" name="action"> 
-                                                        <span style="font-weight: bold; color: #D9AB73 ">
-                                                            Chỉnh sửa 
-                                                        </span> 
-                                                    </button> 
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </s:forEach>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Tên:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="fullName" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Tài khoản:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="userName" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Mật khẩu:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="password" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Email:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="email" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">SĐT:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="phone" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Địa chỉ:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="address" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">CCCD:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="cccd" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Nơi cấp CCCD:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="placeOfReg" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Ngày cấp CCCD:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="dateOfReg" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Tên ngân hàng:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="bankName" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Số tài khoản:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="bankCode" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
                             </tbody>
                         </table>
-                    </s:if>
+                        <input type="hidden" name="ID" value="${s.accID}">
+                        <button type="submit" value="addNewStaff" name="action" style="background-color: black; border: 3px solid #D9AB73; color: #D9AB73; padding: 6px 20px; margin-top: 10px">
+                            <span style="font-size: 14px; font-weight: bold">Thêm mới</span>
+                        </button>
+                    </form>
+
+
                 </div>
-
-                <div>
-                    <s:if test="${not empty requestScope.Fail}">
-                        <p style="margin-top: 20px; font-size: 20px; font-weight: bold; color: red" >Không tìm thấy nhân viên, vui lòng thử lại.</p><br>
-                    </s:if>
-                </div>
-
-
-
-
             </div>
-        </div>
-
-        <!-- BODY -->
-
-
-
+            <div class="column" style="height: 100vh;">
+                <s:if test="${not empty requestScope.ADDOKE}">
+                    <span style="font-weight: bold; margin-right: 1px; color:green ">
+                        Thêm mới thành công
+                    </span>  
+                </s:if>
+                <s:if test="${not empty requestScope.ADDnotOKE}">
+                    <span style="font-weight: bold; margin-right: 1px; color: red ">
+                        Thêm mới thất bại
+                    </span> 
+                </s:if>
+                <s:if test="${not empty requestScope.THIEUTT}">
+                    <span style="font-weight: bold; margin-right: 1px; color: red ">
+                        Vui lòng nhập đầy đủ thông tin
+                    </span>  
+                </s:if>
+            </div>
+                      
+        </div>        
     </body>
 </html>

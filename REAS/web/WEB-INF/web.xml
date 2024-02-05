@@ -70,6 +70,18 @@
         <servlet-name>SearchStaffServlet</servlet-name>
         <servlet-class>controllersAdmin.SearchStaffServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlockUnblockServlet</servlet-name>
+        <servlet-class>controllersAdmin.BlockUnblockServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changeInfoStaffServlet</servlet-name>
+        <servlet-class>controllersAdmin.changeInfoStaffServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addNewStaffServlet</servlet-name>
+        <servlet-class>controllersAdmin.AddNewStaffServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -129,6 +141,18 @@
     <servlet-mapping>
         <servlet-name>SearchStaffServlet</servlet-name>
         <url-pattern>/SearchStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlockUnblockServlet</servlet-name>
+        <url-pattern>/BlockUnblockServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changeInfoStaffServlet</servlet-name>
+        <url-pattern>/changeInfoStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addNewStaffServlet</servlet-name>
+        <url-pattern>/addNewStaffServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

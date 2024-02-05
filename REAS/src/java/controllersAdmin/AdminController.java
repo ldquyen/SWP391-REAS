@@ -43,6 +43,24 @@ public class AdminController extends HttpServlet {
                 case "searchNameStaff":
                     url = "SearchStaffServlet";
                     break;
+                case "blockUnblock":
+                    url = "BlockUnblockServlet";
+                    break;
+                case "chinhsua":
+                    url = "changeInfoStaffServlet";
+                    break;
+                case "chinhsuajsp":
+                    url = "changeInfoStaff.jsp";
+                    break;
+                case "chinhsuathongtin":
+                    url = "ChangeInfomationStaffServlet";
+                    break;
+                case "addStaff":
+                    url = "addNewStaff.jsp";
+                    break;
+                case "addNewStaff":
+                    url = "addNewStaffServlet";
+                    break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);
