@@ -21,13 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 public class ChangeInfomationStaffServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String ID = request.getParameter("ID");
             String fullName = request.getParameter("fullName");
             String userName = request.getParameter("userName");
             String password = request.getParameter("password");
+            String newpassword = AccountDAO.encodePassword(password);
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
@@ -37,8 +38,8 @@ public class ChangeInfomationStaffServlet extends HttpServlet {
             String bankName = request.getParameter("bankName");
             String bankCode = request.getParameter("bankCode");
 
-            boolean update = AccountDAO.changeInfoStaff(ID, userName, password, fullName, email, phone, cccd, address, placeOfReg, dateOfReg, bankName, bankCode);
-            AccountDAO.changeInfoStaff(ID, userName, password, fullName, email, phone, cccd, address, placeOfReg, dateOfReg, bankName, bankCode);
+            boolean update = AccountDAO.changeInfoStaff(ID, userName, newpassword, fullName, email, phone, cccd, address, placeOfReg, dateOfReg, bankName, bankCode);
+            AccountDAO.changeInfoStaff(ID, userName, newpassword, fullName, email, phone, cccd, address, placeOfReg, dateOfReg, bankName, bankCode);
             if (update) {
                 request.setAttribute("UpdateOKE", "OKE");
                 Account a = AccountDAO.getAccountByID(ID);
@@ -72,6 +73,8 @@ public class ChangeInfomationStaffServlet extends HttpServlet {
             Logger.getLogger(ChangeInfomationStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ChangeInfomationStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ChangeInfomationStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -91,6 +94,8 @@ public class ChangeInfomationStaffServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ChangeInfomationStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(ChangeInfomationStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(ChangeInfomationStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
