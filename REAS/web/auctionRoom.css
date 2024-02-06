@@ -54,7 +54,7 @@ body {
     max-width: calc(100% - 32px);
     animation: modalFadeIn ease 0.5s;
 
-    width: 85%;
+    width: 90%;
     margin: 0 auto; /* Center the container horizontally */
     padding: 12px 10px;
 }
