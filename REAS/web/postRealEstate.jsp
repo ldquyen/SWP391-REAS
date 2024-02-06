@@ -161,7 +161,7 @@
             <div class="form-post-real-estate" >
                 <form action="MainController" method="post" enctype="multipart/form-data">
                     <input type="hidden" id="accID" name="accID" value="${sessionScope.member.accID}">
-<!--                    <input type="text" id="realEstateID" name="realEstateID" required/></br>-->
+                    <!--                    <input type="text" id="realEstateID" name="realEstateID" required/></br>-->
                     <label>1. Tên tài sản đấu giá</label>
                     <input type="text" id="realEstateName" name="realEstateName" required></br>
                     <label>2.Địa chỉ</label>
@@ -259,11 +259,12 @@
 
                     <div>
                         <label>10. Hình ảnh</label><br>
-                        <input type="file" name="image1">
-                        <input type="file" name="image2"> 
-                        <input type="file" name="image3">
+                        <input type="file" title="Chọn Ảnh" name="image1"/>
+                        <input type="file" title="Chọn Ảnh" name="image2"/> 
+                        <input type="file" title="Chọn Ảnh" name="image3"/>
+                        
                     </div>
-                    
+
                     <button  type="submit" value="submitPost" name="action">
                         Đăng tin
                     </button>
