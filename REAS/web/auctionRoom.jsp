@@ -148,7 +148,7 @@
 
 
         <div class="columns">
-            <div class="column is-three-fifths" style="padding-top: 30px">
+            <div class="column is-two-thirds"style="padding-top: 30px">
                 <div class="register-modal-container">
                     <div class="img-auction-room-container">
                         <img class="img-real-auction-room" src="image/auctionroom1.png" alt="auctionroom1" />
