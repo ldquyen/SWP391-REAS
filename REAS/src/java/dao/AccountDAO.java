@@ -552,7 +552,7 @@ public class AccountDAO {
         return list;
     }
 
-    public static Account getAccountByID(String AccID) throws ClassNotFoundException, SQLException {
+    public static Account getAccountByID(String AccID) throws ClassNotFoundException, SQLException, Exception {
         Account a = new Account();
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
@@ -566,7 +566,8 @@ public class AccountDAO {
                     String accID = rs.getString("AccID");
                     String roleID = rs.getString("RoleID");
                     String userName = rs.getString("UserName");
-                    String password = rs.getString("Password");
+                    String oldpassword = rs.getString("Password");
+                    String newpassword = AccountDAO.decodePassword(oldpassword);
                     String fullname = rs.getString("FullName");
                     boolean status = rs.getBoolean("Status");
                     String email = rs.getString("Email");
@@ -578,7 +579,7 @@ public class AccountDAO {
                     String bankName = rs.getString("BankName");
                     String bankCode = rs.getString("BankCode");
 
-                    a = new Account(accID, roleID, userName, password, fullname, status, email, phone, cccd, address, placeOfReg, dateOfReg, bankName, bankCode);
+                    a = new Account(accID, roleID, userName, newpassword, fullname, status, email, phone, cccd, address, placeOfReg, dateOfReg, bankName, bankCode);
                 }
             }
             cn.close();
