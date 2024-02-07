@@ -7,10 +7,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>ManageAuctionRoom</title>
+        <title>detailRealEstate</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-        <link rel="stylesheet" href="ManageAuctionRoom.css" type="text/css" >
+        <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -146,59 +146,84 @@
             </div>
         </nav>
 
+        <!-- Container for the image gallery -->
+        <div class="container">
+
+            <!-- Full-width images with number text -->
+            <div class="mySlides">
+                <div class="numbertext">1 / 6</div>
+                <img src="image/img_woods_wide.png" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 6</div>
+                <img src="image/img_5terre_wide.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 6</div>
+                <img src="image/img_mountains_wide.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">4 / 6</div>
+                <img src="image/img_lights_wide.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">5 / 6</div>
+                <img src="image/img_nature_wide.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">6 / 6</div>
+                <img src="image/img_snow_wide.jpg" style="width:100%">
+            </div>
+
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <!-- Image text -->
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+
+            <!-- Thumbnail images -->
+            <div class="row">
+                <div class="column">
+                    <img class="demo cursor" src="image/img_woods_wide.jpg" style="width:100%" onclick="currentSlide(1)" alt="The Woods">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="image/img_5terre_wide.jpg" style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="image/img_mountains_wide.jpg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="image/img_nature_wide.jpg" style="width:100%" onclick="currentSlide(5)" alt="Nature and sunrise">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%" onclick="currentSlide(6)" alt="Snowy Mountains">
+                </div>
+            </div>
+        </div>
+
 
         <div class="columns">
             <div class="column is-two-thirds"style="padding-top: 30px">
-                <div class="register-modal-container">
-                    <div class="img-auction-room-container">
-                        <img class="img-real-auction-room" src="image/auctionroom1.png" alt="auctionroom1" />
-                        <img class="img-real-auction-room" src="image/auctionroom2.png" alt="auctionroom2" />
-                    </div>
-                    <h1 class="text-auction-room-h1">The Marq - TPHCM - 500 m2</h1>
-                    <div class="text-auction-room-container">
-                        <p>Giá khởi điểm: 50 tỷ 200 triệu đồng</p>
-                        <p>Loại hình: Chung cư</p>
-                        <p>Địa chỉ: 123 đường ABCXYZ, quận 1, TPHCM</p>
-                        <p>Mô tả: ....</p>
-                    </div>
+
+                <div class="container-full-left">
+
                 </div>
-                <div style="width: 100%; display: flex; justify-content: center">
-                    <div class="list-auction-p-container" style="">
-                        <p class="list-auction-p-1">Đấu giá viên: Trương Gia Bình</p>
-                        <p class="list-auction-p-2">00:15:32</p>
-                    </div>
-                </div>
+
             </div>
+
             <div class="column" style="padding-top: 30px">
-                <div class="register-modal-container">
-                    <h1 style="font-size: 22px; padding: 4px 0px;">Diễn biến cuộc đấu giá</h1>
-                    <div class="number-price-container">
-                        <p style="color: #D9AB73; font-size: 22px">50.300.000.000 Đ</p>
-                        <p>50.250.000.000 Đ</p>
-                        <p>50.215.000.000 Đ</p>
-                        <p>50.205.000.000 Đ</p>
-                        <p>50.200.000.000 Đ</p>
-                    </div>
-                </div>
-                <form action="MainController" method="post">
-                    <button class="navbar-1 button-list-people" type="submit" value="auctionList" name="action">
-                        <span>Danh sách người tham gia</span>
-                    </button>
-                </form>
-                <div style="display: flex; justify-content: space-between; width: 90%; margin: auto;">
-                    <form action="MainController" method="post">
-                        <button class="navbar-1 button-list-people" style="width: auto;" type="submit" value="auctionList" name="action">
-                            <span>Kết thúc</span>
-                        </button>
-                    </form>
-
-                    <form action="MainController" method="post">
-                        <button class="navbar-1 button-list-people" style="width: auto;" type="submit" value="auctionList" name="action">
-                            <span>Hủy đấu giá</span>
-                        </button>
-                    </form>
-                </div>
-
+                hello
             </div>
         </div>
 
@@ -220,5 +245,42 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+
+// Next/previous controls
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+// Thumbnail image controls
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("demo");
+                let captionText = document.getElementById("caption");
+                if (n > slides.length) {
+                    slideIndex = 1
+                }
+                if (n < 1) {
+                    slideIndex = slides.length
+                }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+                captionText.innerHTML = dots[slideIndex - 1].alt;
+            }
+        </script>
     </body>
 </html>
