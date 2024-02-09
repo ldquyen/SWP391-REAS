@@ -191,6 +191,12 @@ a.navbar-item:hover{
     padding-bottom: 10px;
 }
 
+.divider {
+    width: 1px;
+    background-color: black;
+    margin: 2% auto;
+}
+
 .flex-center {
     display: flex;
     justify-content: center;

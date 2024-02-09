@@ -229,6 +229,7 @@
                                     <p class="bold-text">Địa chỉ: <span> Landmark 81, Đường Điện Biên Phủ, Phường 22, Bình Thạnh, Hồ Chí Minh.</span></p>
                                 </div>
                             </div>
+                             <div class="divider"></div>
                             <div class="column" style="padding: 1.2rem 2.75rem;">
                                 <h1 class="flex-center h1-text-left-right">Thông tin đấu giá cơ bản</h1>
                                 <div style="padding-top: 8px;">
