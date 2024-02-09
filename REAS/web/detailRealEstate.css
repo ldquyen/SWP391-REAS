@@ -166,11 +166,69 @@ a.navbar-item:hover{
 
 
 .container-full-left {
+    width: 90%;
+    padding: 20px;
+    background-color: #D9AB73 !important;
+}
+
+.container-full-right{
+    width: 80%;
+    padding: 10px;
+    background-color: #000 !important;
+    border: 5px solid #D9AB73;
+}
+
+.container-full-right-bellow {
+    margin-top: 25px;
+    width: 80%;
+    background-color: #fff !important;
+    border: 10px solid #D9AB73;
+}
+
+.container-full-bellow {
+    width: 100%;
+    background-color: #fff !important;
+    padding-bottom: 10px;
+}
+
+.flex-center {
     display: flex;
     justify-content: center;
-    width: 800px;
-    height: 800px;/*
-    background-color: #D9AB73;*/
+}
+
+.text-center {
+    text-align: center;
+}
+
+.h1-text-mid {
+    font-size: 22px !important;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.h1-text-left-right {
+    font-size: 18px !important;
+    font-weight: bold;
+    padding-top: 5px;
+    text-decoration: underline;
+}
+
+p-text-left-right-container {
+    padding-top: 5px !important;
+}
+
+.bold-text {
+    font-weight: bold;
+    font-size: 17px;
+    padding: 3px 0;
+}
+
+.bold-text > span {
+    font-weight: normal; /* Loại bỏ font-weight: bold; cho thẻ span */
+}
+
+.text-center {
+    text-align: center;
 }
 
 .footer {
@@ -344,7 +402,7 @@ button {
 
 /* Hide the images by default */
 .mySlides {
-    display: none !important;
+    /*display: none !important;*/
 }
 
 /* Add a pointer when hovering over the thumbnail images */
@@ -357,7 +415,7 @@ button {
 .next {
     cursor: pointer !important;
     position: absolute !important;
-    top: 40% !important;
+    top: 36% !important;
     width: auto !important;
     padding: 16px !important;
     margin-top: -50px !important;
@@ -384,7 +442,7 @@ button {
 /* Number text (1/3 etc) */
 .numbertext {
     color: #f2f2f2 !important;
-    font-size: 12px !important;
+    font-size: 15px !important;
     padding: 8px 12px !important;
     position: absolute !important;
     top: 0 !important;
@@ -405,7 +463,7 @@ button {
 }
 
 /* Six columns side by side */
-.column {
+.row .column {
     float: left !important;
     width: 16.66% !important;
     padding: 0px;

@@ -146,84 +146,136 @@
             </div>
         </nav>
 
-        <!-- Container for the image gallery -->
-        <div class="container">
 
-            <!-- Full-width images with number text -->
-            <div class="mySlides">
-                <div class="numbertext">1 / 6</div>
-                <img src="image/img_woods_wide.png" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">2 / 6</div>
-                <img src="image/img_5terre_wide.jpg" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">3 / 6</div>
-                <img src="image/img_mountains_wide.jpg" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">4 / 6</div>
-                <img src="image/img_lights_wide.jpg" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">5 / 6</div>
-                <img src="image/img_nature_wide.jpg" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">6 / 6</div>
-                <img src="image/img_snow_wide.jpg" style="width:100%">
-            </div>
-
-            <!-- Next and previous buttons -->
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-            <!-- Image text -->
-            <div class="caption-container">
-                <p id="caption"></p>
-            </div>
-
-            <!-- Thumbnail images -->
-            <div class="row">
-                <div class="column">
-                    <img class="demo cursor" src="image/img_woods_wide.jpg" style="width:100%" onclick="currentSlide(1)" alt="The Woods">
-                </div>
-                <div class="column">
-                    <img class="demo cursor" src="image/img_5terre_wide.jpg" style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
-                </div>
-                <div class="column">
-                    <img class="demo cursor" src="image/img_mountains_wide.jpg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
-                </div>
-                <div class="column">
-                    <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
-                </div>
-                <div class="column">
-                    <img class="demo cursor" src="image/img_nature_wide.jpg" style="width:100%" onclick="currentSlide(5)" alt="Nature and sunrise">
-                </div>
-                <div class="column">
-                    <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%" onclick="currentSlide(6)" alt="Snowy Mountains">
-                </div>
-            </div>
-        </div>
 
 
         <div class="columns">
-            <div class="column is-two-thirds"style="padding-top: 30px">
+            <div class="column is-two-thirds" style="padding-top: 30px;display: flex;justify-content: end;">
 
                 <div class="container-full-left">
+                    <!-- Container for the image gallery -->
+                    <div class="container">
 
+                        <!-- Full-width images with number text -->
+                        <div class="mySlides">
+                            <div class="numbertext">1 / 6</div>
+                            <img src="image/img_woods_wide.png" style="width:100%">
+                        </div>
+
+                        <div class="mySlides">
+                            <div class="numbertext">2 / 6</div>
+                            <img src="image/img_5terre_wide.jpg" style="width:100%">
+                        </div>
+
+                        <div class="mySlides">
+                            <div class="numbertext">3 / 6</div>
+                            <img src="image/img_mountains_wide.jpg" style="width:100%">
+                        </div>
+
+                        <div class="mySlides">
+                            <div class="numbertext">4 / 6</div>
+                            <img src="image/img_lights_wide.jpg" style="width:100%">
+                        </div>
+
+                        <div class="mySlides">
+                            <div class="numbertext">5 / 6</div>
+                            <img src="image/img_nature_wide.jpg" style="width:100%">
+                        </div>
+
+                        <div class="mySlides">
+                            <div class="numbertext">6 / 6</div>
+                            <img src="image/img_snow_wide.jpg" style="width:100%">
+                        </div>
+
+                        <!-- Next and previous buttons -->
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                        <!-- Image text -->
+                        <div class="caption-container">
+                            <p id="caption"></p>
+                        </div>
+
+                        <!-- Thumbnail images -->
+                        <div class="row">
+                            <div class="column">
+                                <img class="demo cursor" src="image/img_woods_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(1)" alt="The Woods">
+                            </div>
+                            <div class="column">
+                                <img class="demo cursor" src="image/img_5terre_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(2)" alt="Cinque Terre">
+                            </div>
+                            <div class="column">
+                                <img class="demo cursor" src="image/img_mountains_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(3)" alt="Mountains and fjords">
+                            </div>
+                            <div class="column">
+                                <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(4)" alt="Northern Lights">
+                            </div>
+                            <div class="column">
+                                <img class="demo cursor" src="image/img_nature_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(5)" alt="Nature and sunrise">
+                            </div>
+                            <div class="column">
+                                <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(6)" alt="Snowy Mountains">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-full-bellow">
+                        <h1 class="flex-center h1-text-mid">Dự án: The Landmark 81</h1>
+                        <div class="columns">
+                            <div class="column" style="padding: 1.2rem 2.75rem;">
+                                <h1 class="flex-center h1-text-left-right">Thông tin bất động sản</h1>
+                                <div style="padding-top: 8px;">
+                                    <p class="bold-text">Diện tích: <span>55m²</span></p>
+                                    <p class="bold-text">Loại hình: <span>căn hộ chung cư</span></p>
+                                    <p class="bold-text">Địa chỉ: <span> Landmark 81, Đường Điện Biên Phủ, Phường 22, Bình Thạnh, Hồ Chí Minh.</span></p>
+                                </div>
+                            </div>
+                            <div class="column" style="padding: 1.2rem 2.75rem;">
+                                <h1 class="flex-center h1-text-left-right">Thông tin đấu giá cơ bản</h1>
+                                <div style="padding-top: 8px;">
+                                    <p class="bold-text">Giá khởi điểm: <span>6,4Tỷ</span></p>
+                                    <p class="bold-text">Bước giá: <span>50Triệu</span></p>
+                                    <p class="bold-text">Thời gian bắt đầu đấu giá: </br><span>11:00AM- 03:00PM 12/01/2024.</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
 
             </div>
 
             <div class="column" style="padding-top: 30px">
-                hello
+                <div class="container-full-right flex-center text-center">
+                    <div>
+                        <p class="h1-text-mid" style="color: #fff;">Đăng bởi<p>
+                        <p style="color: #D9AB73;font-size: 20px">Trương Gia Bình<p>
+                        <p style="color: #D9AB73;font-size: 20px">0888999xxx<p>
+                    </div>
+                </div>
+
+
+                <div class="container-full-right-bellow">
+                    <div>
+                        <p class="flex-center text-center" style="color: #000;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
+                        <div style="text-align: left; padding-left: 10px;">
+                            <form action="MainController" method="post">
+                                <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
+                                    <span>Thảo Điền Pearl</span>
+                                </button>
+                            </form>
+                            <form action="MainController" method="post">
+                                <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
+                                    <span>Hoàng Anh River View</span>
+                                </button>
+                            </form>
+                            <form action="MainController" method="post">
+                                <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
+                                    <span>Thủ Thiêm Sky(5)</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
