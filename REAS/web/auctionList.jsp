@@ -196,10 +196,11 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE3.priceFirst}</td>
-                                <td>
+                                <td id="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
-                                            ${fn:substring(auctions.timeStart, 11, 19)}
+                                            <p style="display: none;">${auctions.timeStart}</p>
+                                            <p id="demo"></p>
                                         </c:if>
                                     </c:forEach>
                                 </td>
@@ -238,13 +239,15 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE2.priceFirst}</td>
-                                <td>
+                                <td id="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
-                                            ${fn:substring(auctions.timeStart, 11, 19)}
+                                            ${auctions.timeStart}
+                                            <p id="demo"></p>
                                         </c:if>
                                     </c:forEach>
                                 </td>
+
 
                                 <c:set var="listRE2Status" value="Đăng Kí" />
 
@@ -265,6 +268,8 @@
                 </table>
             </c:if>
         </div>
+
+
         <footer class="footer" style="margin-top: 10px"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
@@ -282,5 +287,90 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            var auctionTimeStartElement = document.getElementById("auctionTimeStart");
+
+            function formatDateTime(originalDateTime) {
+                // Remove leading and trailing quotes from the original datetime string
+                originalDateTime = originalDateTime.replace(/^"|"$/g, '');
+
+                // Parse the original datetime string
+                var dateTimeParts = originalDateTime.split('T');
+                var datePart = dateTimeParts[0];
+                var timePart = dateTimeParts[1].split(':');
+
+                var yearMonthDay = datePart.split('-');
+                var year = parseInt(yearMonthDay[0]);
+                var month = parseInt(yearMonthDay[1]);
+                var day = parseInt(yearMonthDay[2]);
+
+                // Check if year, month, or day parsing failed
+                if (isNaN(year) || isNaN(month) || isNaN(day)) {
+                    console.error("Failed to parse year, month, or day:", yearMonthDay);
+                    return ""; // Return an empty string to indicate failure
+                }
+
+                var hours = parseInt(timePart[0]);
+                var minutes = parseInt(timePart[1]);
+                var seconds = parseInt(timePart[2].substring(0, 2)); // Extract seconds and convert to integer
+
+                // Get the month name
+                var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                var monthName = monthNames[month - 1]; // Month is 0-indexed in JavaScript
+
+                // Format the datetime string
+                var formattedDateTime = monthName + ' ' + day + ', ' + year + ' ' +
+                        hours + ':' + minutes + ':' + seconds;
+
+                return formattedDateTime;
+            }
+
+
+
+// Example usage
+            var originalDateTime = '"' + auctionTimeStartElement.textContent.trim() + '"';
+            console.log(originalDateTime)
+            var formattedDateTime = formatDateTime(originalDateTime);
+            console.log(formattedDateTime);
+
+// Set the date we're counting down to
+            var countDownDate = new Date(formattedDateTime).getTime();
+
+
+// Update the count down every 1 second
+            var x = setInterval(function () {
+
+                // Get today's date and time
+                var now = new Date().getTime();
+
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Output the result in an element with id="demo"
+                document.getElementById("demo").innerHTML = hours + ":"
+                        + minutes + ":" + seconds + "";
+
+                // If the count down is over, write some text 
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("demo").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+
+
+
+
+
+
+        </script>
     </body>
 </html>
