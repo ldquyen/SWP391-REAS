@@ -26,6 +26,21 @@ select:-webkit-autofill:focus {
     transition: background-color 5000s ease-in-out 0s;
 }
 
+.glow {
+    color: #00ff00; /* Green text color */
+    text-align: center;
+    animation: glowing 1.5s infinite alternate;
+  }
+  
+  @keyframes glowing {
+    from {
+      color: #00ff00; /* Start with green */
+    }
+    to {
+      color: #aaffaa; /* Transition to a lighter shade of green */
+    }
+  }
+
 body {
     font-family: Inter;
 }
@@ -51,7 +66,6 @@ body {
     border: 3px solid #D9AB73;
     background: #000;
     flex-shrink: 0;
-    min-height: 200px;
     max-width: calc(100% - 32px);
     animation: modalFadeIn ease 0.5s;
 
@@ -64,7 +78,7 @@ button .button-xem {
     color: #fff !important;
 }
 
-#button-dangki {
+.button-dangki {
     color: #D9AB73;
     font-family: Inter;
     font-size: 16px;
@@ -73,11 +87,11 @@ button .button-xem {
     padding: 2px 0;
 }
 
-#button-dangki:hover {
+.button-dangki:hover {
     color: #fff;
 }
 
-#button-xem {
+.button-xem {
     color: #D9AB73;
     font-family: Inter;
     font-size: 16px;
@@ -86,7 +100,7 @@ button .button-xem {
     padding: 2px 0;
 }
 
-#button-xem:hover {
+.button-xem:hover {
     color: #fff;
 }
 

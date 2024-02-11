@@ -95,8 +95,8 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
+                                    <form action="MemberController" method="post">
+                                        <button type="submit" value="dangkiroom" name="action">
                                             <span>Danh mục đã đăng kí</span>
                                         </button>
                                     </form>
@@ -203,12 +203,16 @@
                                         </c:if>
                                     </c:forEach>
                                 </td>
-                                <c:set var="listRE3Status" value="Xem" />
+
 
                                 <td>
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
-                                        <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">   
-                                            <button id="button-xem">${listRE3Status}</button>
+                                        <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
+                                            <form action="MemberController" method="post">
+                                                <button class="button-xem" type="submit" value="xemroom" name="action">
+                                                    <span>Xem</span>
+                                                </button>
+                                            </form>
                                         </c:if>
                                     </c:forEach>
                                 </td>
@@ -247,12 +251,16 @@
                                 </td>
 
 
-                                <c:set var="listRE2Status" value="Đăng Kí" />
+
 
                                 <td>
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
-                                            <button id="button-dangki">${listRE2Status}</button>
+                                            <form action="MemberController" method="post">
+                                                <button class="button-dangki" type="submit" value="dangkiroom" name="action">
+                                                    <span>Đăng Kí</span>
+                                                </button>
+                                            </form>
                                         </c:if>
                                     </c:forEach>
                                 </td>
@@ -342,16 +350,19 @@
                     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    var countdownDisplay = days + " ngày " +
-                            (hours < 10 ? "0" : "") + hours + ":" +
+                    var countdownDisplay = "";
+                    if (days > 0) {
+                        countdownDisplay += days + " ngày ";
+                    }
+                    countdownDisplay += (hours < 10 ? "0" : "") + hours + ":" +
                             (minutes < 10 ? "0" : "") + minutes + ":" +
                             (seconds < 10 ? "0" : "") + seconds;
 
                     element.innerHTML = countdownDisplay;
 
-                    if (distance < 0) {
+                    if (distance <= 0) {
                         clearInterval(x);
-                        element.innerHTML = "<span style='color: #00ff00;'>Đấu giá đang diễn ra</span>";
+                        element.innerHTML = "<span class='glow' style='color: #00ff00;'>Đấu giá đang diễn ra</span>";
                     }
                 }, 1000);
             }
