@@ -77,7 +77,8 @@ public class LoginGoogleServlet extends HttpServlet {
 
             // Trích xuất phần đầu của chuỗi trước vị trí của "@"
             String username = email.substring(0, atIndex);
-
+            
+            request.setAttribute("updateinfo", "Bạn cần cập nhật thêm một vài thông tin");
             request.setAttribute("ggusername", username);
             request.setAttribute("ggemail", email);
             request.setAttribute("gggiven_name", given_name);
@@ -86,6 +87,7 @@ public class LoginGoogleServlet extends HttpServlet {
 
             if (ggacc.checkIDGoogle(id)) {
                 error = true;
+                url = "index_1.jsp";
             } else {
                 boolean bl = ggacc.saveUserGoogle(id, email, verified_email, name, given_name, family_name, picture);
             }

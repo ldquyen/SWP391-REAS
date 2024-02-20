@@ -100,7 +100,7 @@
                         <h1 style="color: red">${requestScope.FAILUSERNAME}</h1>
                         <h1 style="color: red">${requestScope.FAILPHONE}</h1>
                         <h1 style="color: red">${requestScope.SUCCESS}</h1>
-                        <h1 style="color: red">${requestScope.FAILGGUSERNAME}</h1>
+                        <h1 style="color: red">${requestScope.updateinfo}</h1>
                         <div class="container-login">
                             <p class="register-if-dont-have-container">Bạn đã có tài khoản?</p>
                             <form action="MainController" method="post" class="registration-form">
