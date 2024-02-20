@@ -100,6 +100,7 @@
                         <h1 style="color: red">${requestScope.FAILUSERNAME}</h1>
                         <h1 style="color: red">${requestScope.FAILPHONE}</h1>
                         <h1 style="color: red">${requestScope.SUCCESS}</h1>
+                        <h1 style="color: red">${requestScope.FAILGGUSERNAME}</h1>
                         <div class="container-login">
                             <p class="register-if-dont-have-container">Bạn đã có tài khoản?</p>
                             <form action="MainController" method="post" class="registration-form">
@@ -185,6 +186,36 @@
                 return true;
             }
         </script>
+
+        <script>
+            // Lấy giá trị của ggusername từ request
+            var ggusername = '<%= request.getAttribute("ggusername")%>';
+            var ggemail = '<%= request.getAttribute("ggemail")%>';
+            var gggiven_name = '<%= request.getAttribute("gggiven_name")%>';
+
+            // Đặt giá trị của ggusername vào trường input nếu có giá trị và khác null
+            document.addEventListener('DOMContentLoaded', function () {
+                var inputUsername = document.querySelector('.input-username');
+                if (inputUsername && ggusername !== null && ggusername !== 'null') {
+                    inputUsername.value = ggusername;
+                }
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+                var inputEmail = document.querySelector('.input-email');
+                if (inputEmail && ggemail !== null && ggemail !== 'null') {
+                    inputEmail.value = ggemail;
+                }
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+                var inputFullname = document.querySelector('.input-fullname');
+                if (inputFullname && gggiven_name !== null && gggiven_name !== 'null') {
+                    inputFullname.value = gggiven_name;
+                }
+            });
+        </script>
+
+
+
 
     </body>
 

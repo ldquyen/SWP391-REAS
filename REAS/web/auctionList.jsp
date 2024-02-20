@@ -210,6 +210,7 @@
                             <th>Tỉnh, TP</th>
                             <th>Loại hình</th>
                             <th>Giá khởi điểm</th>
+                            <th>Giá mua ngay</th>
                             <th>Thời gian</th>
                             <th>Đăng kí</th>
                         </tr>
@@ -238,6 +239,7 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE3.priceFirst}</td>
+                                <td>${listRE3.pricePaid}</td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
@@ -284,6 +286,7 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE2.priceFirst}</td>
+                                <td>${listRE2.pricePaid}</td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
