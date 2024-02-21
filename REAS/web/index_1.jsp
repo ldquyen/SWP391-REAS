@@ -153,6 +153,10 @@
             </div>
         </nav>
 
+        <div class="stream_text-container">
+            <div class="stream_text">Căn hộ góc Landmark 81 đã trúng đấu giá với giá tiền 25 tỷ 300 triệu đồng.</div>
+        </div>
+
         <!-- BODY -->
         <form action="MainController" method="post">
             <div class="search-container">
@@ -291,5 +295,14 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            const streamText = document.querySelector('.stream_text');
+            const streamTextContainer = document.querySelector('.stream_text-container');
+
+            streamText.addEventListener('animationend', function () {
+                streamTextContainer.remove(); // Remove the stream_text-container when animation ends
+            });
+        </script>
     </body>
 </html>

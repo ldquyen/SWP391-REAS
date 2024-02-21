@@ -604,3 +604,29 @@ button {
     font-weight: 800;
     word-wrap: break-word
 }
+
+.stream_text {
+    position: absolute;
+    padding-left: 100%;
+    white-space: nowrap;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: Inter;
+    animation: stream 15s linear;
+}
+
+.stream_text-container {
+    position: relative;
+    display: flex;
+    background-color: #D9AB73;
+    height: 30px;
+}
+
+@keyframes stream {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}

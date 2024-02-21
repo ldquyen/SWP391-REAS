@@ -239,7 +239,7 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE3.priceFirst}</td>
-                                <td>${listRE3.pricePaid}</td>
+                                <td class="test">${listRE3.pricePaid}</td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
@@ -286,7 +286,7 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE2.priceFirst}</td>
-                                <td>${listRE2.pricePaid}</td>
+                                <td class="test">${listRE2.pricePaid}</td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
