@@ -193,7 +193,7 @@ a.navbar-item:hover{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 .search-wrap {
@@ -610,16 +610,19 @@ button {
     padding-left: 100%;
     white-space: nowrap;
     font-size: 20px;
-    text-transform: uppercase;
     font-family: Inter;
-    animation: stream 15s linear;
+    animation: stream linear;
 }
 
 .stream_text-container {
     position: relative;
     display: flex;
-    background-color: #D9AB73;
     height: 30px;
+    overflow: hidden;
+}
+
+.stream_text-container-2{
+    background-color: #D9AB73;
 }
 
 @keyframes stream {
@@ -627,6 +630,6 @@ button {
         transform: translateX(0%);
     }
     100% {
-        transform: translateX(-200%);
+        transform: translateX(-110%);
     }
 }

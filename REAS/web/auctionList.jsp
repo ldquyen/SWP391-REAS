@@ -253,6 +253,7 @@
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
                                             <form action="MemberController" method="post">
+                                                <input type="hidden" name="idRE3" value="${auctions.realEstateID eq listRE3.realEstateID}">
                                                 <button class="button-xem" type="submit" value="xemroom" name="action">
                                                     <span>Xem</span>
                                                 </button>
