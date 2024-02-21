@@ -79,7 +79,7 @@ public class LoginGoogleServlet extends HttpServlet {
             String username = email.substring(0, atIndex);
             
             request.setAttribute("updateinfo", "Bạn cần cập nhật thêm một vài thông tin");
-            request.setAttribute("ggusername", username);
+            session.setAttribute("ggusername", username);
             request.setAttribute("ggemail", email);
             request.setAttribute("gggiven_name", given_name);
 

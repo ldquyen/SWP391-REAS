@@ -100,7 +100,7 @@
                         <h1 style="color: red">${requestScope.FAILUSERNAME}</h1>
                         <h1 style="color: red">${requestScope.FAILPHONE}</h1>
                         <h1 style="color: red">${requestScope.SUCCESS}</h1>
-                        <h1 style="color: red">${requestScope.updateinfo}</h1>
+                        <h1 style="color: #02ff6e">${requestScope.updateinfo}</h1>
                         <div class="container-login">
                             <p class="register-if-dont-have-container">Bạn đã có tài khoản?</p>
                             <form action="MainController" method="post" class="registration-form">
@@ -189,7 +189,7 @@
 
         <script>
             // Lấy giá trị của ggusername từ request
-            var ggusername = '<%= request.getAttribute("ggusername")%>';
+            var ggusername = '<%= session.getAttribute("ggusername") %>';
             var ggemail = '<%= request.getAttribute("ggemail")%>';
             var gggiven_name = '<%= request.getAttribute("gggiven_name")%>';
 
