@@ -524,7 +524,7 @@ public class AccountDAO {
                     + "FROM Account WHERE [RoleID] = ? AND [FullName] LIKE ?";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, roleid);
-            pst.setString(2, "%" +name+ "%");
+            pst.setString(2, "%" + name + "%");
             ResultSet rs = pst.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
@@ -551,4 +551,135 @@ public class AccountDAO {
         }
         return list;
     }
+
+    public static Account getAccountByID(String AccID) throws ClassNotFoundException, SQLException, Exception {
+        Account a = new Account();
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [AccID],[RoleID],[UserName],[Password],[FullName],[Status], [Email], [Phone], [CCCD], [Address], [PlaceOfReg], [DateOfReg], [BankName],[BankCode]\n"
+                    + "FROM Account WHERE [AccID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, AccID);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String accID = rs.getString("AccID");
+                    String roleID = rs.getString("RoleID");
+                    String userName = rs.getString("UserName");
+                    String oldpassword = rs.getString("Password");
+                    String newpassword = AccountDAO.decodePassword(oldpassword);
+                    String fullname = rs.getString("FullName");
+                    boolean status = rs.getBoolean("Status");
+                    String email = rs.getString("Email");
+                    String phone = rs.getString("Phone");
+                    String cccd = rs.getString("CCCD");
+                    String address = rs.getString("Address");
+                    String placeOfReg = rs.getString("PlaceOfReg");
+                    String dateOfReg = rs.getString("DateOfReg");
+                    String bankName = rs.getString("BankName");
+                    String bankCode = rs.getString("BankCode");
+
+                    a = new Account(accID, roleID, userName, newpassword, fullname, status, email, phone, cccd, address, placeOfReg, dateOfReg, bankName, bankCode);
+                }
+            }
+            cn.close();
+        }
+        return a;
+    }
+
+    public static void changeStatusAccount(String Accid, boolean Status) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            if (Status == false) {
+                String sql = "UPDATE [dbo].[Account] SET [Status] = 1 WHERE AccID = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, Accid);
+                int rowsAffected = pst.executeUpdate();
+            } else {
+                String sql = "UPDATE [dbo].[Account] SET [Status] = 0 WHERE AccID = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, Accid);
+                int rowsAffected = pst.executeUpdate();
+            }
+        }
+    }
+
+    public static boolean changeInfoStaff(String Accid, String userName, String password, String fullname, String email, String phone, String cccd, String address, String placeOfReg, String dateOfReg, String bankName, String bankCode) throws ClassNotFoundException, SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "UPDATE [dbo].[Account]\n"
+                    + "SET \n"
+                    + "    [UserName] = ?,\n"
+                    + "    [Password] = ?,\n"
+                    + "    [FullName] = ?,\n"
+                    + "    [Email] = ?,\n"
+                    + "    [Phone] = ?,\n"
+                    + "    [CCCD] = ?,\n"
+                    + "    [Address] = ?,\n"
+                    + "    [PlaceOfReg] = ?,\n"
+                    + "    [DateOfReg] = ?,\n"
+                    + "    [BankName] = ?,\n"
+                    + "    [BankCode] = ?\n"
+                    + "WHERE [AccID] = ?;";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(12, Accid);
+            pst.setString(1, userName);
+            pst.setString(2, password);
+            pst.setString(3, fullname);
+            pst.setString(4, email);
+            pst.setString(5, phone);
+            pst.setString(6, cccd);
+            pst.setString(7, address);
+            pst.setString(8, placeOfReg);
+            pst.setString(9, dateOfReg);
+            pst.setString(10, bankName);
+            pst.setString(11, bankCode);
+            int rowsAffected = pst.executeUpdate();
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean addStaff(String accid, String username, String password, String fullname, String email, String phone, String cccd, String address, String cccdregplace, String cccdregdate, String bankname, String bankcode) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "INSERT INTO [dbo].[Account]([AccID],[RoleID],[UserName],[Password],[FullName],[Status],[Email],[Phone],[CCCD],[Address],[PlaceOfReg],[DateOfReg],[BankName],[BankCode])\n"
+                        + "VALUES (?,'S',?,?,?,0,?,?,?,?,?,?,?,?)";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, accid);
+                pst.setString(2, username);
+                pst.setString(3, password);
+                pst.setString(4, fullname);
+                pst.setString(5, email);
+                pst.setString(6, phone);
+                pst.setString(7, cccd);
+                pst.setString(8, address);
+                pst.setString(9, cccdregplace);
+                pst.setString(10, cccdregdate);
+                pst.setString(11, bankname);
+                pst.setString(12, bankcode);
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
 }

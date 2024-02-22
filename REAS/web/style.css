@@ -193,7 +193,7 @@ a.navbar-item:hover{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 .search-wrap {
@@ -603,4 +603,33 @@ button {
     font-family: Inter;
     font-weight: 800;
     word-wrap: break-word
+}
+
+.stream_text {
+    position: absolute;
+    padding-left: 100%;
+    white-space: nowrap;
+    font-size: 20px;
+    font-family: Inter;
+    animation: stream linear;
+}
+
+.stream_text-container {
+    position: relative;
+    display: flex;
+    height: 30px;
+    overflow: hidden;
+}
+
+.stream_text-container-2{
+    background-color: #D9AB73;
+}
+
+@keyframes stream {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-110%);
+    }
 }

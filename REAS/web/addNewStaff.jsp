@@ -1,19 +1,20 @@
 <%-- 
-    Document   : staff
-    Created on : Jan 22, 2024, 11:54:20 PM
+    Document   : changeInfoStaff
+    Created on : Feb 5, 2024, 2:05:06 PM
     Author     : ASUS
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>  
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Staff Page</title>
+        <title>REAS-ADMIN PAGE</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
-        <link rel="stylesheet" href="staff.css" type="text/css" >
+        <link rel="stylesheet" href="admin.css" type="text/css" >
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -32,10 +33,10 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="adminjsp" name="action" >
-                                <span style="color: white">TRANG CHỦ</span>
-                            </button>
-                        </form>
+                        <button type="submit" value="adminjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="navbar-end">
@@ -47,7 +48,7 @@
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
-                                ${sessionScope.staff.fullname} (STAFF)                
+                                ${sessionScope.admin.fullname} (ADMIN)                
                             </a>
 
                             <div class="fake-div"></div>
@@ -89,31 +90,30 @@
                     </p>
                     <ul class="menu-list">
                         <li>
-                            <a class="">Xét duyệt</a>
+                            <a class="">Thống kê</a>
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
-                                        <form action="StaffController" method="post">
-                                            <button type="submit" value="approve" name="action">
-                                                <span>Danh sách đợi xét duyệt</span>
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Biểu đồ</span>
                                             </button>
                                         </form>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="navbar-item">
-                                        <form action="StaffController" method="post">
-                                            <button type="submit" value="approved" name="action">
-                                                <span>Danh sách đã xét duyệt</span>
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Chi tiết</span>
                                             </button>
                                         </form>
                                     </a>
                                 </li>
                             </ul>
-                            <a class="">Đấu giá</a>
                         </li>
                     </ul>
-<!--                    <p class="menu-label">
+                    <p class="menu-label">
                         Administration
                     </p>
                     <ul class="menu-list">
@@ -154,7 +154,7 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -200,20 +200,95 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
-                    </ul>-->
+                    </ul>
 
 
                 </aside>
             </div>
-            <div class="column" style="height: 100vh;">Auto</div>
-        </div>
+            <div class="column" style="height: 100vh;">
+                <span style="font-weight: bold; margin-right: 1px; color: #D9AB73; font-size: 20px">
+                    Thêm nhân viên mới
+                </span>  
+                <div style="margin-top: 10px">
+                    <form action="AdminController" method="post">
+                        <table style="border-collapse: collapse; border: 3px solid #D9AB73;background-color: black; color: white;">
+                            <tbody>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Tên:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="fullName" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Tài khoản:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="userName" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Mật khẩu:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="password" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Email:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="email" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">SĐT:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="phone" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Địa chỉ:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="address" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">CCCD:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="cccd" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Nơi cấp CCCD:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="placeOfReg" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Ngày cấp CCCD:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="dateOfReg" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Tên ngân hàng:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="bankName" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Số tài khoản:</td>
+                                    <td style=" padding: 8px;"> <input type="text" name="bankCode" style="background-color: black; color: white; font-size: 15px"> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <input type="hidden" name="ID" value="${s.accID}">
+                        <button type="submit" value="addNewStaff" name="action" style="background-color: black; border: 3px solid #D9AB73; color: #D9AB73; padding: 6px 20px; margin-top: 10px">
+                            <span style="font-size: 14px; font-weight: bold">Thêm mới</span>
+                        </button>
+                    </form>
 
-        <!-- BODY -->
 
-
-
+                </div>
+            </div>
+            <div class="column" style="height: 100vh;">
+                <s:if test="${not empty requestScope.ADDOKE}">
+                    <span style="font-weight: bold; margin-right: 1px; color:green ">
+                        Thêm mới thành công
+                    </span>  
+                </s:if>
+                <s:if test="${not empty requestScope.ADDnotOKE}">
+                    <span style="font-weight: bold; margin-right: 1px; color: red ">
+                        Thêm mới thất bại
+                    </span> 
+                </s:if>
+                <s:if test="${not empty requestScope.THIEUTT}">
+                    <span style="font-weight: bold; margin-right: 1px; color: red ">
+                        Vui lòng nhập đầy đủ thông tin
+                    </span>  
+                </s:if>
+            </div>
+                      
+        </div>        
     </body>
 </html>

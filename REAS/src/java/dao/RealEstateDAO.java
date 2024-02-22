@@ -37,8 +37,8 @@ public class RealEstateDAO {
                 stm.setInt(5, cityID);
                 stm.setString(6, realEstateName);
                 stm.setLong(7, priceFirst);
-                stm.setTimestamp(8, Timestamp.valueOf(timeUp));
-                stm.setTimestamp(9, Timestamp.valueOf(timeDown));
+                stm.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
+                stm.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
                 stm.setLong(10, priceLast);
                 stm.setLong(11, pricePaid);
                 stm.setInt(12, statusID);

@@ -1,52 +1,60 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllersMember;
 
+import dao.AuctionDAO;
+import dao.CategoryDAO;
+import dao.CityDAO;
+import dao.RealEstateDAO;
+import dto.Auction;
+import dto.Category;
+import dto.City;
+import dto.RealEstate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MemberController extends HttpServlet {
+/**
+ *
+ * @author tranl
+ */
+@WebServlet(name = "RegisterAuctionServlet", urlPatterns = {"/RegisterAuctionServlet"})
+public class RegisterAuctionServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    private final String REGISTERAUCTION = "registerAuction.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String action = request.getParameter("action");
-            String url = "";
-            if (action == null) {
-                action = "";
-            }
-            switch (action) {
-                case "":
-                    url = "index_1.jsp";
-                    break;
-                case "changePassServlet":
-                    url = "ChangePasswordServlet";
-                    break;
-                case "changePass":
-                    url = "changePass.jsp";
-                    break;
-                case "newsjsp":
-                    url = "news.jsp";
-                    break;
-                case "filterInNews":
-                    url = "FilterInNewsServlet";
-                    break;
-                case "changeInfo":
-                    url = "InformationChangeServlet";
-                    break;
-                case "xemroom":
-                    url = "AuctionRoomServlet";
-                    break;
-                case "dangkiroom":
-                    url = "RegisterAuctionServlet";
-                    break;
-            }
-            request.getRequestDispatcher(url).forward(request, response);
+        String url = REGISTERAUCTION;
+        try {
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching auctions");
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
 
         }
     }

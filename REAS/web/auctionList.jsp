@@ -95,8 +95,8 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
+                                    <form action="MemberController" method="post">
+                                        <button type="submit" value="dangkiroom" name="action">
                                             <span>Danh mục đã đăng kí</span>
                                         </button>
                                     </form>
@@ -149,9 +149,51 @@
             </div>
         </nav>
 
-        <div class="list-auction-p-container" style="">
-            <p class="list-auction-p">Danh sách đấu giá</p>
-        </div>
+        <form action="MemberController" method="post" style="margin: 0 auto; width: 40%; margin-top: 20px">
+            <div class="field has-addons">
+                <div class="search-detail-container">
+                    <div class="control">
+                        <div class="select">
+                            <select class="custom-select" name="loaihinhbds">
+                                <option value="">Loại hình BĐS</option>
+                                <c:forEach var="locCategory" items="${sessionScope.CATEGORYLIST}">
+                                    <option value="${locCategory.catID}" <c:if test="${loaihinhbds eq locCategory.catID}">selected</c:if>>${locCategory.catName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="select" >
+                            <select class="custom-select" name="thanhpho">
+                                <option value="">Thành phố</option>
+                                <c:forEach var="locCity" items="${sessionScope.CITYLIST}">
+                                    <option value="${locCity.cityID}" <c:if test="${thanhpho eq locCity.cityID }">selected</c:if>>${locCity.cityName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <div class="select">
+                            <select class="custom-select" name="mucgia">
+                                <option value="">Mức giá</option>
+                                <option value="ASC" <c:if test="${mucgia == 'ASC'}">selected</c:if>>Tăng dần</option>
+                                <option value="DESC" <c:if test="${mucgia == 'DESC'}">selected</c:if>>Giảm dần</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="control button-search-container">
+                        <button class="button is-info button-search" type="submit" value="filterInNews" name="action">
+                            Lọc
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="list-auction-p-container" style="">
+                <p class="list-auction-p">Danh sách đấu giá</p>
+            </div>
+
+
 
 
         <c:if test="${empty auctions}">
@@ -168,6 +210,7 @@
                             <th>Tỉnh, TP</th>
                             <th>Loại hình</th>
                             <th>Giá khởi điểm</th>
+                            <th>Giá mua ngay</th>
                             <th>Thời gian</th>
                             <th>Đăng kí</th>
                         </tr>
@@ -196,19 +239,25 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE3.priceFirst}</td>
-                                <td>
+                                <td class="test">${listRE3.pricePaid}</td>
+                                <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
-                                            ${fn:substring(auctions.timeStart, 11, 19)}
+                                            <p style="display: none;">${auctions.timeStart}</p>
                                         </c:if>
                                     </c:forEach>
                                 </td>
-                                <c:set var="listRE3Status" value="Xem" />
+
 
                                 <td>
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
-                                        <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">   
-                                            <button id="button-xem">${listRE3Status}</button>
+                                        <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
+                                            <form action="MemberController" method="post">
+                                                <input type="hidden" name="idRE3" value="${auctions.realEstateID eq listRE3.realEstateID}">
+                                                <button class="button-xem" type="submit" value="xemroom" name="action">
+                                                    <span>Xem</span>
+                                                </button>
+                                            </form>
                                         </c:if>
                                     </c:forEach>
                                 </td>
@@ -238,20 +287,26 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE2.priceFirst}</td>
-                                <td>
+                                <td class="test">${listRE2.pricePaid}</td>
+                                <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
-                                            ${fn:substring(auctions.timeStart, 11, 19)}
+                                            <p style="display: none;">${auctions.timeStart}</p>
                                         </c:if>
                                     </c:forEach>
                                 </td>
 
-                                <c:set var="listRE2Status" value="Đăng Kí" />
+
+
 
                                 <td>
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
-                                            <button id="button-dangki">${listRE2Status}</button>
+                                            <form action="MemberController" method="post">
+                                                <button class="button-dangki" type="submit" value="dangkiroom" name="action">
+                                                    <span>Đăng Kí</span>
+                                                </button>
+                                            </form>
                                         </c:if>
                                     </c:forEach>
                                 </td>
@@ -265,6 +320,8 @@
                 </table>
             </c:if>
         </div>
+
+
         <footer class="footer" style="margin-top: 10px"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
@@ -282,5 +339,83 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            var auctionTimeStartElements = document.querySelectorAll(".auctionTimeStart");
+
+            function formatDateTime(originalDateTime) {
+                // Remove leading and trailing quotes from the original datetime string
+                originalDateTime = originalDateTime.replace(/^"|"$/g, '');
+
+                // Parse the original datetime string
+                var dateTimeParts = originalDateTime.split('T');
+                var datePart = dateTimeParts[0];
+                var timePart = dateTimeParts[1].split(':');
+
+                var yearMonthDay = datePart.split('-');
+                var year = parseInt(yearMonthDay[0]);
+                var month = parseInt(yearMonthDay[1]);
+                var day = parseInt(yearMonthDay[2]);
+
+                // Check if year, month, or day parsing failed
+                if (isNaN(year) || isNaN(month) || isNaN(day)) {
+                    console.error("Failed to parse year, month, or day:", yearMonthDay);
+                    return ""; // Return an empty string to indicate failure
+                }
+
+                var hours = parseInt(timePart[0]);
+                var minutes = parseInt(timePart[1]);
+                var seconds = 0; // Mặc định giây là 0
+                if (timePart.length > 2 && timePart[2].length >= 2) {
+                    seconds = parseInt(timePart[2].substring(0, 2)); // Extract seconds and convert to integer
+                }
+
+
+                // Get the month name
+                var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                var monthName = monthNames[month - 1]; // Month is 0-indexed in JavaScript
+
+                // Format the datetime string
+                var formattedDateTime = monthName + ' ' + day + ', ' + year + ' ' +
+                        hours + ':' + minutes + ':' + seconds;
+
+                return formattedDateTime;
+            }
+
+            function startCountdown(element) {
+                var originalDateTime = '"' + element.textContent.trim() + '"';
+                var formattedDateTime = formatDateTime(originalDateTime);
+                var countDownDate = new Date(formattedDateTime).getTime();
+
+                var x = setInterval(function () {
+                    var now = new Date().getTime();
+                    var distance = countDownDate - now;
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    var countdownDisplay = "";
+                    if (days > 0) {
+                        countdownDisplay += days + " ngày ";
+                    }
+                    countdownDisplay += (hours < 10 ? "0" : "") + hours + ":" +
+                            (minutes < 10 ? "0" : "") + minutes + ":" +
+                            (seconds < 10 ? "0" : "") + seconds;
+
+                    element.innerHTML = countdownDisplay;
+
+                    if (distance <= 0) {
+                        clearInterval(x);
+                        element.innerHTML = "<span class='glow' style='color: #00ff00;'>Đấu giá đang diễn ra</span>";
+                    }
+                }, 1000);
+            }
+
+            auctionTimeStartElements.forEach(function (element) {
+                startCountdown(element);
+            });
+        </script>
     </body>
 </html>
