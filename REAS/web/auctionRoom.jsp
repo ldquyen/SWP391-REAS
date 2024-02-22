@@ -154,13 +154,32 @@
                         <img class="img-real-auction-room" src="image/auctionroom1.png" alt="auctionroom1" />
                         <img class="img-real-auction-room" src="image/auctionroom2.png" alt="auctionroom2" />
                     </div>
-                    <h1 class="text-auction-room-h1">The Marq - TPHCM - 500 m2</h1>
-                    <div class="text-auction-room-container">
-                        <p>Giá khởi điểm: 50 tỷ 200 triệu đồng</p>
-                        <p>Loại hình: Chung cư</p>
-                        <p>Địa chỉ: 123 đường ABCXYZ, quận 1, TPHCM</p>
-                        <p>Mô tả: ....</p>
-                    </div>
+
+                    <c:if test="${not empty auctions}">
+                        <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                            <c:forEach var="imageforauction" items="${requestScope.imageforauction}"> 
+                                <c:if test="${imageforauction.imageFolderID eq REGETBYID.imageFolderID}">
+                                    ${imageforauction.imageFolderID}
+                                </c:if>
+                            </c:forEach>
+                            <h1 class="text-auction-room-h1">${REGETBYID.realEstateName} - <c:forEach var="cityList" items="${requestScope.city}"> 
+                                    <c:if test="${cityList.cityID eq REGETBYID.cityID}">
+                                        ${cityList.cityName}
+                                    </c:if>
+                                </c:forEach> - ${REGETBYID.area} m2</h1>
+                            <div class="text-auction-room-container">
+                                <p>Giá khởi điểm: ${REGETBYID.priceFirst}</p>
+                                <c:forEach var="catList" items="${requestScope.category}"> 
+                                    <c:if test="${catList.catID eq REGETBYID.catID}">
+                                        <p>Loại hình: ${catList.catName}</p>
+                                    </c:if>
+                                </c:forEach>
+                                <p>Địa chỉ: ${REGETBYID.address}</p>
+                                <p>Mô tả: ${REGETBYID.detail}</p>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+
                 </div>
                 <div style="width: 100%; display: flex; justify-content: center">
                     <div class="list-auction-p-container" style="">
@@ -254,10 +273,10 @@
                 document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN') + ' Đ';
             }
 
-// Initialize total price based on default quantity and price per unit
+            // Initialize total price based on default quantity and price per unit
             updateTotalPrice();
 
-// Function to handle quantity changes
+            // Function to handle quantity changes
             function setQuantity(action) {
                 var quantityElement = document.getElementById('quantity');
                 var quantity = parseInt(quantityElement.value);

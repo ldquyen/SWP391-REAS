@@ -158,20 +158,20 @@
 
                         <!-- Full-width images with number text -->
                         <div class="mySlides">
-                            <div class="numbertext">1 / 6</div>
-                            <img src="image/img_woods_wide.png" style="width:100%">
+                            <div class="numbertext">1 / 3</div>
+                            <img src="data:image/jpeg;base64,${item.image1}" style="width:100%">
                         </div>
 
                         <div class="mySlides">
-                            <div class="numbertext">2 / 6</div>
-                            <img src="image/img_5terre_wide.jpg" style="width:100%">
+                            <div class="numbertext">2 / 3</div>
+                            <img src="data:image/jpeg;base64,${item.image2}" style="width:100%">
                         </div>
 
                         <div class="mySlides">
-                            <div class="numbertext">3 / 6</div>
-                            <img src="image/img_mountains_wide.jpg" style="width:100%">
+                            <div class="numbertext">3 / 3</div>
+                            <img src="data:image/jpeg;base64,${item.image3}" style="width:100%">
                         </div>
-
+<!--
                         <div class="mySlides">
                             <div class="numbertext">4 / 6</div>
                             <img src="image/img_lights_wide.jpg" style="width:100%">
@@ -185,7 +185,7 @@
                         <div class="mySlides">
                             <div class="numbertext">6 / 6</div>
                             <img src="image/img_snow_wide.jpg" style="width:100%">
-                        </div>
+                        </div>-->
 
                         <!-- Next and previous buttons -->
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -199,15 +199,15 @@
                         <!-- Thumbnail images -->
                         <div class="row">
                             <div class="column">
-                                <img class="demo cursor" src="image/img_woods_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(1)" alt="The Woods">
+                                <img class="demo cursor" src="data:image/jpeg;base64,${item.image1}" style="width:100%; min-height: 100px" onclick="currentSlide(1)" alt="The Woods">
                             </div>
                             <div class="column">
-                                <img class="demo cursor" src="image/img_5terre_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(2)" alt="Cinque Terre">
+                                <img class="demo cursor" src="data:image/jpeg;base64,${item.image2}" style="width:100%; min-height: 100px" onclick="currentSlide(2)" alt="Cinque Terre">
                             </div>
                             <div class="column">
-                                <img class="demo cursor" src="image/img_mountains_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(3)" alt="Mountains and fjords">
+                                <img class="demo cursor" src="data:image/jpeg;base64,${item.image3}" style="width:100%; min-height: 100px" onclick="currentSlide(3)" alt="Mountains and fjords">
                             </div>
-                            <div class="column">
+<!--                            <div class="column">
                                 <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(4)" alt="Northern Lights">
                             </div>
                             <div class="column">
@@ -215,27 +215,27 @@
                             </div>
                             <div class="column">
                                 <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(6)" alt="Snowy Mountains">
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <div class="container-full-bellow">
-                        <h1 class="flex-center h1-text-mid">Dự án: The Landmark 81</h1>
+                        <h1 class="flex-center h1-text-mid">Dự án: ${realEstate.realEstateName}</h1>
                         <div class="columns">
                             <div class="column" style="padding: 1.2rem 2.75rem;">
                                 <h1 class="flex-center h1-text-left-right">Thông tin bất động sản</h1>
                                 <div style="padding-top: 8px;">
-                                    <p class="bold-text">Diện tích: <span>55m²</span></p>
-                                    <p class="bold-text">Loại hình: <span>căn hộ chung cư</span></p>
-                                    <p class="bold-text">Địa chỉ: <span> Landmark 81, Đường Điện Biên Phủ, Phường 22, Bình Thạnh, Hồ Chí Minh.</span></p>
+                                    <p class="bold-text">Diện tích: <span>${realEstate.area}m²</span></p>
+                                    <p class="bold-text">Loại hình: <span>${realEstate.category}</span></p>
+                                    <p class="bold-text">Địa chỉ: <span> ${realEstate.address}</span></p>
                                 </div>
                             </div>
                              <div class="divider"></div>
                             <div class="column" style="padding: 1.2rem 2.75rem;">
                                 <h1 class="flex-center h1-text-left-right">Thông tin đấu giá cơ bản</h1>
                                 <div style="padding-top: 8px;">
-                                    <p class="bold-text">Giá khởi điểm: <span>6,4Tỷ</span></p>
-                                    <p class="bold-text">Bước giá: <span>50Triệu</span></p>
-                                    <p class="bold-text">Thời gian bắt đầu đấu giá: </br><span>11:00AM- 03:00PM 12/01/2024.</span></p>
+                                    <p class="bold-text">Giá khởi điểm: <span>${realEstate.priceFirst} vnd</span></p>
+                                    <p class="bold-text">Bước giá: <span>${realEstate.priceLast}vnd</span></p>
+                                    <p class="bold-text">Thời gian bắt đầu đấu giá: </br><span>${realEstate.timeUp} - ${realEstate.timeDown}</span></p>
                                 </div>
                             </div>
                         </div>

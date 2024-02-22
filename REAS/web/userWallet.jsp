@@ -1,9 +1,11 @@
+[userWallet.jsp]
+
 <%-- 
     Document   : admin
     Created on : Jan 22, 2024, 11:54:07 PM
     Author     : ASUS
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +14,7 @@
         <title>REAS-ADMIN PAGE</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="admin.css" type="text/css" >
 
@@ -33,10 +36,10 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="adminjsp" name="action" >
-                                <span style="color: white">TRANG CHỦ</span>
-                            </button>
-                        </form>
+                        <button type="submit" value="adminjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="navbar-end">
@@ -154,7 +157,7 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -193,24 +196,116 @@
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
-                                         <form action="AdminController" method="post">
+                                        <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
                                                 <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
+
                                             </button>
                                         </form>
-
-
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
-
-
                 </aside>
             </div>
-            <div class="column" style="height: 100vh;">Auto</div>
+            <div class="column" style="height: 100vh;">
+                <h3>UserWallet</h3>
+                <div style="color: red">${error}</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">FullName</th>
+                            <th scope="col">AccountBalance</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${listUserWallet}" var="user" varStatus="loopStatus">
+                            <tr>
+                                <th scope="row">${loopStatus.count}</th>
+                                <td>${user.fullName}</td>
+                                <td>${user.accountBalance}</td>
+                                <td><a class="btn btn-success" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editWallet-${user.accID}" data-bs-whatever="@getbootstrap">Add fund</a></td>
+                                <td><a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#refundWallet-${user.accID}" data-bs-whatever="@getbootstrap">Refund</a></td>
+
+                            </tr>
+
+
+                        <div class="modal fade" id="editWallet-${user.accID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content"> 
+                                    <form action="AdminController">
+                                        <input type="hidden" name="action" value="editUserWallet">                                        
+                                        <input type="hidden" name="editAction" value="add">
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">${user.fullName}'s Wallet</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Account Balance</label>
+                                                <div class="">${user.accountBalance}</div>
+                                                <input type="hidden" name="currentFund" value="${user.accountBalance}"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Add fund: </label>
+                                                <input name="fund" class="form-control" id="message-text"></input>
+                                                <input type="hidden"  name="accId" class="form-control" id="message-text" value="${user.accID}"></input>
+                                            </div>
+                                            <div class="modal-body">Chọn "Add" de cap nhat vi tien cua member cua ban. Luu y hanh dong nay se khong the hoan tac!</div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-success">Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade" id="refundWallet-${user.accID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content"> 
+                                    <form action="AdminController">
+                                        <input type="hidden" name="action" value="editUserWallet">
+                                         <input type="hidden" name="editAction" value="refund">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">${user.fullName}'s Wallet</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Account Balance</label>
+                                                <div class="">${user.accountBalance}</div>
+                                                <input type="hidden" name="currentFund" value="${user.accountBalance}"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Refund: </label>
+                                                <input name="fund" class="form-control" id="message-text"></input>
+                                                <input type="hidden"  name="accId" class="form-control" id="message-text" value="${user.accID}"></input>
+                                            </div>
+                                            <div class="modal-body">Chọn "Refund" de cap nhat vi tien cua member cua ban. Luu y hanh dong nay se khong the hoan tac!</div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-success">Refund</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+
+            </div>
         </div>
 
         <!-- BODY -->
@@ -218,4 +313,5 @@
 
 
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
