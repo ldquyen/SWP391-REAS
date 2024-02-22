@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MainController extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -88,6 +88,9 @@ public class MainController extends HttpServlet {
                     break;
                 case "informationPage":
                     url = "informationPage.jsp";
+                    break;
+                case "viewPostRealEstate":
+                    url = "RealEstateDetailServlet";
                     break;
             }
         } finally {
