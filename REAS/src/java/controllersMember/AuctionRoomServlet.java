@@ -8,10 +8,12 @@ package controllersMember;
 import dao.AuctionDAO;
 import dao.CategoryDAO;
 import dao.CityDAO;
+import dao.ImageDAO;
 import dao.RealEstateDAO;
 import dto.Auction;
 import dto.Category;
 import dto.City;
+import dto.Image;
 import dto.RealEstate;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -47,18 +49,21 @@ public class AuctionRoomServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = AUCTIONROOM;
         try {
-            String ID = request.getParameter("idRE3");
+            String IDRE = request.getParameter("idRE3");
+            System.out.println(IDRE);
             AuctionDAO auctionDAO = new AuctionDAO();
             List<Auction> auctions = auctionDAO.getAuctions();
             ArrayList<City> city = CityDAO.getCityList();
             ArrayList<Category> category = CategoryDAO.getListCategory();
+            Image imageforauction = ImageDAO.getImageByID(IDRE);
 
             
-            ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(ID);
+            ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(IDRE);
 
             request.setAttribute("REGETBYID", REGETBYID);
             request.setAttribute("city", city);
             request.setAttribute("category", category);
+            request.setAttribute("imageforauction", imageforauction);
 
             request.setAttribute("auctions", auctions);
 
