@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class changeInfoStaffServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String accid = request.getParameter("idChinhSua");
@@ -53,6 +53,8 @@ public class changeInfoStaffServlet extends HttpServlet {
             Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -72,6 +74,8 @@ public class changeInfoStaffServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(changeInfoStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
