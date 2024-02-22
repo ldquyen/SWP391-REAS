@@ -142,4 +142,47 @@ public class RealEstateDAO {
         }
         return list;
     }
+    
+    public static ArrayList<RealEstate> getRealEstateByID(String RealEstateID) throws ClassNotFoundException, SQLException, NamingException {
+        ArrayList<RealEstate> list = new ArrayList<>();
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address] ,[Detail] \n"
+                    + "FROM RealEstate WHERE [RealEstateID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, RealEstateID);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+
+                    String realEstateID = rs.getString("RealEstateID");
+                    String imageFolderID = rs.getString("ImageFolderID");
+                    String accID = rs.getString("AccID");
+                    String catID = rs.getString("CatID");
+                    int cityID = rs.getInt("CityID");
+                    String realEstateName = rs.getString("RealEstateName");
+                    long priceFirst = rs.getLong("PriceFirst");
+
+                    Timestamp timeUpSql = rs.getTimestamp("TimeUp");
+                    Timestamp timeDownSql = rs.getTimestamp("TimeDown");
+
+                    // Chuyển đổi Timestamp thành LocalDateTime
+                    LocalDateTime timeUp = timeUpSql.toLocalDateTime();
+                    LocalDateTime timeDown = timeDownSql.toLocalDateTime();
+                    long priceLast = rs.getLong("PriceLast");
+                    long pricePaid = rs.getLong("PricePaid");
+                    int statusid = rs.getInt("StatusID");
+                    int area = rs.getInt("Area");
+                    String address = rs.getString("Address");
+                    String detail = rs.getString("Detail");
+
+                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown, priceLast, pricePaid, statusid, area, address, detail);
+                    list.add(re);
+                }
+            }
+            cn.close();
+        }
+        return list;
+    }
 }
