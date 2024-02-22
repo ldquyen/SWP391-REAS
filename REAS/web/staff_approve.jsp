@@ -1,7 +1,7 @@
 <%-- 
-    Document   : staff
-    Created on : Jan 22, 2024, 11:54:20 PM
-    Author     : ASUS
+    Document   : staff_approve
+    Created on : Feb 20, 2024, 11:05:03 AM
+    Author     : ADMIN
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,8 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Staff Page</title>
-        <link rel="icon" type="image/x-icon" href="image/logo.png">
+        <title>JSP Page</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="staff.css" type="text/css" >
@@ -95,7 +94,7 @@
                                     <a class="navbar-item">
                                         <form action="StaffController" method="post">
                                             <button type="submit" value="approve" name="action">
-                                                <span>Danh sách đợi xét duyệt</span>
+                                                <span>Danh sách đang xét duyệt</span>
                                             </button>
                                         </form>
                                     </a>
@@ -110,100 +109,8 @@
                                     </a>
                                 </li>
                             </ul>
-                            <a class="">Đấu giá</a>
                         </li>
                     </ul>
-<!--                    <p class="menu-label">
-                        Administration
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Nhân viên</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="searchStaff" name="action">
-                                                <span>Tìm kiếm</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="addStaff" name="action">
-                                                <span>Thêm mới</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Doanh thu</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Tổng doanh thu</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Đấu giá</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Danh sách</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Kết quả</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <p class="menu-label">
-                        Transactions
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Ví tiền</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Thông tin ví tiền</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                    </ul>-->
 
 
                 </aside>

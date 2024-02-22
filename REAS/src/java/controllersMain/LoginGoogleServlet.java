@@ -45,7 +45,7 @@ public class LoginGoogleServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final String HOMEPAGE = "index_1.jsp";
+    private final String HOMEPAGE = "register.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
@@ -71,10 +71,23 @@ public class LoginGoogleServlet extends HttpServlet {
             String family_name = userGoogle.getFamily_name();
             String picture = userGoogle.getPicture();
 
+
+            // Tìm vị trí của chuỗi "@"
+            int atIndex = email.indexOf("@");
+
+            // Trích xuất phần đầu của chuỗi trước vị trí của "@"
+            String username = email.substring(0, atIndex);
+            
+            request.setAttribute("updateinfo", "Bạn cần cập nhật thêm một vài thông tin");
+            session.setAttribute("ggusername", username);
+            request.setAttribute("ggemail", email);
+            request.setAttribute("gggiven_name", given_name);
+
             GoogleDAO ggacc = new GoogleDAO();
 
             if (ggacc.checkIDGoogle(id)) {
                 error = true;
+                url = "index_1.jsp";
             } else {
                 boolean bl = ggacc.saveUserGoogle(id, email, verified_email, name, given_name, family_name, picture);
             }

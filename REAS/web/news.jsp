@@ -184,23 +184,23 @@
                                 <option value="ASC" <c:if test="${mucgia == 'ASC'}">selected</c:if>>Tăng dần</option>
                                 <option value="DESC" <c:if test="${mucgia == 'DESC'}">selected</c:if>>Giảm dần</option>
 
-                            </select>
+                                </select>
+                            </div>
                         </div>
+
                     </div>
-
+                    <div class="control button-search-container">
+                        <button class="button is-info button-search" type="submit" value="filterInNews" name="action">
+                            Lọc
+                        </button>
+                    </div>
                 </div>
-                <div class="control button-search-container">
-                    <button class="button is-info button-search" type="submit" value="filterInNews" name="action">
-                        Lọc
-                    </button>
-                </div>
-            </div>
-        </form>
-        <!-- BODY -->
-        <div>
+            </form>
+            <!-- BODY -->
+            <div>
 
-            <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 10px;margin-bottom: 10px; ">Những bất động sản đã trúng đấu giá </p>
-            <div style="text-align: center; border-radius: 45px;">
+                <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 10px;margin-bottom: 10px; ">Những bất động sản đã trúng đấu giá </p>
+                <div style="text-align: center; border-radius: 45px;">
                 <c:if test="${not empty requestScope.listRealEstateInNews}">
                     <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;">
                         <thead>

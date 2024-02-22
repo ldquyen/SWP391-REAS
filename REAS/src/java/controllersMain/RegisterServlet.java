@@ -91,6 +91,7 @@ public class RegisterServlet extends HttpServlet {
                     } while (acc.checkAccount(accid));
                     boolean bl = acc.insertAccount(accid, username, password2, fullname, email, phone, cccd, address, cccdregplace, cccdregdate, bankname, bankcode);
                     request.setAttribute("SUCCESS", "Đăng ký thành công, vui lòng đăng nhập");
+                    request.setAttribute("UsernameRegister", username);
                     request.getRequestDispatcher("MainController?action=DN").forward(request, response);
                 }
             } else {

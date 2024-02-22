@@ -47,7 +47,23 @@ public class AuctionRoomServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = AUCTIONROOM;
         try {
-            
+            String ID = request.getParameter("idRE3");
+            AuctionDAO auctionDAO = new AuctionDAO();
+            List<Auction> auctions = auctionDAO.getAuctions();
+            ArrayList<City> city = CityDAO.getCityList();
+            ArrayList<Category> category = CategoryDAO.getListCategory();
+
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address] ,[Detail] \n"
+                    + "FROM RealEstate WHERE [RealEstateID] = ?";
+            ArrayList<RealEstate> listRE2 = RealEstateDAO.getRealEstateByStatus(sql, 2);
+            ArrayList<RealEstate> listRE3 = RealEstateDAO.getRealEstateByStatus(sql, 3);
+
+            request.setAttribute("listRE2", listRE2);
+            request.setAttribute("listRE3", listRE3);
+            request.setAttribute("city", city);
+            request.setAttribute("category", category);
+
+            request.setAttribute("auctions", auctions);
 
         } catch (Exception e) {
             e.printStackTrace();

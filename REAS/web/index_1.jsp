@@ -153,6 +153,10 @@
             </div>
         </nav>
 
+        <div class="stream_text-container" id="streamContainer">
+            <div class="stream_text" id="streamText">Biệt thự khu đô thị Sala đã trúng đấu giá với giá tiền 30 tỷ đồng</div>
+        </div>
+
         <!-- BODY -->
         <form action="MainController" method="post">
             <div class="search-container">
@@ -291,5 +295,36 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            // Get the element with the ID 'streamText'
+            const streamText = document.getElementById('streamText');
+            const streamContainer = document.getElementById('streamContainer');
+
+// Check if the element was found
+
+            // If the element exists, calculate its width
+            const textWidth = streamText.offsetWidth; // Độ dài của văn bản
+
+            // Calculate animation duration based on text width
+            const animationDuration = (textWidth / 100) * 0.5; // 100 pixels/second
+
+            // Apply the animation duration to the 'stream_text' class
+            streamText.style.animationDuration = animationDuration + 's';
+
+
+            // Check if there is text inside the streamText element
+            if (streamText.textContent.trim().length > 0) {
+                // Add the stream_text-container class to the container
+                streamContainer.classList.add('stream_text-container-2');
+            }
+
+            // Listen for the end of the animation
+            streamText.addEventListener('animationend', function () {
+                // Remove the background color class from the container
+                streamContainer.classList.remove('stream_text-container-2');
+            });
+
+        </script>
     </body>
 </html>

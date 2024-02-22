@@ -1,0 +1,37 @@
+.column {
+    padding: 1.75rem;
+}
+
+.menu-list-subnav {
+    display: none;
+}
+
+li:hover .menu-list-subnav {
+    display: block;
+}
+
+.menu-list a:active,
+.menu-list a:hover,
+.menu-list a:focus
+{
+    background-color: #D9AB73;
+    color: #fff;
+}
+
+.field {
+    padding: 0 ;
+}
+/*.menu-list-subnav {
+    color: #D9AB73;
+    background-color: #000;
+}
+
+*/.menu-list-subnav li button {
+    /*color: #D9AB73;*/
+    /*background-color: #000;*/
+}
+
+a.navbar-item:hover {
+     color: transparent; 
+     background-color: initial; 
+}

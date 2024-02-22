@@ -149,9 +149,51 @@
             </div>
         </nav>
 
-        <div class="list-auction-p-container" style="">
-            <p class="list-auction-p">Danh sách đấu giá</p>
-        </div>
+        <form action="MemberController" method="post" style="margin: 0 auto; width: 40%; margin-top: 20px">
+            <div class="field has-addons">
+                <div class="search-detail-container">
+                    <div class="control">
+                        <div class="select">
+                            <select class="custom-select" name="loaihinhbds">
+                                <option value="">Loại hình BĐS</option>
+                                <c:forEach var="locCategory" items="${sessionScope.CATEGORYLIST}">
+                                    <option value="${locCategory.catID}" <c:if test="${loaihinhbds eq locCategory.catID}">selected</c:if>>${locCategory.catName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="select" >
+                            <select class="custom-select" name="thanhpho">
+                                <option value="">Thành phố</option>
+                                <c:forEach var="locCity" items="${sessionScope.CITYLIST}">
+                                    <option value="${locCity.cityID}" <c:if test="${thanhpho eq locCity.cityID }">selected</c:if>>${locCity.cityName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <div class="select">
+                            <select class="custom-select" name="mucgia">
+                                <option value="">Mức giá</option>
+                                <option value="ASC" <c:if test="${mucgia == 'ASC'}">selected</c:if>>Tăng dần</option>
+                                <option value="DESC" <c:if test="${mucgia == 'DESC'}">selected</c:if>>Giảm dần</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="control button-search-container">
+                        <button class="button is-info button-search" type="submit" value="filterInNews" name="action">
+                            Lọc
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="list-auction-p-container" style="">
+                <p class="list-auction-p">Danh sách đấu giá</p>
+            </div>
+
+
 
 
         <c:if test="${empty auctions}">
@@ -168,6 +210,7 @@
                             <th>Tỉnh, TP</th>
                             <th>Loại hình</th>
                             <th>Giá khởi điểm</th>
+                            <th>Giá mua ngay</th>
                             <th>Thời gian</th>
                             <th>Đăng kí</th>
                         </tr>
@@ -196,6 +239,7 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE3.priceFirst}</td>
+                                <td class="test">${listRE3.pricePaid}</td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
@@ -209,6 +253,7 @@
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
                                             <form action="MemberController" method="post">
+                                                <input type="hidden" name="idRE3" value="${auctions.realEstateID eq listRE3.realEstateID}">
                                                 <button class="button-xem" type="submit" value="xemroom" name="action">
                                                     <span>Xem</span>
                                                 </button>
@@ -242,6 +287,7 @@
                                     </c:forEach>
                                 </td>
                                 <td>${listRE2.priceFirst}</td>
+                                <td class="test">${listRE2.pricePaid}</td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">

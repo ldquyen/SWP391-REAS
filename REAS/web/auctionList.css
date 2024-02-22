@@ -30,16 +30,44 @@ select:-webkit-autofill:focus {
     color: #00ff00; /* Green text color */
     text-align: center;
     animation: glowing 1.5s infinite alternate;
-  }
-  
-  @keyframes glowing {
+}
+
+@keyframes glowing {
     from {
-      color: #00ff00; /* Start with green */
+        color: #00ff00; /* Start with green */
     }
     to {
-      color: #aaffaa; /* Transition to a lighter shade of green */
+        color: #aaffaa; /* Transition to a lighter shade of green */
     }
-  }
+}
+
+@-webkit-keyframes my {
+	 0% { color: #F8CD0A; } 
+	 50% { color: #fff;  } 
+	 100% { color: #F8CD0A;  } 
+ }
+ @-moz-keyframes my { 
+	 0% { color: #F8CD0A;  } 
+	 50% { color: #fff;  }
+	 100% { color: #F8CD0A;  } 
+ }
+ @-o-keyframes my { 
+	 0% { color: #F8CD0A; } 
+	 50% { color: #fff; } 
+	 100% { color: #F8CD0A;  } 
+ }
+ @keyframes my { 
+	 0% { color: #F8CD0A;  } 
+	 50% { color: #fff;  }
+	 100% { color: #F8CD0A;  } 
+ } 
+ .test {
+         font-weight:bold;
+	 -webkit-animation: my 1000ms infinite;
+	 -moz-animation: my 1000ms infinite; 
+	 -o-animation: my 1000ms infinite; 
+	 animation: my 1000ms infinite;
+}
 
 body {
     font-family: Inter;
