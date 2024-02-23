@@ -238,8 +238,20 @@
                                         </c:if>
                                     </c:forEach>
                                 </td>
-                                <td>${listRE3.priceFirst}</td>
-                                <td class="test">${listRE3.pricePaid}</td>
+                                <td>
+                                    <script>
+                                        var number = ${listRE3.priceFirst}; // Assuming auctions.lamda contains the number
+                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                        document.write(formattedNumber);
+                                    </script>
+                                </td>
+                                <td class="test">
+                                    <script>
+                                        var number = ${listRE3.pricePaid}; // Assuming auctions.lamda contains the number
+                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                        document.write(formattedNumber);
+                                    </script>
+                                </td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
@@ -286,8 +298,20 @@
                                         </c:if>
                                     </c:forEach>
                                 </td>
-                                <td>${listRE2.priceFirst}</td>
-                                <td class="test">${listRE2.pricePaid}</td>
+                                <td>
+                                    <script>
+                                        var number = ${listRE2.priceFirst}; // Assuming auctions.lamda contains the number
+                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                        document.write(formattedNumber);
+                                    </script>
+                                </td>
+                                <td class="test">
+                                    <script>
+                                        var number = ${listRE2.pricePaid}; // Assuming auctions.lamda contains the number
+                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                        document.write(formattedNumber);
+                                    </script>
+                                </td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">

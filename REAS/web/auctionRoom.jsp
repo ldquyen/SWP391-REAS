@@ -248,9 +248,30 @@
                                     <div class="column" style="padding: 1.2rem 2.75rem;">
                                         <h1 class="flex-center h1-text-left-right">Thông tin đấu giá cơ bản</h1>
                                         <div style="padding-top: 8px;">
-                                            <p class="bold-text">Giá khởi điểm: <span>${REGETBYID.priceFirst} VND</span></p>
-                                            <p class="bold-text">Bước giá: <span>${REGETBYID.priceLast} VND</span></p>
-                                            <p class="bold-text">Thời gian bắt đầu đấu giá: </br><span>${REGETBYID.timeUp} - ${REGETBYID.timeDown}</span></p>
+                                            <p class="bold-text">Giá khởi điểm: <span>
+                                                    <script>
+                                                        var number = ${REGETBYID.priceFirst}; // Assuming auctions.lamda contains the number
+                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                        document.write(formattedNumber);
+                                                    </script> VND</span></p>
+                                                    <p class="bold-text">Giá mua ngay: <span class="test"><script>
+                                                var number = ${REGETBYID.pricePaid}; // Assuming auctions.lamda contains the number
+                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                document.write(formattedNumber);
+                                                    </script> VND</span>
+                                            <p class="bold-text">Bước giá: <span>
+                                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                                            <script>
+                                                                var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
+                                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                                document.write(formattedNumber);
+                                                            </script>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                    VND</span></p>
+                                            <p class="bold-text">Thời gian đấu giá: <br/><span>${REGETBYID.timeUp} - ${REGETBYID.timeDown}</span></p>
+
                                         </div>
                                     </div>
                                 </div>
@@ -290,7 +311,22 @@
                 <div class="register-modal-container" style="margin-top: 25px">
                     <h1 style="font-size: 20px; padding: 4px 0px;color: #D9AB73;font-weight: bold;">Giá hiện tại: 50.300.000.000 VND</h1>
                     <div class="number-price-container number-price-container-bellow">
-                        <p class="number-price-bellow-1">15.000.000</p>
+                        <p class="number-price-bellow-1">
+                            <c:if test="${not empty auctions}">
+                                <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                            <script>
+                                                var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
+                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                document.write(formattedNumber);
+                                            </script>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                            </c:if>
+                        </p>
+
                         <p class="number-price-bellow-2">X</p>
                         <p id="quantity-field">
                             <button id="down" onclick="setQuantity('down');" style="color: #fff">-</button>
@@ -380,7 +416,7 @@
                 updateTotalPrice();
             }
         </script>
-        
+
         <script>
             var auctionTimeEndElements = document.querySelectorAll(".auctionTimeEnd");
 
