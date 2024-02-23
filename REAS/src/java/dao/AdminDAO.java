@@ -25,6 +25,25 @@ import mylib.DBUtils;
  */
 public class AdminDAO {
 
+    
+    public int getListUserCount() {
+        int count = 0;
+        String sql = "SELECT count(*) FROM dbo.[Account] WHERE RoleID = ? ";
+        try {
+            String statusId = "M";
+            Connection cn = DBUtils.getConnection();
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, statusId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
 
     public List<UserVM> getListMember() throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<UserVM> listMemebers = new ArrayList<>();
@@ -59,16 +78,18 @@ public class AdminDAO {
     }
 
 
-    public List<UserVM> getListMemberWallet() throws ClassNotFoundException, SQLException, NamingException {
+   public List<UserVM> getListMemberWallet(int offset) throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<UserVM> listMemebers = new ArrayList<>();
         String statusId = "M";
         Connection cn = null;
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                String sql = "SELECT * FROM dbo.[Account] acc JOIN dbo.[Wallet] w ON acc.AccID = w.AccID WHERE RoleID = ? ";
+                String sql = "SELECT * FROM dbo.[Account] acc JOIN dbo.[Wallet] w ON acc.AccID = w.AccID WHERE RoleID = ? "
+                        + "order by acc.DateOfReg desc offset ? row fetch next 5 rows only";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, statusId);
+                pst.setInt(2, (offset - 1) * 5);
                 ResultSet rs = pst.executeQuery();
                 if (rs != null) {
                     while (rs.next()) {
@@ -99,6 +120,7 @@ public class AdminDAO {
         }
         return null;
     }
+
 
 
     public int editUserWallet(String accId, double fund, double currentFund, String editAction) throws ClassNotFoundException, SQLException, NamingException {

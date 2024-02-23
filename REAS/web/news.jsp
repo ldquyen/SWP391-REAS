@@ -61,7 +61,7 @@
                         <div class="navbar-container-1">
                             <form action="MainController" method="post">
                                 <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                    <span>DS ĐẤU GIÁ</span>
+                                    <span>DANH SÁCH ĐẤU GIÁ</span>
                                 </button>
                             </form>
                         </div>
@@ -233,7 +233,13 @@
                                         </c:forEach>
                                     </td>
                                     <td style="border: 1px solid #D9AB73; padding: 8px;">${r.timeDown}</td>
-                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${r.priceLast}</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        <script>
+                                            var number = ${r.priceLast}; // Assuming auctions.lamda contains the number
+                                            var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                            document.write(formattedNumber);
+                                        </script>
+                                    </td>
                                 </tr>
                             </c:forEach>
 

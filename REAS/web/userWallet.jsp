@@ -1,5 +1,3 @@
-[userWallet.jsp]
-
 <%-- 
     Document   : admin
     Created on : Jan 22, 2024, 11:54:07 PM
@@ -274,7 +272,7 @@
                                 <div class="modal-content"> 
                                     <form action="AdminController">
                                         <input type="hidden" name="action" value="editUserWallet">
-                                         <input type="hidden" name="editAction" value="refund">
+                                        <input type="hidden" name="editAction" value="refund">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">${user.fullName}'s Wallet</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -301,9 +299,13 @@
                             </div>
                         </div>
                     </c:forEach>
-
                     </tbody>
                 </table>
+                <div class="admin-paged" style="display: flex">
+                    <c:forEach begin="1" end="${lastPage}" var="i">
+                        <a href="AdminController?action=userWalletPage&index=${i}" style="color: #000; font-size: 20px; padding: 0 20px">${i}</a>
+                    </c:forEach>
+                </div>
 
             </div>
         </div>

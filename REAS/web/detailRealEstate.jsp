@@ -54,7 +54,7 @@
                         <div class="navbar-container-1">
                             <form action="MainController" method="post">
                                 <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                    <span>DS ĐẤU GIÁ</span>
+                                    <span>DANH SÁCH ĐẤU GIÁ</span>
                                 </button>
                             </form>
                         </div>
@@ -171,21 +171,21 @@
                             <div class="numbertext">3 / 3</div>
                             <img src="data:image/jpeg;base64,${item.image3}" style="width:100%">
                         </div>
-<!--
-                        <div class="mySlides">
-                            <div class="numbertext">4 / 6</div>
-                            <img src="image/img_lights_wide.jpg" style="width:100%">
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="numbertext">5 / 6</div>
-                            <img src="image/img_nature_wide.jpg" style="width:100%">
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="numbertext">6 / 6</div>
-                            <img src="image/img_snow_wide.jpg" style="width:100%">
-                        </div>-->
+                        <!--
+                                                <div class="mySlides">
+                                                    <div class="numbertext">4 / 6</div>
+                                                    <img src="image/img_lights_wide.jpg" style="width:100%">
+                                                </div>
+                        
+                                                <div class="mySlides">
+                                                    <div class="numbertext">5 / 6</div>
+                                                    <img src="image/img_nature_wide.jpg" style="width:100%">
+                                                </div>
+                        
+                                                <div class="mySlides">
+                                                    <div class="numbertext">6 / 6</div>
+                                                    <img src="image/img_snow_wide.jpg" style="width:100%">
+                                                </div>-->
 
                         <!-- Next and previous buttons -->
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -207,15 +207,15 @@
                             <div class="column">
                                 <img class="demo cursor" src="data:image/jpeg;base64,${item.image3}" style="width:100%; min-height: 100px" onclick="currentSlide(3)" alt="Mountains and fjords">
                             </div>
-<!--                            <div class="column">
-                                <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(4)" alt="Northern Lights">
-                            </div>
-                            <div class="column">
-                                <img class="demo cursor" src="image/img_nature_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(5)" alt="Nature and sunrise">
-                            </div>
-                            <div class="column">
-                                <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(6)" alt="Snowy Mountains">
-                            </div>-->
+                            <!--                            <div class="column">
+                                                            <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(4)" alt="Northern Lights">
+                                                        </div>
+                                                        <div class="column">
+                                                            <img class="demo cursor" src="image/img_nature_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(5)" alt="Nature and sunrise">
+                                                        </div>
+                                                        <div class="column">
+                                                            <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(6)" alt="Snowy Mountains">
+                                                        </div>-->
                         </div>
                     </div>
                     <div class="container-full-bellow">
@@ -229,7 +229,7 @@
                                     <p class="bold-text">Địa chỉ: <span> ${realEstate.address}</span></p>
                                 </div>
                             </div>
-                             <div class="divider"></div>
+                            <div class="divider"></div>
                             <div class="column" style="padding: 1.2rem 2.75rem;">
                                 <h1 class="flex-center h1-text-left-right">Thông tin đấu giá cơ bản</h1>
                                 <div style="padding-top: 8px;">
