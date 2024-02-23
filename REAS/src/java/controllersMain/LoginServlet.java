@@ -52,7 +52,8 @@ public class LoginServlet extends HttpServlet {
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
-            String password2 = dao.encodePassword(password);
+//            String password2 = dao.encodePassword(password);
+            String password2 = password;
             Account dto = dao.checkLogin(username, password2);
 
             if (dto == null) {
