@@ -910,3 +910,18 @@ button {
     display: flex;
     justify-content: space-around;
 }
+
+.glow {
+    color: #00ff00; /* Green text color */
+    text-align: center;
+    animation: glowing 1.5s infinite alternate;
+}
+
+@keyframes glowing {
+    from {
+        color: #00ff00; /* Start with green */
+    }
+    to {
+        color: #aaffaa; /* Transition to a lighter shade of green */
+    }
+}

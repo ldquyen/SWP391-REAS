@@ -183,8 +183,18 @@
                 </div>
                 <div style="width: 100%; display: flex; justify-content: center">
                     <div class="list-auction-p-container" style="">
-                        <p class="list-auction-p-1">Đấu giá viên: Trương Gia Bình</p>
-                        <p class="list-auction-p-2">00:15:32</p>
+                        <c:if test="${not empty auctions}">
+                            <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                    <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                        <p class="list-auction-p-1">Đấu giá viên: Trương Gia Bình</p>
+                                        <div class="auctionTimeEnd list-auction-p-2">
+                                            <p style="display: none;">${auctions.timeEnd}</p>
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -292,6 +302,84 @@
                 // Update total price based on the new quantity
                 updateTotalPrice();
             }
+        </script>
+
+        <script>
+            var auctionTimeEndElements = document.querySelectorAll(".auctionTimeEnd");
+
+            function formatDateTime(originalDateTime) {
+                // Remove leading and trailing quotes from the original datetime string
+                originalDateTime = originalDateTime.replace(/^"|"$/g, '');
+
+                // Parse the original datetime string
+                var dateTimeParts = originalDateTime.split('T');
+                var datePart = dateTimeParts[0];
+                var timePart = dateTimeParts[1].split(':');
+
+                var yearMonthDay = datePart.split('-');
+                var year = parseInt(yearMonthDay[0]);
+                var month = parseInt(yearMonthDay[1]);
+                var day = parseInt(yearMonthDay[2]);
+
+                // Check if year, month, or day parsing failed
+                if (isNaN(year) || isNaN(month) || isNaN(day)) {
+                    console.error("Failed to parse year, month, or day:", yearMonthDay);
+                    return ""; // Return an empty string to indicate failure
+                }
+
+                var hours = parseInt(timePart[0]);
+                var minutes = parseInt(timePart[1]);
+                var seconds = 0; // Mặc định giây là 0
+                if (timePart.length > 2 && timePart[2].length >= 2) {
+                    seconds = parseInt(timePart[2].substring(0, 2)); // Extract seconds and convert to integer
+                }
+
+
+                // Get the month name
+                var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                var monthName = monthNames[month - 1]; // Month is 0-indexed in JavaScript
+
+                // Format the datetime string
+                var formattedDateTime = monthName + ' ' + day + ', ' + year + ' ' +
+                        hours + ':' + minutes + ':' + seconds;
+
+                return formattedDateTime;
+            }
+
+            function startCountdown(element) {
+                var originalDateTime = '"' + element.textContent.trim() + '"';
+                var formattedDateTime = formatDateTime(originalDateTime);
+                var countDownDate = new Date(formattedDateTime).getTime();
+
+                var x = setInterval(function () {
+                    var now = new Date().getTime();
+                    var distance = countDownDate - now;
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    var countdownDisplay = "";
+                    if (days > 0) {
+                        countdownDisplay += days + " ngày ";
+                    }
+                    countdownDisplay += (hours < 10 ? "0" : "") + hours + ":" +
+                            (minutes < 10 ? "0" : "") + minutes + ":" +
+                            (seconds < 10 ? "0" : "") + seconds;
+
+                    element.innerHTML = countdownDisplay;
+
+                    if (distance <= 0) {
+                        clearInterval(x);
+                        element.innerHTML = "<span class='glow' style='color: red;'>Đấu giá đã kết thúc</span>";
+                    }
+                }, 1000);
+            }
+
+            auctionTimeEndElements.forEach(function (element) {
+                startCountdown(element);
+            });
         </script>
     </body>
 </html>
