@@ -19,23 +19,40 @@ import model.UserVM;
  */
 public class GetListUserServlet extends HttpServlet {
 
-    @Override
+      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = "";
         try {
-            AdminDAO adminDAO = new AdminDAO();
-            List<UserVM> listMenbers = adminDAO.getListMemberWallet();
-            if(listMenbers.size() > 0 || listMenbers.isEmpty()) {
-                request.setAttribute("listUserWallet", listMenbers);
-                url = "userWallet.jsp";
-            } else {
-                System.out.println("get list User Error");
+            String indexPage = request.getParameter("index");
+            if (indexPage == null) {
+                indexPage = "1";
             }
-        } catch (Exception e) { 
-}
-        request.getRequestDispatcher(url).forward(request, response);
+            int index = Integer.parseInt(indexPage);
+            AdminDAO adminDAO = new AdminDAO();
+            int count = adminDAO.getListUserCount();
+            if (count > 0) {
+                int lastPage = count / 5;
+                if (count % 5 != 0) {
+                    lastPage++;
+                }
+                List<UserVM> listMenbers = adminDAO.getListMemberWallet(index);
+                if (listMenbers.size() > 0 || listMenbers.isEmpty()) {
+                    request.setAttribute("listUserWallet", listMenbers);
+                    request.setAttribute("lastPage", lastPage);
+                    url = "userWallet.jsp";
+                } else {
+                    System.out.println("get list User Error");
+                }
+            } else {
+                System.out.println("Cannot get list user");
+            }
+        } catch (Exception e) {
+        }
+        request.getRequestDispatcher(url)
+                .forward(request, response);
     }
+
 
 
     @Override
