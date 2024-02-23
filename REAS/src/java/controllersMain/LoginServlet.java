@@ -18,9 +18,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dao.AccountDAO;
+import dao.RealEstateDAO;
 import dto.Account;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+import model.RealEstateVM;
 
 /**
  *
@@ -68,6 +70,9 @@ public class LoginServlet extends HttpServlet {
                 Account a = dao.getAccount(username, password2);
                 session.setAttribute("admin", a);
             } else if ("M".equals(dto.getRoleID())) {
+                RealEstateDAO realEstateDAO = new RealEstateDAO();
+                List<RealEstateVM> list = realEstateDAO.getListAvailableRealEstate();
+                request.setAttribute("list", list);
                 url = "index_1.jsp";
                 HttpSession session = request.getSession(true);
                 Account m = dao.getAccount(username, password2);
