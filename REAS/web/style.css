@@ -611,7 +611,7 @@ button {
     white-space: nowrap;
     font-size: 20px;
     font-family: Inter;
-    animation: stream linear;
+    animation: stream linear infinite;
 }
 
 .stream_text-container {
@@ -619,10 +619,10 @@ button {
     display: flex;
     height: 30px;
     overflow: hidden;
+    background-color: #D9AB73;
 }
 
 .stream_text-container-2{
-    background-color: #D9AB73;
 }
 
 @keyframes stream {

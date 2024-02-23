@@ -58,7 +58,7 @@
                         <div class="navbar-container-1">
                             <form action="MainController" method="post">
                                 <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                    <span>DS ĐẤU GIÁ</span>
+                                    <span>DANH SÁCH ĐẤU GIÁ</span>
                                 </button>
                             </form>
                         </div>
@@ -311,19 +311,19 @@
 
             // Apply the animation duration to the 'stream_text' class
             streamText.style.animationDuration = animationDuration + 's';
-
-
-            // Check if there is text inside the streamText element
-            if (streamText.textContent.trim().length > 0) {
-                // Add the stream_text-container class to the container
-                streamContainer.classList.add('stream_text-container-2');
-            }
-
-            // Listen for the end of the animation
-            streamText.addEventListener('animationend', function () {
-                // Remove the background color class from the container
-                streamContainer.classList.remove('stream_text-container-2');
-            });
+//
+//
+//            // Check if there is text inside the streamText element
+//            if (streamText.textContent.trim().length > 0) {
+//                // Add the stream_text-container class to the container
+//                streamContainer.classList.add('stream_text-container-2');
+//            }
+//
+//            // Listen for the end of the animation
+//            streamText.addEventListener('animationend', function () {
+//                // Remove the background color class from the container
+//                streamContainer.classList.remove('stream_text-container-2');
+//            });
 
         </script>
     </body>
