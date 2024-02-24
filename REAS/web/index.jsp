@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="i" %>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -133,13 +133,21 @@
                                  class="resalestate-image" alt="none" />
                             <div class="text-home-container">
                                 <p class="text-home-1">
-                                    Thoi gian: ${item.timeUp}
+                                    ${item.timeUp}
                                 </p>
                                 <p class="text-home-2">
-                                    Dia chi:  ${item.address}
+                                    ${item.realEstateName}
                                 </p>
                                 <p class="text-home-2">
-                                    Price: <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd
+                                    ${item.address}
+                                </p>
+                                <p class="text-home-3">
+                                    <script>
+                                        var number = ${item.priceFirst}; // Assuming auctions.lamda contains the number
+                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                        document.write(formattedNumber);
+                                    </script> VND
+                                    <%--  <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd --%>
                                 </p>
                             </div>
                         </a>
@@ -208,48 +216,48 @@
                 </div>
             </footer>
     </body>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const swiper = new Swiper('.swiper', {
-            slidesPerView: 4,
-            spaceBetween: 25,
-            // loop: true,
-            centeredSlide: 'true',
-            direction: 'horizontal',
-            fade: 'true',
-            grabCursor: 'true',
-            pagination: {
-                clickable: true,
-                renderBullet: function (index, className) {
-                    return '<span class="' + className + '">' + (index + 1) + "</span>";
-                },
-                el: '.swiper-pagination',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+                                        const swiper = new Swiper('.swiper', {
+                                            slidesPerView: 4,
+                                            spaceBetween: 25,
+                                            // loop: true,
+                                            centeredSlide: 'true',
+                                            direction: 'horizontal',
+                                            fade: 'true',
+                                            grabCursor: 'true',
+                                            pagination: {
+                                                clickable: true,
+                                                renderBullet: function (index, className) {
+                                                    return '<span class="' + className + '">' + (index + 1) + "</span>";
+                                                },
+                                                el: '.swiper-pagination',
+                                            },
+                                            navigation: {
+                                                nextEl: '.swiper-button-next',
+                                                prevEl: '.swiper-button-prev',
+                                            },
 
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
+                                            scrollbar: {
+                                                el: '.swiper-scrollbar',
+                                            },
 
-            breakpoints: {
-                0: {
-                    slidesPerView: 1,
-                },
-                520: {
-                    slidesPerView: 2,
-                },
-                950: {
-                    slidesPerView: 3,
-                },
-                1024: {
-                    slidesPerView: 4,
-                }
-            }
-        });
+                                            breakpoints: {
+                                                0: {
+                                                    slidesPerView: 1,
+                                                },
+                                                520: {
+                                                    slidesPerView: 2,
+                                                },
+                                                950: {
+                                                    slidesPerView: 3,
+                                                },
+                                                1024: {
+                                                    slidesPerView: 4,
+                                                }
+                                            }
+                                        });
     </script>
 </html>
 
