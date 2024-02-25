@@ -67,7 +67,7 @@ public class HomeServlet extends HttpServlet {
         try {
             int pageNum = request.getParameter("pagenum") != null ? Integer.parseInt(request.getParameter("pagenum")) : 1;
             RealEstateDAO realEstateDAO = new RealEstateDAO();
-            ImageDAO imgDAO = new ImageDAO();
+            
             String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
                     + "FROM RealEstate WHERE [Status] = ?";
 //            List<RealEstate> list = Pagination.paging(realEstateDAO.getRealEstateByStatus(sql, 1), pageNum);
@@ -78,6 +78,7 @@ public class HomeServlet extends HttpServlet {
 
             List<RealEstateVM> list = realEstateDAO.getListAvailableRealEstate();
             request.setAttribute("list", list);
+            ImageDAO imgDAO = new ImageDAO();
             List<Image> listImage = imgDAO.getListImage2();
             request.setAttribute("listImg", listImage);
             request.setAttribute("pagenum", pageNum);

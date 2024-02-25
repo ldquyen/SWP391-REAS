@@ -6,6 +6,7 @@
 
 <%@page import="dto.UserGoogle"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -284,6 +285,9 @@
                 <c:forEach items="${list}" var="item">
                     <div class=" realestate-items swiper-slide"> 
                         <a href="MainController?action=viewPostRealEstate&id=${item.realEstateID}">
+                            <c:forEach var="img" items="${listImg}">
+                                <c:if test="${img.imageFolderID eq item.imageFolderID}"> <img src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image1)}" alt="Image"></c:if>
+                            </c:forEach>
                             <img src="data:image/jpeg;base64,${item.image1}" style="display: flex;"
                                  class="resalestate-image" alt="none" />
                             <div class="text-home-container">
@@ -291,10 +295,10 @@
                                     ${item.timeUp}
                                 </p>
                                 <p class="text-home-2">
-                                   ${item.realEstateName}
+                                    ${item.realEstateName}
                                 </p>
                                 <p class="text-home-2">
-                                   ${item.address}
+                                    ${item.address}
                                 </p>
                                 <p class="text-home-3">
                                     <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd
