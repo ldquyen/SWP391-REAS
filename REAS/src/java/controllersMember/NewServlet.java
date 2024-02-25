@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dto.Image;
+import dao.ImageDAO;
 public class NewServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -35,6 +37,9 @@ public class NewServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("CITYLIST", listCity);
             session.setAttribute("CATEGORYLIST", listCategory);
+            
+            ArrayList<Image> list = ImageDAO.getListImageByFolderID("folder1");
+            request.setAttribute("imageList", list);
             request.getRequestDispatcher("MemberController?action=newsjsp").forward(request, response);         
         }
     }

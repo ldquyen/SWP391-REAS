@@ -143,6 +143,22 @@
                     </ul>
                     <ul class="menu-list">
                         <li>
+                            <a class="">Thành viên</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="searchStaff" name="action">
+                                                <span>Tìm kiếm</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>                                
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu-list">
+                        <li>
                             <a class="">Doanh thu</a>
                             <ul class="menu-list-subnav">
                                 <li>
@@ -208,7 +224,7 @@
 
                 </aside>
             </div>
-            <div class="column" style="height: 100vh;">Auto</div>
+            <div class="column" style="height: 100vh;">Admin page</div>
         </div>
 
         <!-- BODY -->

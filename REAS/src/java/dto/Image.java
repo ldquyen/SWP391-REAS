@@ -1,9 +1,7 @@
 package dto;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+
+import java.util.Base64;
 
 public class Image {
 
@@ -59,18 +57,30 @@ public class Image {
         return "Image{" + "imageFolderID=" + imageFolderID + ", imageLink1=" + imageLink1 + ", imageLink2=" + imageLink2 + ", imageLink3=" + imageLink3 + '}';
     }
     
-    public BufferedImage getImage1BufferedImage() throws IOException {
-        ByteArrayInputStream bis = new ByteArrayInputStream(imageLink1);
-        return ImageIO.read(bis);
+    public String getBase64Image1() {
+        return Base64.getEncoder().encodeToString(imageLink1);
     }
-
-    public BufferedImage getImage2BufferedImage() throws IOException {
-        ByteArrayInputStream bis = new ByteArrayInputStream(imageLink2);
-        return ImageIO.read(bis);
+    
+    public String getBase64Image2() {
+        return Base64.getEncoder().encodeToString(imageLink2);
     }
-
-    public BufferedImage getImage3BufferedImage() throws IOException {
-        ByteArrayInputStream bis = new ByteArrayInputStream(imageLink3);
-        return ImageIO.read(bis);
+    
+    public String getBase64Image3() {
+        return Base64.getEncoder().encodeToString(imageLink3);
     }
+    
+//    public BufferedImage getImage1BufferedImage() throws IOException {
+//        ByteArrayInputStream bis = new ByteArrayInputStream(imageLink1);
+//        return ImageIO.read(bis);
+//    }
+//
+//    public BufferedImage getImage2BufferedImage() throws IOException {
+//        ByteArrayInputStream bis = new ByteArrayInputStream(imageLink2);
+//        return ImageIO.read(bis);
+//    }
+//
+//    public BufferedImage getImage3BufferedImage() throws IOException {
+//        ByteArrayInputStream bis = new ByteArrayInputStream(imageLink3);
+//        return ImageIO.read(bis);
+//    }
 }
