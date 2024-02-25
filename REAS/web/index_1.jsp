@@ -6,6 +6,7 @@
 
 <%@page import="dto.UserGoogle"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -58,7 +59,7 @@
                         <div class="navbar-container-1">
                             <form action="MainController" method="post">
                                 <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                    <span>DS ĐẤU GIÁ</span>
+                                    <span>DANH SÁCH ĐẤU GIÁ</span>
                                 </button>
                             </form>
                         </div>
@@ -278,53 +279,123 @@
             </div>
         </form>
 
-        <footer class="footer"> 
-            <div>
-                <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
-                <div class="footer-container">
-                    <div class="footer-left-content"> Liên hệ:<br/>
-                        Email: reas@gmail.com<br/>
-                        Điện thoại: +84 (24) 8888 9999<br/>
-                        <br/>
+        <div class="swiper postElstate-container">
+            <div class="swiper-wrapper postElstate-list">
+                <c:forEach items="${list}" var="item">
+                    <div class=" realestate-items swiper-slide"> 
+                        <a href="MainController?action=viewPostRealEstate&id=${item.realEstateID}">
+                            <img src="data:image/jpeg;base64,${item.image1}" style="display: flex;"
+                                 class="resalestate-image" alt="none" />
+                            <div class="text-home-container">
+                                <p class="text-home-1">
+                                    ${item.timeUp}
+                                </p>
+                                <p class="text-home-2">
+                                   ${item.realEstateName}
+                                </p>
+                                <p class="text-home-2">
+                                   ${item.address}
+                                </p>
+                                <p class="text-home-3">
+                                    <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd
+                                </p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="footer-mid-content"> Trụ sở chính:<br/>
-                        Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
-                        <br/>
-                    </div>
-                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
-                </div>
-            </div>
-        </footer>
 
-        <script>
-            // Get the element with the ID 'streamText'
-            const streamText = document.getElementById('streamText');
-            const streamContainer = document.getElementById('streamContainer');
+                </c:forEach>
+            </div>
+            <div class="swiper-pagination pagination-style"></div>
+            <div class="swiper-button-prev swiper-navBtn"></div>
+            <div class="swiper-button-next swiper-navBtn"></div>
+
+            <footer class="footer"> 
+                <div>
+                    <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
+                    <div class="footer-container">
+                        <div class="footer-left-content"> Liên hệ:<br/>
+                            Email: reas@gmail.com<br/>
+                            Điện thoại: +84 (24) 8888 9999<br/>
+                            <br/>
+                        </div>
+                        <div class="footer-mid-content"> Trụ sở chính:<br/>
+                            Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
+                            <br/>
+                        </div>
+                        <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    </div>
+                </div>
+            </footer>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 4,
+            spaceBetween: 25,
+            // loop: true,
+            centeredSlide: 'true',
+            direction: 'horizontal',
+            fade: 'true',
+            grabCursor: 'true',
+            pagination: {
+                clickable: true,
+                renderBullet: function (index, className) {
+                    return '<span class="' + className + '">' + (index + 1) + "</span>";
+                },
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                520: {
+                    slidesPerView: 2,
+                },
+                950: {
+                    slidesPerView: 3,
+                },
+                1024: {
+                    slidesPerView: 4,
+                }
+            }
+        });
+
+        // Get the element with the ID 'streamText'
+        const streamText = document.getElementById('streamText');
+        const streamContainer = document.getElementById('streamContainer');
 
 // Check if the element was found
 
-            // If the element exists, calculate its width
-            const textWidth = streamText.offsetWidth; // Độ dài của văn bản
+        // If the element exists, calculate its width
+        const textWidth = streamText.offsetWidth; // Độ dài của văn bản
 
-            // Calculate animation duration based on text width
-            const animationDuration = (textWidth / 100) * 0.5; // 100 pixels/second
+        // Calculate animation duration based on text width
+        const animationDuration = (textWidth / 100) * 0.5; // 100 pixels/second
 
-            // Apply the animation duration to the 'stream_text' class
-            streamText.style.animationDuration = animationDuration + 's';
+        // Apply the animation duration to the 'stream_text' class
+        streamText.style.animationDuration = animationDuration + 's';
+//
+//
+//            // Check if there is text inside the streamText element
+//            if (streamText.textContent.trim().length > 0) {
+//                // Add the stream_text-container class to the container
+//                streamContainer.classList.add('stream_text-container-2');
+//            }
+//
+//            // Listen for the end of the animation
+//            streamText.addEventListener('animationend', function () {
+//                // Remove the background color class from the container
+//                streamContainer.classList.remove('stream_text-container-2');
+//            });
 
-
-            // Check if there is text inside the streamText element
-            if (streamText.textContent.trim().length > 0) {
-                // Add the stream_text-container class to the container
-                streamContainer.classList.add('stream_text-container-2');
-            }
-
-            // Listen for the end of the animation
-            streamText.addEventListener('animationend', function () {
-                // Remove the background color class from the container
-                streamContainer.classList.remove('stream_text-container-2');
-            });
-
-        </script>
-    </body>
+    </script>
 </html>

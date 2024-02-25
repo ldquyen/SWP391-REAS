@@ -16,7 +16,7 @@ import mylib.DBUtils;
 
 public class ImageDAO {
 
-    public Image getImageByID(String folderID)
+    public static Image getImageByID(String folderID)
             throws SQLException, NamingException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;

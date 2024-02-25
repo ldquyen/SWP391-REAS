@@ -61,6 +61,12 @@ public class AdminController extends HttpServlet {
                 case "addNewStaff":
                     url = "addNewStaffServlet";
                     break;
+                case "userWalletPage":
+                    url = "GetListUserServlet";
+                    break;
+                case "editUserWallet":
+                    url = "EditUserWalletServlet";
+                    break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);

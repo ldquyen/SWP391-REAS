@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
+import model.RealEstateVM;
 import mylib.DBUtils;
 
 public class RealEstateDAO {
@@ -142,4 +144,151 @@ public class RealEstateDAO {
         }
         return list;
     }
+
+    public static ArrayList<RealEstate> getRealEstateByID(String IDRE) throws ClassNotFoundException, SQLException, NamingException {
+        ArrayList<RealEstate> list = new ArrayList<>();
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address] ,[Detail]\n"
+                    + "FROM RealEstate WHERE [RealEstateID] = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, IDRE);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+
+                    String realEstateID = rs.getString("RealEstateID");
+                    String imageFolderID = rs.getString("ImageFolderID");
+                    String accID = rs.getString("AccID");
+                    String catID = rs.getString("CatID");
+                    int cityID = rs.getInt("CityID");
+                    String realEstateName = rs.getString("RealEstateName");
+                    long priceFirst = rs.getLong("PriceFirst");
+
+                    Timestamp timeUpSql = rs.getTimestamp("TimeUp");
+                    Timestamp timeDownSql = rs.getTimestamp("TimeDown");
+
+                    // Chuyển đổi Timestamp thành LocalDateTime
+                    LocalDateTime timeUp = timeUpSql.toLocalDateTime();
+                    LocalDateTime timeDown = timeDownSql.toLocalDateTime();
+                    long priceLast = rs.getLong("PriceLast");
+                    long pricePaid = rs.getLong("PricePaid");
+                    int statusid = rs.getInt("StatusID");
+                    int area = rs.getInt("Area");
+                    String address = rs.getString("Address");
+                    String detail = rs.getString("Detail");
+
+                    RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown, priceLast, pricePaid, statusid, area, address, detail);
+                    list.add(re);
+                }
+            }
+            cn.close();
+        }
+        return list;
+    }
+    
+    
+    public List<RealEstateVM> getListAvailableRealEstate() throws SQLException, ClassNotFoundException {
+        List<RealEstateVM> listRealEstates = new ArrayList();
+        Connection cn = DBUtils.getConnection();
+        PreparedStatement pst = null;
+        if (cn != null) {
+            String sql = "select re.[RealEstateID], "
+                    + "re.[AccID], "
+                    + "re.[RealEstateName], "
+                    + "re.[PriceFirst], "
+                    + "re.[PriceLast], "
+                    + "re.[PricePaid], "
+                    + "re.[TimeUp], "
+                    + "re.[TimeDown], "
+                    + "re.[Address], "
+                    + "im.[ImageLink1] "
+                    + "from dbo.[RealEstate] re join dbo.[Image] im on re.ImageFolderID = im.ImageFolderID Where StatusID = 1 order by re.TimeUp desc ";
+            pst = cn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                RealEstateVM re = new RealEstateVM();
+                re.setRealEstateID(rs.getString("RealEstateID"));
+                re.setAccID(rs.getString("AccID"));
+                re.setRealEstateName(rs.getString("RealEstateName"));
+                re.setPriceFirst(rs.getLong("PriceFirst"));
+                re.setPriceLast(rs.getLong("PriceLast"));
+                re.setPricePaid(rs.getLong("PricePaid"));
+                Timestamp timeUpSql = rs.getTimestamp("TimeUp");
+                Timestamp timeDownSql = rs.getTimestamp("TimeDown");
+                re.setTimeUp(timeUpSql.toLocalDateTime());
+                re.setTimeDown(timeDownSql.toLocalDateTime());
+                // set image.
+                byte[] imageData = rs.getBytes("ImageLink1");
+                String base64Image = java.util.Base64.getEncoder().encodeToString(imageData);
+                re.setImage1(base64Image);
+                re.setAddress(rs.getString("Address"));
+                listRealEstates.add(re);
+            }
+        }
+        return listRealEstates;
+    }
+
+    // get RealEstate by id 
+    public RealEstateVM getRealEstateById(String realEstateID) throws SQLException, ClassNotFoundException {
+        Connection cn = DBUtils.getConnection();
+        PreparedStatement pst = null;
+        RealEstateVM realEstate = new RealEstateVM();
+
+        if (cn != null) {
+            String sql = "Select re.[RealEstateID], "
+                    + "re.[AccID], "
+                    + "re.[RealEstateName], "
+                    + "re.[PriceFirst], "
+                    + "re.[PriceLast], "
+                    + "re.[PricePaid], "
+                    + "re.[TimeUp], "
+                    + "re.[TimeDown], "
+                    + "re.[Area],"
+                    + "re.[Detail], "
+                    + "re.[Address], "
+                    + "im.[ImageLink1], "
+                    + "im.[ImageLink2], "
+                    + "im.[ImageLink3], "
+                    + "ca.[CatName], "
+                    + "city.[CityName] "
+                    + "from dbo.[RealEstate] re join dbo.[Image] im on re.ImageFolderID = im.ImageFolderID "
+                    + "join dbo.[Category] ca on ca.CatID = re.CatID join dbo.[City] city on re.CityID = city.CityID Where re.[RealEstateID] = ?";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, realEstateID);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                realEstate.setAccID(rs.getString("AccID"));
+                realEstate.setRealEstateName(rs.getString("RealEstateName"));
+                realEstate.setPriceFirst(rs.getLong("PriceFirst"));
+                realEstate.setPriceLast(rs.getLong("PriceLast"));
+                realEstate.setAddress(rs.getString("Address"));
+                Timestamp timeUpSql = rs.getTimestamp("TimeUp");
+                Timestamp timeDownSql = rs.getTimestamp("TimeDown");
+                realEstate.setTimeUp(timeUpSql.toLocalDateTime());
+                realEstate.setTimeDown(timeDownSql.toLocalDateTime());
+                // set image.
+                byte[] imageData1 = rs.getBytes("ImageLink1");
+                byte[] imageData2 = rs.getBytes("ImageLink2");
+                byte[] imageData3 = rs.getBytes("ImageLink3");
+                String base64Image1 = java.util.Base64.getEncoder().encodeToString(imageData1);
+                String base64Image2 = java.util.Base64.getEncoder().encodeToString(imageData2);
+                String base64Image3 = java.util.Base64.getEncoder().encodeToString(imageData3);
+                realEstate.setImage1(base64Image1);
+                realEstate.setImage2(base64Image2);
+                realEstate.setImage3(base64Image3);
+
+                realEstate.setDetail(rs.getString("Detail"));
+                realEstate.setArea(rs.getInt("Area"));
+                realEstate.setPricePaid(rs.getLong("PricePaid"));
+                realEstate.setImageFolderID(rs.getString("AccID"));
+                realEstate.setCategory(rs.getString("CatName"));
+                realEstate.setCity(rs.getString("CityName"));
+                return realEstate;
+            }
+        }
+        return null;
+    }
+
 }

@@ -578,7 +578,8 @@ button {
 
 .text-home-container {
     background-color: #000;
-    color: #D9AB73
+    color: #D9AB73;
+    text-align: center;
 }
 
 .text-home-1 {
@@ -611,7 +612,7 @@ button {
     white-space: nowrap;
     font-size: 20px;
     font-family: Inter;
-    animation: stream linear;
+    animation: stream linear infinite;
 }
 
 .stream_text-container {
@@ -619,10 +620,10 @@ button {
     display: flex;
     height: 30px;
     overflow: hidden;
+    background-color: #D9AB73;
 }
 
 .stream_text-container-2{
-    background-color: #D9AB73;
 }
 
 @keyframes stream {
@@ -633,3 +634,63 @@ button {
         transform: translateX(-110%);
     }
 }
+
+.postElstate-container {
+    margin: 20px;
+}
+
+.slide-content {
+    margin: 0 50px;
+    background-color: red;
+}
+
+
+
+.swiper-wrapper {
+    height: auto;
+    padding-bottom: 50px;
+}
+
+.swiper-navBtn {
+    color: #D9AB73;
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.50);
+    transition: .2s all linear;
+}
+
+.swiper-navBtn:hover {
+    background-color: rgba(0, 0, 0, 0.90);
+}
+
+.nav-button::after,
+.nav-button::before {
+    font-size: 40px;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #000;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #D9AB73;
+    opacity: 1;
+}
+
+

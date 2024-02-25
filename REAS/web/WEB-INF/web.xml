@@ -82,6 +82,18 @@
         <servlet-name>addNewStaffServlet</servlet-name>
         <servlet-class>controllersAdmin.AddNewStaffServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditUserWalletServlet</servlet-name>
+        <servlet-class>controllersAdmin.EditUserWalletServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetListUserServlet</servlet-name>
+        <servlet-class>controllersAdmin.GetListUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RealEstateDetailServlet</servlet-name>
+        <servlet-class>controllersMain.RealEstateDetailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -112,7 +124,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/home</url-pattern>
+        <url-pattern></url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
@@ -154,12 +166,21 @@
         <servlet-name>addNewStaffServlet</servlet-name>
         <url-pattern>/addNewStaffServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserWalletServlet</servlet-name>
+        <url-pattern>/EditUserWalletServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetListUserServlet</servlet-name>
+        <url-pattern>/GetListUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RealEstateDetailServlet</servlet-name>
+        <url-pattern>/RealEstateDetailServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 </web-app>
