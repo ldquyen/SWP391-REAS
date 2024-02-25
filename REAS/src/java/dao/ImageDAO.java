@@ -187,14 +187,64 @@ public class ImageDAO {
         }
         return list;
     }
+    
+    public static ArrayList<Image> getListImage() throws ClassNotFoundException, SQLException {
+        ArrayList<Image> list = new ArrayList<>();
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT ImageFolderID,ImageLink1,ImageLink2,ImageLink3 FROM Image";
+            PreparedStatement pst = cn.prepareStatement(sql);         
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String imageFolderID = rs.getString("ImageFolderID");
+                    byte[] imageLink1 = rs.getBytes("ImageLink1");
+                    byte[] imageLink2 = rs.getBytes("ImageLink2");
+                    byte[] imageLink3 = rs.getBytes("ImageLink3");
+                    Image i = new Image(imageFolderID, imageLink1, imageLink2, imageLink3);
+                    list.add(i);
+                }
+            }
+            cn.close();
+        }
+        return list;
+    }
+    
+    public  ArrayList<Image> getListImage2() throws ClassNotFoundException, SQLException {
+        ArrayList<Image> list = new ArrayList<>();
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT ImageFolderID,ImageLink1,ImageLink2,ImageLink3 FROM Image";
+            PreparedStatement pst = cn.prepareStatement(sql);         
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String imageFolderID = rs.getString("ImageFolderID");
+                    byte[] imageLink1 = rs.getBytes("ImageLink1");
+                    byte[] imageLink2 = rs.getBytes("ImageLink2");
+                    byte[] imageLink3 = rs.getBytes("ImageLink3");
+                    Image i = new Image(imageFolderID, imageLink1, imageLink2, imageLink3);
+                    list.add(i);
+                }
+            }
+            cn.close();
+        }
+        return list;
+    }
+     
 
     public static void main(String[] args) throws SQLException, NamingException, ClassNotFoundException {
         //ImageDAO.saveImg2("FOLDER10", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png");
         //ImageDAO iD = new ImageDAO();
         //Image i = iD.getImageByID("FOLDER10");
-        ArrayList<Image> list = ImageDAO.getListImageByFolderID("FOLDER10");
+        ArrayList<Image> list = ImageDAO.getListImage();
         for (Image image : list) {
             System.out.println(image.toString());
+        }
+        System.out.println("===========");
+        ArrayList<Image> list2 = ImageDAO.getListImageByFolderID("folder1");
+        for (Image image2 : list2) {
+            System.out.println(image2.toString());
         }
     }
 }

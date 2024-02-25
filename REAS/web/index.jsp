@@ -7,8 +7,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="i" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -128,9 +130,13 @@
             <div class="swiper-wrapper postElstate-list">
                 <c:forEach items="${list}" var="item">
                     <div class=" realestate-items swiper-slide"> 
-                        <a href="MainController?action=viewPostRealEstate&id=${item.realEstateID}">
-                            <img src="data:image/jpeg;base64,${item.image1}" style="display: flex;"
-                                 class="resalestate-image" alt="none" />
+                        <h1>${item.imageLink1}</h1>
+                            <c:forEach var="img" items="${listImg}">
+                                <c:if test="${img.imageFolderID eq item.imageFolderID}"> <img src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image1)}" alt="Image"></c:if>
+                                
+                            </c:forEach>
+                            <a href="MainController?action=viewPostRealEstate&id=${item.realEstateID}">
+
                             <div class="text-home-container">
                                 <p class="text-home-1">
                                     ${item.timeUp}
@@ -155,66 +161,67 @@
 
                 </c:forEach>
             </div>
-            <div class="swiper-pagination pagination-style"></div>
-            <div class="swiper-button-prev swiper-navBtn"></div>
-            <div class="swiper-button-next swiper-navBtn"></div>
+        </div>
+        <div class="swiper-pagination pagination-style"></div>
+        <div class="swiper-button-prev swiper-navBtn"></div>
+        <div class="swiper-button-next swiper-navBtn"></div>
 
-            <!-- If we need scrollbar -->
-            <!-- <div class="swiper-scrollbar"></div> -->
+        <!-- If we need scrollbar -->
+        <!-- <div class="swiper-scrollbar"></div> -->
 
-            <!--        <div class="columns">
-                        <div class="column column-home-real">
-                            <img src="image/homereallestate.png" style="display: flex;" alt="none"/>
-                            <div class="text-home-container">
-                                <p class="text-home-1">30/01/2024-22:00</p>
-                                <p class="text-home-2">Sala-TPHCM</p>
-                                <p class="text-home-3">28 tỷ 930 triệu</p>
-                            </div>
+        <!--        <div class="columns">
+                    <div class="column column-home-real">
+                        <img src="image/homereallestate.png" style="display: flex;" alt="none"/>
+                        <div class="text-home-container">
+                            <p class="text-home-1">30/01/2024-22:00</p>
+                            <p class="text-home-2">Sala-TPHCM</p>
+                            <p class="text-home-3">28 tỷ 930 triệu</p>
                         </div>
-                        <div class="column column-home-real column-home-real-2">
-                            <img src="image/homereal2.png" style="display: flex;" alt="none"/>
-                            <div class="text-home-container">
-                                <p class="text-home-1">30/01/2024-22:00</p>
-                                <p class="text-home-2">Grand Marina-TPHCM</p>
-                                <p class="text-home-3">30 tỷ 500 triệu</p>
-                            </div>
-                        </div>
-                        <div class="column column-home-real">
-                            <img src="image/homereallestate.png" style="display: flex;" alt="none"/>
-                            <div class="text-home-container">
-                                <p class="text-home-1">30/01/2024-22:00</p>
-                                <p class="text-home-2">Sala-TPHCM</p>
-                                <p class="text-home-3">28 tỷ 930 triệu</p>
-                            </div>
-                        </div>
-                        <div class="column column-home-real">
-                            <img src="image/homereal2.png" style="display: flex;" alt="none"/>
-                            <div class="text-home-container">
-                                <p class="text-home-1">30/01/2024-22:00</p>
-                                <p class="text-home-2">Grand Marina-TPHCM</p>
-                                <p class="text-home-3">30 tỷ 500 triệu</p>
-                            </div>
-                        </div>
-                    </div>-->
-
-
-            <footer class="footer" style="position: fixed; bottom: 0; left: 0; right: 0"> 
-                <div>
-                    <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
-                    <div class="footer-container">
-                        <div class="footer-left-content"> Liên hệ:<br/>
-                            Email: reas@gmail.com<br/>
-                            Điện thoại: +84 (24) 8888 9999<br/>
-                            <br/>
-                        </div>
-                        <div class="footer-mid-content"> Trụ sở chính:<br/>
-                            Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
-                            <br/>
-                        </div>
-                        <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
                     </div>
+                    <div class="column column-home-real column-home-real-2">
+                        <img src="image/homereal2.png" style="display: flex;" alt="none"/>
+                        <div class="text-home-container">
+                            <p class="text-home-1">30/01/2024-22:00</p>
+                            <p class="text-home-2">Grand Marina-TPHCM</p>
+                            <p class="text-home-3">30 tỷ 500 triệu</p>
+                        </div>
+                    </div>
+                    <div class="column column-home-real">
+                        <img src="image/homereallestate.png" style="display: flex;" alt="none"/>
+                        <div class="text-home-container">
+                            <p class="text-home-1">30/01/2024-22:00</p>
+                            <p class="text-home-2">Sala-TPHCM</p>
+                            <p class="text-home-3">28 tỷ 930 triệu</p>
+                        </div>
+                    </div>
+                    <div class="column column-home-real">
+                        <img src="image/homereal2.png" style="display: flex;" alt="none"/>
+                        <div class="text-home-container">
+                            <p class="text-home-1">30/01/2024-22:00</p>
+                            <p class="text-home-2">Grand Marina-TPHCM</p>
+                            <p class="text-home-3">30 tỷ 500 triệu</p>
+                        </div>
+                    </div>
+                </div>-->
+
+
+        <footer class="footer" style="position: fixed; bottom: 0; left: 0; right: 0"> 
+            <div>
+                <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
+                <div class="footer-container">
+                    <div class="footer-left-content"> Liên hệ:<br/>
+                        Email: reas@gmail.com<br/>
+                        Điện thoại: +84 (24) 8888 9999<br/>
+                        <br/>
+                    </div>
+                    <div class="footer-mid-content"> Trụ sở chính:<br/>
+                        Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
+                        <br/>
+                    </div>
+                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
                 </div>
-            </footer>
+            </div>
+        </footer>
     </body>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
