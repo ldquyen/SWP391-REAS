@@ -233,7 +233,7 @@
                                             </c:if>
                                         </c:forEach>
                                     </td>
-                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${r.timeDown}</td>
+                                    <td class="endTimeNews" style="border: 1px solid #D9AB73; padding: 8px;">${r.timeDown}</td>
                                     <td style="border: 1px solid #D9AB73; padding: 8px;">
                                         <script>
                                             var number = ${r.priceLast}; // Assuming auctions.lamda contains the number
@@ -276,5 +276,37 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var endTimeElements = document.querySelectorAll(".endTimeNews");
+
+                endTimeElements.forEach(function (endTimeElement) {
+                    // Format end time
+                    var endTime = new Date(endTimeElement.innerText);
+                    var formattedEndTime = formatTime(endTime);
+
+                    // Update the HTML with the formatted time
+                    endTimeElement.innerText = formattedEndTime;
+                });
+            });
+
+            // Function to format the time
+            function formatTime(time) {
+                var year = time.getFullYear();
+                var month = padZero(time.getMonth() + 1);
+                var date = padZero(time.getDate());
+                var hours = padZero(time.getHours());
+                var minutes = padZero(time.getMinutes());
+                var seconds = padZero(time.getSeconds());
+                var formattedTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+                return formattedTime;
+            }
+
+            // Function to pad zero to single digit numbers
+            function padZero(number) {
+                return number < 10 ? '0' + number : number;
+            }
+        </script>
     </body>
 </html>

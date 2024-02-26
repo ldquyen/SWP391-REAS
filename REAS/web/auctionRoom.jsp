@@ -270,7 +270,8 @@
                                                         </c:if>
                                                     </c:forEach>
                                                     VND</span></p>
-                                            <p class="bold-text">Thời gian đấu giá: <br/><span>${REGETBYID.timeUp} - ${REGETBYID.timeDown}</span></p>
+                                            <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${REGETBYID.timeUp}</span></p>
+                                            <p class="bold-text">Thời gian kết thúc: <span id="endTime">${REGETBYID.timeDown}</span></p>
 
                                         </div>
                                     </div>
@@ -427,6 +428,42 @@
 
             // Initialize total price based on default quantity and price per unit
             updateTotalPrice();
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var startTimeElement = document.getElementById("startTime");
+                var endTimeElement = document.getElementById("endTime");
+
+                // Format start time
+                var startTime = new Date(startTimeElement.innerText);
+                var formattedStartTime = formatTime(startTime);
+
+                // Format end time
+                var endTime = new Date(endTimeElement.innerText);
+                var formattedEndTime = formatTime(endTime);
+
+                // Update the HTML with the formatted time
+                startTimeElement.innerText = formattedStartTime;
+                endTimeElement.innerText = formattedEndTime;
+            });
+
+            // Function to format the time
+            function formatTime(time) {
+                var year = time.getFullYear();
+                var month = padZero(time.getMonth() + 1);
+                var date = padZero(time.getDate());
+                var hours = padZero(time.getHours());
+                var minutes = padZero(time.getMinutes());
+                var seconds = padZero(time.getSeconds());
+                var formattedTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+                return formattedTime;
+            }
+
+            // Function to pad zero to single digit numbers
+            function padZero(number) {
+                return number < 10 ? '0' + number : number;
+            }
         </script>
 
         <script>
