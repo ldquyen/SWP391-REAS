@@ -255,9 +255,9 @@
                                                         document.write(formattedNumber);
                                                     </script> VND</span></p>
                                             <p class="bold-text">Giá mua ngay: <span class="test"><script>
-                                                        var number = ${REGETBYID.pricePaid}; // Assuming auctions.lamda contains the number
-                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                        document.write(formattedNumber);
+                                                var number = ${REGETBYID.pricePaid}; // Assuming auctions.lamda contains the number
+                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                document.write(formattedNumber);
                                                     </script> VND</span>
                                             <p class="bold-text">Bước giá: <span>
                                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
@@ -335,13 +335,18 @@
                                    font-style: normal;
                                    font-weight: 400;
                                    line-height: normal;
-                                   text-align: center">
+                                   text-align: center" onkeypress="handleKeyPress(event)">
                             <button id="up" onclick="setQuantity('up');" style="color: #fff">+</button>
                         </p>
                     </div>
                     <div style="display: flex; justify-content: center">
-                        <h1  style="display: flex;justify-content: center;font-size: 20px; padding: 4px 0px;color: #D9AB73;font-weight: bold;border: 3px #D9AB73 solid;width: 75%;margin-top: 8px">
-                            Trả giá:  <p id="total-price"></p></h1>
+                        <form action="MainController" method="post">
+                            <button type="submit" value="rule" name="action">
+                                <h1  style="display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #D9AB73 solid;margin-top: 8px">
+                                    Trả giá:  <span id="total-price"></span>
+                                </h1>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -368,46 +373,17 @@
 
         <script>
             function setQuantity(upordown) {
-                var quantity = document.getElementById('quantity');
-
-                if (quantity.value > 1) {
-                    if (upordown == 'up') {
-                        ++document.getElementById('quantity').value;
-                    } else if (upordown == 'down') {
-                        --document.getElementById('quantity').value;
-                    }
-                } else if (quantity.value == 1) {
-                    if (upordown == 'up') {
-                        ++document.getElementById('quantity').value;
-                    }
-                } else
-                {
-                    document.getElementById('quantity').value = 1;
-                }
-            }
-        </script>
-
-        <script>
-            // Function to update the total price based on quantity
-            function updateTotalPrice() {
-                var quantity = parseInt(document.getElementById('quantity').value);
-                var pricePerUnit = parseFloat(document.querySelector('.number-price-bellow-1').innerText.replace(/\./g, '').replace(',', '.'));
-                var totalPrice = quantity * pricePerUnit;
-                document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN') + ' VND';
-            }
-
-            // Initialize total price based on default quantity and price per unit
-            updateTotalPrice();
-
-            // Function to handle quantity changes
-            function setQuantity(action) {
                 var quantityElement = document.getElementById('quantity');
                 var quantity = parseInt(quantityElement.value);
 
-                if (action === 'up') {
-                    quantity += 1;
-                } else if (action === 'down' && quantity > 1) {
-                    quantity -= 1;
+                if (quantity > 1 || upordown === 'up') {
+                    if (upordown === 'up') {
+                        quantity += 1;
+                    } else if (upordown === 'down') {
+                        quantity -= 1;
+                    }
+                } else {
+                    quantity = 1;
                 }
 
                 quantityElement.value = quantity;
@@ -415,6 +391,25 @@
                 // Update total price based on the new quantity
                 updateTotalPrice();
             }
+
+            function handleKeyPress(event) {
+                if (event.keyCode === 13) {
+                    // If Enter key is pressed, update the total price
+                    updateTotalPrice();
+                }
+            }
+
+            // Function to update the total price based on quantity
+            function updateTotalPrice() {
+                var quantity = parseInt(document.getElementById('quantity').value);
+                // You need to replace '.number-price-bellow-1' with the appropriate selector
+                var pricePerUnit = parseFloat(document.querySelector('.number-price-bellow-1').innerText.replace(/\./g, '').replace(',', '.'));
+                var totalPrice = quantity * pricePerUnit;
+                document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN') + ' VND';
+            }
+
+            // Initialize total price based on default quantity and price per unit
+            updateTotalPrice();
         </script>
 
         <script>
