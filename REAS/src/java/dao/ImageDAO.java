@@ -237,14 +237,6 @@ public class ImageDAO {
         //ImageDAO.saveImg2("FOLDER10", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png");
         //ImageDAO iD = new ImageDAO();
         //Image i = iD.getImageByID("FOLDER10");
-        ArrayList<Image> list = ImageDAO.getListImage();
-        for (Image image : list) {
-            System.out.println(image.toString());
-        }
-        System.out.println("===========");
-        ArrayList<Image> list2 = ImageDAO.getListImageByFolderID("folder1");
-        for (Image image2 : list2) {
-            System.out.println(image2.toString());
-        }
+       
     }
 }
