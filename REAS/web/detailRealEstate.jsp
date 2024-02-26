@@ -227,14 +227,35 @@
                                     <p class="bold-text">Diện tích: <span>${realEstate.area}m²</span></p>
                                     <p class="bold-text">Loại hình: <span>${realEstate.category}</span></p>
                                     <p class="bold-text">Địa chỉ: <span> ${realEstate.address}</span></p>
+                                    <p class="bold-text">Mô tả: <span> ${realEstate.detail}</span></p>
                                 </div>
                             </div>
                             <div class="divider"></div>
                             <div class="column" style="padding: 1.2rem 2.75rem;">
                                 <h1 class="flex-center h1-text-left-right">Thông tin đấu giá cơ bản</h1>
                                 <div style="padding-top: 8px;">
-                                    <p class="bold-text">Giá khởi điểm: <span>${realEstate.priceFirst} vnd</span></p>
-                                    <p class="bold-text">Bước giá: <span>${realEstate.priceLast}vnd</span></p>
+                                    <p class="bold-text">Giá khởi điểm: <span>
+                                            <script>
+                                                var number = ${realEstate.priceFirst}; // Assuming auctions.lamda contains the number
+                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                document.write(formattedNumber);
+                                            </script> VND</span></p></span></p>
+                                    <p class="bold-text">Giá mua ngay: <span class="test"><script>
+                                        var number = ${realEstate.pricePaid}; // Assuming auctions.lamda contains the number
+                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                        document.write(formattedNumber);
+                                            </script> VND</span>
+                                    <p class="bold-text">Bước giá: <span>
+                                            <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                                <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                                    <script>
+                                                                var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
+                                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                                document.write(formattedNumber);
+                                                    </script>
+                                                </c:if>
+                                            </c:forEach>
+                                            VND</span></p>
                                     <p class="bold-text">Thời gian bắt đầu đấu giá: </br><span>${realEstate.timeUp} - ${realEstate.timeDown}</span></p>
                                 </div>
                             </div>

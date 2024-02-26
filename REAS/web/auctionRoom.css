@@ -1078,7 +1078,7 @@ p-text-left-right-container {
 /* Six columns side by side */
 .row .column {
     float: left !important;
-    width: 16.66% !important;
+    width: 33.33% !important;
     padding: 0px;
 }
 

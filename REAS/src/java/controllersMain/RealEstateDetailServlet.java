@@ -4,8 +4,11 @@
  */
 package controllersMain;
 
+import dao.AuctionDAO;
 import dao.RealEstateDAO;
+import dto.Auction;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +29,11 @@ public class RealEstateDetailServlet extends HttpServlet {
             String realEstateId = request.getParameter("id");
             if (realEstateId != null) {
                 RealEstateDAO realEstateDAO = new RealEstateDAO();
+                AuctionDAO auctionDAO = new AuctionDAO();
+                List<Auction> auctions = auctionDAO.getAuctions();
+
+                request.setAttribute("Auctions", auctions);
+
                 RealEstateVM realEstateVM = realEstateDAO.getRealEstateById(realEstateId);
                 if (realEstateVM != null) {
                     request.setAttribute("realEstate", realEstateVM);
@@ -34,9 +42,9 @@ public class RealEstateDetailServlet extends HttpServlet {
                     System.out.println("RealEstateDetailServlet null exception");
                 }
             } else {
-                url = "home";   
+                url = "home";
             }
-                request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,5 +61,3 @@ public class RealEstateDetailServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
-

@@ -5,6 +5,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 /**
  *
@@ -29,15 +30,15 @@ public class RealEstateVM {
     private int area;
     private String address;
     private String detail;
-    private String image1;
-    private String image2;
-    private String image3;
+    private byte[] imageLink1;
+    private byte[] imageLink2;
+    private byte[] imageLink3;
 
 
     public RealEstateVM() {
     }
 
-    public RealEstateVM(String realEstateID, String imageFolderID, String accID, String catID, String category, int cityID, String city, String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, long pricePaid, int statusID, int area, String address, String detail, String image1, String image2, String image3) {
+    public RealEstateVM(String realEstateID, String imageFolderID, String accID, String catID, String category, int cityID, String city, String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, long pricePaid, int statusID, int area, String address, String detail, byte[] imageLink1, byte[] imageLink2, byte[] imageLink3) {
         this.realEstateID = realEstateID;
         this.imageFolderID = imageFolderID;
         this.accID = accID;
@@ -55,34 +56,49 @@ public class RealEstateVM {
         this.area = area;
         this.address = address;
         this.detail = detail;
-        this.image1 = image1;
-        this.image2 = image2;
-        this.image3 = image3;
+        this.imageLink1 = imageLink1;
+        this.imageLink2 = imageLink2;
+        this.imageLink3 = imageLink3;
+    }
+    
+
+    public String getBase64Image1() {
+        return Base64.getEncoder().encodeToString(imageLink1);
+    }
+    
+    public String getBase64Image2() {
+        return Base64.getEncoder().encodeToString(imageLink2);
+    }
+    
+    public String getBase64Image3() {
+        return Base64.getEncoder().encodeToString(imageLink3);
     }
 
-    public String getImage1() {
-        return image1;
+    public byte[] getImageLink1() {
+        return imageLink1;
     }
 
-    public String getImage2() {
-        return image2;
+    public void setImageLink1(byte[] imageLink1) {
+        this.imageLink1 = imageLink1;
     }
 
-    public String getImage3() {
-        return image3;
+    public byte[] getImageLink2() {
+        return imageLink2;
     }
 
-    public void setImage1(String image1) {
-        this.image1 = image1;
+    public void setImageLink2(byte[] imageLink2) {
+        this.imageLink2 = imageLink2;
     }
 
-    public void setImage2(String image2) {
-        this.image2 = image2;
+    public byte[] getImageLink3() {
+        return imageLink3;
     }
 
-    public void setImage3(String image3) {
-        this.image3 = image3;
+    public void setImageLink3(byte[] imageLink3) {
+        this.imageLink3 = imageLink3;
     }
+
+    
 
 
 
@@ -223,4 +239,8 @@ public class RealEstateVM {
         return detail;
     }
 
+    @Override
+    public String toString() {
+        return "RealEstateVM{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", category=" + category + ", cityID=" + cityID + ", city=" + city + ", realEstateName=" + realEstateName + ", priceFirst=" + priceFirst + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", priceLast=" + priceLast + ", pricePaid=" + pricePaid + ", statusID=" + statusID + ", area=" + area + ", address=" + address + ", detail=" + detail + ", imageLink1=" + imageLink1 + ", imageLink2=" + imageLink2 + ", imageLink3=" + imageLink3 + '}';
+    }
 }

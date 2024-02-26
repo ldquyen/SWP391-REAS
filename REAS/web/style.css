@@ -578,7 +578,8 @@ button {
 
 .text-home-container {
     background-color: #000;
-    color: #D9AB73
+    color: #D9AB73;
+    text-align: center;
 }
 
 .text-home-1 {

@@ -187,8 +187,7 @@ public class RealEstateDAO {
         }
         return list;
     }
-    
-    
+
     public List<RealEstateVM> getListAvailableRealEstate() throws SQLException, ClassNotFoundException {
         List<RealEstateVM> listRealEstates = new ArrayList();
         Connection cn = DBUtils.getConnection();
@@ -196,6 +195,7 @@ public class RealEstateDAO {
         if (cn != null) {
             String sql = "select re.[RealEstateID], "
                     + "re.[AccID], "
+                    + "re.[ImageFolderID], "
                     + "re.[RealEstateName], "
                     + "re.[PriceFirst], "
                     + "re.[PriceLast], "
@@ -210,6 +210,7 @@ public class RealEstateDAO {
             while (rs.next()) {
                 RealEstateVM re = new RealEstateVM();
                 re.setRealEstateID(rs.getString("RealEstateID"));
+                re.setImageFolderID(rs.getString("ImageFolderID"));
                 re.setAccID(rs.getString("AccID"));
                 re.setRealEstateName(rs.getString("RealEstateName"));
                 re.setPriceFirst(rs.getLong("PriceFirst"));
@@ -220,9 +221,7 @@ public class RealEstateDAO {
                 re.setTimeUp(timeUpSql.toLocalDateTime());
                 re.setTimeDown(timeDownSql.toLocalDateTime());
                 // set image.
-                byte[] imageData = rs.getBytes("ImageLink1");
-                String base64Image = java.util.Base64.getEncoder().encodeToString(imageData);
-                re.setImage1(base64Image);
+                byte[] imageLink1 = rs.getBytes("ImageLink1");
                 re.setAddress(rs.getString("Address"));
                 listRealEstates.add(re);
             }
@@ -269,15 +268,18 @@ public class RealEstateDAO {
                 realEstate.setTimeUp(timeUpSql.toLocalDateTime());
                 realEstate.setTimeDown(timeDownSql.toLocalDateTime());
                 // set image.
-                byte[] imageData1 = rs.getBytes("ImageLink1");
-                byte[] imageData2 = rs.getBytes("ImageLink2");
-                byte[] imageData3 = rs.getBytes("ImageLink3");
-                String base64Image1 = java.util.Base64.getEncoder().encodeToString(imageData1);
-                String base64Image2 = java.util.Base64.getEncoder().encodeToString(imageData2);
-                String base64Image3 = java.util.Base64.getEncoder().encodeToString(imageData3);
-                realEstate.setImage1(base64Image1);
-                realEstate.setImage2(base64Image2);
-                realEstate.setImage3(base64Image3);
+//                byte[] imageData1 = rs.getBytes("ImageLink1");
+//                byte[] imageData2 = rs.getBytes("ImageLink2");
+//                byte[] imageData3 = rs.getBytes("ImageLink3");
+//                String base64Image1 = java.util.Base64.getEncoder().encodeToString(imageData1);
+//                String base64Image2 = java.util.Base64.getEncoder().encodeToString(imageData2);
+//                String base64Image3 = java.util.Base64.getEncoder().encodeToString(imageData3);
+//                realEstate.setImage1(base64Image1);
+//                realEstate.setImage2(base64Image2);
+//                realEstate.setImage3(base64Image3);
+                byte[] imageLink1 = rs.getBytes("ImageLink1");
+                byte[] imageLink2 = rs.getBytes("ImageLink2");
+                byte[] imageLink3 = rs.getBytes("ImageLink3");
 
                 realEstate.setDetail(rs.getString("Detail"));
                 realEstate.setArea(rs.getInt("Area"));
@@ -290,5 +292,12 @@ public class RealEstateDAO {
         }
         return null;
     }
-
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        RealEstateDAO dao = new RealEstateDAO();
+        List<RealEstateVM> list = dao.getListAvailableRealEstate();
+        for (RealEstateVM realEstateVM : list) {
+            System.out.println(            realEstateVM.toString()
+);
+            }
+    }
 }

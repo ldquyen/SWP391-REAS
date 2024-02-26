@@ -254,10 +254,10 @@
                                                         var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                                         document.write(formattedNumber);
                                                     </script> VND</span></p>
-                                                    <p class="bold-text">Giá mua ngay: <span class="test"><script>
-                                                var number = ${REGETBYID.pricePaid}; // Assuming auctions.lamda contains the number
-                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                document.write(formattedNumber);
+                                            <p class="bold-text">Giá mua ngay: <span class="test"><script>
+                                                        var number = ${REGETBYID.pricePaid}; // Assuming auctions.lamda contains the number
+                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                        document.write(formattedNumber);
                                                     </script> VND</span>
                                             <p class="bold-text">Bước giá: <span>
                                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 

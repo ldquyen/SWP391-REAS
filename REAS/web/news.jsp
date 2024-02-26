@@ -6,6 +6,7 @@
 
 <%@page import="dto.UserGoogle"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -247,8 +248,15 @@
                     </table>
                 </c:if>
 
+                <c:forEach var="img" items="${requestScope.imageList}">
+                    <img src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image1)}" alt="Image">
+                    <img src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image2)}" alt="Image">
+                    <img src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image3)}" alt="Image">
+                </c:forEach>
             </div>
         </div>
+
+
 
 
         <footer class="footer"> 
