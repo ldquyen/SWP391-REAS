@@ -43,23 +43,21 @@ public class AuctionDAO {
                     dto.setAuctionName(rs.getString("AuctionName"));
                     dto.setPriceNow(rs.getLong("PriceNow"));
                     dto.setLamda(rs.getLong("Lamda"));
-                    
+
                     Timestamp timeStartSql = rs.getTimestamp("TimeStart");
                     Timestamp timeEndSql = rs.getTimestamp("TimeEnd");
-                    
-                    
+
                     // Chuyển đổi Timestamp thành LocalDateTime
                     LocalDateTime timeStart = timeStartSql.toLocalDateTime();
                     LocalDateTime timeEnd = timeEndSql.toLocalDateTime();
-                    
+
                     dto.setTimeStart(timeStart);
                     dto.setTimeEnd(timeEnd);
-                    
+
 //                    dto.setTimeStart(rs.getObject("TimeStart", LocalDateTime.class));
 //                    dto.setTimeEnd(rs.getObject("TimeEnd", LocalDateTime.class));
-
                     result.add(dto);
-                    
+
                     System.out.println(dto);
                 }
             }
@@ -110,4 +108,35 @@ public class AuctionDAO {
 //        }
 //        return auction;
     }
+
+    public void setPriceNowAuctions(String pricenowbid, String realEstateID) throws ClassNotFoundException, SQLException {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE [dbo].[Auction]\n"
+                        + "SET  [PriceNow]= ?\n"
+                        + "WHERE [RealEstateID] = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, pricenowbid);
+                pst.setString(2, realEstateID);
+
+                int rowsAffected = pst.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Cập nhật giá thành công cho phiên đấu giá có ID: " + realEstateID);
+                } else {
+                    System.out.println("Không tìm thấy phiên đấu giá nào có ID: " + realEstateID);
+                }
+            }
+        } finally {
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+    }
+
 }

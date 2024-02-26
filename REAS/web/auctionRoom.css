@@ -561,7 +561,7 @@ button {
 .number-price-container-bellow .number-price-bellow-2 {
     display: flex;
     align-items: center;
-    padding: 0 30px;
+    padding: 0 12px;
     font-weight: bold;
 }
 
@@ -1093,29 +1093,34 @@ p-text-left-right-container {
 }
 
 @-webkit-keyframes my {
-	 0% { color: red; } 
-	 50% { color: #000;  } 
-	 100% { color: red;  } 
- }
- @-moz-keyframes my { 
-	 0% { color: red;  } 
-	 50% { color: #000;  }
-	 100% { color: red;  } 
- }
- @-o-keyframes my { 
-	 0% { color: red; } 
-	 50% { color: #000; } 
-	 100% { color: red;  } 
- }
- @keyframes my { 
-	 0% { color: red;  } 
-	 50% { color: #000;  }
-	 100% { color: red;  } 
- } 
- .test {
-         font-weight:bold;
-	 -webkit-animation: my 1000ms infinite;
-	 -moz-animation: my 1000ms infinite; 
-	 -o-animation: my 1000ms infinite; 
-	 animation: my 1000ms infinite;
+    0% { color: red; } 
+    50% { color: #000;  } 
+    100% { color: red;  } 
+}
+@-moz-keyframes my { 
+    0% { color: red;  } 
+    50% { color: #000;  }
+    100% { color: red;  } 
+}
+@-o-keyframes my { 
+    0% { color: red; } 
+    50% { color: #000; } 
+    100% { color: red;  } 
+}
+@keyframes my { 
+    0% { color: red;  } 
+    50% { color: #000;  }
+    100% { color: red;  } 
+} 
+.test {
+    font-weight:bold;
+    -webkit-animation: my 1000ms infinite;
+    -moz-animation: my 1000ms infinite; 
+    -o-animation: my 1000ms infinite; 
+    animation: my 1000ms infinite;
+}
+
+
+#text-price {
+    padding: 6px 0px 0px 0px;
 }

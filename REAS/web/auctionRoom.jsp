@@ -298,19 +298,56 @@
                 </div>
             </div>
             <div class="column" style="padding-top: 30px">
-                <div class="register-modal-container">
+                <div style="width: 95%;" class="register-modal-container">
                     <h1 style="font-size: 22px; padding: 4px 0px;">Diễn biến cuộc đấu giá</h1>
                     <div class="number-price-container">
-                        <p style="color: #D9AB73; font-size: 22px">50.300.000.000 VND</p>
-                        <p>50.250.000.000 VND</p>
+                        <p style="color: #D9AB73; font-size: 22px">
+                            <c:if test="${not empty auctions}">
+                                <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">                            
+                                            <span class="price-now">
+                                                <script>
+                                                    var number = ${auctions.priceNow}; // Assuming auctions.lamda contains the number
+                                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                    document.write(formattedNumber);
+                                                </script>
+                                                VND
+                                            </span>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                            </c:if> 
+                        </p>
+                        <p>50.210.000.000 VND</p>
                         <p>50.215.000.000 VND</p>
                         <p>50.205.000.000 VND</p>
                         <p>50.200.000.000 VND</p>
                     </div>
                 </div>
 
-                <div class="register-modal-container" style="margin-top: 25px">
-                    <h1 style="font-size: 20px; padding: 4px 0px;color: #D9AB73;font-weight: bold;">Giá hiện tại: 50.300.000.000 VND</h1>
+                <div class="register-modal-container" style="width: 95%;margin-top: 25px">
+                    <h1 style="display: flex; justify-content: center;font-size: 20px; padding: 4px 0px;color: #D9AB73;font-weight: bold;">
+                        <c:if test="${not empty auctions}">
+                            <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                    <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                        <p>Giá hiện tại: 
+                                            <span id="price-now">
+                                                <script>
+                                                    var number = ${auctions.priceNow}; // Assuming auctions.lamda contains the number
+                                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                    document.write(formattedNumber);
+                                                </script>
+                                                VND
+                                            </span>
+                                        </p>
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </c:if> 
+                    </h1>
+                    </h1>
                     <div class="number-price-container number-price-container-bellow">
                         <p class="number-price-bellow-1">
                             <c:if test="${not empty auctions}">
@@ -331,7 +368,7 @@
                         <p class="number-price-bellow-2">X</p>
                         <p id="quantity-field">
                             <button id="down" onclick="setQuantity('down');" style="color: #fff">-</button>
-                            <input type="text" id="quantity" value="1" style="background-color: #000; color: #fff;width: 50%; border: 3px #fff solid;padding: 2px 10px;font-family: Inter;
+                            <input type="text" id="quantity" value="1" style="background-color: #000; color: #fff;width: 52%; border: 3px #fff solid;padding: 2px 10px;font-family: Inter;
                                    font-size: 20px;
                                    font-style: normal;
                                    font-weight: 400;
@@ -339,15 +376,38 @@
                                    text-align: center" onkeypress="handleKeyPress(event)">
                             <button id="up" onclick="setQuantity('up');" style="color: #fff">+</button>
                         </p>
+                        <p class="number-price-bellow-2">=</p>
+                        <p class="number-price-bellow-1">
+                            <span id="total-price"></span>
+                        </p>
                     </div>
                     <div style="display: flex; justify-content: center">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="rule" name="action">
+                        <form action="MemberController" method="post">
+                            <button type="submit" value="tragia" name="action">
                                 <h1  style="display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #D9AB73 solid;margin-top: 8px">
-                                    Trả giá:  <span id="total-price"></span>
+                                    <c:if test="${not empty auctions}">
+                                        <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                            <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                                <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                                    <input type="hidden" name="idAuctionBID" value="${auctions.realEstateID}">
+                                                    <input type="hidden" name="priceNowBid" id="priceNowBid" value="Pricevalue">
+                                                    <p>Trả giá:  
+                                                        <span id="total-price-bid">
+                                                            <script>
+                                                                var number = ${auctions.priceNow}; // Assuming auctions.lamda contains the number
+                                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                                document.write(formattedNumber);
+                                                            </script>
+                                                            VND
+                                                        </span>
+                                                    </p>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:forEach>
+                                    </c:if> 
                                 </h1>
                             </button>
-<!--                            <p id="text-price"></p>-->
+                            <!--                            <p id="text-price"></p>-->
                         </form>
                     </div>
                 </div>
@@ -471,13 +531,23 @@
             // Function to update the total price based on quantity
             function updateTotalPrice() {
                 var quantity = parseInt(document.getElementById('quantity').value);
+                var priceNow = parseFloat(document.querySelector('.price-now').innerText.replace(/\./g, '').replace(',', '.'));
                 // You need to replace '.number-price-bellow-1' with the appropriate selector
                 var pricePerUnit = parseFloat(document.querySelector('.number-price-bellow-1').innerText.replace(/\./g, '').replace(',', '.'));
                 var totalPrice = quantity * pricePerUnit;
-                document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN') + ' VND';
+                var totalPriceBid = priceNow + totalPrice;
+
+                document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN');
+                document.getElementById('total-price-bid').innerText = totalPriceBid.toLocaleString('vi-VN');
+
+
+                var Pricevalue = document.getElementById('priceNowBid').value = totalPriceBid;
+                console.log(Pricevalue);
+
+
 
                 // Convert total price to words using chuyenSoTienSangChu function
-                var totalPriceInWords = chuyenSoTienSangChu(totalPrice);
+                var totalPriceInWords = chuyenSoTienSangChu(totalPriceBid);
                 document.getElementById('text-price').innerText = totalPriceInWords.charAt(0).toUpperCase() + totalPriceInWords.slice(1); // Render total price in words with the first letter capitalized
             }
 
