@@ -399,6 +399,23 @@
                 }
             }
 
+            document.addEventListener('keydown', function (event) {
+                // Check if the pressed key is the arrow up key (key code 38)
+                if (event.keyCode === 38) {
+                    // Simulate a click on the button with id 'up'
+                    document.getElementById('up').click();
+                    // Prevent the default behavior (scrolling up)
+                    event.preventDefault();
+                }
+                // Check if the pressed key is the arrow down key (key code 40)
+                else if (event.keyCode === 40) {
+                    // Simulate a click on the button with id 'down'
+                    document.getElementById('down').click();
+                    // Prevent the default behavior (scrolling down)
+                    event.preventDefault();
+                }
+            });
+
             // Function to update the total price based on quantity
             function updateTotalPrice() {
                 var quantity = parseInt(document.getElementById('quantity').value);
