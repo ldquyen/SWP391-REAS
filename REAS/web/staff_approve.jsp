@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,10 +32,10 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="adminjsp" name="action" >
-                                <span style="color: white">TRANG CHỦ</span>
-                            </button>
-                        </form>
+                        <button type="submit" value="adminjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="navbar-end">
@@ -115,7 +116,82 @@
 
                 </aside>
             </div>
-            <div class="column" style="height: 100vh;">Auto</div>
+
+            <div>
+                <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br>            
+                <form action="StaffController">
+                    Search value <input type="text" name="txtSearchValue" 
+                                        value="${param.txtSearchValue}" />
+                    <input type="submit" value="searchAution" name="action" />   
+                </form><br/>
+                
+                
+                <c:set var="listAuction" value="${requestScope.SEARCH_RESULT}"/>
+                <c:if test="${not empty listAuction}">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>AuctionID</th>
+                                <th>RealEstateID</th>
+                                <th>Aution Name</th>
+                                <th>Price now</th>
+                                <th>Lamda</th>
+                                <th>Time Start</th>
+                                <th>Time End</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <c:forEach items="${listAuction}" var="dto" varStatus="counter">
+                                <tr>
+                                    
+                                <td>
+                                    ${dto.auctionID}
+                                </td>
+                                
+                                <td>
+                                    ${dto.realEstateID}
+                                </td>
+                                
+                                <td>
+                                    ${dto.auctionName}
+                                </td>
+                                
+                                <td>
+                                    ${dto.priceNow}
+                                </td>
+                                
+                                <td>
+                                    ${dto.lamda}
+                                </td>
+                                <td>
+                                    ${dto.timeStart}
+                                </td>
+                                <td>
+                                    ${dto.timeEnd}
+                                </td>
+                                
+                                <td>
+                                    <input type="hidden" name="txtSearchValue" 
+                                           value="${searchValue}" />
+                                    <input type="submit" value="Check" name="btAction"  />
+                                </td>
+                                
+                                </tr>
+                            </form> 
+                        </c:forEach>
+
+
+                        </tbody>
+                    </table>
+                </c:if>
+                <c:if test="${empty listAuction}">
+                    <h2>
+                        No record is matched!!!
+                    </h2>
+                </c:if>
+            </div>
+
         </div>
 
         <!-- BODY -->

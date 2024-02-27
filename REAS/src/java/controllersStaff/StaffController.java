@@ -25,6 +25,16 @@ public class StaffController extends HttpServlet {
                 case "":
                     url = "index.jsp";
                     break;
+                case "approve":
+                    url = "staff_approve.jsp";
+                    break;
+                case "approved":
+                    url = "staff_approve.jsp";
+                    break;   
+                case "searchAution":
+                    url = "SearchAutionAppoveServlet";
+                    break;
+                
                 
             }
             request.getRequestDispatcher(url).forward(request, response);
