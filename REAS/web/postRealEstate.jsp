@@ -247,12 +247,51 @@
 
                     <label>6.Thời gian bắt đầu</label>
                     <input type="datetime-local"  id="timeStart" name="timeStart" required></br>
+                    <script>
+                        // Lấy ngày và giờ hiện tại
+                        var currentDate = new Date();
+
+                        // Chuyển đổi ngày hiện tại thành chuỗi định dạng ISO (yyyy-mm-ddThh:mm)
+                        var currentDateTime = currentDate.toISOString().slice(0, 16);
+
+                        // Thiết lập thuộc tính min cho các trường datetime-local
+                        document.getElementById("timeStart").min = currentDateTime;
+                    </script>
 
                     <label>7.Thời gian kết thúc</label>
                     <input type="datetime-local"  id="timeEnd" name="timeEnd"  required></br>
+                    <script>
+                        // Lấy ngày và giờ hiện tại
+                        var currentDate = new Date();
+
+                        // Chuyển đổi ngày hiện tại thành chuỗi định dạng ISO (yyyy-mm-ddThh:mm)
+                        var currentDateTime = currentDate.toISOString().slice(0, 16);
+
+                        // Thiết lập thuộc tính min cho các trường datetime-local
+                        document.getElementById("timeEnd").min = currentDateTime;
+                    </script>
 
                     <label>8.Diện tích</label>
                     <input type="text"  id="area" name="area" placeholder="(m²)" required></br>
+                    <script>
+                        function validateArea() {
+                            // Lấy giá trị diện tích từ trường input
+                            var areaValue = document.getElementById("area").value;
+
+                            // Chuyển đổi giá trị diện tích sang kiểu số
+                            var areaNumber = parseFloat(areaValue);
+
+                            // Kiểm tra nếu giá trị diện tích là lớn hơn 0
+                            if (areaNumber <= 0 || isNaN(areaNumber)) {
+                                // Hiển thị thông báo lỗi
+                                alert("Diện tích phải lớn hơn 0");
+                                // Ngăn chặn việc gửi form đi
+                                return false;
+                            }
+                            // Cho phép gửi form đi nếu điều kiện hợp lệ
+                            return true;
+                        }
+                    </script>
 
                     <label>9.Mô tả</label>
                     <input type= "text" id="detail" name="detail" placeholder="Nhập mô tả tài sản...">
@@ -262,7 +301,6 @@
                         <input type="file" title="Chọn Ảnh" name="image1"/>
                         <input type="file" title="Chọn Ảnh" name="image2"/> 
                         <input type="file" title="Chọn Ảnh" name="image3"/>
-                        
                     </div>
 
                     <button  type="submit" value="submitPost" name="action">

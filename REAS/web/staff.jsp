@@ -113,6 +113,7 @@
                             <a class="">Đấu giá</a>
                         </li>
                     </ul>
+                    
 <!--                    <p class="menu-label">
                         Administration
                     </p>
@@ -207,8 +208,10 @@
 
 
                 </aside>
+                
             </div>
-            <div class="column" style="height: 100vh;">Auto</div>
+            <div class="column" style="height: 100vh;">Xin chào ${sessionScope.staff.fullname} </div></br>
+            
         </div>
 
         <!-- BODY -->
