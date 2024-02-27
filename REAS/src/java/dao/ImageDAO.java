@@ -237,6 +237,5 @@ public class ImageDAO {
         //ImageDAO.saveImg2("FOLDER10", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png");
         //ImageDAO iD = new ImageDAO();
         //Image i = iD.getImageByID("FOLDER10");
-       
     }
 }
