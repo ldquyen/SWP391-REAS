@@ -159,19 +159,19 @@
                         <c:forEach items="${requestScope.listimg}" var="i">
                             <div class="mySlides">
                                 <div class="numbertext">1 / 3</div>
-                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" alt="Image">
+                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
                             </div>
 
                             <div class="mySlides">
                                 <div class="numbertext">2 / 3</div>
-                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" alt="Image">
+                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
                             </div>
 
                             <div class="mySlides">
                                 <div class="numbertext">3 / 3</div>
-                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" alt="Image">
+                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
                             </div>
                         </c:forEach>
@@ -208,13 +208,13 @@
 
 
                                 <div class="column">
-                                    <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" alt="Image">
+                                    <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" style="width:100%; min-height: 100px;max-height: 100px;" onclick="currentSlide(1)" alt="Image">
                                 </div>
                                 <div class="column">
-                                    <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" alt="Image">
+                                    <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" style="width:100%; min-height: 100px;max-height: 100px;" onclick="currentSlide(2)" alt="Image">
                                 </div>
                                 <div class="column">
-                                    <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" alt="Image">
+                                    <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" style="width:100%; min-height: 100px;max-height: 100px;" onclick="currentSlide(3)" alt="Image">
                                 </div>
                             </c:forEach>
                             <!--                            <div class="column">

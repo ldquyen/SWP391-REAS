@@ -409,6 +409,7 @@ button {
 /* Hide the images by default */
 .mySlides {
     /*display: none !important;*/
+    position: relative;
 }
 
 /* Add a pointer when hovering over the thumbnail images */
@@ -448,10 +449,13 @@ button {
 /* Number text (1/3 etc) */
 .numbertext {
     color: #f2f2f2 !important;
-    font-size: 15px !important;
-    padding: 8px 12px !important;
+    font-size: 16px !important;
+    padding: 0px 6px !important;
     position: absolute !important;
-    top: 0 !important;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    bottom: 4%;
+    right: 1%;
 }
 
 /* Container for image text */
@@ -471,7 +475,7 @@ button {
 /* Six columns side by side */
 .row .column {
     float: left !important;
-    width: 16.66% !important;
+    width: 33.33% !important;
     padding: 0px;
 }
 

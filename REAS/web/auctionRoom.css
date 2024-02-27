@@ -1015,6 +1015,7 @@ p-text-left-right-container {
 /* Hide the images by default */
 .mySlides {
     /*display: none !important;*/
+    position: relative;
 }
 
 /* Add a pointer when hovering over the thumbnail images */
@@ -1057,8 +1058,12 @@ p-text-left-right-container {
 .numbertext {
     color: #f2f2f2 !important;
     font-size: 16px !important;
-    padding: 8px 12px !important;
+    padding: 0px 6px !important;
     position: absolute !important;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    bottom: 4%;
+    right: 1%;
 }
 
 /* Container for image text */

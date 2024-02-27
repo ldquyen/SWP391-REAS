@@ -693,4 +693,10 @@ button {
     opacity: 1;
 }
 
+.img-home-page{
+    height: 230px;
+    max-width: 100%;
+    width: 100%;
+}
+
 
