@@ -255,9 +255,9 @@
                                                         document.write(formattedNumber);
                                                     </script> VND</span></p>
                                             <p class="bold-text">Giá mua ngay: <span class="test"><script>
-                                                        var number = ${REGETBYID.pricePaid}; // Assuming auctions.lamda contains the number
-                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                        document.write(formattedNumber);
+                                                var number = ${REGETBYID.pricePaid}; // Assuming auctions.lamda contains the number
+                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                document.write(formattedNumber);
                                                     </script> VND</span>
                                             <p class="bold-text">Bước giá: <span>
                                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
@@ -270,7 +270,8 @@
                                                         </c:if>
                                                     </c:forEach>
                                                     VND</span></p>
-                                            <p class="bold-text">Thời gian đấu giá: <br/><span>${REGETBYID.timeUp} - ${REGETBYID.timeDown}</span></p>
+                                            <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${REGETBYID.timeUp}</span></p>
+                                            <p class="bold-text">Thời gian kết thúc: <span id="endTime">${REGETBYID.timeDown}</span></p>
 
                                         </div>
                                     </div>
@@ -297,19 +298,56 @@
                 </div>
             </div>
             <div class="column" style="padding-top: 30px">
-                <div class="register-modal-container">
+                <div style="width: 95%;" class="register-modal-container">
                     <h1 style="font-size: 22px; padding: 4px 0px;">Diễn biến cuộc đấu giá</h1>
                     <div class="number-price-container">
-                        <p style="color: #D9AB73; font-size: 22px">50.300.000.000 VND</p>
-                        <p>50.250.000.000 VND</p>
+                        <p style="color: #D9AB73; font-size: 22px">
+                            <c:if test="${not empty auctions}">
+                                <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">                            
+                                            <span class="price-now">
+                                                <script>
+                                                    var number = ${auctions.priceNow}; // Assuming auctions.lamda contains the number
+                                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                    document.write(formattedNumber);
+                                                </script>
+                                                VND
+                                            </span>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                            </c:if> 
+                        </p>
+                        <p>50.210.000.000 VND</p>
                         <p>50.215.000.000 VND</p>
                         <p>50.205.000.000 VND</p>
                         <p>50.200.000.000 VND</p>
                     </div>
                 </div>
 
-                <div class="register-modal-container" style="margin-top: 25px">
-                    <h1 style="font-size: 20px; padding: 4px 0px;color: #D9AB73;font-weight: bold;">Giá hiện tại: 50.300.000.000 VND</h1>
+                <div class="register-modal-container" style="width: 95%;margin-top: 25px">
+                    <h1 style="display: flex; justify-content: center;font-size: 20px; padding: 4px 0px;color: #D9AB73;font-weight: bold;">
+                        <c:if test="${not empty auctions}">
+                            <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                    <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                        <p>Giá hiện tại: 
+                                            <span id="price-now">
+                                                <script>
+                                                    var number = ${auctions.priceNow}; // Assuming auctions.lamda contains the number
+                                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                    document.write(formattedNumber);
+                                                </script>
+                                                VND
+                                            </span>
+                                        </p>
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </c:if> 
+                    </h1>
+                    </h1>
                     <div class="number-price-container number-price-container-bellow">
                         <p class="number-price-bellow-1">
                             <c:if test="${not empty auctions}">
@@ -330,18 +368,47 @@
                         <p class="number-price-bellow-2">X</p>
                         <p id="quantity-field">
                             <button id="down" onclick="setQuantity('down');" style="color: #fff">-</button>
-                            <input type="text" id="quantity" value="1" style="background-color: #000; color: #fff;width: 50%; border: 3px #fff solid;padding: 2px 10px;font-family: Inter;
+                            <input type="text" id="quantity" value="1" style="background-color: #000; color: #fff;width: 52%; border: 3px #fff solid;padding: 2px 10px;font-family: Inter;
                                    font-size: 20px;
                                    font-style: normal;
                                    font-weight: 400;
                                    line-height: normal;
-                                   text-align: center">
+                                   text-align: center" onkeypress="handleKeyPress(event)">
                             <button id="up" onclick="setQuantity('up');" style="color: #fff">+</button>
+                        </p>
+                        <p class="number-price-bellow-2">=</p>
+                        <p class="number-price-bellow-1">
+                            <span id="total-price"></span>
                         </p>
                     </div>
                     <div style="display: flex; justify-content: center">
-                        <h1  style="display: flex;justify-content: center;font-size: 20px; padding: 4px 0px;color: #D9AB73;font-weight: bold;border: 3px #D9AB73 solid;width: 75%;margin-top: 8px">
-                            Trả giá:  <p id="total-price"></p></h1>
+                        <form action="MemberController" method="post">
+                            <button type="submit" value="tragia" name="action">
+                                <h1  style="display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #D9AB73 solid;margin-top: 8px">
+                                    <c:if test="${not empty auctions}">
+                                        <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                            <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                                <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                                    <input type="hidden" name="idAuctionBID" value="${auctions.realEstateID}">
+                                                    <input type="hidden" name="priceNowBid" id="priceNowBid" value="Pricevalue">
+                                                    <p>Trả giá:  
+                                                        <span id="total-price-bid">
+                                                            <script>
+                                                                var number = ${auctions.priceNow}; // Assuming auctions.lamda contains the number
+                                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                                document.write(formattedNumber);
+                                                            </script>
+                                                            VND
+                                                        </span>
+                                                    </p>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:forEach>
+                                    </c:if> 
+                                </h1>
+                            </button>
+                            <!--                            <p id="text-price"></p>-->
+                        </form>
                     </div>
                 </div>
             </div>
@@ -367,53 +434,161 @@
         </footer>
 
         <script>
-            function setQuantity(upordown) {
-                var quantity = document.getElementById('quantity');
+            function chuyenSoTienSangChu(soTien) {
+                const motDenChin = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+                const muoiDenHaiMuoi = ['', 'mười', 'hai mươi', 'ba mươi', 'bốn mươi', 'năm mươi', 'sáu mươi', 'bảy mươi', 'tám mươi', 'chín mươi'];
 
-                if (quantity.value > 1) {
-                    if (upordown == 'up') {
-                        ++document.getElementById('quantity').value;
-                    } else if (upordown == 'down') {
-                        --document.getElementById('quantity').value;
+                function chuyenHangChuc(so) {
+                    const donVi = so % 10;
+                    const hangChuc = Math.floor(so / 10);
+                    if (donVi === 0) {
+                        return muoiDenHaiMuoi[hangChuc];
+                    } else if (hangChuc === 1) {
+                        return 'mười ' + motDenChin[donVi];
+                    } else {
+                        return muoiDenHaiMuoi[hangChuc] + ' ' + motDenChin[donVi];
                     }
-                } else if (quantity.value == 1) {
-                    if (upordown == 'up') {
-                        ++document.getElementById('quantity').value;
-                    }
-                } else
-                {
-                    document.getElementById('quantity').value = 1;
                 }
+
+                function chuyenSoLonHonHaiChuSo(so) {
+                    const tram = Math.floor(so / 100);
+                    const phanDu = so % 100;
+                    if (tram === 0) {
+                        return chuyenHangChuc(phanDu);
+                    } else if (phanDu === 0) {
+                        return motDenChin[tram] + ' trăm';
+                    } else {
+                        return motDenChin[tram] + ' trăm ' + chuyenHangChuc(phanDu);
+                    }
+                }
+
+                const ty = Math.floor(soTien / 1000000000);
+                const trieu = Math.floor((soTien % 1000000000) / 1000000);
+                const ngan = Math.floor((soTien % 1000000) / 1000);
+                const dong = Math.floor(soTien % 1000);
+
+                let chuoiChu = '';
+                if (ty > 0) {
+                    chuoiChu += chuyenSoLonHonHaiChuSo(ty) + ' tỷ ';
+                }
+                if (trieu > 0) {
+                    chuoiChu += chuyenSoLonHonHaiChuSo(trieu) + ' triệu ';
+                }
+                if (ngan > 0) {
+                    chuoiChu += chuyenSoLonHonHaiChuSo(ngan) + ' nghìn ';
+                }
+                if (dong > 0) {
+                    chuoiChu += chuyenSoLonHonHaiChuSo(dong);
+                }
+
+                return chuoiChu.trim() + ' đồng';
             }
-        </script>
 
-        <script>
-            // Function to update the total price based on quantity
-            function updateTotalPrice() {
-                var quantity = parseInt(document.getElementById('quantity').value);
-                var pricePerUnit = parseFloat(document.querySelector('.number-price-bellow-1').innerText.replace(/\./g, '').replace(',', '.'));
-                var totalPrice = quantity * pricePerUnit;
-                document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN') + ' VND';
-            }
-
-            // Initialize total price based on default quantity and price per unit
-            updateTotalPrice();
-
-            // Function to handle quantity changes
-            function setQuantity(action) {
+            function setQuantity(upordown) {
                 var quantityElement = document.getElementById('quantity');
                 var quantity = parseInt(quantityElement.value);
 
-                if (action === 'up') {
-                    quantity += 1;
-                } else if (action === 'down' && quantity > 1) {
-                    quantity -= 1;
+                if (quantity > 1 || upordown === 'up') {
+                    if (upordown === 'up') {
+                        quantity += 1;
+                    } else if (upordown === 'down') {
+                        quantity -= 1;
+                    }
+                } else {
+                    quantity = 1;
                 }
 
                 quantityElement.value = quantity;
 
                 // Update total price based on the new quantity
                 updateTotalPrice();
+            }
+
+            function handleKeyPress(event) {
+                if (event.keyCode === 13) {
+                    // If Enter key is pressed, update the total price
+                    updateTotalPrice();
+                }
+            }
+
+            document.addEventListener('keydown', function (event) {
+                // Check if the pressed key is the arrow up key (key code 38)
+                if (event.keyCode === 38) {
+                    // Simulate a click on the button with id 'up'
+                    document.getElementById('up').click();
+                    // Prevent the default behavior (scrolling up)
+                    event.preventDefault();
+                }
+                // Check if the pressed key is the arrow down key (key code 40)
+                else if (event.keyCode === 40) {
+                    // Simulate a click on the button with id 'down'
+                    document.getElementById('down').click();
+                    // Prevent the default behavior (scrolling down)
+                    event.preventDefault();
+                }
+            });
+
+            // Function to update the total price based on quantity
+            function updateTotalPrice() {
+                var quantity = parseInt(document.getElementById('quantity').value);
+                var priceNow = parseFloat(document.querySelector('.price-now').innerText.replace(/\./g, '').replace(',', '.'));
+                // You need to replace '.number-price-bellow-1' with the appropriate selector
+                var pricePerUnit = parseFloat(document.querySelector('.number-price-bellow-1').innerText.replace(/\./g, '').replace(',', '.'));
+                var totalPrice = quantity * pricePerUnit;
+                var totalPriceBid = priceNow + totalPrice;
+
+                document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN');
+                document.getElementById('total-price-bid').innerText = totalPriceBid.toLocaleString('vi-VN');
+
+
+                var Pricevalue = document.getElementById('priceNowBid').value = totalPriceBid;
+                console.log(Pricevalue);
+
+
+
+                // Convert total price to words using chuyenSoTienSangChu function
+                var totalPriceInWords = chuyenSoTienSangChu(totalPriceBid);
+                document.getElementById('text-price').innerText = totalPriceInWords.charAt(0).toUpperCase() + totalPriceInWords.slice(1); // Render total price in words with the first letter capitalized
+            }
+
+            // Initialize total price based on default quantity and price per unit
+            updateTotalPrice();
+        </script>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var startTimeElement = document.getElementById("startTime");
+                var endTimeElement = document.getElementById("endTime");
+
+                // Format start time
+                var startTime = new Date(startTimeElement.innerText);
+                var formattedStartTime = formatTime(startTime);
+
+                // Format end time
+                var endTime = new Date(endTimeElement.innerText);
+                var formattedEndTime = formatTime(endTime);
+
+                // Update the HTML with the formatted time
+                startTimeElement.innerText = formattedStartTime;
+                endTimeElement.innerText = formattedEndTime;
+            });
+
+            // Function to format the time
+            function formatTime(time) {
+                var year = time.getFullYear();
+                var month = padZero(time.getMonth() + 1);
+                var date = padZero(time.getDate());
+                var hours = padZero(time.getHours());
+                var minutes = padZero(time.getMinutes());
+                var seconds = padZero(time.getSeconds());
+                var formattedTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+                return formattedTime;
+            }
+
+            // Function to pad zero to single digit numbers
+            function padZero(number) {
+                return number < 10 ? '0' + number : number;
             }
         </script>
 
