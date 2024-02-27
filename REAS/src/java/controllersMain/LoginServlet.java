@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
-           String password2 = dao.encodePassword(password);
+            String password2 = dao.encodePassword(password);
             Account dto = dao.checkLogin(username, password2);
 
             if (dto == null) {
@@ -74,9 +74,9 @@ public class LoginServlet extends HttpServlet {
                 RealEstateDAO realEstateDAO = new RealEstateDAO();
                 List<RealEstateVM> list = realEstateDAO.getListAvailableRealEstate();
                 request.setAttribute("list", list);
-                 ImageDAO imgDAO = new ImageDAO();
-            List<Image> listImage = imgDAO.getListImage2();
-            request.setAttribute("listImg", listImage);
+                ImageDAO imgDAO = new ImageDAO();
+                List<Image> listImage = imgDAO.getListImage2();
+                request.setAttribute("listImg", listImage);
                 url = "index_1.jsp";
                 HttpSession session = request.getSession(true);
                 Account m = dao.getAccount(username, password2);
