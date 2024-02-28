@@ -3,22 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersMember;
+package controllersStaff;
 
 import dao.AuctionDAO;
-import dao.CategoryDAO;
-import dao.CityDAO;
-import dao.ImageDAO;
-import dao.RealEstateDAO;
 import dto.Auction;
-import dto.Category;
-import dto.City;
-import dto.Image;
-import dto.RealEstate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,10 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author tranl
+ * @author ADMIN
  */
-@WebServlet(name = "AuctionRoomServlet", urlPatterns = {"/AuctionRoomServlet"})
-public class AuctionRoomServlet extends HttpServlet {
+@WebServlet(name = "SearchAutionAppoveServlet", urlPatterns = {"/SearchAutionAppoveServlet"})
+public class SearchAutionAppoveServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,39 +37,26 @@ public class AuctionRoomServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final String AUCTIONROOM = "auctionRoom.jsp";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = AUCTIONROOM;
+        String url = "staff_approve.jsp";
+        String searchValue = request.getParameter("txtSearchValue");
         try {
-            String IDRE = request.getParameter("idRE3");
-
-            System.out.println(IDRE);
-            AuctionDAO auctionDAO = new AuctionDAO();
-            List<Auction> auctions = auctionDAO.getAuctions();
-            ArrayList<City> city = CityDAO.getCityList();
-            ArrayList<Category> category = CategoryDAO.getListCategory();
-            ArrayList<Image> listImgAuction = ImageDAO.getListImageByID(IDRE);
-
-            ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(IDRE);
-
-            request.setAttribute("REGETBYID", REGETBYID);
-            request.setAttribute("city", city);
-            request.setAttribute("category", category);
-            request.setAttribute("listimgauction", listImgAuction);
-            System.out.println(listImgAuction);
-
-            request.setAttribute("auctions", auctions);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching auctions");
+            if (searchValue == null || searchValue.trim().isEmpty()) {
+                AuctionDAO dao = new AuctionDAO();
+                List<Auction> listAuction = dao.getAuctions();
+                request.setAttribute("SEARCH_RESULT", listAuction);
+            } else {
+                AuctionDAO dao = new AuctionDAO();
+                List<Auction> listAuction = dao.getAuctions();
+                request.setAttribute("SEARCH_RESULT", listAuction);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-
         }
     }
 
@@ -90,7 +72,11 @@ public class AuctionRoomServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchAutionAppoveServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -104,7 +90,11 @@ public class AuctionRoomServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchAutionAppoveServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

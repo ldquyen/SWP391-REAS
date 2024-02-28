@@ -151,71 +151,78 @@
             <div class="column is-two-thirds"style="padding-top: 30px;">
 
                 <div class="register-modal-container">
-                    <!-- Container for the image gallery -->
+                    <div class="container">
+                        <c:forEach items="${requestScope.listimgauction}" var="i">
+                            <div class="mySlides fade">
+                                <div class="numbertext">1 / 3</div>
+                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;object-fit: cover;">
 
-                    <!-- Full-width images with number text -->
-                    <div style="display: flex">
-                        <div class="mySlides">
-                            <div class="numbertext">1 / 3</div>
-                            <img src="image/img_woods_wide.png" style="width:100%">
+                            </div>
+
+                            <div class="mySlides fade">
+                                <div class="numbertext">2 / 3</div>
+                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;object-fit: cover;">
+
+                            </div>
+
+                            <div class="mySlides fade">
+                                <div class="numbertext">3 / 3</div>
+                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;object-fit: cover;">
+
+                            </div>
+                        </c:forEach>
+                        <!-- Full-width images with number text -->
+
+                        <!--
+                                                <div class="mySlides">
+                                                    <div class="numbertext">4 / 6</div>
+                                                    <img src="image/img_lights_wide.jpg" style="width:100%">
+                                                </div>
+                        
+                                                <div class="mySlides">
+                                                    <div class="numbertext">5 / 6</div>
+                                                    <img src="image/img_nature_wide.jpg" style="width:100%">
+                                                </div>
+                        
+                                                <div class="mySlides">
+                                                    <div class="numbertext">6 / 6</div>
+                                                    <img src="image/img_snow_wide.jpg" style="width:100%">
+                                                </div>-->
+
+                        <!-- Next and previous buttons -->
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                        <!--                         Image text 
+                                                <div class="caption-container">
+                                                    <p id="caption"></p>
+                                                </div>-->
+
+                        <!-- Thumbnail images -->
+                        <div class="row">
+                            <c:forEach items="${requestScope.listimgauction}" var="i">
+
+
+                                <div class="column">
+                                    <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" style="width:100%; min-height: 100px;max-height: 100px;object-fit: cover;" onclick="currentSlide(1)" alt="Image">
+                                </div>
+                                <div class="column">
+                                    <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" style="width:100%; min-height: 100px;max-height: 100px;object-fit: cover;" onclick="currentSlide(2)" alt="Image">
+                                </div>
+                                <div class="column">
+                                    <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" style="width:100%; min-height: 100px;max-height: 100px;object-fit: cover;" onclick="currentSlide(3)" alt="Image">
+                                </div>
+                            </c:forEach>
+                            <!--                            <div class="column">
+                                                            <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(4)" alt="Northern Lights">
+                                                        </div>
+                                                        <div class="column">
+                                                            <img class="demo cursor" src="image/img_nature_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(5)" alt="Nature and sunrise">
+                                                        </div>
+                                                        <div class="column">
+                                                            <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(6)" alt="Snowy Mountains">
+                                                        </div>-->
                         </div>
-
-                        <div class="mySlides">
-                            <div class="numbertext">2 / 3</div>
-                            <img src="image/img_5terre_wide.jpg" style="width:100%">
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="numbertext">3 / 3</div>
-                            <img src="image/img_mountains_wide.jpg" style="width:100%">
-                        </div>
-                    </div>
-
-                    <!--
-                                            <div class="mySlides">
-                                                <div class="numbertext">4 / 6</div>
-                                                <img src="image/img_lights_wide.jpg" style="width:100%">
-                                            </div>
-                    
-                                            <div class="mySlides">
-                                                <div class="numbertext">5 / 6</div>
-                                                <img src="image/img_nature_wide.jpg" style="width:100%">
-                                            </div>
-                    
-                                            <div class="mySlides">
-                                                <div class="numbertext">6 / 6</div>
-                                                <img src="image/img_snow_wide.jpg" style="width:100%">
-                                            </div>-->
-
-                    <!-- Next and previous buttons -->
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-                    <!-- Image text -->
-                    <div class="caption-container">
-                        <p id="caption"></p>
-                    </div>
-
-                    <!-- Thumbnail images -->
-                    <div class="row">
-                        <div class="column">
-                            <img class="demo cursor" src="image/img_woods_wide.png" style="width:100%; min-height: 100px" onclick="currentSlide(1)" alt="The Woods">
-                        </div>
-                        <div class="column">
-                            <img class="demo cursor" src="image/img_5terre_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(2)" alt="Cinque Terre">
-                        </div>
-                        <div class="column">
-                            <img class="demo cursor" src="image/img_mountains_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(3)" alt="Mountains and fjords">
-                        </div>
-                        <!--                            <div class="column">
-                                                        <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(4)" alt="Northern Lights">
-                                                    </div>
-                                                    <div class="column">
-                                                        <img class="demo cursor" src="image/img_nature_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(5)" alt="Nature and sunrise">
-                                                    </div>
-                                                    <div class="column">
-                                                        <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(6)" alt="Snowy Mountains">
-                                                    </div>-->
                     </div>
                     <div class="container-full-bellow">
                         <c:if test="${not empty auctions}">
@@ -674,12 +681,22 @@
             let slideIndex = 1;
             showSlides(slideIndex);
 
-// Next/previous controls
+            // Next/previous controls
             function plusSlides(n) {
+                // Disable transition temporarily
+                let slidesContainer = document.querySelector('.container');
+                slidesContainer.style.transitionDuration = '0ms';
+
+                // Move to the next slide
                 showSlides(slideIndex += n);
+
+                // Enable transition after a short delay (10ms for example)
+                setTimeout(() => {
+                    slidesContainer.style.transitionDuration = '';
+                }, 10);
             }
 
-// Thumbnail image controls
+            // Thumbnail image controls
             function currentSlide(n) {
                 showSlides(slideIndex = n);
             }

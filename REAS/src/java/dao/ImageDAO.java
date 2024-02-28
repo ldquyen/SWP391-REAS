@@ -187,13 +187,13 @@ public class ImageDAO {
         }
         return list;
     }
-    
+
     public static ArrayList<Image> getListImage() throws ClassNotFoundException, SQLException {
         ArrayList<Image> list = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
             String sql = "SELECT ImageFolderID,ImageLink1,ImageLink2,ImageLink3 FROM Image";
-            PreparedStatement pst = cn.prepareStatement(sql);         
+            PreparedStatement pst = cn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
@@ -209,13 +209,13 @@ public class ImageDAO {
         }
         return list;
     }
-    
-    public  ArrayList<Image> getListImage2() throws ClassNotFoundException, SQLException {
+
+    public ArrayList<Image> getListImage2() throws ClassNotFoundException, SQLException {
         ArrayList<Image> list = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
             String sql = "SELECT ImageFolderID,ImageLink1,ImageLink2,ImageLink3 FROM Image";
-            PreparedStatement pst = cn.prepareStatement(sql);         
+            PreparedStatement pst = cn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
@@ -231,11 +231,36 @@ public class ImageDAO {
         }
         return list;
     }
-     
+
+    public static ArrayList<Image> getListImageByID(String realestateID) throws ClassNotFoundException, SQLException {
+        ArrayList<Image> list = new ArrayList<>();
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT Image.[ImageFolderID],ImageLink1,ImageLink2,ImageLink3 FROM Image\n"
+                    + "join RealEstate on Image.ImageFolderID = RealEstate.ImageFolderID\n"
+                    + "where RealEstate.RealEstateID = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, realestateID);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String imageFolderID = rs.getString("ImageFolderID");
+                    byte[] imageLink1 = rs.getBytes("ImageLink1");
+                    byte[] imageLink2 = rs.getBytes("ImageLink2");
+                    byte[] imageLink3 = rs.getBytes("ImageLink3");
+                    Image i = new Image(imageFolderID, imageLink1, imageLink2, imageLink3);
+                    list.add(i);
+                }
+            }
+            cn.close();
+        }
+        return list;
+    }
 
     public static void main(String[] args) throws SQLException, NamingException, ClassNotFoundException {
         //ImageDAO.saveImg2("FOLDER10", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png");
         //ImageDAO iD = new ImageDAO();
         //Image i = iD.getImageByID("FOLDER10");
+//        saveImg2("FOL3", "C:\\Users\\tranl\\Downloads\\images.jpg", "C:\\Users\\tranl\\Downloads\\625b10a58137b364b18df2ea_iStock-94179607.jpg", "C:\\Users\\tranl\\Downloads\\download (3).jpg");
     }
 }

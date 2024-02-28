@@ -301,7 +301,12 @@
                                     ${item.address}
                                 </p>
                                 <p class="text-home-3">
-                                    <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd
+                                    <script>
+                                        var number = ${item.priceFirst}; // Assuming auctions.lamda contains the number
+                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                        document.write(formattedNumber);
+                                    </script> VND
+                                    <%--  <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd --%>
                                 </p>
                             </div>
                         </a>
@@ -333,60 +338,60 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const swiper = new Swiper('.swiper', {
-            slidesPerView: 4,
-            spaceBetween: 25,
-            // loop: true,
-            centeredSlide: 'true',
-            direction: 'horizontal',
-            fade: 'true',
-            grabCursor: 'true',
-            pagination: {
-                clickable: true,
-                renderBullet: function (index, className) {
-                    return '<span class="' + className + '">' + (index + 1) + "</span>";
-                },
-                el: '.swiper-pagination',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+                                        const swiper = new Swiper('.swiper', {
+                                            slidesPerView: 4,
+                                            spaceBetween: 25,
+                                            // loop: true,
+                                            centeredSlide: 'true',
+                                            direction: 'horizontal',
+                                            fade: 'true',
+                                            grabCursor: 'true',
+                                            pagination: {
+                                                clickable: true,
+                                                renderBullet: function (index, className) {
+                                                    return '<span class="' + className + '">' + (index + 1) + "</span>";
+                                                },
+                                                el: '.swiper-pagination',
+                                            },
+                                            navigation: {
+                                                nextEl: '.swiper-button-next',
+                                                prevEl: '.swiper-button-prev',
+                                            },
 
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
+                                            scrollbar: {
+                                                el: '.swiper-scrollbar',
+                                            },
 
-            breakpoints: {
-                0: {
-                    slidesPerView: 1,
-                },
-                520: {
-                    slidesPerView: 2,
-                },
-                950: {
-                    slidesPerView: 3,
-                },
-                1024: {
-                    slidesPerView: 4,
-                }
-            }
-        });
+                                            breakpoints: {
+                                                0: {
+                                                    slidesPerView: 1,
+                                                },
+                                                520: {
+                                                    slidesPerView: 2,
+                                                },
+                                                950: {
+                                                    slidesPerView: 3,
+                                                },
+                                                1024: {
+                                                    slidesPerView: 4,
+                                                }
+                                            }
+                                        });
 
-        // Get the element with the ID 'streamText'
-        const streamText = document.getElementById('streamText');
-        const streamContainer = document.getElementById('streamContainer');
+                                        // Get the element with the ID 'streamText'
+                                        const streamText = document.getElementById('streamText');
+                                        const streamContainer = document.getElementById('streamContainer');
 
 // Check if the element was found
 
-        // If the element exists, calculate its width
-        const textWidth = streamText.offsetWidth; // Độ dài của văn bản
+                                        // If the element exists, calculate its width
+                                        const textWidth = streamText.offsetWidth; // Độ dài của văn bản
 
-        // Calculate animation duration based on text width
-        const animationDuration = (textWidth / 100) * 0.5; // 100 pixels/second
+                                        // Calculate animation duration based on text width
+                                        const animationDuration = (textWidth / 100) * 0.5; // 100 pixels/second
 
-        // Apply the animation duration to the 'stream_text' class
-        streamText.style.animationDuration = animationDuration + 's';
+                                        // Apply the animation duration to the 'stream_text' class
+                                        streamText.style.animationDuration = animationDuration + 's';
 //
 //
 //            // Check if there is text inside the streamText element

@@ -248,11 +248,7 @@
                     </table>
                 </c:if>
 
-                <c:forEach var="img" items="${requestScope.imageList}">
-                    <img src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image1)}" alt="Image">
-                    <img src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image2)}" alt="Image">
-                    <img src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image3)}" alt="Image">
-                </c:forEach>
+                
             </div>
         </div>
 

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -155,22 +156,27 @@
                 <div class="container-full-left">
                     <!-- Container for the image gallery -->
                     <div class="container">
+                        <c:forEach items="${requestScope.listimg}" var="i">
+                            <div class="mySlides">
+                                <div class="numbertext">1 / 3</div>
+                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
+                            </div>
+
+                            <div class="mySlides">
+                                <div class="numbertext">2 / 3</div>
+                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
+
+                            </div>
+
+                            <div class="mySlides">
+                                <div class="numbertext">3 / 3</div>
+                                <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
+
+                            </div>
+                        </c:forEach>
                         <!-- Full-width images with number text -->
-                        <div class="mySlides">
-                            <div class="numbertext">1 / 3</div>
-                            <img src="data:image/jpeg;base64,${item.image1}" style="width:100%">
-                        </div>
 
-                        <div class="mySlides">
-                            <div class="numbertext">2 / 3</div>
-                            <img src="data:image/jpeg;base64,${item.image2}" style="width:100%">
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="numbertext">3 / 3</div>
-                            <img src="data:image/jpeg;base64,${item.image3}" style="width:100%">
-                        </div>
                         <!--
                                                 <div class="mySlides">
                                                     <div class="numbertext">4 / 6</div>
@@ -198,15 +204,19 @@
 
                         <!-- Thumbnail images -->
                         <div class="row">
-                            <div class="column">
-                                <img class="demo cursor" src="data:image/jpeg;base64,${item.image1}" style="width:100%; min-height: 100px" onclick="currentSlide(1)" alt="The Woods">
-                            </div>
-                            <div class="column">
-                                <img class="demo cursor" src="data:image/jpeg;base64,${item.image2}" style="width:100%; min-height: 100px" onclick="currentSlide(2)" alt="Cinque Terre">
-                            </div>
-                            <div class="column">
-                                <img class="demo cursor" src="data:image/jpeg;base64,${item.image3}" style="width:100%; min-height: 100px" onclick="currentSlide(3)" alt="Mountains and fjords">
-                            </div>
+                            <c:forEach items="${requestScope.listimg}" var="i">
+
+
+                                <div class="column">
+                                    <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" style="width:100%; min-height: 100px;max-height: 100px;" onclick="currentSlide(1)" alt="Image">
+                                </div>
+                                <div class="column">
+                                    <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" style="width:100%; min-height: 100px;max-height: 100px;" onclick="currentSlide(2)" alt="Image">
+                                </div>
+                                <div class="column">
+                                    <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" style="width:100%; min-height: 100px;max-height: 100px;" onclick="currentSlide(3)" alt="Image">
+                                </div>
+                            </c:forEach>
                             <!--                            <div class="column">
                                                             <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(4)" alt="Northern Lights">
                                                         </div>
@@ -249,9 +259,9 @@
                                             <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                                 <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
                                                     <script>
-                                                                var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
-                                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                                document.write(formattedNumber);
+                                                        var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
+                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                        document.write(formattedNumber);
                                                     </script>
                                                 </c:if>
                                             </c:forEach>

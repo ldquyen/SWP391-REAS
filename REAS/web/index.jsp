@@ -132,7 +132,7 @@
                     <div class=" realestate-items swiper-slide"> 
                         <h1>${item.imageLink1}</h1>
                         <c:forEach var="img" items="${listImg}">
-                            <c:if test="${img.imageFolderID eq item.imageFolderID}"> <img src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image1)}" alt="Image"></c:if>
+                            <c:if test="${img.imageFolderID eq item.imageFolderID}"> <img class="img-home-page" src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image1)}" alt="Image"></c:if>
                         </c:forEach>
                         <a href="MainController?action=viewPostRealEstate&id=${item.realEstateID}">
 

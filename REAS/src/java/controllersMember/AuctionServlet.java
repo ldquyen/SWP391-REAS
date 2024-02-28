@@ -61,14 +61,15 @@ public class AuctionServlet extends HttpServlet {
             List<Auction> auctions = auctionDAO.getAuctions();
             ArrayList<City> city = CityDAO.getCityList();
             ArrayList<Category> category = CategoryDAO.getListCategory();
-            Image imageforauction = ImageDAO.getImageByID(idauctionbid);
+            ArrayList<Image> listImgAuction = ImageDAO.getListImageByID(idauctionbid);
 
             ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(idauctionbid);
 
             request.setAttribute("REGETBYID", REGETBYID);
             request.setAttribute("city", city);
             request.setAttribute("category", category);
-            request.setAttribute("imageforauction", imageforauction);
+            request.setAttribute("listimgauction", listImgAuction);
+            System.out.println(listImgAuction);
 
             request.setAttribute("auctions", auctions);
             request.setAttribute("priceoldbid", pricenowbid);

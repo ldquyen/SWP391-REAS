@@ -812,13 +812,9 @@ button {
 
 /* Customize the label (the container) */
 .container {
-    display: inline; /* Sử dụng flexbox để căn chỉnh văn bản và checkbox trên cùng một dòng */
     align-items: center; /* Canh chỉnh theo chiều dọc */
     position: relative;
-    padding-left: 35px;
     margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -1015,6 +1011,7 @@ p-text-left-right-container {
 /* Hide the images by default */
 .mySlides {
     /*display: none !important;*/
+    position: relative;
 }
 
 /* Add a pointer when hovering over the thumbnail images */
@@ -1032,7 +1029,7 @@ p-text-left-right-container {
     top: 36% !important;
     width: auto !important;
     padding: 16px !important;
-    margin-top: -118px !important;
+    margin-top: -5% !important;
     color: white !important;
     font-weight: bold !important;
     font-size: 20px !important;
@@ -1057,8 +1054,12 @@ p-text-left-right-container {
 .numbertext {
     color: #f2f2f2 !important;
     font-size: 16px !important;
-    padding: 8px 12px !important;
+    padding: 0px 6px !important;
     position: absolute !important;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    bottom: 4%;
+    right: 1%;
 }
 
 /* Container for image text */
@@ -1123,4 +1124,15 @@ p-text-left-right-container {
 
 #text-price {
     padding: 6px 0px 0px 0px;
+}
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
 }
