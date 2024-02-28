@@ -261,6 +261,7 @@ public class RealEstateDAO {
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 realEstate.setAccID(rs.getString("AccID"));
+                realEstate.setRealEstateID(rs.getString("RealEstateID"));
                 realEstate.setRealEstateName(rs.getString("RealEstateName"));
                 realEstate.setPriceFirst(rs.getLong("PriceFirst"));
                 realEstate.setPriceLast(rs.getLong("PriceLast"));

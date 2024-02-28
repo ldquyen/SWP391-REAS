@@ -36,9 +36,11 @@ public class RealEstateDetailServlet extends HttpServlet {
                 List<Auction> auctions = auctionDAO.getAuctions();
 
                 request.setAttribute("Auctions", auctions);
+                System.out.println(auctions);
                 ArrayList<Image> listIMG = ImageDAO.getListImageByID(realEstateId);
 
                 RealEstateVM realEstateVM = realEstateDAO.getRealEstateById(realEstateId);
+                System.out.println(realEstateVM);
                 if (realEstateVM != null) {
                     request.setAttribute("realEstate", realEstateVM);
                     

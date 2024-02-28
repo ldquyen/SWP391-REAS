@@ -157,19 +157,19 @@
                     <!-- Container for the image gallery -->
                     <div class="container">
                         <c:forEach items="${requestScope.listimg}" var="i">
-                            <div class="mySlides">
+                            <div class="mySlides fade">
                                 <div class="numbertext">1 / 3</div>
                                 <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
                             </div>
 
-                            <div class="mySlides">
+                            <div class="mySlides fade">
                                 <div class="numbertext">2 / 3</div>
                                 <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
                             </div>
 
-                            <div class="mySlides">
+                            <div class="mySlides fade">
                                 <div class="numbertext">3 / 3</div>
                                 <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
@@ -198,9 +198,9 @@
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
                         <!-- Image text -->
-                        <div class="caption-container">
+<!--                        <div class="caption-container">
                             <p id="caption"></p>
-                        </div>
+                        </div>-->
 
                         <!-- Thumbnail images -->
                         <div class="row">
@@ -238,6 +238,7 @@
                                     <p class="bold-text">Loại hình: <span>${realEstate.category}</span></p>
                                     <p class="bold-text">Địa chỉ: <span> ${realEstate.address}</span></p>
                                     <p class="bold-text">Mô tả: <span> ${realEstate.detail}</span></p>
+
                                     <%-- <p class="bold-text">Mô tả: <span> ${Auctions.realEstateID}</span></p> --%>
                                 </div>
                             </div>
@@ -257,7 +258,15 @@
                                         document.write(formattedNumber);
                                             </script> VND</span>
                                     <p class="bold-text">Bước giá: <span>
-
+                                            <c:forEach var="Auctions" items="${requestScope.Auctions}"> 
+                                                <c:if test="${Auctions.realEstateID eq realEstate.realEstateID}">
+                                                    <script>
+                                                        var number = ${Auctions.lamda}; // Assuming auctions.lamda contains the number
+                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                        document.write(formattedNumber);
+                                                    </script>
+                                                </c:if>
+                                            </c:forEach>
                                             VND</span></p>
                                     <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
                                     <p class="bold-text">Thời gian kết thúc: <span id="endTime">${realEstate.timeDown}</span></p>
