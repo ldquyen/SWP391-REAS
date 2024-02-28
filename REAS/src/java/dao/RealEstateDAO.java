@@ -253,7 +253,8 @@ public class RealEstateDAO {
                     + "im.[ImageLink2], "
                     + "im.[ImageLink3], "
                     + "ca.[CatName], "
-                    + "city.[CityName] "
+                    + "city.[CityName], "
+                    + "city.[CityID] "
                     + "from dbo.[RealEstate] re join dbo.[Image] im on re.ImageFolderID = im.ImageFolderID "
                     + "join dbo.[Category] ca on ca.CatID = re.CatID join dbo.[City] city on re.CityID = city.CityID Where re.[RealEstateID] = ?";
             pst = cn.prepareStatement(sql);
@@ -266,6 +267,7 @@ public class RealEstateDAO {
                 realEstate.setPriceFirst(rs.getLong("PriceFirst"));
                 realEstate.setPriceLast(rs.getLong("PriceLast"));
                 realEstate.setAddress(rs.getString("Address"));
+                realEstate.setCityID(rs.getInt("CityID"));
                 Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                 Timestamp timeDownSql = rs.getTimestamp("TimeDown");
                 realEstate.setTimeUp(timeUpSql.toLocalDateTime());

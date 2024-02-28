@@ -198,9 +198,9 @@
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
                         <!-- Image text -->
-<!--                        <div class="caption-container">
-                            <p id="caption"></p>
-                        </div>-->
+                        <!--                        <div class="caption-container">
+                                                    <p id="caption"></p>
+                                                </div>-->
 
                         <!-- Thumbnail images -->
                         <div class="row">
@@ -229,12 +229,16 @@
                         </div>
                     </div>
                     <div class="container-full-bellow">
-                        <h1 class="flex-center h1-text-mid">Dự án: ${realEstate.realEstateName}</h1>
+                        <h1 class="flex-center h1-text-mid">Dự án: ${realEstate.realEstateName} - <c:forEach var="cityList" items="${requestScope.city}"> 
+                                <c:if test="${cityList.cityID eq realEstate.cityID}">
+                                    ${cityList.cityName}
+                                </c:if>
+                            </c:forEach> - ${realEstate.area} m2</h1>
                         <div class="columns">
                             <div class="column" style="padding: 1.2rem 2.75rem;">
                                 <h1 class="flex-center h1-text-left-right">Thông tin bất động sản</h1>
                                 <div style="padding-top: 8px;">
-                                    <p class="bold-text">Diện tích: <span>${realEstate.area}m²</span></p>
+                                    <p class="bold-text">Diện tích: <span>${realEstate.area} m²</span></p>
                                     <p class="bold-text">Loại hình: <span>${realEstate.category}</span></p>
                                     <p class="bold-text">Địa chỉ: <span> ${realEstate.address}</span></p>
                                     <p class="bold-text">Mô tả: <span> ${realEstate.detail}</span></p>

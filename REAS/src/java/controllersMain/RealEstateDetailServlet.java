@@ -5,9 +5,11 @@
 package controllersMain;
 
 import dao.AuctionDAO;
+import dao.CityDAO;
 import dao.ImageDAO;
 import dao.RealEstateDAO;
 import dto.Auction;
+import dto.City;
 import dto.Image;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class RealEstateDetailServlet extends HttpServlet {
                 RealEstateDAO realEstateDAO = new RealEstateDAO();
                 AuctionDAO auctionDAO = new AuctionDAO();
                 List<Auction> auctions = auctionDAO.getAuctions();
+                ArrayList<City> city = CityDAO.getCityList();
 
                 request.setAttribute("Auctions", auctions);
                 System.out.println(auctions);
@@ -43,8 +46,8 @@ public class RealEstateDetailServlet extends HttpServlet {
                 System.out.println(realEstateVM);
                 if (realEstateVM != null) {
                     request.setAttribute("realEstate", realEstateVM);
-                    
-                request.setAttribute("listimg", listIMG);
+                    request.setAttribute("city", city);
+                    request.setAttribute("listimg", listIMG);
                     url = "detailRealEstate.jsp";
                 } else {
                     System.out.println("RealEstateDetailServlet null exception");
