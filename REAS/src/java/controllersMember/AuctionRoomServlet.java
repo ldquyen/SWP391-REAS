@@ -51,7 +51,7 @@ public class AuctionRoomServlet extends HttpServlet {
         try {
             String IDRE = request.getParameter("idRE3");
 
-            System.out.println(IDRE);
+//            System.out.println(IDRE);
             AuctionDAO auctionDAO = new AuctionDAO();
             List<Auction> auctions = auctionDAO.getAuctions();
             ArrayList<City> city = CityDAO.getCityList();
@@ -64,7 +64,7 @@ public class AuctionRoomServlet extends HttpServlet {
             request.setAttribute("city", city);
             request.setAttribute("category", category);
             request.setAttribute("listimgauction", listImgAuction);
-            System.out.println(listImgAuction);
+//            System.out.println(listImgAuction);
 
             request.setAttribute("auctions", auctions);
 

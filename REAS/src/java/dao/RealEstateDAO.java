@@ -195,6 +195,7 @@ public class RealEstateDAO {
         if (cn != null) {
             String sql = "select re.[RealEstateID], "
                     + "re.[AccID], "
+                    + "re.[CityID], "
                     + "re.[ImageFolderID], "
                     + "re.[RealEstateName], "
                     + "re.[PriceFirst], "
@@ -212,6 +213,7 @@ public class RealEstateDAO {
                 re.setRealEstateID(rs.getString("RealEstateID"));
                 re.setImageFolderID(rs.getString("ImageFolderID"));
                 re.setAccID(rs.getString("AccID"));
+                re.setCityID(rs.getInt("CityID"));
                 re.setRealEstateName(rs.getString("RealEstateName"));
                 re.setPriceFirst(rs.getLong("PriceFirst"));
                 re.setPriceLast(rs.getLong("PriceLast"));
@@ -292,12 +294,13 @@ public class RealEstateDAO {
         }
         return null;
     }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         RealEstateDAO dao = new RealEstateDAO();
         List<RealEstateVM> list = dao.getListAvailableRealEstate();
         for (RealEstateVM realEstateVM : list) {
-            System.out.println(            realEstateVM.toString()
-);
-            }
+            System.out.println(realEstateVM.toString()
+            );
+        }
     }
 }

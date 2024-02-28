@@ -58,7 +58,6 @@ public class AuctionDAO {
 //                    dto.setTimeEnd(rs.getObject("TimeEnd", LocalDateTime.class));
                     result.add(dto);
 
-                    System.out.println(dto);
                 }
             }
 
