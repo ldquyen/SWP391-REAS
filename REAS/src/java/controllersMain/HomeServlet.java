@@ -5,12 +5,17 @@
  */
 package controllersMain;
 
+import dao.CategoryDAO;
+import dao.CityDAO;
 import dao.ImageDAO;
 import dao.RealEstateDAO;
+import dto.Category;
+import dto.City;
 import dto.Image;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,11 +82,13 @@ public class HomeServlet extends HttpServlet {
 //            request.setAttribute("totalPage", totalPage);
 
             List<RealEstateVM> list = realEstateDAO.getListAvailableRealEstate();
+            ArrayList<City> city = CityDAO.getCityList();
             request.setAttribute("list", list);
             ImageDAO imgDAO = new ImageDAO();
             List<Image> listImage = imgDAO.getListImage2();
             request.setAttribute("listImg", listImage);
             request.setAttribute("pagenum", pageNum);
+            request.setAttribute("city", city);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } catch (ClassNotFoundException | SQLException  ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);

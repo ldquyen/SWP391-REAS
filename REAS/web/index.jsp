@@ -137,12 +137,19 @@
                         <a href="MainController?action=viewPostRealEstate&id=${item.realEstateID}">
 
                             <div class="text-home-container">
-                                <p class="text-home-1">
+                                <p class="text-home-1 timeUp">
                                     ${item.timeUp}
                                 </p>
                                 <p class="text-home-2">
-                                    ${item.realEstateName}
+                                    ${item.realEstateName} - <span>
+                                        <c:forEach var="cityList" items="${requestScope.city}"> 
+                                            <c:if test="${cityList.cityID eq item.cityID}">
+                                                ${cityList.cityName}
+                                            </c:if>
+                                        </c:forEach>
+                                    </span>
                                 </p>
+
                                 <p class="text-home-2">
                                     ${item.address}
                                 </p>
@@ -265,5 +272,38 @@
                                             }
                                         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var timeUpElements = document.querySelectorAll(".timeUp");
+
+            timeUpElements.forEach(function (element) {
+                // Format start time
+                var startTime = new Date(element.innerText);
+                var formattedStartTime = formatTime(startTime);
+
+                // Update the HTML with the formatted time
+                element.innerText = formattedStartTime;
+            });
+        });
+
+        // Function to format the time
+        function formatTime(time) {
+            var year = time.getFullYear();
+            var month = padZero(time.getMonth() + 1);
+            var date = padZero(time.getDate());
+            var hours = padZero(time.getHours());
+            var minutes = padZero(time.getMinutes());
+            var seconds = padZero(time.getSeconds());
+            var formattedTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+            return formattedTime;
+        }
+
+        // Function to pad zero to single digit numbers
+        function padZero(number) {
+            return number < 10 ? '0' + number : number;
+        }
+    </script>
+
 </html>
 

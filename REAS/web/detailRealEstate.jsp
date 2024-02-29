@@ -157,19 +157,19 @@
                     <!-- Container for the image gallery -->
                     <div class="container">
                         <c:forEach items="${requestScope.listimg}" var="i">
-                            <div class="mySlides">
+                            <div class="mySlides fade">
                                 <div class="numbertext">1 / 3</div>
                                 <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image1)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
                             </div>
 
-                            <div class="mySlides">
+                            <div class="mySlides fade">
                                 <div class="numbertext">2 / 3</div>
                                 <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image2)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
                             </div>
 
-                            <div class="mySlides">
+                            <div class="mySlides fade">
                                 <div class="numbertext">3 / 3</div>
                                 <img src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" alt="Image" style="width:100%;min-height: 300px; max-height: 300px;">
 
@@ -198,9 +198,9 @@
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
                         <!-- Image text -->
-                        <div class="caption-container">
-                            <p id="caption"></p>
-                        </div>
+                        <!--                        <div class="caption-container">
+                                                    <p id="caption"></p>
+                                                </div>-->
 
                         <!-- Thumbnail images -->
                         <div class="row">
@@ -229,15 +229,21 @@
                         </div>
                     </div>
                     <div class="container-full-bellow">
-                        <h1 class="flex-center h1-text-mid">Dự án: ${realEstate.realEstateName}</h1>
+                        <h1 class="flex-center h1-text-mid">Dự án: ${realEstate.realEstateName} - <c:forEach var="cityList" items="${requestScope.city}"> 
+                                <c:if test="${cityList.cityID eq realEstate.cityID}">
+                                    ${cityList.cityName}
+                                </c:if>
+                            </c:forEach> - ${realEstate.area} m2</h1>
                         <div class="columns">
                             <div class="column" style="padding: 1.2rem 2.75rem;">
                                 <h1 class="flex-center h1-text-left-right">Thông tin bất động sản</h1>
                                 <div style="padding-top: 8px;">
-                                    <p class="bold-text">Diện tích: <span>${realEstate.area}m²</span></p>
+                                    <p class="bold-text">Diện tích: <span>${realEstate.area} m²</span></p>
                                     <p class="bold-text">Loại hình: <span>${realEstate.category}</span></p>
                                     <p class="bold-text">Địa chỉ: <span> ${realEstate.address}</span></p>
                                     <p class="bold-text">Mô tả: <span> ${realEstate.detail}</span></p>
+
+                                    <%-- <p class="bold-text">Mô tả: <span> ${Auctions.realEstateID}</span></p> --%>
                                 </div>
                             </div>
                             <div class="divider"></div>
@@ -256,17 +262,18 @@
                                         document.write(formattedNumber);
                                             </script> VND</span>
                                     <p class="bold-text">Bước giá: <span>
-                                            <c:forEach var="auctions" items="${requestScope.auctions}"> 
-                                                <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                            <c:forEach var="Auctions" items="${requestScope.Auctions}"> 
+                                                <c:if test="${Auctions.realEstateID eq realEstate.realEstateID}">
                                                     <script>
-                                                        var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
+                                                        var number = ${Auctions.lamda}; // Assuming auctions.lamda contains the number
                                                         var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                                         document.write(formattedNumber);
                                                     </script>
                                                 </c:if>
                                             </c:forEach>
                                             VND</span></p>
-                                    <p class="bold-text">Thời gian bắt đầu đấu giá: </br><span>${realEstate.timeUp} - ${realEstate.timeDown}</span></p>
+                                    <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
+                                    <p class="bold-text">Thời gian kết thúc: <span id="endTime">${realEstate.timeDown}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -364,6 +371,42 @@
                 slides[slideIndex - 1].style.display = "block";
                 dots[slideIndex - 1].className += " active";
                 captionText.innerHTML = dots[slideIndex - 1].alt;
+            }
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var startTimeElement = document.getElementById("startTime");
+                var endTimeElement = document.getElementById("endTime");
+
+                // Format start time
+                var startTime = new Date(startTimeElement.innerText);
+                var formattedStartTime = formatTime(startTime);
+
+                // Format end time
+                var endTime = new Date(endTimeElement.innerText);
+                var formattedEndTime = formatTime(endTime);
+
+                // Update the HTML with the formatted time
+                startTimeElement.innerText = formattedStartTime;
+                endTimeElement.innerText = formattedEndTime;
+            });
+
+            // Function to format the time
+            function formatTime(time) {
+                var year = time.getFullYear();
+                var month = padZero(time.getMonth() + 1);
+                var date = padZero(time.getDate());
+                var hours = padZero(time.getHours());
+                var minutes = padZero(time.getMinutes());
+                var seconds = padZero(time.getSeconds());
+                var formattedTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+                return formattedTime;
+            }
+
+            // Function to pad zero to single digit numbers
+            function padZero(number) {
+                return number < 10 ? '0' + number : number;
             }
         </script>
     </body>

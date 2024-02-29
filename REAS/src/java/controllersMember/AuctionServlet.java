@@ -52,8 +52,8 @@ public class AuctionServlet extends HttpServlet {
             String idauctionbid = request.getParameter("idAuctionBID");
             String pricenowbid = request.getParameter("priceNowBid");
 
-            System.out.println(idauctionbid);
-            System.out.println(pricenowbid);
+//            System.out.println(idauctionbid);
+//            System.out.println(pricenowbid);
 
             AuctionDAO auctionDAO = new AuctionDAO();
             auctionDAO.setPriceNowAuctions(pricenowbid, idauctionbid);
@@ -69,7 +69,7 @@ public class AuctionServlet extends HttpServlet {
             request.setAttribute("city", city);
             request.setAttribute("category", category);
             request.setAttribute("listimgauction", listImgAuction);
-            System.out.println(listImgAuction);
+//            System.out.println(listImgAuction);
 
             request.setAttribute("auctions", auctions);
             request.setAttribute("priceoldbid", pricenowbid);

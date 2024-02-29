@@ -195,6 +195,7 @@ public class RealEstateDAO {
         if (cn != null) {
             String sql = "select re.[RealEstateID], "
                     + "re.[AccID], "
+                    + "re.[CityID], "
                     + "re.[ImageFolderID], "
                     + "re.[RealEstateName], "
                     + "re.[PriceFirst], "
@@ -212,6 +213,7 @@ public class RealEstateDAO {
                 re.setRealEstateID(rs.getString("RealEstateID"));
                 re.setImageFolderID(rs.getString("ImageFolderID"));
                 re.setAccID(rs.getString("AccID"));
+                re.setCityID(rs.getInt("CityID"));
                 re.setRealEstateName(rs.getString("RealEstateName"));
                 re.setPriceFirst(rs.getLong("PriceFirst"));
                 re.setPriceLast(rs.getLong("PriceLast"));
@@ -251,7 +253,8 @@ public class RealEstateDAO {
                     + "im.[ImageLink2], "
                     + "im.[ImageLink3], "
                     + "ca.[CatName], "
-                    + "city.[CityName] "
+                    + "city.[CityName], "
+                    + "city.[CityID] "
                     + "from dbo.[RealEstate] re join dbo.[Image] im on re.ImageFolderID = im.ImageFolderID "
                     + "join dbo.[Category] ca on ca.CatID = re.CatID join dbo.[City] city on re.CityID = city.CityID Where re.[RealEstateID] = ?";
             pst = cn.prepareStatement(sql);
@@ -259,10 +262,12 @@ public class RealEstateDAO {
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 realEstate.setAccID(rs.getString("AccID"));
+                realEstate.setRealEstateID(rs.getString("RealEstateID"));
                 realEstate.setRealEstateName(rs.getString("RealEstateName"));
                 realEstate.setPriceFirst(rs.getLong("PriceFirst"));
                 realEstate.setPriceLast(rs.getLong("PriceLast"));
                 realEstate.setAddress(rs.getString("Address"));
+                realEstate.setCityID(rs.getInt("CityID"));
                 Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                 Timestamp timeDownSql = rs.getTimestamp("TimeDown");
                 realEstate.setTimeUp(timeUpSql.toLocalDateTime());
@@ -292,12 +297,13 @@ public class RealEstateDAO {
         }
         return null;
     }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         RealEstateDAO dao = new RealEstateDAO();
         List<RealEstateVM> list = dao.getListAvailableRealEstate();
         for (RealEstateVM realEstateVM : list) {
-            System.out.println(            realEstateVM.toString()
-);
-            }
+            System.out.println(realEstateVM.toString()
+            );
+        }
     }
 }
