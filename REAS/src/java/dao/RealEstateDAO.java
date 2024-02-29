@@ -81,6 +81,179 @@ public class RealEstateDAO {
         return result;
     }
 
+    public static List<RealEstate> getAllRealEstate(int StatusID) throws ClassNotFoundException, SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<RealEstate> result = null;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT [RealEstateID]\n"
+                        + "      ,[RealEstateName]\n"
+                        + "      ,[AccID]\n"
+                        + "      ,[CityID]\n"
+                        + "      ,[CatID]\n"
+                        + "      ,[PriceFirst]\n"
+                        + "      ,[TimeUp]\n"
+                        + "      ,[TimeDown]\n"
+                        + "      ,[PricePaid]\n"
+                        + "      ,[StatusID]\n"
+                        + "      ,[Area]\n"
+                        + "      ,[Address]\n"
+                        + "      ,[Detail]\n"
+                        + "      ,[ImageFolderID]\n"
+                        + "  FROM [dbo].[RealEstate]"
+                        + "WHERE [StatusID] = ? ORDER BY [TimeUp] DESC";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, StatusID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    if (result == null) {
+                        result = new ArrayList<RealEstate>();
+                    }
+                    RealEstate dto = new RealEstate();
+
+                    dto.setRealEstateID(rs.getString("RealEstateID"));
+                    dto.setRealEstateName(rs.getString("RealEstateName"));
+                    dto.setAccID(rs.getString("AccID"));
+                    dto.setCityID(rs.getInt("CityID"));
+                    dto.setCatID(rs.getString("CatID"));
+                    dto.setPriceFirst(rs.getLong("PriceFirst"));
+
+                    dto.setPricePaid(rs.getLong("PricePaid"));
+                    dto.setStatusID(rs.getInt("StatusID"));
+                    dto.setArea(rs.getInt("Area"));
+                    dto.setAddress(rs.getString("Address"));
+                    dto.setDetail(rs.getString("Detail"));
+                    dto.setImageFolderID(rs.getString("ImageFolderID"));
+
+                    Timestamp timeStartSql = rs.getTimestamp("TimeUp");
+                    Timestamp timeEndSql = rs.getTimestamp("TimeDown");
+
+                    // Chuyển đổi Timestamp thành LocalDateTime
+                    LocalDateTime timeUp = timeStartSql.toLocalDateTime();
+                    LocalDateTime timeDown = timeEndSql.toLocalDateTime();
+
+                    dto.setTimeUp(timeUp);
+                    dto.setTimeDown(timeDown);
+
+                    result.add(dto);
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public boolean updateStatusID(String realEstateID, int statusID) throws ClassNotFoundException, SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE [dbo].[RealEstate] SET [StatusID] = ? WHERE [RealEstateID] = ?";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, statusID);
+                stm.setString(2, realEstateID);
+                int effectRows = stm.executeUpdate();
+                if (effectRows > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+//    public List<RealEstate> getRealEstate() throws ClassNotFoundException, SQLException {
+//        Connection con = null;
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//        List<RealEstate> result = null;
+//
+//        try {
+//            con = DBUtils.getConnection();
+//            if (con != null) {
+//                String sql = "SELECT [RealEstateID]\n"
+//                        + "      ,[RealEstateName]\n"
+//                        + "      ,[AccID]\n"
+//                        + "      ,[CityID]\n"
+//                        + "      ,[CatID]\n"
+//                        + "      ,[PriceFirst]\n"
+//                        + "      ,[TimeUp]\n"
+//                        + "      ,[TimeDown]\n"
+//                        + "      ,[PricePaid]\n"
+//                        + "      ,[StatusID]\n"
+//                        + "      ,[Area]\n"
+//                        + "      ,[Address]\n"
+//                        + "      ,[Detail]\n"
+//                        + "      ,[ImageFolderID]\n"
+//                        + "  FROM [dbo].[RealEstate]";
+//                stm = con.prepareStatement(sql);
+//                rs = stm.executeQuery();
+//                while (rs.next()) {
+//                    if (result == null) {
+//                        result = new ArrayList<RealEstate>();
+//                    }
+//                    RealEstate dto = new RealEstate();
+//
+//                    dto.setRealEstateID(rs.getString("RealEstateID"));
+//                    dto.setRealEstateName(rs.getString("RealEstateName"));
+//                    dto.setAccID(rs.getString("AccID"));
+//                    dto.setPriceNow(rs.getLong("PriceNow"));
+//                    dto.setLamda(rs.getLong("Lamda"));
+//
+//                    Timestamp timeStartSql = rs.getTimestamp("TimeStart");
+//                    Timestamp timeEndSql = rs.getTimestamp("TimeEnd");
+//
+//                    // Chuyển đổi Timestamp thành LocalDateTime
+//                    LocalDateTime timeStart = timeStartSql.toLocalDateTime();
+//                    LocalDateTime timeEnd = timeEndSql.toLocalDateTime();
+//
+//                    dto.setTimeStart(timeStart);
+//                    dto.setTimeEnd(timeEnd);
+//
+////                    dto.setTimeStart(rs.getObject("TimeStart", LocalDateTime.class));
+////                    dto.setTimeEnd(rs.getObject("TimeEnd", LocalDateTime.class));
+//                    result.add(dto);
+//
+//                }
+//            }
+//
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (con != null) {
+//                con.close();
+//            }
+//        }
+//        return result;
+//    }
     public static boolean checkRealEstateIDExists(String realEstateID) throws SQLException, ClassNotFoundException {
         Connection cn = DBUtils.getConnection();
         PreparedStatement pst = null;
