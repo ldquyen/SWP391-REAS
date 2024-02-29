@@ -51,6 +51,10 @@ public class MemberController extends HttpServlet {
                 case "auctionRoom":
                     url = "auctionRoom.jsp";
                     break;
+                case "registerAuction":
+                    url = "RegisterAuctionServlet";
+                    break;
+
             }
             request.getRequestDispatcher(url).forward(request, response);
 

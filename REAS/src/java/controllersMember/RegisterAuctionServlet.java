@@ -1,28 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllersMember;
 
+import dao.AccountDAO;
 import dao.AuctionDAO;
-import dao.CategoryDAO;
-import dao.CityDAO;
-import dao.RealEstateDAO;
-import dto.Auction;
-import dto.Category;
-import dto.City;
-import dto.RealEstate;
+import dto.Account;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,21 +30,53 @@ public class RegisterAuctionServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private final String REGISTERAUCTION = "registerAuction.jsp";
+    private final String LOGIN = "login.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = REGISTERAUCTION;
-        try {
-            
 
+        try {
+            // get auctionid
+            // get accountblance check so voi priceNow + phi tham gia dau gia 5%.
+            // neu thoa thi se update wallet
+            // tao them auctionDepositHistory
+            // tao walletTranscationHistory.
+            AccountDAO accountDAO = new AccountDAO();
+            AuctionDAO auctionDAO = new AuctionDAO();
+            double requirmentPrice = 0; // gia yeu ca de co the tham gia dau gia = priceNow + 5% phi cua pricenow.
+            double registerFee = 0; // 5% cua price now.
+            // get auctionId
+            String auctionIds = request.getParameter("auctionId");
+            HttpSession session = request.getSession(false);
+            if (session != null && session.getAttribute("member") != null) {
+                Account account = (Account) session.getAttribute("member");
+                // get current userBalance.
+                double currentUserBalance = accountDAO.getAccountWallet(account.getAccID());
+                int userWalletId = accountDAO.getUserWalletId(account.getAccID());
+                // get priceNow
+                double auctionPriceNow = auctionDAO.getCurrentPriceNow(auctionIds);
+                registerFee = auctionPriceNow * 0.05;
+                requirmentPrice = auctionPriceNow + registerFee;
+                // Handle logic ben trong DAO. se tra ve code
+                int result = auctionDAO.registerAuction(auctionIds, auctionIds, currentUserBalance, requirmentPrice, userWalletId);
+                System.out.println("UserWAlleet - " + userWalletId);
+                System.out.println("Current Balance - " + currentUserBalance);
+                System.out.println("Phi dang ki dau gia - " + registerFee);
+                System.out.println("Gia yeu cau de tham gia - " + requirmentPrice);
+                if(result == 5) {
+                    System.out.println("Successfully");
+                } else {
+                    System.out.println("Code - " + result);
+                }
+                 
+            } else {
+                response.sendRedirect(LOGIN);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching auctions");
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-
         }
     }
 
@@ -99,3 +120,4 @@ public class RegisterAuctionServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+

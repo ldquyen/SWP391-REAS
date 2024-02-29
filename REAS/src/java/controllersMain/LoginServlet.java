@@ -51,12 +51,12 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         //1. get all paratmeter
         String username = request.getParameter("txtUsername");
-        String password = request.getParameter("txtPassword");
+        String password2 = request.getParameter("txtPassword");
         String url = HOMEPAGE;
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
-            String password2 = dao.encodePassword(password);
+//            String password2 = dao.encodePassword(password);
             Account dto = dao.checkLogin(username, password2);
 
             if (dto == null) {
