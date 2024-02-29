@@ -25,8 +25,12 @@
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="index.jsp">
-                    <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                <a class="navbar-item">
+                    <form action="MainController" method="post">
+                        <button type="submit" value="homeindex" name="action">
+                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                        </button>
+                    </form>
                 </a>
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
@@ -38,7 +42,11 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <a class="navbar-item">
-                        TRANG CHỦ
+                        <form action="MainController" method="post">
+                            <button type="submit" value="homeindex" name="action">
+                                <span>TRANG CHỦ</span>
+                            </button>
+                        </form>
                     </a>
 
                     <a class="navbar-item">
@@ -76,6 +84,10 @@
                 </div>
             </div>
         </nav>
+
+        <div class="stream_text-container" id="streamContainer">
+            <div class="stream_text" id="streamText">Biệt thự khu đô thị Sala đã trúng đấu giá với giá tiền 30 tỷ đồng</div>
+        </div>
 
 
         <!-- BODY -->
@@ -211,7 +223,7 @@
                 </div>-->
 
 
-        <footer class="footer" style="position: fixed; bottom: 0; left: 0; right: 0"> 
+        <footer class="footer" style="position: initial; bottom: 0; left: 0; right: 0"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
                 <div class="footer-container">
@@ -303,6 +315,37 @@
         function padZero(number) {
             return number < 10 ? '0' + number : number;
         }
+    </script>
+
+    <script>
+        // Get the element with the ID 'streamText'
+        const streamText = document.getElementById('streamText');
+        const streamContainer = document.getElementById('streamContainer');
+
+// Check if the element was found
+
+        // If the element exists, calculate its width
+        const textWidth = streamText.offsetWidth; // Độ dài của văn bản
+
+        // Calculate animation duration based on text width
+        const animationDuration = (textWidth / 100) * 0.5; // 100 pixels/second
+
+        // Apply the animation duration to the 'stream_text' class
+        streamText.style.animationDuration = animationDuration + 's';
+//
+//
+//            // Check if there is text inside the streamText element
+//            if (streamText.textContent.trim().length > 0) {
+//                // Add the stream_text-container class to the container
+//                streamContainer.classList.add('stream_text-container-2');
+//            }
+//
+//            // Listen for the end of the animation
+//            streamText.addEventListener('animationend', function () {
+//                // Remove the background color class from the container
+//                streamContainer.classList.remove('stream_text-container-2');
+//            });
+
     </script>
 
 </html>

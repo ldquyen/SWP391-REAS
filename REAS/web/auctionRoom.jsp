@@ -147,8 +147,8 @@
         </nav>
 
 
-        <div class="columns">
-            <div class="column is-two-thirds"style="padding-top: 30px;">
+        <div class="columns" style="padding: 0px 50px;">
+            <div class="column is-two-thirds"style="padding-top: 30px;padding-right: 35px">
 
                 <div class="register-modal-container">
                     <div class="container">
@@ -305,7 +305,7 @@
                 </div>
             </div>
             <div class="column" style="padding-top: 30px">
-                <div style="width: 95%;" class="register-modal-container">
+                <div class="register-modal-container">
                     <h1 style="font-size: 22px; padding: 4px 0px;">Diễn biến cuộc đấu giá</h1>
                     <div class="number-price-container">
                         <p style="color: #D9AB73; font-size: 22px">
@@ -333,7 +333,7 @@
                     </div>
                 </div>
 
-                <div class="register-modal-container" style="width: 95%;margin-top: 25px">
+                <div class="register-modal-container" style="margin-top: 25px">
                     <h1 style="display: flex; justify-content: center;font-size: 20px; padding: 4px 0px;color: #D9AB73;font-weight: bold;">
                         <c:if test="${not empty auctions}">
                             <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
@@ -414,7 +414,7 @@
                                     </c:if> 
                                 </h1>
                             </button>
-                            <!--                            <p id="text-price"></p>-->
+<!--                                                        <p id="text-price"></p>-->
                         </form>
                     </div>
                 </div>

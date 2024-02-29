@@ -13,10 +13,13 @@
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="index_1.jsp">
-                    <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                <a class="navbar-item">
+                    <form action="MainController" method="post">
+                        <button type="submit" value="homeindex_1" name="action">
+                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                        </button>
+                    </form>
                 </a>
-
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -26,8 +29,12 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="index_1.jsp">
-                        TRANG CHỦ
+                    <a class="navbar-item">
+                        <form action="MainController" method="post">
+                            <button type="submit" value="homeindex_1" name="action">
+                                <span>TRANG CHỦ</span>
+                            </button>
+                        </form>
                     </a>
 
                     <a class="navbar-item">

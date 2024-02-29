@@ -77,7 +77,7 @@ public class LoginServlet extends HttpServlet {
                 ImageDAO imgDAO = new ImageDAO();
                 List<Image> listImage = imgDAO.getListImage2();
                 request.setAttribute("listImg", listImage);
-                url = "index_1.jsp";
+                url = "HomeServletIndex_1";
                 HttpSession session = request.getSession(true);
                 Account m = dao.getAccount(username, password2);
                 session.setAttribute("member", m);
