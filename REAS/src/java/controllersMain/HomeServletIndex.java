@@ -5,25 +5,31 @@
  */
 package controllersMain;
 
+import dao.CityDAO;
+import dao.ImageDAO;
+import dao.RealEstateDAO;
+import dto.City;
+import dto.Image;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.RealEstateVM;
 
 /**
  *
- * @author ADMIN
+ * @author tranl
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
-public class LogoutServlet extends HttpServlet {
-
-    private final String HOME_PAGE_GUEST = "HomeServletIndex";
-    private final String HOME_PAGE_USER = "HomeServletIndex_1";
+@WebServlet(name = "HomeServletIndex", urlPatterns = {"/HomeServletIndex"})
+public class HomeServletIndex extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,23 +43,30 @@ public class LogoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = HOME_PAGE_USER;
-        String username = request.getParameter("txtUsername");
-        String button = request.getParameter("action");
         try {
-            if (button.equals("Logout")) {
-                HttpSession session = request.getSession(false);
-                if (session != null) {
-                    session.invalidate();
-                }
-                url = HOME_PAGE_GUEST;
-//                System.out.println(session);
-//                System.out.println(cookies);
-            }
-        } finally {
-            response.sendRedirect(url);
-        }
+            int pageNum = request.getParameter("pagenum") != null ? Integer.parseInt(request.getParameter("pagenum")) : 1;
+            RealEstateDAO realEstateDAO = new RealEstateDAO();
 
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast], [Status], [Area], [Address], [Detail] \n"
+                    + "FROM RealEstate WHERE [Status] = ?";
+//            List<RealEstate> list = Pagination.paging(realEstateDAO.getRealEstateByStatus(sql, 1), pageNum);
+//            int totalPage = realEstateDAO.getRealEstateByStatus(sql, 1).size() % 5 == 0? realEstateDAO.getRealEstateByStatus(sql, 1).size() / 5 : 
+//                    (realEstateDAO.getRealEstateByStatus(sql, 1).size() / 5 + 1);
+//            request.setAttribute("list", list);
+//            request.setAttribute("totalPage", totalPage);
+
+            List<RealEstateVM> list = realEstateDAO.getListAvailableRealEstate();
+            ArrayList<City> city = CityDAO.getCityList();
+            request.setAttribute("list", list);
+            ImageDAO imgDAO = new ImageDAO();
+            List<Image> listImage = imgDAO.getListImage2();
+            request.setAttribute("listImg", listImage);
+            request.setAttribute("pagenum", pageNum);
+            request.setAttribute("city", city);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(HomeServletIndex.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

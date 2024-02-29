@@ -92,6 +92,12 @@ public class MainController extends HttpServlet {
                 case "viewPostRealEstate":
                     url = "RealEstateDetailServlet";
                     break;
+                case "homeindex":
+                    url = "HomeServletIndex";
+                    break;
+                case "homeindex_1":
+                    url = "HomeServletIndex_1";
+                    break;
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

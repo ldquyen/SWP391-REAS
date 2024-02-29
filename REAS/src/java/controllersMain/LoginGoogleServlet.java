@@ -87,7 +87,7 @@ public class LoginGoogleServlet extends HttpServlet {
 
             if (ggacc.checkIDGoogle(id)) {
                 error = true;
-                url = "index_1.jsp";
+                url = "HomeServletIndex_1";
             } else {
                 boolean bl = ggacc.saveUserGoogle(id, email, verified_email, name, given_name, family_name, picture);
             }
