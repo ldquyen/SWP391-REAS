@@ -648,7 +648,7 @@ button {
 
 .swiper-wrapper {
     height: auto;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
 }
 
 .swiper-navBtn {
@@ -677,6 +677,9 @@ button {
     right: 0;
 }
 
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+    margin-bottom: 7%;
+}
 .swiper-pagination-bullet {
     width: 20px;
     height: 20px;
