@@ -15,7 +15,28 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="postRealEstate.css" type="text/css" >
+        <script>
+            // Hàm hiển thị cửa sổ thông báo
+            function showErrorMessage(message) {
+                alert(message);
+            }
+            // Kiểm tra và hiển thị thông báo nếu có
+            <c:if test="${not empty requestScope.Success}">
+            showErrorMessage("${requestScope.Success}");
+            </c:if>
 
+            <c:if test="${not empty requestScope.Wrong_Area}">
+            showErrorMessage("${requestScope.Wrong_Area}");
+            </c:if>
+
+            <c:if test="${not empty requestScope.Wrong_Area_Nummeric}">
+            showErrorMessage("${requestScope.Wrong_Area_Nummeric}");
+            </c:if>
+
+            <c:if test="${not empty requestScope.Wrong_PriceFirst}">
+            showErrorMessage("${requestScope.Wrong_PriceFirst}");
+            </c:if>
+        </script>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -174,7 +195,7 @@
                     <label>2.Địa chỉ</label>
                     <input type="text" id="address" name="address" required></br>
                     <label>3.Loại</label>
-                    <select id="loaiTaiSan" name="catID" ></br>
+                    <select id="loaiTaiSan" name="catID" required></br>
                         <option value="" disabled selected hidden>-- Chọn --</option>
                         <option value="no">Nhà </option>
                         <option value="dn">Đất </option>
@@ -182,7 +203,7 @@
                         <option value="bt">Biệt thự</option>
                     </select></br>
                     <label>4.Thành phố</label>
-                    <select id="cityID" name="cityID">
+                    <select id="cityID" name="cityID" required>
                         <option value="" disabled selected hidden>Thành phố</option>
                         <option value="1">An Giang</option>
                         <option value="2">Bà Rịa - Vũng Tàu</option>
@@ -301,13 +322,13 @@
                     </script>
 
                     <label>9.Mô tả</label>
-                    <input type= "text" id="detail" name="detail" placeholder="Nhập mô tả tài sản...">
+                    <input type= "text" id="detail" name="detail" placeholder="Nhập mô tả tài sản..." required>
 
                     <div>
                         <label>10. Hình ảnh</label><br>
-                        <input type="file" title="Chọn Ảnh" name="image1"/>
-                        <input type="file" title="Chọn Ảnh" name="image2"/> 
-                        <input type="file" title="Chọn Ảnh" name="image3"/>
+                        <input type="file" title="Chọn Ảnh" name="image1" required/>
+                        <input type="file" title="Chọn Ảnh" name="image2" required/> 
+                        <input type="file" title="Chọn Ảnh" name="image3" required/>
                     </div>
 
                     <button  type="submit" value="submitPost" name="action">
@@ -479,14 +500,18 @@
         </footer>
 
         <script>
+
             function formatCurrency(input) {
-                // Xóa các ký tự không phải số từ giá trị input
-                let value = input.value.replace(/[^\d]/g, '');
-                // Định dạng số thành chuỗi có dấu phẩy ngăn cách nghìn
-                value = new Intl.NumberFormat().format(value);
-                // Gán giá trị đã định dạng vào input
-                input.value = value;
+                // Hàm định dạng số tiền sang dạng chuỗi có định dạng tiền tệ
+                var value = input.value.replace(/[^\d]/g, '');
+
+                // Định dạng giá trị thành chuỗi có dấu phân cách hàng nghìn
+                var formattedValue = new Intl.NumberFormat().format(value);
+
+                // Gán giá trị định dạng vào trường input
+                input.value = formattedValue;
             }
+
         </script>
     </body>
 </html>
