@@ -34,7 +34,7 @@ public class PostRealEstateServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        String url = "postRealEstate.jsp";
         /*1*/
         String accID = request.getParameter("accID");
         /*2*/
@@ -46,19 +46,19 @@ public class PostRealEstateServlet extends HttpServlet {
         /*5*/
         int cityID = Integer.parseInt(request.getParameter("cityID"));
         /*6*/
-        long priceFirst;
+        long priceFirst = 0;
         String priceFirstStr = request.getParameter("priceFirst");
         if (priceFirstStr != null) {
             priceFirstStr = priceFirstStr.replace(",", "");
             if (priceFirstStr != null && !priceFirstStr.isEmpty()) {
                 // Nếu có thì parse sang long
                 priceFirst = Long.parseLong(priceFirstStr);
-            } else {
-                // Nếu không thì mặc định = 0
-                priceFirst = 0;
+                if (priceFirst <= 0) {
+                    request.setAttribute("Wrong_PriceFirst", "Số tiền phải lớn hơn 0!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                }
             }
-        } else {
-            priceFirst = 0;
         }
         /*7*/
         long priceLast;
@@ -71,7 +71,7 @@ public class PostRealEstateServlet extends HttpServlet {
             priceLast = 0;
         }
         /*8*/
-        long pricePaid = (priceFirst * 105) / 100;
+        long pricePaid = (priceFirst * 120) / 100;
         /*9*/
         int statusID;
         String statusStr = request.getParameter("status");
@@ -90,7 +90,20 @@ public class PostRealEstateServlet extends HttpServlet {
         /*11*/
         String address = request.getParameter("address");
         /*12*/
-        int area = Integer.parseInt(request.getParameter("area"));
+        int area = 0;
+        String areaStr = request.getParameter("area");
+        if (isNumeric(areaStr)) {
+            area = Integer.parseInt(areaStr);
+            if (area <= 0) {
+                request.setAttribute("Wrong_Area", "Diện tích phải LỚN HƠN 0!!!");
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            }
+        } else {
+            request.setAttribute("Wrong_Area_Nummeric", "Diện tích phải là một SỐ!!!");
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
         /*13*/
         String detail = request.getParameter("detail");
 
@@ -102,7 +115,6 @@ public class PostRealEstateServlet extends HttpServlet {
         /*15*/
         String imageFolderID;
 
-        String url = "";
         try {
             RealEstateDAO dao = new RealEstateDAO();
             int i = 0;
@@ -119,12 +131,14 @@ public class PostRealEstateServlet extends HttpServlet {
 
             if (result) {
                 url = "postRealEstate.jsp";
+                request.setAttribute("Success", "Bài Đấu Giá Của Bạn Đã Gửi Thành Công, vui lòng đợi hệ thống xét duyệt!!!");
             } else {
                 url = "rule.jsp";
             }
         } catch (ClassNotFoundException | SQLException | NamingException ex) {
             Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
@@ -143,7 +157,11 @@ public class PostRealEstateServlet extends HttpServlet {
 //        if (result) {
 //        }
 //    }
+    public boolean isNumeric(String str) {
+        return str != null && str.matches("-?\\d+");
+    }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
