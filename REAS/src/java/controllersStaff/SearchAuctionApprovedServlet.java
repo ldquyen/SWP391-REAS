@@ -5,8 +5,8 @@
  */
 package controllersStaff;
 
-import dao.AuctionDAO;
-import dto.Auction;
+import dao.RealEstateDAO;
+import dto.RealEstate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -25,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-@WebServlet(name = "SearchAutionAppoveServlet", urlPatterns = {"/SearchAutionAppoveServlet"})
-public class SearchAutionAppoveServlet extends HttpServlet {
+@WebServlet(name = "SearchAuctionApprovedServlet", urlPatterns = {"/SearchAuctionApprovedServlet"})
+public class SearchAuctionApprovedServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,19 +38,19 @@ public class SearchAutionAppoveServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
+            throws ServletException, IOException, ClassNotFoundException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "staff_approve.jsp";
+        String url = "staff_approved.jsp";
         String searchValue = request.getParameter("txtSearchValue");
         try {
             if (searchValue == null || searchValue.trim().isEmpty()) {
-                AuctionDAO dao = new AuctionDAO();
-                List<Auction> listAuction = dao.getAuctions();
-                request.setAttribute("SEARCH_RESULT", listAuction);
+                RealEstateDAO dao = new RealEstateDAO();
+                List<RealEstate>  listRealEstate = dao.getAllRealEstate(1);
+                request.setAttribute("SEARCH_RESULT", listRealEstate);
             } else {
-                AuctionDAO dao = new AuctionDAO();
-                List<Auction> listAuction = dao.getAuctions();
-                request.setAttribute("SEARCH_RESULT", listAuction);
+                RealEstateDAO dao = new RealEstateDAO();
+                List<RealEstate>  listRealEstate = dao.getAllRealEstate(1);
+                request.setAttribute("SEARCH_RESULT", listRealEstate);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -75,7 +75,9 @@ public class SearchAutionAppoveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchAutionAppoveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchAuctionApprovedServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(SearchAuctionApprovedServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,7 +95,9 @@ public class SearchAutionAppoveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchAutionAppoveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchAuctionApprovedServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(SearchAuctionApprovedServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : staff_approve
-    Created on : Feb 20, 2024, 11:05:03 AM
+    Document   : staff_approved
+    Created on : Feb 29, 2024, 10:13:42 PM
     Author     : ADMIN
 --%>
 
@@ -122,9 +122,8 @@
                 <form action="StaffController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
-                    <!--                    <input type="submit" value="searchAuctionApprove" name="action" />-->
-                    <button type="submit" value="searchAuctionApprove" name="action">Search</button>
-
+                    <!--                    <input type="submit" value="searchAuctionApproved" name="action" />-->
+                    <button type="submit" value="searchAuctionApproved" name="action">Search</button>
                 </form><br/>
 
 
@@ -199,8 +198,6 @@
 
                                     <td>
                                         <form action="StaffController" method="post">
-                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                            <input type="hidden" name="txtSearchValue" value="${searchValue}" />
                                             <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
                                         </form>
                                     </td>
