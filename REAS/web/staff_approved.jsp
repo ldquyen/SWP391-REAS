@@ -111,47 +111,52 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
 
 
-                </aside>
+                </aside>                    </ul>
+
             </div>
 
             <div>
-                <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br>            
-                <form action="StaffController">
+                <div class="h1-staff-header">
+                    <h1>ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ ĐÃ XÉT DUYỆT</h1></br> 
+                </div>
+                           
+                <form class="flex-center" action="StaffController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
-                    <!--                    <input type="submit" value="searchAuctionApproved" name="action" />-->
-                    <button type="submit" value="searchAuctionApproved" name="action">Search</button>
+                    <!--                    <input type="submit" value="searchAuctionApprove" name="action" />-->
+                    <button class="button-search-staff" type="submit" value="searchAuctionApproved" name="action">Search</button>
+
                 </form><br/>
 
-
-                <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                <c:if test="${not empty listRealEstate}">
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>RealEstateID</th>
-                                <th>RealEstateName</th>
-                                <th>AccID</th>
-                                <th>CityID</th>
-                                <th>CatID</th>
-                                <th>PriceFirst</th>
-                                <th>TimeUp</th>
-                                <th>TimeDown</th>
-                                <th>PricePaid</th>
-                                <th>StatusID</th>
-                                <th>Area</th>
-                                <th>Address</th>
-                                <th>Detail</th>
-                                <th>ImageFolderID</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                <div class="register-modal-container">
+                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                    <c:if test="${not empty listRealEstate}">
+                        <table class="table-container" border="1">
+                            <thead>
                                 <tr>
+                                <th>Real Estate ID</th>
+                                <th>Real Estate Name</th>
+                                <th>Account</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>Price First</th>
+                                <th>Price Paid</th>
+                                <th>Lambda</th>
+                                <th>Time Start</th>
+                                <th>Time End</th>
+                                <th>Area</th>
+                                <th>Image Folder ID</th>
+                                <th>Detail</th>
+                                <th>Time Up</th>
+                                <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                    <tr>
 
                                     <td>
                                         ${dto.realEstateID}
@@ -160,66 +165,78 @@
                                         ${dto.realEstateName}
                                     </td>
                                     <td>
-                                        ${dto.accID}
-                                    </td>
-                                    <td>
-                                        ${dto.cityID}
-                                    </td>
-                                    <td>
-                                        ${dto.catID}
-                                    </td>
-                                    <td>
-                                        ${dto.priceFirst}
-                                    </td>
-                                    <td>
-                                        ${dto.timeUp}
-                                    </td>
-                                    <td>
-                                        ${dto.timeDown}
-                                    </td>
-                                    <td>
-                                        ${dto.pricePaid}
-                                    </td>
-                                    <td>
-                                        ${dto.statusID}
-                                    </td>
-                                    <td>
-                                        ${dto.area}
+                                        ${dto.userName}
                                     </td>
                                     <td>
                                         ${dto.address}
                                     </td>
                                     <td>
-                                        ${dto.detail}
+                                        ${dto.catName}
+                                    </td>
+                                    <td>
+                                        ${dto.priceFirst}
+                                    </td>
+                                    <td>
+                                        ${dto.pricePaid}
+                                    </td>
+                                    <td>
+                                        ${dto.lamda}
+                                    </td>
+                                    <td>
+                                        ${dto.timeStart}
+                                    </td>
+                                    <td>
+                                        ${dto.timeEnd}
+                                    </td>
+                                    <td>
+                                        ${dto.area}
                                     </td>
                                     <td>
                                         ${dto.imageFolderID}
                                     </td>
+                                    <td>
+                                        ${dto.detail}
+                                    </td>
+                                    <td>
+                                        ${dto.timeUp}
+                                    </td>
+                                    <td>
+                                        ${dto.statusName}
+                                    </td>
+                                    
 
                                     <td>
                                         <form action="StaffController" method="post">
+                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                            <input type="hidden" name="txtSearchValue" value="${searchValue}" />
                                             <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
                                         </form>
                                     </td>
                                     <td>
                                         <form action="StaffController" method="post">
+                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                            <input type="hidden" name="txtSearchValue" value="${searchValue}" />
                                             <button type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
                                         </form>
                                     </td>
 
                                 </tr>
-                                </form> 
-                            </c:forEach>
+                                    </form> 
+                                </c:forEach>
 
 
-                        </tbody>
-                    </table>
-                    <c:if test="${empty listRealEstate}">
-                        <h2>
-                            No record is matched!!!
-                        </h2>
+                            </tbody>
+                        </table>
+                        <c:if test="${empty listRealEstate}">
+                            <h2>
+                                No record is matched!!!
+                            </h2>
+                        </c:if>
                     </c:if>
-                </c:if>
+                </div>
+
+
+
 
             </div>
 
