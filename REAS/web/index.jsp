@@ -42,7 +42,7 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <a class="navbar-item">
-                        <form action="MainController" method="post">
+                        <form action="MainController" method="get">
                             <button type="submit" value="homeindex" name="action">
                                 <span>TRANG CHỦ</span>
                             </button>

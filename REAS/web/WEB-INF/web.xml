@@ -17,7 +17,7 @@
             <max-request-size>418018841</max-request-size>
             <file-size-threshold>1048576</file-size-threshold>
         </multipart-config>
-    </servlet>
+    </servlet> 
     <servlet>
         <servlet-name>StaffController</servlet-name>
         <servlet-class>controllersStaff.StaffController</servlet-class>
@@ -121,10 +121,6 @@
     <servlet-mapping>
         <servlet-name>ListCityServlet</servlet-name>
         <url-pattern>/ListCityServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>HomeServlet</servlet-name>
-        <url-pattern></url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
