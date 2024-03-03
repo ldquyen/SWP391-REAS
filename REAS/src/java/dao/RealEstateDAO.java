@@ -544,38 +544,12 @@ public static List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNo
         return null;
     }
 
-    public static List<RealEstateVM> getListAvailableRealEstateByFilterWithSQL(String SQL) throws SQLException, ClassNotFoundException {
-        List<RealEstateVM> listRealEstates = new ArrayList();
-        Connection cn = DBUtils.getConnection();
-        PreparedStatement pst = null;
-        if (cn != null) {
-            String sql = SQL;
-            pst = cn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                RealEstateVM re = new RealEstateVM();
-                re.setRealEstateID(rs.getString("RealEstateID"));
-                re.setImageFolderID(rs.getString("ImageFolderID"));
-                re.setAccID(rs.getString("AccID"));
-                re.setCatID("CatID");
-                re.setArea(rs.getInt("Area"));
-                re.setCityID(rs.getInt("CityID"));
-                re.setRealEstateName(rs.getString("RealEstateName"));
-                re.setPriceFirst(rs.getLong("PriceFirst"));
-                re.setPriceLast(rs.getLong("PriceLast"));
-                re.setPricePaid(rs.getLong("PricePaid"));
-                Timestamp timeUpSql = rs.getTimestamp("TimeUp");
-                Timestamp timeDownSql = rs.getTimestamp("TimeDown");
-                re.setTimeUp(timeUpSql.toLocalDateTime());
-                re.setTimeDown(timeDownSql.toLocalDateTime());
-                // set image.
-                byte[] imageLink1 = rs.getBytes("ImageLink1");
-                re.setAddress(rs.getString("Address"));
-                listRealEstates.add(re);
-            }
-        }
-        return listRealEstates;
-    }
-    
-    
+//    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+//        RealEstateDAO dao = new RealEstateDAO();
+//        List<RealEstateVM> list = dao.getListAvailableRealEstate();
+//        for (RealEstateVM realEstateVM : list) {
+//            System.out.println(realEstateVM.toString()
+//            );
+//        }
+//    }
 }
