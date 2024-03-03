@@ -197,8 +197,7 @@ public class AuctionDAO {
         }
     }
 
-<<<<<<< HEAD
-    public void setStatusTimeEndAuctions(int statusID,String realEstateID) throws ClassNotFoundException, SQLException {
+    public void setStatusTimeEndAuctions(int statusID, String realEstateID) throws ClassNotFoundException, SQLException {
         Connection cn = null;
         PreparedStatement pst = null;
         try {
@@ -226,7 +225,8 @@ public class AuctionDAO {
                 cn.close();
             }
         }
-=======
+    }
+
     public double getCurrentPriceNow(String auctionId) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -337,7 +337,6 @@ public class AuctionDAO {
             }
         }
         return 0;
->>>>>>> dff8a7f6db1730ad7bc970a0695bac430fc1ac80
     }
 
 }
