@@ -94,6 +94,12 @@
         <servlet-name>RealEstateDetailServlet</servlet-name>
         <servlet-class>controllersMain.RealEstateDetailServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>SearchRealEstateAtHomepageServlet</servlet-name>
+        <servlet-class>controllersMain.SearchRealEstateAtHomepageServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -178,6 +184,15 @@
         <servlet-name>RealEstateDetailServlet</servlet-name>
         <url-pattern>/RealEstateDetailServlet</url-pattern>
     </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>HomeServletIndex</welcome-file>
+    </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>SearchRealEstateAtHomepageServlet</servlet-name>
+        <url-pattern>/SearchRealEstateAtHomepageServlet</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
