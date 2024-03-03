@@ -98,6 +98,12 @@ public class MainController extends HttpServlet {
                 case "homeindex_1":
                     url = "HomeServletIndex_1";
                     break;
+                case "searchRealEstate":
+                    url = "SearchRealEstateAtHomepageServlet";
+                    break;
+                case "homepage":
+                    url = "index_1.jsp";
+                    break;
             }
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

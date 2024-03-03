@@ -1,4 +1,3 @@
-
 package controllersMember;
 
 import dao.AccountDAO;
@@ -120,4 +119,3 @@ public class RegisterAuctionServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
