@@ -7,7 +7,6 @@ package controllersStaff;
 
 import dao.RealEstateDAO;
 import dto.RealEstate;
-import dto.RealEstateInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -46,11 +45,11 @@ public class SearchAuctionApprovedServlet extends HttpServlet {
         try {
             if (searchValue == null || searchValue.trim().isEmpty()) {
                 RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(1);
+                List<RealEstate>  listRealEstate = dao.getAllRealEstate(1);
                 request.setAttribute("SEARCH_RESULT", listRealEstate);
             } else {
                 RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(1);
+                List<RealEstate>  listRealEstate = dao.getAllRealEstate(1);
                 request.setAttribute("SEARCH_RESULT", listRealEstate);
             }
         } catch (SQLException ex) {
