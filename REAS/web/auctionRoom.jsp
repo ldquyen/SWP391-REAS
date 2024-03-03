@@ -15,13 +15,10 @@
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item">
-                    <form action="MainController" method="post">
-                        <button type="submit" value="homeindex_1" name="action">
-                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
-                        </button>
-                    </form>
+                <a class="navbar-item" href="index_1.jsp">
+                    <img class="logo-header" src="image/logo.png" alt="" href="index.jsp" width="100" height="28" />
                 </a>
+
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -31,12 +28,8 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="homeindex_1" name="action">
-                                <span>TRANG CHỦ</span>
-                            </button>
-                        </form>
+                    <a class="navbar-item" href="index_1.jsp">
+                        TRANG CHỦ
                     </a>
 
                     <a class="navbar-item">
@@ -421,10 +414,21 @@
                                     </c:if> 
                                 </h1>
                             </button>
-                            <!--                                                        <p id="text-price"></p>-->
+<!--                                                        <p id="text-price"></p>-->
                         </form>
                     </div>
                 </div>
+                 <div style="display: flex; justify-content: center; width: 100%; text-align: center;">
+
+                    <button type="submit" value="tragia" name="action">
+                        <h1  style="background: #D9AB73; display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #000 solid;margin-top: 8px">
+                            <a id="total-price-bid" href="MemberController?action=registerAuction&auctionId=${auction.auctionID}">
+                                Dang ki dau gia
+                            </a>
+                        </h1>
+                    </button>
+                </div>
+
             </div>
         </div>
 

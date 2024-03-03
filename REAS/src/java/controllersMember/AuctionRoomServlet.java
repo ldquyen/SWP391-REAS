@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllersMember;
 
 import dao.AuctionDAO;
@@ -55,6 +50,8 @@ public class AuctionRoomServlet extends HttpServlet {
             AuctionDAO auctionDAO = new AuctionDAO();
             List<Auction> auctions = auctionDAO.getAuctions();
             ArrayList<City> city = CityDAO.getCityList();
+            Auction auction = auctionDAO.getAuctionByRealEstateId(IDRE);
+
             ArrayList<Category> category = CategoryDAO.getListCategory();
             ArrayList<Image> listImgAuction = ImageDAO.getListImageByID(IDRE);
 
@@ -67,6 +64,7 @@ public class AuctionRoomServlet extends HttpServlet {
 //            System.out.println(listImgAuction);
 
             request.setAttribute("auctions", auctions);
+            request.setAttribute("auction", auction);
 
         } catch (Exception e) {
             e.printStackTrace();

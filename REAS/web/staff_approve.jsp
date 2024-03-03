@@ -118,118 +118,111 @@
             </div>
 
             <div>
-                <div class="h1-staff-header">
-                    <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
-                </div>
-                           
-                <form class="flex-center" action="StaffController">
+                <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br>            
+                <form action="StaffController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
                     <!--                    <input type="submit" value="searchAuctionApprove" name="action" />-->
-                    <button class="button-search-staff" type="submit" value="searchAuctionApprove" name="action">Search</button>
+                    <button type="submit" value="searchAuctionApprove" name="action">Search</button>
 
                 </form><br/>
 
-                <div class="register-modal-container">
-                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                    <c:if test="${not empty listRealEstate}">
-                        <table class="table-container" border="1">
-                            <thead>
+
+                <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                <c:if test="${not empty listRealEstate}">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>RealEstateID</th>
+                                <th>RealEstateName</th>
+                                <th>AccID</th>
+                                <th>CityID</th>
+                                <th>CatID</th>
+                                <th>PriceFirst</th>
+                                <th>TimeUp</th>
+                                <th>TimeDown</th>
+                                <th>PricePaid</th>
+                                <th>StatusID</th>
+                                <th>Area</th>
+                                <th>Address</th>
+                                <th>Detail</th>
+                                <th>ImageFolderID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
                                 <tr>
-                                    <th>RE ID</th>
-                                    <th>RE Name</th>
-                                    <th>AccID</th>
-                                    <th>CityID</th>
-                                    <th>CatID</th>
-                                    <th>PriceFirst</th>
-                                    <th>TimeUp</th>
-                                    <th>TimeDown</th>
-                                    <th>PricePaid</th>
-                                    <th>StatusID</th>
-                                    <th>Area</th>
-                                    <th>Address</th>
-                                    <th>Detail</th>
-                                    <th>ImageFolderID</th>
+
+                                    <td>
+                                        ${dto.realEstateID}
+                                    </td>                               
+                                    <td>
+                                        ${dto.realEstateName}
+                                    </td>
+                                    <td>
+                                        ${dto.accID}
+                                    </td>
+                                    <td>
+                                        ${dto.cityID}
+                                    </td>
+                                    <td>
+                                        ${dto.catID}
+                                    </td>
+                                    <td>
+                                        ${dto.priceFirst}
+                                    </td>
+                                    <td>
+                                        ${dto.timeUp}
+                                    </td>
+                                    <td>
+                                        ${dto.timeDown}
+                                    </td>
+                                    <td>
+                                        ${dto.pricePaid}
+                                    </td>
+                                    <td>
+                                        ${dto.statusID}
+                                    </td>
+                                    <td>
+                                        ${dto.area}
+                                    </td>
+                                    <td>
+                                        ${dto.address}
+                                    </td>
+                                    <td>
+                                        ${dto.detail}
+                                    </td>
+                                    <td>
+                                        ${dto.imageFolderID}
+                                    </td>
+
+                                    <td>
+                                        <form action="StaffController" method="post">
+                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                            <input type="hidden" name="txtSearchValue" value="${searchValue}" />
+                                            <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="StaffController" method="post">
+                                            <button type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
+                                        </form>
+                                    </td>
+
                                 </tr>
-                            </thead>
-                            <tbody>
-
-                                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-                                    <tr>
-
-                                        <td>
-                                            ${dto.realEstateID}
-                                        </td>                               
-                                        <td>
-                                            ${dto.realEstateName}
-                                        </td>
-                                        <td>
-                                            ${dto.accID}
-                                        </td>
-                                        <td>
-                                            ${dto.cityID}
-                                        </td>
-                                        <td>
-                                            ${dto.catID}
-                                        </td>
-                                        <td>
-                                            ${dto.priceFirst}
-                                        </td>
-                                        <td>
-                                            ${dto.timeUp}
-                                        </td>
-                                        <td>
-                                            ${dto.timeDown}
-                                        </td>
-                                        <td>
-                                            ${dto.pricePaid}
-                                        </td>
-                                        <td>
-                                            ${dto.statusID}
-                                        </td>
-                                        <td>
-                                            ${dto.area}
-                                        </td>
-                                        <td>
-                                            ${dto.address}
-                                        </td>
-                                        <td>
-                                            ${dto.detail}
-                                        </td>
-                                        <td>
-                                            ${dto.imageFolderID}
-                                        </td>
-
-                                        <td>
-                                            <form action="StaffController" method="post">
-                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                                <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form action="StaffController" method="post">
-                                                <button type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
-                                            </form>
-                                        </td>
-
-                                    </tr>
-                                    </form> 
-                                </c:forEach>
+                                </form> 
+                            </c:forEach>
 
 
-                            </tbody>
-                        </table>
-                        <c:if test="${empty listRealEstate}">
-                            <h2>
-                                No record is matched!!!
-                            </h2>
-                        </c:if>
+                        </tbody>
+                    </table>
+                    <c:if test="${empty listRealEstate}">
+                        <h2>
+                            No record is matched!!!
+                        </h2>
                     </c:if>
-                </div>
-
-
-
+                </c:if>
 
             </div>
 

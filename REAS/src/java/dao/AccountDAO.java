@@ -682,4 +682,72 @@ public class AccountDAO {
         return false;
     }
     
+        public double getAccountWallet(String accountId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT AccountBalance FROM dbo.[Wallet] WHERE AccID = ?";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, accountId);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    return rs.getFloat("AccountBalance");
+                } 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+    
+    
+    public int getUserWalletId(String accountId) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT WalletID FROM dbo.[Wallet] WHERE AccID = ?";
+
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, accountId);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("WalletID");
+                } 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    
 }
