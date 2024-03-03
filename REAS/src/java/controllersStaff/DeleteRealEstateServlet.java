@@ -5,8 +5,13 @@
  */
 package controllersStaff;
 
+import dao.RealEstateDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,10 +35,42 @@ public class DeleteRealEstateServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         
+        String realEstateID= request.getParameter("realEstateID");
+        String auctionID= request.getParameter("auctionID");
+        String imageFolderID= request.getParameter("imageFolderID");
+        String searchValue= request.getParameter("txtSearchValue");
+        String url= "staff_approve.jsp";
+        try {
+            //2.call DAO
+            RealEstateDAO dao = new RealEstateDAO();
+            
+            boolean result = dao.deleteRealEstateID(auctionID, realEstateID, imageFolderID);
+            
+            if(result){
+                //refesh --> goi lai chuc nang truoc do
+                //using url rewriting
+            url = "StaffController"
+                    + "?action=searchAuctionApprove"
+                    + "&txtSearchValue=" + searchValue;                
+            }//delete account success
+            else {
+                // Cập nhật không thành công, chuyển hướng đến trang lỗi
+                url="rule.jsp";
+            }
+        } catch(NamingException ex){
+                ex.printStackTrace();
+                    }
+              catch(SQLException ex){
+                  ex.printStackTrace();
+                    }
+        finally{
+            response.sendRedirect(url);
+        }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -47,7 +84,11 @@ public class DeleteRealEstateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DeleteRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -61,7 +102,11 @@ public class DeleteRealEstateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DeleteRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
