@@ -266,6 +266,13 @@
                                         </c:if>
                                     </c:forEach>
                                 </td>
+                                <td class="auctionTimeEnd">
+                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                        <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
+                                            <p style="display: none;">${auctions.timeEnd}</p>
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
 
 
                                 <td>
@@ -326,6 +333,13 @@
                                         </c:if>
                                     </c:forEach>
                                 </td>
+                                <td class="auctionTimeEnd">
+                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                        <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
+                                            <p style="display: none;">${auctions.timeEnd}</p>
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
 
 
 
@@ -351,9 +365,42 @@
                 </table>
             </c:if>
         </div>
+        <%--
+                <form class="auctionForm" action="MemberController" method="post">
+                    <button id="submitButton" type="submit" value="stastus2tostatus3" name="action">
+                        <c:if test="${not empty auctions}">
+                            <c:forEach var="listRE2" items="${requestScope.listRE2}">
+                                <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                    <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
+                                        <input type="hidden" name="idAuction2to3" value="${auctions.realEstateID}">
+                                        <p>Test</p>
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </c:if> 
+                    </button>
+                </form>
+        --%>
+
+        <form action="MemberController" method="post">
+            <c:if test="${not empty auctions}">
+                <c:forEach var="listRE2" items="${requestScope.listRE2}">
+                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                        <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
+                            <button id="submitButton" type="submit" value="stastus2tostatus3" name="action">
+                                <input type="hidden" name="idAuction2to3" value="${auctions.realEstateID}">
+                                <p style="">Test</p>
+                            </button>
+                        </c:if>
+                    </c:forEach>
+                </c:forEach>
+
+            </c:if> 
+        </form>
 
 
-        <footer class="footer" style="margin-top: 10px"> 
+
+        <footer class="footer" style="margin-top: 10px; position: initial"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
                 <div class="footer-container">
@@ -372,7 +419,6 @@
         </footer>
 
         <script>
-            var auctionTimeStartElements = document.querySelectorAll(".auctionTimeStart");
 
             function formatDateTime(originalDateTime) {
                 // Remove leading and trailing quotes from the original datetime string
@@ -414,6 +460,25 @@
                 return formattedDateTime;
             }
 
+//            function submitForm() {
+//                var submitButton = document.getElementById('submitButton');
+////                submitButton.click();
+//            }
+//
+            var auctionTimeStartElements = document.querySelectorAll(".auctionTimeStart");
+//            console.log(auctionTimeStartElements);
+//
+//            // Attach event listener to submit button
+//            var submitButton = document.getElementById('submitButton');
+//            submitButton.addEventListener('click', function () {
+//                var form = document.querySelector('.auctionForm');
+//                form.submit();
+//            });
+
+            
+
+
+
             function startCountdown(element) {
                 var originalDateTime = '"' + element.textContent.trim() + '"';
                 var formattedDateTime = formatDateTime(originalDateTime);
@@ -439,14 +504,54 @@
 
                     if (distance <= 0) {
                         clearInterval(x);
-                        element.innerHTML = "<span class='glow' style='color: #00ff00;'>Đấu giá đang diễn ra</span>";
+                        element.innerHTML = "<span class='glow' style='color: #00ff00;'>Đấu giá đang diễn ra</span>";             
+                    }
+                }, 1000);
+            }
+            
+            auctionTimeStartElements.forEach(function (element) {
+                startCountdown(element);
+            });
+
+
+
+            function startCountdown2(element) {
+                var originalDateTime = '"' + element.textContent.trim() + '"';
+                var formattedDateTime = formatDateTime(originalDateTime);
+                var countDownDate = new Date(formattedDateTime).getTime();
+
+                var x = setInterval(function () {
+                    var now = new Date().getTime();
+                    var distance = countDownDate - now;
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    var countdownDisplay = "";
+                    if (days > 0) {
+                        countdownDisplay += days + " ngày ";
+                    }
+                    countdownDisplay += (hours < 10 ? "0" : "") + hours + ":" +
+                            (minutes < 10 ? "0" : "") + minutes + ":" +
+                            (seconds < 10 ? "0" : "") + seconds;
+
+                    element.innerHTML = countdownDisplay;
+
+                    if (distance <= 0) {
+                        clearInterval(x);
+                        element.innerHTML = "<span class='glow' style='color: red;'>Đấu giá đã kết thúc</span>";
                     }
                 }, 1000);
             }
 
-            auctionTimeStartElements.forEach(function (element) {
-                startCountdown(element);
+
+            var auctionTimeEndElements = document.querySelectorAll(".auctionTimeEnd");
+
+            auctionTimeEndElements.forEach(function (element) {
+                startCountdown2(element);
             });
+
         </script>
     </body>
 </html>

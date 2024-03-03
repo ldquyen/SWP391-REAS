@@ -18,7 +18,7 @@
             <div class="navbar-brand">
                 <a class="navbar-item">
                     <form action="MainController" method="post">
-                        <button type="submit" value="homeindex_1" name="action">
+                        <button type="submit" value="homeindex" name="action">
                             <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
                         </button>
                     </form>
@@ -34,7 +34,7 @@
                 <div class="navbar-start">
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="homeindex_1" name="action">
+                            <button type="submit" value="homeindex" name="action">
                                 <span>TRANG CHỦ</span>
                             </button>
                         </form>
@@ -59,7 +59,7 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <div class="navbar-container-1">
+<!--                        <div class="navbar-container-1">
                             <form action="MainController" method="post">
                                 <button class="navbar-1" type="submit" value="auctionList" name="action">
                                     <span>DANH SÁCH ĐẤU GIÁ</span>
@@ -73,7 +73,7 @@
                                 </button>
                             </form>
                         </div>
-                        <div class="navbar-container-1">
+-->                        <div class="navbar-container-1">
                             <a class="navbar-1">10.000.000</a>                  
                         </div>
 

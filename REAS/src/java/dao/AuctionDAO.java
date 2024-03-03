@@ -138,4 +138,34 @@ public class AuctionDAO {
         }
     }
 
+    public void setStatusTimeEndAuctions(int statusID,String realEstateID) throws ClassNotFoundException, SQLException {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE [dbo].[RealEstate]\n"
+                        + "SET  [statusID]= ?\n"
+                        + "WHERE [RealEstateID] = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setInt(1, statusID);
+                pst.setString(2, realEstateID);
+
+                int rowsAffected = pst.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Cập nhật status = " + statusID + "thành công cho phiên đấu giá có ID: " + realEstateID);
+                } else {
+                    System.out.println("Không tìm thấy phiên đấu giá nào có ID: " + realEstateID);
+                }
+            }
+        } finally {
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+    }
+
 }
