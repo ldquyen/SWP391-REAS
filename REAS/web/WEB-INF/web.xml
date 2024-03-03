@@ -17,7 +17,7 @@
             <max-request-size>418018841</max-request-size>
             <file-size-threshold>1048576</file-size-threshold>
         </multipart-config>
-    </servlet> 
+    </servlet>
     <servlet>
         <servlet-name>StaffController</servlet-name>
         <servlet-class>controllersStaff.StaffController</servlet-class>
@@ -93,6 +93,10 @@
     <servlet>
         <servlet-name>RealEstateDetailServlet</servlet-name>
         <servlet-class>controllersMain.RealEstateDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchRealEstateAtHomePageServlet</servlet-name>
+        <servlet-class>controllersMain.SearchRealEstateAtHomePageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -177,6 +181,10 @@
     <welcome-file-list>
         <welcome-file>HomeServletIndex</welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>SearchRealEstateAtHomePageServlet</servlet-name>
+        <url-pattern>/SearchRealEstateAtHomePageServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
