@@ -172,7 +172,7 @@
             <div class="search-wrap">
                 <div class="field has-addons">
                     <div class="control search-bar">
-                        <input class="input" type="text" placeholder="Nhập bất động sản yêu thích">
+                        <input class="input" type="text" name="txtName" placeholder="Nhập bất động sản yêu thích" value="${requestScope.name}">
                     </div>
                     <div class="control button-search-container">
                         <button class="button is-info button-search" type="submit" value="searchRealEstate" name="action">
@@ -183,112 +183,113 @@
                 <div class="search-detail-container">
                     <div class="control">
                         <div class="select">
-                            <select class="custom-select">
-                                <option value="nonecategory">Loại hình bất động sản</option>
-                                <option value="cc">Chung cư</option>
-                                <option value="bt">Biệt thự</option>
-                                <option value="nd">Nhà đất</option>
-                                <option value="cdt">Condotel</option>
-                            </select>
+                            <select class="custom-select" name="loaihinhbds">
+                                <option value="">Loại hình bất động sản</option>
+                                <option value="cc"<c:if test="${loaihinhbds eq 'cc'}">selected</c:if>>Chung cư</option>
+                                <option value="bt"<c:if test="${loaihinhbds eq 'bt'}">selected</c:if>>Biệt thự</option>
+                                <option value="dn"<c:if test="${loaihinhbds eq 'dn'}">selected</c:if>>Đất nền</option>
+                                <option value="no"<c:if test="${loaihinhbds eq 'no'}">selected</c:if>>Nhà ở</option>
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select class="custom-select" name="thanhpho">
+                                    <option value="">Thành phố</option>
+                                    <option value="1" <c:if test="${thanhpho eq '1'}">selected</c:if>>An Giang</option>
+                                <option value="2" <c:if test="${thanhpho eq '2'}">selected</c:if>>Bà Rịa - Vũng Tàu</option>
+                                <option value="3" <c:if test="${thanhpho eq '3'}">selected</c:if>>Bắc Giang</option>
+                                <option value="4" <c:if test="${thanhpho eq '4'}">selected</c:if>>Bắc Kạn</option>
+                                <option value="5" <c:if test="${thanhpho eq '5'}">selected</c:if>>Bạc Liêu</option>
+                                <option value="6" <c:if test="${thanhpho eq '6'}">selected</c:if>>Bắc Ninh</option>
+                                <option value="7" <c:if test="${thanhpho eq '7'}">selected</c:if>>Bến Tre</option>
+                                <option value="8" <c:if test="${thanhpho eq '8'}">selected</c:if>>Bình Định</option>
+                                <option value="9" <c:if test="${thanhpho eq '9'}">selected</c:if>>Bình Bương</option>
+                                <option value="10" <c:if test="${thanhpho eq '10'}">selected</c:if>>Bình Phước</option>
+                                <option value="11" <c:if test="${thanhpho eq '11'}">selected</c:if>>Bình Thuận</option>
+                                <option value="12" <c:if test="${thanhpho eq '12'}">selected</c:if>>Cà Mau</option>
+                                <option value="13" <c:if test="${thanhpho eq '13'}">selected</c:if>>Cao Bằng</option>
+                                <option value="14" <c:if test="${thanhpho eq '14'}">selected</c:if>>Cần Thơ</option>
+                                <option value="15" <c:if test="${thanhpho eq '15'}">selected</c:if>>Đà Nẵng</option>
+                                <option value="16" <c:if test="${thanhpho eq '16'}">selected</c:if>>Đắk Lắk</option>
+                                <option value="17" <c:if test="${thanhpho eq '17'}">selected</c:if>>Đắk Nông</option>
+                                <option value="18" <c:if test="${thanhpho eq '18'}">selected</c:if>>Điện Biên</option>
+                                <option value="19" <c:if test="${thanhpho eq '19'}">selected</c:if>>Đồng Nai</option>
+                                <option value="20" <c:if test="${thanhpho eq '20'}">selected</c:if>>Đồng Tháp</option>
+                                <option value="21" <c:if test="${thanhpho eq '21'}">selected</c:if>>Gia Lai</option>
+                                <option value="22" <c:if test="${thanhpho eq '22'}">selected</c:if>>Hà Giang</option>
+                                <option value="23" <c:if test="${thanhpho eq '23'}">selected</c:if>>Hà Nam</option>
+                                <option value="24" <c:if test="${thanhpho eq '24'}">selected</c:if>>Hà Tĩnh</option>
+                                <option value="25" <c:if test="${thanhpho eq '25'}">selected</c:if>>Hà Nội</option>
+                                <option value="26" <c:if test="${thanhpho eq '26'}">selected</c:if>>Hải Dương</option>
+                                <option value="27" <c:if test="${thanhpho eq '27'}">selected</c:if>>Hải Phòng</option>
+                                <option value="28" <c:if test="${thanhpho eq '28'}">selected</c:if>>Hậu Giang</option>
+                                <option value="29" <c:if test="${thanhpho eq '29'}">selected</c:if>>Hòa Bình</option>
+                                <option value="30" <c:if test="${thanhpho eq '30'}">selected</c:if>>Hưng Yên</option>
+                                <option value="31" <c:if test="${thanhpho eq '31'}">selected</c:if>>Khánh Hòa</option>
+                                <option value="32" <c:if test="${thanhpho eq '32'}">selected</c:if>>Kiên Giang</option>
+                                <option value="33" <c:if test="${thanhpho eq '33'}">selected</c:if>>Kon Tum</option>
+                                <option value="34" <c:if test="${thanhpho eq '34'}">selected</c:if>>Lai Châu</option>
+                                <option value="35" <c:if test="${thanhpho eq '35'}">selected</c:if>>Lâm Đồng</option>
+                                <option value="36" <c:if test="${thanhpho eq '36'}">selected</c:if>>Lạng Sơn</option>
+                                <option value="37" <c:if test="${thanhpho eq '37'}">selected</c:if>>Lào Cai</option>
+                                <option value="38" <c:if test="${thanhpho eq '38'}">selected</c:if>>Long An</option>
+                                <option value="39" <c:if test="${thanhpho eq '39'}">selected</c:if>>Nam Định</option>
+                                <option value="40" <c:if test="${thanhpho eq '40'}">selected</c:if>>Nghệ An</option>
+                                <option value="41" <c:if test="${thanhpho eq '41'}">selected</c:if>>Ninh Bình</option>
+                                <option value="42" <c:if test="${thanhpho eq '42'}">selected</c:if>>Ninh Thuận</option>
+                                <option value="43" <c:if test="${thanhpho eq '43'}">selected</c:if>>Phú Thọ</option>
+                                <option value="44" <c:if test="${thanhpho eq '44'}">selected</c:if>>Phú Yên</option>
+                                <option value="45" <c:if test="${thanhpho eq '45'}">selected</c:if>>Quảng Bình</option>
+                                <option value="46" <c:if test="${thanhpho eq '46'}">selected</c:if>>Quảng Nam</option>
+                                <option value="47" <c:if test="${thanhpho eq '47'}">selected</c:if>>Quảng Ngãi</option>
+                                <option value="48" <c:if test="${thanhpho eq '48'}">selected</c:if>>Quảng Ninh</option>
+                                <option value="49" <c:if test="${thanhpho eq '49'}">selected</c:if>>Quảng Trị</option>
+                                <option value="50" <c:if test="${thanhpho eq '50'}">selected</c:if>>Sóc Trăng</option>
+                                <option value="51" <c:if test="${thanhpho eq '51'}">selected</c:if>>Sơn La</option>
+                                <option value="52" <c:if test="${thanhpho eq '52'}">selected</c:if>>Tây Ninh</option>
+                                <option value="53" <c:if test="${thanhpho eq '53'}">selected</c:if>>Thái Bình</option>
+                                <option value="54" <c:if test="${thanhpho eq '54'}">selected</c:if>>Thái Nguyên</option>
+                                <option value="55" <c:if test="${thanhpho eq '55'}">selected</c:if>>Thanh Hóa</option>
+                                <option value="56" <c:if test="${thanhpho eq '56'}">selected</c:if>>Thừa Thiên Huế</option>
+                                <option value="57" <c:if test="${thanhpho eq '57'}">selected</c:if>>Tiền Giang</option>
+                                <option value="58" <c:if test="${thanhpho eq '58'}">selected</c:if>>TP Hồ Chí Minh</option>
+                                <option value="59" <c:if test="${thanhpho eq '59'}">selected</c:if>>Trà Vinh</option>
+                                <option value="60" <c:if test="${thanhpho eq '60'}">selected</c:if>>Tuyên Quang</option>
+                                <option value="61" <c:if test="${thanhpho eq '61'}">selected</c:if>>Vĩnh Long</option>
+                                <option value="62" <c:if test="${thanhpho eq '62'}">selected</c:if>>Vĩnh Phúc</option>
+                                <option value="63" <c:if test="${thanhpho eq '63'}">selected</c:if>>Yên Bái</option>
+
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select class="custom-select" name="dientich">
+                                    <option value="">Diện tích</option>
+                                    <option value="100" <c:if test="${dientich eq '100'}">selected</c:if>>0-100 m2</option>
+                                    <option value="500" <c:if test="${dientich eq '500'}">selected</c:if>>100-500 m2</option>
+                                    <option value="1000" <c:if test="${dientich eq '1000'}">selected</c:if>>500-1000 m2</option>
+                                    <option value="1001" <c:if test="${dientich eq '1001'}">selected</c:if>>Trên 1000 m2</option>
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select class="custom-select" name="mucgia">
+                                    <option value="">Mức giá</option>
+                                    <option value="5" <c:if test="${mucgia eq '5'}">selected</c:if>>0-5 tỷ</option>
+                                    <option value="10" <c:if test="${mucgia eq '10'}">selected</c:if>>5-10 tỷ</option>
+                                    <option value="50" <c:if test="${mucgia eq '50'}">selected</c:if>>10-50 tỷ</option>
+                                    <option value="100" <c:if test="${mucgia eq '100'}">selected</c:if>>50-100 tỷ</option>
+                                    <option value="101" <c:if test="${mucgia eq '101'}">selected</c:if>>Trên 100 tỷ</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="select">
-                            <select class="custom-select">
-                                <option value="0">Thành phố</option>
-                                <option value="1">An Giang</option>
-                                <option value="2">Bà Rịa - Vũng Tàu</option>
-                                <option value="3">Bắc Giang</option>
-                                <option value="4">Bắc Kạn</option>
-                                <option value="5">Bạc Liêu</option>
-                                <option value="6">Bắc Ninh</option>
-                                <option value="7">Bến Tre</option>
-                                <option value="8">Bình Định</option>
-                                <option value="9">Bình Bương</option>
-                                <option value="10">Bình Phước</option>
-                                <option value="11">Bình Thuận</option>
-                                <option value="12">Cà Mau</option>
-                                <option value="13">Cao Bằng</option>
-                                <option value="14">Cần Thơ</option>
-                                <option value="15">Đà Nẵng</option>
-                                <option value="16">Đắk Lắk</option>
-                                <option value="17">Đắk Nông</option>
-                                <option value="18">Điện Biên</option>
-                                <option value="19">Đồng Nai</option>
-                                <option value="20">Đồng Tháp</option>
-                                <option value="21">Gia Lai</option>
-                                <option value="22">Hà Giang</option>
-                                <option value="23">Hà Nam</option>
-                                <option value="24">Hà Tĩnh</option>
-                                <option value="25">Hà Nội</option>
-                                <option value="26">Hải Dương</option>
-                                <option value="27">Hải Phòng</option>
-                                <option value="28">Hậu Giang</option>
-                                <option value="29">Hòa Bình</option>
-                                <option value="30">Hưng Yên</option>
-                                <option value="31">Khánh Hòa</option>
-                                <option value="32">Kiên Giang</option>
-                                <option value="33">Kon Tum</option>
-                                <option value="34">Lai Châu</option>
-                                <option value="35">Lâm Đồng</option>
-                                <option value="36">Lạng Sơn</option>
-                                <option value="37">Lào Cai</option>
-                                <option value="38">Long An</option>
-                                <option value="39">Nam Định</option>
-                                <option value="40">Nghệ An</option>
-                                <option value="41">Ninh Bình</option>
-                                <option value="42">Ninh Thuận</option>
-                                <option value="43">Phú Thọ</option>
-                                <option value="44">Phú Yên</option>
-                                <option value="45">Quảng Bình</option>
-                                <option value="46">Quảng Nam</option>
-                                <option value="47">Quảng Ngãi</option>
-                                <option value="48">Quảng Ninh</option>
-                                <option value="49">Quảng Trị</option>
-                                <option value="50">Sóc Trăng</option>
-                                <option value="51">Sơn La</option>
-                                <option value="52">Tây Ninh</option>
-                                <option value="53">Thái Bình</option>
-                                <option value="54">Thái Nguyên</option>
-                                <option value="55">Thanh Hóa</option>
-                                <option value="56">Thừa Thiên Huế</option>
-                                <option value="57">Tiền Giang</option>
-                                <option value="58">Hồ Chí Minh</option>
-                                <option value="59">Trà Vinh</option>
-                                <option value="60">Tuyên Quang</option>
-                                <option value="61">Vĩnh Long</option>
-                                <option value="62">Vĩnh Phúc</option>
-                                <option value="63">Yên Bái</option>
-                            </select>
+                        <div class="realestate-quantity">
+                            <p>Hiện có 99 dự án</p>
                         </div>
-                        <div class="select">
-                            <select class="custom-select">
-                                <option value="nonearea">Diện tích</option>
-                                <option value="100m2">0-100 m2</option>
-                                <option value="500m2">100-500 m2</option>
-                                <option value="1000m2">500-1000 m2</option>
-                                <option value="1001m2">Trên 1000 m2</option>
-                            </select>
-                        </div>
-                        <div class="select">
-                            <select class="custom-select">
-                                <option value="noneprice">Mức giá</option>
-                                <option value="5">0-5 tỷ</option>
-                                <option value="10">5-10 tỷ</option>
-                                <option value="50">10-50 tỷ</option>
-                                <option value="100">50-100 tỷ</option>
-                                <option value="101">Trên 100 tỷ</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="realestate-quantity">
-                        <p>Hiện có 99 dự án</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
-    <div class="swiper postElstate-container">
-        <div class="swiper-wrapper postElstate-list">
+        <div class="swiper postElstate-container">
+            <div class="swiper-wrapper postElstate-list">
             <c:forEach items="${list}" var="item">
                 <div class=" realestate-items swiper-slide"> 
                     <h1>${item.imageLink1}</h1>
@@ -316,9 +317,9 @@
                             </p>
                             <p class="text-home-3">
                                 <script>
-                                        var number = ${item.priceFirst}; // Assuming auctions.lamda contains the number
-                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                        document.write(formattedNumber);
+                                    var number = ${item.priceFirst}; // Assuming auctions.lamda contains the number
+                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                    document.write(formattedNumber);
                                 </script> VND
                                 <%--  <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd --%>
                             </p>

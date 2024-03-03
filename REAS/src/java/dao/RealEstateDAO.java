@@ -175,7 +175,7 @@ public class RealEstateDAO {
                 }
             }
         } finally {
-            
+
             if (stm != null) {
                 stm.close();
             }
@@ -471,7 +471,6 @@ public class RealEstateDAO {
         return null;
     }
 
-
 //    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        RealEstateDAO dao = new RealEstateDAO();
 //        List<RealEstateVM> list = dao.getListAvailableRealEstate();
@@ -510,13 +509,7 @@ public class RealEstateDAO {
                 listRealEstates.add(re);
             }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        RealEstateDAO dao = new RealEstateDAO();
-        List<RealEstateVM> list = dao.getListAvailableRealEstate();
-        for (RealEstateVM realEstateVM : list) {
-            System.out.println(realEstateVM.toString()
-            );
-
         }
+        return listRealEstates;
     }
 }
