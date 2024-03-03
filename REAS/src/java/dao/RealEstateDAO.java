@@ -1,7 +1,6 @@
 package dao;
 
 import dto.RealEstate;
-import dto.RealEstateInfo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,8 +47,7 @@ public class RealEstateDAO {
                 stm.setInt(13, area);
                 stm.setString(14, address);
                 stm.setString(15, detail);
- 
-         
+
                 int effectRows = stm.executeUpdate();
                 if (effectRows > 0) {
                     String sql2 = "INSERT INTO [dbo].[Auction]"
@@ -83,73 +81,63 @@ public class RealEstateDAO {
         return result;
     }
 
-public static List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNotFoundException, SQLException, NamingException {
+    public static List<RealEstate> getAllRealEstate(int StatusID) throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        List<RealEstateInfo> result = null;
+        List<RealEstate> result = null;
+
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "SELECT [RealEstate].RealEstateID "
-                        + "      ,[Auction].AuctionID "
-                        + "      ,[RealEstate].RealEstateName "
-                        + "      ,[Account].UserName "
-                        + "      ,[RealEstate].Address "
-                        + "      ,[Category].CatName "
-                        + "      ,[RealEstate].PriceFirst "
-                        + "      ,[RealEstate].PricePaid "
-                        + "      ,[Auction].Lamda "
-                        + "      ,[Auction].TimeStart "
-                        + "      ,[Auction].TimeEnd "
-                        + "      ,[RealEstate].Area "
-                        + "      ,[RealEstate].ImageFolderID "
-                        + "      ,[RealEstate].Detail "
-                        + "      ,[RealEstate].TimeUp "
-                        + "      ,[Status].StatusName "
-                        + "      ,[RealEstate].StatusID "
-                        + "FROM [dbo].[RealEstate] "
-                        + "INNER JOIN [dbo].[Category] ON [RealEstate].[CatID]  = [Category].[CatID] "
-                        + "INNER JOIN [dbo].[City]     ON [RealEstate].[CityID] = [City].[CityID] "
-                        + "INNER JOIN [dbo].[Account]  ON [RealEstate].[AccID]  = [Account].[AccID] "
-                        + "INNER JOIN [dbo].[Auction]  ON [RealEstate].[RealEstateID] = [Auction].[RealEstateID] "
-                        + "INNER JOIN [dbo].[Status] ON [RealEstate].[StatusID] = [Status].[StatusID] "
-                        + "WHERE [RealEstate].[StatusID] = ? ORDER BY [RealEstate].[TimeUp] ASC";
+                String sql = "SELECT [RealEstateID]\n"
+                        + "      ,[RealEstateName]\n"
+                        + "      ,[AccID]\n"
+                        + "      ,[CityID]\n"
+                        + "      ,[CatID]\n"
+                        + "      ,[PriceFirst]\n"
+                        + "      ,[TimeUp]\n"
+                        + "      ,[TimeDown]\n"
+                        + "      ,[PricePaid]\n"
+                        + "      ,[StatusID]\n"
+                        + "      ,[Area]\n"
+                        + "      ,[Address]\n"
+                        + "      ,[Detail]\n"
+                        + "      ,[ImageFolderID]\n"
+                        + "  FROM [dbo].[RealEstate]"
+                        + "WHERE [StatusID] = ? ORDER BY [TimeUp] DESC";
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, statusID);
+                stm.setInt(1, StatusID);
                 rs = stm.executeQuery();
-                stm = con.prepareStatement(sql);
                 while (rs.next()) {
                     if (result == null) {
-                        result = new ArrayList<RealEstateInfo>();
+                        result = new ArrayList<RealEstate>();
                     }
-                    RealEstateInfo dto = new RealEstateInfo();
-                    dto.setRealEstateID(rs.getString("RealEstateID"));
-                    dto.setAuctionID(rs.getString("AuctionID"));
-                    dto.setRealEstateName(rs.getString("RealEstateName"));
-                    dto.setUserName(rs.getString("UserName"));
-                    dto.setAddress(rs.getString("Address"));
-                    dto.setCatName(rs.getString("CatName"));
-                    dto.setPriceFirst(rs.getLong("PriceFirst"));
-                    dto.setPricePaid(rs.getLong("PricePaid"));
-                    dto.setLamda(rs.getLong("Lamda"));
-                    dto.setArea(rs.getInt("Area"));
-                    dto.setImageFolderID(rs.getString("ImageFolderID"));
-                    dto.setDetail(rs.getString("Detail"));
-                    dto.setStatusName(rs.getString("StatusName"));
-                    dto.setStatusID(rs.getInt("StatusID"));
-                    
-                    Timestamp timeStartSql = rs.getTimestamp("TimeStart");
-                    Timestamp timeEndSql = rs.getTimestamp("TimeEnd");
-                    Timestamp timeUpSql = rs.getTimestamp("TimeUp");
-                    // Chuyển đổi Timestamp thành LocalDateTime
-                    LocalDateTime timeStart = timeStartSql.toLocalDateTime();
-                    LocalDateTime timeEnd = timeEndSql.toLocalDateTime();
-                    LocalDateTime timeUp = timeUpSql.toLocalDateTime();
+                    RealEstate dto = new RealEstate();
 
-                    dto.setTimeStart(timeStart);
-                    dto.setTimeEnd(timeEnd);
+                    dto.setRealEstateID(rs.getString("RealEstateID"));
+                    dto.setRealEstateName(rs.getString("RealEstateName"));
+                    dto.setAccID(rs.getString("AccID"));
+                    dto.setCityID(rs.getInt("CityID"));
+                    dto.setCatID(rs.getString("CatID"));
+                    dto.setPriceFirst(rs.getLong("PriceFirst"));
+
+                    dto.setPricePaid(rs.getLong("PricePaid"));
+                    dto.setStatusID(rs.getInt("StatusID"));
+                    dto.setArea(rs.getInt("Area"));
+                    dto.setAddress(rs.getString("Address"));
+                    dto.setDetail(rs.getString("Detail"));
+                    dto.setImageFolderID(rs.getString("ImageFolderID"));
+
+                    Timestamp timeStartSql = rs.getTimestamp("TimeUp");
+                    Timestamp timeEndSql = rs.getTimestamp("TimeDown");
+
+                    // Chuyển đổi Timestamp thành LocalDateTime
+                    LocalDateTime timeUp = timeStartSql.toLocalDateTime();
+                    LocalDateTime timeDown = timeEndSql.toLocalDateTime();
+
                     dto.setTimeUp(timeUp);
+                    dto.setTimeDown(timeDown);
 
                     result.add(dto);
                 }
@@ -168,7 +156,6 @@ public static List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNo
         }
         return result;
     }
- 
 
     public boolean updateStatusID(String realEstateID, int statusID) throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -191,66 +178,6 @@ public static List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNo
             
             if (stm != null) {
                 stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return result;
-    }
-    
-        public boolean deleteRealEstateID(String auctionID, String realEstateID, String imageFolderID) throws SQLException, NamingException, ClassNotFoundException {
-        //mở connection
-        Connection con = null;
-        PreparedStatement stm1 = null;
-        PreparedStatement stm2 = null;
-        PreparedStatement stm3 = null;
-        boolean result = false;
-        try {
-            //1.create connection
-            con = DBUtils.getConnection();
-            //2.create SQL String
-            if (con != null) {
-                String sql1 = " Delete From [dbo].[Auction] "
-                        + "Where [AuctionID] = ?";
-                //3.create Statement Obj
-                stm1 = con.prepareStatement(sql1);
-                stm1.setString(1, auctionID);
-                int effectRows1 = stm1.executeUpdate();
-                
-                String sql2 = " Delete From [dbo].[RealEstate] "
-                        + "Where [RealEstateID] = ?";
-                //3.create Statement Obj
-                stm2 = con.prepareStatement(sql2);
-                stm2.setString(1, realEstateID);
-                int effectRows2 = stm2.executeUpdate();
-                
-                String sql3 = " Delete From [dbo].[Image] "
-                        + "Where [ImageFolderID] = ?";
-                //3.create Statement Obj
-                stm3 = con.prepareStatement(sql3);
-                stm3.setString(1, imageFolderID);
-                int effectRows3 = stm3.executeUpdate();
-                
-
-                //end username and password are existed
-                //5.Process
-                if (effectRows1 > 0 && effectRows2 > 0 && effectRows3 > 0 ) {
-                    result = true;
-                }
-            }//end connection í avaible
-
-        } finally {
-            //xoa,sua,insert khong tra du lieu
-            //bo ResultSet
-            if (stm3 != null) {
-                stm3.close();
-            }
-            if (stm2 != null) {
-                stm2.close();
-            }
-            if (stm1 != null) {
-                stm1.close();
             }
             if (con != null) {
                 con.close();
@@ -544,6 +471,7 @@ public static List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNo
         return null;
     }
 
+
 //    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        RealEstateDAO dao = new RealEstateDAO();
 //        List<RealEstateVM> list = dao.getListAvailableRealEstate();
@@ -581,7 +509,14 @@ public static List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNo
                 re.setAddress(rs.getString("Address"));
                 listRealEstates.add(re);
             }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        RealEstateDAO dao = new RealEstateDAO();
+        List<RealEstateVM> list = dao.getListAvailableRealEstate();
+        for (RealEstateVM realEstateVM : list) {
+            System.out.println(realEstateVM.toString()
+            );
+
         }
-        return listRealEstates;
     }
 }

@@ -111,52 +111,48 @@
                                 </li>
                             </ul>
                         </li>
+                    </ul>
 
 
-                </aside>                    </ul>
-
+                </aside>
             </div>
 
             <div>
-                <div class="h1-staff-header">
-                    <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
-                </div>
-                           
-                <form class="flex-center" action="StaffController">
+                <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br>            
+                <form action="StaffController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
                     <!--                    <input type="submit" value="searchAuctionApprove" name="action" />-->
-                    <button class="button-search-staff" type="submit" value="searchAuctionApprove" name="action">Search</button>
+                    <button type="submit" value="searchAuctionApprove" name="action">Search</button>
 
                 </form><br/>
 
-                <div class="register-modal-container">
-                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                    <c:if test="${not empty listRealEstate}">
-                        <table class="table-container" border="1">
-                            <thead>
-                                <tr>
-                                <th>Real Estate ID</th>
-                                <th>Real Estate Name</th>
-                                <th>Account</th>
-                                <th>Address</th>
-                                <th>City</th>
-                                <th>Price First</th>
-                                <th>Price Paid</th>
-                                <th>Lambda</th>
-                                <th>Time Start</th>
-                                <th>Time End</th>
-                                <th>Area</th>
-                                <th>Image Folder ID</th>
-                                <th>Detail</th>
-                                <th>Time Up</th>
-                                <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-                                    <tr>
+                <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                <c:if test="${not empty listRealEstate}">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>RealEstateID</th>
+                                <th>RealEstateName</th>
+                                <th>AccID</th>
+                                <th>CityID</th>
+                                <th>CatID</th>
+                                <th>PriceFirst</th>
+                                <th>TimeUp</th>
+                                <th>TimeDown</th>
+                                <th>PricePaid</th>
+                                <th>StatusID</th>
+                                <th>Area</th>
+                                <th>Address</th>
+                                <th>Detail</th>
+                                <th>ImageFolderID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                <tr>
 
                                     <td>
                                         ${dto.realEstateID}
@@ -165,45 +161,41 @@
                                         ${dto.realEstateName}
                                     </td>
                                     <td>
-                                        ${dto.userName}
+                                        ${dto.accID}
                                     </td>
                                     <td>
-                                        ${dto.address}
+                                        ${dto.cityID}
                                     </td>
                                     <td>
-                                        ${dto.catName}
+                                        ${dto.catID}
                                     </td>
                                     <td>
                                         ${dto.priceFirst}
                                     </td>
                                     <td>
+                                        ${dto.timeUp}
+                                    </td>
+                                    <td>
+                                        ${dto.timeDown}
+                                    </td>
+                                    <td>
                                         ${dto.pricePaid}
                                     </td>
                                     <td>
-                                        ${dto.lamda}
-                                    </td>
-                                    <td>
-                                        ${dto.timeStart}
-                                    </td>
-                                    <td>
-                                        ${dto.timeEnd}
+                                        ${dto.statusID}
                                     </td>
                                     <td>
                                         ${dto.area}
                                     </td>
                                     <td>
-                                        ${dto.imageFolderID}
+                                        ${dto.address}
                                     </td>
                                     <td>
                                         ${dto.detail}
                                     </td>
                                     <td>
-                                        ${dto.timeUp}
+                                        ${dto.imageFolderID}
                                     </td>
-                                    <td>
-                                        ${dto.statusName}
-                                    </td>
-                                    
 
                                     <td>
                                         <form action="StaffController" method="post">
@@ -214,31 +206,23 @@
                                     </td>
                                     <td>
                                         <form action="StaffController" method="post">
-                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                            <input type="hidden" name="auctionID" value="${dto.auctionID}">
-                                            <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
-                                            <input type="hidden" name="txtSearchValue" value="${searchValue}" />
                                             <button type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
                                         </form>
                                     </td>
 
                                 </tr>
-                                    </form> 
-                                </c:forEach>
+                                </form> 
+                            </c:forEach>
 
 
-                            </tbody>
-                        </table>
-                        <c:if test="${empty listRealEstate}">
-                            <h2>
-                                No record is matched!!!
-                            </h2>
-                        </c:if>
+                        </tbody>
+                    </table>
+                    <c:if test="${empty listRealEstate}">
+                        <h2>
+                            No record is matched!!!
+                        </h2>
                     </c:if>
-                </div>
-
-
-
+                </c:if>
 
             </div>
 
