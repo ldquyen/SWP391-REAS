@@ -55,6 +55,8 @@ public class AuctionRoomServlet extends HttpServlet {
             AuctionDAO auctionDAO = new AuctionDAO();
             List<Auction> auctions = auctionDAO.getAuctions();
             ArrayList<City> city = CityDAO.getCityList();
+            Auction auction = auctionDAO.getAuctionByRealEstateId(IDRE);
+
             ArrayList<Category> category = CategoryDAO.getListCategory();
             ArrayList<Image> listImgAuction = ImageDAO.getListImageByID(IDRE);
 
@@ -67,6 +69,7 @@ public class AuctionRoomServlet extends HttpServlet {
 //            System.out.println(listImgAuction);
 
             request.setAttribute("auctions", auctions);
+            request.setAttribute("auction", auction);
 
         } catch (Exception e) {
             e.printStackTrace();

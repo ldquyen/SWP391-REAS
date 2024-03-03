@@ -425,6 +425,17 @@
                         </form>
                     </div>
                 </div>
+                 <div style="display: flex; justify-content: center; width: 100%; text-align: center;">
+
+                    <button type="submit" value="tragia" name="action">
+                        <h1  style="background: #D9AB73; display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #000 solid;margin-top: 8px">
+                            <a id="total-price-bid" href="MemberController?action=registerAuction&auctionId=${auction.auctionID}">
+                                Dang ki dau gia
+                            </a>
+                        </h1>
+                    </button>
+                </div>
+
             </div>
         </div>
 
