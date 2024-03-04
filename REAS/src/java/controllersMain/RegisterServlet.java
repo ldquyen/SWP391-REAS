@@ -6,6 +6,7 @@
 package controllersMain;
 
 import dao.AccountDAO;
+import dao.WalletDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,8 +39,9 @@ public class RegisterServlet extends HttpServlet {
             String password = request.getParameter("txtPassword");
             String repassword = request.getParameter("txtRepassword");
             String accid;
+            int walletId;
             AccountDAO acc = new AccountDAO();
-
+            WalletDAO wallet = new WalletDAO();
             int i = 0;
             String password2 = acc.encodePassword(password);
             if (!password.equals(repassword)) {
@@ -88,8 +90,10 @@ public class RegisterServlet extends HttpServlet {
                         i++;
                         String i1 = Integer.toString(i);
                         accid = "M" + i1;
+                        walletId = i;
                     } while (acc.checkAccount(accid));
                     boolean bl = acc.insertAccount(accid, username, password2, fullname, email, phone, cccd, address, cccdregplace, cccdregdate, bankname, bankcode);
+                    boolean bl1 = wallet.addNewWallet(walletId, accid);
                     request.setAttribute("SUCCESS", "Đăng ký thành công, vui lòng đăng nhập");
                     request.setAttribute("UsernameRegister", username);
                     request.getRequestDispatcher("MainController?action=DN").forward(request, response);
@@ -101,19 +105,17 @@ public class RegisterServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    public static void main(String[] args) throws Exception {
-        AccountDAO acc = new AccountDAO();
-        String email = "1234567890@fpt";
-        if (!acc.checkGmailContainSymbol(email)) {
-            System.out.println("toan chu cai");
-        } else {
-            System.out.println("sai me r");
-        }
-    }
-
+//    public static void main(String[] args) throws Exception {
+//        AccountDAO acc = new AccountDAO();
+//        String email = "1234567890@fpt";
+//        if (!acc.checkGmailContainSymbol(email)) {
+//            System.out.println("toan chu cai");
+//        } else {
+//            System.out.println("sai me r");
+//        }
+//    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
