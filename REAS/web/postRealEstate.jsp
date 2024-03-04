@@ -24,15 +24,15 @@
             <c:if test="${not empty requestScope.Success}">
             showErrorMessage("${requestScope.Success}");
             </c:if>
-
+            <c:if test="${not empty requestScope.Fail}">
+            showErrorMessage("${requestScope.Fail}");
+            </c:if>
             <c:if test="${not empty requestScope.Wrong_Area}">
             showErrorMessage("${requestScope.Wrong_Area}");
             </c:if>
-
             <c:if test="${not empty requestScope.Wrong_Area_Nummeric}">
             showErrorMessage("${requestScope.Wrong_Area_Nummeric}");
             </c:if>
-
             <c:if test="${not empty requestScope.Wrong_PriceFirst}">
             showErrorMessage("${requestScope.Wrong_PriceFirst}");
             </c:if>
@@ -279,8 +279,12 @@
                         // Lấy ngày và giờ hiện tại
                         var currentDate = new Date();
 
+                        // Thêm 3 ngày vào thời gian hiện tại
+                        currentDate.setDate(currentDate.getDate() + 3);
+
                         // Chuyển đổi ngày hiện tại thành chuỗi định dạng ISO (yyyy-mm-ddThh:mm)
                         var currentDateTime = currentDate.toISOString().slice(0, 16);
+
 
                         // Thiết lập thuộc tính min cho các trường datetime-local
                         document.getElementById("timeStart").min = currentDateTime;
@@ -292,13 +296,60 @@
                         // Lấy ngày và giờ hiện tại
                         var currentDate = new Date();
 
+                                                // Thêm 3 ngày vào thời gian hiện tại
+                        currentDate.setDate(currentDate.getDate() + 10);
+
                         // Chuyển đổi ngày hiện tại thành chuỗi định dạng ISO (yyyy-mm-ddThh:mm)
                         var currentDateTime = currentDate.toISOString().slice(0, 16);
 
                         // Thiết lập thuộc tính min cho các trường datetime-local
                         document.getElementById("timeEnd").min = currentDateTime;
+
+                        // Tính toán thời gian kết thúc tối đa (30 ngày sau thời gian bắt đầu)
+                        var maxEndDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+
+                        // Chuyển đổi ngày kết thúc tối đa thành chuỗi định dạng ISO (yyyy-mm-ddThh:mm)
+                        var maxEndDateTime = maxEndDate.toISOString().slice(0, 16);
+
+                        // Thiết lập thuộc tính max cho thời gian kết thúc là 30 ngày sau thời gian bắt đầu
+                        document.getElementById("timeEnd").max = maxEndDateTime;
                     </script>
 
+                    <script>
+                        // Lấy thẻ input của thời gian bắt đầu và thời gian kết thúc
+                        var timeStartInput = document.getElementById("timeStart");
+                        var timeEndInput = document.getElementById("timeEnd");
+
+                        // Sử dụng sự kiện onchange để kiểm tra thời gian kết thúc sau khi thời gian bắt đầu đã thay đổi
+                        timeStartInput.addEventListener("change", function () {
+                            // Lấy giá trị thời gian bắt đầu và thời gian kết thúc
+                            var startTime = new Date(timeStartInput.value);
+                            var endTime = new Date(timeEndInput.value);
+
+                            // Kiểm tra nếu thời gian kết thúc nhỏ hơn thời gian bắt đầu
+                            if (endTime <= startTime) {
+                                // Thiết lập giá trị của thời gian kết thúc bằng thời gian bắt đầu + 1 giây
+                                endTime = new Date(startTime.getTime() + 86400);
+                                // Cập nhật giá trị của thời gian kết thúc trong thẻ input
+                                timeEndInput.value = endTime.toISOString().slice(0, 16);
+                            }
+                        });
+
+                        // Sử dụng sự kiện onchange để kiểm tra thời gian bắt đầu sau khi thời gian kết thúc đã thay đổi
+                        timeEndInput.addEventListener("change", function () {
+                            // Lấy giá trị thời gian bắt đầu và thời gian kết thúc
+                            var startTime = new Date(timeStartInput.value);
+                            var endTime = new Date(timeEndInput.value);
+
+                            // Kiểm tra nếu thời gian kết thúc nhỏ hơn hoặc bằng thời gian bắt đầu
+                            if (endTime <= startTime) {
+                                // Thiết lập giá trị của thời gian bắt đầu bằng thời gian kết thúc trước đó - 1 giây
+                                startTime = new Date(endTime.getTime() + 86400);
+                                // Cập nhật giá trị của thời gian bắt đầu trong thẻ input
+                                timeStartInput.value = startTime.toISOString().slice(0, 16);
+                            }
+                        });
+                    </script>
                     <label>8.Diện tích</label>
                     <input type="text"  id="area" name="area" placeholder="(m²)" oninput="formatCurrency(this)" required></br>
                     <script>

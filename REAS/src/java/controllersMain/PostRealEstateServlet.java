@@ -57,6 +57,7 @@ public class PostRealEstateServlet extends HttpServlet {
                     request.setAttribute("Wrong_PriceFirst", "Số tiền phải lớn hơn 0!!!");
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
+                    return;
                 }
             }
         }
@@ -72,7 +73,7 @@ public class PostRealEstateServlet extends HttpServlet {
         }
         /*8*/
         long pricePaid = (priceFirst * 120) / 100;
-        
+
         long lamda = (long) (priceFirst * 0.002);
         /*9*/
         int statusID;
@@ -101,11 +102,13 @@ public class PostRealEstateServlet extends HttpServlet {
                 request.setAttribute("Wrong_Area", "Diện tích phải LỚN HƠN 0!!!");
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             }
         } else {
             request.setAttribute("Wrong_Area_Nummeric", "Diện tích phải là một SỐ!!!");
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+            return;
         }
         /*13*/
         String detail = request.getParameter("detail");
@@ -134,16 +137,18 @@ public class PostRealEstateServlet extends HttpServlet {
 
             if (result) {
                 url = "postRealEstate.jsp";
-                request.setAttribute("Success", "Bài Đấu Giá Của Bạn Đã Gửi Thành Công, vui lòng đợi hệ thống xét duyệt!!!");
+                request.setAttribute("Success", "Bài Đấu Giá Của Bạn Đã Gửi THÀNH CÔNG, vui lòng đợi hệ thống xét duyệt!!!");
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             } else {
-                url = "rule.jsp";
+                url = "postRealEstate.jsp";
+                request.setAttribute("Fail", "Bài Đấu Giá Của Bạn Gửi THẤT BẠI, hãy thử l!!!");
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+                return;
             }
         } catch (ClassNotFoundException | SQLException | NamingException ex) {
             Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
     }
 
