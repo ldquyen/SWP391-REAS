@@ -432,6 +432,23 @@
             </div>
         </div>
 
+        <form class="auctionForm" action="MemberController" method="post">
+            <button id="submitButton" type="submit" value="resultAuction" name="action">
+                <c:if test="${not empty auctions}">
+                    <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                        <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                            <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                <input type="hidden" name="idAuctionResult" value="${auctions.realEstateID}">
+                                <p>Test</p>
+                            </c:if>
+                        </c:forEach>
+                    </c:forEach>
+                </c:if> 
+            </button>
+        </form>
+
+
+
 
         <footer class="footer" style="margin-top: 20px;position: initial"> 
             <div>
@@ -679,9 +696,19 @@
                     if (distance <= 0) {
                         clearInterval(x);
                         element.innerHTML = "<span class='glow' style='color: red;'>Đấu giá đã kết thúc</span>";
+                        // Trigger click event on the submit button to submit the form
+                        var submitButton = document.getElementById('submitButton');
+                        submitButton.click();
                     }
                 }, 1000);
             }
+
+            // Attach event listener to submit button
+            var submitButton = document.getElementById('submitButton');
+            submitButton.addEventListener('click', function () {
+                var form = document.querySelector('.auctionForm');
+                form.submit();
+            });
 
             auctionTimeEndElements.forEach(function (element) {
                 startCountdown(element);

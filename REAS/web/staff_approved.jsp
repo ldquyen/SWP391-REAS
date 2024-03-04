@@ -31,8 +31,8 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <form action="AdminController" method="post" style="margin-top: 17px">
-                        <button type="submit" value="adminjsp" name="action" >
+                    <form action="StaffController" method="post" style="margin-top: 17px">
+                        <button type="submit" value="staffjsp" name="action" >
                             <span style="color: white">TRANG CHỦ</span>
                         </button>
                     </form>
@@ -118,115 +118,180 @@
             </div>
 
             <div>
-                <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br>            
+                <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">THÔNG TIN ĐẤU GIÁ ĐÃ XÉT DUYỆT</p>
                 <form action="StaffController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
-                    <!--                    <input type="submit" value="searchAuctionApproved" name="action" />-->
-                    <button type="submit" value="searchAuctionApproved" name="action">Search</button>
+                    <button class="button-search-staff" type="submit" value="searchAuctionApproved" name="action">Search</button>
                 </form><br/>
 
-
-                <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                <c:if test="${not empty listRealEstate}">
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>RealEstateID</th>
-                                <th>RealEstateName</th>
-                                <th>AccID</th>
-                                <th>CityID</th>
-                                <th>CatID</th>
-                                <th>PriceFirst</th>
-                                <th>TimeUp</th>
-                                <th>TimeDown</th>
-                                <th>PricePaid</th>
-                                <th>StatusID</th>
-                                <th>Area</th>
-                                <th>Address</th>
-                                <th>Detail</th>
-                                <th>ImageFolderID</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                <div style="text-align: center; border-radius: 45px;">
+                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                    <c:if test="${not empty listRealEstate}">
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                            <thead>
                                 <tr>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate Name</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Account</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Address</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">City</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price First</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price Paid</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Lambda</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Start</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time End</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area(m²)</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Image Folder ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Up</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
 
-                                    <td>
-                                        ${dto.realEstateID}
-                                    </td>                               
-                                    <td>
-                                        ${dto.realEstateName}
-                                    </td>
-                                    <td>
-                                        ${dto.accID}
-                                    </td>
-                                    <td>
-                                        ${dto.cityID}
-                                    </td>
-                                    <td>
-                                        ${dto.catID}
-                                    </td>
-                                    <td>
-                                        ${dto.priceFirst}
-                                    </td>
-                                    <td>
-                                        ${dto.timeUp}
-                                    </td>
-                                    <td>
-                                        ${dto.timeDown}
-                                    </td>
-                                    <td>
-                                        ${dto.pricePaid}
-                                    </td>
-                                    <td>
-                                        ${dto.statusID}
-                                    </td>
-                                    <td>
-                                        ${dto.area}
-                                    </td>
-                                    <td>
-                                        ${dto.address}
-                                    </td>
-                                    <td>
-                                        ${dto.detail}
-                                    </td>
-                                    <td>
-                                        ${dto.imageFolderID}
-                                    </td>
-
-                                    <td>
-                                        <form action="StaffController" method="post">
-                                            <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="StaffController" method="post">
-                                            <button type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
-                                        </form>
-                                    </td>
+                                    <!--            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ImageID</th>            -->
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xác nhận</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xóa</th>
 
                                 </tr>
-                                </form> 
-                            </c:forEach>
+                            </thead>
+                            <tbody>
+
+                                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                    <tr>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.realEstateID}
+                                        </td>                               
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.realEstateName}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.userName}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.address}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.catName}
+                                        </td>
+                                        <!--                                        <td >
+                                                                                    <script>
+                                                                                        var number = ${dto.priceFirst}; // Assuming auctions.lamda contains the number
+                                                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                                                        document.write(formattedNumber);
+                                                                                    </script>
+                                                                                </td>-->
+                                        <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.priceFirst}
+                                        </td>
+                                        <td class="pricePaidCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.pricePaid}
+                                        </td>
+                                        <td class="lamdaCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.lamda}
+                                        </td>
+                                        <td class="startTime" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.timeStart}
+                                        </td>
+                                        <td class="endTime" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.timeEnd}
+                                        </td>
+                                        <!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                                                                    <script>
+                                                                                     var number = ${dto.pricePaid}; // Assuming auctions.lamda contains the number
+                                                                                     var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                                                     document.write(formattedNumber);
+                                                                                    </script>
+                                                                                </td>-->
+                                        <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.area}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.imageFolderID}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.detail}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.timeUp}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.statusName}
+                                        </td>
+
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            <form action="StaffController" method="post">
+                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
+                                                <button style="color: #fff" type="submit" value="updateStatusButton" name="action">Xác nhận</button>
+                                            </form>
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            <form action="StaffController" method="post">
+                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                                <input type="hidden" name="auctionID" value="${dto.auctionID}">
+                                                <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
+                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
+                                                <button style="color: #fff" type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                    </form> 
+                                </c:forEach>
 
 
-                        </tbody>
-                    </table>
-                    <c:if test="${empty listRealEstate}">
-                        <h2>
-                            No record is matched!!!
-                        </h2>
+                            </tbody>
+                        </table>
+                        <c:if test="${empty listRealEstate}">
+                            <h2>
+                                No record is matched!!!
+                            </h2>
+                        </c:if>
                     </c:if>
-                </c:if>
 
+                </div>
             </div>
 
         </div>
 
         <!-- BODY -->
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var startTimeElements = document.querySelectorAll(".startTime");
+                var endTimeElements = document.querySelectorAll(".endTime");
+
+                // Loop through each startTimeElement
+                startTimeElements.forEach(function (startTimeElement) {
+                    var startTime = new Date(startTimeElement.innerText);
+                    var formattedStartTime = formatTime(startTime);
+                    startTimeElement.innerText = formattedStartTime;
+                });
+
+                // Loop through each endTimeElement
+                endTimeElements.forEach(function (endTimeElement) {
+                    var endTime = new Date(endTimeElement.innerText);
+                    var formattedEndTime = formatTime(endTime);
+                    endTimeElement.innerText = formattedEndTime;
+                });
+            });
+
+            // Function to format the time
+            function formatTime(time) {
+                var year = time.getFullYear();
+                var month = padZero(time.getMonth() + 1);
+                var date = padZero(time.getDate());
+                var hours = padZero(time.getHours());
+                var minutes = padZero(time.getMinutes());
+                var seconds = padZero(time.getSeconds());
+                var formattedTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+                return formattedTime;
+            }
+
+            // Function to pad zero to single digit numbers
+            function padZero(number) {
+                return number < 10 ? '0' + number : number;
+            }
+        </script>
 
 
     </body>

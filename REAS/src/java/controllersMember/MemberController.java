@@ -51,6 +51,12 @@ public class MemberController extends HttpServlet {
                 case "auctionRoom":
                     url = "auctionRoom.jsp";
                     break;
+                case "resultAuction":
+                    url = "ResultAuctionServlet";
+                    break;
+                case "stastus2tostatus3":
+                    url = "Status2toStatus3Servlet";
+                    break;
                 case "registerAuction":
                     url = "RegisterAuctionServlet";
                     break;

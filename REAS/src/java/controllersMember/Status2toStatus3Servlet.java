@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersStaff;
+package controllersMember;
 
 import dao.AuctionDAO;
+import dao.CategoryDAO;
+import dao.CityDAO;
 import dao.RealEstateDAO;
 import dto.Auction;
+import dto.Category;
+import dto.City;
 import dto.RealEstate;
-import dto.RealEstateInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,10 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author tranl
  */
-@WebServlet(name = "SearchAuctionApproveServlet", urlPatterns = {"/SearchAuctionApproveServlet"})
-public class SearchAuctionApproveServlet extends HttpServlet {
+@WebServlet(name = "Status2toStatus3Servlet", urlPatterns = {"/Status2toStatus3Servlet"})
+public class Status2toStatus3Servlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,28 +40,41 @@ public class SearchAuctionApproveServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private final String AUCTIONLISTPAGE = "auctionList.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, NamingException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "staff_approve.jsp";
-        String searchValue = request.getParameter("txtSearchValue");
+        String url = AUCTIONLISTPAGE;
+
+        String idreal = request.getParameter("idAuction2to3");
+        System.out.println(idreal);
         try {
-            if (searchValue == null || searchValue.trim().isEmpty()) {
-                RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(0);
-                url = "staff_approve.jsp";
-                request.setAttribute("SEARCH_RESULT", listRealEstate);
-            } else {
-                RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(0);
-                url = "staff_approve.jsp";
-                request.setAttribute("SEARCH_RESULT", listRealEstate);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            AuctionDAO auctionDAO = new AuctionDAO();
+            List<Auction> auctions = auctionDAO.getAuctions();
+            auctionDAO.setStatusTimeEndAuctions(3, idreal);
+            ArrayList<City> city = CityDAO.getCityList();
+            ArrayList<Category> category = CategoryDAO.getListCategory();
+
+            String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address] ,[Detail] \n"
+                    + "FROM RealEstate WHERE [StatusID] = ?";
+            ArrayList<RealEstate> listRE2 = RealEstateDAO.getRealEstateByStatus(sql, 2);
+            ArrayList<RealEstate> listRE3 = RealEstateDAO.getRealEstateByStatus(sql, 3);
+
+            request.setAttribute("listRE2", listRE2);
+            request.setAttribute("listRE3", listRE3);
+            request.setAttribute("city", city);
+            request.setAttribute("category", category);
+
+            request.setAttribute("auctions", auctions);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching auctions");
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+
         }
     }
 
@@ -78,13 +90,7 @@ public class SearchAuctionApproveServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -98,13 +104,7 @@ public class SearchAuctionApproveServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

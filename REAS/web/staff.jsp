@@ -32,7 +32,7 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="adminjsp" name="action" >
+                            <button type="submit" value="staffjsp" name="action" >
                                 <span style="color: white">TRANG CHỦ</span>
                             </button>
                         </form>

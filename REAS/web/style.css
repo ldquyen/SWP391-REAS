@@ -702,4 +702,17 @@ button {
     width: 100%;
 }
 
+.bold-text {
+    font-weight: bold;
+    font-size: 17px;
+    padding: 3px 0;
+    color: #fff;
+    text-align: left;
+}
+
+.bold-text > span {
+    font-weight: normal; /* Loại bỏ font-weight: bold; cho thẻ span */
+    color: #D9AB73;
+}
+
 
