@@ -24,6 +24,9 @@ public class StaffController extends HttpServlet {
                 case "":
                     url = "index.jsp";
                     break;
+                case "staffjsp":
+                    url = "staff.jsp";
+                    break;
                 case "approve":
                     url = "staff_approve.jsp";
                     break;

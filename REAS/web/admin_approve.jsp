@@ -1,7 +1,7 @@
 <%-- 
-    Document   : admin
-    Created on : Jan 22, 2024, 11:54:07 PM
-    Author     : ASUS
+    Document   : admin_approve
+    Created on : Mar 2, 2024, 11:46:14 AM
+    Author     : ADMIN
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="admin.css" type="text/css" >
+<!--        <link rel="stylesheet" href="staff.css" type="text/css" >-->
 
     </head>
     <body>
@@ -33,10 +34,10 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="adminjsp" name="action" >
-                                <span style="color: white">TRANG CHỦ</span>
-                            </button>
-                        </form>
+                        <button type="submit" value="adminjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="navbar-end">
@@ -114,53 +115,29 @@
                         </li>
                     </ul>
                     <ul class="menu-list">
-
                         <li>
-
                             <a class="">Xét duyệt</a>
-
                             <ul class="menu-list-subnav">
-
                                 <li>
-
                                     <a class="navbar-item">
-
                                         <form action="AdminController" method="post">
-
                                             <button type="submit" value="aboutus" name="action">
-
                                                 <span>Danh sách</span>
-
                                             </button>
-
                                         </form>
-
                                     </a>
-
                                 </li>
-
                                 <li>
-
                                     <a class="navbar-item">
-
                                         <form action="AdminController" method="post">
-
                                             <button type="submit" value="aboutus" name="action">
-
                                                 <span>Kết quả</span>
-
                                             </button>
-
                                         </form>
-
                                     </a>
-
                                 </li>
-
                             </ul>
-
                         </li>
-
                     </ul>
                     <p class="menu-label">
                         Administration
@@ -219,7 +196,7 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -248,55 +225,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="menu-list">
-
-                        <li>
-
-                            <a class="">Xét duyệt</a>
-
-                            <ul class="menu-list-subnav">
-
-                                <li>
-
-                                    <a class="navbar-item">
-
-                                        <form action="AdminController" method="post">
-
-                                            <button type="submit" value="aboutus" name="action">
-
-                                                <span>Danh sách</span>
-
-                                            </button>
-
-                                        </form>
-
-                                    </a>
-
-                                </li>
-
-                                <li>
-
-                                    <a class="navbar-item">
-
-                                        <form action="AdminController" method="post">
-
-                                            <button type="submit" value="aboutus" name="action">
-
-                                                <span>Kết quả</span>
-
-                                            </button>
-
-                                        </form>
-
-                                    </a>
-
-                                </li>
-
-                            </ul>
-
-                        </li>
-
-                    </ul>
+                    
 
                     <p class="menu-label">
                         Transactions
@@ -307,7 +236,7 @@
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
-                                         <form action="AdminController" method="post">
+                                        <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
                                                 <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
                                             </button>
@@ -316,20 +245,174 @@
 
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
-
-
                 </aside>
             </div>
-            <div class="column" style="height: 100vh;">Admin page</div>
+            
+            <!--===============================================================-->
+            <div>
+                <div class="h1-staff-header">
+                    <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
+                </div>
+
+                <form class="flex-center" action="StaffController">
+                    <input type="hidden" name="txtSearchValue" 
+                           value="${param.txtSearchValue}" />
+                    <!--                    <input type="submit" value="searchAuctionApprove" name="action" />-->
+                    <button class="button-search-staff" type="submit" value="AdminSearchAuctionApproveServlet" name="action">Search</button>
+
+                </form><br/>
+
+                <div class="register-modal-container">
+                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                    <c:if test="${not empty listRealEstate}">
+                        <table class="table-container" border="1">
+                            <thead>
+                                <tr>
+                                    <th>Real Estate ID</th>
+                                    <th>Real Estate Name</th>
+                                    <th>Account</th>
+                                    <th>Address</th>
+                                    <th>City</th>
+                                    <th>Price First</th>
+                                    <th>Price Paid</th>
+                                    <th>Lambda</th>
+                                    <th>Time Start</th>
+                                    <th>Time End</th>
+                                    <th>Area(m²)</th>
+                                    <th>Image Folder ID</th>
+                                    <th>Detail</th>
+                                    <th>Time Up</th>
+                                    <th>Status</th>
+                                    <th>Staff</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                <tr>
+
+                                    <td>
+                                        ${dto.realEstateID}
+                                    </td>                               
+                                    <td>
+                                        ${dto.realEstateName}
+                                    </td>
+                                    <td>
+                                        ${dto.userName}
+                                    </td>
+                                    <td>
+                                        ${dto.address}
+                                    </td>
+                                    <td>
+                                        ${dto.catName}
+                                    </td>
+                                    <td class="priceFirstCell">
+                                        ${dto.priceFirst}
+                                    </td>
+                                    <td class="pricePaidCell">
+                                        ${dto.pricePaid}
+                                    </td>
+                                    <td class="lamdaCell">
+                                        ${dto.lamda}
+                                    </td>
+                                    <td>
+                                        ${dto.timeStart}
+                                    </td>
+                                    <td>
+                                        ${dto.timeEnd}
+                                    </td>
+                                    <td class="areaCell">
+                                        ${dto.area}
+                                    </td>
+                                    <td>
+                                        ${dto.imageFolderID}
+                                    </td>
+                                    <td>
+                                        ${dto.detail}
+                                    </td>
+                                    <td>
+                                        ${dto.timeUp}
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        ${dto.statusName}
+                                    </td>
+
+
+                                    <td>
+                                        <form action="StaffController" method="post">
+                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                            <input type="hidden" name="txtSearchValue" value="${searchValue}" />
+                                            <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
+                                        </form>
+                                    </td>
+<!--                                    <td>
+                                        <form action="StaffController" method="post">
+                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                            <input type="hidden" name="auctionID" value="${dto.auctionID}">
+                                            <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
+                                            <input type="hidden" name="txtSearchValue" value="${searchValue}" />
+                                            <button type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
+                                        </form>
+                                    </td>-->
+
+                                </tr>
+                                </form> 
+                            </c:forEach>
+
+
+                            </tbody>
+                        </table>
+                        <c:if test="${empty listRealEstate}">
+                            <h2>
+                                No record is matched!!!
+                            </h2>
+                        </c:if>
+                    </c:if>
+                </div>
+            </div>
+
+
+            <!--         ==============       -->
         </div>
 
         <!-- BODY -->
 
+<script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var priceFirstCells = document.querySelectorAll('.priceFirstCell');
+                var pricePaidCells = document.querySelectorAll('.pricePaidCell');
+                var lamdaCells = document.querySelectorAll('.lamdaCell');
+                var areaCells = document.querySelectorAll('.areaCell');
+                
+                priceFirstCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
 
+                pricePaidCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+                
+                lamdaCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+                
+                areaCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+            });
+
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+        </script>
 
     </body>
 </html>

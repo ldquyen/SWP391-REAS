@@ -31,8 +31,8 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <form action="AdminController" method="post" style="margin-top: 17px">
-                        <button type="submit" value="adminjsp" name="action" >
+                    <form action="StaffController" method="post" style="margin-top: 17px">
+                        <button type="submit" value="staffjsp" name="action" >
                             <span style="color: white">TRANG CHỦ</span>
                         </button>
                     </form>
@@ -122,8 +122,7 @@
                 <form action="StaffController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
-                    <!--                    <input type="submit" value="searchAuctionApproved" name="action" />-->
-                    <button type="submit" value="searchAuctionApproved" name="action">Search</button>
+                    <button class="button-search-staff" type="submit" value="searchAuctionApproved" name="action">Search</button>
                 </form><br/>
 
                 <div style="text-align: center; border-radius: 45px;">
@@ -132,23 +131,25 @@
                         <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
                             <thead>
                                 <tr>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">RE ID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">RE Name</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">AccID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">CityID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">CatID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PriceFirst</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">TimeUp</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">TimeDown</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PricePaid</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">StatusID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate Name</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Account</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Address</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">City</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price First</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price Paid</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Lambda</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Start</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time End</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area(m²)</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Image Folder ID</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>
-                                    <!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ImageID</th>-->
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Up</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
+
+                                    <!--            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ImageID</th>            -->
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xác nhận</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xóa</th>
-
 
                                 </tr>
                             </thead>
@@ -163,60 +164,73 @@
                                             ${dto.realEstateName}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.accID}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.cityID}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.catID}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            <script>
-                                                var number = ${dto.priceFirst}; // Assuming auctions.lamda contains the number
-                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                document.write(formattedNumber);
-                                            </script>
-                                        </td>
-                                        <td class="startTime" style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.timeUp}
-                                        </td>
-                                        <td class="endTime" style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.timeDown}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            <script>
-                                                var number = ${dto.pricePaid}; // Assuming auctions.lamda contains the number
-                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                document.write(formattedNumber);
-                                            </script>
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.statusID}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.area}
+                                            ${dto.userName}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.address}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.detail}
+                                            ${dto.catName}
                                         </td>
-                                        <%--
+                                        <!--                                        <td >
+                                                                                    <script>
+                                                                                        var number = ${dto.priceFirst}; // Assuming auctions.lamda contains the number
+                                                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                                                        document.write(formattedNumber);
+                                                                                    </script>
+                                                                                </td>-->
+                                        <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.priceFirst}
+                                        </td>
+                                        <td class="pricePaidCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.pricePaid}
+                                        </td>
+                                        <td class="lamdaCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.lamda}
+                                        </td>
+                                        <td class="startTime" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.timeStart}
+                                        </td>
+                                        <td class="endTime" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.timeEnd}
+                                        </td>
+                                        <!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                                                                    <script>
+                                                                                     var number = ${dto.pricePaid}; // Assuming auctions.lamda contains the number
+                                                                                     var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                                                     document.write(formattedNumber);
+                                                                                    </script>
+                                                                                </td>-->
+                                        <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.area}
+                                        </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.imageFolderID}
                                         </td>
-                                        --%>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.detail}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.timeUp}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.statusName}
+                                        </td>
 
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             <form action="StaffController" method="post">
+                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
                                                 <button style="color: #fff" type="submit" value="updateStatusButton" name="action">Xác nhận</button>
                                             </form>
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             <form action="StaffController" method="post">
-                                                <button style="color: #fff"  type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
+                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                                <input type="hidden" name="auctionID" value="${dto.auctionID}">
+                                                <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
+                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
+                                                <button style="color: #fff" type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
                                             </form>
                                         </td>
 

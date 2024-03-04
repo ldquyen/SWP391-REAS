@@ -92,6 +92,7 @@ public class PostRealEstateServlet extends HttpServlet {
         /*12*/
         int area = 0;
         String areaStr = request.getParameter("area");
+        areaStr = areaStr.replace(",", "");
         if (isNumeric(areaStr)) {
             area = Integer.parseInt(areaStr);
             if (area <= 0) {
@@ -144,19 +145,6 @@ public class PostRealEstateServlet extends HttpServlet {
         }
     }
 
-//    public static void main(String[] args) throws SQLException, NamingException, ClassNotFoundException {
-//        String timeUpStr = "2022-02-01T22:10";
-//        String timeDownStr = "2022-02-01T22:10";
-//        long priceFirst = 10000;
-//        long pricePaid = (priceFirst * 105) / 100;
-//        LocalDateTime timeUp = LocalDateTime.parse(timeUpStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-//        LocalDateTime timeDown = LocalDateTime.parse(timeDownStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-//        RealEstateDAO dao = new RealEstateDAO();
-//        boolean result = dao.createPost("4", "1", "M1", "no", 1, "dep store", priceFirst, timeUp, timeDown,
-//                0, pricePaid, 0, 200, "29A", "depvl");
-//        if (result) {
-//        }
-//    }
     public boolean isNumeric(String str) {
         return str != null && str.matches("-?\\d+");
     }

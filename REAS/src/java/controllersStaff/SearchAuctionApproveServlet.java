@@ -9,6 +9,7 @@ import dao.AuctionDAO;
 import dao.RealEstateDAO;
 import dto.Auction;
 import dto.RealEstate;
+import dto.RealEstateInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -48,12 +49,12 @@ public class SearchAuctionApproveServlet extends HttpServlet {
         try {
             if (searchValue == null || searchValue.trim().isEmpty()) {
                 RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstate>  listRealEstate = dao.getAllRealEstate(0);
+                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(0);
                 url = "staff_approve.jsp";
                 request.setAttribute("SEARCH_RESULT", listRealEstate);
             } else {
                 RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstate>  listRealEstate = dao.getAllRealEstate(0);
+                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(0);
                 url = "staff_approve.jsp";
                 request.setAttribute("SEARCH_RESULT", listRealEstate);
             }
