@@ -49,6 +49,8 @@ public class ResultAuctionServlet extends HttpServlet {
             AuctionDAO auctionDAO = new AuctionDAO();
             auctionDAO.setStatusTimeEndAuctions(4, idreal);
 
+            ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(idreal);
+            request.setAttribute("REGETBYID", REGETBYID);
 
         } catch (Exception e) {
             e.printStackTrace();

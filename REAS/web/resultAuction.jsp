@@ -158,30 +158,38 @@
 
         <c:if test="${not empty sessionScope.member.password }">
             <c:set var="m" value="${sessionScope.member}"></c:set>
-                <form style="background-color: black; border-radius: 40px; width: 350px; height: 370px; padding: 20px; text-align: center; border: 6px solid #D9AB73; color: #D9AB73; position: fixed; top: 45%; left: 50%; transform: translate(-50%, -50%);" action="MemberController" method="post">
-                    <h1 style="font-weight: bold; margin-bottom: 20px; font-size: 20px">THAY ĐỔI MẬT KHẨU</h1>          
-                    <p style="margin-bottom: 25px;"><input type="text" name="password" placeholder="Nhập mật khẩu cũ" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
+                <div style="background-color: black; border-radius: 40px;padding: 20px; text-align: center; border: 6px solid #D9AB73; color: #D9AB73; position: fixed; top: 45%; left: 50%; transform: translate(-50%, -50%);">
+                    <form  action="MemberController" method="post">
+                        <h1 style="font-weight: bold; margin-bottom: 20px; font-size: 20px">THÔNG BÁO ĐẤU GIÁ</h1>          
+                    <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                        <p class="bold-text">Dự án: <span>
+                                ${REGETBYID.realEstateName}
+                            </span></p>
+                        <p class="bold-text">Người trúng đấu giá: <span></span></p>
+                        <p class="bold-text">Số điện thoại người bán: <span></span></p>
+                        <p class="bold-text">Trạng thái đấu giá: <span></span></p>
+                        <p class="bold-text">Giá trúng đấu giá: <span>
+                                <script>
+                                var number = ${REGETBYID.priceLast}; // Assuming auctions.lamda contains the number
+                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                document.write(formattedNumber);
+                                </script> VND
+                            </span></p>
+                        </c:forEach>
+                        <%--
+                
+                
+                        --%>
 
-                    <input type="hidden" name="passmember" value="${m.password}">
+                    <input type="hidden" name="accidmember" value="${m.accID}">
 
-                <p style="margin-bottom: 25px;"><input type="text" name="newpassword" placeholder="Nhập mật khẩu mới" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
-
-                <p style="margin-bottom: 25px;"><input type="text" name="renewpassword" placeholder="Nhập lại mật khẩu mới" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
-
-                <p style="margin-bottom: 25px;"><input type="text" name="cccd" placeholder="Xác nhận CCCD của bạn" style="background-color: transparent; border: none; border-bottom: 1px solid #D9AB73; color: #D9AB73; width: 300px"></p>
-
-                <input type="hidden" name="cccdmember" value="${m.cccd}">
-                <input type="hidden" name="usernamemember" value="${m.userName}">
-                <input type="hidden" name="accidmember" value="${m.accID}">
-                <button type="submit" value="resultAuction" name="action" style="border: 5px solid #D9AB73; color: #D9AB73;border-radius: 40px; width: 150px; height: 50px; font-size: 18px;margin-bottom: 7px">
-                    <span>Đổi mật khẩu</span>
-                </button><br>
-                ${requestScope.CHANGEPASSOKE}
-                ${requestScope.WRONGPASSWORD}
-                ${requestScope.DUPLICATEOLDPASSWORD}
-                ${requestScope.WRONGNEWPASSWORD}
-                ${requestScope.WRONGCCCD}
-            </form>
+                </form>
+                <form action="MainController" method="post">
+                    <button type="submit" value="homeindex_1" name="action" style="border: 5px solid #D9AB73; color: #D9AB73;border-radius: 40px; font-size: 18px;margin-top: 10px;padding: 5px 62px;font-weight: bold;">
+                        <span>QUAY VỀ TRANG CHỦ</span><br>
+                    </button>
+                </form>
+            </div>
         </c:if>
 
         <footer class="footer"> 

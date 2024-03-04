@@ -118,7 +118,7 @@
             </div>
 
             <div>
-                <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br>            
+                <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</p>         
                 <form action="StaffController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
@@ -127,103 +127,109 @@
 
                 </form><br/>
 
-
-                <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                <c:if test="${not empty listRealEstate}">
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>RealEstateID</th>
-                                <th>RealEstateName</th>
-                                <th>AccID</th>
-                                <th>CityID</th>
-                                <th>CatID</th>
-                                <th>PriceFirst</th>
-                                <th>TimeUp</th>
-                                <th>TimeDown</th>
-                                <th>PricePaid</th>
-                                <th>StatusID</th>
-                                <th>Area</th>
-                                <th>Address</th>
-                                <th>Detail</th>
-                                <th>ImageFolderID</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                <div style="text-align: center; border-radius: 45px;">
+                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                    <c:if test="${not empty listRealEstate}">
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;">
+                            <thead>
                                 <tr>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">RE ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">RE Name</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">AccID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">CityID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">CatID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PriceFirst</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">TimeUp</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">TimeDown</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PricePaid</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">StatusID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Address</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>
+                                    <!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ImageID</th>-->
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xác nhận</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xóa</th>
 
-                                    <td>
-                                        ${dto.realEstateID}
-                                    </td>                               
-                                    <td>
-                                        ${dto.realEstateName}
-                                    </td>
-                                    <td>
-                                        ${dto.accID}
-                                    </td>
-                                    <td>
-                                        ${dto.cityID}
-                                    </td>
-                                    <td>
-                                        ${dto.catID}
-                                    </td>
-                                    <td>
-                                        ${dto.priceFirst}
-                                    </td>
-                                    <td>
-                                        ${dto.timeUp}
-                                    </td>
-                                    <td>
-                                        ${dto.timeDown}
-                                    </td>
-                                    <td>
-                                        ${dto.pricePaid}
-                                    </td>
-                                    <td>
-                                        ${dto.statusID}
-                                    </td>
-                                    <td>
-                                        ${dto.area}
-                                    </td>
-                                    <td>
-                                        ${dto.address}
-                                    </td>
-                                    <td>
-                                        ${dto.detail}
-                                    </td>
-                                    <td>
-                                        ${dto.imageFolderID}
-                                    </td>
-
-                                    <td>
-                                        <form action="StaffController" method="post">
-                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                            <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                            <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="StaffController" method="post">
-                                            <button type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
-                                        </form>
-                                    </td>
 
                                 </tr>
-                                </form> 
-                            </c:forEach>
+                            </thead>
+                            <tbody>
+
+                                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                    <tr>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.realEstateID}
+                                        </td>                               
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.realEstateName}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.accID}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.cityID}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.catID}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.priceFirst}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.timeUp}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.timeDown}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.pricePaid}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.statusID}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.area}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.address}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.detail}
+                                        </td>
+                                        <%--
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.imageFolderID}
+                                        </td>
+                                        --%>
+
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            <form action="StaffController" method="post">
+                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
+                                                <button style="color: #fff" type="submit" value="updateStatusButton" name="action">Xác nhận</button>
+                                            </form>
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            <form action="StaffController" method="post">
+                                                <button style="color: #fff" type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                    </form> 
+                                </c:forEach>
 
 
-                        </tbody>
-                    </table>
-                    <c:if test="${empty listRealEstate}">
-                        <h2>
-                            No record is matched!!!
-                        </h2>
+                            </tbody>
+                        </table>
+                        <c:if test="${empty listRealEstate}">
+                            <h2>
+                                No record is matched!!!
+                            </h2>
+                        </c:if>
                     </c:if>
-                </c:if>
 
+                </div>
             </div>
 
         </div>
