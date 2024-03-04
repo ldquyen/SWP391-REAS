@@ -300,7 +300,7 @@
                     </script>
 
                     <label>8.Diện tích</label>
-                    <input type="text"  id="area" name="area" placeholder="(m²)" required></br>
+                    <input type="text"  id="area" name="area" placeholder="(m²)" oninput="formatCurrency(this)" required></br>
                     <script>
                         function validateArea() {
                             // Lấy giá trị diện tích từ trường input
