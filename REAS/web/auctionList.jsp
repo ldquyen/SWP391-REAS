@@ -460,24 +460,6 @@
                 return formattedDateTime;
             }
 
-//            function submitForm() {
-//                var submitButton = document.getElementById('submitButton');
-////                submitButton.click();
-//            }
-//
-            var auctionTimeStartElements = document.querySelectorAll(".auctionTimeStart");
-//            console.log(auctionTimeStartElements);
-//
-//            // Attach event listener to submit button
-//            var submitButton = document.getElementById('submitButton');
-//            submitButton.addEventListener('click', function () {
-//                var form = document.querySelector('.auctionForm');
-//                form.submit();
-//            });
-
-            
-
-
 
             function startCountdown(element) {
                 var originalDateTime = '"' + element.textContent.trim() + '"';
@@ -504,14 +486,37 @@
 
                     if (distance <= 0) {
                         clearInterval(x);
-                        element.innerHTML = "<span class='glow' style='color: #00ff00;'>Đấu giá đang diễn ra</span>";             
+                        element.innerHTML = "<span class='glow' style='color: #00ff00;'>Đấu giá đang diễn ra</span>";
+//                        submitForm();
                     }
                 }, 1000);
             }
+
             
+//
+            var auctionTimeStartElements = document.querySelectorAll(".auctionTimeStart");
+//            console.log(auctionTimeStartElements);
+////
+//
+//
+//
+//            // Attach event listener to submit button
+//            var submitButton = document.getElementById('submitButton');
+//            submitButton.addEventListener('click', function () {
+//                var form = document.querySelector('.auctionForm');
+//                form.submit();
+//            });
+//            
+//            function submitForm() {
+//                var submitButton = document.getElementById('submitButton');
+//                submitButton.click();
+//            }
+
             auctionTimeStartElements.forEach(function (element) {
                 startCountdown(element);
             });
+
+
 
 
 
