@@ -41,6 +41,21 @@ select:-webkit-autofill:focus {
     }
 }
 
+.glow2 {
+    color: red; /* Green text color */
+    text-align: center;
+    animation: glowing2 1.5s infinite alternate;
+}
+
+@keyframes glowing2 {
+    from {
+        color: red; /* Start with green */
+    }
+    to {
+        color: #e06969; /* Transition to a lighter shade of green */
+    }
+}
+
 @-webkit-keyframes my {
 	 0% { color: #F8CD0A; } 
 	 50% { color: #fff;  } 

@@ -218,7 +218,8 @@
                             <th>Loại hình</th>
                             <th>Giá khởi điểm</th>
                             <th>Giá mua ngay</th>
-                            <th>Thời gian</th>
+                            <th>Thời gian bắt đầu</th>
+                            <th>Thời gian kết thúc</th>
                             <th>Đăng kí</th>
                         </tr>
                     </thead>
@@ -492,7 +493,7 @@
                 }, 1000);
             }
 
-            
+
 //
             var auctionTimeStartElements = document.querySelectorAll(".auctionTimeStart");
 //            console.log(auctionTimeStartElements);
@@ -545,7 +546,7 @@
 
                     if (distance <= 0) {
                         clearInterval(x);
-                        element.innerHTML = "<span class='glow' style='color: red;'>Đấu giá đã kết thúc</span>";
+                        element.innerHTML = "<span class='glow2' style='color: red;'>Đấu giá đã kết thúc</span>";
                     }
                 }, 1000);
             }
