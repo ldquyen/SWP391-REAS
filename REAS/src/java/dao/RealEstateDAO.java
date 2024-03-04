@@ -19,11 +19,12 @@ public class RealEstateDAO {
 
     public boolean createPost(String realEstateID, String imageFolderID, String accID, String catID, int cityID,
             String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, long pricePaid, int statusID,
-            int area, String address, String detail) throws SQLException, NamingException, ClassNotFoundException {
+            int area, String address, String detail, long lamda) throws SQLException, NamingException, ClassNotFoundException {
         //mở connection
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
+        
         try {
             con = DBUtils.getConnection();
 
@@ -53,14 +54,15 @@ public class RealEstateDAO {
                 if (effectRows > 0) {
                     String sql2 = "INSERT INTO [dbo].[Auction]"
                             + "([AuctionID],[RealEstateID],[AuctionName],[PriceNow],[Lamda],[TimeStart],[TimeEnd])"
-                            + "VALUES (?,?,?,?,0,?,?)";
+                            + "VALUES (?,?,?,?,?,?,?)";
                     try (PreparedStatement anotherStm = con.prepareStatement(sql2)) {
                         anotherStm.setString(1, realEstateID);
                         anotherStm.setString(2, realEstateID);
                         anotherStm.setString(3, realEstateName);
                         anotherStm.setLong(4, priceFirst);
-                        anotherStm.setTimestamp(5, Timestamp.valueOf(timeUp));
-                        anotherStm.setTimestamp(6, Timestamp.valueOf(timeDown));
+                        anotherStm.setLong(5, lamda);
+                        anotherStm.setTimestamp(6, Timestamp.valueOf(timeUp));
+                        anotherStm.setTimestamp(7, Timestamp.valueOf(timeDown));
 
                         int anotherEffectRows = anotherStm.executeUpdate();
                         // Xử lý kết quả hoặc thông báo
