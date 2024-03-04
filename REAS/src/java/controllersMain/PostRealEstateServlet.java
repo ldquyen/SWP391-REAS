@@ -72,6 +72,8 @@ public class PostRealEstateServlet extends HttpServlet {
         }
         /*8*/
         long pricePaid = (priceFirst * 120) / 100;
+        
+        long lamda = (long) (priceFirst * 0.002);
         /*9*/
         int statusID;
         String statusStr = request.getParameter("status");
@@ -128,7 +130,7 @@ public class PostRealEstateServlet extends HttpServlet {
             ImageDAO.saveImg(imageFolderID, imagePart1, imagePart2, imagePart3);
 
             boolean result = dao.createPost(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown,
-                    priceLast, pricePaid, statusID, area, address, detail);
+                    priceLast, pricePaid, statusID, area, address, detail, lamda);
 
             if (result) {
                 url = "postRealEstate.jsp";
