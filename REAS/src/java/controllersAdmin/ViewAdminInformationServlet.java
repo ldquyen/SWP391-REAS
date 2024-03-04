@@ -14,66 +14,32 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ASUS
+ * @author TRUONG SON
  */
-public class AdminController extends HttpServlet {
+public class ViewAdminInformationServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String action = request.getParameter("action");
-            String url = "";
-            if (action == null) {
-                action = "";
-            }
-            switch (action) {
-                case "":
-                    url = "admin.jsp";
-                    break;
-                case "adminjsp":
-                    url = "admin.jsp";
-                    break;
-                // nhan vien
-                case "searchStaff":
-                    url = "searchStaff.jsp";
-                    break;
-                case "searchNameStaff":
-                    url = "SearchStaffServlet";
-                    break;
-                case "blockUnblock":
-                    url = "BlockUnblockServlet";
-                    break;
-                case "chinhsua":
-                    url = "changeInfoStaffServlet";
-                    break;
-                case "chinhsuajsp":
-                    url = "changeInfoStaff.jsp";
-                    break;
-                case "chinhsuathongtin":
-                    url = "ChangeInfomationStaffServlet";
-                    break;
-                case "addStaff":
-                    url = "addNewStaff.jsp";
-                    break;
-                case "addNewStaff":
-                    url = "addNewStaffServlet";
-                    break;
-                case "userWalletPage":
-                    url = "GetListUserServlet";
-                    break;
-                case "editUserWallet":
-                    url = "EditUserWalletServlet";
-                    break;
-                case "adminInformationPage":
-                    url = "adminInformationPage.jsp";
-                    break;
-
-            }
-            request.getRequestDispatcher(url).forward(request, response);
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ViewAdminInformationServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ViewAdminInformationServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

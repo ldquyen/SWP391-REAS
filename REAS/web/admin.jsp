@@ -56,7 +56,7 @@
                             <div class="navbar-dropdown">
                                 <a class="navbar-item">
                                     <form action="AdminController" method="post">
-                                        <button type="submit" value="informationOfAdmin" name="action">
+                                        <button type="submit" value="adminInformationPage" name="action">
                                             <span>Thông tin tài khoản</span>
                                         </button>
                                     </form>
