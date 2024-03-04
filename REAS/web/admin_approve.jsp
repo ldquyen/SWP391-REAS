@@ -4,7 +4,13 @@
     Author     : ADMIN
 --%>
 
+<%@page import="dto.Account"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@page import="dao.AccountDAO" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +20,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="admin.css" type="text/css" >
-<!--        <link rel="stylesheet" href="staff.css" type="text/css" >-->
+        <!--        <link rel="stylesheet" href="staff.css" type="text/css" >-->
 
     </head>
     <body>
@@ -121,8 +127,8 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Danh sách</span>
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách chờ</span>
                                             </button>
                                         </form>
                                     </a>
@@ -130,8 +136,8 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Kết quả</span>
+                                            <button type="submit" value="approved" name="action">
+                                                <span>Đã xét duyệt</span>
                                             </button>
                                         </form>
                                     </a>
@@ -202,13 +208,13 @@
                     </ul>
                     <ul class="menu-list">
                         <li>
-                            <a class="">Đấu giá</a>
+                            <a class="">Xét duyệt</a>
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Danh sách</span>
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách chờ</span>
                                             </button>
                                         </form>
                                     </a>
@@ -216,8 +222,8 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Kết quả</span>
+                                            <button type="submit" value="approved" name="action">
+                                                <span>Đã xét duyệt</span>
                                             </button>
                                         </form>
                                     </a>
@@ -225,7 +231,7 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
 
                     <p class="menu-label">
                         Transactions
@@ -251,18 +257,22 @@
                     </ul>
                 </aside>
             </div>
-            
+
             <!--===============================================================-->
+            <%
+                ArrayList<Account> staffList = AccountDAO.getAllAccountByRole("S");
+                pageContext.setAttribute("staffList", staffList);
+            %>
             <div>
                 <div class="h1-staff-header">
                     <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
                 </div>
 
-                <form class="flex-center" action="StaffController">
+                <form class="flex-center" action="AdminController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
-                    <!--                    <input type="submit" value="searchAuctionApprove" name="action" />-->
-                    <button class="button-search-staff" type="submit" value="AdminSearchAuctionApproveServlet" name="action">Search</button>
+
+                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApprove" name="action">Search</button>
 
                 </form><br/>
 
@@ -286,85 +296,75 @@
                                     <th>Image Folder ID</th>
                                     <th>Detail</th>
                                     <th>Time Up</th>
-                                    <th>Status</th>
                                     <th>Staff</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-                                <tr>
+                                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                    
+                                <form action="AdminController" method="post">
+                                    <tr>
+                                        <td>
+                                            ${dto.realEstateID}
+                                        </td>                               
+                                        <td>
+                                            ${dto.realEstateName}
+                                        </td>
+                                        <td>
+                                            ${dto.userName}
+                                        </td>
+                                        <td>
+                                            ${dto.address}
+                                        </td>
+                                        <td>
+                                            ${dto.catName}
+                                        </td>
+                                        <td class="priceFirstCell">
+                                            ${dto.priceFirst}
+                                        </td>
+                                        <td class="pricePaidCell">
+                                            ${dto.pricePaid}
+                                        </td>
+                                        <td class="lamdaCell">
+                                            ${dto.lamda}
+                                        </td>
+                                        <td>
+                                            ${dto.timeStart}
+                                        </td>
+                                        <td>
+                                            ${dto.timeEnd}
+                                        </td>
+                                        <td class="areaCell">
+                                            ${dto.area}
+                                        </td>
+                                        <td>
+                                            ${dto.imageFolderID}
+                                        </td>
+                                        <td>
+                                            ${dto.detail}
+                                        </td>
+                                        <td>
+                                            ${dto.timeUp}
+                                        </td>
+                                        <td>
+                                            <select id="accID" name="accID" required>
+                                                <option value="" disabled selected hidden>-- Chọn --</option>
+                                                <c:forEach items="${staffList}" var="staff">
+                                                    <option value="${staff.accID}">${staff.userName}</option>
+                                                </c:forEach>
+                                            </select>
 
-                                    <td>
-                                        ${dto.realEstateID}
-                                    </td>                               
-                                    <td>
-                                        ${dto.realEstateName}
-                                    </td>
-                                    <td>
-                                        ${dto.userName}
-                                    </td>
-                                    <td>
-                                        ${dto.address}
-                                    </td>
-                                    <td>
-                                        ${dto.catName}
-                                    </td>
-                                    <td class="priceFirstCell">
-                                        ${dto.priceFirst}
-                                    </td>
-                                    <td class="pricePaidCell">
-                                        ${dto.pricePaid}
-                                    </td>
-                                    <td class="lamdaCell">
-                                        ${dto.lamda}
-                                    </td>
-                                    <td>
-                                        ${dto.timeStart}
-                                    </td>
-                                    <td>
-                                        ${dto.timeEnd}
-                                    </td>
-                                    <td class="areaCell">
-                                        ${dto.area}
-                                    </td>
-                                    <td>
-                                        ${dto.imageFolderID}
-                                    </td>
-                                    <td>
-                                        ${dto.detail}
-                                    </td>
-                                    <td>
-                                        ${dto.timeUp}
-                                    </td>
-                                    <td>
-                                        
-                                    </td>
-                                    <td>
-                                        ${dto.statusName}
-                                    </td>
-
-
-                                    <td>
-                                        <form action="StaffController" method="post">
+                                        </td>
+                                        <td>
                                             <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
                                             <input type="hidden" name="txtSearchValue" value="${searchValue}" />
                                             <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
-                                        </form>
-                                    </td>
-<!--                                    <td>
-                                        <form action="StaffController" method="post">
-                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                            <input type="hidden" name="auctionID" value="${dto.auctionID}">
-                                            <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
-                                            <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                            <button type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
-                                        </form>
-                                    </td>-->
+                                        </td>
 
-                                </tr>
-                                </form> 
+                                    </tr>
+                                </form>
                             </c:forEach>
 
 
@@ -385,13 +385,13 @@
 
         <!-- BODY -->
 
-<script>
+        <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var priceFirstCells = document.querySelectorAll('.priceFirstCell');
                 var pricePaidCells = document.querySelectorAll('.pricePaidCell');
                 var lamdaCells = document.querySelectorAll('.lamdaCell');
                 var areaCells = document.querySelectorAll('.areaCell');
-                
+
                 priceFirstCells.forEach(function (cell) {
                     cell.textContent = numberWithCommas(cell.textContent);
                 });
@@ -399,11 +399,11 @@
                 pricePaidCells.forEach(function (cell) {
                     cell.textContent = numberWithCommas(cell.textContent);
                 });
-                
+
                 lamdaCells.forEach(function (cell) {
                     cell.textContent = numberWithCommas(cell.textContent);
                 });
-                
+
                 areaCells.forEach(function (cell) {
                     cell.textContent = numberWithCommas(cell.textContent);
                 });

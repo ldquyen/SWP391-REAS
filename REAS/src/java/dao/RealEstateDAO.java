@@ -24,7 +24,7 @@ public class RealEstateDAO {
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
-        
+
         try {
             con = DBUtils.getConnection();
 
@@ -84,7 +84,7 @@ public class RealEstateDAO {
         return result;
     }
 
-    public static List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNotFoundException, SQLException, NamingException {
+    public List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -144,7 +144,7 @@ public class RealEstateDAO {
                     Timestamp timeStartSql = rs.getTimestamp("TimeStart");
                     Timestamp timeEndSql = rs.getTimestamp("TimeEnd");
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
-                    
+
                     // Chuyển đổi Timestamp thành LocalDateTime
                     LocalDateTime timeStart = timeStartSql.toLocalDateTime();
                     LocalDateTime timeEnd = timeEndSql.toLocalDateTime();
@@ -200,8 +200,8 @@ public class RealEstateDAO {
         }
         return result;
     }
-    
-     public boolean deleteRealEstateID(String auctionID, String realEstateID, String imageFolderID) throws SQLException, NamingException, ClassNotFoundException {
+
+    public boolean deleteRealEstateID(String auctionID, String realEstateID, String imageFolderID) throws SQLException, NamingException, ClassNotFoundException {
         //mở connection
         Connection con = null;
         PreparedStatement stm1 = null;
@@ -219,25 +219,24 @@ public class RealEstateDAO {
                 stm1 = con.prepareStatement(sql1);
                 stm1.setString(1, auctionID);
                 int effectRows1 = stm1.executeUpdate();
-                
+
                 String sql2 = " Delete From [dbo].[RealEstate] "
                         + "Where [RealEstateID] = ?";
                 //3.create Statement Obj
                 stm2 = con.prepareStatement(sql2);
                 stm2.setString(1, realEstateID);
                 int effectRows2 = stm2.executeUpdate();
-                
+
                 String sql3 = " Delete From [dbo].[Image] "
                         + "Where [ImageFolderID] = ?";
                 //3.create Statement Obj
                 stm3 = con.prepareStatement(sql3);
                 stm3.setString(1, imageFolderID);
                 int effectRows3 = stm3.executeUpdate();
-                
 
                 //end username and password are existed
                 //5.Process
-                if (effectRows1 > 0 && effectRows2 > 0 && effectRows3 > 0 ) {
+                if (effectRows1 > 0 && effectRows2 > 0 && effectRows3 > 0) {
                     result = true;
                 }
             }//end connection í avaible
@@ -261,6 +260,35 @@ public class RealEstateDAO {
         return result;
     }
 
+    public boolean chooseStaffForAuction(String accID, String realEstateID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try{
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE [dbo].[Auction] SET [AccID] = ? WHERE [RealEstateID] = ?";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, accID);
+                stm.setString(2, realEstateID);
+                int effectRows = stm.executeUpdate();
+                if (effectRows > 0) {
+                    result = true;
+                }
+            }
+            
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 
 //    public List<RealEstate> getRealEstate() throws ClassNotFoundException, SQLException {
 //        Connection con = null;

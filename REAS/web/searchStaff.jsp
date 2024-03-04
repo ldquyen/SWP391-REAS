@@ -114,6 +114,31 @@
                             </ul>
                         </li>
                     </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Xét duyệt</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách chờ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approved" name="action">
+                                                <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                     <p class="menu-label">
                         Administration
                     </p>
@@ -232,7 +257,7 @@
                         <span style="font-size: 14px; font-weight: bold">Tìm kiếm</span>
                     </button>
                 </form>
-                
+
                 <div style="margin-top: 20px">
                     <s:if test="${not empty requestScope.staffList}">
                         <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white;">
@@ -285,10 +310,10 @@
                                             <form action="AdminController" method="post">
                                                 <input type="hidden" name="idChinhSua" value="${s.accID}">
                                                 <button style="background-color: black; border: 2px solid #D9AB73" type="submit" value="chinhsua" name="action"> 
-                                                        <span style="font-weight: bold; color: #D9AB73 ">
-                                                            Chỉnh sửa 
-                                                        </span> 
-                                                    </button> 
+                                                    <span style="font-weight: bold; color: #D9AB73 ">
+                                                        Chỉnh sửa 
+                                                    </span> 
+                                                </button> 
                                             </form>
                                         </td>
                                     </tr>
