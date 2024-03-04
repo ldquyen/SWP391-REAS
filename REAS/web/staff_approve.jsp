@@ -130,7 +130,7 @@
                 <div style="text-align: center; border-radius: 45px;">
                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
                     <c:if test="${not empty listRealEstate}">
-                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;">
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
                             <thead>
                                 <tr>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">RE ID</th>
@@ -173,16 +173,24 @@
                                             ${dto.catID}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.priceFirst}
+                                            <script>
+                                                var number = ${dto.priceFirst}; // Assuming auctions.lamda contains the number
+                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                document.write(formattedNumber);
+                                            </script>
                                         </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        <td class="startTime" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeUp}
                                         </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        <td class="endTime" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeDown}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.pricePaid}
+                                            <script>
+                                                var number = ${dto.pricePaid}; // Assuming auctions.lamda contains the number
+                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                document.write(formattedNumber);
+                                            </script>
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.statusID}
@@ -235,6 +243,43 @@
         </div>
 
         <!-- BODY -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var startTimeElements = document.querySelectorAll(".startTime");
+                var endTimeElements = document.querySelectorAll(".endTime");
+
+                // Loop through each startTimeElement
+                startTimeElements.forEach(function (startTimeElement) {
+                    var startTime = new Date(startTimeElement.innerText);
+                    var formattedStartTime = formatTime(startTime);
+                    startTimeElement.innerText = formattedStartTime;
+                });
+
+                // Loop through each endTimeElement
+                endTimeElements.forEach(function (endTimeElement) {
+                    var endTime = new Date(endTimeElement.innerText);
+                    var formattedEndTime = formatTime(endTime);
+                    endTimeElement.innerText = formattedEndTime;
+                });
+            });
+
+            // Function to format the time
+            function formatTime(time) {
+                var year = time.getFullYear();
+                var month = padZero(time.getMonth() + 1);
+                var date = padZero(time.getDate());
+                var hours = padZero(time.getHours());
+                var minutes = padZero(time.getMinutes());
+                var seconds = padZero(time.getSeconds());
+                var formattedTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+                return formattedTime;
+            }
+
+            // Function to pad zero to single digit numbers
+            function padZero(number) {
+                return number < 10 ? '0' + number : number;
+            }
+        </script>
 
 
 
