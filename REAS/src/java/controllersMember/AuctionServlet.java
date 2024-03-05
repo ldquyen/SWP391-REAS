@@ -76,6 +76,8 @@ public class AuctionServlet extends HttpServlet {
 
             request.getRequestDispatcher("MemberController?action=auctionRoom").forward(request, response);
         }
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
