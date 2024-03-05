@@ -334,7 +334,7 @@
     <div class="swiper-button-prev swiper-navBtn"></div>
     <div class="swiper-button-next swiper-navBtn"></div>
 
-    <footer class="footer" style="position: initial"> 
+    <footer class="footer" style="position: fixed"> 
         <div>
             <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
             <div class="footer-container">

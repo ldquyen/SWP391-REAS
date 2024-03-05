@@ -223,7 +223,7 @@
                 </div>-->
 
 
-        <footer class="footer" style="position: initial; bottom: 0; left: 0; right: 0"> 
+        <footer class="footer" style="position: fixed; bottom: 0; left: 0; right: 0"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
                 <div class="footer-container">
