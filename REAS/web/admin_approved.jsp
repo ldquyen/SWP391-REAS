@@ -295,7 +295,6 @@
                                     <th>Detail</th>
                                     <th>Time Up</th>
                                     <th>Staff</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -347,9 +346,7 @@
                                             ${dto.timeUp}
                                         </td>
                                         <td>
-                                            <c:forEach items="${staffList}" var="staff">
-                                                ${staff.userName}
-                                            </c:forEach>
+                                            ${dto.accID}
                                         </td>
                                         <!--                                        <td>
                                                                                     <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
