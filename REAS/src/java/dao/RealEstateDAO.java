@@ -19,11 +19,12 @@ public class RealEstateDAO {
 
     public boolean createPost(String realEstateID, String imageFolderID, String accID, String catID, int cityID,
             String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, long pricePaid, int statusID,
-            int area, String address, String detail) throws SQLException, NamingException, ClassNotFoundException {
+            int area, String address, String detail, long lamda) throws SQLException, NamingException, ClassNotFoundException {
         //mở connection
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
+
         try {
             con = DBUtils.getConnection();
 
@@ -53,14 +54,15 @@ public class RealEstateDAO {
                 if (effectRows > 0) {
                     String sql2 = "INSERT INTO [dbo].[Auction]"
                             + "([AuctionID],[RealEstateID],[AuctionName],[PriceNow],[Lamda],[TimeStart],[TimeEnd])"
-                            + "VALUES (?,?,?,?,0,?,?)";
+                            + "VALUES (?,?,?,?,?,?,?)";
                     try (PreparedStatement anotherStm = con.prepareStatement(sql2)) {
                         anotherStm.setString(1, realEstateID);
                         anotherStm.setString(2, realEstateID);
                         anotherStm.setString(3, realEstateName);
                         anotherStm.setLong(4, priceFirst);
-                        anotherStm.setTimestamp(5, Timestamp.valueOf(timeUp));
-                        anotherStm.setTimestamp(6, Timestamp.valueOf(timeDown));
+                        anotherStm.setLong(5, lamda);
+                        anotherStm.setTimestamp(6, Timestamp.valueOf(timeUp));
+                        anotherStm.setTimestamp(7, Timestamp.valueOf(timeDown));
 
                         int anotherEffectRows = anotherStm.executeUpdate();
                         // Xử lý kết quả hoặc thông báo
@@ -82,7 +84,7 @@ public class RealEstateDAO {
         return result;
     }
 
-    public static List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNotFoundException, SQLException, NamingException {
+    public List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -108,6 +110,7 @@ public class RealEstateDAO {
                         + "      ,[RealEstate].TimeUp "
                         + "      ,[Status].StatusName "
                         + "      ,[RealEstate].StatusID "
+                        + "      ,[Auction].AccID "
                         + "FROM [dbo].[RealEstate] "
                         + "INNER JOIN [dbo].[Category] ON [RealEstate].[CatID]  = [Category].[CatID] "
                         + "INNER JOIN [dbo].[City]     ON [RealEstate].[CityID] = [City].[CityID] "
@@ -138,11 +141,13 @@ public class RealEstateDAO {
                     dto.setDetail(rs.getString("Detail"));
                     dto.setStatusName(rs.getString("StatusName"));
                     dto.setStatusID(rs.getInt("StatusID"));
+                    dto.setAccID(rs.getString("AccID"));
+
 
                     Timestamp timeStartSql = rs.getTimestamp("TimeStart");
                     Timestamp timeEndSql = rs.getTimestamp("TimeEnd");
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
-                    
+
                     // Chuyển đổi Timestamp thành LocalDateTime
                     LocalDateTime timeStart = timeStartSql.toLocalDateTime();
                     LocalDateTime timeEnd = timeEndSql.toLocalDateTime();
@@ -198,8 +203,8 @@ public class RealEstateDAO {
         }
         return result;
     }
-    
-     public boolean deleteRealEstateID(String auctionID, String realEstateID, String imageFolderID) throws SQLException, NamingException, ClassNotFoundException {
+
+    public boolean deleteRealEstateID(String auctionID, String realEstateID, String imageFolderID) throws SQLException, NamingException, ClassNotFoundException {
         //mở connection
         Connection con = null;
         PreparedStatement stm1 = null;
@@ -217,25 +222,24 @@ public class RealEstateDAO {
                 stm1 = con.prepareStatement(sql1);
                 stm1.setString(1, auctionID);
                 int effectRows1 = stm1.executeUpdate();
-                
+
                 String sql2 = " Delete From [dbo].[RealEstate] "
                         + "Where [RealEstateID] = ?";
                 //3.create Statement Obj
                 stm2 = con.prepareStatement(sql2);
                 stm2.setString(1, realEstateID);
                 int effectRows2 = stm2.executeUpdate();
-                
+
                 String sql3 = " Delete From [dbo].[Image] "
                         + "Where [ImageFolderID] = ?";
                 //3.create Statement Obj
                 stm3 = con.prepareStatement(sql3);
                 stm3.setString(1, imageFolderID);
                 int effectRows3 = stm3.executeUpdate();
-                
 
                 //end username and password are existed
                 //5.Process
-                if (effectRows1 > 0 && effectRows2 > 0 && effectRows3 > 0 ) {
+                if (effectRows1 > 0 && effectRows2 > 0 && effectRows3 > 0) {
                     result = true;
                 }
             }//end connection í avaible
@@ -259,6 +263,35 @@ public class RealEstateDAO {
         return result;
     }
 
+    public boolean chooseStaffForAuction(String accID, String realEstateID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+        try{
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE [dbo].[Auction] SET [AccID] = ? WHERE [RealEstateID] = ?";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, accID);
+                stm.setString(2, realEstateID);
+                int effectRows = stm.executeUpdate();
+                if (effectRows > 0) {
+                    result = true;
+                }
+            }
+            
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 
 //    public List<RealEstate> getRealEstate() throws ClassNotFoundException, SQLException {
 //        Connection con = null;

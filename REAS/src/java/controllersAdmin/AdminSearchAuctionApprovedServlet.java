@@ -25,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-@WebServlet(name = "AdminSearchAuctionApproveServlet", urlPatterns = {"/AdminSearchAuctionApproveServlet"})
-public class AdminSearchAuctionApproveServlet extends HttpServlet {
+@WebServlet(name = "AdminSearchAuctionApprovedServlet", urlPatterns = {"/AdminSearchAuctionApprovedServlet"})
+public class AdminSearchAuctionApprovedServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,18 +40,18 @@ public class AdminSearchAuctionApproveServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "admin_approve.jsp";
+        String url = "admin_approved.jsp";
         String searchValue = request.getParameter("txtSearchValue");
         try {
             if (searchValue == null || searchValue.trim().isEmpty()) {
                 RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(1);
-                url = "admin_approve.jsp";
+                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(2);
+                url = "admin_approved.jsp";
                 request.setAttribute("SEARCH_RESULT", listRealEstate);
             } else {
                 RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(1);
-                url = "admin_approve.jsp";
+                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(2);
+                url = "admin_approved.jsp";
                 request.setAttribute("SEARCH_RESULT", listRealEstate);
             }
         } catch (SQLException ex) {
@@ -77,9 +77,9 @@ public class AdminSearchAuctionApproveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdminSearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminSearchAuctionApprovedServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(AdminSearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminSearchAuctionApprovedServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -97,9 +97,9 @@ public class AdminSearchAuctionApproveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdminSearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminSearchAuctionApprovedServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(AdminSearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminSearchAuctionApprovedServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

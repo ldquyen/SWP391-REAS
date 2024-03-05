@@ -49,7 +49,7 @@ public class PostRealEstateServlet extends HttpServlet {
         long priceFirst = 0;
         String priceFirstStr = request.getParameter("priceFirst");
         if (priceFirstStr != null) {
-            priceFirstStr = priceFirstStr.replace(",", "");
+            priceFirstStr = priceFirstStr.replaceAll("[,.]", "");
             if (priceFirstStr != null && !priceFirstStr.isEmpty()) {
                 // Nếu có thì parse sang long
                 priceFirst = Long.parseLong(priceFirstStr);
@@ -57,6 +57,7 @@ public class PostRealEstateServlet extends HttpServlet {
                     request.setAttribute("Wrong_PriceFirst", "Số tiền phải lớn hơn 0!!!");
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
+                    return;
                 }
             }
         }
@@ -72,6 +73,8 @@ public class PostRealEstateServlet extends HttpServlet {
         }
         /*8*/
         long pricePaid = (priceFirst * 120) / 100;
+
+        long lamda = (long) (priceFirst * 0.002);
         /*9*/
         int statusID;
         String statusStr = request.getParameter("status");
@@ -99,11 +102,13 @@ public class PostRealEstateServlet extends HttpServlet {
                 request.setAttribute("Wrong_Area", "Diện tích phải LỚN HƠN 0!!!");
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             }
         } else {
             request.setAttribute("Wrong_Area_Nummeric", "Diện tích phải là một SỐ!!!");
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+            return;
         }
         /*13*/
         String detail = request.getParameter("detail");
@@ -128,20 +133,22 @@ public class PostRealEstateServlet extends HttpServlet {
             ImageDAO.saveImg(imageFolderID, imagePart1, imagePart2, imagePart3);
 
             boolean result = dao.createPost(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown,
-                    priceLast, pricePaid, statusID, area, address, detail);
+                    priceLast, pricePaid, statusID, area, address, detail, lamda);
 
             if (result) {
                 url = "postRealEstate.jsp";
-                request.setAttribute("Success", "Bài Đấu Giá Của Bạn Đã Gửi Thành Công, vui lòng đợi hệ thống xét duyệt!!!");
+                request.setAttribute("Success", "Bài Đấu Giá Của Bạn Đã Gửi THÀNH CÔNG, vui lòng đợi hệ thống xét duyệt!!!");
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             } else {
-                url = "rule.jsp";
+                url = "postRealEstate.jsp";
+                request.setAttribute("Fail", "Bài Đấu Giá Của Bạn Gửi THẤT BẠI, hãy thử l!!!");
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+                return;
             }
         } catch (ClassNotFoundException | SQLException | NamingException ex) {
             Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
     }
 

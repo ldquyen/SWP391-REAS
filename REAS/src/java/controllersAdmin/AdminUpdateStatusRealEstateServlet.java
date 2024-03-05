@@ -6,15 +6,12 @@
 package controllersAdmin;
 
 import dao.RealEstateDAO;
-import dto.RealEstateInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-@WebServlet(name = "AdminSearchAuctionApproveServlet", urlPatterns = {"/AdminSearchAuctionApproveServlet"})
-public class AdminSearchAuctionApproveServlet extends HttpServlet {
+@WebServlet(name = "AdminUpdateStatusRealEstateServlet", urlPatterns = {"/AdminUpdateStatusRealEstateServlet"})
+public class AdminUpdateStatusRealEstateServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,24 +38,28 @@ public class AdminSearchAuctionApproveServlet extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
         String url = "admin_approve.jsp";
+        String realEstateID = request.getParameter("realEstateID");
         String searchValue = request.getParameter("txtSearchValue");
+        String accID =  request.getParameter("accID");
+
         try {
-            if (searchValue == null || searchValue.trim().isEmpty()) {
-                RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(1);
-                url = "admin_approve.jsp";
-                request.setAttribute("SEARCH_RESULT", listRealEstate);
+            RealEstateDAO dao = new RealEstateDAO();
+            boolean result1 = dao.chooseStaffForAuction(accID, realEstateID);
+            boolean result2 = dao.updateStatusID(realEstateID, 2);
+            
+            if (result1 && result2) {
+                url="AdminController"
+                    + "?action=adminSearchAuctionApprove"
+                    + "&txtSearchValue=" + searchValue;  
+                
             } else {
-                RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(1);
-                url = "admin_approve.jsp";
-                request.setAttribute("SEARCH_RESULT", listRealEstate);
+                // Cập nhật không thành công, chuyển hướng đến trang lỗi
+                url="rule.jsp";
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
     }
 
@@ -77,9 +78,9 @@ public class AdminSearchAuctionApproveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdminSearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminUpdateStatusRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(AdminSearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminUpdateStatusRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -97,9 +98,9 @@ public class AdminSearchAuctionApproveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdminSearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminUpdateStatusRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(AdminSearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminUpdateStatusRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

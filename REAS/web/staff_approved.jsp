@@ -148,8 +148,8 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
 
                                     <!--            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ImageID</th>            -->
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xác nhận</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xóa</th>
+<!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xác nhận</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xóa</th>-->
 
                                 </tr>
                             </thead>
@@ -217,7 +217,7 @@
                                             ${dto.statusName}
                                         </td>
 
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+<!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             <form action="StaffController" method="post">
                                                 <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
                                                 <input type="hidden" name="txtSearchValue" value="${searchValue}" />
@@ -232,7 +232,7 @@
                                                 <input type="hidden" name="txtSearchValue" value="${searchValue}" />
                                                 <button style="color: #fff" type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
                                             </form>
-                                        </td>
+                                        </td>-->
 
                                     </tr>
                                     </form> 
@@ -256,24 +256,31 @@
         <!-- BODY -->
 
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                var startTimeElements = document.querySelectorAll(".startTime");
-                var endTimeElements = document.querySelectorAll(".endTime");
+            document.addEventListener('DOMContentLoaded', function () {
+                var priceFirstCells = document.querySelectorAll('.priceFirstCell');
+                var pricePaidCells = document.querySelectorAll('.pricePaidCell');
+                var lamdaCells = document.querySelectorAll('.lamdaCell');
+                var areaCells = document.querySelectorAll('.areaCell');
 
-                // Loop through each startTimeElement
-                startTimeElements.forEach(function (startTimeElement) {
-                    var startTime = new Date(startTimeElement.innerText);
-                    var formattedStartTime = formatTime(startTime);
-                    startTimeElement.innerText = formattedStartTime;
+                priceFirstCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
                 });
 
-                // Loop through each endTimeElement
-                endTimeElements.forEach(function (endTimeElement) {
-                    var endTime = new Date(endTimeElement.innerText);
-                    var formattedEndTime = formatTime(endTime);
-                    endTimeElement.innerText = formattedEndTime;
+                pricePaidCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+
+                lamdaCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+
+                areaCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
                 });
             });
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
 
             // Function to format the time
             function formatTime(time) {

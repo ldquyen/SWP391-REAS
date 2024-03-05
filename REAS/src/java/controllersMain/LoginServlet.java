@@ -56,8 +56,8 @@ public class LoginServlet extends HttpServlet {
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
-            String password2 = dao.encodePassword(password);
-            Account dto = dao.checkLogin(username, password2);
+//            String password2 = dao.encodePassword(password);
+            Account dto = dao.checkLogin(username, password);
 
             if (dto == null) {
                 HttpSession session = request.getSession();
@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
                 System.out.println(dto.getRoleID());
                 url = "admin.jsp";
                 HttpSession session = request.getSession(true);
-                Account a = dao.getAccount(username, password2);
+                Account a = dao.getAccount(username, password);
                 session.setAttribute("admin", a);
             } else if ("M".equals(dto.getRoleID())) {
                 RealEstateDAO realEstateDAO = new RealEstateDAO();
@@ -79,12 +79,12 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("listImg", listImage);
                 url = "HomeServletIndex_1";
                 HttpSession session = request.getSession(true);
-                Account m = dao.getAccount(username, password2);
+                Account m = dao.getAccount(username, password);
                 session.setAttribute("member", m);
             } else if ("S".equals(dto.getRoleID())) {
                 url = "staff.jsp";
                 HttpSession session = request.getSession(true);
-                Account s = dao.getAccount(username, password2);
+                Account s = dao.getAccount(username, password);
                 session.setAttribute("staff", s);
             }
         } catch (SQLException ex) {

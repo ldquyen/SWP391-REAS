@@ -67,6 +67,25 @@ public class AdminController extends HttpServlet {
                 case "editUserWallet":
                     url = "EditUserWalletServlet";
                     break;
+                case "adminInformationPage":
+                    url = "adminInformationPage.jsp";
+                    break;
+                // Search,Update Status, Chọn Staff cho RealEstate
+                case "adminSearchAuctionApprove":
+                    url = "AdminSearchAuctionApproveServlet";
+                    break;
+                case "adminSearchAuctionApproved":
+                    url = "AdminSearchAuctionApprovedServlet";
+                    break;
+                case "updateStatusButton":
+                    url = "AdminUpdateStatusRealEstateServlet";
+                    break;
+                case "approve":
+                    url = "admin_approve.jsp";
+                    break;
+                case "approved":
+                    url = "admin_approved.jsp";
+                    break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);

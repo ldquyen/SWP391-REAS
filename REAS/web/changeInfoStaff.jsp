@@ -113,6 +113,31 @@
                             </ul>
                         </li>
                     </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Xét duyệt</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách chờ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approved" name="action">
+                                                <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                     <p class="menu-label">
                         Administration
                     </p>
