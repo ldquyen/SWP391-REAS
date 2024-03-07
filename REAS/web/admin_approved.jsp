@@ -298,6 +298,7 @@
                                     <th>Detail</th>
                                     <th>Time Up</th>
                                     <th>Staff</th>
+                                    <th>Staff Name</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -365,13 +366,8 @@
                                                 </c:if>
                                             </c:forEach>
 
-
                                         </td>
-                                        <!--                                        <td>
-                                                                                    <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                                                                    <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                                                                    <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
-                                                                                </td>-->
+                                        
                                     </tr>
                                 </form>
                             </c:forEach>
