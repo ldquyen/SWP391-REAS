@@ -352,7 +352,7 @@
                                             <select id="accID" name="accID" required>
                                                 <option value="" disabled selected hidden>-- Chọn --</option>
                                                 <c:forEach items="${staffList}" var="staff">
-                                                    <option value="${staff.accID}">${staff.userName}</option>
+                                                    <option value="${staff.accID}">${staff.fullname}</option>
                                                 </c:forEach>
                                             </select>
 

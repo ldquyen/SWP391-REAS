@@ -260,7 +260,10 @@
             </div>
 
             <!--===============================================================-->
-            
+            <%
+                ArrayList<Account> staffList = AccountDAO.getAllAccountByRole("S");
+                pageContext.setAttribute("staffList", staffList);
+            %>
             <div>
                 <div class="h1-staff-header">
                     <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
@@ -347,6 +350,22 @@
                                         </td>
                                         <td>
                                             ${dto.accID}
+                                        </td>
+                                        <td>
+
+                                            <c:forEach items="${staffList}" var="staff">
+                                                <c:if test="${dto.accID eq staff.accID}">
+                                                    <div>
+                                                        <div>
+                              
+                                                            <p>${staff.fullname}</p>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
+
+
                                         </td>
                                         <!--                                        <td>
                                                                                     <input type="hidden" name="realEstateID" value="${dto.realEstateID}">

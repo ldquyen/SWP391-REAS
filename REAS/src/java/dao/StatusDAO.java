@@ -29,10 +29,10 @@ public class StatusDAO {
         }      
         return list;
     }
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        ArrayList<Status> list = getStatusList();
-        for (Status status : list) {
-            System.out.println(status.toString());
-        }
-    }
+//    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//        ArrayList<Status> list = getStatusList();
+//        for (Status status : list) {
+//            System.out.println(status.toString());
+//        }
+//    }
 }

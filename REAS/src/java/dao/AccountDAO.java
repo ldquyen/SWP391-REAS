@@ -749,5 +749,40 @@ public class AccountDAO {
         return 0;
     }
 
+    public String getFullNameByAccID(String accID) throws ClassNotFoundException, SQLException, NamingException {
+        String fullName = null;
+        Connection cn = DBUtils.getConnection();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        
+        try {
+ 
+            // Truy vấn để lấy FullName từ bảng Account dựa trên AccID
+            String sql = "SELECT FullName FROM Account WHERE AccID = ?";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, accID);
+            
+            // Thực thi truy vấn
+            rs = pst.executeQuery();
+            
+            // Nếu tìm thấy kết quả, lấy FullName
+            if (rs.next()) {
+                fullName = rs.getString("FullName");
+            }
+        } finally {
+            // Đóng kết nối, statement và result set
+            if (rs != null) {
+                rs.close();
+            }
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+        
+        return fullName;
+    }
     
 }

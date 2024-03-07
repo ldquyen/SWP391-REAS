@@ -84,12 +84,13 @@ public class RealEstateDAO {
         return result;
     }
     
+    // Lấy mọi thông tin của RealEstate bằng statusID
     public List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         List<RealEstateInfo> result = null;
-        
+
         try {
             con = DBUtils.getConnection();
             if (con != null) {
@@ -111,6 +112,8 @@ public class RealEstateDAO {
                         + "      ,[Status].StatusName "
                         + "      ,[RealEstate].StatusID "
                         + "      ,[Auction].AccID "
+                        + "      ,[Account].FullName "
+                        + "      ,[Account].Phone "
                         + "FROM [dbo].[RealEstate] "
                         + "INNER JOIN [dbo].[Category] ON [RealEstate].[CatID]  = [Category].[CatID] "
                         + "INNER JOIN [dbo].[City]     ON [RealEstate].[CityID] = [City].[CityID] "
@@ -126,7 +129,7 @@ public class RealEstateDAO {
                         result = new ArrayList<RealEstateInfo>();
                     }
                     RealEstateInfo dto = new RealEstateInfo();
-                    
+
                     dto.setRealEstateID(rs.getString("RealEstateID"));
                     dto.setAuctionID(rs.getString("AuctionID"));
                     dto.setRealEstateName(rs.getString("RealEstateName"));
@@ -142,7 +145,9 @@ public class RealEstateDAO {
                     dto.setStatusName(rs.getString("StatusName"));
                     dto.setStatusID(rs.getInt("StatusID"));
                     dto.setAccID(rs.getString("AccID"));
-                    
+                    dto.setFullName(rs.getString("FullName"));
+                    dto.setPhone(rs.getString("Phone"));
+
                     Timestamp timeStartSql = rs.getTimestamp("TimeStart");
                     Timestamp timeEndSql = rs.getTimestamp("TimeEnd");
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
@@ -151,15 +156,15 @@ public class RealEstateDAO {
                     LocalDateTime timeStart = timeStartSql.toLocalDateTime();
                     LocalDateTime timeEnd = timeEndSql.toLocalDateTime();
                     LocalDateTime timeUp = timeUpSql.toLocalDateTime();
-                    
+
                     dto.setTimeStart(timeStart);
                     dto.setTimeEnd(timeEnd);
                     dto.setTimeUp(timeUp);
-                    
+
                     result.add(dto);
                 }
             }
-            
+
         } finally {
             if (rs != null) {
                 rs.close();
@@ -292,74 +297,8 @@ public class RealEstateDAO {
         return result;
     }
 
-//    public List<RealEstate> getRealEstate() throws ClassNotFoundException, SQLException {
-//        Connection con = null;
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        List<RealEstate> result = null;
-//
-//        try {
-//            con = DBUtils.getConnection();
-//            if (con != null) {
-//                String sql = "SELECT [RealEstateID]\n"
-//                        + "      ,[RealEstateName]\n"
-//                        + "      ,[AccID]\n"
-//                        + "      ,[CityID]\n"
-//                        + "      ,[CatID]\n"
-//                        + "      ,[PriceFirst]\n"
-//                        + "      ,[TimeUp]\n"
-//                        + "      ,[TimeDown]\n"
-//                        + "      ,[PricePaid]\n"
-//                        + "      ,[StatusID]\n"
-//                        + "      ,[Area]\n"
-//                        + "      ,[Address]\n"
-//                        + "      ,[Detail]\n"
-//                        + "      ,[ImageFolderID]\n"
-//                        + "  FROM [dbo].[RealEstate]";
-//                stm = con.prepareStatement(sql);
-//                rs = stm.executeQuery();
-//                while (rs.next()) {
-//                    if (result == null) {
-//                        result = new ArrayList<RealEstate>();
-//                    }
-//                    RealEstate dto = new RealEstate();
-//
-//                    dto.setRealEstateID(rs.getString("RealEstateID"));
-//                    dto.setRealEstateName(rs.getString("RealEstateName"));
-//                    dto.setAccID(rs.getString("AccID"));
-//                    dto.setPriceNow(rs.getLong("PriceNow"));
-//                    dto.setLamda(rs.getLong("Lamda"));
-//
-//                    Timestamp timeStartSql = rs.getTimestamp("TimeStart");
-//                    Timestamp timeEndSql = rs.getTimestamp("TimeEnd");
-//
-//                    // Chuyển đổi Timestamp thành LocalDateTime
-//                    LocalDateTime timeStart = timeStartSql.toLocalDateTime();
-//                    LocalDateTime timeEnd = timeEndSql.toLocalDateTime();
-//
-//                    dto.setTimeStart(timeStart);
-//                    dto.setTimeEnd(timeEnd);
-//
-////                    dto.setTimeStart(rs.getObject("TimeStart", LocalDateTime.class));
-////                    dto.setTimeEnd(rs.getObject("TimeEnd", LocalDateTime.class));
-//                    result.add(dto);
-//
-//                }
-//            }
-//
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//        return result;
-//    }
+    
+
     public static boolean checkRealEstateIDExists(String realEstateID) throws SQLException, ClassNotFoundException {
         Connection cn = DBUtils.getConnection();
         PreparedStatement pst = null;
@@ -643,10 +582,10 @@ public class RealEstateDAO {
         return reList;
     }
     
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        ArrayList<RealEstate> reList = getRealEstateByIDAtMyPost("M1");
-        for (RealEstate realEstate : reList) {
-            System.out.println(realEstate.toString());
-        }
-    }
+//    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//        ArrayList<RealEstate> reList = getRealEstateByIDAtMyPost("M1");
+//        for (RealEstate realEstate : reList) {
+//            System.out.println(realEstate.toString());
+//        }
+//    }
 }
