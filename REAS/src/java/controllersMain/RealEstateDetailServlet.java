@@ -14,6 +14,8 @@ import dto.Image;
 import dto.RealEstateInfo;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +45,12 @@ public class RealEstateDetailServlet extends HttpServlet {
                 RealEstateDAO dao = new RealEstateDAO();
                 List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                 request.setAttribute("SEARCH_RESULT", listRealEstate);
-                
+                // Sắp xếp danh sách theo thời gian cập nhật mới nhất
+                Collections.sort(listRealEstate, Comparator.comparing(RealEstateInfo::getTimeUp).reversed());
+                // Chỉ lấy 3 bất động sản đầu tiên
+                List<RealEstateInfo> top3RealEstate = listRealEstate.subList(0, Math.min(3, listRealEstate.size()));
+                request.setAttribute("TOP_3_REAL_ESTATE", top3RealEstate);
+
                 System.out.println(auctions);
 
                 ArrayList<Image> listIMG = ImageDAO.getListImageByID(realEstateId);

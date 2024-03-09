@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
+<%@ page import="java.util.List" %>
+<%@ page import="dto.RealEstateInfo" %>
 
 
 <!DOCTYPE html>
@@ -307,23 +308,28 @@
                 <div class="container-full-right-bellow">
                     <div>
                         <p class="flex-center text-center" style="color: #000;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
-                        <div style="text-align: left; padding-left: 10px;">
-                            <form action="MainController" method="post">
-                                <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                    <span>Thảo Điền Pearl</span>
-                                </button>
-                            </form>
-                            <form action="MainController" method="post">
-                                <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                    <span>Hoàng Anh River View</span>
-                                </button>
-                            </form>
-                            <form action="MainController" method="post">
-                                <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                    <span>Thủ Thiêm Sky(5)</span>
-                                </button>
-                            </form>
-                        </div>
+                            <!--                        <div style="text-align: left; padding-left: 10px;">
+                                                        <form action="MainController" method="post">
+                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
+                                                                <span>Thảo Điền Pearl</span>
+                                                            </button>
+                                                        </form>
+                                                        <form action="MainController" method="post">
+                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
+                                                                <span>Hoàng Anh River View</span>
+                                                            </button>
+                                                        </form>
+                                                        <form action="MainController" method="post">
+                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
+                                                                <span>Thủ Thiêm Sky(5)</span>
+                                                            </button>
+                                                        </form>
+                                                    </div>-->
+                            <div style="text-align: left; padding-left: 10px;">
+                            <c:forEach items="${TOP_3_REAL_ESTATE}" var="realEstate">
+                                <a href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${realEstate.realEstateName}</a><br>
+                            </c:forEach>
+                            </div>
                     </div>
                 </div>
             </div>
