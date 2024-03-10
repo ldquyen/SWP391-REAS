@@ -102,6 +102,10 @@
         <servlet-name>ViewAdminInformationServlet</servlet-name>
         <servlet-class>controllersAdmin.ViewAdminInformationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MyPostServlet</servlet-name>
+        <servlet-class>controllersMember.MyPostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -196,6 +200,10 @@
     <servlet-mapping>
         <servlet-name>ViewAdminInformationServlet</servlet-name>
         <url-pattern>/ViewAdminInformationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyPostServlet</servlet-name>
+        <url-pattern>/MyPostServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

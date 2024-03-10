@@ -167,6 +167,70 @@ public class AuctionDAO {
 //        return auction;
     }
 
+    public List<Auction> getAuctionsV2() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<Auction> result = null;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT [AuctionID]\n"
+                        + "      ,[RealEstateID]\n"
+                        + "      ,[AuctionName]\n"
+                        + "      ,[PriceNow]\n"
+                        + "      ,[Lamda]\n"
+                        + "      ,[TimeStart]\n"
+                        + "      ,[TimeEnd]\n"
+                        + "      ,[AccID]\n"
+                        + "  FROM [dbo].[Auction]";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    if (result == null) {
+                        result = new ArrayList<Auction>();
+                    }
+                    Auction dto = new Auction();
+
+                    dto.setAuctionID(rs.getString("AuctionID"));
+                    dto.setRealEstateID(rs.getString("RealEstateID"));
+                    dto.setAuctionName(rs.getString("AuctionName"));
+                    dto.setPriceNow(rs.getLong("PriceNow"));
+                    dto.setLamda(rs.getLong("Lamda"));
+                    dto.setAccID(rs.getString("AccID"));
+
+                    Timestamp timeStartSql = rs.getTimestamp("TimeStart");
+                    Timestamp timeEndSql = rs.getTimestamp("TimeEnd");
+
+                    // Chuyển đổi Timestamp thành LocalDateTime
+                    LocalDateTime timeStart = timeStartSql.toLocalDateTime();
+                    LocalDateTime timeEnd = timeEndSql.toLocalDateTime();
+
+                    dto.setTimeStart(timeStart);
+                    dto.setTimeEnd(timeEnd);
+
+//                    dto.setTimeStart(rs.getObject("TimeStart", LocalDateTime.class));
+//                    dto.setTimeEnd(rs.getObject("TimeEnd", LocalDateTime.class));
+                    result.add(dto);
+
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
     public void setPriceNowAuctions(String pricenowbid, String realEstateID) throws ClassNotFoundException, SQLException {
         Connection cn = null;
         PreparedStatement pst = null;

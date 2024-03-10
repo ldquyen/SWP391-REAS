@@ -49,7 +49,7 @@ public class PostRealEstateServlet extends HttpServlet {
         long priceFirst = 0;
         String priceFirstStr = request.getParameter("priceFirst");
         if (priceFirstStr != null) {
-            priceFirstStr = priceFirstStr.replace(",", "");
+            priceFirstStr = priceFirstStr.replaceAll("[,.]", "");
             if (priceFirstStr != null && !priceFirstStr.isEmpty()) {
                 // Nếu có thì parse sang long
                 priceFirst = Long.parseLong(priceFirstStr);

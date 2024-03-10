@@ -260,7 +260,10 @@
             </div>
 
             <!--===============================================================-->
-            
+            <%
+                ArrayList<Account> staffList = AccountDAO.getAllAccountByRole("S");
+                pageContext.setAttribute("staffList", staffList);
+            %>
             <div>
                 <div class="h1-staff-header">
                     <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
@@ -295,7 +298,7 @@
                                     <th>Detail</th>
                                     <th>Time Up</th>
                                     <th>Staff</th>
-                                    <th>Action</th>
+                                    <th>Staff Name</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -347,15 +350,24 @@
                                             ${dto.timeUp}
                                         </td>
                                         <td>
-                                            <c:forEach items="${staffList}" var="staff">
-                                                ${staff.userName}
-                                            </c:forEach>
+                                            ${dto.accID}
                                         </td>
-                                        <!--                                        <td>
-                                                                                    <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                                                                    <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                                                                    <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
-                                                                                </td>-->
+                                        <td>
+
+                                            <c:forEach items="${staffList}" var="staff">
+                                                <c:if test="${dto.accID eq staff.accID}">
+                                                    <div>
+                                                        <div>
+                              
+                                                            <p>${staff.fullname}</p>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
+
+                                        </td>
+                                        
                                     </tr>
                                 </form>
                             </c:forEach>

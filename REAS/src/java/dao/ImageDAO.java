@@ -257,10 +257,10 @@ public class ImageDAO {
         return list;
     }
 
-    public static void main(String[] args) throws SQLException, NamingException, ClassNotFoundException {
-        //ImageDAO.saveImg2("FOLDER10", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png");
-        //ImageDAO iD = new ImageDAO();
-        //Image i = iD.getImageByID("FOLDER10");
+//    public static void main(String[] args) throws SQLException, NamingException, ClassNotFoundException {
+//        ImageDAO.saveImg2("FOLDER10", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png", "C:\\Users\\ASUS\\Pictures\\Screen\\gameedu.png");
+//        ImageDAO iD = new ImageDAO();
+//        Image i = iD.getImageByID("FOLDER10");
 //        saveImg2("FOL3", "C:\\Users\\tranl\\Downloads\\images.jpg", "C:\\Users\\tranl\\Downloads\\625b10a58137b364b18df2ea_iStock-94179607.jpg", "C:\\Users\\tranl\\Downloads\\download (3).jpg");
-    }
+//    }
 }
