@@ -383,21 +383,21 @@
                 </form>
         --%>
 
-        <form action="MemberController" method="post">
-            <c:if test="${not empty auctions}">
-                <c:forEach var="listRE2" items="${requestScope.listRE2}">
-                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
-                        <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
+        <c:if test="${not empty auctions}">
+            <c:forEach var="listRE2" items="${requestScope.listRE2}">
+                <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                    <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
+                        <form action="MemberController" method="post">
                             <button id="submitButton" type="submit" value="stastus2tostatus3" name="action">
                                 <input type="hidden" name="idAuction2to3" value="${auctions.realEstateID}">
                                 <p style="">Test</p>
                             </button>
-                        </c:if>
-                    </c:forEach>
+                        </form>
+                    </c:if>
                 </c:forEach>
+            </c:forEach>
 
-            </c:if> 
-        </form>
+        </c:if> 
 
 
 
