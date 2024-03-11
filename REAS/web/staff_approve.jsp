@@ -122,8 +122,7 @@
                 <form action="StaffController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
-                     <button class="button-search-staff" type="submit" value="searchAuctionApprove" name="action">Search</button>
-
+                     <button class="button-search-staff" type="submit" value="searchAuctionApprove" name="action">VIEW</button>
                 </form><br/>
 
                 <div style="text-align: center; border-radius: 45px;">

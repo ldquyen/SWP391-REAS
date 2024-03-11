@@ -199,32 +199,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Đấu giá</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Danh sách</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Kết quả</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
+                    
                     <p class="menu-label">
                         Transactions
                     </p>

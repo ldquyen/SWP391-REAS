@@ -1,17 +1,11 @@
 <%-- 
-    Document   : admin_approved
-    Created on : Mar 2, 2024, 11:46:27 AM
+    Document   : searchMember
+    Created on : Mar 11, 2024, 11:05:39 PM
     Author     : ADMIN
 --%>
 
-
-<%@page import="dto.Account"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
-<%@page import="dao.AccountDAO" %>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,8 +15,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="admin.css" type="text/css" >
-        <!--        <link rel="stylesheet" href="staff.css" type="text/css" >-->
-
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -81,6 +73,8 @@
 
                             </div>
                         </div>
+
+
 
                     </div>
                 </div>
@@ -217,174 +211,75 @@
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
-                                                <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
+                                                <span>Thông tin ví tiền</span>
                                             </button>
                                         </form>
-
-
                                     </a>
                                 </li>
 
                             </ul>
                         </li>
                     </ul>
+
+
                 </aside>
             </div>
+            <div class="column" style="height: 100vh;">
+                <form action="AdminController" method="post">
+                    <input type="text" placeholder="Nhập tên thành viên" name="txtNameMember" style="width: 400px; height: 30px" >
+                    <button type="submit" value="searchNameMember" name="action" style="background-color: black; color: #D9AB73; padding: 6px 20px; ">
+                        <span style="font-size: 14px; font-weight: bold">Tìm kiếm</span>
+                    </button>
+                </form>
 
-            <!--===============================================================-->
-            <%
-                ArrayList<Account> staffList = AccountDAO.getAllAccountByRole("S");
-                pageContext.setAttribute("staffList", staffList);
-            %>
-            <div>
-                <div style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">
-                    <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
-                </div>
-
-                <form class="flex-center" action="AdminController">
-                    <input type="hidden" name="txtSearchValue" 
-                           value="${param.txtSearchValue}" />
-
-                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApproved" name="action">VIEW</button>
-
-                </form><br/>
-
-                <div style="text-align: center; border-radius: 45px;">
-                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                    <c:if test="${not empty listRealEstate}">
-                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                <div style="margin-top: 20px">
+                    <s:if test="${not empty requestScope.memberList}">
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white;">
                             <thead>
                                 <tr>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate ID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate Name</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Account</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Address</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">City</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price First</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price Paid</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Lambda</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Start</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time End</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area(m²)</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Image Folder ID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Up</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Staff</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Staff Name</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tên</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Email</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Số điện thoại</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">CCCD</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Địa chỉ</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Ngân hàng</th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-
-                                <form action="AdminController" method="post">
+                                <s:forEach var="m" items="${requestScope.memberList}">
                                     <tr>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.realEstateID}
-                                        </td>                               
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.realEstateName}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.userName}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.address}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.catName}
-                                        </td>
-                                        <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.priceFirst}
-                                        </td>
-                                        <td class="pricePaidCell" style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.pricePaid}
-                                        </td>
-                                        <td class="lamdaCell" style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.lamda}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.timeStart}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.timeEnd}
-                                        </td>
-                                        <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.area}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.imageFolderID}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.timeUp}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.accID}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-
-                                            <c:forEach items="${staffList}" var="staff">
-                                                <c:if test="${dto.accID eq staff.accID}">
-                                                    <div>
-                                                        <div>
-                              
-                                                            <p>${staff.fullname}</p>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </c:if>
-                                            </c:forEach>
-
-                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${m.accID}</td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${m.fullname}</td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${m.email}</td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${m.phone}</td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${m.cccd}</td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${m.address}</td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">${m.bankName}</td>
+                                        
                                         
                                     </tr>
-                                </form>
-                            </c:forEach>
-
+                                </s:forEach>
                             </tbody>
                         </table>
-                        <c:if test="${empty listRealEstate}">
-                            <h2>
-                                No record is matched!!!
-                            </h2>
-                        </c:if>
-                    </c:if>
+                    </s:if>
                 </div>
+
+                <div>
+                    <s:if test="${not empty requestScope.Fail}">
+                        <p style="margin-top: 20px; font-size: 20px; font-weight: bold; color: red" >Không tìm thấy nhân viên, vui lòng thử lại.</p><br>
+                    </s:if>
+                </div>
+
+
+
+
             </div>
-
-
-            <!--         ==============       -->
         </div>
 
         <!-- BODY -->
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var priceFirstCells = document.querySelectorAll('.priceFirstCell');
-                var pricePaidCells = document.querySelectorAll('.pricePaidCell');
-                var lamdaCells = document.querySelectorAll('.lamdaCell');
-                var areaCells = document.querySelectorAll('.areaCell');
 
-                priceFirstCells.forEach(function (cell) {
-                    cell.textContent = numberWithCommas(cell.textContent);
-                });
-
-                pricePaidCells.forEach(function (cell) {
-                    cell.textContent = numberWithCommas(cell.textContent);
-                });
-
-                lamdaCells.forEach(function (cell) {
-                    cell.textContent = numberWithCommas(cell.textContent);
-                });
-
-                areaCells.forEach(function (cell) {
-                    cell.textContent = numberWithCommas(cell.textContent);
-                });
-            });
-
-            function numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
-        </script>
 
     </body>
 </html>
