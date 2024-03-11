@@ -179,7 +179,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="searchStaff" name="action">
+                                            <button type="submit" value="searchMember" name="action">
                                                 <span>Tìm kiếm</span>
                                             </button>
                                         </form>
