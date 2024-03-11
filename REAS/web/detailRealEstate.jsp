@@ -325,16 +325,14 @@
                                                             </button>
                                                         </form>
                                                     </div>-->
-                            <div style="text-align: left; padding-left: 10px;">
-<<<<<<< HEAD
+                        <div style="text-align: left; padding-left: 10px;">
                             <c:forEach items="${TOP_3_REAL_ESTATE}" var="realEstate">
                                 <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${realEstate.realEstateName}</a><br>
-=======
+                            </c:forEach>
                             <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
                                 <a href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
->>>>>>> 8522a22c3b2742c617b2f4c8afc6d354cd9bc5bf
                             </c:forEach>
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
