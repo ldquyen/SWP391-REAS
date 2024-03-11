@@ -309,21 +309,16 @@
                             <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
                                 <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                     <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
-                                        <p class="list-auction-p-1">Đấu giá viên:</p>
-                                        <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                                        <c:forEach items="${listRealEstate}" var="dto" >
-                                                   <c:forEach items="${staffList}" var="staff">
-                                                <c:if test="${dto.accID eq staff.accID}">
-                                                    <div>
-                                                        <div>
-
-                                                            <p class="list-auction-p-1">${staff.fullname}</p>
-
-                                                        </div>
-                                                    </div>
-                                                </c:if>
+                                        <p class="list-auction-p-1">Đấu giá viên: <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                                            <c:forEach items="${listRealEstate}" var="dto" >
+                                                <c:forEach items="${staffList}" var="staff">
+                                                    <c:if test="${dto.accID eq staff.accID}">
+                                                        <span class="list-auction-p-1">${staff.fullname}</span>
+                                                    </c:if>
+                                                </c:forEach>
                                             </c:forEach>
-                                        </c:forEach>
+                                        </p>
+
                                         <div class="auctionTimeEnd list-auction-p-2">
                                             <p style="display: none;">${auctions.timeEnd}</p>
                                         </div>

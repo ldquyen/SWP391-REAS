@@ -327,7 +327,7 @@
                                                     </div>-->
                             <div style="text-align: left; padding-left: 10px;">
                             <c:forEach items="${TOP_3_REAL_ESTATE}" var="realEstate">
-                                <a href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${realEstate.realEstateName}</a><br>
+                                <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${realEstate.realEstateName}</a><br>
                             </c:forEach>
                             </div>
                     </div>
