@@ -1,49 +1,128 @@
-.BodyForm {
-    width: 50%;
-    margin: auto;
-    font-family: Arial, sans-serif;
-}
 
-.TieuDe h1 {
-    text-align: center;
-    color: #333;
-}
-
-.form-post-real-estate label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.form-post-real-estate input[type="text"],
-.form-post-real-estate select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.form-post-real-estate input[type="file"] {
-    margin-bottom: 10px;
-}
-
-.form-post-real-estate button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
     border: none;
-    border-radius: 4px;
+    -webkit-text-fill-color: #000;
+    /* -webkit-box-shadow: 0 0 0px 1000px #000 inset; */
+    background-color: black;
+    color: #fff;
+    border: #fff 1px solid;
+    border-bottom: #D9AB73 3px solid;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+body {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0; 
+    padding: 0; 
+}
+.form-post-real-estate {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+.TieuDe h1 {
+    text-align: center; 
+    margin-bottom: 30px;
+    font-size: 45px;
+    font-weight: bold;
+    color: black;
+}
+.formDangKy {
+    display: flex;
+    flex-direction: column;
+}
+.form-group {
+    margin-bottom: 15px;  
+    text-indent: 20px;
+}
+.form-group1 textarea {
+    float: right;
+    width: 300px; 
+    height: 100px; /* Đặt chiều cao theo mong muốn của bạn */
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    resize: none;
+    margin-left: 20px;
+}
+
+.form-group1 {
+    margin : 15px;  
+    text-indent: 100px;
+}
+.form-group label {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold;
+}
+.form-group1 label {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold;
+}
+.form-control{
+    width: 250px; 
+    padding: 5px; 
+}
+.form-control1{
+    width: 100px; 
+    padding: 5px; 
+}
+
+input, select ,form-control1{
+    /*    margin-right: 5px;*/
+    margin-left: 15px;
+}
+input, 
+textarea, select,form-control1  {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+input[type="datetime-local"] {
+    width: 200px;
+}
+.submit-form{
+    background: #D9AB73;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+    font-size: 20px; 
+    font-weight: bold;
+    color: black;
+}
+/*button {
+    background: #D9AB73;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+    font-size: 20px; 
+    font-weight: bold;
+    color: black;
+}*/
+
+.danhSachHinhAnh img {
+    max-width: 100px;
+    max-height: 100px;
+    margin: 5px;
+}
+
+.danhSachHinhAnh button {
+    margin: 5px;
     cursor: pointer;
-    margin-top: 10px;
 }
-
-.form-post-real-estate button:hover {
-    background-color: #45a049;
-}
-
-.error-message {
-    color: red;
-    margin-top: 5px;
-}
-
