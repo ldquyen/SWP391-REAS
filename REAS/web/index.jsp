@@ -153,7 +153,7 @@
                                     ${item.timeUp}
                                 </p>
                                 <p class="text-home-2">
-                                    ${item.realEstateName} - <span>
+                                    ${fn:toUpperCase(item.realEstateName)} - <span>
                                         <c:forEach var="cityList" items="${requestScope.city}"> 
                                             <c:if test="${cityList.cityID eq item.cityID}">
                                                 ${cityList.cityName}

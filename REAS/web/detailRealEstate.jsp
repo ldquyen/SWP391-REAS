@@ -237,7 +237,7 @@
                         </div>
                     </div>
                     <div class="container-full-bellow">
-                        <h1 class="flex-center h1-text-mid">Dự án: ${realEstate.realEstateName} - <c:forEach var="cityList" items="${requestScope.city}"> 
+                        <h1 class="flex-center h1-text-mid">Dự án: ${fn:toUpperCase(realEstate.realEstateName)} - <c:forEach var="cityList" items="${requestScope.city}"> 
                                 <c:if test="${cityList.cityID eq realEstate.cityID}">
                                     ${cityList.cityName}
                                 </c:if>
@@ -326,8 +326,8 @@
                                                         </form>
                                                     </div>-->
                             <div style="text-align: left; padding-left: 10px;">
-                            <c:forEach items="${TOP_3_REAL_ESTATE}" var="realEstate">
-                                <a href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${realEstate.realEstateName}</a><br>
+                            <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
+                                <a href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
                             </c:forEach>
                             </div>
                     </div>
