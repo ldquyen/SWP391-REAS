@@ -53,6 +53,9 @@ public class MainController extends HttpServlet {
                 case "aboutus":
                     url = "aboutUS.jsp";
                     break;
+                case "ruleedit":
+                    url = "RuleEditServlet";
+                    break;
                 case "rule":
                     url = "rule.jsp";
                     break;

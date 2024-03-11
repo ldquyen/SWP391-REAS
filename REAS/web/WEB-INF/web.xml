@@ -106,6 +106,14 @@
         <servlet-name>MyPostServlet</servlet-name>
         <servlet-class>controllersMember.MyPostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RuleEditServlet</servlet-name>
+        <servlet-class>controllersAdmin.RuleEditServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RuleDAO</servlet-name>
+        <servlet-class>dao.RuleDAO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -204,6 +212,14 @@
     <servlet-mapping>
         <servlet-name>MyPostServlet</servlet-name>
         <url-pattern>/MyPostServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RuleEditServlet</servlet-name>
+        <url-pattern>/RuleEditServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RuleDAO</servlet-name>
+        <url-pattern>/RuleDAO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
