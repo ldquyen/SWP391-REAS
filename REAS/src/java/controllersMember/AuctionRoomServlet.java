@@ -63,8 +63,11 @@ public class AuctionRoomServlet extends HttpServlet {
             ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(IDRE);
 
             RealEstateDAO dao = new RealEstateDAO();
-            List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(2);
+            List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(3);
             request.setAttribute("SEARCH_RESULT", listRealEstate);
+            
+            List<Auction> auctionV2 = auctionDAO.getAuctionsV2();
+            request.setAttribute("auctionV2", auctionV2);
 
             request.setAttribute("REGETBYID", REGETBYID);
             request.setAttribute("city", city);

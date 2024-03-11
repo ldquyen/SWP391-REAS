@@ -207,9 +207,9 @@
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.imageFolderID}
                                         </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+<!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.detail}
-                                        </td>
+                                        </td>-->
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeUp}
                                         </td>

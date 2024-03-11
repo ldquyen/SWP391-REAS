@@ -1,7 +1,5 @@
 <%@page import="dto.Account"%>
 <%@page import="dao.AccountDAO"%>
-<%@page import="dao.AccountDAO"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -305,22 +303,19 @@
                 %>
                 <div style="width: 100%; display: flex; justify-content: center">
                     <div class="list-auction-p-container" style="">
-                        <c:if test="${not empty auctions}">
+                        <c:if test="${not empty auctionV2}">
                             <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
-                                <c:forEach var="auctions" items="${requestScope.auctions}"> 
-                                    <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
-                                        <p class="list-auction-p-1">Đấu giá viên: <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                                            <c:forEach items="${listRealEstate}" var="dto" >
-                                                <c:forEach items="${staffList}" var="staff">
-                                                    <c:if test="${dto.accID eq staff.accID}">
-                                                        <span class="list-auction-p-1">${staff.fullname}</span>
-                                                    </c:if>
-                                                </c:forEach>
-                                            </c:forEach>
+                                <c:forEach var="auctionV2" items="${requestScope.auctionV2}"> 
+                                    <c:if test="${auctionV2.realEstateID eq REGETBYID.realEstateID}">
+                                        <p class="list-auction-p-1">Đấu giá viên:
+                                        <c:forEach var="staff" items="${staffList}">
+                                            <c:if test="${auctionV2.accID eq staff.accID}">
+                                                <span class="list-auction-p-2">${staff.fullname}</span>
+                                            </c:if>
+                                        </c:forEach>
                                         </p>
-
                                         <div class="auctionTimeEnd list-auction-p-2">
-                                            <p style="display: none;">${auctions.timeEnd}</p>
+                                            <p style="display: none;">${auctionV2.timeEnd}</p>
                                         </div>
                                     </c:if>
                                 </c:forEach>
