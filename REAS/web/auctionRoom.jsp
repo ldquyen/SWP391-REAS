@@ -310,7 +310,7 @@
                                         <p class="list-auction-p-1">Đấu giá viên:
                                         <c:forEach var="staff" items="${staffList}">
                                             <c:if test="${auctionV2.accID eq staff.accID}">
-                                                <span class="list-auction-p-2">${staff.fullname}</span>
+                                                <span class="list-auction-p-1">${staff.fullname}</span>
                                             </c:if>
                                         </c:forEach>
                                         </p>
