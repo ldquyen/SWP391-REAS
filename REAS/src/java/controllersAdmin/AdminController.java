@@ -93,6 +93,10 @@ public class AdminController extends HttpServlet {
                 case "approved":
                     url = "admin_approved.jsp";
                     break;
+                    //chinh sua luat le
+                case "RuleEdit":
+                    url = "rulefix.jsp";
+                    break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);

@@ -63,7 +63,7 @@
 
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="rule" name="action">
+                            <button type="submit" value="ruleedit" name="action">
                                 <span>NỘI QUY</span>
                             </button>
                         </form>
@@ -168,24 +168,47 @@
                 </div>
             </div>
         </nav>
-
+         <h1>Rule List</h1>
+    <table border="1">
+        <tr>
+            <th>Rule ID</th>
+            <th>Rule Detail</th>
+            <th>Account ID</th>
+            <th>Modify Time</th>
+        </tr>
+        <c:forEach var="rule" items="${rulelist}">
+            <tr>
+                <td>${rule.ruleID}</td>
+                <td>${rule.ruleDetail}</td>
+                <td>${rule.accID}</td>
+                <td>${rule.modifyTime}</td>
+            </tr>
+        </c:forEach>
+    </table>
         <h1 style="text-align: center; font-size: 36px; color: #D9AB73; margin-top: 30px ;">NỘI QUY</h1>
         <h2 style="text-align: center; font-size: 24px; color: #D9AB73;">CHƯƠNG I</h2>
         <h3 style="text-align: center; color: #D9AB73;"> NHỮNG QUY ĐỊNH CHUNG</h3>
         <p style="margin-left: 20px; font-weight: bold; color: white">Điều 1. Đối tượng áp dụng</p>
         <p style="margin-left: 35px; color: white">
-            1. Công ty đấu giá bất động sản (REAS), đấu giá viên được lựa chọn để đấu giá bất động sản.<br>
-            2. Tổ chức, cá nhân tham gia đấu giá.<br>
-            3. Cơ quan, tổ chức, cá nhân khác có liên quan đến hoạt động đấu giá bất động sản.<br>
+        <table border="1" style="margin-left: 35px; color: white"">
+    <c:forEach var="rule" items="${rulelist}">
+        <tr >
+            <td>${rule.ruleDetail}</td>
+        </tr>
+    </c:forEach>
+</table>
         </p>
 
         <p style="margin-left: 20px; font-weight: bold; color: white">Điều 2. Nguyên tắc hoạt động </p>
         <p style="margin-left: 35px; color: white">
-            1. Tuân thủ theo quy định của Nghị quyết của Quốc hội, Nghị định của Chính phủ và các văn bản pháp luật có liên quan.<br>
-            2. Bảo mật về tài khoản truy cập, thông tin về người tham gia đấu giá và các thông tin khác.<br>
-            3. Bảo đảm tính khách quan, minh bạch, an toàn, an ninh.<br>
-            4. Bảo vệ quyền và lợi ích hợp pháp của đơn vị có tài sản, người tham gia đấu giá và cá nhân, tổ chức có liên quan.<br>
-            5. Cuộc đấu giá trực tuyến bất động sản phải do đấu giá viên được phân công điều hành.<br>
+             <c:forEach var="rule" items="${rulelist}">
+            <tr>
+                <td>${rule.ruleID}</td>
+                <td>${rule.ruleDetail}</td>
+                <td>${rule.accID}</td>
+                <td>${rule.modifyTime}</td>
+            </tr>
+        </c:forEach>
         </p>
 
 
