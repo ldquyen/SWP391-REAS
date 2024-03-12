@@ -60,6 +60,12 @@ public class MemberController extends HttpServlet {
                 case "registerAuction":
                     url = "RegisterAuctionServlet";
                     break;
+                case "mypost":
+                    url = "MyPostServlet";
+                    break;
+                case "mypostjsp":
+                    url = "myPost.jsp";
+                    break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);

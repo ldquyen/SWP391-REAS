@@ -5,11 +5,14 @@
  */
 package controllersAdmin;
 
+import dao.AccountDAO;
 import dao.RealEstateDAO;
+import dto.Account;
 import dto.RealEstateInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,14 +48,14 @@ public class AdminSearchAuctionApproveServlet extends HttpServlet {
         try {
             if (searchValue == null || searchValue.trim().isEmpty()) {
                 RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(1);
-                url = "admin_approve.jsp";
+                List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                 request.setAttribute("SEARCH_RESULT", listRealEstate);
+                url = "admin_approve.jsp";
             } else {
                 RealEstateDAO dao = new RealEstateDAO();
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(1);
-                url = "admin_approve.jsp";
+                List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                 request.setAttribute("SEARCH_RESULT", listRealEstate);
+                url = "admin_approve.jsp";
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

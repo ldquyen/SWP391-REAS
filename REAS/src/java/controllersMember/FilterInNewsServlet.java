@@ -42,7 +42,7 @@ public class FilterInNewsServlet extends HttpServlet {
             }
 
             if (!mucgia.isEmpty()) {
-                locgia = " ORDER BY Area " + mucgia;
+                locgia = " ORDER BY PricePaid " + mucgia;
             }
             if (loaihinhbds.isEmpty() && thanhpho.isEmpty() && mucgia.isEmpty()) {
                 String sql = "SELECT [RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown], [PriceLast],[PricePaid], [StatusID], [Area], [Address], [Detail] \n"

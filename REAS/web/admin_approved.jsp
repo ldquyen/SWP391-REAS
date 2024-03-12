@@ -82,8 +82,6 @@
                             </div>
                         </div>
 
-
-
                     </div>
                 </div>
             </div>
@@ -181,7 +179,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="searchStaff" name="action">
+                                            <button type="submit" value="searchMember" name="action">
                                                 <span>Tìm kiếm</span>
                                             </button>
                                         </form>
@@ -207,33 +205,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Xét duyệt</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="approve" name="action">
-                                                <span>Danh sách chờ</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="approved" name="action">
-                                                <span>Đã xét duyệt</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
-
+                    
                     <p class="menu-label">
                         Transactions
                     </p>
@@ -260,41 +232,64 @@
             </div>
 
             <!--===============================================================-->
-            
+            <%
+                ArrayList<Account> staffList = AccountDAO.getAllAccountByRole("S");
+                pageContext.setAttribute("staffList", staffList);
+            %>
             <div>
-                <div class="h1-staff-header">
+                <div style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">
                     <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
                 </div>
 
-                <form class="flex-center" action="AdminController">
+<!--                <form class="flex-center" action="AdminController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
 
-                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApproved" name="action">Search</button>
+                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApproved" name="action">VIEW</button>
 
-                </form><br/>
+                </form><br/>-->
 
-                <div class="register-modal-container">
+                <script>
+                    window.onload = function () {
+                        // Kiểm tra xem trang đã được reload trước đó hay không
+                        if (!localStorage.getItem('pageReloaded')) {
+                            // Nếu chưa, thực hiện submit form
+                            document.forms['searchForm'].submit();
+                            // Đánh dấu rằng trang đã được reload
+                            localStorage.setItem('pageReloaded', 'true');
+                        } else {
+                            // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                            localStorage.removeItem('pageReloaded');
+                        }
+                    };
+                </script>
+
+                <form id="searchForm" class="flex-center" action="AdminController">
+                    <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                    <input type="hidden" name="action" value="adminSearchAuctionApproved" />
+                </form>
+                
+                <div style="text-align: center; border-radius: 45px;">
                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
                     <c:if test="${not empty listRealEstate}">
-                        <table class="table-container" border="1">
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
                             <thead>
                                 <tr>
-                                    <th>Real Estate ID</th>
-                                    <th>Real Estate Name</th>
-                                    <th>Account</th>
-                                    <th>Address</th>
-                                    <th>City</th>
-                                    <th>Price First</th>
-                                    <th>Price Paid</th>
-                                    <th>Lambda</th>
-                                    <th>Time Start</th>
-                                    <th>Time End</th>
-                                    <th>Area(m²)</th>
-                                    <th>Image Folder ID</th>
-                                    <th>Detail</th>
-                                    <th>Time Up</th>
-                                    <th>Staff</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate Name</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Account</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Address</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">City</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Cat Name</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price First</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price Paid</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Lambda</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Start</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time End</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area(m²)</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Image Folder ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Up</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Staff Name</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -303,56 +298,64 @@
 
                                 <form action="AdminController" method="post">
                                     <tr>
-                                        <td>
-                                            ${dto.realEstateID}
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            <a href="StaffController?action=viewPostRealEstate&id=${dto.realEstateID}">${dto.realEstateID}
                                         </td>                               
-                                        <td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.realEstateName}
                                         </td>
-                                        <td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.userName}
                                         </td>
-                                        <td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.address}
                                         </td>
-                                        <td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.cityName}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.catName}
                                         </td>
-                                        <td class="priceFirstCell">
+                                        <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.priceFirst}
                                         </td>
-                                        <td class="pricePaidCell">
+                                        <td class="pricePaidCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.pricePaid}
                                         </td>
-                                        <td class="lamdaCell">
+                                        <td class="lamdaCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.lamda}
                                         </td>
-                                        <td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeStart}
                                         </td>
-                                        <td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeEnd}
                                         </td>
-                                        <td class="areaCell">
+                                        <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.area}
                                         </td>
-                                        <td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.imageFolderID}
                                         </td>
-                                        <td>
-                                            ${dto.detail}
-                                        </td>
-                                        <td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeUp}
                                         </td>
-                                        <td>
-                                            ${dto.accID}
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+
+                                            <c:forEach items="${staffList}" var="staff">
+                                                <c:if test="${dto.accID eq staff.accID}">
+                                                    <div>
+                                                        <div>
+                              
+                                                            <p>${staff.fullname}</p>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
+
                                         </td>
-                                        <!--                                        <td>
-                                                                                    <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                                                                    <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                                                                    <button type="submit" value="updateStatusButton" name="action">Xác nhận</button>
-                                                                                </td>-->
+                                        
                                     </tr>
                                 </form>
                             </c:forEach>

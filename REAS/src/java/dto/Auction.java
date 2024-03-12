@@ -12,11 +12,12 @@ public class Auction {
     private long lamda;
     private LocalDateTime timeStart;
     private LocalDateTime timeEnd;
+    private String accID;
 
     public Auction() {
     }
 
-    public Auction(String auctionID, String realEstateID, String auctionName, long priceNow, long lamda, LocalDateTime timeStart, LocalDateTime timeEnd) {
+    public Auction(String auctionID, String realEstateID, String auctionName, long priceNow, long lamda, LocalDateTime timeStart, LocalDateTime timeEnd, String accID) {
         this.auctionID = auctionID;
         this.realEstateID = realEstateID;
         this.auctionName = auctionName;
@@ -24,6 +25,7 @@ public class Auction {
         this.lamda = lamda;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
+        this.accID = accID;
     }
 
     public String getAuctionID() {
@@ -81,6 +83,16 @@ public class Auction {
     public void setTimeEnd(LocalDateTime timeEnd) {
         this.timeEnd = timeEnd;
     }
+
+    public String getAccID() {
+        return accID;
+    }
+
+    public void setAccID(String accID) {
+        this.accID = accID;
+    }
+
+   
 
     @Override
     public String toString() {

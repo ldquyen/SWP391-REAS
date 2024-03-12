@@ -243,7 +243,7 @@
                                     <td class="endTimeNews" style="border: 1px solid #D9AB73; padding: 8px;">${r.timeDown}</td>
                                     <td style="border: 1px solid #D9AB73; padding: 8px;">
                                         <script>
-                                            var number = ${r.priceLast}; // Assuming auctions.lamda contains the number
+                                            var number = ${r.pricePaid}; // Assuming auctions.lamda contains the number
                                             var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                             document.write(formattedNumber);
                                         </script>

@@ -10,6 +10,7 @@ import dto.Category;
 import dto.City;
 import dto.Image;
 import dto.RealEstate;
+import dto.RealEstateInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -48,14 +49,25 @@ public class AuctionRoomServlet extends HttpServlet {
 
 //            System.out.println(IDRE);
             AuctionDAO auctionDAO = new AuctionDAO();
+
             List<Auction> auctions = auctionDAO.getAuctions();
+
             ArrayList<City> city = CityDAO.getCityList();
+
             Auction auction = auctionDAO.getAuctionByRealEstateId(IDRE);
 
             ArrayList<Category> category = CategoryDAO.getListCategory();
+
             ArrayList<Image> listImgAuction = ImageDAO.getListImageByID(IDRE);
 
             ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(IDRE);
+
+            RealEstateDAO dao = new RealEstateDAO();
+            List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(3);
+            request.setAttribute("SEARCH_RESULT", listRealEstate);
+            
+            List<Auction> auctionV2 = auctionDAO.getAuctionsV2();
+            request.setAttribute("auctionV2", auctionV2);
 
             request.setAttribute("REGETBYID", REGETBYID);
             request.setAttribute("city", city);

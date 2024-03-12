@@ -243,4 +243,8 @@ public class RealEstateVM {
     public String toString() {
         return "RealEstateVM{" + "realEstateID=" + realEstateID + ", imageFolderID=" + imageFolderID + ", accID=" + accID + ", catID=" + catID + ", category=" + category + ", cityID=" + cityID + ", city=" + city + ", realEstateName=" + realEstateName + ", priceFirst=" + priceFirst + ", timeUp=" + timeUp + ", timeDown=" + timeDown + ", priceLast=" + priceLast + ", pricePaid=" + pricePaid + ", statusID=" + statusID + ", area=" + area + ", address=" + address + ", detail=" + detail + ", imageLink1=" + imageLink1 + ", imageLink2=" + imageLink2 + ", imageLink3=" + imageLink3 + '}';
     }
+
+    public void setFullName(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

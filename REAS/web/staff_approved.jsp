@@ -110,6 +110,19 @@
                                     </a>
                                 </li>
                             </ul>
+                            <a class="">Đấu giá</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="StaffController" method="post">
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách đảm nhận</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                
+                            </ul>
                         </li>
                     </ul>
 
@@ -119,11 +132,26 @@
 
             <div>
                 <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">THÔNG TIN ĐẤU GIÁ ĐÃ XÉT DUYỆT</p>
-                <form action="StaffController">
-                    <input type="hidden" name="txtSearchValue" 
-                           value="${param.txtSearchValue}" />
-                    <button class="button-search-staff" type="submit" value="searchAuctionApproved" name="action">Search</button>
-                </form><br/>
+                <script>
+                    window.onload = function () {
+                        // Kiểm tra xem trang đã được reload trước đó hay không
+                        if (!localStorage.getItem('pageReloaded')) {
+                            // Nếu chưa, thực hiện submit form
+                            document.forms['searchForm'].submit();
+                            // Đánh dấu rằng trang đã được reload
+                            localStorage.setItem('pageReloaded', 'true');
+                        } else {
+                            // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                            localStorage.removeItem('pageReloaded');
+                        }
+                    };
+                </script>
+
+                <form id="searchForm" class="flex-center" action="StaffController">
+                    <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                    <input type="hidden" name="action" value="searchAuctionApproved" />
+                </form>
+
 
                 <div style="text-align: center; border-radius: 45px;">
                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
@@ -136,6 +164,7 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Account</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Address</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">City</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Cat Name</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price First</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price Paid</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Lambda</th>
@@ -143,13 +172,13 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time End</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area(m²)</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Image Folder ID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>
+<!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>-->
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Up</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
 
                                     <!--            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ImageID</th>            -->
-<!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xác nhận</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xóa</th>-->
+                                    <!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xác nhận</th>
+                                                                        <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xóa</th>-->
 
                                 </tr>
                             </thead>
@@ -158,7 +187,7 @@
                                 <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
                                     <tr>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.realEstateID}
+                                            <a href="StaffController?action=viewPostRealEstate&id=${dto.realEstateID}">${dto.realEstateID}
                                         </td>                               
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.realEstateName}
@@ -170,15 +199,11 @@
                                             ${dto.address}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.cityName}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.catName}
                                         </td>
-                                        <!--                                        <td >
-                                                                                    <script>
-                                                                                        var number = ${dto.priceFirst}; // Assuming auctions.lamda contains the number
-                                                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                                                        document.write(formattedNumber);
-                                                                                    </script>
-                                                                                </td>-->
                                         <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.priceFirst}
                                         </td>
@@ -194,45 +219,21 @@
                                         <td class="endTime" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeEnd}
                                         </td>
-                                        <!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                                                                    <script>
-                                                                                     var number = ${dto.pricePaid}; // Assuming auctions.lamda contains the number
-                                                                                     var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                                                     document.write(formattedNumber);
-                                                                                    </script>
-                                                                                </td>-->
                                         <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.area}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.imageFolderID}
                                         </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+<!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.detail}
-                                        </td>
+                                        </td>-->
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeUp}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.statusName}
                                         </td>
-
-<!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            <form action="StaffController" method="post">
-                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                                <button style="color: #fff" type="submit" value="updateStatusButton" name="action">Xác nhận</button>
-                                            </form>
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            <form action="StaffController" method="post">
-                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                                <input type="hidden" name="auctionID" value="${dto.auctionID}">
-                                                <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
-                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                                <button style="color: #fff" type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
-                                            </form>
-                                        </td>-->
 
                                     </tr>
                                     </form> 

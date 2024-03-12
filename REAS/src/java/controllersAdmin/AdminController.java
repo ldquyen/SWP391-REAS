@@ -37,6 +37,13 @@ public class AdminController extends HttpServlet {
                     url = "admin.jsp";
                     break;
                 // nhan vien
+                case "searchMember":
+                    url = "searchMember.jsp";
+                    break;
+                case "searchNameMember":
+                    url = "SearchMemberServlet";
+                    break;
+                   //==============
                 case "searchStaff":
                     url = "searchStaff.jsp";
                     break;
@@ -85,6 +92,10 @@ public class AdminController extends HttpServlet {
                     break;
                 case "approved":
                     url = "admin_approved.jsp";
+                    break;
+                    //chinh sua luat le
+                case "RuleEdit":
+                    url = "rulefix.jsp";
                     break;
 
             }

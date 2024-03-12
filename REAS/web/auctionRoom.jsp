@@ -1,3 +1,6 @@
+<%@page import="dto.Account"%>
+<%@page import="dao.AccountDAO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -294,15 +297,25 @@
                         </c:if>
                     </div>
                 </div>
+                <%
+                    ArrayList<Account> staffList = AccountDAO.getAllAccountByRole("S");
+                    pageContext.setAttribute("staffList", staffList);
+                %>
                 <div style="width: 100%; display: flex; justify-content: center">
                     <div class="list-auction-p-container" style="">
-                        <c:if test="${not empty auctions}">
+                        <c:if test="${not empty auctionV2}">
                             <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
-                                <c:forEach var="auctions" items="${requestScope.auctions}"> 
-                                    <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
-                                        <p class="list-auction-p-1">Đấu giá viên: Trương Gia Bình</p>
+                                <c:forEach var="auctionV2" items="${requestScope.auctionV2}"> 
+                                    <c:if test="${auctionV2.realEstateID eq REGETBYID.realEstateID}">
+                                        <p class="list-auction-p-1">Đấu giá viên:
+                                        <c:forEach var="staff" items="${staffList}">
+                                            <c:if test="${auctionV2.accID eq staff.accID}">
+                                                <span class="list-auction-p-1">${staff.fullname}</span>
+                                            </c:if>
+                                        </c:forEach>
+                                        </p>
                                         <div class="auctionTimeEnd list-auction-p-2">
-                                            <p style="display: none;">${auctions.timeEnd}</p>
+                                            <p style="display: none;">${auctionV2.timeEnd}</p>
                                         </div>
                                     </c:if>
                                 </c:forEach>
@@ -421,11 +434,11 @@
                                     </c:if> 
                                 </h1>
                             </button>
-<!--                                                        <p id="text-price"></p>-->
+                            <!--                                                        <p id="text-price"></p>-->
                         </form>
                     </div>
                 </div>
-                 <div style="display: flex; justify-content: center; width: 100%; text-align: center;">
+                <div style="display: flex; justify-content: center; width: 100%; text-align: center;">
 
                     <button type="submit" value="tragia" name="action">
                         <h1  style="background: #D9AB73; display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #000 solid;margin-top: 8px">

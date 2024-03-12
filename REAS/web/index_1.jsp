@@ -122,8 +122,9 @@
                                 </form>
                             </a>
                             <a class="navbar-item">
-                                <form action="MainController" method="post">
-                                    <button type="submit" value="aboutus" name="action">
+                                <form action="MemberController" method="post">
+                                    <button type="submit" value="mypost" name="action">
+                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
                                         <span>Quản lí tin đăng</span>
                                     </button>
                                 </form>
@@ -303,7 +304,7 @@
                                 ${item.timeUp}
                             </p>
                             <p class="text-home-2">
-                                ${item.realEstateName} - <span>
+                                ${fn:toUpperCase(item.realEstateName)} - <span>
                                     <c:forEach var="cityList" items="${requestScope.city}"> 
                                         <c:if test="${cityList.cityID eq item.cityID}">
                                             ${cityList.cityName}
