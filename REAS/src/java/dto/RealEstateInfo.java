@@ -24,6 +24,7 @@ public class RealEstateInfo implements Serializable{
     private String accID;
     private String fullName;
     private String phone;
+    private String cityName;
 //    private String catID;
 //    private int cityID;
 //    private LocalDateTime timeDown;
@@ -37,7 +38,7 @@ public class RealEstateInfo implements Serializable{
     public RealEstateInfo() {
     }
 
-    public RealEstateInfo(String realEstateID, String realEstateName, String userName, String address, String catName, long priceFirst, long pricePaid, long lamda, LocalDateTime timeStart, LocalDateTime timeEnd, int area, String imageFolderID, String detail, LocalDateTime timeUp, String statusName, int statusID, String auctionID, String accID, String fullName, String phone) {
+    public RealEstateInfo(String realEstateID, String realEstateName, String userName, String address, String catName, long priceFirst, long pricePaid, long lamda, LocalDateTime timeStart, LocalDateTime timeEnd, int area, String imageFolderID, String detail, LocalDateTime timeUp, String statusName, int statusID, String auctionID, String accID, String fullName, String phone, String cityName) {
         this.realEstateID = realEstateID;
         this.realEstateName = realEstateName;
         this.userName = userName;
@@ -58,6 +59,7 @@ public class RealEstateInfo implements Serializable{
         this.accID = accID;
         this.fullName = fullName;
         this.phone = phone;
+        this.cityName = cityName;
     }
 
     public String getRealEstateID() {
@@ -220,6 +222,15 @@ public class RealEstateInfo implements Serializable{
         this.phone = phone;
     }
 
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    
 
 
 

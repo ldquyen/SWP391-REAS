@@ -164,6 +164,7 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Account</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Address</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">City</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Cat Name</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price First</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price Paid</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Lambda</th>
@@ -171,7 +172,7 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time End</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area(m²)</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Image Folder ID</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>
+<!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>-->
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Up</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
 
@@ -198,6 +199,9 @@
                                             ${dto.address}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.cityName}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.catName}
                                         </td>
                                         <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
@@ -221,9 +225,9 @@
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.imageFolderID}
                                         </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+<!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.detail}
-                                        </td>
+                                        </td>-->
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeUp}
                                         </td>

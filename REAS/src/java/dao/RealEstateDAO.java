@@ -114,6 +114,7 @@ public class RealEstateDAO {
                         + "      ,[Auction].AccID "
                         + "      ,[Account].FullName "
                         + "      ,[Account].Phone "
+                        + "      ,[City].CityName "
                         + "FROM [dbo].[RealEstate] "
                         + "INNER JOIN [dbo].[Category] ON [RealEstate].[CatID]  = [Category].[CatID] "
                         + "INNER JOIN [dbo].[City]     ON [RealEstate].[CityID] = [City].[CityID] "
@@ -147,6 +148,7 @@ public class RealEstateDAO {
                     dto.setAccID(rs.getString("AccID"));
                     dto.setFullName(rs.getString("FullName"));
                     dto.setPhone(rs.getString("Phone"));
+                    dto.setCityName(rs.getString("CityName"));
 
                     Timestamp timeStartSql = rs.getTimestamp("TimeStart");
                     Timestamp timeEndSql = rs.getTimestamp("TimeEnd");
