@@ -1,6 +1,7 @@
 package dao;
 
 import dto.Auction;
+import dto.AuctionHistory;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -238,7 +239,7 @@ public class AuctionDAO {
             cn = DBUtils.getConnection();
             if (cn != null) {
                 String sql = "UPDATE [dbo].[Auction]\n"
-                        + "SET  [PriceNow]= ?\n"
+                        + "SET  [PriceNow]= ?, [Status] = 4 "
                         + "WHERE [RealEstateID] = ?";
                 pst = cn.prepareStatement(sql);
                 pst.setString(1, pricenowbid);
@@ -322,7 +323,7 @@ public class AuctionDAO {
         return 0;
     }
 
-    public int registerAuction(String auctionId, String accountId, double currentUserBalance, double requirmentPrice, int walletId) throws SQLException, ClassNotFoundException {
+    public int registerAuction(String auctionId, String accountId, double currentUserBalance, double requirmentPrice, int walletId, double auctionPriceNow) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -336,15 +337,15 @@ public class AuctionDAO {
                     LocalDateTime localDateTime = LocalDateTime.now();
 
                     // Convert LocalDateTime to java.sql.Date
-                    Date date = Date.valueOf(localDateTime.toLocalDate());
-                    System.out.println("DATE TIME " + date);
-                    // create data in AuctionDepositHistory
+                    java.util.Date date = new java.util.Date();
+
+                    // Can check trong cai bang nay da co cai auctionID do chua. 
                     String sql = "INSERT INTO dbo.[AuctionDepositHistory] (WalletID, AuctionID, DateAndTime, Quantity) VALUES (?, ?, ?, ?)";
                     stm = con.prepareStatement(sql);
                     stm.setInt(1, walletId);
                     stm.setString(2, auctionId);
 //                    stm.setObject(3, LocalDateTime.now());
-                    stm.setDate(3, date);
+                    stm.setTimestamp(3, new java.sql.Timestamp(date.getTime()));
                     stm.setDouble(4, requirmentPrice);
 
                     int affectedRow = stm.executeUpdate();
@@ -363,10 +364,21 @@ public class AuctionDAO {
                             stm.setInt(1, walletId);
                             // Tien gia ban dau cua cai auction + 5%.
                             stm.setDouble(2, requirmentPrice);
-                            stm.setDate(3, date);
+                            stm.setTimestamp(3, new java.sql.Timestamp(date.getTime()));
                             stm.setString(4, action);
                             affectedRow = stm.executeUpdate();
                             if (affectedRow > 0) {
+                                // Add tien vao trong tai khoan admin [O day co hardcode adminId = A1, sau nay doi data thi vao DAO sua lai cho AccID]
+                                int result = AddToAdminWallet(requirmentPrice);
+                                if (result == 0) {
+                                    return 0;
+                                } else {
+                                    // Add to admin wallet Successfully.
+                                    // Add to auction history and winning history;
+                                    Auction auction = getAuctionByRealEstateId(auctionId);
+                                    AuctionHistory aucHistory = AuctionHistoryRecord(auctionId, auctionPriceNow, auction.getLamda());
+                                    result = AuctionWinningHistory(aucHistory, accountId);
+                                }
                                 // successfully code
                                 return 5;
                             } else {
@@ -402,5 +414,87 @@ public class AuctionDAO {
         }
         return 0;
     }
+
+    public int AddToAdminWallet(double price) {
+        AccountDAO accountDAO = new AccountDAO();
+        String ADMIN_WALLET_ID = "A1";
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        double currentUserBalance = accountDAO.getAccountWallet(ADMIN_WALLET_ID);
+        double newBalance = currentUserBalance + price;
+        try {
+            con = DBUtils.getConnection();
+            // Can check trong cai bang nay da co cai auctionID do chua. 
+            String sql = "UPDATE dbo.[Wallet] SET AccountBalance = ? WHERE AccID = ?";
+            stm = con.prepareStatement(sql);
+            stm.setDouble(1, newBalance);
+            stm.setString(2, ADMIN_WALLET_ID);
+            int affectedRow = stm.executeUpdate();
+            if (affectedRow > 0) {
+                return 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public AuctionHistory AuctionHistoryRecord(String auctionId, double Price, double Lamda) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            java.util.Date date = new java.util.Date();
+            String sql = "INSERT INTO dbo.[AuctionHistory] (AuctionId, Price, Lamda, Date) VALUES (?, ?, ?, ?)";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, auctionId);
+            stm.setDouble(2, Price);
+            stm.setDouble(3, Lamda);
+            stm.setTimestamp(4, new java.sql.Timestamp(date.getTime()));
+            int affectedRow = stm.executeUpdate();
+            if (affectedRow > 0) {
+                sql = "SELECT TOP 1 * FROM AuctionHistory ORDER BY Date DESC";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    AuctionHistory auctionHistory = new AuctionHistory();
+                    auctionHistory.setAuctionHisID(rs.getInt("AuctionHisID"));
+                    auctionHistory.setLamda(rs.getLong("Lamda"));
+                    auctionHistory.setPrice(rs.getLong("Price"));
+                    return auctionHistory;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int AuctionWinningHistory(AuctionHistory auctionHistory, String accountId) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String AuctionWinID = "AuctionWin-" + auctionHistory.getAuctionHisID();
+            con = DBUtils.getConnection();
+            // Can check trong cai bang nay da co cai auctionID do chua. 
+            String sql = "INSERT INTO dbo.[AutionWinningHistory] (AuctionWinID, AuctionHisID, AccID, FinalPrice) VALUES (?, ?, ?, ?)";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, AuctionWinID);
+            stm.setInt(2, auctionHistory.getAuctionHisID());
+            stm.setString(3, accountId);
+            stm.setDouble(4, auctionHistory.getPrice());
+            int affectedRow = stm.executeUpdate();
+            if (affectedRow > 0) {
+                return 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 
 }

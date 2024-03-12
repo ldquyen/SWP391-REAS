@@ -5,11 +5,13 @@
  */
 package controllersMember;
 
+import dao.AccountDAO;
 import dao.AuctionDAO;
 import dao.CategoryDAO;
 import dao.CityDAO;
 import dao.ImageDAO;
 import dao.RealEstateDAO;
+import dto.Account;
 import dto.Auction;
 import dto.Category;
 import dto.City;
@@ -28,6 +30,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -45,19 +48,61 @@ public class AuctionServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private final String REGISTERAUCTION = "registerAuction.jsp";
+    private final String LOGIN = "login.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             String idauctionbid = request.getParameter("idAuctionBID");
             String pricenowbid = request.getParameter("priceNowBid");
 
-//            System.out.println(idauctionbid);
-//            System.out.println(pricenowbid);
-
             AuctionDAO auctionDAO = new AuctionDAO();
-            auctionDAO.setPriceNowAuctions(pricenowbid, idauctionbid);
-            
+            AccountDAO accountDAO = new AccountDAO();
+
+            // get auctionid
+            // get accountblance check so voi priceNow + phi tham gia dau gia 5%.
+            // neu thoa thi se update wallet
+            // tao them auctionDepositHistory
+            // tao walletTranscationHistory.
+            double requirmentPrice = 0; // gia yeu ca de co the tham gia dau gia = priceNow + 5% phi cua pricenow.
+            double registerFee = 0; // 5% cua price now.
+            // get auctionId
+            HttpSession session = request.getSession(false);
+            if (session != null && session.getAttribute("member") != null) {
+                double priceRegisterAuction = Double.parseDouble(pricenowbid);
+                Account account = (Account) session.getAttribute("member");
+                // get current userBalance.
+                double currentUserBalance = accountDAO.getAccountWallet(account.getAccID());
+                int userWalletId = accountDAO.getUserWalletId(account.getAccID());
+                // get priceNow
+                // Check phi dau gia co cao hon tien trong vi khong.
+                registerFee = priceRegisterAuction * 0.05;
+                requirmentPrice = priceRegisterAuction + registerFee;
+                if (currentUserBalance >= requirmentPrice) {
+                    // neu thoa thi update pricenow cua auction.
+                    auctionDAO.setPriceNowAuctions(pricenowbid, idauctionbid);
+                }
+                double auctionPriceNow = auctionDAO.getCurrentPriceNow(idauctionbid);
+                    
+                // Handle logic ben trong DAO. se tra ve code
+                int result = auctionDAO.registerAuction(idauctionbid, account.getAccID(), currentUserBalance, requirmentPrice, userWalletId, auctionPriceNow);
+                System.out.println("UserWAlleet - " + userWalletId);
+                System.out.println("Current Balance - " + currentUserBalance);
+                System.out.println("Phi dang ki dau gia - " + registerFee);
+                System.out.println("Gia yeu cau de tham gia - " + requirmentPrice);
+                if (result == 5) {
+                    System.out.println("Successfully");
+                    // Cap nhat lich su dau gia.
+                } else {
+                    System.out.println("Code - " + result);
+                }
+
+            } else {
+                response.sendRedirect(LOGIN);
+            }
+
             List<Auction> auctions = auctionDAO.getAuctions();
             ArrayList<City> city = CityDAO.getCityList();
             ArrayList<Category> category = CategoryDAO.getListCategory();
