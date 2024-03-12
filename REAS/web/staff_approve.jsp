@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="staff.css" type="text/css" >
-          
+
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -110,6 +110,19 @@
                                     </a>
                                 </li>
                             </ul>
+                            <a class="">Đấu giá</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="StaffController" method="post">
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách đảm nhận</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                
+                            </ul>
                         </li>
                     </ul>
 
@@ -119,12 +132,6 @@
 
             <div>
                 <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</p>         
-<!--                <form action="StaffController">
-                    <input type="hidden" name="txtSearchValue" 
-                           value="${param.txtSearchValue}" />
-                     <button class="button-search-staff" type="submit" value="searchAuctionApprove" name="action">VIEW</button>
-                </form><br/>-->
-
                 <script>
                     window.onload = function () {
                         // Kiểm tra xem trang đã được reload trước đó hay không
@@ -144,7 +151,7 @@
                     <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
                     <input type="hidden" name="action" value="searchAuctionApprove" />
                 </form>
-                
+
                 <div style="text-align: center; border-radius: 45px;">
                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
                     <c:if test="${not empty listRealEstate}">
@@ -178,7 +185,7 @@
                                 <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
                                     <tr>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.realEstateID}
+                                            <a href="StaffController?action=viewPostRealEstate&id=${dto.realEstateID}">${dto.realEstateID}
                                         </td>                               
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.realEstateName}
@@ -191,14 +198,7 @@
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.catName}
-                                        </td>
-                                        <!--                                        <td >
-                                                                                    <script>
-                                                                                        var number = ${dto.priceFirst}; // Assuming auctions.lamda contains the number
-                                                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                                                        document.write(formattedNumber);
-                                                                                    </script>
-                                                                                </td>-->
+                                        </td>                            
                                         <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.priceFirst}
                                         </td>
@@ -214,22 +214,15 @@
                                         <td class="endTime" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeEnd}
                                         </td>
-                                        <!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                                                                    <script>
-                                                                                     var number = ${dto.pricePaid}; // Assuming auctions.lamda contains the number
-                                                                                     var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                                                     document.write(formattedNumber);
-                                                                                    </script>
-                                                                                </td>-->
                                         <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.area}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.imageFolderID}
                                         </td>
-<!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.detail}
-                                        </td>-->
+                                        </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeUp}
                                         </td>

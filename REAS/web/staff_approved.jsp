@@ -110,6 +110,19 @@
                                     </a>
                                 </li>
                             </ul>
+                            <a class="">Đấu giá</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="StaffController" method="post">
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách đảm nhận</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                
+                            </ul>
                         </li>
                     </ul>
 
@@ -119,12 +132,6 @@
 
             <div>
                 <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">THÔNG TIN ĐẤU GIÁ ĐÃ XÉT DUYỆT</p>
-<!--                <form action="StaffController">
-                    <input type="hidden" name="txtSearchValue" 
-                           value="${param.txtSearchValue}" />
-                    <button class="button-search-staff" type="submit" value="searchAuctionApproved" name="action">VIEW</button>
-                </form><br/> -->
-                
                 <script>
                     window.onload = function () {
                         // Kiểm tra xem trang đã được reload trước đó hay không
@@ -144,7 +151,7 @@
                     <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
                     <input type="hidden" name="action" value="searchAuctionApproved" />
                 </form>
-                
+
 
                 <div style="text-align: center; border-radius: 45px;">
                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
@@ -169,8 +176,8 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
 
                                     <!--            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">ImageID</th>            -->
-<!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xác nhận</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xóa</th>-->
+                                    <!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xác nhận</th>
+                                                                        <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Xóa</th>-->
 
                                 </tr>
                             </thead>
@@ -179,7 +186,7 @@
                                 <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
                                     <tr>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.realEstateID}
+                                            <a href="StaffController?action=viewPostRealEstate&id=${dto.realEstateID}">${dto.realEstateID}
                                         </td>                               
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.realEstateName}
@@ -193,13 +200,6 @@
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.catName}
                                         </td>
-                                        <!--                                        <td >
-                                                                                    <script>
-                                                                                        var number = ${dto.priceFirst}; // Assuming auctions.lamda contains the number
-                                                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                                                        document.write(formattedNumber);
-                                                                                    </script>
-                                                                                </td>-->
                                         <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.priceFirst}
                                         </td>
@@ -215,13 +215,6 @@
                                         <td class="endTime" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeEnd}
                                         </td>
-                                        <!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                                                                    <script>
-                                                                                     var number = ${dto.pricePaid}; // Assuming auctions.lamda contains the number
-                                                                                     var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                                                     document.write(formattedNumber);
-                                                                                    </script>
-                                                                                </td>-->
                                         <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.area}
                                         </td>
@@ -237,23 +230,6 @@
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.statusName}
                                         </td>
-
-<!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            <form action="StaffController" method="post">
-                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                                <button style="color: #fff" type="submit" value="updateStatusButton" name="action">Xác nhận</button>
-                                            </form>
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            <form action="StaffController" method="post">
-                                                <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                                <input type="hidden" name="auctionID" value="${dto.auctionID}">
-                                                <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
-                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
-                                                <button style="color: #fff" type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
-                                            </form>
-                                        </td>-->
 
                                     </tr>
                                     </form> 
