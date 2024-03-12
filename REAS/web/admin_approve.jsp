@@ -243,13 +243,32 @@
                     <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
                 </div>
 
-                <form class="flex-center" action="AdminController">
-                    <input type="hidden" name="txtSearchValue" 
-                           value="${param.txtSearchValue}" />
+                <!--                <form class="flex-center" action="AdminController">
+                                    <input type="hidden" name="txtSearchValue" 
+                                           value="${param.txtSearchValue}" />
+                
+                                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApprove" name="action">VIEW</button>
+                
+                                </form><br/>-->
+                <script>
+                    window.onload = function () {
+                        // Kiểm tra xem trang đã được reload trước đó hay không
+                        if (!localStorage.getItem('pageReloaded')) {
+                            // Nếu chưa, thực hiện submit form
+                            document.forms['searchForm'].submit();
+                            // Đánh dấu rằng trang đã được reload
+                            localStorage.setItem('pageReloaded', 'true');
+                        } else {
+                            // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                            localStorage.removeItem('pageReloaded');
+                        }
+                    };
+                </script>
 
-                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApprove" name="action">VIEW</button>
-
-                </form><br/>
+                <form id="searchForm" class="flex-center" action="AdminController">
+                    <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                    <input type="hidden" name="action" value="adminSearchAuctionApprove" />
+                </form>
 
                 <div style="text-align: center; border-radius: 45px;">
                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
@@ -276,7 +295,7 @@
                             <tbody>
 
                                 <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-                                    
+
                                 <form action="AdminController" method="post">
                                     <tr>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">

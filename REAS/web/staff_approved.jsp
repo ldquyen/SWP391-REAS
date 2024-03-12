@@ -119,11 +119,32 @@
 
             <div>
                 <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">THÔNG TIN ĐẤU GIÁ ĐÃ XÉT DUYỆT</p>
-                <form action="StaffController">
+<!--                <form action="StaffController">
                     <input type="hidden" name="txtSearchValue" 
                            value="${param.txtSearchValue}" />
                     <button class="button-search-staff" type="submit" value="searchAuctionApproved" name="action">VIEW</button>
-                </form><br/>
+                </form><br/> -->
+                
+                <script>
+                    window.onload = function () {
+                        // Kiểm tra xem trang đã được reload trước đó hay không
+                        if (!localStorage.getItem('pageReloaded')) {
+                            // Nếu chưa, thực hiện submit form
+                            document.forms['searchForm'].submit();
+                            // Đánh dấu rằng trang đã được reload
+                            localStorage.setItem('pageReloaded', 'true');
+                        } else {
+                            // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                            localStorage.removeItem('pageReloaded');
+                        }
+                    };
+                </script>
+
+                <form id="searchForm" class="flex-center" action="StaffController">
+                    <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                    <input type="hidden" name="action" value="searchAuctionApproved" />
+                </form>
+                
 
                 <div style="text-align: center; border-radius: 45px;">
                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
