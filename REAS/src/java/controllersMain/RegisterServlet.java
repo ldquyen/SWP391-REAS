@@ -39,7 +39,6 @@ public class RegisterServlet extends HttpServlet {
             String password = request.getParameter("txtPassword");
             String repassword = request.getParameter("txtRepassword");
             String accid;
-            int walletId;
             AccountDAO acc = new AccountDAO();
             WalletDAO wallet = new WalletDAO();
             int i = 0;
@@ -90,11 +89,10 @@ public class RegisterServlet extends HttpServlet {
                         i++;
                         String i1 = Integer.toString(i);
                         accid = "M" + i1;
-                        walletId = i;
                     } while (acc.checkAccount(accid));
                     boolean bl = acc.insertAccount(accid, username, password2, fullname, email, phone, cccd, address, cccdregplace, cccdregdate, bankname, bankcode);
                     //add new wallet
-                    boolean bl1 = wallet.addNewWallet(walletId, accid);
+                    boolean bl1 = wallet.addNewWallet(accid);
                     request.setAttribute("SUCCESS", "Đăng ký thành công, vui lòng đăng nhập");
                     request.setAttribute("UsernameRegister", username);
                     request.getRequestDispatcher("MainController?action=DN").forward(request, response);

@@ -7,19 +7,18 @@ import mylib.DBUtils;
 
 public class WalletDAO {
 //add new wallet
-    public static boolean addNewWallet(int walletid, String accid) {
+    public static boolean addNewWallet(String accid) {
         Connection cn = null;
         PreparedStatement pst = null;
 
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                String sql = "insert into [dbo].[Wallet] ([WalletID],[AccID],[AccountBalance])\n"
+                String sql = "insert into [dbo].[Wallet] ([AccID],[AccountBalance])\n"
                         + "values (?,?,?)";
                 pst = cn.prepareStatement(sql);
-                pst.setInt(1, walletid);
-                pst.setString(2, accid);
-                pst.setLong(3, 0);
+                pst.setString(1, accid);
+                pst.setLong(2, 0);
                 int rowsAffected = pst.executeUpdate();
                 return rowsAffected > 0;
             }
