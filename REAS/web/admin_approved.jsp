@@ -280,6 +280,7 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Account</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Address</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">City</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Cat Name</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price First</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price Paid</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Lambda</th>
@@ -288,7 +289,6 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area(m²)</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Image Folder ID</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Up</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Staff</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Staff Name</th>
                                 </tr>
                             </thead>
@@ -299,7 +299,7 @@
                                 <form action="AdminController" method="post">
                                     <tr>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.realEstateID}
+                                            <a href="StaffController?action=viewPostRealEstate&id=${dto.realEstateID}">${dto.realEstateID}
                                         </td>                               
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.realEstateName}
@@ -309,6 +309,9 @@
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.address}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.cityName}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.catName}
@@ -336,9 +339,6 @@
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeUp}
-                                        </td>
-                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.accID}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
 

@@ -119,12 +119,13 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Quản lí tin đăng</span>
-                                        </button>
-                                    </form>
-                                </a>
+                                <form action="MemberController" method="post">
+                                    <button type="submit" value="mypost" name="action">
+                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
+                                        <span>Quản lí tin đăng</span>
+                                    </button>
+                                </form>
+                            </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="changePass" name="action">
@@ -239,7 +240,7 @@
                             <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
                                 <c:forEach var="imageforauction" items="${requestScope.imageforauction}"> 
                                     <c:if test="${imageforauction.imageFolderID eq REGETBYID.imageFolderID}">
-                                        ${imageforauction.imageFolderID}
+                                        ${fn: toUpperCase(imageforauction.imageFolderID)}
                                     </c:if>
                                 </c:forEach>
                                 <h1 class="flex-center h1-text-mid">${REGETBYID.realEstateName} - <c:forEach var="cityList" items="${requestScope.city}"> 
@@ -308,11 +309,11 @@
                                 <c:forEach var="auctionV2" items="${requestScope.auctionV2}"> 
                                     <c:if test="${auctionV2.realEstateID eq REGETBYID.realEstateID}">
                                         <p class="list-auction-p-1">Đấu giá viên:
-                                        <c:forEach var="staff" items="${staffList}">
-                                            <c:if test="${auctionV2.accID eq staff.accID}">
-                                                <span class="list-auction-p-1">${staff.fullname}</span>
-                                            </c:if>
-                                        </c:forEach>
+                                            <c:forEach var="staff" items="${staffList}">
+                                                <c:if test="${auctionV2.accID eq staff.accID}">
+                                                    <span class="list-auction-p-1">${staff.fullname}</span>
+                                                </c:if>
+                                            </c:forEach>
                                         </p>
                                         <div class="auctionTimeEnd list-auction-p-2">
                                             <p style="display: none;">${auctionV2.timeEnd}</p>

@@ -1,15 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- 
+    Document   : staff_detailRealEstate
+    Created on : Mar 12, 2024, 11:13:52 AM
+    Author     : ADMIN
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="java.util.List" %>
 <%@ page import="dto.RealEstateInfo" %>
-
-
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>detailRealEstate</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
@@ -118,13 +122,12 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                <form action="MemberController" method="post">
-                                    <button type="submit" value="mypost" name="action">
-                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
-                                        <span>Quản lí tin đăng</span>
-                                    </button>
-                                </form>
-                            </a>
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Quản lí tin đăng</span>
+                                        </button>
+                                    </form>
+                                </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="changePass" name="action">
@@ -156,7 +159,13 @@
             </div>
         </nav>
 
+        <button onclick="goBack()">Quay lại</button>
 
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
 
 
         <div class="columns">
@@ -304,37 +313,38 @@
                         </div>
                     </c:if>
                 </c:forEach>
-
-
-                <div class="container-full-right-bellow">
-                    <div>
-                        <p class="flex-center text-center" style="color: #000;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
-                            <!--                        <div style="text-align: left; padding-left: 10px;">
-                                                        <form action="MainController" method="post">
-                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                                                <span>Thảo Điền Pearl</span>
-                                                            </button>
-                                                        </form>
-                                                        <form action="MainController" method="post">
-                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                                                <span>Hoàng Anh River View</span>
-                                                            </button>
-                                                        </form>
-                                                        <form action="MainController" method="post">
-                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                                                <span>Thủ Thiêm Sky(5)</span>
-                                                            </button>
-                                                        </form>
-                                                    </div>-->
-                        <div style="text-align: left; padding-left: 10px;">
-
-                            <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
-                                <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
-                            </c:forEach>
+                <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                    <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
+                        <div class="container-full-right-bellow">
+                            <div>
+                                <p class="flex-center text-center" style="color: #000;font-1weight: bold;font-size: 26px !important;">
+                                <form action="StaffController" method="post">
+                                    <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
+                                    <button style="color: #000 ; text-align: center" type="submit" value="updateStatusButton" name="action">Xác nhận</button>
+                                </form>
+                                <p>
+                            </div>
                         </div>
-                    </div>
-                </div>
+
+                        <div class="container-full-right-bellow">
+                            <div>
+                                <p class="flex-center text-center" style="color: #000;font-weight: bold;font-size: 26px !important;">
+                                <form action="StaffController" method="post">
+                                    <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
+                                    <input type="hidden" name="auctionID" value="${dto.auctionID}">
+                                    <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
+                                    <button style="color: #000 ; text-align: center"  type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
+                                </form>
+                                <p>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+
             </div>
+
+
         </div>
 
 

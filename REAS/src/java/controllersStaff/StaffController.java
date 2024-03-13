@@ -45,6 +45,9 @@ public class StaffController extends HttpServlet {
                 case "deleteRealEstateButton":
                     url = "DeleteRealEstateServlet";
                     break;
+                case "viewPostRealEstate":
+                    url = "REDetailServlet";
+                    break;    
 
             }
             request.getRequestDispatcher(url).forward(request, response);

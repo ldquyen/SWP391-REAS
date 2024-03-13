@@ -111,46 +111,12 @@
                                 </li>
                             </ul>
                             <a class="">Đấu giá</a>
-                        </li>
-                    </ul>
-                    
-<!--                    <p class="menu-label">
-                        Administration
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Nhân viên</a>
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="searchStaff" name="action">
-                                                <span>Tìm kiếm</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="addStaff" name="action">
-                                                <span>Thêm mới</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Doanh thu</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Tổng doanh thu</span>
+                                        <form action="StaffController" method="post">
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách đảm nhận</span>
                                             </button>
                                         </form>
                                     </a>
@@ -159,53 +125,6 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Đấu giá</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Danh sách</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Kết quả</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <p class="menu-label">
-                        Transactions
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Ví tiền</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Thông tin ví tiền</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                    </ul>-->
-
 
                 </aside>
                 

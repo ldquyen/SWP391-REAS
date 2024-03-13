@@ -116,12 +116,13 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Quản lí tin đăng</span>
-                                        </button>
-                                    </form>
-                                </a>
+                                <form action="MemberController" method="post">
+                                    <button type="submit" value="mypost" name="action">
+                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
+                                        <span>Quản lí tin đăng</span>
+                                    </button>
+                                </form>
+                            </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="changePass" name="action">
@@ -157,9 +158,9 @@
         </nav>
 
 
-            <div class="list-auction-p-container" style="">
-                <p class="list-auction-p">Danh sách đấu giá</p>
-            </div>
+        <div class="list-auction-p-container" style="">
+            <p class="list-auction-p">Danh sách đấu giá</p>
+        </div>
 
 
 
@@ -192,7 +193,7 @@
 
                             <tr>
                                 <td>${rowNumber}</td>
-                                <td>${listRE3.realEstateName}</td>
+                                <td>${fn:toUpperCase(listRE3.realEstateName)}</td>
                                 <td>
                                     <c:forEach var="cityList" items="${requestScope.city}"> 
                                         <c:if test="${cityList.cityID eq listRE3.cityID}">
