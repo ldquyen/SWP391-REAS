@@ -774,5 +774,16 @@
                 captionText.innerHTML = dots[slideIndex - 1].alt;
             }
         </script>
+<!--        <script>
+            function reloadPageEveryTwoSeconds() {
+                setInterval(function () {
+                    location.reload();
+                }, 10000); // 2000 milliseconds = 2 seconds
+            }
+
+// Gọi hàm để bắt đầu reload
+            reloadPageEveryTwoSeconds();
+
+        </script>-->
     </body>
 </html>
