@@ -93,6 +93,7 @@ public class RegisterServlet extends HttpServlet {
                         walletId = i;
                     } while (acc.checkAccount(accid));
                     boolean bl = acc.insertAccount(accid, username, password2, fullname, email, phone, cccd, address, cccdregplace, cccdregdate, bankname, bankcode);
+                    //add new wallet
                     boolean bl1 = wallet.addNewWallet(walletId, accid);
                     request.setAttribute("SUCCESS", "Đăng ký thành công, vui lòng đăng nhập");
                     request.setAttribute("UsernameRegister", username);

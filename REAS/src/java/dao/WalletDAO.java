@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import mylib.DBUtils;
 
 public class WalletDAO {
-
+//add new wallet
     public static boolean addNewWallet(int walletid, String accid) {
         Connection cn = null;
         PreparedStatement pst = null;
