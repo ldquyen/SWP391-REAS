@@ -118,12 +118,13 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Quản lí tin đăng</span>
-                                        </button>
-                                    </form>
-                                </a>
+                                <form action="MemberController" method="post">
+                                    <button type="submit" value="mypost" name="action">
+                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
+                                        <span>Quản lí tin đăng</span>
+                                    </button>
+                                </form>
+                            </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="changePass" name="action">
@@ -326,7 +327,7 @@
                                                         </form>
                                                     </div>-->
                         <div style="text-align: left; padding-left: 10px;">
-                            
+
                             <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
                                 <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
                             </c:forEach>

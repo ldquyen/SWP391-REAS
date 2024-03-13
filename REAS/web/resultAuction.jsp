@@ -113,8 +113,9 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
+                                    <form action="MemberController" method="post">
+                                        <button type="submit" value="mypost" name="action">
+                                            <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
                                             <span>Quản lí tin đăng</span>
                                         </button>
                                     </form>
@@ -170,9 +171,9 @@
                         <p class="bold-text">Trạng thái đấu giá: <span></span></p>
                         <p class="bold-text">Giá trúng đấu giá: <span>
                                 <script>
-                                var number = ${REGETBYID.priceLast}; // Assuming auctions.lamda contains the number
-                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                document.write(formattedNumber);
+                                    var number = ${REGETBYID.priceLast}; // Assuming auctions.lamda contains the number
+                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                    document.write(formattedNumber);
                                 </script> VND
                             </span></p>
                         </c:forEach>
