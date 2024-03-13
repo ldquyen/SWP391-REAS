@@ -170,9 +170,9 @@
                         <p class="bold-text">Trạng thái đấu giá: <span></span></p>
                         <p class="bold-text">Giá trúng đấu giá: <span>
                                 <script>
-                                var number = ${REGETBYID.priceLast}; // Assuming auctions.lamda contains the number
-                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                document.write(formattedNumber);
+                                    var number = ${REGETBYID.priceLast}; // Assuming auctions.lamda contains the number
+                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                    document.write(formattedNumber);
                                 </script> VND
                             </span></p>
                         </c:forEach>
@@ -190,6 +190,20 @@
                     </button>
                 </form>
             </div>
+        </c:if>
+
+        <c:if test="${not empty auctions}">
+            <c:forEach var="auctionwinningresult" items="${requestScope.auctionwinningresult}">
+                <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                    <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                        <script>
+                            var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
+                            var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                            document.write(formattedNumber);
+                        </script>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
         </c:if>
 
         <footer class="footer"> 

@@ -6,8 +6,12 @@
 package controllersMember;
 
 import dao.AuctionDAO;
+import dao.AuctionHistoryDAO;
+import dao.AuctionWinningHistoryDAO;
 import dao.RealEstateDAO;
 import dto.Auction;
+import dto.AuctionHistory;
+import dto.AuctionWinningHistory;
 import dto.RealEstate;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,6 +55,18 @@ public class ResultAuctionServlet extends HttpServlet {
 
             ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(idreal);
             request.setAttribute("REGETBYID", REGETBYID);
+            
+            AuctionWinningHistoryDAO auctionwinning = new AuctionWinningHistoryDAO();
+            List<AuctionWinningHistory> auctionwinningresult = auctionwinning.getAuctionWinning2();
+            System.out.println(auctionwinningresult);
+            
+            AuctionHistoryDAO auctionhistory = new AuctionHistoryDAO();
+            AuctionHistory  auctionhisresult = auctionhistory.getAuctionHistory(idreal);
+            
+            System.out.println(auctionhisresult);
+            
+            request.setAttribute("auctionwinningresult", auctionwinningresult);
+            request.setAttribute("auctionhisresult", auctionhisresult);
 
         } catch (Exception e) {
             e.printStackTrace();
