@@ -75,6 +75,13 @@
                                 </button>
                             </form>
                         </div>
+                        <div class="navbar-container-1">
+                            <form action="MainController" method="post">
+                                <button class="navbar-1" type="submit" value="naptien" name="action">
+                                    <span>NẠP TIỀN</span>
+                                </button>
+                            </form>
+                        </div>
                         <%
                             List<Wallet> wallet = new WalletDAO().getWallet();
                             pageContext.setAttribute("walletAccount", wallet);
@@ -257,7 +264,8 @@
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
                                             <form action="MemberController" method="post">
                                                 <input type="hidden" name="idRE3" value="${listRE3.realEstateID}">
-                                                <button class="button-xem" type="submit" value="xemroom" name="action">
+                                                <!--onclick="logCurrentTime()-->
+                                                <button class="button-xem" type="submit" value="xemroom" name="action" ">
                                                     <span>Đấu giá</span>
                                                 </button>
                                             </form>
@@ -536,6 +544,15 @@
                 startCountdown2(element);
             });
 
+        </script>
+
+        <script>
+            // Định nghĩa một hàm để ghi lại thời gian hiện tại và hiển thị nó trong cửa sổ thông báo
+            function logCurrentTime() {
+                var currentTime = new Date(); // Lấy thời gian hiện tại
+                var vietnamTime = new Date(currentTime.toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"})); // Đặt múi giờ cho Việt Nam
+                alert("Current time in Vietnam: " + vietnamTime.toLocaleString());
+            }
         </script>
     </body>
 </html>
