@@ -45,10 +45,10 @@ public class detailStatisticalServlet extends HttpServlet {
                 int totalLoginMonth = staDAO.getTotalLoginCountMonth(month);
                 int totalLoginDay = staDAO.getTotalLoginCountDay(day);
                 int totalLoginDate = staDAO.getTotalLoginCountYMD(year, month, day);
-                request.setAttribute("totalLoginYear", "Số người đăng nhập trong năm " + year + " là : " + totalLoginYear);
-                request.setAttribute("totalLoginMonth", "Số người đăng nhập trong tháng " + month + " là : " + totalLoginMonth);
-                request.setAttribute("totalLoginDay", "Số người đăng nhập trong ngày " + day + " là : " + totalLoginDay);
-                request.setAttribute("totalLoginDate", "Số người đăng nhập trong ngày " + day +" tháng "+ month+" năm "+ year +  " là : " + totalLoginDate);                
+                request.setAttribute("totalLoginYear", "Số lượt đăng nhập trong năm " + year + " là : " + totalLoginYear);
+                request.setAttribute("totalLoginMonth", "Số lượt đăng nhập trong tháng " + month + " là : " + totalLoginMonth);
+                request.setAttribute("totalLoginDay", "Số lượt đăng nhập trong ngày " + day + " là : " + totalLoginDay);
+                request.setAttribute("totalLoginDate", "Số lượt đăng nhập trong ngày " + day +" tháng "+ month+" năm "+ year +  " là : " + totalLoginDate);                
                 request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
             }
             if (registeryear != null || registermonth != null || registerday != null) {
@@ -56,10 +56,10 @@ public class detailStatisticalServlet extends HttpServlet {
                 int totalRegisterMonth = staDAO.getTotalRegisterCountMonth(registermonth);
                 int totalRegisternDay = staDAO.getTotalRegisterCountDay(registerday);
                 int totalRegisterDate = staDAO.getTotalRegisterCountYMD(registeryear, registermonth, registerday);
-                request.setAttribute("totalRegisterYear", "Số người đăng ký trong năm " + registeryear + " là : " + totalRegisterYear);
-                request.setAttribute("totalRegisterMonth", "Số người đăng ký trong tháng " + registermonth + " là : " + totalRegisterMonth);
-                request.setAttribute("totalRegisterDay", "Số người đăng ký trong ngày " + registerday + " là : " + totalRegisternDay);
-                request.setAttribute("totalRegisterDate", "Số người đăng nhập trong ngày " + day +" tháng "+ month+" năm "+ year +  " là : " + totalRegisterDate);  
+                request.setAttribute("totalRegisterYear", "Số lượt đăng ký trong năm " + registeryear + " là : " + totalRegisterYear);
+                request.setAttribute("totalRegisterMonth", "Số lượt đăng ký trong tháng " + registermonth + " là : " + totalRegisterMonth);
+                request.setAttribute("totalRegisterDay", "Số lượt đăng ký trong ngày " + registerday + " là : " + totalRegisternDay);
+                request.setAttribute("totalRegisterDate", "Số lượt đăng nhập trong ngày " + day +" tháng "+ month+" năm "+ year +  " là : " + totalRegisterDate);  
                 request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
             } else {
                 request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
