@@ -6,6 +6,7 @@
 package controllersMain;
 
 import dao.AccountDAO;
+import dao.StatisticalDAO;
 import dao.WalletDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,6 +42,7 @@ public class RegisterServlet extends HttpServlet {
             String accid;
             AccountDAO acc = new AccountDAO();
             WalletDAO wallet = new WalletDAO();
+            StatisticalDAO stadao = new StatisticalDAO();
             int i = 0;
             String password2 = acc.encodePassword(password);
             if (!password.equals(repassword)) {
@@ -93,6 +95,8 @@ public class RegisterServlet extends HttpServlet {
                     boolean bl = acc.insertAccount(accid, username, password2, fullname, email, phone, cccd, address, cccdregplace, cccdregdate, bankname, bankcode);
                     //add new wallet
                     boolean bl1 = wallet.addNewWallet(accid);
+                    //add register date
+                    boolean bl2 = stadao.addNewRegisterDate(accid);
                     request.setAttribute("SUCCESS", "Đăng ký thành công, vui lòng đăng nhập");
                     request.setAttribute("UsernameRegister", username);
                     request.getRequestDispatcher("MainController?action=DN").forward(request, response);

@@ -43,7 +43,7 @@ public class AdminController extends HttpServlet {
                 case "searchNameMember":
                     url = "SearchMemberServlet";
                     break;
-                   //==============
+                //==============
                 case "searchStaff":
                     url = "searchStaff.jsp";
                     break;
@@ -77,6 +77,9 @@ public class AdminController extends HttpServlet {
                 case "adminInformationPage":
                     url = "adminInformationPage.jsp";
                     break;
+                case "informationChangeAdmin":
+                    url = "InformationChangeAdminServlet";
+                    break;
                 // Search,Update Status, Chọn Staff cho RealEstate
                 case "adminSearchAuctionApprove":
                     url = "AdminSearchAuctionApproveServlet";
@@ -93,9 +96,16 @@ public class AdminController extends HttpServlet {
                 case "approved":
                     url = "admin_approved.jsp";
                     break;
-                    //chinh sua luat le
+                //chinh sua luat le
                 case "ruleedited":
                     url = "rule.jsp";
+                    break;
+                //chi tiet thong ke
+                case "detailStatistical":
+                    url = "detailStatisticalServlet";
+                    break;
+                case "detailStatisticalJSP":
+                    url = "detailStatisticalServlet";
                     break;
 
             }
