@@ -160,7 +160,7 @@
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
                                             <button type="submit" value="approve_order" name="action">
-                                                <span>Đơn nạp tiền</span>
+                                                <span>Đợi xét duyệt</span>
                                             </button>
                                         </form>
                                     </a>
@@ -168,8 +168,17 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="approved" name="action">
+                                            <button type="submit" value="approved_order" name="action">
                                                 <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="reject_order" name="action">
+                                                <span>Đã từ chối</span>
                                             </button>
                                         </form>
                                     </a>

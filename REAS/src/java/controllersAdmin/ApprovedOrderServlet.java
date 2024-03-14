@@ -19,14 +19,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name = "ApproveOrderServlet", urlPatterns = {"/ApproveOrderServlet"})
-public class ApproveOrderServlet extends HttpServlet {
+@WebServlet(name = "ApprovedOrderServlet", urlPatterns = {"/ApprovedOrderServlet"})
+public class ApprovedOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,22 +36,22 @@ public class ApproveOrderServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "admin_ApproveOrder.jsp";
+        String url = "admin_ApprovedOrder.jsp";
         String searchValue = request.getParameter("txtSearchValue");
         try {
             if (searchValue == null || searchValue.trim().isEmpty()) {
                 WalletDAO dao = new WalletDAO();
-                List<OrderWallet> listOrder = dao.getRequestNapTien(1);
+                List<OrderWallet> listOrder = dao.getRequestNapTien(2);
                 request.setAttribute("LIST_ORDER_RESULT", listOrder);
-                url = "admin_ApproveOrder.jsp";
+                url = "admin_ApprovedOrder.jsp";
             } else {
                 WalletDAO dao = new WalletDAO();
-                List<OrderWallet> listOrder = dao.getRequestNapTien(1);
+                List<OrderWallet> listOrder = dao.getRequestNapTien(2);
                 request.setAttribute("LIST_ORDER_RESULT", listOrder);
-                url = "admin_ApproveOrder.jsp";
+                url = "admin_ApprovedOrder.jsp";
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -74,13 +73,13 @@ public class ApproveOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ApproveOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ApproveOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+           try {
+               processRequest(request, response);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(ApprovedOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (SQLException ex) {
+               Logger.getLogger(ApprovedOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+           }
     }
 
     /**
@@ -94,13 +93,13 @@ public class ApproveOrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ApproveOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ApproveOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+           try {
+               processRequest(request, response);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(ApprovedOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (SQLException ex) {
+               Logger.getLogger(ApprovedOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+           }
     }
 
     /**

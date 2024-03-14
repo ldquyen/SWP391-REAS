@@ -130,15 +130,15 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="menu-list">
+<ul class="menu-list">
                         <li>
-                            <a class="">Xét duyệt</a>
+                            <a class="">Nạp tiền</a>
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="approve" name="action">
-                                                <span>Danh sách chờ</span>
+                                            <button type="submit" value="approve_order" name="action">
+                                                <span>Đợi xét duyệt</span>
                                             </button>
                                         </form>
                                     </a>
@@ -146,8 +146,17 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="approved" name="action">
+                                            <button type="submit" value="approved_order" name="action">
                                                 <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="reject_order" name="action">
+                                                <span>Đã từ chối</span>
                                             </button>
                                         </form>
                                     </a>
