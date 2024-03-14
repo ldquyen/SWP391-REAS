@@ -41,7 +41,7 @@ public class AuctionHistoryDAO {
                     
                     int numberOfBids = rs.getInt("NumberOfBids");
                     long startPrice = rs.getLong("StartPrice");
-                    auctionhistory = new AuctionHistory(auctionHisID, auctionID, status, lamda, timeJoin, timeOut, numberOfBids, startPrice);
+//                    auctionhistory = new AuctionHistory(auctionHisID, auctionID, status, lamda, timeJoin, timeOut, numberOfBids, startPrice);
                 }
             }
             cn.close();
