@@ -438,11 +438,12 @@
 
                             </tbody>
                         </table>
-                        <c:if test="${empty listRealEstate}">
-                            <h2>
-                                No record is matched!!!
-                            </h2>
-                        </c:if>
+
+                    </c:if>
+                    <c:if test="${empty listRealEstate}">
+                        <h2>
+                            No record is matched!!!
+                        </h2>
                     </c:if>
                 </div>
             </div>
