@@ -1,3 +1,5 @@
+<%@page import="dto.Wallet"%>
+<%@page import="dao.WalletDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -74,8 +76,20 @@
                                                         </button>
                                                     </form>
                                                 </div>
-                        -->                        <div class="navbar-container-1">
-                            <a class="navbar-1">10.000.000</a>                  
+                        -->                        
+                        <%
+                            List<Wallet> wallet = new WalletDAO().getWallet();
+                            pageContext.setAttribute("walletAccount", wallet);
+                        %>
+                        <div class="navbar-container-1">
+                            <a class="navbar-1">SỐ DƯ :
+                                <c:forEach var="wallet" items="${walletAccount}">
+                                    <c:if test="${wallet.accID eq member.accID}">
+                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                    </c:if>
+                                </c:forEach>
+                                (xu)
+                            </a>                  
                         </div>
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
@@ -118,13 +132,13 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                <form action="MemberController" method="post">
-                                    <button type="submit" value="mypost" name="action">
-                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
-                                        <span>Quản lí tin đăng</span>
-                                    </button>
-                                </form>
-                            </a>
+                                    <form action="MemberController" method="post">
+                                        <button type="submit" value="mypost" name="action">
+                                            <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
+                                            <span>Quản lí tin đăng</span>
+                                        </button>
+                                    </form>
+                                </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="changePass" name="action">

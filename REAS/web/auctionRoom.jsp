@@ -1,3 +1,7 @@
+
+<%@page import="dto.Wallet"%>
+<%@page import="dao.WalletDAO"%>
+<%@page import="java.util.List"%>
 <%@page import="dto.Account"%>
 <%@page import="dao.AccountDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -75,8 +79,19 @@
                                 </button>
                             </form>
                         </div>
+                        <%
+                            List<Wallet> wallet = new WalletDAO().getWallet();
+                            pageContext.setAttribute("walletAccount", wallet);
+                        %>
                         <div class="navbar-container-1">
-                            <a class="navbar-1">10.000.000</a>                  
+                            <a class="navbar-1">SỐ DƯ :
+                                <c:forEach var="wallet" items="${walletAccount}">
+                                    <c:if test="${wallet.accID eq member.accID}">
+                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                    </c:if>
+                                </c:forEach>
+                                (xu)
+                            </a>                  
                         </div>
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
@@ -119,13 +134,13 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                <form action="MemberController" method="post">
-                                    <button type="submit" value="mypost" name="action">
-                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
-                                        <span>Quản lí tin đăng</span>
-                                    </button>
-                                </form>
-                            </a>
+                                    <form action="MemberController" method="post">
+                                        <button type="submit" value="mypost" name="action">
+                                            <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
+                                            <span>Quản lí tin đăng</span>
+                                        </button>
+                                    </form>
+                                </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="changePass" name="action">
@@ -440,15 +455,24 @@
                     </div>
                 </div>
                 <div style="display: flex; justify-content: center; width: 100%; text-align: center;">
+                </div>
 
-                    <button type="submit" value="tragia" name="action">
-                        <h1  style="background: #D9AB73; display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #000 solid;margin-top: 8px">
-                            <a id="total-price-bid" href="MemberController?action=registerAuction&auctionId=${auction.auctionID}">
-                                Dang ki dau gia
-                            </a>
+                <form id="reloadAuction" action="MemberController" method="post">
+                    <button id="reloadButton" type="submit" value="xemroom" name="action">
+                        <h1 style="display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #D9AB73 solid;margin-top: 8px">
+                            <c:if test="${not empty auctions}">
+                                <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                    <c:forEach var="auctions" items="${requestScope.auctions}">
+                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                            <input type="hidden" name="idRE3" value="${REGETBYID.realEstateID}">
+                                            <span>Reload</span>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                            </c:if>
                         </h1>
                     </button>
-                </div>
+                </form>
 
             </div>
         </div>
@@ -781,6 +805,15 @@
                 dots[slideIndex - 1].className += " active";
                 captionText.innerHTML = dots[slideIndex - 1].alt;
             }
+        </script>\
+        <script>
+// Function to click the button with id 'reloadButton' every 10 seconds
+            function autoClick() {
+                document.getElementById('reloadButton').click(); // Simulate button click
+            }
+
+// Call the autoClick function every 10 seconds
+            setInterval(autoClick, 10000);
         </script>
     </body>
 </html>
