@@ -244,7 +244,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="searchStaff" name="action">
+                                            <button type="submit" value="fixrule" name="action">
                                                 <span>Chỉnh sửa luật lệ</span>
                                             </button>
                                         </form>
@@ -255,6 +255,15 @@
                                         <form action="AdminController" method="post">
                                             <button type="submit" value="addStaff" name="action">
                                                 <span>Danh sách luật chỉnh sửa</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="rule" name="action">
+                                                <span>Xem luật lệ</span>
                                             </button>
                                         </form>
                                     </a>

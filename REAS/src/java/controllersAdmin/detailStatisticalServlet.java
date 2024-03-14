@@ -59,7 +59,7 @@ public class detailStatisticalServlet extends HttpServlet {
                 request.setAttribute("totalRegisterYear", "Số lượt đăng ký trong năm " + registeryear + " là : " + totalRegisterYear);
                 request.setAttribute("totalRegisterMonth", "Số lượt đăng ký trong tháng " + registermonth + " là : " + totalRegisterMonth);
                 request.setAttribute("totalRegisterDay", "Số lượt đăng ký trong ngày " + registerday + " là : " + totalRegisternDay);
-                request.setAttribute("totalRegisterDate", "Số lượt đăng nhập trong ngày " + day +" tháng "+ month+" năm "+ year +  " là : " + totalRegisterDate);  
+                request.setAttribute("totalRegisterDate", "Số lượt đăng nhập trong ngày " + registerday +" tháng "+ registermonth+" năm "+ registeryear +  " là : " + totalRegisterDate);  
                 request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
             } else {
                 request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);

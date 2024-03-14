@@ -4,10 +4,10 @@
     Author     : ASUS
 --%>
 
+<%@page import="dto.Account"%>
 <%@page import="dto.Wallet"%>
 <%@page import="dao.WalletDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="java.time.LocalDate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,65 +37,63 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                        <button type="submit" value="adminjsp" name="action" >
-                            <span style="color: white">TRANG CHỦ</span>
-                        </button>
-                    </form>
+                            <button type="submit" value="adminjsp" name="action" >
+                                <span style="color: white">TRANG CHỦ</span>
+                            </button>
+                        </form>
                 </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item">
 
-                        <div class="navbar-item">
+                        <%
+                            List<Wallet> wallet = new WalletDAO().getWallet();
+                            pageContext.setAttribute("walletAccount", wallet);
+                        %>
+                        <div class="navbar-container-1">
+                            <a class="navbar-1">SỐ DƯ :
+                                <c:forEach var="wallet" items="${walletAccount}">
+                                    <c:if test="${wallet.accID eq admin.accID}">
+                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                    </c:if>
+                                </c:forEach>
+                                (xu)
+                            </a>                  
+                        </div>
 
-                            <%
-                                List<Wallet> wallet = new WalletDAO().getWallet();
-                                pageContext.setAttribute("walletAccount", wallet);
-                            %>
-                            <div class="navbar-container-1">
-                                <a class="navbar-1">SỐ DƯ :
-                                    <c:forEach var="wallet" items="${walletAccount}">
-                                        <c:if test="${wallet.accID eq admin.accID}">
-                                            <span class="list-auction-p-1">${wallet.accountBalance}</span>
-                                        </c:if>
-                                    </c:forEach>
-                                    (xu)
-                                </a>                  
-                            </div>
+                        <div class="navbar-item hover-down has-dropdown is-hoverable">
+                            <a class="navbar-link navbar-1-list">
+                                ${sessionScope.admin.fullname} (ADMIN)                
+                            </a>
 
-                            <div class="navbar-item hover-down has-dropdown is-hoverable">
-                                <a class="navbar-link navbar-1-list">
-                                    ${sessionScope.admin.fullname} (ADMIN)                
+                            <div class="fake-div"></div>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item">
+                                    <form action="AdminController" method="post">
+                                        <button type="submit" value="adminInformationPage" name="action">
+                                            <span>Thông tin tài khoản</span>
+                                        </button>
+                                    </form>
                                 </a>
 
-                                <div class="fake-div"></div>
+                                <hr class="navbar-divider">
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="Logout" name="action">
+                                            <span>Đăng xuất</span>
+                                        </button>
+                                    </form>
+                                </a>
 
-                                <div class="navbar-dropdown">
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="adminInformationPage" name="action">
-                                                <span>Thông tin tài khoản</span>
-                                            </button>
-                                        </form>
-                                    </a>
-
-                                    <hr class="navbar-divider">
-                                    <a class="navbar-item">
-                                        <form action="MainController" method="post">
-                                            <button type="submit" value="Logout" name="action">
-                                                <span>Đăng xuất</span>
-                                            </button>
-                                        </form>
-                                    </a>
-
-                                </div>
                             </div>
-
-
-
                         </div>
+
+
+
                     </div>
                 </div>
+            </div>
         </nav>
 
 
@@ -121,7 +119,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="detailStatistical" name="action">
+                                            <button type="submit" value="detailStatisticalJSP" name="action">
                                                 <span>Chi tiết</span>
                                             </button>
                                         </form>
@@ -212,11 +210,11 @@
                                         </form>
                                     </a>
                                 </li>
-
+                                
                             </ul>
                         </li>
                     </ul>
-
+           
 
                     <p class="menu-label">
                         Transactions
@@ -227,14 +225,14 @@
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
-                                        <form action="AdminController" method="post">
+                                         <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
                                                 <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
                                             </button>
                                         </form>
                                     </a>
                                 </li>
-
+                                
                             </ul>
                         </li>
                     </ul>
@@ -244,7 +242,7 @@
                     <ul class="menu-list">
                         <li>
                             <a class="">Luật lệ</a>
-                            <ul class="menu-list-subnav">
+                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
@@ -279,113 +277,42 @@
 
                 </aside>
             </div>
+            <div class="column" style="height: 100vh;">                
 
-            <div class="column" style="height: 100vh;">
-                <form action="AdminController" method="post">
-                    <p>Chọn năm/tháng/ngày</p>
-                    <select name="year">
-                        <%
-                            // Generate options for years
-                            int currentYear = LocalDate.now().getYear();
-                            for (int year = currentYear; year >= currentYear - 10; year--) {
-                        %>
-                        <option value="<%= year%>"><%= year%></option>
-                        <%
-                            }
-                        %>
+                <form ction="AdminController" method="post">
+                <p><input type="text" placeholder="Nội dung luật" name="ruledetail" value=""</p> 
+                <p>Điều Khoản<select name="sectionid">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
                     </select>
-                    <select name="month">
-                        <%
-                            // Generate options for months
-                            for (int month = 1; month <= 12; month++) {
-                        %>
-                        <option value="<%= month%>"><%= month%></option>
-                        <%
-                            }
-                        %>
-                    </select>
-                    <select name="day">
-                        <%
-                            // Generate options for days
-                            for (int day = 1; day <= 31; day++) {
-                        %>
-                        <option value="<%= day%>"><%= day%></option>
-                        <%
-                            }
-                        %>
-                    </select>
-                    <button type="submit" value="detailStatistical" name="action">
-                        <span>Xem thống kê người đăng nhập</span>
-                    </button> 
-                    <div></div>
-                    <p>
-                        ${requestScope.totalLoginYear}
-                    </p>
-                    <p>
-                        ${requestScope.totalLoginMonth}
-                    </p>
-                    <p>
-                        ${requestScope.totalLoginDay}
-                    </p>
-                    <p>
-                        ${requestScope.totalLoginDate}
-                    </p>
+                 <button id="loginSubmitBtn" class="button is-light submit-login-btn" type="submit" value="rulefix" name="action" style="
+                                        background-color: transparent;
+                                        color: #D9AB73;
+                                        font-size: 11px;
+                                        font-family: Inter;
+                                        font-weight: 800;
+                                        word-wrap: break-word;
+                                        border-radius: 40px;
+                                        border: 3px solid #D9AB73" >
+                                    <span>Tạo</span>
+                 </button>
+                 </p>
+                  <% 
+        // Set session attribute      
+      Account admin = (Account) session.getAttribute("admin");
+        session.setAttribute("admin", admin);
+    %>
+        <p>${requestScope.notice}</p>
+                 </form>
 
-                </form>
-
-                <form action="AdminController" method="post">
-                    <p>Chọn năm/tháng/ngày</p>
-                    <select name="registeryear">
-                        <%
-                            // Generate options for years
-                            int currentYearRegister = LocalDate.now().getYear();
-                            for (int year = currentYear; year >= currentYear - 10; year--) {
-                        %>
-                        <option value="<%= year%>"><%= year%></option>
-                        <%
-                            }
-                        %>
-                    </select>
-                    <select name="registermonth">
-                        <%
-                            // Generate options for months
-                            for (int month = 1; month <= 12; month++) {
-                        %>
-                        <option value="<%= month%>"><%= month%></option>
-                        <%
-                            }
-                        %>
-                    </select>
-                    <select name="registerday">
-                        <%
-                            // Generate options for days
-                            for (int day = 1; day <= 31; day++) {
-                        %>
-                        <option value="<%= day%>"><%= day%></option>
-                        <%
-                            }
-                        %>
-                    </select>
-                    <button type="submit" value="detailStatistical" name="action">
-                        <span>Xem thống kê người đăng kí</span>
-                    </button> 
-                    <div></div>
-                    <p>
-                        ${requestScope.totalRegisterYear}
-                    </p>
-                    <p>
-                        ${requestScope.totalRegisterMonth}
-                    </p>
-                    <p>
-                        ${requestScope.totalRegisterDay}
-                    </p>
-                    <p>
-                        ${requestScope.totalRegisterDate}
-                    </p>      
-                </form>
-            </div> 
-
-
+            </div>
         </div>
 
         <!-- BODY -->

@@ -100,6 +100,12 @@ public class AdminController extends HttpServlet {
                 case "ruleedited":
                     url = "rule.jsp";
                     break;
+                case "fixrule":
+                    url = "fixrule.jsp";
+                    break;
+                case "rulefix":
+                    url = "RuleModifyServlet";
+                    break;
                 //chi tiet thong ke
                 case "detailStatistical":
                     url = "detailStatisticalServlet";
