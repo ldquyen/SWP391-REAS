@@ -145,13 +145,13 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                <form action="MemberController" method="post">
-                                    <button type="submit" value="mypost" name="action">
-                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
-                                        <span>Quản lí tin đăng</span>
-                                    </button>
-                                </form>
-                            </a>
+                                    <form action="MemberController" method="post">
+                                        <button type="submit" value="mypost" name="action">
+                                            <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
+                                            <span>Quản lí tin đăng</span>
+                                        </button>
+                                    </form>
+                                </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="changePass" name="action">
@@ -161,8 +161,8 @@
                                 </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Thông tin thanh toán</span>
+                                        <button type="submit" value="lichsunaptien" name="action">
+                                            <span>Lịch sử nạp tiền</span>
                                         </button>
                                     </form>
                                 </a>
@@ -277,7 +277,7 @@
                     </table>
                 </c:if>
 
-                
+
             </div>
         </div>
 

@@ -91,13 +91,13 @@ public class AdminController extends HttpServlet {
                     url = "admin_RejectOrder.jsp";
                     break;
                 case "approveOrderList":
-                    url = "ApprovedOrderServlet";
+                    url = "ApproveOrderServlet";
                     break;
                 case "approvedOrderList":
-                    url = "RejectOrderServlet";
+                    url = "ApprovedOrderServlet";
                     break;
                 case "rejectOrderList":
-                    url = "ApproveOrderServlet";
+                    url = "RejectOrderServlet";
                     break;
                 case "approveOrder":
                     url = "UpdateStatusOrderS2Servlet";

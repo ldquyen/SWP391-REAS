@@ -118,7 +118,7 @@ public class WalletDAO {
         }
         return true;
     }
-
+// Lấy Request Nạp Tiền bằng Status
     public List<OrderWallet> getRequestNapTien(int statusID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -134,6 +134,58 @@ public class WalletDAO {
                         + " WHERE wh.StatusID = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, statusID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    if (result == null) {
+                        result = new ArrayList<OrderWallet>();
+                    }
+                    OrderWallet dto = new OrderWallet();
+
+                    dto.setOrderID(rs.getInt("OrderID"));
+                    dto.setWalletID(rs.getInt("WalletID"));
+                    dto.setPrice(rs.getLong("Price"));
+
+                    Timestamp dateSql = rs.getTimestamp("DateAndTime");
+                    LocalDateTime date = dateSql.toLocalDateTime();
+                    dto.setDate(date);
+
+                    dto.setStatusName(rs.getString("StatusName"));
+                    dto.setContent(rs.getString("Content"));
+
+                    result.add(dto);
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+    
+    // Lấy Request nạp tiền = WalletID
+    public List<OrderWallet> getRequestNapTienByWalletID(int walletID) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<OrderWallet> result = null;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT wh.OrderID, wh.WalletID, wh.Price, wh.DateAndTime, wh.StatusID, wh.Content, whs.StatusName\n"
+                        + " FROM dbo.WalletHistory wh \n"
+                        + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n" 
+                        + " WHERE wh.WalletID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, walletID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     if (result == null) {

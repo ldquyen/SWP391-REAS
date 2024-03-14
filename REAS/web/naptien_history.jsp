@@ -334,12 +334,12 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                <form action="MainController" method="post">
-                                    <button type="submit" value="lichsunaptien" name="action">
-                                        <span>Lịch sử nạp tiền</span>
-                                    </button>
-                                </form>
-                            </a>
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="lichsunaptien" name="action">
+                                            <span>Lịch sử nạp tiền</span>
+                                        </button>
+                                    </form>
+                                </a>
 
                                 <hr class="navbar-divider">
                                 <a class="navbar-item">
@@ -357,47 +357,93 @@
             </div>
         </nav>
         <!-- BODY -->
-        <div class="BodyForm">
-            <div class="TieuDe">
-                <h1>
-                    Nạp Tiền
-                </h1>
+
+        <div>
+            <div style="text-align: center; display: block; font-size: 25px; color: #D9AB73; margin-top: 25px; margin-bottom: 10px; ">
+                <h1>ĐƠN NẠP TIỀN ĐÃ GỬI</h1>
             </div>
 
-            <div class="form-post-real-estate" >
-                <form action="MainController" method="post" enctype="multipart/form-data">
-                    <input type="hidden" id="accID" name="accID" value="${sessionScope.member.accID}">
-                    <c:forEach var="wallet" items="${walletAccount}">
-                        <c:if test="${wallet.accID eq member.accID}">
-                            <input type="hidden" id="accID" name="walletID" value="${wallet.walletID}">
-                        </c:if>
-                    </c:forEach>
-                    <div class="form-element">
-                        <label>1. Nhập số Xu
-                            <span style="font-size: 14px; color: red; margin-top: 5px;" >Lưu ý : 1 Xu = 1.000.000 VNĐ</span>
-                        </label>
-                        <input type="text" class="form-control" id="soTien" name="soTien" placeholder="Xu" oninput="formatCurrency(updateMoney(this.value))" required>
-                        <span id="moneyMessage" style="font-size: 14px; color: red; margin-top: 5px;"></span>
-                    </div>
-                    <div class="form-element">
-                        <label>2. Nội dung chuyển khoản</label>
-                        <div class="square-box">
-                            <h3 style="text-align: center">"TÊN TÀI KHOẢN"_ORDER_"SỐ XU NẠP"</h3>
-                        </div>
-                        <input type="text" class="form-control" id="content" name="content" placeholder="Điền nội dung" required>
-                    </div>
 
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="agreeCheckbox" required>
-                        <label for="agreeCheckbox">Tôi hoàn toàn chịu trách nhiệm với những sai sót của mình!</label>
-                    </div>
-                    <button type="submit" value="submitNaptien" name="action" class="btn-submit">
-                        Xác nhận
-                    </button>
-                </form>
+            <script>
+                window.onload = function () {
+                    // Kiểm tra xem trang đã được reload trước đó hay không
+                    if (!localStorage.getItem('pageReloaded')) {
+                        // Nếu chưa, thực hiện submit form
+                        document.forms['searchForm'].submit();
+                        // Đánh dấu rằng trang đã được reload
+                        localStorage.setItem('pageReloaded', 'true');
+                    } else {
+                        // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                        localStorage.removeItem('pageReloaded');
+                    }
+                };
+            </script>
+
+            <form id="searchForm" class="flex-center" action="MainController">
+                <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                <c:forEach var="wallet" items="${walletAccount}">
+                    <c:if test="${wallet.accID eq member.accID}">                      
+                        <input type="hidden" name="walletID" value="${wallet.walletID}" />
+                    </c:if>
+                </c:forEach>
+                
+                <input type="hidden" name="action" value="viewHistoryOrder" />
+            </form>
+
+            <div style="text-align: center; border-radius: 45px;">
+                <c:set var="listOrder" value="${requestScope.LIST_ORDER_RESULT}"/>
+                <c:if test="${not empty listOrder}">
+                    <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Order ID</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date and Time</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Content</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status ID</th>                   
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <c:forEach items="${listOrder}" var="dto" varStatus="counter">
+
+                            <form action="AdminController" method="post">
+                                <tr>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.orderID}
+                                    </td>                               
+                                    
+                                    <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.price}
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.date}
+                                    </td>
+                                    <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.content}
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.statusName}
+                                    </td>
+                                </tr>
+                            </form>
+                        </c:forEach>
+
+
+                        </tbody>
+                    </table>
+
+                </c:if>
+                <c:if test="${empty listOrder}">
+                    <h2>
+                        No Request!!!
+                    </h2>
+                </c:if>
             </div>
-
         </div>
+
+
+
         <!-- END BODY -->
 
         <footer class="footer" style="position: inherit; margin-top: 30px"> 
