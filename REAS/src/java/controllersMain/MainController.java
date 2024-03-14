@@ -57,7 +57,7 @@ public class MainController extends HttpServlet {
                     url = "RuleEditServlet";
                     break;
                 case "rule":
-                    url = "rule.jsp";
+                    url = "RuleEditServlet";
                     break;
                 case "changePass":
                     url = "changePass.jsp";
@@ -107,6 +107,11 @@ public class MainController extends HttpServlet {
                     break;
                 case "homepage":
                     url = "index_1.jsp";
+                    break;
+
+                //edited rule
+                case "ruleedited":
+                    url = "rule.jsp";
                     break;
             }
         } finally {
