@@ -121,7 +121,7 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -171,7 +171,7 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time End</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area(m²)</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Image Folder ID</th>
-<!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>-->
+                                    <!--                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>-->
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Time Up</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
 
@@ -224,9 +224,9 @@
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.imageFolderID}
                                         </td>
-<!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.detail}
-                                        </td>-->
+                                        <!--                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.detail}
+                                    </td>-->
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.timeUp}
                                         </td>
@@ -258,11 +258,12 @@
 
                             </tbody>
                         </table>
-                        <c:if test="${empty listRealEstate}">
-                            <h2>
-                                No record is matched!!!
-                            </h2>
-                        </c:if>
+
+                    </c:if>
+                    <c:if test="${empty listRealEstate}">
+                        <h2>
+                            No record is matched!!!
+                        </h2>
                     </c:if>
 
                 </div>

@@ -1,13 +1,18 @@
 <%-- 
-    Document   : admin
-    Created on : Jan 22, 2024, 11:54:07 PM
-    Author     : ASUS
+    Document   : admin_approve
+    Created on : Mar 2, 2024, 11:46:14 AM
+    Author     : ADMIN
 --%>
 
 <%@page import="dto.Wallet"%>
 <%@page import="dao.WalletDAO"%>
+<%@page import="dto.Account"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@page import="dao.AccountDAO" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +22,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="admin.css" type="text/css" >
+        <!--        <link rel="stylesheet" href="staff.css" type="text/css" >-->
 
     </head>
     <body>
@@ -36,10 +42,10 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="adminjsp" name="action" >
-                                <span style="color: white">TRANG CHỦ</span>
-                            </button>
-                        </form>
+                        <button type="submit" value="adminjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="navbar-end">
@@ -70,7 +76,7 @@
                             <div class="navbar-dropdown">
                                 <a class="navbar-item">
                                     <form action="AdminController" method="post">
-                                        <button type="submit" value="adminInformationPage" name="action">
+                                        <button type="submit" value="informationOfAdmin" name="action">
                                             <span>Thông tin tài khoản</span>
                                         </button>
                                     </form>
@@ -94,6 +100,8 @@
                 </div>
             </div>
         </nav>
+
+
         <div class="columns">
             <div class="column is-one-fifth" style="background-color: #D9D9D9; height: 100vh;">
                 <aside class="menu">
@@ -116,7 +124,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="detailStatisticalJSP" name="action">
+                                            <button type="submit" value="aboutus" name="action">
                                                 <span>Chi tiết</span>
                                             </button>
                                         </form>
@@ -232,11 +240,11 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
-           
+
 
                     <p class="menu-label">
                         Transactions
@@ -247,14 +255,16 @@
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
-                                         <form action="AdminController" method="post">
+                                        <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
                                                 <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
                                             </button>
                                         </form>
+
+
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -264,11 +274,11 @@
                     <ul class="menu-list">
                         <li>
                             <a class="">Luật lệ</a>
-                             <ul class="menu-list-subnav">
+                            <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="fixrule" name="action">
+                                            <button type="submit" value="searchStaff" name="action">
                                                 <span>Chỉnh sửa luật lệ</span>
                                             </button>
                                         </form>
@@ -283,28 +293,147 @@
                                         </form>
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="MainController" method="post">
-                                            <button type="submit" value="rule" name="action">
-                                                <span>Xem luật lệ</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
                             </ul>                           
                         </li>
                     </ul>
-
-
                 </aside>
             </div>
-            <div class="column" style="height: 100vh;">Admin page</div>
+
+
+            <!--===============================================================-->
+
+            <div>
+                <div style="text-align: center; display: block; font-size: 25px; color: #D9AB73; margin-top: 25px; margin-bottom: 10px; ">
+                    <h1>XÉT DUYỆT ĐƠN NẠP TIỀN</h1>
+                </div>
+
+
+                <script>
+                    window.onload = function () {
+                        // Kiểm tra xem trang đã được reload trước đó hay không
+                        if (!localStorage.getItem('pageReloaded')) {
+                            // Nếu chưa, thực hiện submit form
+                            document.forms['searchForm'].submit();
+                            // Đánh dấu rằng trang đã được reload
+                            localStorage.setItem('pageReloaded', 'true');
+                        } else {
+                            // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                            localStorage.removeItem('pageReloaded');
+                        }
+                    };
+                </script>
+
+                <form id="searchForm" class="flex-center" action="AdminController">
+                    <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                    <input type="hidden" name="action" value="approveOrderList" />
+                </form>
+
+                <div style="text-align: center; border-radius: 45px;">
+                    <c:set var="listOrder" value="${requestScope.LIST_ORDER_RESULT}"/>
+                    <c:if test="${not empty listOrder}">
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Order ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Wallet ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date and Time</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Content</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <c:forEach items="${listOrder}" var="dto" varStatus="counter">
+
+                                <form action="AdminController" method="post">
+                                    <tr>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.orderID}
+                                        </td>                               
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.walletID}
+                                        </td>
+                                        <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.price}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.date}
+                                        </td>
+                                        <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.content}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.statusName}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            <form action="AdminController" method="post">
+                                                <input type="hidden" name="orderID" value="${dto.orderID}">
+                                                <button style="color: #fff" type="submit" value="approveOrder" name="action" onclick="return confirmAction('Bạn có chắc chắn XÁC NHẬN?')" >Xác nhận</button>
+                                            </form>
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            <form action="AdminController" method="post">
+                                                <input type="hidden" name="orderID" value="${dto.orderID}">
+                                                <button style="color: #fff" type="submit" value="rejectOrder" name="action" onclick="return confirmAction('Bạn có chắc chắn TỪ CHỐI?')" >Từ chối</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </form>
+                            </c:forEach>
+
+
+                            </tbody>
+                        </table>
+
+                    </c:if>
+                    <c:if test="${empty listOrder}">
+                        <h2>
+                            No Request!!!
+                        </h2>
+                    </c:if>
+                </div>
+            </div>
+
+
+            <!--         ==============       -->
         </div>
 
         <!-- BODY -->
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var priceFirstCells = document.querySelectorAll('.priceFirstCell');
+                var pricePaidCells = document.querySelectorAll('.pricePaidCell');
+                var lamdaCells = document.querySelectorAll('.lamdaCell');
+                var areaCells = document.querySelectorAll('.areaCell');
 
+                priceFirstCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+
+                pricePaidCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+
+                lamdaCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+
+                areaCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+            });
+
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+        </script>
+        <script>
+            function confirmAction(message) {
+                return confirm(message);
+            }
+        </script>
 
     </body>
 </html>

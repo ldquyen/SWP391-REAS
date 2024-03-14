@@ -157,6 +157,31 @@
                             </ul>
                         </li>
                     </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Nạp tiền</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approve_order" name="action">
+                                                <span>Đơn nạp tiền</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approved" name="action">
+                                                <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                     <p class="menu-label">
                         Administration
                     </p>
@@ -218,7 +243,7 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <p class="menu-label">
                         Transactions
                     </p>
@@ -247,7 +272,7 @@
                     <ul class="menu-list">
                         <li>
                             <a class="">Luật lệ</a>
-                             <ul class="menu-list-subnav">
+                            <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
@@ -292,13 +317,13 @@
                     <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
                 </div>
 
-<!--                <form class="flex-center" action="AdminController">
-                    <input type="hidden" name="txtSearchValue" 
-                           value="${param.txtSearchValue}" />
-
-                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApproved" name="action">VIEW</button>
-
-                </form><br/>-->
+                <!--                <form class="flex-center" action="AdminController">
+                                    <input type="hidden" name="txtSearchValue" 
+                                           value="${param.txtSearchValue}" />
+                
+                                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApproved" name="action">VIEW</button>
+                
+                                </form><br/>-->
 
                 <script>
                     window.onload = function () {
@@ -319,7 +344,7 @@
                     <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
                     <input type="hidden" name="action" value="adminSearchAuctionApproved" />
                 </form>
-                
+
                 <div style="text-align: center; border-radius: 45px;">
                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
                     <c:if test="${not empty listRealEstate}">
@@ -397,16 +422,16 @@
                                                 <c:if test="${dto.accID eq staff.accID}">
                                                     <div>
                                                         <div>
-                              
+
                                                             <p>${staff.fullname}</p>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </c:if>
                                             </c:forEach>
 
                                         </td>
-                                        
+
                                     </tr>
                                 </form>
                             </c:forEach>

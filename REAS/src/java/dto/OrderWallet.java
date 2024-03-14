@@ -7,40 +7,40 @@ package dto;
 
 import java.time.LocalDateTime;
 
-/**
- *
- * @author ADMIN
- */
+
 public class OrderWallet {
-    private String orderID;
-    private String walletID;
+    private int orderID;
+    private int walletID;
     private Long price;
     private LocalDateTime date;
-    private int statusID;
-    private String context;
+    private String statusName;
+    private String content;
 
-    public OrderWallet(String orderID, String walletID, Long price, LocalDateTime date, int statusID, String context) {
+    public OrderWallet() {
+    }
+
+    public OrderWallet(int orderID, int walletID, Long price, LocalDateTime date, String statusName, String content) {
         this.orderID = orderID;
         this.walletID = walletID;
         this.price = price;
         this.date = date;
-        this.statusID = statusID;
-        this.context = context;
+        this.statusName = statusName;
+        this.content = content;
     }
 
-    public String getOrderID() {
+    public int getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(String orderID) {
+    public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
 
-    public String getWalletID() {
+    public int getWalletID() {
         return walletID;
     }
 
-    public void setWalletID(String walletID) {
+    public void setWalletID(int walletID) {
         this.walletID = walletID;
     }
 
@@ -60,21 +60,26 @@ public class OrderWallet {
         this.date = date;
     }
 
-    public int getStatusID() {
-        return statusID;
+    public String getStatusName() {
+        return statusName;
     }
 
-    public void setStatusID(int statusID) {
-        this.statusID = statusID;
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
-    public String getContext() {
-        return context;
+    public String getContent() {
+        return content;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public void setContent(String content) {
+        this.content = content;
     }
+
+    
+    
+
+    
     
     
 }

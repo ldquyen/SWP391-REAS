@@ -80,6 +80,19 @@ public class AdminController extends HttpServlet {
                 case "informationChangeAdmin":
                     url = "InformationChangeAdminServlet";
                     break;
+                //Xét duyệt đơn nạp tiền Cus
+                case "approve_order":
+                    url = "admin_ApproveOrder.jsp";
+                    break;
+                case "approveOrderList":
+                    url = "ApproveOrderServlet";
+                    break;
+                case "approveOrder":
+                    url = "UpdateStatusOrderS2Servlet";
+                    break;
+                case "rejectOrder":
+                    url = "UpdateStatusOrderS2Servlet";
+                    break;
                 // Search,Update Status, Chọn Staff cho RealEstate
                 case "adminSearchAuctionApprove":
                     url = "AdminSearchAuctionApproveServlet";

@@ -138,6 +138,31 @@
                             </ul>
                         </li>
                     </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Nạp tiền</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approve_order" name="action">
+                                                <span>Đơn nạp tiền</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approved" name="action">
+                                                <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                     <p class="menu-label">
                         Administration
                     </p>
@@ -199,7 +224,7 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <p class="menu-label">
                         Transactions
                     </p>
@@ -220,13 +245,13 @@
                             </ul>
                         </li>
                     </ul>
-<p class="menu-label">
+                    <p class="menu-label">
                         Khác
                     </p>
                     <ul class="menu-list">
                         <li>
                             <a class="">Luật lệ</a>
-                             <ul class="menu-list-subnav">
+                            <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
