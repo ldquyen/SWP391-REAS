@@ -241,9 +241,7 @@
                             </ul>
                         </li>
                     </ul>
-                </aside>
-            </div>
-<p class="menu-label">
+                    <p class="menu-label">
                         Khác
                     </p>
                     <ul class="menu-list">
@@ -271,6 +269,9 @@
                             </ul>                           
                         </li>
                     </ul>
+                </aside>
+            </div>
+
 
             <!--===============================================================-->
             <%

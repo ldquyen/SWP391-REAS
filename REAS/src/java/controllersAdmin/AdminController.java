@@ -105,7 +105,7 @@ public class AdminController extends HttpServlet {
                     url = "detailStatisticalServlet";
                     break;
                 case "detailStatisticalJSP":
-                    url = "detailStatisticalServlet";
+                    url = "detailStatistical.jsp";
                     break;
 
             }

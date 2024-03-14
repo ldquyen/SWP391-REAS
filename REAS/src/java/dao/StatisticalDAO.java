@@ -123,7 +123,7 @@ public class StatisticalDAO {
         return loginCount;
     }
 
-   public static int getTotalLoginCount(int year) {
+   public static int getTotalLoginCount(String year) {
         Connection cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -134,7 +134,7 @@ public class StatisticalDAO {
             if (cn != null) {
                 String sql = "SELECT COUNT(*) AS totalLogin FROM accountLoginDate WHERE YEAR(loginDate) = ?";
                 pst = cn.prepareStatement(sql);
-                pst.setInt(1, year);
+                pst.setString(1, year);
                 rs = pst.executeQuery();
                 if (rs.next()) {
                     totalLoginCount = rs.getInt("totalLogin");
@@ -159,6 +159,268 @@ public class StatisticalDAO {
         }
         return totalLoginCount;
     }
+    public static int getTotalLoginCountMonth(String month) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int totalLoginCount = 0;
+
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) AS totalLogin FROM accountLoginDate WHERE MONTH(loginDate) = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, month);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    totalLoginCount = rs.getInt("totalLogin");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return totalLoginCount;
+    } 
+    public static int getTotalLoginCountDay(String day) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int totalLoginCount = 0;
+
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) AS totalLogin FROM accountLoginDate WHERE DAY(loginDate) = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, day);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    totalLoginCount = rs.getInt("totalLogin");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return totalLoginCount;
+    }
+   
+   public static int getTotalLoginCountYMD(String year, String month, String day) {
+    Connection cn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    int totalLoginCount = 0;
+
+    try {
+        cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT COUNT(*) AS totalLogin FROM accountLoginDate WHERE YEAR(loginDate) = ? AND MONTH(loginDate) = ? AND DAY(loginDate) = ?";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, year);
+            pst.setString(2, month);
+            pst.setString(3, day);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                totalLoginCount = rs.getInt("totalLogin");
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return totalLoginCount;
+}
+   
+    public static int getTotalRegisterCountYMD(String registeryear, String registermonth, String registerday) {
+    Connection cn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    int totalRegisterCount = 0;
+
+    try {
+        cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT COUNT(*) AS totalRegister FROM accountRegisterDate WHERE YEAR(registerDate) = ? AND MONTH(registerDate) = ? AND DAY(registerDate) = ?";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, registeryear);
+            pst.setString(2, registermonth);
+            pst.setString(3, registerday);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                totalRegisterCount = rs.getInt("totalRegister");
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return totalRegisterCount;
+}
+   
+   public static int getTotalRegisterCountDay(String day) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int totalRegisterCount = 0;
+
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) AS totalLogin FROM accountRegisterDate WHERE DAY(registerDate) = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, day);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    totalRegisterCount = rs.getInt("totalRegister");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return totalRegisterCount;
+    }
+   
+    public static int getTotalRegisterCountMonth(String month) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int totalRegisterCount = 0;
+
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) AS totalLogin FROM accountRegisterDate WHERE MONTH(registerDate) = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, month);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    totalRegisterCount = rs.getInt("totalRegister");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return totalRegisterCount;
+    }
+   
+    public static int getTotalRegisterCountYear(String year) {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int totalRegisterCount = 0;
+
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT COUNT(*) AS totalLogin FROM accountRegisterDate WHERE YEAR(registerDate) = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, year);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    totalRegisterCount = rs.getInt("totalRegister");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return totalRegisterCount;
+    }
+   
    
      public static int getTotalRegisterCount(Date date) {
         Connection cn = null;

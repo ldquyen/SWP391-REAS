@@ -32,11 +32,38 @@ public class detailStatisticalServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+
             StatisticalDAO staDAO = new StatisticalDAO();
-            int year = 0;
-            int totalLogin = staDAO.getTotalLoginCount(year);
-           request.getRequestDispatcher("AdminController?acion=detailStatisticalJSP").forward(request, response);
+            String year = request.getParameter("year");
+            String month = request.getParameter("month");
+            String day = request.getParameter("day");
+            String registeryear = request.getParameter("registeryear");
+            String registermonth = request.getParameter("registermonth");
+            String registerday = request.getParameter("registerday");
+            if (year != null || month != null || day != null) {
+                int totalLoginYear = staDAO.getTotalLoginCount(year);
+                int totalLoginMonth = staDAO.getTotalLoginCountMonth(month);
+                int totalLoginDay = staDAO.getTotalLoginCountDay(day);
+                int totalLoginDate = staDAO.getTotalLoginCountYMD(year, month, day);
+                request.setAttribute("totalLoginYear", "Số người đăng nhập trong năm " + year + " là : " + totalLoginYear);
+                request.setAttribute("totalLoginMonth", "Số người đăng nhập trong tháng " + month + " là : " + totalLoginMonth);
+                request.setAttribute("totalLoginDay", "Số người đăng nhập trong ngày " + day + " là : " + totalLoginDay);
+                request.setAttribute("totalLoginDate", "Số người đăng nhập trong ngày " + day +" tháng "+ month+" năm "+ year +  " là : " + totalLoginDate);                
+                request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
+            }
+            if (registeryear != null || registermonth != null || registerday != null) {
+                int totalRegisterYear = staDAO.getTotalRegisterCountYear(registeryear);
+                int totalRegisterMonth = staDAO.getTotalRegisterCountMonth(registermonth);
+                int totalRegisternDay = staDAO.getTotalRegisterCountDay(registerday);
+                int totalRegisterDate = staDAO.getTotalRegisterCountYMD(registeryear, registermonth, registerday);
+                request.setAttribute("totalRegisterYear", "Số người đăng ký trong năm " + registeryear + " là : " + totalRegisterYear);
+                request.setAttribute("totalRegisterMonth", "Số người đăng ký trong tháng " + registermonth + " là : " + totalRegisterMonth);
+                request.setAttribute("totalRegisterDay", "Số người đăng ký trong ngày " + registerday + " là : " + totalRegisternDay);
+                request.setAttribute("totalRegisterDate", "Số người đăng nhập trong ngày " + day +" tháng "+ month+" năm "+ year +  " là : " + totalRegisterDate);  
+                request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
+            } else {
+                request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
+            }
         }
     }
 
