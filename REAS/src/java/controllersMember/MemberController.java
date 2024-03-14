@@ -48,9 +48,6 @@ public class MemberController extends HttpServlet {
                 case "tragia":
                     url = "AuctionServlet";
                     break;
-                case "reload":
-                    url = "ReloadAuctionServlet";
-                    break;
                 case "auctionRoom":
                     url = "auctionRoom.jsp";
                     break;
