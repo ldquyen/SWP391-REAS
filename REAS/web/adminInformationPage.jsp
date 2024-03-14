@@ -82,7 +82,7 @@
                                     <c:when test="${not empty sessionScope.admin}">
                                         ${sessionScope.admin.fullname}
                                     </c:when>
-                                    232<c:when test="${not empty sessionScope.member}">
+                                    <c:when test="${not empty sessionScope.member}">
                                         ${sessionScope.member.fullname}
                                     </c:when>
                                     <c:when test="${not empty sessionScope.userGoogle}">
@@ -160,7 +160,7 @@
         </nav>
 
         <!-- BODY -->   
-        <div style="display: flex">
+       <div style="display: flex">
             <img class="background-login background-register" src="image/background-login.png" alt="background-login" />
             <div class="login-container">
                 <div class="register-modal-container">
@@ -168,37 +168,175 @@
                         <h1 style="font-size: 20px;padding-top: 20px">THÔNG TIN TÀI KHOẢN</h1>
                         <h2 style="color: greenyellow"> ${requestScope.SUCCESS} </h2>
                         <h2 style="color: red"> ${requestScope.ERROR} </h2>
-                        <form action="MemberController" method="post">
+                        <form action="AdminController" method="post">
                             <div style="display: flex; justify-content: center">
                                 <div style="padding-right: 10px">
                                     <div>
                                         <p  class="title-single">Họ và tên: ${sessionScope.admin.fullname}</p>
+                                        <div style="display: flex;">
+                                            <input class="input is-normal input-fullname" type="text" placeholder="Họ Và Tên(Chữ cái)" name="txtFullname">
+                                            <button  class="button is-light submit-login-btn" type="submit" value="informationChangeAdmin" name="action" style="
+                                                     background-color: transparent;
+                                                     color: #D9AB73;
+                                                     font-size: 16px;
+                                                     margin-left: 8px;
+                                                     font-family: Inter;
+                                                     font-weight: 800;
+                                                     word-wrap: break-word;
+                                                     border-radius: 40px;
+                                                     border: 3px solid #D9AB73" >
+                                                <span>Chỉnh sửa</span>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <input type="hidden" name="txtAccID" value="${not empty sessionScope.admin ? sessionScope.admin.accID : ''}">
+                                    <input type="hidden" name="txtUsername" value="${not empty sessionScope.admin ? sessionScope.admin.userName : ''}">
+                                    <input type="hidden" name="txtPassword" value="${not empty sessionScope.admin ? sessionScope.admin.password : ''}">
                                     <div>
                                         <p class="title-single" >Email: ${sessionScope.admin.email}</p>
+                                        <div style="display: flex">
+                                            <input class="input is-normal input-email" type="text" placeholder="Email" name="txtEmail">
+                                            <button  class="button is-light submit-login-btn" type="submit" value="informationChangeAdmin" name="action" style="
+                                                     background-color: transparent;
+                                                     color: #D9AB73;
+                                                     font-size: 16px;
+                                                     margin-left: 8px;
+                                                     font-family: Inter;
+                                                     font-weight: 800;
+                                                     word-wrap: break-word;
+                                                     border-radius: 40px;
+                                                     border: 3px solid #D9AB73" >
+                                                <span>Chỉnh sửa</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div>
                                         <p class="title-single" >Số điện thoại: ${sessionScope.admin.phone}</p>
+                                        <div style="display: flex">
+                                            <input class=" input is-normal input-phone" type="text" placeholder="Số điện thoại(10 chữ số)" name="txtPhone">
+                                            <button  class="button is-light submit-login-btn" type="submit" value="informationChangeAdmin" name="action" style="
+                                                     background-color: transparent;
+                                                     color: #D9AB73;
+                                                     font-size: 16px;
+                                                     margin-left: 8px;
+                                                     font-family: Inter;
+                                                     font-weight: 800;
+                                                     word-wrap: break-word;
+                                                     border-radius: 40px;
+                                                     border: 3px solid #D9AB73" >
+                                                <span>Chỉnh sửa</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div>
                                         <p class="title-single" >Địa Chỉ: ${sessionScope.admin.address}</p>
+                                        <div style="display: flex">
+                                            <input class="input is-normal input-address" type="text" placeholder="Địa Chỉ" name="txtAddress">
+                                            <button  class="button is-light submit-login-btn" type="submit" value="informationChangeAdmin" name="action" style="
+                                                     background-color: transparent;
+                                                     color: #D9AB73;
+                                                     font-size: 16px;
+                                                     margin-left: 8px;
+                                                     font-family: Inter;
+                                                     font-weight: 800;
+                                                     word-wrap: break-word;
+                                                     border-radius: 40px;
+                                                     border: 3px solid #D9AB73" >
+                                                <span>Chỉnh sửa</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div>
                                         <p class="title-single" >Số CCCD: ${sessionScope.admin.cccd}</p>
+                                        <div style="display: flex">
+                                            <input class=" input is-normal input-cccd" type="text" placeholder="Số CCCD(12 chữ số)" name="txtCCCD">
+                                            <button  class="button is-light submit-login-btn" type="submit" value="informationChangeAdmin" name="action" style="
+                                                     background-color: transparent;
+                                                     color: #D9AB73;
+                                                     font-size: 16px;
+                                                     margin-left: 8px;
+                                                     font-family: Inter;
+                                                     font-weight: 800;
+                                                     word-wrap: break-word;
+                                                     border-radius: 40px;
+                                                     border: 3px solid #D9AB73" >
+                                                <span>Chỉnh sửa</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div style="padding-left: 10px">
                                     <div>
                                         <p class="title-single" >Nơi Cấp CCCD: ${sessionScope.admin.placeOfReg}</p>
+                                        <div style="display: flex">
+                                            <input class=" input is-normal input-cccd" type="text" placeholder="Nơi cấp CCCD" name="txtCCCDRegplace">
+                                            <button  class="button is-light submit-login-btn" type="submit" value="informationChangeAdmin" name="action" style="
+                                                     background-color: transparent;
+                                                     color: #D9AB73;
+                                                     font-size: 16px;
+                                                     margin-left: 8px;
+                                                     font-family: Inter;
+                                                     font-weight: 800;
+                                                     word-wrap: break-word;
+                                                     border-radius: 40px;
+                                                     border: 3px solid #D9AB73" >
+                                                <span>Chỉnh sửa</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div>
                                         <p class="title-single" >Ngày Cấp CCCD: ${sessionScope.admin.dateOfReg}</p>
+                                        <div style="display: flex">
+                                            <input class=" input is-normal input-cccd" type="text" placeholder="Ngày cấp CCCD" name="txtCCCDRegdate">
+                                            <button  class="button is-light submit-login-btn" type="submit" value="informationChangeAdmin" name="action" style="
+                                                     background-color: transparent;
+                                                     color: #D9AB73;
+                                                     font-size: 16px;
+                                                     margin-left: 8px;
+                                                     font-family: Inter;
+                                                     font-weight: 800;
+                                                     word-wrap: break-word;
+                                                     border-radius: 40px;
+                                                     border: 3px solid #D9AB73" >
+                                                <span>Chỉnh sửa</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div>
                                         <p class="title-single" >Tên Ngân Hàng: ${sessionScope.admin.bankName}</p>
+                                        <div style="display: flex">
+                                            <input class=" input is-normal input-password" type="text" placeholder="Tên Ngân Hàng(Chữ cái)" name="txtBankname">
+                                            <button  class="button is-light submit-login-btn" type="submit" value="informationChangeAdmin" name="action" style="
+                                                     background-color: transparent;
+                                                     color: #D9AB73;
+                                                     font-size: 16px;
+                                                     margin-left: 8px;
+                                                     font-family: Inter;
+                                                     font-weight: 800;
+                                                     word-wrap: break-word;
+                                                     border-radius: 40px;
+                                                     border: 3px solid #D9AB73" >
+                                                <span>Chỉnh sửa</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div>
                                         <p class="title-single" >Số tài khoản ngân hàng: ${sessionScope.admin.bankCode}</p>
+                                        <div style="display: flex">
+                                            <input class=" input is-normal input-password" type="text" placeholder="Số tài khoản(Chữ số)" name="txtBankcode">
+                                            <button  class="button is-light submit-login-btn" type="submit" value="informationChangeAdmin" name="action" style="
+                                                     background-color: transparent;
+                                                     color: #D9AB73;
+                                                     font-size: 16px;
+                                                     margin-left: 8px;
+                                                     font-family: Inter;
+                                                     font-weight: 800;
+                                                     word-wrap: break-word;
+                                                     border-radius: 40px;
+                                                     border: 3px solid #D9AB73" >
+                                                <span>Chỉnh sửa</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -208,6 +346,7 @@
             </div>
         </div>
     </div>
+
 
 
 

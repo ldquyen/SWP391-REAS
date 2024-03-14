@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.AccountDAO;
 import dao.ImageDAO;
 import dao.RealEstateDAO;
+import dao.StatisticalDAO;
 import dto.Account;
 import dto.Image;
 import java.util.List;
@@ -53,6 +54,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
         String url = HOMEPAGE;
+        StatisticalDAO stadao = new StatisticalDAO();
         boolean error = false;
         try {
             AccountDAO dao = new AccountDAO();
@@ -69,6 +71,7 @@ public class LoginServlet extends HttpServlet {
                 url = "admin.jsp";
                 HttpSession session = request.getSession(true);
                 Account a = dao.getAccount(username, password);
+                boolean bl = stadao.addNewLoginDate(a.getAccID());
                 session.setAttribute("admin", a);
             } else if ("M".equals(dto.getRoleID())) {
                 RealEstateDAO realEstateDAO = new RealEstateDAO();
@@ -80,11 +83,13 @@ public class LoginServlet extends HttpServlet {
                 url = "HomeServletIndex_1";
                 HttpSession session = request.getSession(true);
                 Account m = dao.getAccount(username, password);
+                boolean bl1 = stadao.addNewLoginDate(m.getAccID());
                 session.setAttribute("member", m);
             } else if ("S".equals(dto.getRoleID())) {
                 url = "staff.jsp";
                 HttpSession session = request.getSession(true);
                 Account s = dao.getAccount(username, password);
+                boolean bl2 = stadao.addNewLoginDate(s.getAccID());
                 session.setAttribute("staff", s);
             }
         } catch (SQLException ex) {

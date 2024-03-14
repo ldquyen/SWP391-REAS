@@ -243,6 +243,34 @@
                     </ul>
                 </aside>
             </div>
+<p class="menu-label">
+                        Khác
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Luật lệ</a>
+                             <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="searchStaff" name="action">
+                                                <span>Chỉnh sửa luật lệ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="addStaff" name="action">
+                                                <span>Danh sách luật chỉnh sửa</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>                           
+                        </li>
+                    </ul>
 
             <!--===============================================================-->
             <%

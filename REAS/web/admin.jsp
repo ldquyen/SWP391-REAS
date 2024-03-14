@@ -118,7 +118,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
+                                            <button type="submit" value="detailStatistical" name="action">
                                                 <span>Chi tiết</span>
                                             </button>
                                         </form>
