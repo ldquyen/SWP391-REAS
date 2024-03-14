@@ -4,13 +4,10 @@
  */
 package dao;
 
-
-import dto.RealEstate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +15,12 @@ import javax.naming.NamingException;
 import model.UserVM;
 import mylib.DBUtils;
 
-
 /**
  *
  * @author Admin
  */
 public class AdminDAO {
 
-    
     public int getListUserCount() {
         int count = 0;
         String sql = "SELECT count(*) FROM dbo.[Account] WHERE RoleID = ? ";
@@ -43,7 +38,6 @@ public class AdminDAO {
         }
         return count;
     }
-
 
     public List<UserVM> getListMember() throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<UserVM> listMemebers = new ArrayList<>();
@@ -77,8 +71,7 @@ public class AdminDAO {
         return listMemebers;
     }
 
-
-   public List<UserVM> getListMemberWallet(int offset) throws ClassNotFoundException, SQLException, NamingException {
+    public List<UserVM> getListMemberWallet(int offset) throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<UserVM> listMemebers = new ArrayList<>();
         String statusId = "M";
         Connection cn = null;
@@ -121,8 +114,6 @@ public class AdminDAO {
         return null;
     }
 
-
-
     public int editUserWallet(String accId, double fund, double currentFund, String editAction) throws ClassNotFoundException, SQLException, NamingException {
         Connection cn = null;
         try {
@@ -132,7 +123,7 @@ public class AdminDAO {
                 newAccountBalance = fund + currentFund;
             } else {
                 newAccountBalance = currentFund - fund;
-                if(newAccountBalance < 0) {
+                if (newAccountBalance < 0) {
                     return 3;
                 }
             }
@@ -142,7 +133,28 @@ public class AdminDAO {
                 pst.setDouble(1, newAccountBalance);
                 pst.setString(2, accId);
                 int affectedRow = pst.executeUpdate();
-                if (affectedRow > 0) {
+                if (affectedRow > 0 && !(editAction.contains("add"))) {
+                    LocalDateTime localDateTime = LocalDateTime.now();
+                    int WalletId = getUserWalletId(accId);
+                    System.out.println("Wallet Id" + WalletId);
+                    // Convert LocalDateTime to java.sql.Date
+
+                    // Convert LocalDateTime to java.sql.Date
+                    java.util.Date date = new java.util.Date();
+
+                    sql = "INSERT INTO dbo.[WalletTransactionHistory] (WalletID, Quantity, DateAndTime, Action) VALUES (?, ?, ?, ?)";
+                    String actionEdit = "Admin refund from you " + fund;
+                    pst = cn.prepareStatement(sql);
+                    pst.setDouble(1, WalletId);
+                    // Tien gia ban dau cua cai auction + 5%.
+                    pst.setDouble(2, fund);
+                    pst.setTimestamp(3, new java.sql.Timestamp(date.getTime()));
+                    pst.setString(4, actionEdit);
+                    affectedRow = pst.executeUpdate();
+                    if (affectedRow > 0) {
+                        return 1;
+                    }
+                } else if (affectedRow > 0) {
                     return 1;
                 } else {
                     System.out.println("editUserWallet affected row = 0");
@@ -156,6 +168,27 @@ public class AdminDAO {
         }
         return 0;
 
-
     }
+
+    public int getUserWalletId(String accId) throws SQLException {
+        Connection cn = null;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT * FROM dbo.[Wallet] WHERE AccID = ? ";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, accId);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("WalletId");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("getListMemberWallet " + e.getMessage());
+        } finally {
+            cn.close();
+        }
+        return 0;
+    }
+
 }

@@ -56,10 +56,11 @@ public class RegisterAuctionServlet extends HttpServlet {
                 int userWalletId = accountDAO.getUserWalletId(account.getAccID());
                 // get priceNow
                 double auctionPriceNow = auctionDAO.getCurrentPriceNow(auctionIds);
-                registerFee = auctionPriceNow * 0.05;
+                // Cau hinh phan tram
+                registerFee = auctionPriceNow + 0.5;
                 requirmentPrice = auctionPriceNow + registerFee;
                 // Handle logic ben trong DAO. se tra ve code
-                int result = auctionDAO.registerAuction(auctionIds, auctionIds, currentUserBalance, requirmentPrice, userWalletId);
+                int result = auctionDAO.registerAuction(auctionIds, auctionIds, currentUserBalance, requirmentPrice, userWalletId, auctionPriceNow);
                 System.out.println("UserWAlleet - " + userWalletId);
                 System.out.println("Current Balance - " + currentUserBalance);
                 System.out.println("Phi dang ki dau gia - " + registerFee);
