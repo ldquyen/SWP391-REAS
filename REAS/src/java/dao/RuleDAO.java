@@ -24,7 +24,7 @@ import mylib.DBUtils;
  */
 public class RuleDAO {
 
-    public List<Rule> getRule() throws ClassNotFoundException, SQLException {
+    public List<Rule> getRule(int sectionId) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -33,19 +33,18 @@ public class RuleDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "select [ruleID],[ruleDetail],[AccID],[modifyTime]\n"
-                        + "from [dbo].[Rule]";
+                String sql = "select [ruleDetail]\n"
+                        + "from [dbo].[Rule]\n"
+                        + "where [sectionID] = ?";
                 stm = con.prepareStatement(sql);
+                stm.setInt(1, sectionId);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     if (result == null) {
                         result = new ArrayList<Rule>();
                     }
                     Rule dto = new Rule();
-                    dto.setRuleID(rs.getInt("ruleID"));
                     dto.setRuleDetail(rs.getString("ruleDetail"));
-                    dto.setAccID(rs.getString("AccID"));
-                    dto.setModifyTime(rs.getDate("modifyTime"));
                     result.add(dto);
                 }
             }

@@ -94,8 +94,8 @@ public class AdminController extends HttpServlet {
                     url = "admin_approved.jsp";
                     break;
                     //chinh sua luat le
-                case "RuleEdit":
-                    url = "rulefix.jsp";
+                case "ruleedited":
+                    url = "rule.jsp";
                     break;
 
             }

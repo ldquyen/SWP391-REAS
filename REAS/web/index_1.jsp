@@ -9,6 +9,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ page import="dao.WalletDAO" %>
+<%@ page import="dto.Wallet" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -78,8 +83,19 @@
                             </button>
                         </form>
                     </div>
+                    <%
+                        List<Wallet> wallet = new WalletDAO().getWallet();
+                        pageContext.setAttribute("walletAccount", wallet);
+                    %>
                     <div class="navbar-container-1">
-                        <a class="navbar-1">10.000.000</a>                  
+                        <a class="navbar-1">SỐ DƯ :
+                            <c:forEach var="wallet" items="${walletAccount}">
+                                <c:if test="${wallet.accID eq member.accID}">
+                                    <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                </c:if>
+                            </c:forEach>
+                            (xu)
+                        </a>                  
                     </div>
 
                     <div class="navbar-item hover-down has-dropdown is-hoverable">
@@ -265,19 +281,19 @@
                                 <select class="custom-select" name="dientich">
                                     <option value="">Diện tích</option>
                                     <option value="100" <c:if test="${dientich eq '100'}">selected</c:if>>0-100 m2</option>
-                                    <option value="500" <c:if test="${dientich eq '500'}">selected</c:if>>100-500 m2</option>
-                                    <option value="1000" <c:if test="${dientich eq '1000'}">selected</c:if>>500-1000 m2</option>
-                                    <option value="1001" <c:if test="${dientich eq '1001'}">selected</c:if>>Trên 1000 m2</option>
+                                <option value="500" <c:if test="${dientich eq '500'}">selected</c:if>>100-500 m2</option>
+                                <option value="1000" <c:if test="${dientich eq '1000'}">selected</c:if>>500-1000 m2</option>
+                                <option value="1001" <c:if test="${dientich eq '1001'}">selected</c:if>>Trên 1000 m2</option>
                                 </select>
                             </div>
                             <div class="select">
                                 <select class="custom-select" name="mucgia">
                                     <option value="">Mức giá</option>
                                     <option value="5" <c:if test="${mucgia eq '5'}">selected</c:if>>0-5 tỷ</option>
-                                    <option value="10" <c:if test="${mucgia eq '10'}">selected</c:if>>5-10 tỷ</option>
-                                    <option value="50" <c:if test="${mucgia eq '50'}">selected</c:if>>10-50 tỷ</option>
-                                    <option value="100" <c:if test="${mucgia eq '100'}">selected</c:if>>50-100 tỷ</option>
-                                    <option value="101" <c:if test="${mucgia eq '101'}">selected</c:if>>Trên 100 tỷ</option>
+                                <option value="10" <c:if test="${mucgia eq '10'}">selected</c:if>>5-10 tỷ</option>
+                                <option value="50" <c:if test="${mucgia eq '50'}">selected</c:if>>10-50 tỷ</option>
+                                <option value="100" <c:if test="${mucgia eq '100'}">selected</c:if>>50-100 tỷ</option>
+                                <option value="101" <c:if test="${mucgia eq '101'}">selected</c:if>>Trên 100 tỷ</option>
                                 </select>
                             </div>
                         </div>

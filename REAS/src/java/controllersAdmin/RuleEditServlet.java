@@ -38,9 +38,26 @@ public class RuleEditServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          try {
             RuleDAO ruledao = new RuleDAO();
-            List<Rule> rulelist = ruledao.getRule();
+            List<Rule> rulelist = ruledao.getRule(1);
+            List<Rule> rulelist2 = ruledao.getRule(2);
+            List<Rule> rulelist3 = ruledao.getRule(3);
+            List<Rule> rulelist4 = ruledao.getRule(4);
+            List<Rule> rulelist5 = ruledao.getRule(5);
+            List<Rule> rulelist6 = ruledao.getRule(6);
+            List<Rule> rulelist7 = ruledao.getRule(7);
+            List<Rule> rulelist8 = ruledao.getRule(8);
+            List<Rule> rulelist9 = ruledao.getRule(9);
+            
             request.setAttribute("rulelist", rulelist);
-            request.getRequestDispatcher("MainController?action=rule").forward(request, response);
+            request.setAttribute("rulelist2", rulelist2);
+            request.setAttribute("rulelist3", rulelist3);
+            request.setAttribute("rulelist4", rulelist4);
+            request.setAttribute("rulelist5", rulelist5);
+            request.setAttribute("rulelist6", rulelist6);
+            request.setAttribute("rulelist7", rulelist7);
+            request.setAttribute("rulelist8", rulelist8);
+            request.setAttribute("rulelist9", rulelist9);
+            request.getRequestDispatcher("MainController?action=ruleedited").forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RuleEditServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

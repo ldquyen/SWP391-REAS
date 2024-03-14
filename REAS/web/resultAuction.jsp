@@ -1,4 +1,7 @@
 
+<%@page import="dto.Wallet"%>
+<%@page import="dao.WalletDAO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
@@ -70,8 +73,19 @@
                                 </button>
                             </form>
                         </div>
+                        <%
+                            List<Wallet> wallet = new WalletDAO().getWallet();
+                            pageContext.setAttribute("walletAccount", wallet);
+                        %>
                         <div class="navbar-container-1">
-                            <a class="navbar-1">10.000.000</a>                  
+                            <a class="navbar-1">SỐ DƯ :
+                                <c:forEach var="wallet" items="${walletAccount}">
+                                    <c:if test="${wallet.accID eq member.accID}">
+                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                    </c:if>
+                                </c:forEach>
+                                (xu)
+                            </a>                  
                         </div>
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
@@ -191,6 +205,20 @@
                     </button>
                 </form>
             </div>
+        </c:if>
+
+        <c:if test="${not empty auctions}">
+            <c:forEach var="auctionwinningresult" items="${requestScope.auctionwinningresult}">
+                <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                    <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                        <script>
+                            var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
+                            var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                            document.write(formattedNumber);
+                        </script>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
         </c:if>
 
         <footer class="footer"> 
