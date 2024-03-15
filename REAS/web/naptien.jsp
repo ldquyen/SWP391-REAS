@@ -334,12 +334,12 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                <form action="MainController" method="post">
-                                    <button type="submit" value="lichsunaptien" name="action">
-                                        <span>Lịch sử nạp tiền</span>
-                                    </button>
-                                </form>
-                            </a>
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="lichsunaptien" name="action">
+                                            <span>Lịch sử nạp tiền</span>
+                                        </button>
+                                    </form>
+                                </a>
 
                                 <hr class="navbar-divider">
                                 <a class="navbar-item">
@@ -380,13 +380,15 @@
                         <span id="moneyMessage" style="font-size: 14px; color: red; margin-top: 5px;"></span>
                     </div>
                     <div class="form-element">
-                        <label>2. Nội dung chuyển khoản</label>
+                        <label>2. Cú pháp chuyển khoản</label>
                         <div class="square-box">
                             <h3 style="text-align: center">"TÊN TÀI KHOẢN"_ORDER_"SỐ XU NẠP"</h3>
                         </div>
-                        <input type="text" class="form-control" id="content" name="content" placeholder="Điền nội dung" required>
                     </div>
-
+                    <div class="form-element">
+                        <label>3. Nội dung chuyển khoản</label>
+                        <input type="text" class="form-control" id="content" name="content" placeholder="Điền mã chuyển khoản" required>
+                    </div>
                     <div class="checkbox-container">
                         <input type="checkbox" id="agreeCheckbox" required>
                         <label for="agreeCheckbox">Tôi hoàn toàn chịu trách nhiệm với những sai sót của mình!</label>

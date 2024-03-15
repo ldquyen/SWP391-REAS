@@ -78,9 +78,10 @@
                                                         </button>
                                                     </form>
                                                 </div>
-                        -->                        <div class="navbar-container-1">
+                        -->                       
+<!--                        <div class="navbar-container-1">
                             <a class="navbar-1">10.000.000</a>                  
-                        </div>
+                        </div>-->
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
