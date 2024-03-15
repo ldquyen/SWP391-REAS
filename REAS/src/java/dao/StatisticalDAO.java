@@ -319,7 +319,7 @@ public class StatisticalDAO {
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                String sql = "SELECT COUNT(*) AS totalLogin FROM accountRegisterDate WHERE DAY(registerDate) = ?";
+                String sql = "SELECT COUNT(*) AS totalRegister FROM accountRegisterDate WHERE DAY(registerDate) = ?";
                 pst = cn.prepareStatement(sql);
                 pst.setString(1, day);
                 rs = pst.executeQuery();
@@ -356,7 +356,7 @@ public class StatisticalDAO {
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                String sql = "SELECT COUNT(*) AS totalLogin FROM accountRegisterDate WHERE MONTH(registerDate) = ?";
+                String sql = "SELECT COUNT(*) AS totalRegister FROM accountRegisterDate WHERE MONTH(registerDate) = ?";
                 pst = cn.prepareStatement(sql);
                 pst.setString(1, month);
                 rs = pst.executeQuery();
@@ -393,7 +393,7 @@ public class StatisticalDAO {
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                String sql = "SELECT COUNT(*) AS totalLogin FROM accountRegisterDate WHERE YEAR(registerDate) = ?";
+                String sql = "SELECT COUNT(*) AS totalRegister FROM accountRegisterDate WHERE YEAR(registerDate) = ?";
                 pst = cn.prepareStatement(sql);
                 pst.setString(1, year);
                 rs = pst.executeQuery();
