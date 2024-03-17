@@ -386,8 +386,8 @@
                         </div>
                     </div>
                     <div class="form-element">
-                        <label>3. Nội dung chuyển khoản</label>
-                        <input type="text" class="form-control" id="content" name="content" placeholder="Điền mã chuyển khoản" required>
+                        <label>3. Mã giao dịch </label>
+                        <input type="text" class="form-control" id="content" name="content" placeholder="Điền mã giao dịch" required>
                     </div>
                     <div class="checkbox-container">
                         <input type="checkbox" id="agreeCheckbox" required>

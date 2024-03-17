@@ -347,8 +347,8 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Wallet ID</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date and Time</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status ID</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Content</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>                                    
                                 </tr>
                             </thead>
                             <tbody>
