@@ -183,7 +183,8 @@ public class WalletDAO {
                 String sql = "SELECT wh.OrderID, wh.WalletID, wh.Price, wh.DateAndTime, wh.StatusID, wh.Content, whs.StatusName\n"
                         + " FROM dbo.WalletHistory wh \n"
                         + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n" 
-                        + " WHERE wh.WalletID = ? ";
+                        + " WHERE wh.WalletID = ? \n"
+                        + " ORDER BY wh.DateAndTime DESC";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, walletID);
                 rs = stm.executeQuery();

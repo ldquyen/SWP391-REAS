@@ -396,10 +396,10 @@
                     <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
                         <thead>
                             <tr>
-                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Order ID</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Content</th>
                                 <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price</th>
                                 <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date and Time</th>
-                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Content</th>
+                                
                                 <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status ID</th>                   
                             </tr>
                         </thead>
@@ -409,18 +409,14 @@
 
                             <form action="AdminController" method="post">
                                 <tr>
-                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                        ${dto.orderID}
-                                    </td>                               
-                                    
+                                    <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.content}
+                                    </td>
                                     <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                         ${dto.price}
                                     </td>
                                     <td style="border: 1px solid #D9AB73; padding: 8px;">
                                         ${dto.date}
-                                    </td>
-                                    <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
-                                        ${dto.content}
                                     </td>
                                     <td style="border: 1px solid #D9AB73; padding: 8px;">
                                         ${dto.statusName}
@@ -446,7 +442,7 @@
 
         <!-- END BODY -->
 
-        <footer class="footer" style="position: inherit; margin-top: 30px"> 
+        <footer class="footer"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
                 <div class="footer-container">
