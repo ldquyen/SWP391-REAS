@@ -66,6 +66,9 @@ public class MemberController extends HttpServlet {
                 case "mypostjsp":
                     url = "myPost.jsp";
                     break;
+                case "feedbackServlet":
+                    url = "FeedbackServlet";
+                    break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);

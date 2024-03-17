@@ -12,6 +12,7 @@
         <title>Real Estate Auction System</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -174,33 +175,56 @@
         <c:if test="${not empty sessionScope.member.password }">
             <c:set var="m" value="${sessionScope.member}"></c:set>
                 <div style="background-color: black; border-radius: 40px;padding: 20px; text-align: center; border: 6px solid #D9AB73; color: #D9AB73; position: fixed; top: 45%; left: 50%; transform: translate(-50%, -50%);">
-                    <form  action="MemberController" method="post">
-                        <h1 style="font-weight: bold; margin-bottom: 20px; font-size: 20px">THÔNG BÁO ĐẤU GIÁ</h1>          
+                    <form  style="text-align: center;display: inline-block"  action="MemberController" method="post">
+                        <h1 style="font-weight: bold; margin-bottom: 5px; font-size: 20px">THÔNG BÁO ĐẤU GIÁ</h1>          
                     <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
-                        <p class="bold-text">Dự án: <span>
+                        <p class="bold-text-2">Dự án: <span>
                                 ${REGETBYID.realEstateName}
                             </span></p>
-                        <p class="bold-text">Người trúng đấu giá: <span></span></p>
-                        <p class="bold-text">Số điện thoại người bán: <span></span></p>
-                        <p class="bold-text">Trạng thái đấu giá: <span></span></p>
-                        <p class="bold-text">Giá trúng đấu giá: <span>
+                        <p class="bold-text-2">Người trúng đấu giá: <span></span></p>
+                        <p class="bold-text-2">Số điện thoại người bán: <span></span></p>
+                        <p class="bold-text-2">Trạng thái đấu giá: <span></span></p>
+                        <p class="bold-text-2">Giá trúng đấu giá: <span>
                                 <script>
                                     var number = ${REGETBYID.priceLast}; // Assuming auctions.lamda contains the number
                                     var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                     document.write(formattedNumber);
                                 </script> VND
                             </span></p>
-                        </c:forEach>
-                        <%--
-                
-                
-                        --%>
+                        <p class="bold-text-2">Đánh giá</p>
+                    </c:forEach>
+
+                    <%--
+            
+            
+                    --%>
 
                     <input type="hidden" name="accidmember" value="${m.accID}">
 
                 </form>
-                <form action="MainController" method="post">
-                    <button type="submit" value="homeindex_1" name="action" style="border: 5px solid #D9AB73; color: #D9AB73;border-radius: 40px; font-size: 18px;margin-top: 10px;padding: 5px 62px;font-weight: bold;">
+                <form action="MemberController" method="post">
+                    <div class="rating" style="color: #fff;margin-bottom: 10px;">
+                        <span class="fa fa-star star-vote" onclick="setRating(1)"></span>
+                        <span class="fa fa-star star-vote" onclick="setRating(2)"></span>
+                        <span class="fa fa-star star-vote" onclick="setRating(3)"></span>
+                        <span class="fa fa-star star-vote" onclick="setRating(4)"></span>
+                        <span class="fa fa-star star-vote" onclick="setRating(5)"></span>
+                    </div>
+                    <c:if test="${not empty auctions}">
+                        <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                            <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                    <input type="hidden" name="auctionIDfeedback" value="${auctions.realEstateID}">
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+                    </c:if>
+                    <input type="hidden" name="rating" id="rating" value="">
+                    <input type="hidden" value="${sessionScope.member.accID}" name="feedbackaccID">
+                    <div class="control">
+                        <textarea name="feedbacktext" style="border: 3px solid #D9AB73; background-color: #000; color: #fff; font-size: 16px;" class="textarea is-small" placeholder="Giới hạn 250 kí tự." placeholderstyle="color: red;"></textarea>
+                    </div>
+                    <button type="submit" value="feedbackServlet" name="action" style="border: 5px solid #D9AB73; color: #D9AB73;border-radius: 40px; font-size: 18px;margin-top: 10px;padding: 5px 62px;font-weight: bold;">
                         <span>QUAY VỀ TRANG CHỦ</span><br>
                     </button>
                 </form>
@@ -238,5 +262,21 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            function setRating(rating) {
+                const stars = document.querySelectorAll('.fa-star');
+                stars.forEach((star, index) => {
+                    if (index < rating) {
+                        star.classList.add('checked');
+                    } else {
+                        star.classList.remove('checked');
+                    }
+                });
+                document.getElementById('rating').value = rating;
+                console.log("Đã chọn " + rating + " sao");
+            }
+        </script>
+
     </body>
 </html>

@@ -292,6 +292,29 @@ public class AuctionDAO {
         }
     }
 
+    public void addTenSecondsToTimeEnd(String auctionId) throws ClassNotFoundException, SQLException {
+        Connection cn = null;
+        PreparedStatement pst = null;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "UPDATE Auction SET TimeEnd = DATEADD(SECOND, 10, TimeEnd) WHERE auctionId = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, auctionId);
+
+                int rowsAffected = pst.executeUpdate();
+            }
+        } finally {
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+    }
+
+
     public double getCurrentPriceNow(String auctionId) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -495,6 +518,5 @@ public class AuctionDAO {
         }
         return 0;
     }
-
 
 }

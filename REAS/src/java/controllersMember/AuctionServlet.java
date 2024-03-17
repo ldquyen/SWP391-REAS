@@ -54,12 +54,15 @@ public class AuctionServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             String idauctionbid = request.getParameter("idAuctionBID");
             String pricenowbid = request.getParameter("priceNowBid");
+            String add10stimes = request.getParameter("add10stime");
 
             AuctionDAO auctionDAO = new AuctionDAO();
             AccountDAO accountDAO = new AccountDAO();
+
+            auctionDAO.addTenSecondsToTimeEnd(add10stimes);
 
             // get auctionid
             // get accountblance check so voi priceNow + phi tham gia dau gia 5%.
@@ -85,7 +88,7 @@ public class AuctionServlet extends HttpServlet {
                     auctionDAO.setPriceNowAuctions(pricenowbid, idauctionbid);
                 }
                 double auctionPriceNow = auctionDAO.getCurrentPriceNow(idauctionbid);
-                    
+
                 // Handle logic ben trong DAO. se tra ve code
                 int result = auctionDAO.registerAuction(idauctionbid, account.getAccID(), currentUserBalance, requirmentPrice, userWalletId, auctionPriceNow);
                 System.out.println("UserWAlleet - " + userWalletId);
@@ -109,10 +112,10 @@ public class AuctionServlet extends HttpServlet {
             ArrayList<Image> listImgAuction = ImageDAO.getListImageByID(idauctionbid);
 
             ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(idauctionbid);
-            
-             List<Auction> auctionV2 = auctionDAO.getAuctionsV2();
+
+            List<Auction> auctionV2 = auctionDAO.getAuctionsV2();
             request.setAttribute("auctionV2", auctionV2);
-            
+
             request.setAttribute("REGETBYID", REGETBYID);
             request.setAttribute("city", city);
             request.setAttribute("category", category);

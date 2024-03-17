@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtils {   
-    private static final String DB_NAME = "AuctionSystem_1";
+    private static final String DB_NAME = "AuctionSystem";
     private static final String DB_USER_NAME = "SA";
     private static final String DB_PASSWORD = "12345";
 
