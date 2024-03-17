@@ -10,16 +10,14 @@ import mylib.DBUtils;
 
 public class FeedbackDAO {
 
-    private static int feedbackCounter = 1; // Initialize feedback counter
 
-    public static boolean insertFeedback(String accID, String auctionID, LocalDateTime feedbackDate, int star, String detail) throws ClassNotFoundException {
+    public static boolean insertFeedback(String feedbackID, String accID, String auctionID, LocalDateTime feedbackDate, int star, String detail) throws ClassNotFoundException {
         Connection cn = null;
         PreparedStatement pst = null;
 
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                String feedbackID = "F" + String.format("%04d", feedbackCounter++); // Generate feedbackID
                 String sql = "INSERT INTO Feedback (FeedbackID, AccID, AuctionID, FeedbackDate, Star, Detail) VALUES (?, ?, ?, ?, ?, ?)";
                 pst = cn.prepareStatement(sql);
                 pst.setString(1, feedbackID);

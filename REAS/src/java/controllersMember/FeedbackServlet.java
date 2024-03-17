@@ -10,6 +10,7 @@ import dao.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,13 +47,12 @@ public class FeedbackServlet extends HttpServlet {
             String feedbackaccID = request.getParameter("feedbackaccID");
             String auctionIDfeedback = request.getParameter("auctionIDfeedback");
 
+            String feedbackID = UUID.randomUUID().toString();
 
-            // Chuyển đổi chuỗi thời gian thành LocalDateTime
             LocalDateTime currentTime = LocalDateTime.now();
 
             FeedbackDAO feedbackDao = new FeedbackDAO();
-            // Gọi phương thức insertFeedback với các tham số phù hợp
-            feedbackDao.insertFeedback(feedbackaccID, auctionIDfeedback, currentTime, Integer.parseInt(rating), feedback);
+            feedbackDao.insertFeedback(feedbackID, feedbackaccID, auctionIDfeedback, currentTime, Integer.parseInt(rating), feedback);
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching auctions");
