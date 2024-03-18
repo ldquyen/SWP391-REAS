@@ -1,13 +1,18 @@
 <%-- 
-    Document   : admin
-    Created on : Jan 22, 2024, 11:54:07 PM
-    Author     : ASUS
+    Document   : admin_approve
+    Created on : Mar 2, 2024, 11:46:14 AM
+    Author     : ADMIN
 --%>
+
 <%@page import="dto.Wallet"%>
-<%@page import="java.util.List"%>
 <%@page import="dao.WalletDAO"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="dto.Account"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@page import="dao.AccountDAO" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,9 +20,9 @@
         <title>REAS-ADMIN PAGE</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="admin.css" type="text/css" >
+        <!--        <link rel="stylesheet" href="staff.css" type="text/css" >-->
 
     </head>
     <body>
@@ -53,7 +58,7 @@
                         <div class="navbar-container-1">
                             <a class="navbar-1">SỐ DƯ :
                                 <c:forEach var="wallet" items="${walletAccount}">
-                                    <c:if test="${wallet.accID eq member.accID}">
+                                    <c:if test="${wallet.accID eq admin.accID}">
                                         <span class="list-auction-p-1">${wallet.accountBalance}</span>
                                     </c:if>
                                 </c:forEach>
@@ -130,6 +135,31 @@
                     </ul>
                     <ul class="menu-list">
                         <li>
+                            <a class="">Xét duyệt</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách chờ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approved" name="action">
+                                                <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu-list">
+                        <li>
                             <a class="">Nạp tiền</a>
                             <ul class="menu-list-subnav">
                                 <li>
@@ -192,6 +222,22 @@
                     </ul>
                     <ul class="menu-list">
                         <li>
+                            <a class="">Thành viên</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="searchMember" name="action">
+                                                <span>Tìm kiếm</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>                                
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu-list">
+                        <li>
                             <a class="">Doanh thu</a>
                             <ul class="menu-list-subnav">
                                 <li>
@@ -207,31 +253,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Đấu giá</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Danh sách</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Kết quả</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+
 
                     <p class="menu-label">
                         Transactions
@@ -245,123 +267,182 @@
                                         <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
                                                 <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
-
                                             </button>
                                         </form>
+
+
                                     </a>
                                 </li>
 
                             </ul>
                         </li>
                     </ul>
+                    <p class="menu-label">
+                        Khác
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Luật lệ</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="searchStaff" name="action">
+                                                <span>Chỉnh sửa luật lệ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="addStaff" name="action">
+                                                <span>Danh sách luật chỉnh sửa</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>                           
+                        </li>
+                    </ul>
                 </aside>
             </div>
-            <div class="column" style="height: 100vh;">
-                <h3>UserWallet</h3>
-                <div style="color: red">${error}</div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">FullName</th>
-                            <th scope="col">AccountBalance</th>
-                            <th scope="col">Action</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${listUserWallet}" var="user" varStatus="loopStatus">
-                            <tr>
-                                <th scope="row">${loopStatus.count}</th>
-                                <td>${user.fullName}</td>
-                                <td>${user.accountBalance}</td>
-                                <td><a class="btn btn-success" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editWallet-${user.accID}" data-bs-whatever="@getbootstrap">Add fund</a></td>
-                                <td><a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#refundWallet-${user.accID}" data-bs-whatever="@getbootstrap">Refund</a></td>
-
-                            </tr>
 
 
-                        <div class="modal fade" id="editWallet-${user.accID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content"> 
-                                    <form action="AdminController">
-                                        <input type="hidden" name="action" value="editUserWallet">                                        
-                                        <input type="hidden" name="editAction" value="add">
+            <!--===============================================================-->
 
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">${user.fullName}'s Wallet</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="recipient-name" class="col-form-label">Account Balance</label>
-                                                <div class="">${user.accountBalance}</div>
-                                                <input type="hidden" name="currentFund" value="${user.accountBalance}"/>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">Add fund: </label>
-                                                <input name="fund" class="form-control" id="message-text"></input>
-                                                <input type="hidden"  name="accId" class="form-control" id="message-text" value="${user.accID}"></input>
-                                            </div>
-                                            <div class="modal-body">Chọn "Add" de cap nhat vi tien cua member cua ban. Luu y hanh dong nay se khong the hoan tac!</div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success">Add</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="modal fade" id="refundWallet-${user.accID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content"> 
-                                    <form action="AdminController">
-                                        <input type="hidden" name="action" value="editUserWallet">
-                                        <input type="hidden" name="editAction" value="refund">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">${user.fullName}'s Wallet</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="recipient-name" class="col-form-label">Account Balance</label>
-                                                <div class="">${user.accountBalance}</div>
-                                                <input type="hidden" name="currentFund" value="${user.accountBalance}"/>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">Refund: </label>
-                                                <input name="fund" class="form-control" id="message-text"></input>
-                                                <input type="hidden"  name="accId" class="form-control" id="message-text" value="${user.accID}"></input>
-                                            </div>
-                                            <div class="modal-body">Chọn "Refund" de cap nhat vi tien cua member cua ban. Luu y hanh dong nay se khong the hoan tac!</div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success">Refund</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                <div class="admin-paged" style="display: flex">
-                    <c:forEach begin="1" end="${lastPage}" var="i">
-                        <a href="AdminController?action=userWalletPage&index=${i}" style="color: #000; font-size: 20px; padding: 0 20px">${i}</a>
-                    </c:forEach>
+            <div>
+                <div style="text-align: center; display: block; font-size: 25px; color: #D9AB73; margin-top: 25px; margin-bottom: 10px; ">
+                    <h1>XÉT DUYỆT ĐƠN NẠP TIỀN</h1>
                 </div>
 
+
+                <script>
+                    window.onload = function () {
+                        // Kiểm tra xem trang đã được reload trước đó hay không
+                        if (!localStorage.getItem('pageReloaded')) {
+                            // Nếu chưa, thực hiện submit form
+                            document.forms['searchForm'].submit();
+                            // Đánh dấu rằng trang đã được reload
+                            localStorage.setItem('pageReloaded', 'true');
+                        } else {
+                            // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                            localStorage.removeItem('pageReloaded');
+                        }
+                    };
+                </script>
+
+                <form id="searchForm" class="flex-center" action="AdminController">
+                    <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                    <input type="hidden" name="action" value="approveOrderList" />
+                </form>
+
+                <div style="text-align: center; border-radius: 45px;">
+                    <c:set var="listOrder" value="${requestScope.LIST_ORDER_RESULT}"/>
+                    <c:if test="${not empty listOrder}">
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Order ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Wallet ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date and Time</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Content</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <c:forEach items="${listOrder}" var="dto" varStatus="counter">
+
+                                <form action="AdminController" method="post">
+                                    <tr>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.orderID}
+                                        </td>                               
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.walletID}
+                                        </td>
+                                        <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.price}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.date}
+                                        </td>
+                                        <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.content}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            ${dto.statusName}
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            <form action="AdminController" method="post">
+                                                <input type="hidden" name="orderID" value="${dto.orderID}">
+                                                <button style="color: #fff" type="submit" value="approveOrder" name="action" onclick="return confirmAction('Bạn có chắc chắn XÁC NHẬN?')" >Xác nhận</button>
+                                            </form>
+                                        </td>
+                                        <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                            <form action="AdminController" method="post">
+                                                <input type="hidden" name="orderID" value="${dto.orderID}">
+                                                <button style="color: #fff" type="submit" value="rejectOrder" name="action" onclick="return confirmAction('Bạn có chắc chắn TỪ CHỐI?')" >Từ chối</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </form>
+                            </c:forEach>
+
+
+                            </tbody>
+                        </table>
+
+                    </c:if>
+                    <c:if test="${empty listOrder}">
+                        <h2>
+                            No Request!!!
+                        </h2>
+                    </c:if>
+                </div>
             </div>
+
+
+            <!--         ==============       -->
         </div>
 
         <!-- BODY -->
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var priceFirstCells = document.querySelectorAll('.priceFirstCell');
+                var pricePaidCells = document.querySelectorAll('.pricePaidCell');
+                var lamdaCells = document.querySelectorAll('.lamdaCell');
+                var areaCells = document.querySelectorAll('.areaCell');
 
+                priceFirstCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+
+                pricePaidCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+
+                lamdaCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+
+                areaCells.forEach(function (cell) {
+                    cell.textContent = numberWithCommas(cell.textContent);
+                });
+            });
+
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+        </script>
+        <script>
+            function confirmAction(message) {
+                return confirm(message);
+            }
+        </script>
 
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

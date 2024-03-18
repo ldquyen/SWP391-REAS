@@ -157,6 +157,40 @@
                             </ul>
                         </li>
                     </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Nạp tiền</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approve_order" name="action">
+                                                <span>Đợi xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approved_order" name="action">
+                                                <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="reject_order" name="action">
+                                                <span>Đã từ chối</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                     <p class="menu-label">
                         Administration
                     </p>
@@ -218,7 +252,7 @@
                             </ul>
                         </li>
                     </ul>
-                    
+
                     <p class="menu-label">
                         Transactions
                     </p>
@@ -241,8 +275,46 @@
                             </ul>
                         </li>
                     </ul>
+                    <p class="menu-label">
+                        Khác
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Luật lệ</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="fixrule" name="action">
+                                                <span>Chỉnh sửa luật lệ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="addStaff" name="action">
+                                                <span>Danh sách luật chỉnh sửa</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="rule" name="action">
+                                                <span>Xem luật lệ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>                           
+                        </li>
+                    </ul>
                 </aside>
             </div>
+
 
             <!--===============================================================-->
             <%
@@ -254,13 +326,13 @@
                     <h1>XÉT DUYỆT ĐƠN ĐĂNG KÍ THÔNG TIN ĐẤU GIÁ</h1></br> 
                 </div>
 
-<!--                <form class="flex-center" action="AdminController">
-                    <input type="hidden" name="txtSearchValue" 
-                           value="${param.txtSearchValue}" />
-
-                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApproved" name="action">VIEW</button>
-
-                </form><br/>-->
+                <!--                <form class="flex-center" action="AdminController">
+                                    <input type="hidden" name="txtSearchValue" 
+                                           value="${param.txtSearchValue}" />
+                
+                                    <button class="button-search-staff" type="submit" value="adminSearchAuctionApproved" name="action">VIEW</button>
+                
+                                </form><br/>-->
 
                 <script>
                     window.onload = function () {
@@ -281,7 +353,7 @@
                     <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
                     <input type="hidden" name="action" value="adminSearchAuctionApproved" />
                 </form>
-                
+
                 <div style="text-align: center; border-radius: 45px;">
                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
                     <c:if test="${not empty listRealEstate}">
@@ -359,27 +431,28 @@
                                                 <c:if test="${dto.accID eq staff.accID}">
                                                     <div>
                                                         <div>
-                              
+
                                                             <p>${staff.fullname}</p>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </c:if>
                                             </c:forEach>
 
                                         </td>
-                                        
+
                                     </tr>
                                 </form>
                             </c:forEach>
 
                             </tbody>
                         </table>
-                        <c:if test="${empty listRealEstate}">
-                            <h2>
-                                No record is matched!!!
-                            </h2>
-                        </c:if>
+
+                    </c:if>
+                    <c:if test="${empty listRealEstate}">
+                        <h2>
+                            No record is matched!!!
+                        </h2>
                     </c:if>
                 </div>
             </div>

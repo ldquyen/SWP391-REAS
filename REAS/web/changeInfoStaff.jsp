@@ -152,6 +152,40 @@
                             </ul>
                         </li>
                     </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Nạp tiền</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approve_order" name="action">
+                                                <span>Đợi xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approved_order" name="action">
+                                                <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="reject_order" name="action">
+                                                <span>Đã từ chối</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                     <p class="menu-label">
                         Administration
                     </p>
@@ -236,7 +270,43 @@
                         </li>
                     </ul>
 
-
+                    <p class="menu-label">
+                        Khác
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Luật lệ</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="fixrule" name="action">
+                                                <span>Chỉnh sửa luật lệ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="addStaff" name="action">
+                                                <span>Danh sách luật chỉnh sửa</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="rule" name="action">
+                                                <span>Xem luật lệ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>                           
+                        </li>
+                    </ul>
                 </aside>
             </div>
             <div class="column" style="height: 100vh;">

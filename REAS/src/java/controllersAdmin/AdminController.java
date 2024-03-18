@@ -43,7 +43,7 @@ public class AdminController extends HttpServlet {
                 case "searchNameMember":
                     url = "SearchMemberServlet";
                     break;
-                   //==============
+                //==============
                 case "searchStaff":
                     url = "searchStaff.jsp";
                     break;
@@ -77,6 +77,34 @@ public class AdminController extends HttpServlet {
                 case "adminInformationPage":
                     url = "adminInformationPage.jsp";
                     break;
+                case "informationChangeAdmin":
+                    url = "InformationChangeAdminServlet";
+                    break;
+                //Xét duyệt đơn nạp tiền Cus
+                case "approve_order":
+                    url = "admin_ApproveOrder.jsp";
+                    break;
+                case "approved_order":
+                    url = "admin_ApprovedOrder.jsp";
+                    break;
+                case "reject_order":
+                    url = "admin_RejectOrder.jsp";
+                    break;
+                case "approveOrderList":
+                    url = "ApproveOrderServlet";
+                    break;
+                case "approvedOrderList":
+                    url = "ApprovedOrderServlet";
+                    break;
+                case "rejectOrderList":
+                    url = "RejectOrderServlet";
+                    break;
+                case "approveOrder":
+                    url = "UpdateStatusOrderS2Servlet";
+                    break;
+                case "rejectOrder":
+                    url = "UpdateStatusOrderS2Servlet";
+                    break;
                 // Search,Update Status, Chọn Staff cho RealEstate
                 case "adminSearchAuctionApprove":
                     url = "AdminSearchAuctionApproveServlet";
@@ -93,9 +121,22 @@ public class AdminController extends HttpServlet {
                 case "approved":
                     url = "admin_approved.jsp";
                     break;
-                    //chinh sua luat le
+                //chinh sua luat le
                 case "ruleedited":
                     url = "rule.jsp";
+                    break;
+                case "fixrule":
+                    url = "fixrule.jsp";
+                    break;
+                case "rulefix":
+                    url = "RuleModifyServlet";
+                    break;
+                //chi tiet thong ke
+                case "detailStatistical":
+                    url = "detailStatisticalServlet";
+                    break;
+                case "detailStatisticalJSP":
+                    url = "detailStatistical.jsp";
                     break;
 
             }

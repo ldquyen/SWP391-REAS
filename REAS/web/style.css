@@ -710,9 +710,40 @@ button {
     text-align: left;
 }
 
+.bold-text-2 {
+    font-weight: bold;
+    font-size: 17px;
+    padding: 3px 0;
+    color: #fff;
+    text-align: left;
+    text-align: center;
+}
+
+.bold-text-2 > span {
+    font-weight: normal; /* Loại bỏ font-weight: bold; cho thẻ span */
+    color: #D9AB73;
+}
+
 .bold-text > span {
     font-weight: normal; /* Loại bỏ font-weight: bold; cho thẻ span */
     color: #D9AB73;
 }
 
+.textarea:not([rows]) {
+    max-height: 40em;
+    min-height: 5em;
+}
+
+.textarea::placeholder {
+    color: #fff;
+}
+
+.checked {
+    color: #D9AB73;
+}
+
+.fa-star.checked, .fa-star:hover {
+    color: #D9AB73;
+    cursor: pointer;
+}
 

@@ -1,11 +1,14 @@
 <%-- 
-    Document   : changeInfoStaff
-    Created on : Feb 5, 2024, 2:05:06 PM
+    Document   : admin
+    Created on : Jan 22, 2024, 11:54:07 PM
     Author     : ASUS
 --%>
 
+<%@page import="dto.Wallet"%>
+<%@page import="dao.WalletDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.time.LocalDate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>  
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +18,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="admin.css" type="text/css" >
+
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -42,43 +46,56 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
 
-                        <div class="navbar-container-1">
-                            <a class="navbar-1">10.000.000</a>                  
-                        </div>
+                        <div class="navbar-item">
 
-                        <div class="navbar-item hover-down has-dropdown is-hoverable">
-                            <a class="navbar-link navbar-1-list">
-                                ${sessionScope.admin.fullname} (ADMIN)                
-                            </a>
-
-                            <div class="fake-div"></div>
-
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item">
-                                    <form action="AdminController" method="post">
-                                        <button type="submit" value="informationOfAdmin" name="action">
-                                            <span>Thông tin tài khoản</span>
-                                        </button>
-                                    </form>
-                                </a>
-
-                                <hr class="navbar-divider">
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="Logout" name="action">
-                                            <span>Đăng xuất</span>
-                                        </button>
-                                    </form>
-                                </a>
-
+                            <%
+                                List<Wallet> wallet = new WalletDAO().getWallet();
+                                pageContext.setAttribute("walletAccount", wallet);
+                            %>
+                            <div class="navbar-container-1">
+                                <a class="navbar-1">SỐ DƯ :
+                                    <c:forEach var="wallet" items="${walletAccount}">
+                                        <c:if test="${wallet.accID eq admin.accID}">
+                                            <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                        </c:if>
+                                    </c:forEach>
+                                    (xu)
+                                </a>                  
                             </div>
+
+                            <div class="navbar-item hover-down has-dropdown is-hoverable">
+                                <a class="navbar-link navbar-1-list">
+                                    ${sessionScope.admin.fullname} (ADMIN)                
+                                </a>
+
+                                <div class="fake-div"></div>
+
+                                <div class="navbar-dropdown">
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="adminInformationPage" name="action">
+                                                <span>Thông tin tài khoản</span>
+                                            </button>
+                                        </form>
+                                    </a>
+
+                                    <hr class="navbar-divider">
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="Logout" name="action">
+                                                <span>Đăng xuất</span>
+                                            </button>
+                                        </form>
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+
                         </div>
-
-
-
                     </div>
                 </div>
-            </div>
         </nav>
 
 
@@ -104,7 +121,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
+                                            <button type="submit" value="detailStatistical" name="action">
                                                 <span>Chi tiết</span>
                                             </button>
                                         </form>
@@ -113,32 +130,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Xét duyệt</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="approve" name="action">
-                                                <span>Danh sách chờ</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="approved" name="action">
-                                                <span>Đã xét duyệt</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="menu-list">
+<ul class="menu-list">
                         <li>
                             <a class="">Nạp tiền</a>
                             <ul class="menu-list-subnav">
@@ -234,6 +226,7 @@
                         </li>
                     </ul>
 
+
                     <p class="menu-label">
                         Transactions
                     </p>
@@ -245,7 +238,7 @@
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
-                                                <span>Thông tin ví tiền</span>
+                                                <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
                                             </button>
                                         </form>
                                     </a>
@@ -264,7 +257,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="searchStaff" name="action">
+                                            <button type="submit" value="fixrule" name="action">
                                                 <span>Chỉnh sửa luật lệ</span>
                                             </button>
                                         </form>
@@ -279,93 +272,134 @@
                                         </form>
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="rule" name="action">
+                                                <span>Xem luật lệ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
                             </ul>                           
                         </li>
                     </ul>
 
+
                 </aside>
             </div>
+
             <div class="column" style="height: 100vh;">
-                <span style="font-weight: bold; margin-right: 1px; color: #D9AB73; font-size: 20px">
-                    Thêm nhân viên mới
-                </span>  
-                <div style="margin-top: 10px">
-                    <form action="AdminController" method="post">
-                        <table style="border-collapse: collapse; border: 3px solid #D9AB73;background-color: black; color: white;">
-                            <tbody>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Tên:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="fullName" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Tài khoản:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="userName" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Mật khẩu:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="password" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Email:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="email" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">SĐT:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="phone" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Địa chỉ:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="address" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">CCCD:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="cccd" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Nơi cấp CCCD:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="placeOfReg" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Ngày cấp CCCD:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="dateOfReg" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Tên ngân hàng:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="bankName" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding: 8px; font-weight: bold; color: #D9AB73;">Số tài khoản:</td>
-                                    <td style=" padding: 8px;"> <input type="text" name="bankCode" style="background-color: black; color: white; font-size: 15px"> </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <input type="hidden" name="ID" value="${s.accID}">
-                        <button type="submit" value="addNewStaff" name="action" style="background-color: black; border: 3px solid #D9AB73; color: #D9AB73; padding: 6px 20px; margin-top: 10px">
-                            <span style="font-size: 14px; font-weight: bold">Thêm mới</span>
-                        </button>
-                    </form>
+                <form action="AdminController" method="post">
+                    <p>Chọn năm/tháng/ngày</p>
+                    <select name="year">
+                        <%
+                            // Generate options for years
+                            int currentYear = LocalDate.now().getYear();
+                            for (int year = currentYear; year >= currentYear - 10; year--) {
+                        %>
+                        <option value="<%= year%>"><%= year%></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                    <select name="month">
+                        <%
+                            // Generate options for months
+                            for (int month = 1; month <= 12; month++) {
+                        %>
+                        <option value="<%= month%>"><%= month%></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                    <select name="day">
+                        <%
+                            // Generate options for days
+                            for (int day = 1; day <= 31; day++) {
+                        %>
+                        <option value="<%= day%>"><%= day%></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                    <button type="submit" value="detailStatistical" name="action">
+                        <span>Xem thống kê người đăng nhập</span>
+                    </button> 
+                    <div></div>
+                    <p>
+                        ${requestScope.totalLoginYear}
+                    </p>
+                    <p>
+                        ${requestScope.totalLoginMonth}
+                    </p>
+                    <p>
+                        ${requestScope.totalLoginDay}
+                    </p>
+                    <p>
+                        ${requestScope.totalLoginDate}
+                    </p>
+
+                </form>
+
+                <form action="AdminController" method="post">
+                    <p>Chọn năm/tháng/ngày</p>
+                    <select name="registeryear">
+                        <%
+                            // Generate options for years
+                            int currentYearRegister = LocalDate.now().getYear();
+                            for (int year = currentYear; year >= currentYear - 10; year--) {
+                        %>
+                        <option value="<%= year%>"><%= year%></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                    <select name="registermonth">
+                        <%
+                            // Generate options for months
+                            for (int month = 1; month <= 12; month++) {
+                        %>
+                        <option value="<%= month%>"><%= month%></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                    <select name="registerday">
+                        <%
+                            // Generate options for days
+                            for (int day = 1; day <= 31; day++) {
+                        %>
+                        <option value="<%= day%>"><%= day%></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                    <button type="submit" value="detailStatistical" name="action">
+                        <span>Xem thống kê người đăng kí</span>
+                    </button> 
+                    <div></div>
+                    <p>
+                        ${requestScope.totalRegisterYear}
+                    </p>
+                    <p>
+                        ${requestScope.totalRegisterMonth}
+                    </p>
+                    <p>
+                        ${requestScope.totalRegisterDay}
+                    </p>
+                    <p>
+                        ${requestScope.totalRegisterDate}
+                    </p>      
+                </form>
+            </div> 
 
 
-                </div>
-            </div>
-            <div class="column" style="height: 100vh;">
-                <s:if test="${not empty requestScope.ADDOKE}">
-                    <span style="font-weight: bold; margin-right: 1px; color:green ">
-                        Thêm mới thành công
-                    </span>  
-                </s:if>
-                <s:if test="${not empty requestScope.ADDnotOKE}">
-                    <span style="font-weight: bold; margin-right: 1px; color: red ">
-                        Thêm mới thất bại
-                    </span> 
-                </s:if>
-                <s:if test="${not empty requestScope.THIEUTT}">
-                    <span style="font-weight: bold; margin-right: 1px; color: red ">
-                        Vui lòng nhập đầy đủ thông tin
-                    </span>  
-                </s:if>
-            </div>
+        </div>
 
-        </div>        
+        <!-- BODY -->
+
+
+
     </body>
 </html>

@@ -8,6 +8,7 @@
 <%@page import="dao.WalletDAO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,10 +37,10 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="adminjsp" name="action" >
-                                <span style="color: white">TRANG CHỦ</span>
-                            </button>
-                        </form>
+                        <button type="submit" value="adminjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="navbar-end">
@@ -94,8 +95,6 @@
                 </div>
             </div>
         </nav>
-
-
         <div class="columns">
             <div class="column is-one-fifth" style="background-color: #D9D9D9; height: 100vh;">
                 <aside class="menu">
@@ -118,7 +117,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
+                                            <button type="submit" value="detailStatisticalJSP" name="action">
                                                 <span>Chi tiết</span>
                                             </button>
                                         </form>
@@ -145,6 +144,40 @@
                                         <form action="AdminController" method="post">
                                             <button type="submit" value="approved" name="action">
                                                 <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Nạp tiền</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approve_order" name="action">
+                                                <span>Đợi xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approved_order" name="action">
+                                                <span>Đã xét duyệt</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="reject_order" name="action">
+                                                <span>Đã từ chối</span>
                                             </button>
                                         </form>
                                     </a>
@@ -209,11 +242,11 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
-           
+
 
                     <p class="menu-label">
                         Transactions
@@ -224,14 +257,14 @@
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
-                                         <form action="AdminController" method="post">
+                                        <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
                                                 <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
                                             </button>
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -241,11 +274,11 @@
                     <ul class="menu-list">
                         <li>
                             <a class="">Luật lệ</a>
-                             <ul class="menu-list-subnav">
+                            <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="searchStaff" name="action">
+                                            <button type="submit" value="fixrule" name="action">
                                                 <span>Chỉnh sửa luật lệ</span>
                                             </button>
                                         </form>
@@ -256,6 +289,15 @@
                                         <form action="AdminController" method="post">
                                             <button type="submit" value="addStaff" name="action">
                                                 <span>Danh sách luật chỉnh sửa</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="rule" name="action">
+                                                <span>Xem luật lệ</span>
                                             </button>
                                         </form>
                                     </a>

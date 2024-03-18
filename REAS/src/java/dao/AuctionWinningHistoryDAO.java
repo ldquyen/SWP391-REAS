@@ -50,7 +50,7 @@ public class AuctionWinningHistoryDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "SELECT [`1AuctionWinID],[AuctionHisID],[AccID],[FinalPrice] \n"
+                String sql = "SELECT [AuctionWinID],[AuctionHisID],[AccID],[FinalPrice] \n"
                         + "FROM AutionWinningHistory";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();

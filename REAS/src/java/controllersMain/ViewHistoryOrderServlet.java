@@ -3,20 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersMember;
+package controllersMain;
 
-import dao.AuctionDAO;
-import dao.AuctionHistoryDAO;
-import dao.AuctionWinningHistoryDAO;
-import dao.RealEstateDAO;
-import dto.Auction;
-import dto.AuctionHistory;
-import dto.AuctionWinningHistory;
-import dto.RealEstate;
+import dao.WalletDAO;
+import dto.OrderWallet;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,10 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author tranl
+ * @author ADMIN
  */
-@WebServlet(name = "ResultAuctionServlet", urlPatterns = {"/ResultAuctionServlet"})
-public class ResultAuctionServlet extends HttpServlet {
+@WebServlet(name = "ViewHistoryOrderServlet", urlPatterns = {"/ViewHistoryOrderServlet"})
+public class ViewHistoryOrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,43 +36,32 @@ public class ResultAuctionServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final String RESULTAUCTION = "resultAuction.jsp";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = RESULTAUCTION;
-
-        String idreal = request.getParameter("idAuctionResult");
-        System.out.println(idreal);
+       String url = "naptien_history.jsp";
+        
+        String walletIDstr = request.getParameter("walletID");
+        int walletID = Integer.parseInt(walletIDstr);
+        
+        String searchValue = request.getParameter("txtSearchValue");
         try {
-            AuctionDAO auctionDAO = new AuctionDAO();
-            List<Auction> auctions = auctionDAO.getAuctions();
-            request.setAttribute("auctions", auctions);
-
-            auctionDAO.setStatusTimeEndAuctions(4, idreal);
-
-            ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(idreal);
-            request.setAttribute("REGETBYID", REGETBYID);
-
-//            AuctionWinningHistoryDAO auctionwinning = new AuctionWinningHistoryDAO();
-//            List<AuctionWinningHistory> auctionwinningresult = auctionwinning.getAuctionWinning2();
-//            System.out.println(auctionwinningresult);
-//            
-//            AuctionHistoryDAO auctionhistory = new AuctionHistoryDAO();
-//            AuctionHistory  auctionhisresult = auctionhistory.getAuctionHistory(idreal);
-//            
-//            System.out.println(auctionhisresult);
-//            
-//            request.setAttribute("auctionwinningresult", auctionwinningresult);
-//            request.setAttribute("auctionhisresult", auctionhisresult);
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching auctions");
+            if (searchValue == null || searchValue.trim().isEmpty()) {
+                WalletDAO dao = new WalletDAO();
+                List<OrderWallet> listOrder = dao.getRequestNapTienByWalletID(walletID);
+                request.setAttribute("LIST_ORDER_RESULT", listOrder);
+                url = "naptien_history.jsp";
+            } else {
+                WalletDAO dao = new WalletDAO();
+                List<OrderWallet> listOrder = dao.getRequestNapTienByWalletID(walletID);
+                request.setAttribute("LIST_ORDER_RESULT", listOrder);
+                url = "naptien_history.jsp";
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-
         }
     }
 
@@ -92,7 +77,11 @@ public class ResultAuctionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViewHistoryOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -106,7 +95,11 @@ public class ResultAuctionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViewHistoryOrderServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

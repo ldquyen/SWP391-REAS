@@ -83,6 +83,13 @@
                                 </button>
                             </form>
                         </div>
+                        <div class="navbar-container-1">
+                            <form action="MainController" method="post">
+                                <button class="navbar-1" type="submit" value="naptien" name="action">
+                                    <span>NẠP TIỀN</span>
+                                </button>
+                            </form>
+                        </div>
                         <%
                             List<Wallet> wallet = new WalletDAO().getWallet();
                             pageContext.setAttribute("walletAccount", wallet);
@@ -154,8 +161,8 @@
                                 </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Thông tin thanh toán</span>
+                                        <button type="submit" value="lichsunaptien" name="action">
+                                            <span>Lịch sử nạp tiền</span>
                                         </button>
                                     </form>
                                 </a>

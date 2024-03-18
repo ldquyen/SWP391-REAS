@@ -75,20 +75,27 @@
                                 </button>
                             </form>
                         </div>
+                        <div class="navbar-container-1">
+                            <form action="MainController" method="post">
+                                <button class="navbar-1" type="submit" value="naptien" name="action">
+                                    <span>NẠP TIỀN</span>
+                                </button>
+                            </form>
+                        </div>
                         <%
-                        List<Wallet> wallet = new WalletDAO().getWallet();
-                        pageContext.setAttribute("walletAccount", wallet);
-                    %>
-                    <div class="navbar-container-1">
-                        <a class="navbar-1">SỐ DƯ :
-                            <c:forEach var="wallet" items="${walletAccount}">
-                                <c:if test="${wallet.accID eq member.accID}">
-                                    <span class="list-auction-p-1">${wallet.accountBalance}</span>
-                                </c:if>
-                            </c:forEach>
-                            (xu)
-                        </a>                  
-                    </div>
+                            List<Wallet> wallet = new WalletDAO().getWallet();
+                            pageContext.setAttribute("walletAccount", wallet);
+                        %>
+                        <div class="navbar-container-1">
+                            <a class="navbar-1">SỐ DƯ :
+                                <c:forEach var="wallet" items="${walletAccount}">
+                                    <c:if test="${wallet.accID eq member.accID}">
+                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                    </c:if>
+                                </c:forEach>
+                                (xu)
+                            </a>                  
+                        </div>
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
@@ -130,13 +137,13 @@
                                     </form>
                                 </a>
                                 <a class="navbar-item">
-                                <form action="MemberController" method="post">
-                                    <button type="submit" value="mypost" name="action">
-                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
-                                        <span>Quản lí tin đăng</span>
-                                    </button>
-                                </form>
-                            </a>
+                                    <form action="MemberController" method="post">
+                                        <button type="submit" value="mypost" name="action">
+                                            <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
+                                            <span>Quản lí tin đăng</span>
+                                        </button>
+                                    </form>
+                                </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="changePass" name="action">
@@ -146,8 +153,8 @@
                                 </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Thông tin thanh toán</span>
+                                        <button type="submit" value="lichsunaptien" name="action">
+                                            <span>Lịch sử nạp tiền</span>
                                         </button>
                                     </form>
                                 </a>
@@ -196,7 +203,7 @@
                             <th>Giá mua ngay</th>
                             <th>Thời gian bắt đầu</th>
                             <th>Thời gian kết thúc</th>
-                            <th>Đăng kí</th>
+                            <th>Xem</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -257,8 +264,9 @@
                                         <c:if test="${auctions.realEstateID eq listRE3.realEstateID}">
                                             <form action="MemberController" method="post">
                                                 <input type="hidden" name="idRE3" value="${listRE3.realEstateID}">
-                                                <button class="button-xem" type="submit" value="xemroom" name="action">
-                                                    <span>Xem đấu giá</span>
+                                                <!--onclick="logCurrentTime()-->
+                                                <button class="button-xem" type="submit" value="xemroom" name="action" ">
+                                                    <span>Đấu giá</span>
                                                 </button>
                                             </form>
                                         </c:if>
@@ -365,16 +373,23 @@
                 <c:forEach var="auctions" items="${requestScope.auctions}"> 
                     <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
                         <form action="MemberController" method="post">
-                            <button id="submitButton" type="submit" value="stastus2tostatus3" name="action">
+                            <button id="${auctions.realEstateID}" type="submit" value="stastus2tostatus3" name="action">
                                 <input type="hidden" name="idAuction2to3" value="${auctions.realEstateID}">
-                                <p style="">Test</p>
+                                <p>${auctions.auctionName}</p>
                             </button>
                         </form>
+                        <script>
+                            // Lưu giá trị của auctions.realEstateID vào một biến JavaScript
+                            var auctionRealEstateID = "${auctions.realEstateID}";
+                            // Sử dụng biến này ở đây hoặc đâu đó trong tập lệnh JavaScript của bạn
+                            // Ví dụ:
+                            console.log("auctionRealEstateID: ", auctionRealEstateID);
+                        </script>
                     </c:if>
                 </c:forEach>
             </c:forEach>
+        </c:if>
 
-        </c:if> 
 
 
 
@@ -395,6 +410,10 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+
+        </script>
 
         <script>
 
@@ -465,7 +484,11 @@
                     if (distance <= 0) {
                         clearInterval(x);
                         element.innerHTML = "<span class='glow' style='color: #00ff00;'>Đấu giá đang diễn ra</span>";
-//                        submitForm();
+//                        var buttonId = "button#" + auctionRealEstateID; // Construct the button id selector
+//                        var button = document.querySelector(buttonId); // Find the button element
+//                        if (button) {
+//                            button.click(); // Trigger click event
+//                        }
                     }
                 }, 1000);
             }
@@ -476,20 +499,6 @@
 //            console.log(auctionTimeStartElements);
 ////
 //
-//
-//
-//            // Attach event listener to submit button
-//            var submitButton = document.getElementById('submitButton');
-//            submitButton.addEventListener('click', function () {
-//                var form = document.querySelector('.auctionForm');
-//                form.submit();
-//            });
-//            
-//            function submitForm() {
-//                var submitButton = document.getElementById('submitButton');
-//                submitButton.click();
-//            }
-
             auctionTimeStartElements.forEach(function (element) {
                 startCountdown(element);
             });
@@ -535,6 +544,15 @@
                 startCountdown2(element);
             });
 
+        </script>
+
+        <script>
+            // Định nghĩa một hàm để ghi lại thời gian hiện tại và hiển thị nó trong cửa sổ thông báo
+            function logCurrentTime() {
+                var currentTime = new Date(); // Lấy thời gian hiện tại
+                var vietnamTime = new Date(currentTime.toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"})); // Đặt múi giờ cho Việt Nam
+                alert("Current time in Vietnam: " + vietnamTime.toLocaleString());
+            }
         </script>
     </body>
 </html>

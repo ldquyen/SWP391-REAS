@@ -5,18 +5,12 @@
  */
 package controllersMember;
 
-import dao.AuctionDAO;
-import dao.AuctionHistoryDAO;
-import dao.AuctionWinningHistoryDAO;
-import dao.RealEstateDAO;
-import dto.Auction;
-import dto.AuctionHistory;
-import dto.AuctionWinningHistory;
-import dto.RealEstate;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.dateTime;
+import dao.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author tranl
  */
-@WebServlet(name = "ResultAuctionServlet", urlPatterns = {"/ResultAuctionServlet"})
-public class ResultAuctionServlet extends HttpServlet {
+@WebServlet(name = "FeedbackServlet", urlPatterns = {"/FeedbackServlet"})
+public class FeedbackServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,43 +34,31 @@ public class ResultAuctionServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final String RESULTAUCTION = "resultAuction.jsp";
+    private final String HomeServletIndex_1 = "HomeServletIndex_1";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = RESULTAUCTION;
+        String url = HomeServletIndex_1;
 
-        String idreal = request.getParameter("idAuctionResult");
-        System.out.println(idreal);
         try {
-            AuctionDAO auctionDAO = new AuctionDAO();
-            List<Auction> auctions = auctionDAO.getAuctions();
-            request.setAttribute("auctions", auctions);
+            String feedback = request.getParameter("feedbacktext");
+            String rating = request.getParameter("rating");
+            String feedbackaccID = request.getParameter("feedbackaccID");
+            String auctionIDfeedback = request.getParameter("auctionIDfeedback");
 
-            auctionDAO.setStatusTimeEndAuctions(4, idreal);
+            String feedbackID = UUID.randomUUID().toString();
 
-            ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(idreal);
-            request.setAttribute("REGETBYID", REGETBYID);
+            LocalDateTime currentTime = LocalDateTime.now();
 
-//            AuctionWinningHistoryDAO auctionwinning = new AuctionWinningHistoryDAO();
-//            List<AuctionWinningHistory> auctionwinningresult = auctionwinning.getAuctionWinning2();
-//            System.out.println(auctionwinningresult);
-//            
-//            AuctionHistoryDAO auctionhistory = new AuctionHistoryDAO();
-//            AuctionHistory  auctionhisresult = auctionhistory.getAuctionHistory(idreal);
-//            
-//            System.out.println(auctionhisresult);
-//            
-//            request.setAttribute("auctionwinningresult", auctionwinningresult);
-//            request.setAttribute("auctionhisresult", auctionhisresult);
+            FeedbackDAO feedbackDao = new FeedbackDAO();
+            feedbackDao.insertFeedback(feedbackID, feedbackaccID, auctionIDfeedback, currentTime, Integer.parseInt(rating), feedback);
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching auctions");
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-
         }
     }
 

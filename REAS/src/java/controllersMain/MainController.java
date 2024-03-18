@@ -108,7 +108,18 @@ public class MainController extends HttpServlet {
                 case "homepage":
                     url = "index_1.jsp";
                     break;
-
+                case "naptien":
+                    url = "naptien.jsp";
+                    break;
+                case "submitNaptien":
+                    url = "NaptienServlet";
+                    break;
+                case "lichsunaptien":
+                    url = "naptien_history.jsp";
+                    break;
+                case "viewHistoryOrder":
+                    url = "ViewHistoryOrderServlet";
+                    break;
                 //edited rule
                 case "ruleedited":
                     url = "rule.jsp";

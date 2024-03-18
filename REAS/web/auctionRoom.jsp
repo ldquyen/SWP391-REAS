@@ -79,6 +79,13 @@
                                 </button>
                             </form>
                         </div>
+                        <div class="navbar-container-1">
+                            <form action="MainController" method="post">
+                                <button class="navbar-1" type="submit" value="naptien" name="action">
+                                    <span>NẠP TIỀN</span>
+                                </button>
+                            </form>
+                        </div>
                         <%
                             List<Wallet> wallet = new WalletDAO().getWallet();
                             pageContext.setAttribute("walletAccount", wallet);
@@ -150,8 +157,8 @@
                                 </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Thông tin thanh toán</span>
+                                        <button type="submit" value="lichsunaptien" name="action">
+                                            <span>Lịch sử nạp tiền</span>
                                         </button>
                                     </form>
                                 </a>
@@ -434,6 +441,7 @@
                                                 <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
                                                     <input type="hidden" name="idAuctionBID" value="${auctions.realEstateID}">
                                                     <input type="hidden" name="priceNowBid" id="priceNowBid" value="Pricevalue">
+                                                    <input type="hidden" class="add10s">
                                                     <p>Trả giá:  
                                                         <span id="total-price-bid">
                                                             <script>
@@ -457,9 +465,9 @@
                 <div style="display: flex; justify-content: center; width: 100%; text-align: center;">
                 </div>
 
-                <form id="reloadAuction" action="MemberController" method="post">
-                    <button id="reloadButton" type="submit" value="xemroom" name="action">
-                        <h1 style="display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #D9AB73 solid;margin-top: 8px">
+                <form style="display: flex;justify-content: center;" id="reloadAuction" action="MemberController" method="post">
+                    <button  id="reloadButton" type="submit" value="xemroom" name="action">
+                        <h1 style="display: flex;justify-content: center;font-size: 20px; padding: 6px 50px;color: #D9AB73;font-weight: bold;border: 3px #D9AB73 solid;margin-top: 8px; align-items: center">
                             <c:if test="${not empty auctions}">
                                 <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
                                     <c:forEach var="auctions" items="${requestScope.auctions}">
@@ -517,7 +525,6 @@
             function chuyenSoTienSangChu(soTien) {
                 const motDenChin = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
                 const muoiDenHaiMuoi = ['', 'mười', 'hai mươi', 'ba mươi', 'bốn mươi', 'năm mươi', 'sáu mươi', 'bảy mươi', 'tám mươi', 'chín mươi'];
-
                 function chuyenHangChuc(so) {
                     const donVi = so % 10;
                     const hangChuc = Math.floor(so / 10);
@@ -546,7 +553,6 @@
                 const trieu = Math.floor((soTien % 1000000000) / 1000000);
                 const ngan = Math.floor((soTien % 1000000) / 1000);
                 const dong = Math.floor(soTien % 1000);
-
                 let chuoiChu = '';
                 if (ty > 0) {
                     chuoiChu += chuyenSoLonHonHaiChuSo(ty) + ' tỷ ';
@@ -567,7 +573,6 @@
             function setQuantity(upordown) {
                 var quantityElement = document.getElementById('quantity');
                 var quantity = parseInt(quantityElement.value);
-
                 if (quantity > 1 || upordown === 'up') {
                     if (upordown === 'up') {
                         quantity += 1;
@@ -579,7 +584,6 @@
                 }
 
                 quantityElement.value = quantity;
-
                 // Update total price based on the new quantity
                 updateTotalPrice();
             }
@@ -607,7 +611,6 @@
                     event.preventDefault();
                 }
             });
-
             // Function to update the total price based on quantity
             function updateTotalPrice() {
                 var quantity = parseInt(document.getElementById('quantity').value);
@@ -616,16 +619,10 @@
                 var pricePerUnit = parseFloat(document.querySelector('.number-price-bellow-1').innerText.replace(/\./g, '').replace(',', '.'));
                 var totalPrice = quantity * pricePerUnit;
                 var totalPriceBid = priceNow + totalPrice;
-
                 document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN');
                 document.getElementById('total-price-bid').innerText = totalPriceBid.toLocaleString('vi-VN');
-
-
                 var Pricevalue = document.getElementById('priceNowBid').value = totalPriceBid;
                 console.log(Pricevalue);
-
-
-
                 // Convert total price to words using chuyenSoTienSangChu function
                 var totalPriceInWords = chuyenSoTienSangChu(totalPriceBid);
                 document.getElementById('text-price').innerText = totalPriceInWords.charAt(0).toUpperCase() + totalPriceInWords.slice(1); // Render total price in words with the first letter capitalized
@@ -640,20 +637,16 @@
             document.addEventListener("DOMContentLoaded", function () {
                 var startTimeElement = document.getElementById("startTime");
                 var endTimeElement = document.getElementById("endTime");
-
                 // Format start time
                 var startTime = new Date(startTimeElement.innerText);
                 var formattedStartTime = formatTime(startTime);
-
                 // Format end time
                 var endTime = new Date(endTimeElement.innerText);
                 var formattedEndTime = formatTime(endTime);
-
                 // Update the HTML with the formatted time
                 startTimeElement.innerText = formattedStartTime;
                 endTimeElement.innerText = formattedEndTime;
             });
-
             // Function to format the time
             function formatTime(time) {
                 var year = time.getFullYear();
@@ -673,22 +666,33 @@
         </script>
 
         <script>
+            <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                <c:forEach var="auction" items="${requestScope.auctions}">
+                    <c:if test="${auction.realEstateID eq REGETBYID.realEstateID}">
+           var auctionidfor10s = "${auction.realEstateID}";
+//           console.log(auctionidfor10s);
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
+        </script>
+
+
+
+        <script>
             var auctionTimeEndElements = document.querySelectorAll(".auctionTimeEnd");
+            var auctionRealID = document.querySelectorAll(".auctionTimeEnd");
 
             function formatDateTime(originalDateTime) {
                 // Remove leading and trailing quotes from the original datetime string
                 originalDateTime = originalDateTime.replace(/^"|"$/g, '');
-
                 // Parse the original datetime string
                 var dateTimeParts = originalDateTime.split('T');
                 var datePart = dateTimeParts[0];
                 var timePart = dateTimeParts[1].split(':');
-
                 var yearMonthDay = datePart.split('-');
                 var year = parseInt(yearMonthDay[0]);
                 var month = parseInt(yearMonthDay[1]);
                 var day = parseInt(yearMonthDay[2]);
-
                 // Check if year, month, or day parsing failed
                 if (isNaN(year) || isNaN(month) || isNaN(day)) {
                     console.error("Failed to parse year, month, or day:", yearMonthDay);
@@ -719,7 +723,6 @@
                 var originalDateTime = '"' + element.textContent.trim() + '"';
                 var formattedDateTime = formatDateTime(originalDateTime);
                 var countDownDate = new Date(formattedDateTime).getTime();
-
                 var x = setInterval(function () {
                     var now = new Date().getTime();
                     var distance = countDownDate - now;
@@ -727,7 +730,6 @@
                     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
                     var countdownDisplay = "";
                     if (days > 0) {
                         countdownDisplay += days + " ngày ";
@@ -737,6 +739,15 @@
                             (seconds < 10 ? "0" : "") + seconds;
 
                     element.innerHTML = countdownDisplay;
+
+                    if (distance <= 10000) { // Khi thời gian đếm ngược còn 10 giây (10000 milliseconds)
+                        // Tạo thẻ input
+                        var add10sClass = document.querySelector(".add10s");
+                        console.log(add10sClass)
+                        add10sClass.setAttribute("name", "add10stime");
+                        add10sClass.setAttribute("value", auctionidfor10s);
+                    }
+
 
                     if (distance <= 0) {
                         clearInterval(x);
@@ -769,10 +780,8 @@
                 // Disable transition temporarily
                 let slidesContainer = document.querySelector('.container');
                 slidesContainer.style.transitionDuration = '0ms';
-
                 // Move to the next slide
                 showSlides(slideIndex += n);
-
                 // Enable transition after a short delay (10ms for example)
                 setTimeout(() => {
                     slidesContainer.style.transitionDuration = '';
@@ -807,12 +816,12 @@
             }
         </script>\
         <script>
-// Function to click the button with id 'reloadButton' every 10 seconds
+            // Function to click the button with id 'reloadButton' every 10 seconds
             function autoClick() {
                 document.getElementById('reloadButton').click(); // Simulate button click
             }
 
-// Call the autoClick function every 10 seconds
+            // Call the autoClick function every 10 seconds
             setInterval(autoClick, 10000);
         </script>
     </body>

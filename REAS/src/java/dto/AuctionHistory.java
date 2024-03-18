@@ -22,6 +22,10 @@ public class AuctionHistory {
         this.Price = Price;
     }
 
+    public AuctionHistory(String auctionHisID, String auctionID, int status, long lamda, LocalDateTime timeJoin, LocalDateTime timeOut, int numberOfBids, long startPrice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void setAuctionHisID(int auctionHisID) {
         this.auctionHisID = auctionHisID;
     }

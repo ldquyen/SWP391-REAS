@@ -114,6 +114,18 @@
         <servlet-name>RuleDAO</servlet-name>
         <servlet-class>dao.RuleDAO</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>detailStatisticalServlet</servlet-name>
+        <servlet-class>controllersAdmin.detailStatisticalServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InformationChangeAdminServlet</servlet-name>
+        <servlet-class>controllersAdmin.InformationChangeAdminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RuleModifyServlet</servlet-name>
+        <servlet-class>controllersAdmin.RuleModifyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -220,6 +232,18 @@
     <servlet-mapping>
         <servlet-name>RuleDAO</servlet-name>
         <url-pattern>/RuleDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>detailStatisticalServlet</servlet-name>
+        <url-pattern>/detailStatisticalServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InformationChangeAdminServlet</servlet-name>
+        <url-pattern>/InformationChangeAdminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RuleModifyServlet</servlet-name>
+        <url-pattern>/RuleModifyServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -53,17 +53,19 @@ public class RealEstateDetailServlet extends HttpServlet {
 //                request.setAttribute("TOP_3_REAL_ESTATE", top3RealEstate);
 
 // Tạo một seed ngẫu nhiên
-                long seed = System.nanoTime();
-                Collections.shuffle(listRealEstate, new Random(seed));
-
-// Số lượng phần tử bạn muốn lấy ngẫu nhiên (trong trường hợp này, là 3 phần tử)
-                int numberOfRandomElements = 3;
-
-// Lấy danh sách ngẫu nhiên
-                List<RealEstateInfo> randomRealEstate = listRealEstate.subList(0, Math.min(numberOfRandomElements, listRealEstate.size()));
-
-// Đặt danh sách ngẫu nhiên vào request attribute
-                request.setAttribute("RANDOM_REAL_ESTATE", randomRealEstate);
+                if (listRealEstate != null && !listRealEstate.isEmpty()) {
+                    // Shuffle listRealEstate
+                    long seed = System.nanoTime();
+                    Collections.shuffle(listRealEstate, new Random(seed));
+                    
+                    // Get a sublist of randomRealEstate
+                    int numberOfRandomElements = 3;
+                    List<RealEstateInfo> randomRealEstate = listRealEstate.subList(0, Math.min(numberOfRandomElements, listRealEstate.size()));
+                    request.setAttribute("RANDOM_REAL_ESTATE", randomRealEstate);
+                } else {
+                    // Handle case where listRealEstate is empty or null
+                    System.out.println("RealEstateDetailServlet: No real estate found");
+                }
 
                 System.out.println(auctions);
 
