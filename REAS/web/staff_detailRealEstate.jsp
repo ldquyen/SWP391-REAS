@@ -79,9 +79,9 @@
                                                     </form>
                                                 </div>
                         -->                       
-<!--                        <div class="navbar-container-1">
-                            <a class="navbar-1">10.000.000</a>                  
-                        </div>-->
+                        <!--                        <div class="navbar-container-1">
+                                                    <a class="navbar-1">10.000.000</a>                  
+                                                </div>-->
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
@@ -291,8 +291,13 @@
                                                 </c:if>
                                             </c:forEach>
                                             VND</span></p>
-                                    <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
-                                    <p class="bold-text">Thời gian kết thúc: <span id="endTime">${realEstate.timeDown}</span></p>
+                                            <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                                <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
+                                            <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${dto.timeStart}</span></p>
+                                            <p class="bold-text">Thời gian kết thúc: <span id="endTime">${dto.timeEnd}</span></p>
+                                            </c:if>
+                                        </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -308,8 +313,8 @@
                         <div class="container-full-right flex-center text-center">
                             <div>
                                 <p class="h1-text-mid" style="color: #fff;">Đăng bởi</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.fullName}</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.phone}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.fullName}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.phone}</p>
                             </div>
                         </div>
                     </c:if>

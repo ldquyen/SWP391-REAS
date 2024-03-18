@@ -66,7 +66,7 @@
                 margin-left: 0px;
                 font-size: 14px;
                 resize: vertical;
-                
+
             }
 
             .form-container textarea {
@@ -112,7 +112,7 @@
                 font-size: 16px;
                 color: #333;
                 transition: background-color 0.3s ease;
-                
+
             }
 
             input[type="file"]:hover {
@@ -171,8 +171,62 @@
             option{
                 font-size: 16px;
             }
+            
+            /* CSS cho modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
         </style>
+        <!--        <script>
+                    function showRulesAndForm() {
+                        // Hiển thị cửa sổ thông báo với nội dung nội quy
+                        alert("Vui lòng Đọc và Đồng ý với nội quy trước khi đăng bài. 
+                        1. Mọi thông tin phải minh bạch, rõ ràng và chính xác. 
+                        2. Thời gian xét duyệt trong 3 ngày kể từ ngày gửi đơn. 
+                        3. Thời lượng mỗi cuộc đấu giá là 2 tiếng. 
+                        4. Giá mua ngay không vượt quá 80% giá trị ban đầu của tài sản 
+                        5. ĐƠN ĐẤU GIÁ SẼ BỊ TỪ CHỐI NẾU CHỨA THÔNG TIN KHÔNG MINH BẠCH.");
+        
+                        // Hiển thị form điền thông tin
+                        showPostForm();
+                    }
+        
+                    function showPostForm() {
+                        // Ở đây bạn có thể viết code để hiển thị form điền thông tin
+                        // Ví dụ:
+                        document.getElementById("postForm").style.display = "block";
+                    }
+                </script>-->
         <script>
             // Hàm hiển thị cửa sổ thông báo
             function showErrorMessage(message) {
@@ -196,7 +250,7 @@
             </c:if>
         </script>
     </head>
-    <body>
+    <body onload="showRulesAndForm()">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item">
@@ -354,6 +408,52 @@
                 </div>
             </div>
         </nav>
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 style="text-align: center; font-size: 24px; font-weight: bold;">Nội Quy Đăng Bài Đấu Giá</h2>
+                <p style="text-align: center;">(Vui lòng đọc và đồng ý với nội quy trước khi đăng bài)</p>
+                <ul style="text-align: center; font-weight: bold;">
+                    <li>1. Mọi thông tin phải minh bạch, rõ ràng và chính xác.</li>
+                    <li>2. Thời gian xét duyệt trong 3 ngày kể từ ngày gửi đơn.</li>
+                    <li>3. Thời lượng mỗi cuộc đấu giá là 2 tiếng.</li>
+                    <li>4. Giá mua ngay không vượt quá 80% giá trị ban đầu của tài sản.</li>
+                    <li>5. Đơn đấu giá sẽ bị TỪ CHỐI nếu chứa thông tin không minh bạch.</li>
+                </ul>
+                <button id="agreeButton" style="width: 200px; padding: 20px; border: 2px solid #ccc; border-radius: 10px;margin-left: 160px;" >Đồng ý</button>
+            </div>
+        </div>
+        <script>
+            // Lấy phần modal
+            var modal = document.getElementById("myModal");
+
+            // Lấy nút đóng
+            var closeButton = document.getElementsByClassName("close")[0];
+
+            // Khi người dùng nhấn vào nút đóng, đóng modal
+            closeButton.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // Hiển thị modal khi trang được tải
+            window.onload = function () {
+                modal.style.display = "block";
+            }
+
+            // Nếu người dùng đồng ý, ẩn modal và hiển thị form
+            var agreeButton = document.getElementById("agreeButton");
+            agreeButton.onclick = function () {
+                modal.style.display = "none";
+                showPostForm();
+            }
+
+            function showPostForm() {
+                // Viết code để hiển thị form điền thông tin ở đây
+                // Ví dụ:
+                document.getElementById("postForm").style.display = "block";
+            }
+        </script>
 
         <!-- BODY -->
         <div class="BodyForm">
@@ -363,7 +463,7 @@
                 </h1>
             </div>
 
-            <div class="form-post-real-estate" >
+            <div class="form-post-real-estate" id="postForm" >
                 <form action="MainController" method="post" enctype="multipart/form-data">
                     <input type="hidden" id="accID" name="accID" value="${sessionScope.member.accID}">
                     <!--                    <input type="text" id="realEstateID" name="realEstateID" required/></br>-->
@@ -455,13 +555,19 @@
                         </select></br>
                     </div>
                     <div class="form-element">
-                        <label>5. Giá       
+                        <label>5. Giá      
                             <span style="font-size: 14px; color: red; margin-top: 5px;" >1 Xu = 1.000.000VNĐ (1 triệu VNĐ)</span>
                         </label>
                         <input type="text" class="form-control" id="priceFirst" name="priceFirst" placeholder="Xu" oninput="formatCurrency(this)" required></br>
                     </div>
                     <div class="form-element">
-                        <label>6. Thời gian bắt đầu</label>
+                        <label>6. Giá mua ngay      
+                            <span style="font-size: 14px; color: red; margin-top: 5px;" >1 Xu = 1.000.000VNĐ (1 triệu VNĐ)</span>
+                        </label>
+                        <input type="text" class="form-control" id="pricePaid" name="pricePaid" placeholder="Xu" oninput="formatCurrency(this)"></br>
+                    </div>
+                    <div class="form-element">
+                        <label>7. Thời gian bắt đầu</label>
                         <input type="datetime-local" class="form-control" id="timeStart" name="timeStart"  required></br>
                         <script>
                             // Lấy ngày và giờ hiện tại
@@ -478,7 +584,7 @@
                             document.getElementById("timeStart").min = currentDateTime;
                         </script>
                     </div>
-                    <div class="form-element">
+<!--                    <div class="form-element">
                         <label>7. Thời gian kết thúc</label>
                         <input type="datetime-local" class="form-control" id="timeEnd" name="timeEnd"  required></br>
                         <script>
@@ -539,7 +645,7 @@
                                 }
                             });
                         </script>
-                    </div>
+                    </div>-->
                     <div class="form-element">
                         <label>8. Diện tích <span style="font-size: 10px;">(m²)</span></label>
                         <input type="text" class="form-control" id="area" name="area" placeholder="(m²)" oninput="formatCurrency(this)" required></br>

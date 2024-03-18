@@ -73,11 +73,7 @@ public class NaptienServlet extends HttpServlet {
             Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        long price = 300;
-        WalletDAO dao = new WalletDAO();
-            boolean result = dao.sendRequestNapTien(1, price, "Nap tien de");
-    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

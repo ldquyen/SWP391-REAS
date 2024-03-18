@@ -134,38 +134,6 @@ public class AuctionDAO {
         }
         return result;
 
-//        Auction auction = new Auction();
-//        Connection cn = DBUtils.getConnection();
-//        if (cn != null) {
-//            String sql = "SELECT\n"
-//                    + "    A.AuctionName,\n"
-//                    + "    CI.CityName,\n"
-//                    + "    C.CatName,\n"
-//                    + "    R.PriceNow,\n"
-//                    + "    A.TimeEnd,\n"
-//                    + "    R.Status\n"
-//                    + "FROM\n"
-//                    + "    Auction A\n"
-//                    + "    JOIN RealEstate R ON A.RealEstateID = R.RealEstateID\n"
-//                    + "    JOIN Category C ON R.CatID = C.CatID\n"
-//                    + "    JOIN City CI ON R.CityID = CI.CityID;";
-//            PreparedStatement pst = cn.prepareStatement(sql);
-//
-//            ResultSet rs = pst.executeQuery();
-//            if (rs != null) {
-//                while (rs.next()) {
-//                    String AuctionName = rs.getString("AuctionName");
-//                    String CityName = rs.getString("CityName");
-//                    String CatName = rs.getString("CatName");
-//                    String PriceNow = rs.getString("PriceNow");
-//                    String TimeEnd = rs.getString("TimeEnd");
-//                    boolean Status = rs.getBoolean("Status");
-//                    auction = new Auction(AuctionName, TimeEnd, AuctionName, 0, 0, LocalDateTime.MAX, LocalDateTime.MIN);
-//                }
-//            }
-//            cn.close();
-//        }
-//        return auction;
     }
 
     public List<Auction> getAuctionsV2() throws ClassNotFoundException, SQLException {

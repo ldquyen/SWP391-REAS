@@ -344,7 +344,7 @@
                                     var number = ${item.priceFirst}; // Assuming auctions.lamda contains the number
                                     var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                     document.write(formattedNumber);
-                                </script> VND
+                                </script> Xu
                                 <%--  <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd --%>
                             </p>
                         </div>

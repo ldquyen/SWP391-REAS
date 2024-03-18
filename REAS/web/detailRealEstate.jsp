@@ -285,12 +285,12 @@
                                                 var number = ${realEstate.priceFirst}; // Assuming auctions.lamda contains the number
                                                 var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                                 document.write(formattedNumber);
-                                            </script> VND</span></p></span></p>
+                                            </script> Xu</span></p></span></p>
                                     <p class="bold-text">Giá mua ngay: <span class="test"><script>
                                         var number = ${realEstate.pricePaid}; // Assuming auctions.lamda contains the number
                                         var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                         document.write(formattedNumber);
-                                            </script> VND</span>
+                                            </script> Xu</span>
                                     <p class="bold-text">Bước giá: <span>
                                             <c:forEach var="Auctions" items="${requestScope.Auctions}"> 
                                                 <c:if test="${Auctions.realEstateID eq realEstate.realEstateID}">
@@ -301,9 +301,16 @@
                                                     </script>
                                                 </c:if>
                                             </c:forEach>
-                                            VND</span></p>
-                                    <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
-                                    <p class="bold-text">Thời gian kết thúc: <span id="endTime">${realEstate.timeDown}</span></p>
+                                            Xu</span></p>
+<!--                                    <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
+                                    <p class="bold-text">Thời gian kết thúc: <span id="endTime">${realEstate.timeDown}</span></p>-->
+                                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                                    <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                        <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
+                                            <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${dto.timeStart}</span></p>
+                                            <p class="bold-text">Thời gian kết thúc: <span id="endTime">${dto.timeEnd}</span></p>
+                                        </c:if>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
