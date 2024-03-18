@@ -417,7 +417,7 @@
                 <ul style="text-align: center; font-weight: bold;">
                     <li>1. Mọi thông tin phải minh bạch, rõ ràng và chính xác.</li>
                     <li>2. Thời gian xét duyệt trong 3 ngày kể từ ngày gửi đơn.</li>
-                    <li>3. Thời lượng mỗi cuộc đấu giá là 2 tiếng.</li>
+                    <li>3. Thời lượng mỗi cuộc đấu giá là 3 tiếng.</li>
                     <li>4. Giá mua ngay không vượt quá 80% giá trị ban đầu của tài sản.</li>
                     <li>5. Đơn đấu giá sẽ bị TỪ CHỐI nếu chứa thông tin không minh bạch.</li>
                 </ul>
