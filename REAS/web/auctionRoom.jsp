@@ -310,9 +310,23 @@
                                                         </c:if>
                                                     </c:forEach>
                                                     Xu</span></p>
-                                            <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${REGETBYID.timeUp}</span></p>
-                                            <p class="bold-text">Thời gian kết thúc: <span id="endTime">${REGETBYID.timeDown}</span></p>
-                                            
+                                            <p class="bold-text">Thời gian bắt đầu: <span id="startTime">
+                                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                                           ${auctions.timeStart}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </span>
+                                            </p>
+                                            <p class="bold-text">Thời gian kết thúc: <span id="endTime">
+                                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                                           ${auctions.timeEnd}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </span>
+                                            </p>
+
                                         </div>
                                     </div>
                                 </div>
