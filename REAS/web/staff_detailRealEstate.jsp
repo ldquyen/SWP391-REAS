@@ -4,11 +4,14 @@
     Author     : ADMIN
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="dto.Wallet"%>
+<%@page import="dao.WalletDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="java.util.List" %>
 <%@ page import="dto.RealEstateInfo" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,113 +40,32 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="homeindex" name="action">
-                                <span>TRANG CHỦ</span>
-                            </button>
-                        </form>
-                    </a>
-
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="news" name="action">
-                                <span>TIN TỨC</span>
-                            </button>
-                        </form>
-                    </a>
-
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="rule" name="action">
-                                <span>NỘI QUY</span>
-                            </button>
-                        </form>
-                    </a>
+                    <form action="StaffController" method="post" style="margin-top: 17px">
+                        <button type="submit" value="staffjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
+
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <!--                        <div class="navbar-container-1">
-                                                    <form action="MainController" method="post">
-                                                        <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                                            <span>DANH SÁCH ĐẤU GIÁ</span>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                                <div class="navbar-container-1">
-                                                    <form action="MainController" method="post">
-                                                        <button class="navbar-1" type="submit" value="postNew" name="action">
-                                                            <span>ĐĂNG TIN</span>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                        -->                       
-                        <!--                        <div class="navbar-container-1">
-                                                    <a class="navbar-1">10.000.000</a>                  
-                                                </div>-->
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
-                                <c:choose>
-                                    <c:when test="${not empty sessionScope.member}">
-                                        ${sessionScope.member.fullname}
-                                    </c:when>
-                                    <c:when test="${not empty sessionScope.userGoogle}">
-                                        ${sessionScope.userGoogle.given_name}
-                                    </c:when>
-                                    <c:otherwise>
-                                        Guest
-                                    </c:otherwise>
-                                </c:choose>
+                                ${sessionScope.staff.fullname} (STAFF)                
                             </a>
 
                             <div class="fake-div"></div>
 
                             <div class="navbar-dropdown">
                                 <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="informationPage" name="action">
+                                    <form action="AdminController" method="post">
+                                        <button type="submit" value="informationOfAdmin" name="action">
                                             <span>Thông tin tài khoản</span>
                                         </button>
                                     </form>
                                 </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Danh mục đã đăng kí</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Lịch sử đấu giá</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Quản lí tin đăng</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="changePass" name="action">
-                                            <span>Thay đổi mật khẩu</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Thông tin thanh toán</span>
-                                        </button>
-                                    </form>
-                                </a>
-
                                 <hr class="navbar-divider">
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
@@ -160,13 +82,13 @@
             </div>
         </nav>
 
-        <button onclick="goBack()">Quay lại</button>
-
-        <script>
-            function goBack() {
-                window.history.back();
-            }
-        </script>
+        <!--        <button onclick="goBack()">Quay lại</button>
+        
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>-->
 
 
         <div class="columns">
@@ -194,23 +116,6 @@
 
                             </div>
                         </c:forEach>
-                        <!-- Full-width images with number text -->
-
-                        <!--
-                                                <div class="mySlides">
-                                                    <div class="numbertext">4 / 6</div>
-                                                    <img src="image/img_lights_wide.jpg" style="width:100%">
-                                                </div>
-                        
-                                                <div class="mySlides">
-                                                    <div class="numbertext">5 / 6</div>
-                                                    <img src="image/img_nature_wide.jpg" style="width:100%">
-                                                </div>
-                        
-                                                <div class="mySlides">
-                                                    <div class="numbertext">6 / 6</div>
-                                                    <img src="image/img_snow_wide.jpg" style="width:100%">
-                                                </div>-->
 
                         <!-- Next and previous buttons -->
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -274,12 +179,12 @@
                                                 var number = ${realEstate.priceFirst}; // Assuming auctions.lamda contains the number
                                                 var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                                 document.write(formattedNumber);
-                                            </script> VND</span></p></span></p>
+                                            </script> Xu</span></p></span></p>
                                     <p class="bold-text">Giá mua ngay: <span class="test"><script>
                                         var number = ${realEstate.pricePaid}; // Assuming auctions.lamda contains the number
                                         var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                         document.write(formattedNumber);
-                                            </script> VND</span>
+                                            </script> Xu</span>
                                     <p class="bold-text">Bước giá: <span>
                                             <c:forEach var="Auctions" items="${requestScope.Auctions}"> 
                                                 <c:if test="${Auctions.realEstateID eq realEstate.realEstateID}">
@@ -290,7 +195,7 @@
                                                     </script>
                                                 </c:if>
                                             </c:forEach>
-                                            VND</span></p>
+                                            Xu</span></p>
                                             <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
                                             <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
                                                 <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
@@ -313,12 +218,13 @@
                         <div class="container-full-right flex-center text-center">
                             <div>
                                 <p class="h1-text-mid" style="color: #fff;">Đăng bởi</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.fullName}</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.phone}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.fullName}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.phone}</p>
                             </div>
                         </div>
                     </c:if>
                 </c:forEach>
+
                 <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
                 <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
                     <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
