@@ -6,9 +6,14 @@
 package controllersStaff;
 
 import dao.AuctionDAO;
+import dao.CityDAO;
+import dao.ImageDAO;
+import dao.PurchaseRequestDAO;
 import dao.RealEstateDAO;
 import dto.Auction;
-import dto.RealEstate;
+import dto.City;
+import dto.Image;
+import dto.PurchaseRequest;
 import dto.RealEstateInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,13 +29,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.RealEstateVM;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name = "SearchAuctionApproveServlet", urlPatterns = {"/SearchAuctionApproveServlet"})
-public class SearchAuctionApproveServlet extends HttpServlet {
+@WebServlet(name = "SearchRequestMuaNgayServlet", urlPatterns = {"/SearchRequestMuaNgayServlet"})
+public class SearchRequestMuaNgayServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,25 +49,58 @@ public class SearchAuctionApproveServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, NamingException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url = "staff_approve.jsp";
+        String url = "";
+        String realEstateId = request.getParameter("realEstateID");
         String searchValue = request.getParameter("txtSearchValue");
         try {
-            RealEstateDAO dao = new RealEstateDAO();
-            if (searchValue == null || searchValue.trim().isEmpty()) {
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(0);
-                url = "staff_approve.jsp";
-                request.setAttribute("SEARCH_RESULT", listRealEstate);
+            if (realEstateId != null) {
+                RealEstateDAO realEstateDAO = new RealEstateDAO();
+                AuctionDAO auctionDAO = new AuctionDAO();
+
+                List<Auction> auctions = auctionDAO.getAuctions();
+                request.setAttribute("Auctions", auctions);
+
+                RealEstateDAO dao = new RealEstateDAO();
+                PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+
+                if (searchValue == null || searchValue.trim().isEmpty()) {
+                    List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
+                    request.setAttribute("SEARCH_RESULT", listRealEstate);
+
+                    List<PurchaseRequest> listRequestMuaNgay = dao1.getAllPurchaseRequests(realEstateId);
+                    request.setAttribute("LIST_REQUEST", listRequestMuaNgay);
+
+                } else {
+                    List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
+                    request.setAttribute("SEARCH_RESULT", listRealEstate);
+
+                    List<PurchaseRequest> listRequestMuaNgay = dao1.getAllPurchaseRequests(realEstateId);
+                    request.setAttribute("LIST_REQUEST", listRequestMuaNgay);
+
+                }
+
+                System.out.println(auctions);
+
+                ArrayList<Image> listIMG = ImageDAO.getListImageByID(realEstateId);
+                ArrayList<City> city = CityDAO.getCityList();
+                RealEstateVM realEstateVM = realEstateDAO.getRealEstateById(realEstateId);
+
+                System.out.println(realEstateVM);
+                if (realEstateVM != null) {
+                    request.setAttribute("realEstate", realEstateVM);
+                    request.setAttribute("city", city);
+                    request.setAttribute("listimg", listIMG);
+
+                    url = "staff_detailRealEstate.jsp";
+                } else {
+                    System.out.println("RealEstateDetailServlet null exception");
+                }
             } else {
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(0);
-                url = "staff_approve.jsp";
-                request.setAttribute("SEARCH_RESULT", listRealEstate);
+                url = "home";
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -80,9 +119,9 @@ public class SearchAuctionApproveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -100,9 +139,9 @@ public class SearchAuctionApproveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

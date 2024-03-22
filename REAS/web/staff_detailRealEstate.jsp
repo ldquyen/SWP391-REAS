@@ -230,33 +230,92 @@
                     <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
                         <div class="container-full-right-bellow">
                             <div>
-                                <p class="flex-center text-center" style="color: #000;font-1weight: bold;font-size: 26px !important;">
+
                                 <form action="StaffController" method="post">
                                     <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
-                                    <button style="color: #000 ; text-align: center" type="submit" value="updateStatusButton" name="action">Xác nhận</button>
+                                    <div class="container-full-right flex-center text-center">
+                                        <button style="color: #fff ; text-align: center" type="submit" value="updateStatusButton" name="action">
+                                            <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Xác nhận</p>
+                                        </button>
+                                    </div>
                                 </form>
-                                <p>
                             </div>
                         </div>
 
                         <div class="container-full-right-bellow">
                             <div>
-                                <p class="flex-center text-center" style="color: #000;font-weight: bold;font-size: 26px !important;">
+
                                 <form action="StaffController" method="post">
                                     <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
                                     <input type="hidden" name="auctionID" value="${dto.auctionID}">
                                     <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
-                                    <button style="color: #000 ; text-align: center"  type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
+                                    <div class="container-full-right flex-center text-center">
+                                        <button style="color: #fff ; text-align: center"  type="submit" value="deleteRealEstateButton" name="action">
+                                            <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Xóa</p>
+                                        </button>
+                                    </div>
                                 </form>
-                                <p>
                             </div>
                         </div>
                     </c:if>
                 </c:forEach>
-
             </div>
 
+        </div>
 
+        <div>
+
+            <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+            <form id="searchForm" class="flex-center" action="StaffController" method="post">
+                <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}" />
+                <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                <input type="submit" value="listRequestMuaNgay" name="action" />   
+            </form>
+
+            <div style="text-align: center; border-radius: 45px;">
+                <c:set var="listRequestMuaNgay" value="${requestScope.LIST_REQUEST}"/>
+                <c:if test="${not empty listRequestMuaNgay}">
+                    <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Acc ID</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PricePaid</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date And Time</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <c:forEach items="${listRequestMuaNgay}" var="dto" varStatus="counter">
+                                <tr>                   
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.accID}
+                                    </td>
+                                    <td class="pricePaid" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.pricePaid}
+                                    </td>
+                                    <td class="dateAndTime" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.timeRequest}
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.requestStatusName}
+                                    </td>
+
+                                </tr>
+                                </form> 
+                            </c:forEach>
+
+                        </tbody>
+                    </table>
+
+                </c:if>
+                <c:if test="${empty listRequestMuaNgay}">
+                    <h2>
+                        No record is matched!!!
+                    </h2>
+                </c:if>
+
+            </div>
         </div>
 
 
@@ -319,18 +378,22 @@
             document.addEventListener("DOMContentLoaded", function () {
                 var startTimeElement = document.getElementById("startTime");
                 var endTimeElement = document.getElementById("endTime");
+                var dateAndTimeElement = document.getElementById("dateAndTime");
 
                 // Format start time
                 var startTime = new Date(startTimeElement.innerText);
                 var formattedStartTime = formatTime(startTime);
+                var dateAndTime = new Date(dateAndTimeElement.innerText);
 
                 // Format end time
                 var endTime = new Date(endTimeElement.innerText);
                 var formattedEndTime = formatTime(endTime);
+                var formattedDateAndTime = formatTime(dateAndTime);
 
                 // Update the HTML with the formatted time
                 startTimeElement.innerText = formattedStartTime;
                 endTimeElement.innerText = formattedEndTime;
+                dateAndTimeElement.innerText = formattedDateAndTime;
             });
 
             // Function to format the time

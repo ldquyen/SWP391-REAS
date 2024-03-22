@@ -55,9 +55,7 @@ public class MuaNgayServlet extends HttpServlet {
                 request.setAttribute("Purchase_Request", "Đơn mua ngay gửi THÀNH CÔNG, vui lòng đợi hệ thống xét duyệt!!!");
                 response.sendRedirect(request.getHeader("Referer"));
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -5,11 +5,14 @@
  */
 package dao;
 
+import dto.PurchaseRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import mylib.DBUtils;
 
 /**
@@ -17,7 +20,7 @@ import mylib.DBUtils;
  * @author ADMIN
  */
 public class PurchaseRequestDAO {
-    
+
     public boolean sendRequestMuaNgay(String accID, String realEstateID, long pricePaid) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -47,4 +50,91 @@ public class PurchaseRequestDAO {
         }
         return true;
     }
+
+    public List<PurchaseRequest> getAllPurchaseRequests(String realEstateID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<PurchaseRequest> result = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = " SELECT pr.AccID, "
+                        + " pr.RealEstateID, "
+                        + " pr.PricePaid, "
+                        + " pr.DateAndTime, "
+                        + " pr.RequestStatusID, "
+                        + " rs.RequestStatusName "
+                        + " FROM PurchaseRequests pr INNER JOIN RequestStatus rs ON pr.RequestStatusID = rs.RequestStatusID "
+                        + " Where pr.RealEstateID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, realEstateID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    PurchaseRequest dto = new PurchaseRequest();
+
+                    dto.setAccID(rs.getString("AccID"));
+                    dto.setRealEstateID(rs.getString("RealEstateID"));
+                    dto.setPricePaid(rs.getLong("PricePaid"));
+
+                    Timestamp timeRequestSql = rs.getTimestamp("DateAndTime");
+                    LocalDateTime timeRequest = timeRequestSql.toLocalDateTime();
+                    dto.setTimeRequest(timeRequest);
+
+                    dto.setRequestStatusID(rs.getInt("RequestStatusID"));
+                    dto.setRequestStatusName(rs.getString("RequestStatusName"));
+                    result.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            // Đóng tài nguyên
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public void updateStatusForMultipleRequests() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT RealEstateID FROM PurchaseRequests GROUP BY RealEstateID HAVING COUNT(*) > 1";
+        Connection con = null;
+        try (PreparedStatement statement = con.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                String realEstateID = resultSet.getString("RealEstateID");
+                updateStatus(realEstateID);
+            }
+        }
+    }
+
+    public boolean updateStatus(String realEstateID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE PurchaseRequests SET RequestStatusID = 3 WHERE RealEstateID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, realEstateID);
+                stm.executeUpdate();
+            }
+        } finally {
+            // Đóng tài nguyên
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return true;
+    }
+
 }
