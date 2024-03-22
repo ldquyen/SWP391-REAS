@@ -101,13 +101,15 @@ public class MainController extends HttpServlet {
                 case "viewPostRealEstateStatus2":
                     url = "RealEstateDetailServlet";
                     break;
+                case "muangay":
+                    url = "MuaNgayServlet";
+                    break;
                 case "homeindex":
                     url = "HomeServletIndex";
                     break;
                 case "homeindex_1":
                     url = "HomeServletIndex_1";
                     break;
-
                 case "searchRealEstate":
                     url = "SearchRealEstateAtHomepageServlet";
                     break;

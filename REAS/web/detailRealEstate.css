@@ -180,9 +180,9 @@ a.navbar-item:hover{
 
 .container-full-right-bellow {
     margin-top: 25px;
-    width: 80%;
+    width: 100%;
     background-color: #fff !important;
-    border: 10px solid #D9AB73;
+    border: 0px solid #D9AB73;
 }
 
 .container-full-bellow {
