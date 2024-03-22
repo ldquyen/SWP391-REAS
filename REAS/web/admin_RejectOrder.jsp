@@ -347,7 +347,6 @@
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Wallet ID</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date and Time</th>
-                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Content</th>
                                     <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>                                    
                                 </tr>
                             </thead>
@@ -368,9 +367,6 @@
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.date}
-                                        </td>
-                                        <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
-                                            ${dto.content}
                                         </td>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.statusName}

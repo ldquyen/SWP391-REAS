@@ -305,12 +305,12 @@
 <!--                                    <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
                                     <p class="bold-text">Thời gian kết thúc: <span id="endTime">${realEstate.timeDown}</span></p>-->
                                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                                    <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-                                        <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
+                                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                                <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
                                             <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${dto.timeStart}</span></p>
                                             <p class="bold-text">Thời gian kết thúc: <span id="endTime">${dto.timeEnd}</span></p>
-                                        </c:if>
-                                    </c:forEach>
+                                            </c:if>
+                                        </c:forEach>
                                 </div>
                             </div>
                         </div>
