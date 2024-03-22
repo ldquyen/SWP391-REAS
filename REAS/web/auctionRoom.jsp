@@ -293,12 +293,12 @@
                                                         var number = ${REGETBYID.priceFirst}; // Assuming auctions.lamda contains the number
                                                         var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                                         document.write(formattedNumber);
-                                                    </script> VND</span></p>
+                                                    </script> Xu</span></p>
                                             <p class="bold-text">Giá mua ngay: <span class="test"><script>
                                                 var number = ${REGETBYID.pricePaid}; // Assuming auctions.lamda contains the number
                                                 var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                                 document.write(formattedNumber);
-                                                    </script> VND</span>
+                                                    </script> Xu</span>
                                             <p class="bold-text">Bước giá: <span>
                                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                                         <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
@@ -309,9 +309,23 @@
                                                             </script>
                                                         </c:if>
                                                     </c:forEach>
-                                                    VND</span></p>
-                                            <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${REGETBYID.timeUp}</span></p>
-                                            <p class="bold-text">Thời gian kết thúc: <span id="endTime">${REGETBYID.timeDown}</span></p>
+                                                    Xu</span></p>
+                                            <p class="bold-text">Thời gian bắt đầu: <span id="startTime">
+                                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                                           ${auctions.timeStart}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </span>
+                                            </p>
+                                            <p class="bold-text">Thời gian kết thúc: <span id="endTime">
+                                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
+                                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
+                                                           ${auctions.timeEnd}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </span>
+                                            </p>
 
                                         </div>
                                     </div>
@@ -362,7 +376,7 @@
                                                     var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                                     document.write(formattedNumber);
                                                 </script>
-                                                VND
+                                                Xu
                                             </span>
                                         </c:if>
                                     </c:forEach>
@@ -669,7 +683,7 @@
             <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
                 <c:forEach var="auction" items="${requestScope.auctions}">
                     <c:if test="${auction.realEstateID eq REGETBYID.realEstateID}">
-           var auctionidfor10s = "${auction.realEstateID}";
+            var auctionidfor10s = "${auction.realEstateID}";
 //           console.log(auctionidfor10s);
                     </c:if>
                 </c:forEach>

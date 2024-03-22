@@ -149,8 +149,8 @@
                                 </a>
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Thông tin thanh toán</span>
+                                        <button type="submit" value="lichsunaptien" name="action">
+                                            <span>Lịch sử nạp tiền</span>
                                         </button>
                                     </form>
                                 </a>

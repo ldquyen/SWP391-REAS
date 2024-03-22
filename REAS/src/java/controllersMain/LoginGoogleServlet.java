@@ -10,11 +10,16 @@ import com.google.gson.JsonObject;
 import controllersAdmin.Constants;
 import dao.AccountDAO;
 import dao.GoogleDAO;
+import dao.ImageDAO;
+import dao.RealEstateDAO;
+import dao.StatisticalDAO;
 import dto.Account;
+import dto.Image;
 import dto.UserGoogle;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -25,6 +30,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.RealEstateVM;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Form;
@@ -71,13 +77,12 @@ public class LoginGoogleServlet extends HttpServlet {
             String family_name = userGoogle.getFamily_name();
             String picture = userGoogle.getPicture();
 
-
             // Tìm vị trí của chuỗi "@"
             int atIndex = email.indexOf("@");
 
             // Trích xuất phần đầu của chuỗi trước vị trí của "@"
             String username = email.substring(0, atIndex);
-            
+
             request.setAttribute("updateinfo", "Bạn cần cập nhật thêm một vài thông tin");
             session.setAttribute("ggusername", username);
             request.setAttribute("ggemail", email);
@@ -87,6 +92,25 @@ public class LoginGoogleServlet extends HttpServlet {
 
             if (ggacc.checkIDGoogle(id)) {
                 error = true;
+                AccountDAO dao = new AccountDAO();
+//                String password2 = dao.encodePassword(password);
+//                Account dto = dao.checkLogin(username, password);
+
+//                Account dto2 = dao.getAccountByEmail(email);
+                
+                StatisticalDAO stadao = new StatisticalDAO();
+                
+                RealEstateDAO realEstateDAO = new RealEstateDAO();
+                List<RealEstateVM> list = realEstateDAO.getListAvailableRealEstate();
+                request.setAttribute("list", list);
+                ImageDAO imgDAO = new ImageDAO();
+                List<Image> listImage = imgDAO.getListImage2();
+                request.setAttribute("listImg", listImage);
+                Account m = dao.getAccountByEmail(email);
+                boolean bl1 = stadao.addNewLoginDate(m.getAccID());
+                session.setAttribute("member", m);
+                
+
                 url = "HomeServletIndex_1";
             } else {
                 boolean bl = ggacc.saveUserGoogle(id, email, verified_email, name, given_name, family_name, picture);

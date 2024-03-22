@@ -63,28 +63,31 @@ public class PostRealEstateServlet extends HttpServlet {
             }
         }
         /*7*/
-        long priceLast;
+        long priceLast = 0;
         String priceLastStr = request.getParameter("priceLast");
         if (priceLastStr != null && !priceLastStr.isEmpty()) {
             // Nếu có thì parse sang long
             priceLast = Long.parseLong(priceLastStr);
-        } else {
-            // Nếu không thì mặc định = 0
-            priceLast = 0;
         }
         /*8*/
         long pricePaid = 0;
-        int[] top1 = {3, 6, 9, 10, 19, 25, 27, 58};
-        int[] top2 = {2, 7, 8, 11, 12, 14, 15, 20, 26, 38, 40, 44, 46, 47, 50, 55, 57, 59, 61};
-        int[] top3 =  {1, 3, 4, 5, 6, 9, 10, 13, 16, 17, 18, 19, 21, 22, 23, 24, 25, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 39, 41, 42, 43, 45, 48, 49, 51, 52, 53, 54, 56, 62, 63};
-        if (Arrays.binarySearch(top1, cityID) >= 0) {
-            pricePaid = (priceFirst * 120) / 100;
-        }
-        if (Arrays.binarySearch(top2, cityID) >= 0) {
-            pricePaid = (priceFirst * 110) / 100;
-        }
-        if (Arrays.binarySearch(top3, cityID) >= 0) {
-            pricePaid = (priceFirst * 105) / 100;
+        String pricePaidStr = request.getParameter("pricePaid");
+        if (pricePaidStr != null && !pricePaidStr.isEmpty()) {
+            pricePaidStr = pricePaidStr.replaceAll("[,.]", "");
+            pricePaid = Long.parseLong(pricePaidStr);
+        } else {
+            int[] top1 = {3, 6, 9, 10, 19, 25, 27, 58};
+            int[] top2 = {2, 7, 8, 11, 12, 14, 15, 20, 26, 38, 40, 44, 46, 47, 50, 55, 57, 59, 61};
+            int[] top3 = {1, 3, 4, 5, 6, 9, 10, 13, 16, 17, 18, 19, 21, 22, 23, 24, 25, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 39, 41, 42, 43, 45, 48, 49, 51, 52, 53, 54, 56, 62, 63};
+            if (Arrays.binarySearch(top1, cityID) >= 0) {
+                pricePaid = (priceFirst * 120) / 100;
+            }
+            if (Arrays.binarySearch(top2, cityID) >= 0) {
+                pricePaid = (priceFirst * 110) / 100;
+            }
+            if (Arrays.binarySearch(top3, cityID) >= 0) {
+                pricePaid = (priceFirst * 105) / 100;
+            }
         }
 
         long lamda = (long) (priceFirst * 0.01);
@@ -99,10 +102,9 @@ public class PostRealEstateServlet extends HttpServlet {
         }
         /*10*/
         String timeUpStr = request.getParameter("timeStart");
-        String timeDownStr = request.getParameter("timeEnd");
 
         LocalDateTime timeUp = LocalDateTime.parse(timeUpStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-        LocalDateTime timeDown = LocalDateTime.parse(timeDownStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+        LocalDateTime timeDown = timeUp.plusHours(3);
         /*11*/
         String address = request.getParameter("address");
         /*12*/
