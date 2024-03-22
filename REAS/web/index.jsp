@@ -146,7 +146,7 @@
                         <c:forEach var="img" items="${listImg}">
                             <c:if test="${img.imageFolderID eq item.imageFolderID}"> <img class="img-home-page" src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image1)}" alt="Image"></c:if>
                         </c:forEach>
-                        <a href="MainController?action=viewPostRealEstate&id=${item.realEstateID}">
+                        <a href="MainController?action=viewPostRealEstateGuest&id=${item.realEstateID}">
 
                             <div class="text-home-container">
                                 <p class="text-home-1 timeUp">

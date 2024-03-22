@@ -63,19 +63,19 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="navbar-container-1">
-                            <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                    <span>DANH SÁCH ĐẤU GIÁ</span>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="navbar-container-1">
-                            <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="postNew" name="action">
-                                    <span>ĐĂNG TIN</span>
-                                </button>
-                            </form>
-                        </div>
+                        <form action="MainController" method="post">
+                            <button class="navbar-1" type="submit" value="auctionList" name="action">
+                                <span>DANH SÁCH ĐẤU GIÁ</span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="navbar-container-1">
+                        <form action="MainController" method="post">
+                            <button class="navbar-1" type="submit" value="postNew" name="action">
+                                <span>ĐĂNG TIN</span>
+                            </button>
+                        </form>
+                    </div>
                         <div class="navbar-container-1">
                             <form action="MainController" method="post">
                                 <button class="navbar-1" type="submit" value="naptien" name="action">
@@ -333,34 +333,7 @@
                 </c:forEach>
 
 
-                <div class="container-full-right-bellow">
-                    <div>
-                        <p class="flex-center text-center" style="color: #000;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
-                            <!--                        <div style="text-align: left; padding-left: 10px;">
-                                                        <form action="MainController" method="post">
-                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                                                <span>Thảo Điền Pearl</span>
-                                                            </button>
-                                                        </form>
-                                                        <form action="MainController" method="post">
-                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                                                <span>Hoàng Anh River View</span>
-                                                            </button>
-                                                        </form>
-                                                        <form action="MainController" method="post">
-                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                                                <span>Thủ Thiêm Sky(5)</span>
-                                                            </button>
-                                                        </form>
-                                                    </div>-->
-                        <div style="text-align: left; padding-left: 10px;">
 
-                            <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
-                                <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 

@@ -37,7 +37,7 @@
                 <div class="navbar-start">
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="homeindex_1" name="action">
+                            <button type="submit" value="homeindex" name="action">
                                 <span>TRANG CHỦ</span>
                             </button>
                         </form>
@@ -45,7 +45,7 @@
 
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="news" name="action">
+                            <button type="submit" value="DN" name="action">
                                 <span>TIN TỨC</span>
                             </button>
                         </form>
@@ -53,7 +53,7 @@
 
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="rule" name="action">
+                            <button type="submit" value="DN" name="action">
                                 <span>NỘI QUY</span>
                             </button>
                         </form>
@@ -62,121 +62,22 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <div class="navbar-container-1">
+                        <div class="buttons" >
                             <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                    <span>DANH SÁCH ĐẤU GIÁ</span>
+                                <button class="button is-light" type="submit" value="DN" name="action">
+                                    <span>ĐĂNG NHẬP</span>
                                 </button>
                             </form>
-                        </div>
-                        <div class="navbar-container-1">
                             <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="postNew" name="action">
-                                    <span>ĐĂNG TIN</span>
+                                <button class="button is-light" type="submit" value="DK" name="action">
+                                    <span>ĐĂNG KÝ</span>
                                 </button>
                             </form>
-                        </div>
-                        <div class="navbar-container-1">
-                            <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="naptien" name="action">
-                                    <span>NẠP TIỀN</span>
-                                </button>
-                            </form>
-                        </div>
-                        <%
-                            List<Wallet> wallet = new WalletDAO().getWallet();
-                            pageContext.setAttribute("walletAccount", wallet);
-                        %>
-                        <div class="navbar-container-1">
-                            <a class="navbar-1">SỐ DƯ :
-                                <c:forEach var="wallet" items="${walletAccount}">
-                                    <c:if test="${wallet.accID eq member.accID}">
-                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
-                                    </c:if>
-                                </c:forEach>
-                                (xu)
-                            </a>                  
-                        </div>
-
-                        <div class="navbar-item hover-down has-dropdown is-hoverable">
-                            <a class="navbar-link navbar-1-list">
-                                <c:choose>
-                                    <c:when test="${not empty sessionScope.member}">
-                                        ${sessionScope.member.fullname}
-                                    </c:when>
-                                    <c:when test="${not empty sessionScope.userGoogle}">
-                                        ${sessionScope.userGoogle.given_name}
-                                    </c:when>
-                                    <c:otherwise>
-                                        Guest
-                                    </c:otherwise>
-                                </c:choose>
-                            </a>
-
-                            <div class="fake-div"></div>
-
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="informationPage" name="action">
-                                            <span>Thông tin tài khoản</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Danh mục đã đăng kí</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Lịch sử đấu giá</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MemberController" method="post">
-                                        <button type="submit" value="mypost" name="action">
-                                            <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
-                                            <span>Quản lí tin đăng</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="changePass" name="action">
-                                            <span>Thay đổi mật khẩu</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="lichsunaptien" name="action">
-                                            <span>Lịch sử nạp tiền</span>
-                                        </button>
-                                    </form>
-                                </a>
-
-                                <hr class="navbar-divider">
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="Logout" name="action">
-                                            <span>Đăng xuất</span>
-                                        </button>
-                                    </form>
-                                </a>
-
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-
-
 
 
         <div class="columns">

@@ -92,7 +92,13 @@ public class MainController extends HttpServlet {
                 case "informationPage":
                     url = "informationPage.jsp";
                     break;
+                case "viewPostRealEstateGuest":
+                    url = "RealEstateDetailServlet";
+                    break;    
                 case "viewPostRealEstate":
+                    url = "RealEstateDetailServlet";
+                    break;
+                case "viewPostRealEstateStatus2":
                     url = "RealEstateDetailServlet";
                     break;
                 case "homeindex":
