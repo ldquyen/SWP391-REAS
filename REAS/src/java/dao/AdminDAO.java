@@ -145,7 +145,7 @@ public class AdminDAO {
                 sql = "INSERT INTO dbo.[WalletTransactionHistory] (WalletID, Quantity, DateAndTime, Action) VALUES (?, ?, ?, ?)";
                 String actionEdit = "";
                 if (editAction.contains("add")) {
-                    actionEdit = "Admin add from you " + fund;
+                    actionEdit = "Admin add for you " + fund;
                 } else {
                     actionEdit = "Admin refund from you " + fund;
                 }
