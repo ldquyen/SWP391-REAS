@@ -334,7 +334,7 @@
                                         <c:if test="${auctions.realEstateID eq listRE2.realEstateID}">
                                             <form action="MainController">
                                                 <input type="hidden" name="id" value="${listRE2.realEstateID}">
-                                                <button class="button-dangki" type="submit" value="viewPostRealEstate" name="action">
+                                                <button class="button-dangki" type="submit" value="viewPostRealEstateStatus2" name="action">
                                                     <span>Xem chi tiết</span>
                                                 </button>
                                             </form>

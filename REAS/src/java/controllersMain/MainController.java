@@ -1,4 +1,4 @@
-package controllersMain;
+ package controllersMain;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -92,8 +92,17 @@ public class MainController extends HttpServlet {
                 case "informationPage":
                     url = "informationPage.jsp";
                     break;
+                case "viewPostRealEstateGuest":
+                    url = "RealEstateDetailServlet";
+                    break;    
                 case "viewPostRealEstate":
                     url = "RealEstateDetailServlet";
+                    break;
+                case "viewPostRealEstateStatus2":
+                    url = "RealEstateDetailServlet";
+                    break;
+                case "muangay":
+                    url = "MuaNgayServlet";
                     break;
                 case "homeindex":
                     url = "HomeServletIndex";
@@ -101,7 +110,6 @@ public class MainController extends HttpServlet {
                 case "homeindex_1":
                     url = "HomeServletIndex_1";
                     break;
-
                 case "searchRealEstate":
                     url = "SearchRealEstateAtHomepageServlet";
                     break;

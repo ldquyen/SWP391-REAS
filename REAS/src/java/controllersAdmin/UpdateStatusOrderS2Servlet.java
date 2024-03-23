@@ -64,8 +64,7 @@ public class UpdateStatusOrderS2Servlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = "admin_ApproveOrder.jsp";
 
-        String orderIDstr = request.getParameter("orderID");
-        int orderID = Integer.parseInt(orderIDstr);
+        String orderID = request.getParameter("orderID");
         String searchValue = request.getParameter("txtSearchValue");
 
         String action = request.getParameter("action");
