@@ -115,60 +115,64 @@ public class AdminDAO {
     }
 
     public int editUserWallet(String accId, double fund, double currentFund, String editAction) throws ClassNotFoundException, SQLException, NamingException {
-        Connection cn = null;
-        try {
-            double newAccountBalance = 0;
-            cn = DBUtils.getConnection();
-            if (editAction.contains("add")) {
-                newAccountBalance = fund + currentFund;
-            } else {
-                newAccountBalance = currentFund - fund;
-                if (newAccountBalance < 0) {
-                    return 3;
-                }
+    Connection cn = null;
+    try {
+        double newAccountBalance = 0;
+        cn = DBUtils.getConnection();
+        if (editAction.contains("add")) {
+            newAccountBalance = fund + currentFund;
+        } else {
+            newAccountBalance = currentFund - fund;
+            if (newAccountBalance < 0) {
+                return 3;
             }
-            if (cn != null) {
-                String sql = "UPDATE dbo.[Wallet] SET AccountBalance = ? WHERE AccID = ? ";
-                PreparedStatement pst = cn.prepareStatement(sql);
-                pst.setDouble(1, newAccountBalance);
-                pst.setString(2, accId);
-                int affectedRow = pst.executeUpdate();
-                if (affectedRow > 0 && !(editAction.contains("add"))) {
-                    LocalDateTime localDateTime = LocalDateTime.now();
-                    int WalletId = getUserWalletId(accId);
-                    System.out.println("Wallet Id" + WalletId);
-                    // Convert LocalDateTime to java.sql.Date
+        }
+        if (cn != null) {
+            String sql = "UPDATE dbo.[Wallet] SET AccountBalance = ? WHERE AccID = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setDouble(1, newAccountBalance);
+            pst.setString(2, accId);
+            int affectedRow = pst.executeUpdate();
+            if (affectedRow > 0) {
+                LocalDateTime localDateTime = LocalDateTime.now();
+                int WalletId = getUserWalletId(accId);
+                System.out.println("Wallet Id" + WalletId);
+                // Convert LocalDateTime to java.sql.Date
 
-                    // Convert LocalDateTime to java.sql.Date
-                    java.util.Date date = new java.util.Date();
+                // Convert LocalDateTime to java.sql.Date
+                java.util.Date date = new java.util.Date();
 
-                    sql = "INSERT INTO dbo.[WalletTransactionHistory] (WalletID, Quantity, DateAndTime, Action) VALUES (?, ?, ?, ?)";
-                    String actionEdit = "Admin refund from you " + fund;
-                    pst = cn.prepareStatement(sql);
-                    pst.setDouble(1, WalletId);
-                    // Tien gia ban dau cua cai auction + 5%.
-                    pst.setDouble(2, fund);
-                    pst.setTimestamp(3, new java.sql.Timestamp(date.getTime()));
-                    pst.setString(4, actionEdit);
-                    affectedRow = pst.executeUpdate();
-                    if (affectedRow > 0) {
-                        return 1;
-                    }
-                } else if (affectedRow > 0) {
-                    return 1;
+                sql = "INSERT INTO dbo.[WalletTransactionHistory] (WalletID, Quantity, DateAndTime, Action) VALUES (?, ?, ?, ?)";
+                String actionEdit = "";
+                if (editAction.contains("add")) {
+                    actionEdit = "Admin add from you " + fund;
                 } else {
-                    System.out.println("editUserWallet affected row = 0");
-                    return 0;
+                    actionEdit = "Admin refund from you " + fund;
                 }
+                pst = cn.prepareStatement(sql);
+                pst.setDouble(1, WalletId);
+                pst.setDouble(2, fund);
+                pst.setTimestamp(3, new java.sql.Timestamp(date.getTime()));
+                pst.setString(4, actionEdit);
+                affectedRow = pst.executeUpdate();
+                if (affectedRow > 0) {
+                    return 1;
+                }
+            } else {
+                System.out.println("editUserWallet affected row = 0");
+                return 0;
             }
-        } catch (Exception e) {
-            System.out.println("getListMemberWallet " + e.getMessage());
-        } finally {
+        }
+    } catch (Exception e) {
+        System.out.println("getListMemberWallet " + e.getMessage());
+    } finally {
+        if (cn != null) {
             cn.close();
         }
-        return 0;
-
     }
+    return 0;
+}
+
 
     public int getUserWalletId(String accId) throws SQLException {
         Connection cn = null;
