@@ -69,20 +69,20 @@ public class AuctionServlet extends HttpServlet {
             // neu thoa thi se update wallet
             // tao them auctionDepositHistory
             // tao walletTranscationHistory.
-            double requirmentPrice = 0; // gia yeu ca de co the tham gia dau gia = priceNow + 5% phi cua pricenow.
-            double registerFee = 0; // 5% cua price now.
+            int requirmentPrice = 0; // gia yeu ca de co the tham gia dau gia = priceNow + 5% phi cua pricenow.
+            int registerFee = 0; // 5% cua price now.
             // get auctionId
             HttpSession session = request.getSession(false);
             if (session != null && session.getAttribute("member") != null) {
-                double priceRegisterAuction = Double.parseDouble(pricenowbid);
+                int priceRegisterAuction = Integer.parseInt(pricenowbid);
                 Account account = (Account) session.getAttribute("member");
                 // get current userBalance.
                 double currentUserBalance = accountDAO.getAccountWallet(account.getAccID());
                 int userWalletId = accountDAO.getUserWalletId(account.getAccID());
                 // get priceNow
                 // Check phi dau gia co cao hon tien trong vi khong.
-                registerFee = priceRegisterAuction * 0.002;
-                requirmentPrice = priceRegisterAuction + registerFee;
+                registerFee = priceRegisterAuction + 1;
+                requirmentPrice = registerFee;
                 if (currentUserBalance >= requirmentPrice) {
                     // neu thoa thi update pricenow cua auction.
                     auctionDAO.setPriceNowAuctions(pricenowbid, idauctionbid);

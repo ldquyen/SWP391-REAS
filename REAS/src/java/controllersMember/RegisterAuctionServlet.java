@@ -44,8 +44,8 @@ public class RegisterAuctionServlet extends HttpServlet {
             // tao walletTranscationHistory.
             AccountDAO accountDAO = new AccountDAO();
             AuctionDAO auctionDAO = new AuctionDAO();
-            double requirmentPrice = 0; // gia yeu ca de co the tham gia dau gia = priceNow + 5% phi cua pricenow.
-            double registerFee = 0; // 5% cua price now.
+            int requirmentPrice = 0; // gia yeu ca de co the tham gia dau gia = priceNow + 5% phi cua pricenow.
+            int registerFee = 0; // 5% cua price now.
             // get auctionId
             String auctionIds = request.getParameter("auctionId");
             HttpSession session = request.getSession(false);
@@ -57,8 +57,8 @@ public class RegisterAuctionServlet extends HttpServlet {
                 // get priceNow
                 double auctionPriceNow = auctionDAO.getCurrentPriceNow(auctionIds);
                 // Cau hinh phan tram
-                registerFee = auctionPriceNow + 0.5;
-                requirmentPrice = auctionPriceNow + registerFee;
+                registerFee = (int) (auctionPriceNow + 1);
+                requirmentPrice = (int) (auctionPriceNow + registerFee);
                 // Handle logic ben trong DAO. se tra ve code
                 int result = auctionDAO.registerAuction(auctionIds, auctionIds, currentUserBalance, requirmentPrice, userWalletId, auctionPriceNow);
                 System.out.println("UserWAlleet - " + userWalletId);
