@@ -535,7 +535,24 @@
             </div>
         </footer>
 
+     <input type="hidden" id="errorMsg" value="${ErrorMsg}">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+             var errorMsg = document.getElementById('errorMsg');
+             if(errorMsg.value.length > 1 ) {
+                 errorNoti();
+             }
+            function errorNoti() {
+                Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Ban khong du tien de tham gia dau gia nay",
+                showConfirmButton: true,
+                timer: 4000
+                });
+            }
+            
+            
             function chuyenSoTienSangChu(soTien) {
                 const motDenChin = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
                 const muoiDenHaiMuoi = ['', 'mười', 'hai mươi', 'ba mươi', 'bốn mươi', 'năm mươi', 'sáu mươi', 'bảy mươi', 'tám mươi', 'chín mươi'];

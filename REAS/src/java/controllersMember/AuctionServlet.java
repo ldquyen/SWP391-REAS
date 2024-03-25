@@ -98,8 +98,8 @@ public class AuctionServlet extends HttpServlet {
                 if (result == 5) {
                     System.out.println("Successfully");
                     // Cap nhat lich su dau gia.
-                } else {
-                    System.out.println("Code - " + result);
+                } else if (result == 1){
+                    request.setAttribute("ErrorMsg", "Not enough money");
                 }
 
             } else {
