@@ -1,4 +1,4 @@
- package controllersMain;
+package controllersMain;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -94,12 +94,18 @@ public class MainController extends HttpServlet {
                     break;
                 case "viewPostRealEstateGuest":
                     url = "RealEstateDetailServlet";
-                    break;    
+                    break;
                 case "viewPostRealEstate":
                     url = "RealEstateDetailServlet";
                     break;
                 case "viewPostRealEstateStatus2":
                     url = "RealEstateDetailServlet";
+                    break;
+                case "cusViewMuaNgayList":
+                    url = "RealEstateDetailServlet";
+                    break;
+                case "cusSearchMuaNgayList":
+                    url = "CusSearchRequestMuaNgayServlet";
                     break;
                 case "muangay":
                     url = "MuaNgayServlet";

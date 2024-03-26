@@ -136,6 +136,25 @@ public class RealEstateDetailServlet extends HttpServlet {
                         System.out.println("RealEstateDetailServlet null exception");
                     }
                 }
+                if (action.equals("cusViewMuaNgayList")) {
+                    if (realEstateVM != null) {
+                        request.setAttribute("realEstate", realEstateVM);
+                        request.setAttribute("city", city);
+                        request.setAttribute("listimg", listIMG);
+                        //===
+                        RealEstateDAO dao = new RealEstateDAO();
+                        List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
+                        request.setAttribute("SEARCH_RESULT", listRealEstate);
+
+                        PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+                        Integer purchaseStatus = dao1.getPurchaseStatus(realEstateId, accID);
+                        request.setAttribute("purchaseStatus", purchaseStatus);
+
+                        url = "cus_detailRealEstate_MuaNgay.jsp";
+                    } else {
+                        System.out.println("RealEstateDetailServlet null exception");
+                    }
+                }
             } else {
                 url = "home";
             }
@@ -145,11 +164,6 @@ public class RealEstateDetailServlet extends HttpServlet {
         }
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
-        Integer purchaseStatus = (Integer) dao1.getPurchaseStatus("M1", "M1");
-        System.out.println(purchaseStatus);
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
