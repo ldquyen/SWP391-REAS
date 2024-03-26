@@ -331,18 +331,7 @@
                         </div>
                     </c:if>
                 </c:forEach>
-
-                <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
-                    <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
-                        <div class="container-full-right flex-center text-center">
-                            <form action="MainController" method="post">
-                                <button type="submit" value="muangay" name="action">
-                                    <p class="h1-text-mid" style="color: #fff;">Mua Ngay</p>
-                                </button>
-                            </form>
-                        </div>
-                    </c:if>
-                </c:forEach>
+                
             </div>
         </div>
 

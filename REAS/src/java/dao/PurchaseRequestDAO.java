@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import mylib.DBUtils;
 
@@ -71,10 +72,13 @@ public class PurchaseRequestDAO {
                 stm.setString(1, realEstateID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
+                    if (result == null) {
+                        result = new ArrayList<PurchaseRequest>();
+                    }
                     PurchaseRequest dto = new PurchaseRequest();
-
-                    dto.setAccID(rs.getString("AccID"));
                     dto.setRealEstateID(rs.getString("RealEstateID"));
+                    dto.setAccID(rs.getString("AccID"));
+
                     dto.setPricePaid(rs.getLong("PricePaid"));
 
                     Timestamp timeRequestSql = rs.getTimestamp("DateAndTime");

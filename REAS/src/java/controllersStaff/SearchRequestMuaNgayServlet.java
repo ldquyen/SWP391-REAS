@@ -49,8 +49,9 @@ public class SearchRequestMuaNgayServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, NamingException {
-        String url = "";
         String realEstateId = request.getParameter("realEstateID");
+        String url = "StaffController?action=viewPostRealEstate&id=" + realEstateId;
+        
         String searchValue = request.getParameter("txtSearchValue");
         try {
             if (realEstateId != null) {
@@ -91,7 +92,7 @@ public class SearchRequestMuaNgayServlet extends HttpServlet {
                     request.setAttribute("city", city);
                     request.setAttribute("listimg", listIMG);
 
-                    url = "staff_detailRealEstate.jsp";
+                    url = "staff_detailRealEstate_approved.jsp";
                 } else {
                     System.out.println("RealEstateDetailServlet null exception");
                 }
