@@ -105,6 +105,43 @@ public class PurchaseRequestDAO {
         return result;
     }
 
+    public Integer getPurchaseStatus(String realEstateID, String accID) throws SQLException, ClassNotFoundException {
+        Integer purchaseStatusID = null;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBUtils.getConnection();
+            // Tạo truy vấn SQL
+            String sql = "SELECT RequestStatusID FROM PurchaseRequests WHERE RealEstateID = ? AND AccID = ?";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, realEstateID);
+            stm.setString(2, accID);
+
+            // Thực thi truy vấn
+            rs = stm.executeQuery();
+
+            // Xử lý kết quả trả về
+            if (rs.next()) {
+                purchaseStatusID = rs.getInt("RequestStatusID");
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            // Đóng tài nguyên
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return purchaseStatusID;
+    }
+
     public void updateStatusForMultipleRequests() throws SQLException, ClassNotFoundException {
         String sql = "SELECT RealEstateID FROM PurchaseRequests GROUP BY RealEstateID HAVING COUNT(*) > 1";
         Connection con = null;

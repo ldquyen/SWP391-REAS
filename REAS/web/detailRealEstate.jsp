@@ -1,3 +1,4 @@
+<%@page import="dao.PurchaseRequestDAO"%>
 <%@page import="dto.Wallet"%>
 <%@page import="dao.WalletDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -359,14 +360,17 @@
                                     <input type="hidden" name="accID" value="${sessionScope.member.accID}">
                                     <input type="hidden" name="pricePaid" value="${listRealEstate.pricePaid}">
                                     <input type="hidden" name="action" value="muangay">
+
                                     <c:choose>
-                                        <c:when test="${'Đang xét duyệt' eq sessionScope.purchaseStatus}">
+                                        <c:when test="${purchaseStatus == 1}">
+                                            <!-- If purchaseStatus is 1 (Đang xét duyệt) -->
                                             <button type="button" disabled>
                                                 <p class="h1-text-mid" style="color: #fff;">Đang xét duyệt</p>
                                             </button>
                                         </c:when>
                                         <c:otherwise>
-                                            <button type="button" onclick="submitForm(this)">
+                                            <!-- For other cases -->
+                                            <button type="button" onclick="confirmAndSubmitForm()">
                                                 <p class="h1-text-mid" style="color: #fff;">Đăng Kí Mua Ngay</p>
                                             </button>
                                         </c:otherwise>
@@ -483,6 +487,11 @@
             }
         </script>
         <script>
+            function confirmAndSubmitForm() {
+                if (confirm("Bạn có chắc chắn muốn đăng kí mua ngay không?")) {
+                    submitForm();
+                }
+            }
             function submitForm() {
                 // Thay đổi giá trị của action input
                 document.getElementById('purchaseForm').action = 'MainController';

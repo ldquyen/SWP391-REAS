@@ -7,12 +7,15 @@ package controllersMain;
 import dao.AuctionDAO;
 import dao.CityDAO;
 import dao.ImageDAO;
+import dao.PurchaseRequestDAO;
 import dao.RealEstateDAO;
+import dto.Account;
 import dto.Auction;
 import dto.City;
 import dto.Image;
 import dto.RealEstateInfo;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,6 +25,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.RealEstateVM;
 
 /**
@@ -34,9 +38,13 @@ public class RealEstateDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+
         try {
             String url = "";
             String realEstateId = request.getParameter("id");
+            HttpSession session = request.getSession(false);
+            Account member = (Account) session.getAttribute("member");
+            String accID = member.getAccID();
             if (realEstateId != null) {
                 RealEstateDAO realEstateDAO = new RealEstateDAO();
                 AuctionDAO auctionDAO = new AuctionDAO();
@@ -57,6 +65,12 @@ public class RealEstateDetailServlet extends HttpServlet {
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
+
+                        PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+                        Integer purchaseStatus = dao1.getPurchaseStatus(realEstateId, accID);
+                        // Sau khi lấy được purchaseStatus từ DAO, bạn có thể sử dụng nó cho mục đích của mình
+                        // Ví dụ: lưu purchaseStatus vào request attribute để sử dụng trong JSP
+                        request.setAttribute("purchaseStatus", purchaseStatus);
 
                         // Tạo một seed ngẫu nhiên
                         if (listRealEstate != null && !listRealEstate.isEmpty()) {
@@ -102,7 +116,21 @@ public class RealEstateDetailServlet extends HttpServlet {
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
+                        // Tạo một seed ngẫu nhiên
+                        if (listRealEstate != null && !listRealEstate.isEmpty()) {
+                            // Shuffle listRealEstate
+                            long seed = System.nanoTime();
+                            Collections.shuffle(listRealEstate, new Random(seed));
 
+                            // Get a sublist of randomRealEstate
+                            int numberOfRandomElements = 3;
+                            List<RealEstateInfo> randomRealEstate = listRealEstate.subList(0, Math.min(numberOfRandomElements, listRealEstate.size()));
+                            request.setAttribute("RANDOM_REAL_ESTATE", randomRealEstate);
+                        } else {
+                            // Handle case where listRealEstate is empty or null
+                            System.out.println("RealEstateDetailServlet: No real estate found");
+                        }
+                        //=====
                         url = "detailRealEstate_guest.jsp";
                     } else {
                         System.out.println("RealEstateDetailServlet null exception");
@@ -115,6 +143,12 @@ public class RealEstateDetailServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+        Integer purchaseStatus = (Integer) dao1.getPurchaseStatus("M1", "M1");
+        System.out.println(purchaseStatus);
     }
 
     @Override
