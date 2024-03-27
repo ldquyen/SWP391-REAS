@@ -42,9 +42,7 @@ public class RealEstateDetailServlet extends HttpServlet {
         try {
             String url = "";
             String realEstateId = request.getParameter("id");
-            HttpSession session = request.getSession(false);
-            Account member = (Account) session.getAttribute("member");
-            String accID = member.getAccID();
+
             if (realEstateId != null) {
                 RealEstateDAO realEstateDAO = new RealEstateDAO();
                 AuctionDAO auctionDAO = new AuctionDAO();
@@ -65,6 +63,10 @@ public class RealEstateDetailServlet extends HttpServlet {
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
+
+                        HttpSession session = request.getSession(false);
+                        Account member = (Account) session.getAttribute("member");
+                        String accID = member.getAccID();
 
                         PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
                         Integer purchaseStatus = dao1.getPurchaseStatus(realEstateId, accID);
@@ -146,6 +148,10 @@ public class RealEstateDetailServlet extends HttpServlet {
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
 
+                        HttpSession session = request.getSession(false);
+                        Account member = (Account) session.getAttribute("member");
+                        String accID = member.getAccID();
+
                         PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
                         Integer purchaseStatus = dao1.getPurchaseStatus(realEstateId, accID);
                         request.setAttribute("purchaseStatus", purchaseStatus);
@@ -163,7 +169,6 @@ public class RealEstateDetailServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
