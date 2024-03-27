@@ -181,9 +181,6 @@
             </div>
         </nav>
 
-
-
-
         <div class="columns">
             <div class="column is-two-thirds" style="padding-top: 30px;display: flex;justify-content: end;">
 
@@ -209,34 +206,9 @@
 
                             </div>
                         </c:forEach>
-                        <!-- Full-width images with number text -->
-
-                        <!--
-                                                <div class="mySlides">
-                                                    <div class="numbertext">4 / 6</div>
-                                                    <img src="image/img_lights_wide.jpg" style="width:100%">
-                                                </div>
-                        
-                                                <div class="mySlides">
-                                                    <div class="numbertext">5 / 6</div>
-                                                    <img src="image/img_nature_wide.jpg" style="width:100%">
-                                                </div>
-                        
-                                                <div class="mySlides">
-                                                    <div class="numbertext">6 / 6</div>
-                                                    <img src="image/img_snow_wide.jpg" style="width:100%">
-                                                </div>-->
-
-                        <!-- Next and previous buttons -->
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-                        <!-- Image text -->
-                        <!--                        <div class="caption-container">
-                                                    <p id="caption"></p>
-                                                </div>-->
-
-                        <!-- Thumbnail images -->
                         <div class="row">
                             <c:forEach items="${requestScope.listimg}" var="i">
 
@@ -251,15 +223,6 @@
                                     <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" style="width:100%; min-height: 100px;max-height: 100px;" onclick="currentSlide(3)" alt="Image">
                                 </div>
                             </c:forEach>
-                            <!--                            <div class="column">
-                                                            <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(4)" alt="Northern Lights">
-                                                        </div>
-                                                        <div class="column">
-                                                            <img class="demo cursor" src="image/img_nature_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(5)" alt="Nature and sunrise">
-                                                        </div>
-                                                        <div class="column">
-                                                            <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(6)" alt="Snowy Mountains">
-                                                        </div>-->
                         </div>
                     </div>
                     <div class="container-full-bellow">
@@ -354,7 +317,6 @@
             <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
             <form id="searchForm" class="flex-center" action="MainController" method="post">
                 <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}" />
-                <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
                 <input type="hidden" value="cusSearchMuaNgayList" name="action" />   
             </form>
 
@@ -368,7 +330,6 @@
                                 <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PricePaid</th>
                                 <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date And Time</th>
                                 <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
-                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -387,13 +348,6 @@
                                     <td style="border: 1px solid #D9AB73; padding: 8px;">
                                         ${dto.requestStatusName}
                                     </td>
-                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                        <form id="purchaseForm" action="MemberController" method="post" onsubmit="return confirmSubmit()">
-                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                            <input type="hidden" name="accID" value="${dto.accID}">
-                                            <button id="submitButton" style="color: #fff" type="submit" value="xacNhanMuaNgay" name="action">Bán Ngay</button>
-                                        </form>
-                                    </td>
 
                                 </tr>
                                 </form> 
@@ -405,12 +359,13 @@
                 </c:if>
                 <c:if test="${empty listRequestMuaNgay}">
                     <h2>
-                        KHÔNG CÓ YÊU CẦU MUA NGAY!!!
+                        KHÔNG CÓ YÊU CẦU MUA NGAY!
                     </h2>
                 </c:if>
 
             </div>
         </div>
+
 
         <footer class="footer" style="margin-top: 20px;position: initial"> 
             <div>
@@ -425,7 +380,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>
@@ -502,20 +457,6 @@
                 return number < 10 ? '0' + number : number;
             }
         </script>
-        <script>
-            function confirmSubmit() {
-                // Hiển thị hộp thoại xác nhận và lưu kết quả vào biến confirmed
-                var confirmed = confirm("Bạn có xác nhận sẽ bán?");
-
-                // Nếu người dùng đã xác nhận
-                if (confirmed) {
-                    // Thay đổi văn bản của nút
-                    document.getElementById('submitButton').innerText = "Đã bán";
-                    // Vô hiệu hóa nút sau khi nhấn
-                    document.getElementById('submitButton').disabled = true;
-                }
-                // Trả về giá trị confirmed để xác định liệu form có nên gửi đi hay không
-                return confirmed;
-        </script>
+      
     </body>
 </html>

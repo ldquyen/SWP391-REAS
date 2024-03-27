@@ -149,14 +149,15 @@ public class PurchaseRequestDAO {
                 ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 String realEstateID = resultSet.getString("RealEstateID");
-                updateStatus(realEstateID);
+                updateStatus3(realEstateID);
             }
         }
     }
 
-    public boolean updateStatus(String realEstateID) throws SQLException, ClassNotFoundException {
+    public boolean updateStatus3(String realEstateID) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
+        boolean result = false;
 
         try {
             con = DBUtils.getConnection();
@@ -164,7 +165,10 @@ public class PurchaseRequestDAO {
                 String sql = "UPDATE PurchaseRequests SET RequestStatusID = 3 WHERE RealEstateID = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, realEstateID);
-                stm.executeUpdate();
+                int effectRows = stm.executeUpdate();
+                if (effectRows > 0) {
+                    result = true;
+                }
             }
         } finally {
             // Đóng tài nguyên
@@ -175,7 +179,61 @@ public class PurchaseRequestDAO {
                 con.close();
             }
         }
-        return true;
+        return result;
+    }
+//    public boolean updateStatus2(String realEstateID) throws SQLException, ClassNotFoundException {
+//        Connection con = null;
+//        PreparedStatement stm = null;
+//        boolean result = false;
+//
+//        try {
+//            con = DBUtils.getConnection();
+//            if (con != null) {
+//                String sql = "UPDATE PurchaseRequests SET RequestStatusID = 2 WHERE RealEstateID = ?";
+//                stm = con.prepareStatement(sql);
+//                stm.setString(1, realEstateID);
+//                int effectRows = stm.executeUpdate();
+//                if (effectRows > 0) {
+//                    result = true;
+//                }
+//            }
+//        } finally {
+//            // Đóng tài nguyên
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (con != null) {
+//                con.close();
+//            }
+//        }
+//        return result;
+//    }
+    public boolean updateStatus2(String accID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE PurchaseRequests SET RequestStatusID = 2 WHERE accID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, accID);
+                int effectRows = stm.executeUpdate();
+                if (effectRows > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            // Đóng tài nguyên
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
     }
 
 }

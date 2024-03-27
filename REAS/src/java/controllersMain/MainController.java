@@ -104,6 +104,9 @@ public class MainController extends HttpServlet {
                 case "cusViewMuaNgayList":
                     url = "RealEstateDetailServlet";
                     break;
+                case "cusViewMuaNgayListV2":
+                    url = "RealEstateDetailServlet";
+                    break;
                 case "cusSearchMuaNgayList":
                     url = "CusSearchRequestMuaNgayServlet";
                     break;

@@ -148,7 +148,6 @@
                 </script>
 
                 <form id="searchForm" class="flex-center" action="StaffController">
-                    <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
                     <input type="hidden" name="action" value="searchAuctionApproved" />
                 </form>
 
