@@ -1,6 +1,7 @@
 package controllersMember;
 
 import dao.AuctionDAO;
+import dao.AuctionHistoryDAO;
 import dao.CategoryDAO;
 import dao.CityDAO;
 import dao.ImageDAO;
@@ -61,11 +62,17 @@ public class AuctionRoomServlet extends HttpServlet {
             ArrayList<Image> listImgAuction = ImageDAO.getListImageByID(IDRE);
 
             ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(IDRE);
+            
+            //List top 5 price auction history
+            AuctionHistoryDAO auctionHistoryDAO = new AuctionHistoryDAO();
+            List<Integer> top5Prices = auctionHistoryDAO.getPriceTop5();
+            System.out.println(top5Prices);
+            request.setAttribute("TOP5Prices", top5Prices);
 
             RealEstateDAO dao = new RealEstateDAO();
             List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(3);
             request.setAttribute("SEARCH_RESULT", listRealEstate);
-            
+
             List<Auction> auctionV2 = auctionDAO.getAuctionsV2();
             request.setAttribute("auctionV2", auctionV2);
 

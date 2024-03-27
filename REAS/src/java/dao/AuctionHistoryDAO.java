@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import mylib.DBUtils;
 
 public class AuctionHistoryDAO {
@@ -28,7 +30,7 @@ public class AuctionHistoryDAO {
                     String auctionID = rs.getString("AuctionID");
                     int status = rs.getInt("Status");
                     long lamda = rs.getLong("Lamda");
-                    
+
                     Timestamp timeJoinSql = rs.getTimestamp("TimeJoin");
                     Timestamp timeOutSql = rs.getTimestamp("TimeOut");
 
@@ -38,7 +40,6 @@ public class AuctionHistoryDAO {
 
 //                    auctionhistory.setTimeJoin(timeStart);
 //                    auctionhistory.setTimeOut(timeEnd);
-                    
                     int numberOfBids = rs.getInt("NumberOfBids");
                     long startPrice = rs.getLong("StartPrice");
 //                    auctionhistory = new AuctionHistory(auctionHisID, auctionID, status, lamda, timeJoin, timeOut, numberOfBids, startPrice);
@@ -47,5 +48,40 @@ public class AuctionHistoryDAO {
             cn.close();
         }
         return auctionhistory;
+    }
+
+    public List<Integer> getPriceTop5() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        List<Integer> top5Prices = new ArrayList<>();
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT DISTINCT TOP 5 Price\n"
+                        + "FROM AuctionHistory\n"
+                        + "ORDER BY Price DESC;";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int price = rs.getInt("Price");
+                    top5Prices.add(price);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return top5Prices;
     }
 }

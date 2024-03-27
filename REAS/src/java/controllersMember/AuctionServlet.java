@@ -7,12 +7,14 @@ package controllersMember;
 
 import dao.AccountDAO;
 import dao.AuctionDAO;
+import dao.AuctionHistoryDAO;
 import dao.CategoryDAO;
 import dao.CityDAO;
 import dao.ImageDAO;
 import dao.RealEstateDAO;
 import dto.Account;
 import dto.Auction;
+import dto.AuctionHistory;
 import dto.Category;
 import dto.City;
 import dto.Image;
@@ -79,6 +81,7 @@ public class AuctionServlet extends HttpServlet {
                 // get current userBalance.
                 double currentUserBalance = accountDAO.getAccountWallet(account.getAccID());
                 int userWalletId = accountDAO.getUserWalletId(account.getAccID());
+
                 // get priceNow
                 // Check phi dau gia co cao hon tien trong vi khong.
                 registerFee = priceRegisterAuction * 0.002;
@@ -91,6 +94,12 @@ public class AuctionServlet extends HttpServlet {
 
                 // Handle logic ben trong DAO. se tra ve code
                 int result = auctionDAO.registerAuction(idauctionbid, account.getAccID(), currentUserBalance, requirmentPrice, userWalletId, auctionPriceNow);
+
+                AuctionHistoryDAO auctionHistoryDAO = new AuctionHistoryDAO();
+                List<Integer> top5Prices = auctionHistoryDAO.getPriceTop5();
+                System.out.println(top5Prices);
+                request.setAttribute("TOP5Prices", top5Prices);
+
                 System.out.println("UserWAlleet - " + userWalletId);
                 System.out.println("Current Balance - " + currentUserBalance);
                 System.out.println("Phi dang ki dau gia - " + registerFee);

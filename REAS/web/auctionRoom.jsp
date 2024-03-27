@@ -289,31 +289,19 @@
                                         <h1 class="flex-center h1-text-left-right">Thông tin đấu giá cơ bản</h1>
                                         <div style="padding-top: 8px;">
                                             <p class="bold-text">Giá khởi điểm: <span>
-                                                    <script>
-                                                        var number = ${REGETBYID.priceFirst}; // Assuming auctions.lamda contains the number
-                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                        document.write(formattedNumber);
-                                                    </script> Xu</span></p>
-                                            <p class="bold-text">Giá mua ngay: <span class="test"><script>
-                                                var number = ${REGETBYID.pricePaid}; // Assuming auctions.lamda contains the number
-                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                document.write(formattedNumber);
-                                                    </script> Xu</span>
+                                                    ${REGETBYID.priceFirst} Xu</span></p>
+                                            <p class="bold-text">Giá mua ngay: <span class="test">${REGETBYID.pricePaid} Xu</span>
                                             <p class="bold-text">Bước giá: <span>
                                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                                         <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
-                                                            <script>
-                                                                var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
-                                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                                document.write(formattedNumber);
-                                                            </script>
+                                                            ${auctions.lamda}
                                                         </c:if>
                                                     </c:forEach>
                                                     Xu</span></p>
                                             <p class="bold-text">Thời gian bắt đầu: <span id="startTime">
                                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                                         <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
-                                                           ${auctions.timeStart}
+                                                            ${auctions.timeStart}
                                                         </c:if>
                                                     </c:forEach>
                                                 </span>
@@ -321,7 +309,7 @@
                                             <p class="bold-text">Thời gian kết thúc: <span id="endTime">
                                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                                         <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
-                                                           ${auctions.timeEnd}
+                                                            ${auctions.timeEnd}
                                                         </c:if>
                                                     </c:forEach>
                                                 </span>
@@ -365,28 +353,17 @@
                 <div class="register-modal-container">
                     <h1 style="font-size: 22px; padding: 4px 0px;">Diễn biến cuộc đấu giá</h1>
                     <div class="number-price-container">
-                        <p style="color: #D9AB73; font-size: 22px">
-                            <c:if test="${not empty auctions}">
-                                <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
-                                    <c:forEach var="auctions" items="${requestScope.auctions}"> 
-                                        <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">                            
-                                            <span class="price-now">
-                                                <script>
-                                                    var number = ${auctions.priceNow}; // Assuming auctions.lamda contains the number
-                                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                    document.write(formattedNumber);
-                                                </script>
-                                                Xu
-                                            </span>
-                                        </c:if>
-                                    </c:forEach>
-                                </c:forEach>
-                            </c:if> 
-                        </p>
-                        <p>50.210.000.000 VND</p>
-                        <p>50.215.000.000 VND</p>
-                        <p>50.205.000.000 VND</p>
-                        <p>50.200.000.000 VND</p>
+                        <c:forEach var="TOP5Prices" items="${requestScope.TOP5Prices}" varStatus="loop">
+                            <c:choose>
+                                <c:when test="${loop.index == 0}">
+                                    <p class="price-now" style="color: #D9AB73; font-size: 22px;">${TOP5Prices} Xu</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p>${TOP5Prices} Xu</p>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+
                     </div>
                 </div>
 
@@ -398,12 +375,7 @@
                                     <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
                                         <p>Giá hiện tại: 
                                             <span id="price-now">
-                                                <script>
-                                                    var number = ${auctions.priceNow}; // Assuming auctions.lamda contains the number
-                                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                    document.write(formattedNumber);
-                                                </script>
-                                                VND
+                                                ${auctions.priceNow} Xu
                                             </span>
                                         </p>
                                     </c:if>
@@ -418,11 +390,7 @@
                                 <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
-                                            <script>
-                                                var number = ${auctions.lamda}; // Assuming auctions.lamda contains the number
-                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                document.write(formattedNumber);
-                                            </script>
+                                           ${auctions.lamda}
                                         </c:if>
                                     </c:forEach>
                                 </c:forEach>
@@ -458,12 +426,7 @@
                                                     <input type="hidden" class="add10s">
                                                     <p>Trả giá:  
                                                         <span id="total-price-bid">
-                                                            <script>
-                                                                var number = ${auctions.priceNow}; // Assuming auctions.lamda contains the number
-                                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                                document.write(formattedNumber);
-                                                            </script>
-                                                            VND
+                                                            ${auctions.priceNow} Xu
                                                         </span>
                                                     </p>
                                                 </c:if>
@@ -633,8 +596,8 @@
                 var pricePerUnit = parseFloat(document.querySelector('.number-price-bellow-1').innerText.replace(/\./g, '').replace(',', '.'));
                 var totalPrice = quantity * pricePerUnit;
                 var totalPriceBid = priceNow + totalPrice;
-                document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN');
-                document.getElementById('total-price-bid').innerText = totalPriceBid.toLocaleString('vi-VN');
+                document.getElementById('total-price').innerText = totalPrice;
+                document.getElementById('total-price-bid').innerText = totalPriceBid;
                 var Pricevalue = document.getElementById('priceNowBid').value = totalPriceBid;
                 console.log(Pricevalue);
                 // Convert total price to words using chuyenSoTienSangChu function
@@ -754,7 +717,7 @@
 
                     element.innerHTML = countdownDisplay;
 
-                    if (distance <= 10000) { // Khi thời gian đếm ngược còn 10 giây (10000 milliseconds)
+                    if (distance <= 15000) { // Khi thời gian đếm ngược còn 15 giây (15000 milliseconds)
                         // Tạo thẻ input
                         var add10sClass = document.querySelector(".add10s");
                         console.log(add10sClass)
