@@ -305,7 +305,7 @@
                             </div>
                         </div>
                         <div class="realestate-quantity">
-                            <p>Hiện có 99 dự án</p>
+                            <p>Hiện có ${requestScope.SoLuongDuAn} dự án</p>
                         </div>
                     </div>
                 </div>
@@ -315,7 +315,7 @@
         <div class="swiper postElstate-container">
             <div class="swiper-wrapper postElstate-list">
             <c:forEach items="${list}" var="item">
-                <div class=" realestate-items swiper-slide"> 
+                <div style="background-color: #000" class=" realestate-items swiper-slide"> 
                     <h1>${item.imageLink1}</h1>
                     <c:forEach var="img" items="${listImg}">
                         <c:if test="${img.imageFolderID eq item.imageFolderID}"> <img class="img-home-page" src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image1)}" alt="Image"></c:if>
