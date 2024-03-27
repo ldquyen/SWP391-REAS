@@ -98,7 +98,7 @@ public class AuctionServlet extends HttpServlet {
                 int result = auctionDAO.registerAuction(idauctionbid, account.getAccID(), currentUserBalance, requirmentPrice, userWalletId, auctionPriceNow);
 
                 AuctionHistoryDAO auctionHistoryDAO = new AuctionHistoryDAO();
-                List<Integer> top5Prices = auctionHistoryDAO.getPriceTop5();
+                List<Integer> top5Prices = auctionHistoryDAO.getPriceTop5(idauctionbid);
                 System.out.println(top5Prices);
                 request.setAttribute("TOP5Prices", top5Prices);
 

@@ -414,12 +414,12 @@
                         </p>
                     </div>
                     <c:if test="${not empty requestScope.HETTIEN}">
-                        <h1 class="hover-effect" style="color: red;display: flex;justify-content: center">Bạn đã hết xu, vui lòng <form action="MainController" method="post">
+                        <h1 class="hover-effect" style="color: red;display: flex;justify-content: center">Số xu không đủ, vui lòng <form action="MainController" method="post">
                                 <button style="color: #fff" type="submit" value="naptien" name="action">
                                     <span style="text-decoration: underline">nạp thêm</span>
                                 </button>
                             </form>...</h1>
-                    </c:if>
+                        </c:if>
 
                     <div style="display: flex; justify-content: center">
                         <form action="MemberController" method="post">
@@ -599,11 +599,18 @@
             // Function to update the total price based on quantity
             function updateTotalPrice() {
                 var quantity = parseInt(document.getElementById('quantity').value);
-                var priceNow = parseFloat(document.querySelector('.price-now').innerText.replace(/\./g, '').replace(',', '.'));
+                var priceNow = parseFloat(document.getElementById('price-now').innerText.replace(/\./g, '').replace(',', '.'));
                 // You need to replace '.number-price-bellow-1' with the appropriate selector
                 var pricePerUnit = parseFloat(document.querySelector('.number-price-bellow-1').innerText.replace(/\./g, '').replace(',', '.'));
                 var totalPrice = quantity * pricePerUnit;
                 var totalPriceBid = priceNow + totalPrice;
+                
+                console.log(quantity)
+                console.log(priceNow)
+                console.log(pricePerUnit)
+                console.log(totalPrice)
+                console.log(totalPriceBid)
+
                 document.getElementById('total-price').innerText = totalPrice;
                 document.getElementById('total-price-bid').innerText = totalPriceBid;
                 var Pricevalue = document.getElementById('priceNowBid').value = totalPriceBid;

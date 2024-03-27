@@ -50,7 +50,7 @@ public class AuctionHistoryDAO {
         return auctionhistory;
     }
 
-    public List<Integer> getPriceTop5() throws ClassNotFoundException, SQLException {
+    public List<Integer> getPriceTop5(String AuctionID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -62,8 +62,11 @@ public class AuctionHistoryDAO {
             if (con != null) {
                 String sql = "SELECT DISTINCT TOP 5 Price\n"
                         + "FROM AuctionHistory\n"
-                        + "ORDER BY Price DESC;";
+                        + "WHERE AuctionID = ?\n"
+                        + // corrected placement of WHERE clause
+                        "ORDER BY Price DESC"; // moved ORDER BY clause here
                 stm = con.prepareStatement(sql);
+                stm.setString(1, AuctionID);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {

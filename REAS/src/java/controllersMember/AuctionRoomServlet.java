@@ -65,7 +65,7 @@ public class AuctionRoomServlet extends HttpServlet {
             
             //List top 5 price auction history
             AuctionHistoryDAO auctionHistoryDAO = new AuctionHistoryDAO();
-            List<Integer> top5Prices = auctionHistoryDAO.getPriceTop5();
+            List<Integer> top5Prices = auctionHistoryDAO.getPriceTop5(auction.getAuctionID());
             System.out.println(top5Prices);
             request.setAttribute("TOP5Prices", top5Prices);
 
