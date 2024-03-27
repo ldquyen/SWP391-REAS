@@ -424,6 +424,7 @@ public class RealEstateDAO {
                     + "re.[TimeUp], "
                     + "re.[TimeDown], "
                     + "re.[Address], "
+                    + "re.[Area], "
                     + "im.[ImageLink1] "
                     + "from dbo.[RealEstate] re join dbo.[Image] im on re.ImageFolderID = im.ImageFolderID Where StatusID = 1 order by re.TimeUp desc ";
             pst = cn.prepareStatement(sql);
@@ -437,6 +438,7 @@ public class RealEstateDAO {
                 re.setRealEstateName(rs.getString("RealEstateName"));
                 re.setPriceFirst(rs.getLong("PriceFirst"));
                 re.setPriceLast(rs.getLong("PriceLast"));
+                re.setArea(rs.getInt("Area"));
                 re.setPricePaid(rs.getLong("PricePaid"));
                 Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                 Timestamp timeDownSql = rs.getTimestamp("TimeDown");

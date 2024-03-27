@@ -323,30 +323,56 @@
                     <a href="MainController?action=viewPostRealEstate&id=${item.realEstateID}">
 
                         <div class="text-home-container">
+                            <%--
                             <p class="text-home-1 timeUp">
                                 ${item.timeUp}
                             </p>
+                            --%>
                             <p class="text-home-2">
-                                ${fn:toUpperCase(item.realEstateName)} - <span>
-                                    <c:forEach var="cityList" items="${requestScope.city}"> 
-                                        <c:if test="${cityList.cityID eq item.cityID}">
-                                            ${cityList.cityName}
-                                        </c:if>
-                                    </c:forEach>
-                                </span>
+                                ${fn:toUpperCase(item.realEstateName)}
                             </p>
 
-                            <p class="text-home-2">
-                                ${item.address}
-                            </p>
-                            <p class="text-home-3">
-                                <script>
-                                    var number = ${item.priceFirst}; // Assuming auctions.lamda contains the number
-                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                    document.write(formattedNumber);
-                                </script> Xu
-                                <%--  <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd --%>
-                            </p>
+                            <div style="display: flex;justify-content: center">
+                                <p class="text-home-3">
+                                    <script>
+                                        var number = ${item.priceFirst}; // Assuming auctions.lamda contains the number
+                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                        document.write(formattedNumber);
+                                    </script> Xu
+                                    <%--  <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd --%>
+                                </p>
+                                <p style="color: #999;margin: 0 8px;line-height: 26px; ">.</p>
+                                <p class="text-home-3">
+                                    ${item.area} m2
+                                </p>
+                            </div>
+
+
+
+
+
+                            <div style="display: flex;justify-content: center">
+                                <p class="text-home-2">
+                                    ${item.address}
+                                </p>
+                                <span class="text-home-2" style="margin-right: 5px">, </span>
+                                <p class="text-home-2">
+                                    <span>
+                                        <c:forEach var="cityList" items="${requestScope.city}"> 
+                                            <c:if test="${cityList.cityID eq item.cityID}">
+                                                ${cityList.cityName}
+                                            </c:if>
+                                        </c:forEach>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div style="display: flex;justify-content: center;">
+                                <p class="text-home-1">Đăng lúc</p>
+                                <p class="text-home-1 timeUp">
+                                    ${item.timeUp}
+                                </p>
+                            </div>
                         </div>
                     </a>
                 </div>
@@ -378,45 +404,45 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-                                    const swiper = new Swiper('.swiper', {
-                                        slidesPerView: 4,
-                                        spaceBetween: 25,
-                                        // loop: true,
-                                        centeredSlide: 'true',
-                                        direction: 'horizontal',
-                                        fade: 'true',
-                                        grabCursor: 'true',
-                                        pagination: {
-                                            clickable: true,
-                                            renderBullet: function (index, className) {
-                                                return '<span class="' + className + '">' + (index + 1) + "</span>";
+                                        const swiper = new Swiper('.swiper', {
+                                            slidesPerView: 4,
+                                            spaceBetween: 25,
+                                            // loop: true,
+                                            centeredSlide: 'true',
+                                            direction: 'horizontal',
+                                            fade: 'true',
+                                            grabCursor: 'true',
+                                            pagination: {
+                                                clickable: true,
+                                                renderBullet: function (index, className) {
+                                                    return '<span class="' + className + '">' + (index + 1) + "</span>";
+                                                },
+                                                el: '.swiper-pagination',
                                             },
-                                            el: '.swiper-pagination',
-                                        },
-                                        navigation: {
-                                            nextEl: '.swiper-button-next',
-                                            prevEl: '.swiper-button-prev',
-                                        },
+                                            navigation: {
+                                                nextEl: '.swiper-button-next',
+                                                prevEl: '.swiper-button-prev',
+                                            },
 
-                                        scrollbar: {
-                                            el: '.swiper-scrollbar',
-                                        },
+                                            scrollbar: {
+                                                el: '.swiper-scrollbar',
+                                            },
 
-                                        breakpoints: {
-                                            0: {
-                                                slidesPerView: 1,
-                                            },
-                                            520: {
-                                                slidesPerView: 2,
-                                            },
-                                            950: {
-                                                slidesPerView: 3,
-                                            },
-                                            1024: {
-                                                slidesPerView: 4,
+                                            breakpoints: {
+                                                0: {
+                                                    slidesPerView: 1,
+                                                },
+                                                520: {
+                                                    slidesPerView: 2,
+                                                },
+                                                950: {
+                                                    slidesPerView: 3,
+                                                },
+                                                1024: {
+                                                    slidesPerView: 4,
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
 </script>
 
 <script>

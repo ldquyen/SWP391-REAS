@@ -119,6 +119,9 @@ public class MainController extends HttpServlet {
                 case "searchRealEstate":
                     url = "SearchRealEstateAtHomepageServlet";
                     break;
+                case "searchRealEstate1":
+                    url = "SearchRealEstateAtHomepage1Servlet";
+                    break;
                 case "homepage":
                     url = "index_1.jsp";
                     break;
