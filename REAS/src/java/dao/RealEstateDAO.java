@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import model.RealEstateVM;
 import mylib.DBUtils;
 
 public class RealEstateDAO {
-    
+
     public boolean createPost(String realEstateID, String imageFolderID, String accID, String catID, int cityID,
             String realEstateName, long priceFirst, LocalDateTime timeUp, LocalDateTime timeDown, long priceLast, long pricePaid, int statusID,
             int area, String address, String detail, long lamda) throws SQLException, NamingException, ClassNotFoundException {
@@ -24,16 +25,16 @@ public class RealEstateDAO {
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
-        
+
         try {
             con = DBUtils.getConnection();
-            
+
             if (con != null) {
                 String sql1 = "INSERT INTO [dbo].[RealEstate]"
                         + "([RealEstateID], [ImageFolderID], [AccID], [CatID], [CityID], [RealEstateName], [PriceFirst], [TimeUp], [TimeDown],[PriceLast],[PricePaid], [statusID], [Area], [Address], [Detail])"
                         + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 stm = con.prepareStatement(sql1);
-                
+
                 stm.setString(1, realEstateID);
                 stm.setString(2, imageFolderID);
                 stm.setString(3, accID);
@@ -49,7 +50,7 @@ public class RealEstateDAO {
                 stm.setInt(13, area);
                 stm.setString(14, address);
                 stm.setString(15, detail);
-                
+
                 int effectRows = stm.executeUpdate();
                 if (effectRows > 0) {
                     String sql2 = "INSERT INTO [dbo].[Auction]"
@@ -63,7 +64,7 @@ public class RealEstateDAO {
                         anotherStm.setLong(5, lamda);
                         anotherStm.setTimestamp(6, Timestamp.valueOf(timeUp));
                         anotherStm.setTimestamp(7, Timestamp.valueOf(timeDown));
-                        
+
                         int anotherEffectRows = anotherStm.executeUpdate();
                         // Xử lý kết quả hoặc thông báo
 
@@ -83,7 +84,7 @@ public class RealEstateDAO {
         }
         return result;
     }
-    
+
     // Lấy mọi thông tin của RealEstate bằng statusID
     public List<RealEstateInfo> getAllRealEstate(int statusID) throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -180,7 +181,7 @@ public class RealEstateDAO {
         }
         return result;
     }
-    
+
     public boolean updateStatusID(String realEstateID, int statusID) throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -189,7 +190,7 @@ public class RealEstateDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "UPDATE [dbo].[RealEstate] SET [StatusID] = ? WHERE [RealEstateID] = ?";
-                
+
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, statusID);
                 stm.setString(2, realEstateID);
@@ -199,7 +200,7 @@ public class RealEstateDAO {
                 }
             }
         } finally {
-            
+
             if (stm != null) {
                 stm.close();
             }
@@ -209,7 +210,7 @@ public class RealEstateDAO {
         }
         return result;
     }
-    
+
     public boolean deleteRealEstateID(String auctionID, String realEstateID, String imageFolderID) throws SQLException, NamingException, ClassNotFoundException {
         //mở connection
         Connection con = null;
@@ -228,14 +229,14 @@ public class RealEstateDAO {
                 stm1 = con.prepareStatement(sql1);
                 stm1.setString(1, auctionID);
                 int effectRows1 = stm1.executeUpdate();
-                
+
                 String sql2 = " Delete From [dbo].[RealEstate] "
                         + "Where [RealEstateID] = ?";
                 //3.create Statement Obj
                 stm2 = con.prepareStatement(sql2);
                 stm2.setString(1, realEstateID);
                 int effectRows2 = stm2.executeUpdate();
-                
+
                 String sql3 = " Delete From [dbo].[Image] "
                         + "Where [ImageFolderID] = ?";
                 //3.create Statement Obj
@@ -268,7 +269,7 @@ public class RealEstateDAO {
         }
         return result;
     }
-    
+
     public boolean chooseStaffForAuction(String accID, String realEstateID) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -277,7 +278,7 @@ public class RealEstateDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "UPDATE [dbo].[Auction] SET [AccID] = ? WHERE [RealEstateID] = ?";
-                
+
                 stm = con.prepareStatement(sql);
                 stm.setString(1, accID);
                 stm.setString(2, realEstateID);
@@ -286,9 +287,9 @@ public class RealEstateDAO {
                     result = true;
                 }
             }
-            
+
         } finally {
-            
+
             if (stm != null) {
                 stm.close();
             }
@@ -298,8 +299,6 @@ public class RealEstateDAO {
         }
         return result;
     }
-
-    
 
     public static boolean checkRealEstateIDExists(String realEstateID) throws SQLException, ClassNotFoundException {
         Connection cn = DBUtils.getConnection();
@@ -322,7 +321,7 @@ public class RealEstateDAO {
         }
         return false;
     }
-    
+
     public static ArrayList<RealEstate> getRealEstateByStatus(String stringsql, int StatusID) throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<RealEstate> list = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
@@ -331,10 +330,10 @@ public class RealEstateDAO {
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setInt(1, StatusID);
             ResultSet rs = pst.executeQuery();
-            
+
             if (rs != null) {
                 while (rs.next()) {
-                    
+
                     String realEstateID = rs.getString("RealEstateID");
                     String imageFolderID = rs.getString("ImageFolderID");
                     String accID = rs.getString("AccID");
@@ -342,7 +341,7 @@ public class RealEstateDAO {
                     int cityID = rs.getInt("CityID");
                     String realEstateName = rs.getString("RealEstateName");
                     long priceFirst = rs.getLong("PriceFirst");
-                    
+
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                     Timestamp timeDownSql = rs.getTimestamp("TimeDown");
 
@@ -355,7 +354,7 @@ public class RealEstateDAO {
                     int area = rs.getInt("Area");
                     String address = rs.getString("Address");
                     String detail = rs.getString("Detail");
-                    
+
                     RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown, priceLast, pricePaid, statusid, area, address, detail);
                     list.add(re);
                 }
@@ -364,7 +363,7 @@ public class RealEstateDAO {
         }
         return list;
     }
-    
+
     public static ArrayList<RealEstate> getRealEstateByID(String IDRE) throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<RealEstate> list = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
@@ -374,10 +373,10 @@ public class RealEstateDAO {
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, IDRE);
             ResultSet rs = pst.executeQuery();
-            
+
             if (rs != null) {
                 while (rs.next()) {
-                    
+
                     String realEstateID = rs.getString("RealEstateID");
                     String imageFolderID = rs.getString("ImageFolderID");
                     String accID = rs.getString("AccID");
@@ -385,7 +384,7 @@ public class RealEstateDAO {
                     int cityID = rs.getInt("CityID");
                     String realEstateName = rs.getString("RealEstateName");
                     long priceFirst = rs.getLong("PriceFirst");
-                    
+
                     Timestamp timeUpSql = rs.getTimestamp("TimeUp");
                     Timestamp timeDownSql = rs.getTimestamp("TimeDown");
 
@@ -398,7 +397,7 @@ public class RealEstateDAO {
                     int area = rs.getInt("Area");
                     String address = rs.getString("Address");
                     String detail = rs.getString("Detail");
-                    
+
                     RealEstate re = new RealEstate(realEstateID, imageFolderID, accID, catID, cityID, realEstateName, priceFirst, timeUp, timeDown, priceLast, pricePaid, statusid, area, address, detail);
                     list.add(re);
                 }
@@ -407,7 +406,22 @@ public class RealEstateDAO {
         }
         return list;
     }
-    
+
+    public static int countRowsInTable() throws ClassNotFoundException, SQLException, NamingException {
+        int rowCount = 0;
+
+        try (Connection cn = DBUtils.getConnection();
+                Statement stmt = cn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS row_count FROM RealEstate where StatusID IN (1, 2, 3)")) {
+
+            if (rs.next()) {
+                rowCount = rs.getInt("row_count");
+            }
+        }
+
+        return rowCount;
+    }
+
     public List<RealEstateVM> getListAvailableRealEstate() throws SQLException, ClassNotFoundException {
         List<RealEstateVM> listRealEstates = new ArrayList();
         Connection cn = DBUtils.getConnection();
@@ -426,7 +440,7 @@ public class RealEstateDAO {
                     + "re.[Address], "
                     + "re.[Area], "
                     + "im.[ImageLink1] "
-                    + "from dbo.[RealEstate] re join dbo.[Image] im on re.ImageFolderID = im.ImageFolderID Where StatusID = 1 order by re.TimeUp desc ";
+                    + "from dbo.[RealEstate] re join dbo.[Image] im on re.ImageFolderID = im.ImageFolderID Where StatusID IN (1 ,2, 3) order by re.TimeUp desc ";
             pst = cn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -458,7 +472,7 @@ public class RealEstateDAO {
         Connection cn = DBUtils.getConnection();
         PreparedStatement pst = null;
         RealEstateVM realEstate = new RealEstateVM();
-        
+
         if (cn != null) {
             String sql = "Select re.[RealEstateID], "
                     + "re.[AccID], "
@@ -507,7 +521,7 @@ public class RealEstateDAO {
                 byte[] imageLink1 = rs.getBytes("ImageLink1");
                 byte[] imageLink2 = rs.getBytes("ImageLink2");
                 byte[] imageLink3 = rs.getBytes("ImageLink3");
-                
+
                 realEstate.setDetail(rs.getString("Detail"));
                 realEstate.setArea(rs.getInt("Area"));
                 realEstate.setPricePaid(rs.getLong("PricePaid"));
@@ -557,11 +571,11 @@ public class RealEstateDAO {
                 re.setAddress(rs.getString("Address"));
                 listRealEstates.add(re);
             }
-            
+
         }
         return listRealEstates;
     }
-    
+
     public static ArrayList<RealEstate> getRealEstateByIDAtMyPost(String accID) throws ClassNotFoundException, SQLException {
         ArrayList<RealEstate> reList = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
@@ -582,10 +596,10 @@ public class RealEstateDAO {
                 }
             }
         }
-        
+
         return reList;
     }
-    
+
 //    public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //        ArrayList<RealEstate> reList = getRealEstateByIDAtMyPost("M1");
 //        for (RealEstate realEstate : reList) {

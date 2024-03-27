@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +42,7 @@ public class HomeServletIndex_1 extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             int pageNum = request.getParameter("pagenum") != null ? Integer.parseInt(request.getParameter("pagenum")) : 1;
@@ -56,11 +57,13 @@ public class HomeServletIndex_1 extends HttpServlet {
 //            request.setAttribute("totalPage", totalPage);
 
             List<RealEstateVM> list = realEstateDAO.getListAvailableRealEstate();
+            int SoLuongDuAn = realEstateDAO.countRowsInTable();
             ArrayList<City> city = CityDAO.getCityList();
             request.setAttribute("list", list);
             ImageDAO imgDAO = new ImageDAO();
             List<Image> listImage = imgDAO.getListImage2();
             request.setAttribute("listImg", listImage);
+            request.setAttribute("SoLuongDuAn", SoLuongDuAn);
             request.setAttribute("pagenum", pageNum);
             request.setAttribute("city", city);
             request.getRequestDispatcher("index_1.jsp").forward(request, response);
@@ -81,7 +84,11 @@ public class HomeServletIndex_1 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (NamingException ex) {
+            Logger.getLogger(HomeServletIndex_1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -95,7 +102,11 @@ public class HomeServletIndex_1 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (NamingException ex) {
+            Logger.getLogger(HomeServletIndex_1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
