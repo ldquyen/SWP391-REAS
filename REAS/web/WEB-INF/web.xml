@@ -126,6 +126,10 @@
         <servlet-name>RuleModifyServlet</servlet-name>
         <servlet-class>controllersAdmin.RuleModifyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>revenueServlet</servlet-name>
+        <servlet-class>controllersAdmin.revenueServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -244,6 +248,10 @@
     <servlet-mapping>
         <servlet-name>RuleModifyServlet</servlet-name>
         <url-pattern>/RuleModifyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>revenueServlet</servlet-name>
+        <url-pattern>/revenueServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
