@@ -292,24 +292,12 @@
                                 <h1 class="flex-center h1-text-left-right">Thông tin đấu giá cơ bản</h1>
                                 <div style="padding-top: 8px;">
                                     <p class="bold-text">Giá khởi điểm: <span>
-                                            <script>
-                                                var number = ${realEstate.priceFirst}; // Assuming auctions.lamda contains the number
-                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                document.write(formattedNumber);
-                                            </script> Xu</span></p></span></p>
-                                    <p class="bold-text">Giá mua ngay: <span class="test"><script>
-                                        var number = ${realEstate.pricePaid}; // Assuming auctions.lamda contains the number
-                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                        document.write(formattedNumber);
-                                            </script> Xu</span>
+                                            ${realEstate.priceFirst} Xu</span></p></span></p>
+                                    <p class="bold-text">Giá mua ngay: <span class="test">${realEstate.pricePaid} Xu</span>
                                     <p class="bold-text">Bước giá: <span>
                                             <c:forEach var="Auctions" items="${requestScope.Auctions}"> 
                                                 <c:if test="${Auctions.realEstateID eq realEstate.realEstateID}">
-                                                    <script>
-                                                        var number = ${Auctions.lamda}; // Assuming auctions.lamda contains the number
-                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                                        document.write(formattedNumber);
-                                                    </script>
+                                                    ${Auctions.lamda}
                                                 </c:if>
                                             </c:forEach>
                                             Xu</span></p>
@@ -348,11 +336,7 @@
                     <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
                         <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
                             <div class="container-full-right flex-center text-center">
-                                <p class="h1-text-mid" style="color: #fff;">Giá mua ngay: <span class="test"><script>
-                                    var number = ${realEstate.pricePaid}; // Assuming auctions.lamda contains the number
-                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                    document.write(formattedNumber);
-                                        </script> Xu</span>
+                                <p class="h1-text-mid" style="color: #fff;">Giá mua ngay: <span class="test">${realEstate.pricePaid} Xu</span>
                             </div>
                             <div class="container-full-right flex-center text-center">
                                 <form id="purchaseForm" action="MainController" method="post">
