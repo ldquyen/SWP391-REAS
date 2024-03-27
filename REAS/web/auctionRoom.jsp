@@ -390,7 +390,7 @@
                                 <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
                                         <c:if test="${auctions.realEstateID eq REGETBYID.realEstateID}">
-                                           ${auctions.lamda}
+                                            ${auctions.lamda}
                                         </c:if>
                                     </c:forEach>
                                 </c:forEach>
@@ -413,6 +413,14 @@
                             <span id="total-price"></span>
                         </p>
                     </div>
+                    <c:if test="${not empty requestScope.HETTIEN}">
+                        <h1 class="hover-effect" style="color: red;display: flex;justify-content: center">Bạn đã hết xu, vui lòng <form action="MainController" method="post">
+                                <button style="color: #fff" type="submit" value="naptien" name="action">
+                                    <span>nạp thêm</span>
+                                </button>
+                            </form>...</h1>
+                    </c:if>
+
                     <div style="display: flex; justify-content: center">
                         <form action="MemberController" method="post">
                             <button type="submit" value="tragia" name="action">

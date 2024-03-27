@@ -89,6 +89,8 @@ public class AuctionServlet extends HttpServlet {
                 if (currentUserBalance >= requirmentPrice) {
                     // neu thoa thi update pricenow cua auction.
                     auctionDAO.setPriceNowAuctions(pricenowbid, idauctionbid);
+                } else {
+                    request.setAttribute("HETTIEN", "Bạn đã hết xu, vui lòng nạp thêm...");
                 }
                 double auctionPriceNow = auctionDAO.getCurrentPriceNow(idauctionbid);
 
