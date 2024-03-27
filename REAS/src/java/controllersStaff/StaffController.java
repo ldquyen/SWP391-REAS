@@ -47,7 +47,13 @@ public class StaffController extends HttpServlet {
                     break;
                 case "viewPostRealEstate":
                     url = "REDetailServlet";
-                    break;    
+                    break;
+                case "viewPostRealEstateStatus2":
+                    url = "REDetailServlet_status2";
+                    break;
+                case "listRequestMuaNgay":
+                    url = "SearchRequestMuaNgayServlet";
+                    break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);

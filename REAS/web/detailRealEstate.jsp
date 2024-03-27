@@ -1,3 +1,4 @@
+<%@page import="dao.PurchaseRequestDAO"%>
 <%@page import="dto.Wallet"%>
 <%@page import="dao.WalletDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -15,6 +16,17 @@
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
+        <script>
+            // Hàm hiển thị cửa sổ thông báo
+            function showErrorMessage(message) {
+                alert(message);
+            }
+            // Kiểm tra và hiển thị thông báo nếu có
+            <c:if test="${not empty requestScope.Purchase_Request}">
+            showErrorMessage("${requestScope.Purchase_Request}");
+            </c:if>
+
+        </script>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -37,7 +49,7 @@
                 <div class="navbar-start">
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="homeindex" name="action">
+                            <button type="submit" value="homeindex_1" name="action">
                                 <span>TRANG CHỦ</span>
                             </button>
                         </form>
@@ -62,21 +74,20 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <!--                        <div class="navbar-container-1">
-                                                    <form action="MainController" method="post">
-                                                        <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                                            <span>DANH SÁCH ĐẤU GIÁ</span>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                                <div class="navbar-container-1">
-                                                    <form action="MainController" method="post">
-                                                        <button class="navbar-1" type="submit" value="postNew" name="action">
-                                                            <span>ĐĂNG TIN</span>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                        -->     
+                        <div class="navbar-container-1">
+                            <form action="MainController" method="post">
+                                <button class="navbar-1" type="submit" value="auctionList" name="action">
+                                    <span>DANH SÁCH ĐẤU GIÁ</span>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="navbar-container-1">
+                            <form action="MainController" method="post">
+                                <button class="navbar-1" type="submit" value="postNew" name="action">
+                                    <span>ĐĂNG TIN</span>
+                                </button>
+                            </form>
+                        </div>
                         <div class="navbar-container-1">
                             <form action="MainController" method="post">
                                 <button class="navbar-1" type="submit" value="naptien" name="action">
@@ -309,8 +320,8 @@
                                         <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
                                             <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${dto.timeStart}</span></p>
                                             <p class="bold-text">Thời gian kết thúc: <span id="endTime">${dto.timeEnd}</span></p>
-                                        </c:if>
-                                    </c:forEach>
+                                            </c:if>
+                                        </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -321,45 +332,64 @@
             </div>
 
             <div class="column" style="padding-top: 30px">
-                <c:forEach items="${requestScope.SEARCH_RESULT}" var="realEstateInfo">
-                    <c:if test="${realEstateInfo.realEstateID eq realEstate.realEstateID}">
+                <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
+                    <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
                         <div class="container-full-right flex-center text-center">
                             <div>
                                 <p class="h1-text-mid" style="color: #fff;">Đăng bởi</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.fullName}</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.phone}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.fullName}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.phone}</p>
                             </div>
                         </div>
                     </c:if>
                 </c:forEach>
 
-
                 <div class="container-full-right-bellow">
-                    <div>
-                        <p class="flex-center text-center" style="color: #000;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
-                            <!--                        <div style="text-align: left; padding-left: 10px;">
-                                                        <form action="MainController" method="post">
-                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                                                <span>Thảo Điền Pearl</span>
-                                                            </button>
-                                                        </form>
-                                                        <form action="MainController" method="post">
-                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                                                <span>Hoàng Anh River View</span>
-                                                            </button>
-                                                        </form>
-                                                        <form action="MainController" method="post">
-                                                            <button type="submit" value="rule" name="action" style="padding: 8px 10px;font-size: 16px">
-                                                                <span>Thủ Thiêm Sky(5)</span>
-                                                            </button>
-                                                        </form>
-                                                    </div>-->
-                        <div style="text-align: left; padding-left: 10px;">
+                    <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
+                        <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
+                            <div class="container-full-right flex-center text-center">
+                                <p class="h1-text-mid" style="color: #fff;">Giá mua ngay: <span class="test"><script>
+                                    var number = ${realEstate.pricePaid}; // Assuming auctions.lamda contains the number
+                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                    document.write(formattedNumber);
+                                        </script> Xu</span>
+                            </div>
+                            <div class="container-full-right flex-center text-center">
+                                <form id="purchaseForm" action="MainController" method="post">
+                                    <input type="hidden" name="realEstateID" value="${listRealEstate.realEstateID}">
+                                    <input type="hidden" name="accID" value="${sessionScope.member.accID}">
+                                    <input type="hidden" name="pricePaid" value="${listRealEstate.pricePaid}">
+                                    <input type="hidden" name="action" value="muangay">
 
-                            <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
-                                <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
-                            </c:forEach>
-                        </div>
+                                    <c:choose>
+                                        <c:when test="${purchaseStatus == 1}">
+                                            <!-- If purchaseStatus is 1 (Đang xét duyệt) -->
+                                            <button type="button" disabled>
+                                                <p class="h1-text-mid" style="color: #fff;">Đang xét duyệt</p>
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <!-- For other cases -->
+                                            <button type="button" onclick="confirmAndSubmitForm()">
+                                                <p class="h1-text-mid" style="color: #fff;">Đăng Kí Mua Ngay</p>
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </form>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+                <div class="container-full-right-bellow">
+                    <div class="container-full-right flex-center text-center">
+                        <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
+
+                    </div>
+                    <div style="text-align: left; padding-left: 200px;">
+
+                        <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
+                            <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
@@ -455,6 +485,34 @@
             function padZero(number) {
                 return number < 10 ? '0' + number : number;
             }
+        </script>
+        <script>
+            function confirmAndSubmitForm() {
+                if (confirm("Bạn có chắc chắn với quyết định Đăng Kí Mua Ngay không?")) {
+                    submitForm();
+                }
+            }
+            function submitForm() {
+                // Thay đổi giá trị của action input
+                document.getElementById('purchaseForm').action = 'MainController';
+                // Gửi biểu mẫu
+                document.getElementById('purchaseForm').submit();
+                // Thay đổi văn bản của nút
+                event.target.innerText = "Đã yêu cầu";
+                event.target.disabled = true; // Vô hiệu hóa nút sau khi nhấn
+            }
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.getElementById("purchaseForm").addEventListener("submit", function (event) {
+                    event.preventDefault(); // Ngăn chặn hành vi mặc định của biểu mẫu
+
+                    // Thực hiện gửi biểu mẫu bằng cách sử dụng AJAX hoặc gì đó tương tự ở đây
+
+                    // Sau khi xử lý yêu cầu gửi, tải lại trang
+                    location.reload();
+                });
+            });
         </script>
     </body>
 </html>

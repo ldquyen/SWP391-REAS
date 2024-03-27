@@ -58,7 +58,7 @@
 
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="news" name="action">
+                            <button type="submit" value="DN" name="action">
                                 <span>TIN TỨC</span>
                             </button>
                         </form>

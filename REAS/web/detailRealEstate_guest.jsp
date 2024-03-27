@@ -1,9 +1,3 @@
-<%-- 
-    Document   : staff_detailRealEstate
-    Created on : Mar 12, 2024, 11:13:52 AM
-    Author     : ADMIN
---%>
-
 <%@page import="dto.Wallet"%>
 <%@page import="dao.WalletDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -12,11 +6,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dto.RealEstateInfo" %>
 
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="UTF-8">
+        <title>detailRealEstate</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
@@ -40,55 +35,49 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <form action="StaffController" method="post" style="margin-top: 17px">
-                        <button type="submit" value="staffjsp" name="action" >
-                            <span style="color: white">TRANG CHỦ</span>
-                        </button>
-                    </form>
-                </div>
+                    <a class="navbar-item">
+                        <form action="MainController" method="post">
+                            <button type="submit" value="homeindex" name="action">
+                                <span>TRANG CHỦ</span>
+                            </button>
+                        </form>
+                    </a>
 
+                    <a class="navbar-item">
+                        <form action="MainController" method="post">
+                            <button type="submit" value="DN" name="action">
+                                <span>TIN TỨC</span>
+                            </button>
+                        </form>
+                    </a>
+
+                    <a class="navbar-item">
+                        <form action="MainController" method="post">
+                            <button type="submit" value="DN" name="action">
+                                <span>NỘI QUY</span>
+                            </button>
+                        </form>
+                    </a>
+                </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-
-                        <div class="navbar-item hover-down has-dropdown is-hoverable">
-                            <a class="navbar-link navbar-1-list">
-                                ${sessionScope.staff.fullname} (STAFF)                
-                            </a>
-
-                            <div class="fake-div"></div>
-
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item">
-                                    <form action="AdminController" method="post">
-                                        <button type="submit" value="informationOfAdmin" name="action">
-                                            <span>Thông tin tài khoản</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <hr class="navbar-divider">
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="Logout" name="action">
-                                            <span>Đăng xuất</span>
-                                        </button>
-                                    </form>
-                                </a>
-
-                            </div>
+                        <div class="buttons" >
+                            <form action="MainController" method="post">
+                                <button class="button is-light" type="submit" value="DN" name="action">
+                                    <span>ĐĂNG NHẬP</span>
+                                </button>
+                            </form>
+                            <form action="MainController" method="post">
+                                <button class="button is-light" type="submit" value="DK" name="action">
+                                    <span>ĐĂNG KÝ</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-
-        <!--        <button onclick="goBack()">Quay lại</button>
-        
-                <script>
-                    function goBack() {
-                        window.history.back();
-                    }
-                </script>-->
 
 
         <div class="columns">
@@ -116,6 +105,23 @@
 
                             </div>
                         </c:forEach>
+                        <!-- Full-width images with number text -->
+
+                        <!--
+                                                <div class="mySlides">
+                                                    <div class="numbertext">4 / 6</div>
+                                                    <img src="image/img_lights_wide.jpg" style="width:100%">
+                                                </div>
+                        
+                                                <div class="mySlides">
+                                                    <div class="numbertext">5 / 6</div>
+                                                    <img src="image/img_nature_wide.jpg" style="width:100%">
+                                                </div>
+                        
+                                                <div class="mySlides">
+                                                    <div class="numbertext">6 / 6</div>
+                                                    <img src="image/img_snow_wide.jpg" style="width:100%">
+                                                </div>-->
 
                         <!-- Next and previous buttons -->
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -196,9 +202,11 @@
                                                 </c:if>
                                             </c:forEach>
                                             Xu</span></p>
-                                            <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-                                                <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
+<!--                                    <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
+                                    <p class="bold-text">Thời gian kết thúc: <span id="endTime">${realEstate.timeDown}</span></p>-->
+                                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                                    <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                        <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
                                             <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${dto.timeStart}</span></p>
                                             <p class="bold-text">Thời gian kết thúc: <span id="endTime">${dto.timeEnd}</span></p>
                                             </c:if>
@@ -213,52 +221,30 @@
             </div>
 
             <div class="column" style="padding-top: 30px">
-                <c:forEach items="${requestScope.SEARCH_RESULT}" var="realEstateInfo">
-                    <c:if test="${realEstateInfo.realEstateID eq realEstate.realEstateID}">
+                <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
+                    <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
                         <div class="container-full-right flex-center text-center">
                             <div>
                                 <p class="h1-text-mid" style="color: #fff;">Đăng bởi</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.fullName}</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.phone}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.fullName}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.phone}</p>
                             </div>
                         </div>
                     </c:if>
                 </c:forEach>
 
-                <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-                    <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
-                        <div class="container-full-right-bellow">
-                            <div>
+                <div class="container-full-right-bellow">
+                    <div class="container-full-right flex-center text-center">
+                        <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
 
-                                <form action="StaffController" method="post">
-                                    <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
-                                    <div class="container-full-right flex-center text-center">
-                                        <button style="color: #fff ; text-align: center" type="submit" value="updateStatusButton" name="action">
-                                            <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Xác nhận</p>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                    </div>
+                    <div style="text-align: left; padding-left: 200px;">
 
-                        <div class="container-full-right-bellow">
-                            <div>
-
-                                <form action="StaffController" method="post">
-                                    <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
-                                    <input type="hidden" name="auctionID" value="${dto.auctionID}">
-                                    <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
-                                    <div class="container-full-right flex-center text-center">
-                                        <button style="color: #fff ; text-align: center"  type="submit" value="deleteRealEstateButton" name="action">
-                                            <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Xóa</p>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
+                        <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
+                            <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstateGuest&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
+                        </c:forEach>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -322,22 +308,18 @@
             document.addEventListener("DOMContentLoaded", function () {
                 var startTimeElement = document.getElementById("startTime");
                 var endTimeElement = document.getElementById("endTime");
-                var dateAndTimeElement = document.getElementById("dateAndTime");
 
                 // Format start time
                 var startTime = new Date(startTimeElement.innerText);
                 var formattedStartTime = formatTime(startTime);
-                var dateAndTime = new Date(dateAndTimeElement.innerText);
 
                 // Format end time
                 var endTime = new Date(endTimeElement.innerText);
                 var formattedEndTime = formatTime(endTime);
-                var formattedDateAndTime = formatTime(dateAndTime);
 
                 // Update the HTML with the formatted time
                 startTimeElement.innerText = formattedStartTime;
                 endTimeElement.innerText = formattedEndTime;
-                dateAndTimeElement.innerText = formattedDateAndTime;
             });
 
             // Function to format the time

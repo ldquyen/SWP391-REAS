@@ -376,7 +376,7 @@
                                                     var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                                     document.write(formattedNumber);
                                                 </script>
-                                                VND
+                                                Xu
                                             </span>
                                         </c:if>
                                     </c:forEach>

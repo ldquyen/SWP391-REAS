@@ -37,29 +37,27 @@
                 <div class="navbar-start">
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="homeindex_1" name="action">
+                            <button type="submit" value="homeindex" name="action">
                                 <span>TRANG CHỦ</span>
                             </button>
                         </form>
                     </a>
 
-                    <div class="navbar-item">
+                    <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="news" name="action">
+                            <button type="submit" value="DN" name="action">
                                 <span>TIN TỨC</span>
                             </button>
                         </form>
-                    </div>
+                    </a>
 
-                    <div class="navbar-item">
+                    <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="rule" name="action">
+                            <button type="submit" value="ruleedit" name="action">
                                 <span>NỘI QUY</span>
                             </button>
                         </form>
-                    </div>
-
-
+                    </a>
                 </div>
 
                 <div class="navbar-end">

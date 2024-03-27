@@ -27,8 +27,8 @@ import model.RealEstateVM;
  *
  * @author ADMIN
  */
-@WebServlet(name = "REDetailServlet", urlPatterns = {"/REDetailServlet"})
-public class REDetailServlet extends HttpServlet {
+@WebServlet(name = "REDetailServlet_status2", urlPatterns = {"/REDetailServlet_status2"})
+public class REDetailServlet_status2 extends HttpServlet {
 
  
     @Override
@@ -61,7 +61,7 @@ public class REDetailServlet extends HttpServlet {
                     request.setAttribute("city", city);
                     request.setAttribute("listimg", listIMG);
 
-                    url = "staff_detailRealEstate.jsp";
+                    url = "staff_detailRealEstate_approved.jsp";
                 } else {
                     System.out.println("RealEstateDetailServlet null exception");
                 }

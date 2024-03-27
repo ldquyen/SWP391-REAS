@@ -9,30 +9,28 @@ import java.time.LocalDateTime;
 
 
 public class OrderWallet {
-    private int orderID;
+    private String orderID;
     private int walletID;
     private Long price;
     private LocalDateTime date;
     private String statusName;
-    private String content;
 
     public OrderWallet() {
     }
 
-    public OrderWallet(int orderID, int walletID, Long price, LocalDateTime date, String statusName, String content) {
+    public OrderWallet(String orderID, int walletID, Long price, LocalDateTime date, String statusName) {
         this.orderID = orderID;
         this.walletID = walletID;
         this.price = price;
         this.date = date;
         this.statusName = statusName;
-        this.content = content;
     }
 
-    public int getOrderID() {
+    public String getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(int orderID) {
+    public void setOrderID(String orderID) {
         this.orderID = orderID;
     }
 
@@ -68,18 +66,7 @@ public class OrderWallet {
         this.statusName = statusName;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     
-    
-
-    
-    
+   
     
 }

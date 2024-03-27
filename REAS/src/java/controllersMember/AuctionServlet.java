@@ -81,7 +81,7 @@ public class AuctionServlet extends HttpServlet {
                 int userWalletId = accountDAO.getUserWalletId(account.getAccID());
                 // get priceNow
                 // Check phi dau gia co cao hon tien trong vi khong.
-                registerFee = priceRegisterAuction * 0.05;
+                registerFee = priceRegisterAuction * 0.002;
                 requirmentPrice = priceRegisterAuction + registerFee;
                 if (currentUserBalance >= requirmentPrice) {
                     // neu thoa thi update pricenow cua auction.

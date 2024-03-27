@@ -199,6 +199,7 @@
                             <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tên</th>                             
                             <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Ngày đăng</th>
                             <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Trạng thái</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Mua Ngay</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -212,7 +213,9 @@
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">${s.statusName}</td>
                                     </c:if>
                                 </c:forEach>
-
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                <a href="MainController?action=cusViewMuaNgayList&id=${r.realEstateID}">Xem danh sách
+                                </td>
 
                             </tr>
                         </c:forEach>

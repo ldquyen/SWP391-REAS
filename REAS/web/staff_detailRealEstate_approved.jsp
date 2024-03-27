@@ -224,41 +224,76 @@
                         </div>
                     </c:if>
                 </c:forEach>
+            </div>
 
-                <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-                    <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
-                        <div class="container-full-right-bellow">
-                            <div>
+        </div>
 
-                                <form action="StaffController" method="post">
-                                    <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
-                                    <div class="container-full-right flex-center text-center">
-                                        <button style="color: #fff ; text-align: center" type="submit" value="updateStatusButton" name="action">
-                                            <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Xác nhận</p>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+        <div>
+            <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">DANH SÁCH ĐĂNG KÍ MUA NGAY</p>
+            <script>
+                window.onload = function () {
+                    // Kiểm tra xem trang đã được reload trước đó hay không
+                    if (!localStorage.getItem('pageReloaded')) {
+                        // Nếu chưa, thực hiện submit form
+                        document.forms['searchForm'].submit();
+                        // Đánh dấu rằng trang đã được reload
+                        localStorage.setItem('pageReloaded', 'true');
+                    } else {
+                        // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                        localStorage.removeItem('pageReloaded');
+                    }
+                };
+            </script>
+            <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+            <form id="searchForm" class="flex-center" action="StaffController" method="post">
+                <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}" />
+                <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                <input type="hidden" value="listRequestMuaNgay" name="action" />   
+            </form>
 
-                        <div class="container-full-right-bellow">
-                            <div>
+            <div style="text-align: center; border-radius: 45px;">
+                <c:set var="listRequestMuaNgay" value="${requestScope.LIST_REQUEST}"/>
+                <c:if test="${not empty listRequestMuaNgay}">
+                    <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Acc ID</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PricePaid</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date And Time</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                <form action="StaffController" method="post">
-                                    <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
-                                    <input type="hidden" name="auctionID" value="${dto.auctionID}">
-                                    <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
-                                    <div class="container-full-right flex-center text-center">
-                                        <button style="color: #fff ; text-align: center"  type="submit" value="deleteRealEstateButton" name="action">
-                                            <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Xóa</p>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
+                            <c:forEach items="${listRequestMuaNgay}" var="dto" varStatus="counter">
+                                <tr>                   
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.accID}
+                                    </td>
+                                    <td class="pricePaid" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.pricePaid}
+                                    </td>
+                                    <td class="dateAndTime" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.timeRequest}
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.requestStatusName}
+                                    </td>
+
+                                </tr>
+                                </form> 
+                            </c:forEach>
+
+                        </tbody>
+                    </table>
+
+                </c:if>
+                <c:if test="${empty listRequestMuaNgay}">
+                    <h2>
+                        No record is matched!!!
+                    </h2>
+                </c:if>
+
             </div>
         </div>
 
