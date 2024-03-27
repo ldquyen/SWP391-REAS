@@ -407,7 +407,6 @@
             </div>
         </div>
 
-
         <footer class="footer" style="margin-top: 20px;position: initial"> 
             <div>
                 <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
@@ -421,7 +420,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>

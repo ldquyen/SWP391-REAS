@@ -358,7 +358,7 @@
     <div class="swiper-button-prev swiper-navBtn"></div>
     <div class="swiper-button-next swiper-navBtn"></div>
 
-    <footer class="footer" style="position: fixed"> 
+    <footer class="footer" style="position: fixed; bottom: 0; left: 0; right: 0"> 
         <div>
             <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
             <div class="footer-container">
@@ -371,10 +371,10 @@
                     Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                     <br/>
                 </div>
-                <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
             </div>
         </div>
-    </footer>
+    </footer> 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
