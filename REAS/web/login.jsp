@@ -204,16 +204,16 @@
 
     <script>
         // Lấy giá trị của ggusername từ request
-        var ggusername = '<%= session.getAttribute("ggusername")%>';
+   <%--     var ggusername = '<%= session.getAttribute("ggusername")%>'; --%>
         var UsernameRegister = '<%= request.getAttribute("UsernameRegister")%>';
 
         // Đặt giá trị của ggusername vào trường input nếu có giá trị và khác null
-        document.addEventListener('DOMContentLoaded', function () {
-            var inputUsername = document.querySelector('.input-username');
-            if (inputUsername && ggusername !== null && ggusername !== 'null') {
-                inputUsername.value = ggusername;
-            }
-        });
+//        document.addEventListener('DOMContentLoaded', function () {
+//            var inputUsername = document.querySelector('.input-username');
+//            if (inputUsername && ggusername !== null && ggusername !== 'null') {
+//                inputUsername.value = ggusername;
+//            }
+//        });
         document.addEventListener('DOMContentLoaded', function () {
             var inputUsername = document.querySelector('.input-username');
             if (inputUsername && UsernameRegister !== null && UsernameRegister !== 'null') {
