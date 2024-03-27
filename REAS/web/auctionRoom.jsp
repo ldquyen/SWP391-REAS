@@ -416,7 +416,7 @@
                     <c:if test="${not empty requestScope.HETTIEN}">
                         <h1 class="hover-effect" style="color: red;display: flex;justify-content: center">Bạn đã hết xu, vui lòng <form action="MainController" method="post">
                                 <button style="color: #fff" type="submit" value="naptien" name="action">
-                                    <span>nạp thêm</span>
+                                    <span style="text-decoration: underline">nạp thêm</span>
                                 </button>
                             </form>...</h1>
                     </c:if>
