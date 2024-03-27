@@ -21,11 +21,17 @@
             function showErrorMessage(message) {
                 alert(message);
             }
-            // Kiểm tra và hiển thị thông báo nếu có
+            // Hiển thị thông báo nếu có
             <c:if test="${not empty requestScope.Purchase_Request}">
             showErrorMessage("${requestScope.Purchase_Request}");
+            // Sau khi hiển thị thông báo, chuyển hướng
+            window.location.href = "${requestScope.previousUrl}";
             </c:if>
-
+            <c:if test="${not empty requestScope.Not_Request}">
+            showErrorMessage("${requestScope.Not_Request}");
+            // Sau khi hiển thị thông báo, chuyển hướng
+            window.location.href = "${requestScope.previousUrl}";
+            </c:if>
         </script>
     </head>
     <body>
@@ -397,8 +403,8 @@
                 </div>
             </div>
         </footer>
-                                    
-                                    
+
+
 
         <script>
             let slideIndex = 1;

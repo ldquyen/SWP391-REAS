@@ -7,6 +7,8 @@ package controllersMember;
 
 import dao.PurchaseRequestDAO;
 import dao.RealEstateDAO;
+import dao.TransactionDAO;
+import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -18,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,21 +43,38 @@ public class AcceptRequestMuaNgayServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = "";
         String realEstateID = request.getParameter("realEstateID");
-        String accID = request.getParameter("accID");
-        try {
-            RealEstateDAO dao = new RealEstateDAO();
-            boolean result = dao.updateStatusID(realEstateID, 6);
+        String accID_nguoiMua = request.getParameter("accID");
 
-            PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
-            boolean result1 = dao1.updateStatus2(accID);
+        long pricePaid = 0;
+        String pricePaidStr = request.getParameter("pricePaid");
+        if (pricePaidStr != null && !pricePaidStr.isEmpty()) {
+            pricePaidStr = pricePaidStr.replaceAll("[,.]", "");
+            pricePaid = Long.parseLong(pricePaidStr);
+        }
+
+        try {
+            HttpSession session = request.getSession(false);
+            if (session != null && session.getAttribute("member") != null) {
+                Account account = (Account) session.getAttribute("member");
+                String accID_nguoiBan = account.getAccID();
+                
+                RealEstateDAO dao = new RealEstateDAO();
+                boolean result = dao.updateStatusID(realEstateID, 6);
+
+                PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+                boolean result1 = dao1.updateStatus2(accID_nguoiMua);
+
+                TransactionDAO dao2 = new TransactionDAO();
+                boolean result2 = dao2.processTransaction(accID_nguoiMua, accID_nguoiBan, pricePaid);
             
-            
-            if (result && result1) {
-                url = "MainController?action=cusViewMuaNgayListV2&id="+realEstateID;
-            } else {
-                // Cập nhật không thành công, chuyển hướng đến trang lỗi
-                url = "rule.jsp";
+                if (result && result1 && result2) {
+                    url = "MainController?action=cusViewMuaNgayListV2&id=" + realEstateID;
+                } else {
+                    // Cập nhật không thành công, chuyển hướng đến trang lỗi
+                    url = "rule.jsp";
+                }
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
