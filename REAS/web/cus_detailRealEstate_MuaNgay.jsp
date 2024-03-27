@@ -321,7 +321,6 @@
                     </div>
                 </div>
 
-
             </div>
 
             <div class="column" style="padding-top: 30px">
@@ -333,7 +332,9 @@
                     </div>
                 </div>
             </div>
+
         </div>
+
         <div>
             <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">DANH SÁCH ĐĂNG KÍ MUA NGAY</p>
             <script>
