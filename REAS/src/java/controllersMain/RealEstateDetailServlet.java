@@ -70,8 +70,6 @@ public class RealEstateDetailServlet extends HttpServlet {
 
                         PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
                         Integer purchaseStatus = dao1.getPurchaseStatus(realEstateId, accID);
-                        // Sau khi lấy được purchaseStatus từ DAO, bạn có thể sử dụng nó cho mục đích của mình
-                        // Ví dụ: lưu purchaseStatus vào request attribute để sử dụng trong JSP
                         request.setAttribute("purchaseStatus", purchaseStatus);
 
                         // Tạo một seed ngẫu nhiên
@@ -114,7 +112,7 @@ public class RealEstateDetailServlet extends HttpServlet {
                         request.setAttribute("realEstate", realEstateVM);
                         request.setAttribute("city", city);
                         request.setAttribute("listimg", listIMG);
-
+                        
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
