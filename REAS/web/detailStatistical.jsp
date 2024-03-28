@@ -8,6 +8,7 @@
 <%@page import="dao.WalletDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.time.LocalDate"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -130,7 +131,7 @@
                             </ul>
                         </li>
                     </ul>
-<ul class="menu-list">
+                    <ul class="menu-list">
                         <li>
                             <a class="">Nạp tiền</a>
                             <ul class="menu-list-subnav">
@@ -390,11 +391,49 @@
                     </p>
                     <p>
                         ${requestScope.totalRegisterDate}
-                    </p>      
+                    </p>
                 </form>
+                <form action="AdminController" method="post">
+                    <select name="catid">
+                        <option value="cc">Chung cư</option>
+                        <option value="no">Nhà</option>
+                        <option value="bt">Biệt thự</option>
+                        <option value="dn">Đất</option>
+                    </select>
+                    <button type="submit" value="detailStatistical" name="action">
+                        <span>Xem thống kê bất động sản</span>
+                    </button>   
+
+                </form>
+                    <table style="margin-left: 35px; color: white">
+                        <tr>
+                            <th>Real Estate ID</th>
+                            <th>Acc ID</th>
+                            <th>Cat ID</th>
+                            <th>City ID</th>
+                            <th>Real Estate Name</th>
+                            <th>Price First</th>
+                            <th>Price Paid</th>
+                            <th>Area</th>
+                            <th>Address</th>
+                            <th>Detail</th>
+                        </tr>
+                        <c:forEach var="realEstate" items="${realEstate}">
+                            <tr>
+                                <td>${realEstate.realEstateID}</td>
+                                <td>${realEstate.accID}</td>
+                                <td>${realEstate.catID}</td>
+                                <td>${realEstate.cityID}</td>
+                                <td>${realEstate.realEstateName}</td>
+                                <td>${realEstate.priceFirst}</td>
+                                <td>${realEstate.pricePaid}</td>
+                                <td>${realEstate.area}</td>
+                                <td>${realEstate.address}</td>
+                                <td>${realEstate.detail}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>            
             </div> 
-
-
         </div>
 
         <!-- BODY -->
