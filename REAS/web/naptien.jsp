@@ -203,255 +203,234 @@
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
+            <a class="navbar-item">
+                <form action="MainController" method="post">
+                    <button type="submit" value="homeindex_1" name="action">
+                        <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                    </button>
+                </form>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
                 <a class="navbar-item">
                     <form action="MainController" method="post">
                         <button type="submit" value="homeindex_1" name="action">
-                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
+                            <span>TRANG CHỦ</span>
                         </button>
                     </form>
                 </a>
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
+                <a class="navbar-item">
+                    <form action="MainController" method="post">
+                        <button type="submit" value="news" name="action">
+                            <span>TIN TỨC</span>
+                        </button>
+                    </form>
+                </a>
+                <a class="navbar-item">
+                    <form action="MainController" method="post">
+                        <button type="submit" value="rule" name="action">
+                            <span>NỘI QUY</span>
+                        </button>
+                    </form>
                 </a>
             </div>
-
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="navbar-container-1">
                         <form action="MainController" method="post">
-                            <button type="submit" value="homeindex_1" name="action">
-                                <span>TRANG CHỦ</span>
+                            <button class="navbar-1" type="submit" value="auctionList" name="action">
+                                <span>DANH SÁCH ĐẤU GIÁ</span>
                             </button>
                         </form>
-                    </a>
-
-                    <a class="navbar-item">
+                    </div>
+                    <div class="navbar-container-1">
                         <form action="MainController" method="post">
-                            <button type="submit" value="news" name="action">
-                                <span>TIN TỨC</span>
+                            <button class="navbar-1" type="submit" value="postNew" name="action">
+                                <span>ĐĂNG TIN</span>
                             </button>
                         </form>
-                    </a>
-
-                    <a class="navbar-item">
+                    </div>
+                    <div class="navbar-container-1">
                         <form action="MainController" method="post">
-                            <button type="submit" value="rule" name="action">
-                                <span>NỘI QUY</span>
+                            <button class="navbar-1" type="submit" value="naptien" name="action">
+                                <span>NẠP TIỀN</span>
                             </button>
                         </form>
-                    </a>
-                </div>
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="navbar-container-1">
-                            <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                    <span>DANH SÁCH ĐẤU GIÁ</span>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="navbar-container-1">
-                            <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="postNew" name="action">
-                                    <span>ĐĂNG TIN</span>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="navbar-container-1">
-                            <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="naptien" name="action">
-                                    <span>NẠP TIỀN</span>
-                                </button>
-                            </form>
-                        </div>
-                        <%
-                            List<Wallet> wallet = new WalletDAO().getWallet();
-                            pageContext.setAttribute("walletAccount", wallet);
-                        %>
-                        <div class="navbar-container-1">
-                            <a class="navbar-1">SỐ DƯ :
-                                <c:forEach var="wallet" items="${walletAccount}">
-                                    <c:if test="${wallet.accID eq member.accID}">
-                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
-                                    </c:if>
-                                </c:forEach>
-                                (xu)
-                            </a>                  
-                        </div>
-
-                        <div class="navbar-item hover-down has-dropdown is-hoverable">
-                            <a class="navbar-link navbar-1-list">
-                                <c:choose>
-                                    <c:when test="${not empty sessionScope.member}">
-                                        ${sessionScope.member.fullname}
-                                    </c:when>
-                                    <c:when test="${not empty sessionScope.userGoogle}">
-                                        ${sessionScope.userGoogle.given_name}
-                                    </c:when>
-                                    <c:otherwise>
-                                        Guest
-                                    </c:otherwise>
-                                </c:choose>
+                    </div>
+                    <%
+                        List<Wallet> wallet = new WalletDAO().getWallet();
+                        pageContext.setAttribute("walletAccount", wallet);
+                    %>
+                    <div class="navbar-container-1">
+                        <a class="navbar-1">SỐ DƯ :
+                            <c:forEach var="wallet" items="${walletAccount}">
+                                <c:if test="${wallet.accID eq member.accID}">
+                                    <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                </c:if>
+                            </c:forEach>
+                            (xu)
+                        </a>                  
+                    </div>
+                    <div class="navbar-item hover-down has-dropdown is-hoverable">
+                        <a class="navbar-link navbar-1-list">
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.member}">
+                                    ${sessionScope.member.fullname}
+                                </c:when>
+                                <c:when test="${not empty sessionScope.userGoogle}">
+                                    ${sessionScope.userGoogle.given_name}
+                                </c:when>
+                                <c:otherwise>
+                                    Guest
+                                </c:otherwise>
+                            </c:choose>
+                        </a>
+                        <div class="fake-div"></div>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                <form action="MainController" method="post">
+                                    <button type="submit" value="informationPage" name="action">
+                                        <span>Thông tin tài khoản</span>
+                                    </button>
+                                </form>
                             </a>
-                            <div class="fake-div"></div>
+                            <a class="navbar-item">
+                                <form action="MemberController" method="post">
+                                    <button type="submit" value="mypost" name="action">
+                                        <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
+                                        <span>Quản lí tin đăng</span>
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="navbar-item">
+                                <form action="MainController" method="post">
+                                    <button type="submit" value="changePass" name="action">
+                                        <span>Thay đổi mật khẩu</span>
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="navbar-item">
+                                <form action="MainController" method="post">
+                                    <button type="submit" value="lichsunaptien" name="action">
+                                        <span>Lịch sử nạp tiền</span>
+                                    </button>
+                                </form>
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                <form action="MainController" method="post">
+                                    <button type="submit" value="Logout" name="action">
+                                        <span>Đăng xuất</span>
+                                    </button>
+                                </form>
+                            </a>
 
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="informationPage" name="action">
-                                            <span>Thông tin tài khoản</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Danh mục đã đăng kí</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Lịch sử đấu giá</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MemberController" method="post">
-                                        <button type="submit" value="mypost" name="action">
-                                            <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
-                                            <span>Quản lí tin đăng</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="changePass" name="action">
-                                            <span>Thay đổi mật khẩu</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="lichsunaptien" name="action">
-                                            <span>Lịch sử nạp tiền</span>
-                                        </button>
-                                    </form>
-                                </a>
-
-                                <hr class="navbar-divider">
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="Logout" name="action" >
-                                            <span>Đăng xuất</span>
-                                        </button>
-                                    </form>
-                                </a>
-
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </nav>
-        <!-- BODY -->
-        <div class="BodyForm">
-            <div class="TieuDe">
-                <h1>
-                    Nạp Tiền
-                </h1>
-            </div>
-
-            <div class="form-post-real-estate" >
-                <form action="MainController" method="post" enctype="multipart/form-data">
-                    <input type="hidden" id="accID" name="accID" value="${sessionScope.member.accID}">
-                    <c:forEach var="wallet" items="${walletAccount}">
-                        <c:if test="${wallet.accID eq member.accID}">
-                            <input type="hidden" id="accID" name="walletID" value="${wallet.walletID}">
-                        </c:if>
-                    </c:forEach>
-                    <div class="form-element">
-                        <label>1. Nhập số Xu
-                            <span style="font-size: 14px; color: red; margin-top: 5px;" >Lưu ý : 1 Xu = 1.000.000 VNĐ</span>
-                        </label>
-                        <input type="text" class="form-control" id="soTien" name="soTien" placeholder="Xu" oninput="formatCurrency(updateMoney(this.value))" required>
-                        <span id="moneyMessage" style="font-size: 14px; color: red; margin-top: 5px;"></span>
-                    </div>
-                    <div class="form-element">
-                        <label>2. Cú pháp chuyển khoản</label>
-                        <div class="square-box">
-                            <h3 style="text-align: center">"TÊN TÀI KHOẢN"_ORDER_"SỐ XU NẠP"</h3>
-                        </div>
-                    </div>
-                    <div class="form-element">
-                        <label>3. Mã giao dịch </label>
-                        <input type="text" class="form-control" id="orderID" name="orderID" placeholder="Điền mã giao dịch" required>
-                    </div>
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="agreeCheckbox" required>
-                        <label for="agreeCheckbox">Tôi hoàn toàn chịu trách nhiệm với những sai sót của mình!</label>
-                    </div>
-                    <button type="submit" value="submitNaptien" name="action" class="btn-submit">
-                        Xác nhận
-                    </button>
-                </form>
-            </div>
-
         </div>
-        <!-- END BODY -->
+    </nav>
+    <%--========================================================--%>
+    <!-- BODY -->
+    <div class="BodyForm">
+        <div class="TieuDe">
+            <h1>
+                Nạp Tiền
+            </h1>
+        </div>
 
-        <footer class="footer"> 
-            <div>
-                <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
-                <div class="footer-container">
-                    <div class="footer-left-content"> Liên hệ:<br/>
-                        Email: reas@gmail.com<br/>
-                        Điện thoại: +84 (24) 8888 9999<br/>
-                        <br/>
-                    </div>
-                    <div class="footer-mid-content"> Trụ sở chính:<br/>
-                        Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
-                        <br/>
-                    </div>
-                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
+        <div class="form-post-real-estate" >
+            <form action="MainController" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="accID" name="accID" value="${sessionScope.member.accID}">
+                <c:forEach var="wallet" items="${walletAccount}">
+                    <c:if test="${wallet.accID eq member.accID}">
+                        <input type="hidden" id="accID" name="walletID" value="${wallet.walletID}">
+                    </c:if>
+                </c:forEach>
+                <div class="form-element">
+                    <label>1. Nhập số Xu
+                        <span style="font-size: 14px; color: red; margin-top: 5px;" >Lưu ý : 1 Xu = 1.000.000 VNĐ</span>
+                    </label>
+                    <input type="text" class="form-control" id="soTien" name="soTien" placeholder="Xu" oninput="formatCurrency(updateMoney(this.value))" required>
+                    <span id="moneyMessage" style="font-size: 14px; color: red; margin-top: 5px;"></span>
                 </div>
+                <div class="form-element">
+                    <label>2. Cú pháp chuyển khoản</label>
+                    <div class="square-box">
+                        <h3 style="text-align: center">"TÊN TÀI KHOẢN"_ORDER_"SỐ XU NẠP"</h3>
+                    </div>
+                </div>
+                <div class="form-element">
+                    <label>3. Mã giao dịch </label>
+                    <input type="text" class="form-control" id="orderID" name="orderID" placeholder="Điền mã giao dịch" required>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="agreeCheckbox" required>
+                    <label for="agreeCheckbox">Tôi hoàn toàn chịu trách nhiệm với những sai sót của mình!</label>
+                </div>
+                <button type="submit" value="submitNaptien" name="action" class="btn-submit">
+                    Xác nhận
+                </button>
+            </form>
+        </div>
+
+    </div>
+    <!-- END BODY -->
+
+    <footer class="footer"> 
+        <div>
+            <p class="footer_content1">CÔNG TY TNHH ĐẤU GIÁ BẤT ĐỘNG SẢN REAS</p>
+            <div class="footer-container">
+                <div class="footer-left-content"> Liên hệ:<br/>
+                    Email: reas@gmail.com<br/>
+                    Điện thoại: +84 (24) 8888 9999<br/>
+                    <br/>
+                </div>
+                <div class="footer-mid-content"> Trụ sở chính:<br/>
+                    Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
+                    <br/>
+                </div>
+                <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
             </div>
-        </footer>
-    </body>
-    <script>
+        </div>
+    </footer>
+</body>
+<script>
 
-        function formatCurrency(input) {
-            // Hàm định dạng số tiền sang dạng chuỗi có định dạng tiền tệ
-            var value = input.value.replace(/[^\d]/g, '');
+    function formatCurrency(input) {
+        // Hàm định dạng số tiền sang dạng chuỗi có định dạng tiền tệ
+        var value = input.value.replace(/[^\d]/g, '');
 
-            // Định dạng giá trị thành chuỗi có dấu phân cách hàng nghìn
-            var formattedValue = new Intl.NumberFormat().format(value);
+        // Định dạng giá trị thành chuỗi có dấu phân cách hàng nghìn
+        var formattedValue = new Intl.NumberFormat().format(value);
 
-            // Gán giá trị định dạng vào trường input
-            input.value = formattedValue;
+        // Gán giá trị định dạng vào trường input
+        input.value = formattedValue;
+    }
+
+</script>
+<script>
+    function updateMoney(xu) {
+        // Tính số tiền tương ứng với số xu
+        var tien = xu * 1000000;
+
+        // Hiển thị thông báo về tỷ lệ đổi
+        var message = " ";
+        document.getElementById("moneyMessage").innerText = message;
+
+        // Hiển thị số tiền tương ứng
+        if (!isNaN(tien)) {
+            document.getElementById("moneyMessage").innerText += " => " + tien.toLocaleString('vi-VN') + " VNĐ";
+        } else {
+            document.getElementById("moneyMessage").innerText = "Số xu không hợp lệ";
         }
-
-    </script>
-    <script>
-        function updateMoney(xu) {
-            // Tính số tiền tương ứng với số xu
-            var tien = xu * 1000000;
-
-            // Hiển thị thông báo về tỷ lệ đổi
-            var message = " ";
-            document.getElementById("moneyMessage").innerText = message;
-
-            // Hiển thị số tiền tương ứng
-            if (!isNaN(tien)) {
-                document.getElementById("moneyMessage").innerText += " => " + tien.toLocaleString('vi-VN') + " VNĐ";
-            } else {
-                document.getElementById("moneyMessage").innerText = "Số xu không hợp lệ";
-            }
-        }
-    </script>
+    }
+</script>
 </html>

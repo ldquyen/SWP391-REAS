@@ -39,7 +39,6 @@
                 <span aria-hidden="true"></span>
             </a>
         </div>
-
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
                 <a class="navbar-item">
@@ -49,7 +48,6 @@
                         </button>
                     </form>
                 </a>
-
                 <a class="navbar-item">
                     <form action="MainController" method="post">
                         <button type="submit" value="news" name="action">
@@ -57,7 +55,6 @@
                         </button>
                     </form>
                 </a>
-
                 <a class="navbar-item">
                     <form action="MainController" method="post">
                         <button type="submit" value="rule" name="action">
@@ -66,7 +63,6 @@
                     </form>
                 </a>
             </div>
-
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="navbar-container-1">
@@ -104,7 +100,6 @@
                             (xu)
                         </a>                  
                     </div>
-
                     <div class="navbar-item hover-down has-dropdown is-hoverable">
                         <a class="navbar-link navbar-1-list">
                             <c:choose>
@@ -119,28 +114,12 @@
                                 </c:otherwise>
                             </c:choose>
                         </a>
-
                         <div class="fake-div"></div>
-
                         <div class="navbar-dropdown">
                             <a class="navbar-item">
                                 <form action="MainController" method="post">
                                     <button type="submit" value="informationPage" name="action">
                                         <span>Thông tin tài khoản</span>
-                                    </button>
-                                </form>
-                            </a>
-                            <a class="navbar-item">
-                                <form action="MainController" method="post">
-                                    <button type="submit" value="aboutus" name="action">
-                                        <span>Danh mục đã đăng kí</span>
-                                    </button>
-                                </form>
-                            </a>
-                            <a class="navbar-item">
-                                <form action="MainController" method="post">
-                                    <button type="submit" value="aboutus" name="action">
-                                        <span>Lịch sử đấu giá</span>
                                     </button>
                                 </form>
                             </a>
@@ -166,7 +145,6 @@
                                     </button>
                                 </form>
                             </a>
-
                             <hr class="navbar-divider">
                             <a class="navbar-item">
                                 <form action="MainController" method="post">
@@ -178,13 +156,11 @@
 
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
     </nav>
+    <%--========================================================--%>
 
     <div class="stream_text-container" id="streamContainer">
         <div class="stream_text" id="streamText">Biệt thự khu đô thị Sala đã trúng đấu giá với giá tiền 30 tỷ đồng</div>
