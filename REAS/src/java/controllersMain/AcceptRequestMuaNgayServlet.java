@@ -43,7 +43,7 @@ public class AcceptRequestMuaNgayServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
+        String url = "rule.jsp";
         String realEstateID = request.getParameter("realEstateID");
         String accID_nguoiMua = request.getParameter("accID");
 
@@ -59,7 +59,7 @@ public class AcceptRequestMuaNgayServlet extends HttpServlet {
         try {
             HttpSession session = request.getSession(false);
             if (session != null && session.getAttribute("member") != null) {
-                if (accountBalance > (pricePaid + 5)) {
+                if (accountBalance > (pricePaid + (pricePaid * 10 / 100) )) {
                     Account account = (Account) session.getAttribute("member");
                     String accID_nguoiBan = account.getAccID();
 

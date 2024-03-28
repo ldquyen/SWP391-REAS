@@ -15,13 +15,13 @@ public class TransactionDAO {
         long sellerBalance = getAccountBalance(sellerID);
 
         // Kiểm tra xem người mua có đủ tiền để thực hiện giao dịch không
-        if (buyerBalance > (pricePaid + 5)) {
+        if (buyerBalance > (pricePaid + (pricePaid * 10 / 100))) {
             // Trừ tiền từ tài khoản người mua
-            boolean buyerUpdated = updateAccountBalance(buyerID, buyerBalance - (pricePaid + 5));
+            boolean buyerUpdated = updateAccountBalance(buyerID, buyerBalance - pricePaid);
             // Cộng tiền vào tài khoản người bán
-            boolean sellerUpdated = updateAccountBalance(sellerID, sellerBalance + pricePaid);
+            boolean sellerUpdated = updateAccountBalance(sellerID, sellerBalance + (pricePaid - (pricePaid * 10 / 100)));
             // Chuyển 5 cho admin
-            boolean adminUpdated = updateAdminAccount(5);
+            boolean adminUpdated = updateAdminAccount(pricePaid * 10 / 100);
 
             // Trả về true nếu tất cả các bước đều thành công
             return buyerUpdated && sellerUpdated && adminUpdated;

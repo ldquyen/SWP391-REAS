@@ -418,10 +418,10 @@
                                         ${dto.requestStatusName}
                                     </td>
                                     <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                        <form id="purchaseForm" action="MainController" method="post" onsubmit="return confirmSubmit()">
-                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
-                                            <input type="hidden" name="accID" value="${dto.accID}">
-                                            <input type="hidden" name="pricePaid" value="${dto.pricePaid}">
+                                        <form id="purchaseForm${counter.index}" action="MainController" method="post" onsubmit="return confirmSubmit()">
+                                            <input type="hidden" id="realEstateID" name="realEstateID" value="${dto.realEstateID}">
+                                            <input type="hidden" id="accID" name="accID" value="${dto.accID}">
+                                            <input type="hidden" id="pricePaid" name="pricePaid" value="${dto.pricePaid}">
                                             <button id="submitButton" style="color: #fff" type="submit" value="xacNhanMuaNgay" name="action">
                                                 <span class="test">Bán Ngay</span>
                                             </button>
@@ -429,7 +429,6 @@
                                     </td>
 
                                 </tr>
-                                </form> 
                             </c:forEach>
 
                         </tbody>
@@ -537,18 +536,13 @@
         </script>
         <script>
             function confirmSubmit() {
-                // Hiển thị hộp thoại xác nhận và lưu kết quả vào biến confirmed
                 var confirmed = confirm("Bạn có xác nhận sẽ bán?");
-                // Nếu người dùng đã xác nhận
                 if (confirmed) {
-                    // Thay đổi văn bản của nút
-                    document.getElementById('submitButton').innerText = "Đã bán";
-                    // Vô hiệu hóa nút sau khi nhấn
-                    document.getElementById('submitButton').disabled = true;
-
+                    var form = this; // Lấy form hiện tại
+                    // Thực hiện các thao tác khác cần thiết
+                    return true; // hoặc return false nếu muốn ngăn chặn việc gửi form
                 }
-                // Trả về giá trị confirmed để xác định liệu form có nên gửi đi hay không
-                return confirmed;
+                return false;
             }
         </script>
     </body>
