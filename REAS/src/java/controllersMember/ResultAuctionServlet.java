@@ -66,17 +66,17 @@ public class ResultAuctionServlet extends HttpServlet {
             int priceLast = (int) topPrices.get(0);
 
             AccountDAO accDao = new AccountDAO();
-            Account accountmember = accDao.getAccountByID(idmemwin);
-            ArrayList<Account> accountfull = accDao.getAllAccount();
+//            Account accountmember = accDao.getAccountByID(idmemwin);
+//            ArrayList<Account> accountfull = accDao.getAllAccount();
 
 // Create a list or an array to hold the account member
-            List<Account> accountMembers = new ArrayList<>();
-            accountMembers.add(accountmember); // Add the retrieved account to the list
+//            List<Account> accountMembers = new ArrayList<>();
+//            accountMembers.add(accountmember); // Add the retrieved account to the list
 
-            request.setAttribute("accountmember", accountMembers); // Set the list as an attribute
-            request.setAttribute("accountfull", accountfull); // Set the list as an attribute
+//            request.setAttribute("accountmember", accountMembers); // Set the list as an attribute
+//            request.setAttribute("accountfull", accountfull); // Set the list as an attribute
 
-            request.setAttribute("priceLast", priceLast);
+//            request.setAttribute("priceLast", priceLast);
 
         } catch (Exception e) {
             e.printStackTrace();
