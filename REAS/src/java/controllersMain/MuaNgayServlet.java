@@ -7,6 +7,7 @@ package controllersMain;
 
 import dao.PurchaseRequestDAO;
 import dao.WalletDAO;
+import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -39,21 +40,26 @@ public class MuaNgayServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        
         String realEstateID = request.getParameter("realEstateID");
 
-        String url = "MainController?action=viewPostRealEstate&id=" + realEstateID;
+        String url = "MainController?action=viewPostRealEstateStatus2&id=" + realEstateID;
 
-        HttpSession session = request.getSession();
-        boolean result = false;
-
-        String accID = request.getParameter("accID");
+        HttpSession session = request.getSession(false);
+        Account account = (Account) session.getAttribute("member");
+        String accID  = account.getAccID();
+        boolean result;
 
         long pricePaid = 0;
         String pricePaidStr = request.getParameter("pricePaid");
-        pricePaid = Long.parseLong(pricePaidStr);
+        if (pricePaidStr != null && !pricePaidStr.isEmpty()) {
+            pricePaidStr = pricePaidStr.replaceAll("[,.]", "");
+            pricePaid = Long.parseLong(pricePaidStr);
+        }
 
         WalletDAO daoWallet = new WalletDAO();
         long accountBalance = daoWallet.getAccountBalanceByAccID(accID);
+        
         try {
             if (accountBalance > (pricePaid + 5)) {
                 PurchaseRequestDAO dao = new PurchaseRequestDAO();
@@ -68,7 +74,7 @@ public class MuaNgayServlet extends HttpServlet {
             // Lưu URL trước đó vào requestScope
             request.setAttribute("previousUrl", request.getHeader("Referer"));
             // Chuyển hướng đến trang JSP để hiển thị thông báo
-            request.getRequestDispatcher("detailRealEstate.jsp").forward(request, response);
+            request.getRequestDispatcher("detailRealEstate_status2.jsp").forward(request, response);
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);

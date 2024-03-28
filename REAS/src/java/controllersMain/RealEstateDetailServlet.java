@@ -54,23 +54,16 @@ public class RealEstateDetailServlet extends HttpServlet {
                 ArrayList<City> city = CityDAO.getCityList();
                 RealEstateVM realEstateVM = realEstateDAO.getRealEstateById(realEstateId);
 
+                request.setAttribute("realEstate", realEstateVM);
+                request.setAttribute("city", city);
+                request.setAttribute("listimg", listIMG);
+
                 if (action.equals("viewPostRealEstate")) {
                     if (realEstateVM != null) {
-                        request.setAttribute("realEstate", realEstateVM);
-                        request.setAttribute("city", city);
-                        request.setAttribute("listimg", listIMG);
                         //===
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
-
-                        HttpSession session = request.getSession(false);
-                        Account member = (Account) session.getAttribute("member");
-                        String accID = member.getAccID();
-
-                        PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
-                        Integer purchaseStatus = dao1.getPurchaseStatus(realEstateId, accID);
-                        request.setAttribute("purchaseStatus", purchaseStatus);
 
                         // Tạo một seed ngẫu nhiên
                         if (listRealEstate != null && !listRealEstate.isEmpty()) {
@@ -94,13 +87,18 @@ public class RealEstateDetailServlet extends HttpServlet {
                 }
                 if (action.equals("viewPostRealEstateStatus2")) {
                     if (realEstateVM != null) {
-                        request.setAttribute("realEstate", realEstateVM);
-                        request.setAttribute("city", city);
-                        request.setAttribute("listimg", listIMG);
 
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(2);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
+
+                        HttpSession session = request.getSession(false);
+                        Account member = (Account) session.getAttribute("member");
+                        String accID = member.getAccID();
+
+                        PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+                        Integer purchaseStatus = dao1.getPurchaseStatus(realEstateId, accID);
+                        request.setAttribute("purchaseStatus", purchaseStatus);
 
                         url = "detailRealEstate_status2.jsp";
                     } else {
@@ -109,10 +107,7 @@ public class RealEstateDetailServlet extends HttpServlet {
                 }
                 if (action.equals("viewPostRealEstateGuest")) {
                     if (realEstateVM != null) {
-                        request.setAttribute("realEstate", realEstateVM);
-                        request.setAttribute("city", city);
-                        request.setAttribute("listimg", listIMG);
-                        
+
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
@@ -138,9 +133,7 @@ public class RealEstateDetailServlet extends HttpServlet {
                 }
                 if (action.equals("cusViewMuaNgayList")) {
                     if (realEstateVM != null) {
-                        request.setAttribute("realEstate", realEstateVM);
-                        request.setAttribute("city", city);
-                        request.setAttribute("listimg", listIMG);
+
                         //===
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
@@ -161,9 +154,7 @@ public class RealEstateDetailServlet extends HttpServlet {
                 }
                 if (action.equals("cusViewMuaNgayListV2")) {
                     if (realEstateVM != null) {
-                        request.setAttribute("realEstate", realEstateVM);
-                        request.setAttribute("city", city);
-                        request.setAttribute("listimg", listIMG);
+
                         //===
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
