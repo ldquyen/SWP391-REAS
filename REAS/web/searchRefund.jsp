@@ -8,7 +8,7 @@
 <%@page import="dao.WalletDAO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>  
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,58 +18,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="style.css" type="text/css" >
         <link rel="stylesheet" href="admin.css" type="text/css" >
-        <style>
-            .container {
-                display: flex;
-                flex-direction: column;
-                height: 10vh;
-            }
 
-            .top-half {
-                flex: 1;
-                display: flex;            
-                align-items: center;
-                background-color: #f0f0f0;
-            }
-
-            .bottom-half {
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: #e0e0e0;
-            }
-
-            .report-form button {
-                border: 2px solid #ccc; /* Thay đổi màu và độ rộng của viền */
-                padding: 1px 10px; /* Tùy chỉnh padding cho nút */
-                cursor: pointer; /* Hiển thị con trỏ khi di chuyển qua nút */
-                color: white;
-                background-color: #007bff;
-            }
-            .report-form input[type="number"] {
-                width: 100px;
-            }
-
-
-            .chart {
-                width: 1300px;
-                height: 460px;
-                border: 1px solid #ccc;
-
-                padding: 20px;
-                box-sizing: border-box;
-                position: relative;
-            }
-
-            .bar {
-                width: 50px;
-                background-color: #007bff;
-                position: absolute;
-                bottom: 0;
-            }
-
-        </style>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -360,90 +309,61 @@
 
                 </aside>
             </div>
-            <!-- BODY -->
             <div class="column" style="height: 100vh;">
-                <div class="container">
-                    <div class="top-half">
-                        <form action="AdminController" method="post">
-                            <div class="report-form">
-                                <label style="margin-left: 10px" for="month" >Chọn tháng:</label>
+                <form action="AdminController" method="post">
+                    <input type="text" placeholder="Nhập mã đấu giá" name="txtAuctionID" style="width: 400px; height: 30px" value="${requestScope.AuctionID}">
+                    <button type="submit" value="searchRefundList" name="action" style="background-color: black; color: #D9AB73; padding: 6px 20px; ">
+                        <span style="font-size: 14px; font-weight: bold">Tìm kiếm</span>
+                    </button>
+                </form>
 
-                                <select name="month" id="month">
-                                    <option value="" <c:if test="${month eq ''}">selected</c:if>>Toàn bộ</option>
-                                    <option value="1" <c:if test="${month eq '1'}">selected</c:if>>Tháng 1</option>
-                                    <option value="2" <c:if test="${month eq '2'}">selected</c:if>>Tháng 2</option>
-                                    <option value="3" <c:if test="${month eq '3'}">selected</c:if>>Tháng 3</option>
-                                    <option value="4" <c:if test="${month eq '4'}">selected</c:if>>Tháng 4</option>
-                                    <option value="5" <c:if test="${month eq '5'}">selected</c:if>>Tháng 5</option>
-                                    <option value="6" <c:if test="${month eq '6'}">selected</c:if>>Tháng 6</option>
-                                    <option value="7" <c:if test="${month eq '7'}">selected</c:if>>Tháng 7</option>
-                                    <option value="8" <c:if test="${month eq '8'}">selected</c:if>>Tháng 8</option>
-                                    <option value="9" <c:if test="${month eq '9'}">selected</c:if>>Tháng 9</option>
-                                    <option value="10" <c:if test="${month eq '10'}">selected</c:if>>Tháng 10</option>
-                                    <option value="11" <c:if test="${month eq '11'}">selected</c:if>>Tháng 11</option>
-                                    <option value="12" <c:if test="${month eq '12'}">selected</c:if>>Tháng 12</option>
-                                    </select>
-                                    <label style="margin-left: 10px" for="month" >2024</label>
-                                    <button type="submit" value="searchRevenue" name="action">Tìm kiếm</button>
-                                    <button type="submit" value="searchRefund" name="action">Xem số tiền của đấu giá</button>
-                                    <br>
-
-
-                                    <div class="report-data">
-                                        <br>
-                                        <label style="margin-left: 10px;" >Đấu giá</label>
-                                        <br>
-                                        <label style="margin-left: 10px;" for="fee">Số tiền phí thu được:</label>
-                                        <input style="margin-left: 30px; margin-right: 10px" type="text" id="fee" name="fee" value="${requestScope.tienphi} xu" >
-
-                                    <label for="auctions">Số cuộc đấu giá diễn ra:</label>
-                                    <input style="margin-left: 60px; margin-right: 10px" type="text" id="auctions" name="auctions" value="${requestScope.sodaugia}">
-
-                                    <label for="winning">Số tiền thắng đấu giá:</label>
-                                    <input style="margin-left: 30px" type="text" id="winning" name="winning" value="${requestScope.sotienthang} xu">
-                                    <br>
-                                    <br>
-                                    <label style="margin-left: 10px;" >Người dùng</label>
-                                    <br>
-
-                                    <label style="margin-left: 10px;" for="winning">Số giao dịch thực hiện:</label>
-                                    <input style="margin-left: 16px; margin-right: 10px" type="text" id="winning" name="winning" value="${requestScope.sogiaodich}">
-
-                                    <label for="winning">Số tiền giao dịch đã thực hiện:</label>
-                                    <input style="margin-left: 15px; " type="text" id="winning" name="winning" value="${requestScope.sotiengiaodich} xu">
-                                </div>
-                            </div>
-                        </form>
-                    </div> 
-                    <label style="margin-left: 10px; margin-top: 10px; color: #007bff; font-weight: bold" >Số tiền thắng của 10 cuộc đấu giá gần nhất</label>
-                    <div class="bottom-half" style="margin-top: 10px">
-                        <div class="chart">
-                                <span style="position: absolute; left: 0px;">Số tiền:</span>
-
-                            <c:forEach var="r" items="${requestScope.getListADH}" varStatus="loop">
-                                
-                                <span style="position: absolute; left: ${65 + (loop.index * 100)}px;">${r.quantity}</span>
-                                <div class="bar" style="height: ${r.quantity}px; left: ${50 + (loop.index * 100)}px;"></div>
-                            </c:forEach>
-
-                            <!-- Số liệu -->
-                            
-                            <div style="position: absolute; bottom: -10px; left: 0; width: 100%; text-align: center;">
-                                <span style="position: absolute; left: 0px;">ID:</span>
-                                <c:forEach var="r" items="${requestScope.getListADH}" varStatus="loop">
-                                <span style="position: absolute; left: ${65 + (loop.index * 100)}px;">${r.auctionID}</span>
-                            </c:forEach>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div style="margin-top: 20px">
+                    <s:if test="${not empty requestScope.ListRefund}">
+                        <label style=" font-weight: bold" >Danh sách tiền trong đấu giá</label>
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white;">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Wallet ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date and Time</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <s:forEach var="s" items="${requestScope.ListRefund}">
+                                <tr>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${s.walletID}</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${s.dateAndTime}</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${s.quantity}</td>
+                                    
+                                </tr>
+                            </s:forEach>
+                            </tbody>
+                        </table>
+                        
+                        <label style=" font-weight: bold" >Danh sách tiền cần trả (chưa bao gồm trừ tiền phí)</label>
+                        <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white;">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Wallet ID</th>
+                                    <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <s:forEach var="s" items="${requestScope.ListRefundDetail}">
+                                <tr>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${s.walletID}</td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">${s.quantity}</td>
+                                    
+                                </tr>
+                            </s:forEach>
+                            </tbody>
+                        </table>
+                    </s:if>
                 </div>
-
-
             </div>
         </div>
 
-
+        <!-- BODY -->
 
 
 

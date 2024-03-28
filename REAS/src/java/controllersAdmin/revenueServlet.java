@@ -34,7 +34,7 @@ public class revenueServlet extends HttpServlet {
             Long tienphi, sodaugia, sotienthang, sogiaodich, sotiengiaodich;
 
             if (month.isEmpty()) {
-                tienphi = AuctionDepositHistoryDAO.getSoNgThamGiaTrongTungCuocDauGia() * 5;
+                tienphi = AuctionDepositHistoryDAO.getSoNgThamGiaTrongTungCuocDauGia();
                 sodaugia = AuctionDepositHistoryDAO.getTongSoCuocDauGiaDienRa();
                 sotienthang = AuctionDepositHistoryDAO.getTongSoTienCuaCacCuocDauGia();
                 sogiaodich = WalletHistoryDAO.getSoGiaoDichThucHien();
@@ -52,7 +52,7 @@ public class revenueServlet extends HttpServlet {
                 
                 request.getRequestDispatcher("AdminController?action=revenue").forward(request, response);
             } else {
-                tienphi = AuctionDepositHistoryDAO.getSoNgThamGiaTrongTungCuocDauGiaInMonth(month) * 5;
+                tienphi = AuctionDepositHistoryDAO.getSoNgThamGiaTrongTungCuocDauGiaInMonth(month);
                 sodaugia = AuctionDepositHistoryDAO.getTongSoCuocDauGiaDienRaInMonth(month);
                 sotienthang = AuctionDepositHistoryDAO.getTongSoTienCuaCacCuocDauGiaInMonth(month);
                 sogiaodich = WalletHistoryDAO.getSoGiaoDichThucHienInMonth(month);

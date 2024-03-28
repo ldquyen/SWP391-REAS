@@ -110,8 +110,14 @@ public class MainController extends HttpServlet {
                 case "cusSearchMuaNgayList":
                     url = "CusSearchRequestMuaNgayServlet";
                     break;
+                case "cusSearchDaBanList":
+                    url = "CusSearchRequestDaBanServlet";
+                    break;
                 case "muangay":
                     url = "MuaNgayServlet";
+                    break;
+                case "xacNhanMuaNgay":
+                    url = "AcceptRequestMuaNgayServlet";
                     break;
                 case "homeindex":
                     url = "HomeServletIndex";
