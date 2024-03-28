@@ -74,17 +74,16 @@ public class AcceptRequestMuaNgayServlet extends HttpServlet {
 
                     if (result && result1 && result2) {
                         request.setAttribute("Purchase_Request", "Thành Công!!!");
-                        url = "MainController?action=cusViewMuaNgayListV2&id="+realEstateID;
+                        url = "MainController?action=cusViewMuaNgayListV2&id=" + realEstateID;
                         response.sendRedirect(url);
                     } else {
                         // Cập nhật không thành công, chuyển hướng đến trang lỗi
                         url = "rule.jsp";
-                    }   
+                    }
                 } else {
                     request.setAttribute("Not_Request", "Số dư không đủ để thực hiện thao tác!!!");
-                    // Lưu URL trước đó vào requestScope
-                    String previousUrl = request.getHeader("Referer");
-                    response.sendRedirect(previousUrl);
+                    url = "MainController?action=cusViewMuaNgayList&id=" + realEstateID;
+                    response.sendRedirect(url);
                 }
             }
         } catch (SQLException ex) {

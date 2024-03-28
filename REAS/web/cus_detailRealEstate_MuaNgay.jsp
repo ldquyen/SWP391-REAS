@@ -20,19 +20,25 @@
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
-        <script>
-            // Hàm hiển thị cửa sổ thông báo
-            function showErrorAlert(message) {
-                alert(message);
-            }
-        </script>
-
         <c:if test="${not empty requestScope.Not_Request}">
             <script>
+                // Hàm hiển thị cửa sổ thông báo
+                function showErrorAlert(message) {
+                    alert(message);
+                }
                 // Gọi hàm hiển thị cửa sổ thông báo với thông điệp từ attribute "Not_Request"
                 showErrorAlert("${requestScope.Not_Request}");
             </script>
         </c:if>
+        <style>
+            .test {
+                font-weight:bold;
+                -webkit-animation: my 1000ms infinite;
+                -moz-animation: my 1000ms infinite; 
+                -o-animation: my 1000ms infinite; 
+                animation: my 1000ms infinite;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -319,7 +325,7 @@
                                                 </c:if>
                                             </c:forEach>
                                             Xu</span></p>
-<!--                                    <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
+    <!--                                    <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
                                     <p class="bold-text">Thời gian kết thúc: <span id="endTime">${realEstate.timeDown}</span></p>-->
                                     <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
                                     <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
@@ -362,7 +368,8 @@
                         // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
                         localStorage.removeItem('pageReloaded');
                     }
-                };
+                }
+                ;
             </script>
             <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
             <form id="searchForm" class="flex-center" action="MainController" method="post">
@@ -405,7 +412,9 @@
                                             <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
                                             <input type="hidden" name="accID" value="${dto.accID}">
                                             <input type="hidden" name="pricePaid" value="${dto.pricePaid}">
-                                            <button id="submitButton" style="color: #fff" type="submit" value="xacNhanMuaNgay" name="action">Bán Ngay</button>
+                                            <button id="submitButton" style="color: #fff" type="submit" value="xacNhanMuaNgay" name="action">
+                                                <span class="test">Bán Ngay</span>
+                                            </button>
                                         </form>
                                     </td>
 
