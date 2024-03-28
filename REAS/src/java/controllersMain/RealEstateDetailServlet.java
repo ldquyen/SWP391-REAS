@@ -64,14 +64,6 @@ public class RealEstateDetailServlet extends HttpServlet {
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
 
-                        HttpSession session = request.getSession(false);
-                        Account member = (Account) session.getAttribute("member");
-                        String accID = member.getAccID();
-
-                        PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
-                        Integer purchaseStatus = dao1.getPurchaseStatus(realEstateId, accID);
-                        request.setAttribute("purchaseStatus", purchaseStatus);
-
                         // Tạo một seed ngẫu nhiên
                         if (listRealEstate != null && !listRealEstate.isEmpty()) {
                             // Shuffle listRealEstate
@@ -102,6 +94,14 @@ public class RealEstateDetailServlet extends HttpServlet {
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(2);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
 
+                        HttpSession session = request.getSession(false);
+                        Account member = (Account) session.getAttribute("member");
+                        String accID = member.getAccID();
+
+                        PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+                        Integer purchaseStatus = dao1.getPurchaseStatus(realEstateId, accID);
+                        request.setAttribute("purchaseStatus", purchaseStatus);
+
                         url = "detailRealEstate_status2.jsp";
                     } else {
                         System.out.println("RealEstateDetailServlet null exception");
@@ -112,7 +112,7 @@ public class RealEstateDetailServlet extends HttpServlet {
                         request.setAttribute("realEstate", realEstateVM);
                         request.setAttribute("city", city);
                         request.setAttribute("listimg", listIMG);
-                        
+
                         RealEstateDAO dao = new RealEstateDAO();
                         List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
