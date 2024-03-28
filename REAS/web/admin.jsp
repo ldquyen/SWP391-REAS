@@ -309,7 +309,6 @@
 
                 </aside>
             </div>
-            <div class="column" style="height: 100vh;">Admin page</div>
         </div>
 
         <!-- BODY -->

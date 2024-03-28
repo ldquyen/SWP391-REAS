@@ -26,13 +26,12 @@
                 <a class="navbar-item" href="admin.jsp">
                     <img class="logo-header" src="image/logo.png" alt="" href="admin.jsp" width="100" height="28" />
                 </a>
-
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
-            </div>
+            </div
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
@@ -42,10 +41,8 @@
                         </button>
                     </form>
                 </div>
-
                 <div class="navbar-end">
                     <div class="navbar-item">
-
                         <%
                             List<Wallet> wallet = new WalletDAO().getWallet();
                             pageContext.setAttribute("walletAccount", wallet);
@@ -60,14 +57,11 @@
                                 (xu)
                             </a>                  
                         </div>
-
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
                                 ${sessionScope.admin.fullname} (ADMIN)                
                             </a>
-
                             <div class="fake-div"></div>
-
                             <div class="navbar-dropdown">
                                 <a class="navbar-item">
                                     <form action="AdminController" method="post">
@@ -76,7 +70,6 @@
                                         </button>
                                     </form>
                                 </a>
-
                                 <hr class="navbar-divider">
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
@@ -85,12 +78,8 @@
                                         </button>
                                     </form>
                                 </a>
-
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
@@ -246,8 +235,6 @@
                             </ul>
                         </li>
                     </ul>
-
-
                     <p class="menu-label">
                         Transactions
                     </p>
@@ -305,10 +292,9 @@
                             </ul>                           
                         </li>
                     </ul>
-
-
                 </aside>
             </div>
+            <!--===============================================================-->
             <div class="column" style="height: 100vh;">
                 <form action="AdminController" method="post">
                     <input type="text" placeholder="Nhập mã đấu giá" name="txtAuctionID" style="width: 400px; height: 30px" value="${requestScope.AuctionID}">

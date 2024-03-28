@@ -76,7 +76,7 @@
                             <div class="navbar-dropdown">
                                 <a class="navbar-item">
                                     <form action="AdminController" method="post">
-                                        <button type="submit" value="informationOfAdmin" name="action">
+                                        <button type="submit" value="adminInformationPage" name="action">
                                             <span>Thông tin tài khoản</span>
                                         </button>
                                     </form>
@@ -93,8 +93,6 @@
 
                             </div>
                         </div>
-
-
 
                     </div>
                 </div>
@@ -124,7 +122,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
+                                            <button type="submit" value="detailStatisticalJSP" name="action">
                                                 <span>Chi tiết</span>
                                             </button>
                                         </form>
@@ -269,8 +267,6 @@
                                                 <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
                                             </button>
                                         </form>
-
-
                                     </a>
                                 </li>
 
@@ -287,7 +283,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="searchStaff" name="action">
+                                            <button type="submit" value="fixrule" name="action">
                                                 <span>Chỉnh sửa luật lệ</span>
                                             </button>
                                         </form>
@@ -302,12 +298,20 @@
                                         </form>
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="rule" name="action">
+                                                <span>Xem luật lệ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
                             </ul>                           
                         </li>
                     </ul>
                 </aside>
             </div>
-
 
             <!--===============================================================-->
 

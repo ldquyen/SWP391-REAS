@@ -33,7 +33,7 @@
                 </a>
             </div>
 
-             <div id="navbarBasicExample" class="navbar-menu">
+            <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
                         <button type="submit" value="adminjsp" name="action" >
@@ -44,6 +44,21 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
+
+                        <%
+                            List<Wallet> wallet = new WalletDAO().getWallet();
+                            pageContext.setAttribute("walletAccount", wallet);
+                        %>
+                        <div class="navbar-container-1">
+                            <a class="navbar-1">SỐ DƯ :
+                                <c:forEach var="wallet" items="${walletAccount}">
+                                    <c:if test="${wallet.accID eq admin.accID}">
+                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                    </c:if>
+                                </c:forEach>
+                                (xu)
+                            </a>                  
+                        </div>
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
@@ -79,7 +94,6 @@
                 </div>
             </div>
         </nav>
-
         <div class="columns">
             <div class="column is-one-fifth" style="background-color: #D9D9D9; height: 100vh;">
                 <aside class="menu">
@@ -102,7 +116,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
+                                            <button type="submit" value="detailStatisticalJSP" name="action">
                                                 <span>Chi tiết</span>
                                             </button>
                                         </form>
@@ -232,6 +246,7 @@
                         </li>
                     </ul>
 
+
                     <p class="menu-label">
                         Transactions
                     </p>
@@ -243,7 +258,7 @@
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
-                                                <span>Thông tin ví tiền</span>
+                                                <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
                                             </button>
                                         </form>
                                     </a>
@@ -262,7 +277,7 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="searchStaff" name="action">
+                                            <button type="submit" value="fixrule" name="action">
                                                 <span>Chỉnh sửa luật lệ</span>
                                             </button>
                                         </form>
@@ -277,9 +292,19 @@
                                         </form>
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="MainController" method="post">
+                                            <button type="submit" value="rule" name="action">
+                                                <span>Xem luật lệ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
                             </ul>                           
                         </li>
                     </ul>
+
 
                 </aside>
             </div>

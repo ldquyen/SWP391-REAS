@@ -4,6 +4,9 @@
     Author     : ASUS
 --%>
 
+<%@page import="dto.Wallet"%>
+<%@page import="dao.WalletDAO"%>
+<%@page import="java.util.List"%>
 <%@page import="dto.UserGoogle"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -19,13 +22,10 @@
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item">
-                    <form action="MainController" method="post">
-                        <button type="submit" value="homeindex_1" name="action">
-                            <img class="logo-header" src="image/logo.png" alt="" href="" width="100" height="28" />
-                        </button>
-                    </form>
+                <a class="navbar-item" href="admin.jsp">
+                    <img class="logo-header" src="image/logo.png" alt="" href="admin.jsp" width="100" height="28" />
                 </a>
+
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -35,63 +35,34 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item">
-                        <form action="AdminController" method="post">
-                            <button type="submit" value="adminjsp" name="action">
-                                <span>TRANG CHỦ</span>
-                            </button>
-                        </form>
-                    </a>
-
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="news" name="action">
-                                <span>TIN TỨC</span>
-                            </button>
-                        </form>
-                    </a>
-
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="rule" name="action">
-                                <span>NỘI QUY</span>
-                            </button>
-                        </form>
-                    </a>
+                    <form action="AdminController" method="post" style="margin-top: 17px">
+                        <button type="submit" value="adminjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item">
+
+                        <%
+                            List<Wallet> wallet = new WalletDAO().getWallet();
+                            pageContext.setAttribute("walletAccount", wallet);
+                        %>
                         <div class="navbar-container-1">
-                            <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="auctionList" name="action">
-                                    <span>DANH SÁCH ĐẤU GIÁ</span>
-                                </button>
-                            </form>
+                            <a class="navbar-1">SỐ DƯ :
+                                <c:forEach var="wallet" items="${walletAccount}">
+                                    <c:if test="${wallet.accID eq admin.accID}">
+                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                    </c:if>
+                                </c:forEach>
+                                (xu)
+                            </a>                  
                         </div>
-                        <div class="navbar-container-1">
-                            <form action="MainController" method="post">
-                                <button class="navbar-1" type="submit" value="postNew" name="action">
-                                    <span>DASHBOARD</span>
-                                </button>
-                            </form>
-                        </div>
+
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
-                                <c:choose>
-                                    <c:when test="${not empty sessionScope.admin}">
-                                        ${sessionScope.admin.fullname}
-                                    </c:when>
-                                    <c:when test="${not empty sessionScope.member}">
-                                        ${sessionScope.member.fullname}
-                                    </c:when>
-                                    <c:when test="${not empty sessionScope.userGoogle}">
-                                        ${sessionScope.userGoogle.given_name}
-                                    </c:when>
-                                    <c:otherwise>
-                                        Guest
-                                    </c:otherwise>
-                                </c:choose>
+                                ${sessionScope.admin.fullname} (ADMIN)                
                             </a>
 
                             <div class="fake-div"></div>
@@ -101,41 +72,6 @@
                                     <form action="AdminController" method="post">
                                         <button type="submit" value="adminInformationPage" name="action">
                                             <span>Thông tin tài khoản</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Nhân viên</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Thành viên</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Doanh thu</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="changePass" name="action">
-                                            <span>Thay đổi mật khẩu</span>
-                                        </button>
-                                    </form>
-                                </a>
-                                <a class="navbar-item">
-                                    <form action="MainController" method="post">
-                                        <button type="submit" value="aboutus" name="action">
-                                            <span>Thông tin giao dịch</span>
                                         </button>
                                     </form>
                                 </a>
@@ -151,8 +87,6 @@
 
                             </div>
                         </div>
-
-
 
                     </div>
                 </div>

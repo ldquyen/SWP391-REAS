@@ -26,26 +26,23 @@
                 <a class="navbar-item" href="admin.jsp">
                     <img class="logo-header" src="image/logo.png" alt="" href="admin.jsp" width="100" height="28" />
                 </a>
-
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
-            </div>
+            </div
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="adminjsp" name="action" >
-                                <span style="color: white">TRANG CHỦ</span>
-                            </button>
-                        </form>
+                        <button type="submit" value="adminjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
-
                 <div class="navbar-end">
                     <div class="navbar-item">
-
                         <%
                             List<Wallet> wallet = new WalletDAO().getWallet();
                             pageContext.setAttribute("walletAccount", wallet);
@@ -60,14 +57,11 @@
                                 (xu)
                             </a>                  
                         </div>
-
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
                                 ${sessionScope.admin.fullname} (ADMIN)                
                             </a>
-
                             <div class="fake-div"></div>
-
                             <div class="navbar-dropdown">
                                 <a class="navbar-item">
                                     <form action="AdminController" method="post">
@@ -76,7 +70,6 @@
                                         </button>
                                     </form>
                                 </a>
-
                                 <hr class="navbar-divider">
                                 <a class="navbar-item">
                                     <form action="MainController" method="post">
@@ -85,18 +78,12 @@
                                         </button>
                                     </form>
                                 </a>
-
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
         </nav>
-
-
         <div class="columns">
             <div class="column is-one-fifth" style="background-color: #D9D9D9; height: 100vh;">
                 <aside class="menu">
@@ -121,6 +108,31 @@
                                         <form action="AdminController" method="post">
                                             <button type="submit" value="detailStatisticalJSP" name="action">
                                                 <span>Chi tiết</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Xét duyệt</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approve" name="action">
+                                                <span>Danh sách chờ</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="approved" name="action">
+                                                <span>Đã xét duyệt</span>
                                             </button>
                                         </form>
                                     </a>
@@ -213,18 +225,16 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Tổng doanh thu</span>
+                                            <button type="submit" value="revenue" name="action">
+                                                <span>Xem chi tiết</span>
                                             </button>
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
-           
-
                     <p class="menu-label">
                         Transactions
                     </p>
@@ -234,14 +244,14 @@
                             <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
-                                         <form action="AdminController" method="post">
+                                        <form action="AdminController" method="post">
                                             <button type="submit" value="aboutus" name="action">
                                                 <a href="AdminController?action=userWalletPage">Thông tin ví tiền</span>
                                             </button>
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -251,7 +261,7 @@
                     <ul class="menu-list">
                         <li>
                             <a class="">Luật lệ</a>
-                             <ul class="menu-list-subnav">
+                            <ul class="menu-list-subnav">
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
@@ -282,44 +292,43 @@
                             </ul>                           
                         </li>
                     </ul>
-
-
                 </aside>
             </div>
+            <!--===============================================================-->
             <div class="column" style="height: 100vh;">                
 
                 <form ction="AdminController" method="post">
-                <p><input type="text" placeholder="Nội dung luật" name="ruledetail" value=""</p> 
-                <p>Điều Khoản<select name="sectionid">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    </select>
-                 <button id="loginSubmitBtn" class="button is-light submit-login-btn" type="submit" value="rulefix" name="action" style="
-                                        background-color: transparent;
-                                        color: #D9AB73;
-                                        font-size: 11px;
-                                        font-family: Inter;
-                                        font-weight: 800;
-                                        word-wrap: break-word;
-                                        border-radius: 40px;
-                                        border: 3px solid #D9AB73" >
-                                    <span>Tạo</span>
-                 </button>
-                 </p>
-                  <% 
-        // Set session attribute      
-      Account admin = (Account) session.getAttribute("admin");
-        session.setAttribute("admin", admin);
-    %>
-        <p>${requestScope.notice}</p>
-                 </form>
+                    <p><input type="text" placeholder="Nội dung luật" name="ruledetail" value=""</p> 
+                    <p>Điều Khoản<select name="sectionid">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                        </select>
+                        <button id="loginSubmitBtn" class="button is-light submit-login-btn" type="submit" value="rulefix" name="action" style="
+                                background-color: transparent;
+                                color: #D9AB73;
+                                font-size: 11px;
+                                font-family: Inter;
+                                font-weight: 800;
+                                word-wrap: break-word;
+                                border-radius: 40px;
+                                border: 3px solid #D9AB73" >
+                            <span>Tạo</span>
+                        </button>
+                    </p>
+                    <%
+                        // Set session attribute      
+                        Account admin = (Account) session.getAttribute("admin");
+                        session.setAttribute("admin", admin);
+                    %>
+                    <p>${requestScope.notice}</p>
+                </form>
 
             </div>
         </div>
