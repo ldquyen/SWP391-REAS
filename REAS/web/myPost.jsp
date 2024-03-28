@@ -199,6 +199,7 @@
                             <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tên</th>                             
                             <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Ngày đăng</th>
                             <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Trạng thái</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Mua Ngay</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -212,7 +213,9 @@
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">${s.statusName}</td>
                                     </c:if>
                                 </c:forEach>
-
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                <a href="MainController?action=cusViewMuaNgayList&id=${r.realEstateID}">Xem danh sách
+                                </td>
 
                             </tr>
                         </c:forEach>
@@ -239,7 +242,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>

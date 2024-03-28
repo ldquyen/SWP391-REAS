@@ -24,6 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author ADMIN
@@ -76,9 +79,10 @@ public class PostRealEstateServlet extends HttpServlet {
             pricePaidStr = pricePaidStr.replaceAll("[,.]", "");
             pricePaid = Long.parseLong(pricePaidStr);
         } else {
-            int[] top1 = {3, 6, 9, 10, 19, 25, 27, 58};
+            int[] top1 = {9, 19, 25, 27, 58};
             int[] top2 = {2, 7, 8, 11, 12, 14, 15, 20, 26, 38, 40, 44, 46, 47, 50, 55, 57, 59, 61};
-            int[] top3 = {1, 3, 4, 5, 6, 9, 10, 13, 16, 17, 18, 19, 21, 22, 23, 24, 25, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 39, 41, 42, 43, 45, 48, 49, 51, 52, 53, 54, 56, 62, 63};
+            int[] top3 = {1, 3, 4, 5, 6, 10, 13, 16, 17, 18, 21, 22, 23, 24, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 39, 41, 42, 43, 45, 48, 49, 51, 52, 53, 54, 56, 62, 63};
+
             if (Arrays.binarySearch(top1, cityID) >= 0) {
                 pricePaid = (priceFirst * 120) / 100;
             }
@@ -164,6 +168,38 @@ public class PostRealEstateServlet extends HttpServlet {
             }
         } catch (ClassNotFoundException | SQLException | NamingException ex) {
             Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] top1 = {9, 19, 25, 27, 58};
+        int[] top2 = {2, 7, 8, 11, 12, 14, 15, 20, 26, 38, 40, 44, 46, 47, 50, 55, 57, 59, 61};
+        int[] top3 = {1, 3, 4, 5, 6, 10, 13, 16, 17, 18, 21, 22, 23, 24, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 39, 41, 42, 43, 45, 48, 49, 51, 52, 53, 54, 56, 62, 63};
+
+        Set<Integer> set = new HashSet<>();
+        // Kiểm tra phần tử trùng lặp trong top1
+        for (int num : top1) {
+            if (!set.add(num)) {
+                System.out.println("Phần tử trùng lặp: " + num);
+            }
+        }
+
+        // Kiểm tra phần tử trùng lặp trong top2
+        for (int num : top2) {
+            if (!set.add(num)) {
+                System.out.println("Phần tử trùng lặp: " + num);
+            }
+        }
+
+        // Kiểm tra phần tử trùng lặp trong top3
+        for (int num : top3) {
+            if (!set.add(num)) {
+                System.out.println("Phần tử trùng lặp: " + num);
+            }
+        }
+
+        if (set.isEmpty()) {
+            System.out.println("Không có phần tử nào trùng lặp giữa ba mảng.");
         }
     }
 

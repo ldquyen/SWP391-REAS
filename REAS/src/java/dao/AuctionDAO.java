@@ -282,7 +282,6 @@ public class AuctionDAO {
         }
     }
 
-
     public double getCurrentPriceNow(String auctionId) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -462,6 +461,7 @@ public class AuctionDAO {
         }
         return null;
     }
+
 
     public int AuctionWinningHistory(AuctionHistory auctionHistory, String accountId) {
         Connection con = null;

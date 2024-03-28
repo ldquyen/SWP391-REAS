@@ -39,11 +39,11 @@ public class NaptienServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String url = "naptien.jsp";
-        
+
         int walletID;
         String walletIDstr = request.getParameter("walletID");
         walletID = Integer.parseInt(walletIDstr);
-        
+
         long price = 0;
         String priceStr = request.getParameter("soTien");
         if (priceStr != null) {
@@ -59,21 +59,28 @@ public class NaptienServlet extends HttpServlet {
                 }
             }
         }
-        String content = request.getParameter("content");
+        String orderID = request.getParameter("orderID");
         try {
+
             WalletDAO dao = new WalletDAO();
-            boolean result = dao.sendRequestNapTien(walletID, price, content);
-            if (result) {
+            if (dao.checkRequestOrderExists(orderID)) {
                 url = "naptien.jsp";
-                request.setAttribute("Nap_Success", "Đơn yêu cầu nạp tiền gửi THÀNH CÔNG, vui lòng đợi hệ thống xét duyệt!!!");
+                request.setAttribute("Nap_Unsuccess", "Mã giao dịch của bạn đã bị trùng với Mã giao dịch đã thực hiện");
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
-            } 
+            }else{
+                boolean result = dao.sendRequestNapTien(walletID, price, orderID);
+                if (result) {
+                    request.setAttribute("Nap_Success", "Đơn yêu cầu nạp tiền gửi THÀNH CÔNG, vui lòng đợi hệ thống xét duyệt!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                }
+            }
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PostRealEstateServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -193,6 +193,9 @@
             <c:if test="${not empty requestScope.Nap_Success}">
             showErrorMessage("${requestScope.Nap_Success}");
             </c:if>
+            <c:if test="${not empty requestScope.Nap_Unsuccess}">
+            showErrorMessage("${requestScope.Nap_Unsuccess}");
+            </c:if>
             <c:if test="${not empty requestScope.Wrong_Price}">
             showErrorMessage("${requestScope.Wrong_Price}");
             </c:if>
@@ -387,7 +390,7 @@
                     </div>
                     <div class="form-element">
                         <label>3. Mã giao dịch </label>
-                        <input type="text" class="form-control" id="content" name="content" placeholder="Điền mã giao dịch" required>
+                        <input type="text" class="form-control" id="orderID" name="orderID" placeholder="Điền mã giao dịch" required>
                     </div>
                     <div class="checkbox-container">
                         <input type="checkbox" id="agreeCheckbox" required>
@@ -415,7 +418,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>

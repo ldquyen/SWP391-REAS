@@ -59,7 +59,7 @@
 
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="DN" name="action">
+                            <button type="submit" value="ruleedit" name="action">
                                 <span>NỘI QUY</span>
                             </button>
                         </form>
@@ -141,38 +141,64 @@
         <div class="swiper postElstate-container">
             <div class="swiper-wrapper postElstate-list">
                 <c:forEach items="${list}" var="item">
-                    <div class=" realestate-items swiper-slide"> 
+                    <div style="background-color: #000" class=" realestate-items swiper-slide"> 
                         <h1>${item.imageLink1}</h1>
                         <c:forEach var="img" items="${listImg}">
                             <c:if test="${img.imageFolderID eq item.imageFolderID}"> <img class="img-home-page" src="data:image/jpeg;base64,${fn:escapeXml(img.base64Image1)}" alt="Image"></c:if>
                         </c:forEach>
-                        <a href="MainController?action=viewPostRealEstate&id=${item.realEstateID}">
+                               <a href="MainController?action=viewPostRealEstateGuest&id=${item.realEstateID}">
 
                             <div class="text-home-container">
+                                <%--
                                 <p class="text-home-1 timeUp">
                                     ${item.timeUp}
                                 </p>
+                                --%>
                                 <p class="text-home-2">
-                                    ${fn:toUpperCase(item.realEstateName)} - <span>
-                                        <c:forEach var="cityList" items="${requestScope.city}"> 
-                                            <c:if test="${cityList.cityID eq item.cityID}">
-                                                ${cityList.cityName}
-                                            </c:if>
-                                        </c:forEach>
-                                    </span>
+                                    ${fn:toUpperCase(item.realEstateName)}
                                 </p>
 
-                                <p class="text-home-2">
-                                    ${item.address}
-                                </p>
-                                <p class="text-home-3">
-                                    <script>
+                                <div style="display: flex;justify-content: center">
+                                    <p class="text-home-3">
+                                        <script>
                                         var number = ${item.priceFirst}; // Assuming auctions.lamda contains the number
                                         var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
                                         document.write(formattedNumber);
-                                    </script> Xu
-                                    <%--  <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd --%>
-                                </p>
+                                        </script> Xu
+                                        <%--  <fmt:formatNumber type="currency" value="${item.priceFirst}" /> vnd --%>
+                                    </p>
+                                    <p style="color: #999;margin: 0 8px;line-height: 26px; ">.</p>
+                                    <p class="text-home-3">
+                                        ${item.area} m2
+                                    </p>
+                                </div>
+
+
+
+
+
+                                <div style="display: flex;justify-content: center">
+                                    <p class="text-home-2">
+                                        ${item.address}
+                                    </p>
+                                    <span class="text-home-2" style="margin-right: 5px">, </span>
+                                    <p class="text-home-2">
+                                        <span>
+                                            <c:forEach var="cityList" items="${requestScope.city}"> 
+                                                <c:if test="${cityList.cityID eq item.cityID}">
+                                                    ${cityList.cityName}
+                                                </c:if>
+                                            </c:forEach>
+                                        </span>
+                                    </p>
+                                </div>
+
+                                <div style="display: flex;justify-content: center;">
+                                    <p class="text-home-1">Đăng lúc</p>
+                                    <p class="text-home-1 timeUp">
+                                        ${item.timeUp}
+                                    </p>
+                                </div>
                             </div>
                         </a>
                     </div>

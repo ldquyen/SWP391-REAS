@@ -396,7 +396,7 @@
                     <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
                         <thead>
                             <tr>
-                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Content</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Mã giao dịch</th>
                                 <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price</th>
                                 <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date and Time</th>
                                 
@@ -410,7 +410,7 @@
                             <form action="AdminController" method="post">
                                 <tr>
                                     <td class="areaCell" style="border: 1px solid #D9AB73; padding: 8px;">
-                                        ${dto.content}
+                                        ${dto.orderID}
                                     </td>
                                     <td class="priceFirstCell" style="border: 1px solid #D9AB73; padding: 8px;">
                                         ${dto.price}
@@ -455,7 +455,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>

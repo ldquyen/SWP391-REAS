@@ -58,7 +58,7 @@
 
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="news" name="action">
+                            <button type="submit" value="DN" name="action">
                                 <span>TIN TỨC</span>
                             </button>
                         </form>
@@ -322,7 +322,7 @@
                 Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                 <br/>
             </div>
-            <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+            <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
         </div>
     </div>
 </footer>

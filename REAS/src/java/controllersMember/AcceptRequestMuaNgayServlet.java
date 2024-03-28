@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersAdmin;
+package controllersMember;
 
-import dao.WalletDAO;
+import dao.PurchaseRequestDAO;
+import dao.RealEstateDAO;
+import dao.TransactionDAO;
+import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -17,13 +20,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name = "UpdateStatusOrderS2Servlet", urlPatterns = {"/UpdateStatusOrderS2Servlet"})
-public class UpdateStatusOrderS2Servlet extends HttpServlet {
+@WebServlet(name = "AcceptRequestMuaNgayServlet", urlPatterns = {"/AcceptRequestMuaNgayServlet"})
+public class AcceptRequestMuaNgayServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,57 +38,43 @@ public class UpdateStatusOrderS2Servlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException, ClassNotFoundException, NamingException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        String url = "admin_ApproveOrder.jsp";
-//        String orderIDstr = request.getParameter("orderID");
-//        int orderID = Integer.parseInt(orderIDstr);
-//        String searchValue = request.getParameter("txtSearchValue");
-//
-//        try {
-//            WalletDAO dao = new WalletDAO();
-//            boolean result = dao.updateRequestNapTien(orderID, 2);
-//            if (result) {
-//                url = "AdminController"
-//                        + "?action=approveOrder"
-//                        + "&txtSearchValue=" + searchValue;
-//            } else {
-//                // Cập nhật không thành công, chuyển hướng đến trang lỗi
-//                url = "rule.jsp";
-//            }
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        } finally {
-//            response.sendRedirect(url);
-//        }
-//    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, NamingException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "admin_ApproveOrder.jsp";
+        String url = "";
+        String realEstateID = request.getParameter("realEstateID");
+        String accID_nguoiMua = request.getParameter("accID");
 
-        String orderID = request.getParameter("orderID");
-        String searchValue = request.getParameter("txtSearchValue");
-
-        String action = request.getParameter("action");
+        long pricePaid = 0;
+        String pricePaidStr = request.getParameter("pricePaid");
+        if (pricePaidStr != null && !pricePaidStr.isEmpty()) {
+            pricePaidStr = pricePaidStr.replaceAll("[,.]", "");
+            pricePaid = Long.parseLong(pricePaidStr);
+        }
 
         try {
-            WalletDAO dao = new WalletDAO();
-            boolean result = false;
-            if ("approveOrder".equals(action)) {
-                result = dao.updateRequestNapTien(orderID, 2);
-            } else if ("rejectOrder".equals(action)) {
-                result = dao.updateRequestNapTien(orderID, 3);
-            }
-            if (result) {
-                url = "AdminController"
-                        + "?action=approveOrderList"
-                        + "&txtSearchValue=" + searchValue;
+            HttpSession session = request.getSession(false);
+            if (session != null && session.getAttribute("member") != null) {
+                Account account = (Account) session.getAttribute("member");
+                String accID_nguoiBan = account.getAccID();
                 
-            } else {
-                url="";
+                RealEstateDAO dao = new RealEstateDAO();
+                boolean result = dao.updateStatusID(realEstateID, 6);
+
+                PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+                boolean result1 = dao1.updateStatus2(accID_nguoiMua);
+
+                TransactionDAO dao2 = new TransactionDAO();
+                boolean result2 = dao2.processTransaction(accID_nguoiMua, accID_nguoiBan, pricePaid);
+            
+                if (result && result1 && result2) {
+                    url = "MainController?action=cusViewMuaNgayListV2&id=" + realEstateID;
+                } else {
+                    // Cập nhật không thành công, chuyển hướng đến trang lỗi
+                    url = "rule.jsp";
+                }
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -107,9 +97,11 @@ public class UpdateStatusOrderS2Servlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateStatusOrderS2Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(UpdateStatusOrderS2Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -127,9 +119,11 @@ public class UpdateStatusOrderS2Servlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateStatusOrderS2Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(UpdateStatusOrderS2Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

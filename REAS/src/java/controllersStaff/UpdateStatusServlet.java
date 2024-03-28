@@ -48,9 +48,10 @@ public class UpdateStatusServlet extends HttpServlet {
             RealEstateDAO dao = new RealEstateDAO();
             boolean result = dao.updateStatusID(realEstateID, 1);
             if (result) {
-                url="StaffController"
-                    + "?action=searchAuctionApprove"
-                    + "&txtSearchValue=" + searchValue;  
+//                url="StaffController"
+//                    + "?action=searchAuctionApprove"
+//                    + "&txtSearchValue=" + searchValue;
+           url = "staff_approve.jsp";
                 
             } else {
                 // Cập nhật không thành công, chuyển hướng đến trang lỗi

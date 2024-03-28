@@ -3,34 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersStaff;
+package controllersMain;
 
-import dao.AuctionDAO;
-import dao.RealEstateDAO;
-import dto.Auction;
-import dto.RealEstate;
-import dto.RealEstateInfo;
+import dao.PurchaseRequestDAO;
+import dao.WalletDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name = "SearchAuctionApproveServlet", urlPatterns = {"/SearchAuctionApproveServlet"})
-public class SearchAuctionApproveServlet extends HttpServlet {
+@WebServlet(name = "MuaNgayServlet", urlPatterns = {"/MuaNgayServlet"})
+public class MuaNgayServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,26 +37,41 @@ public class SearchAuctionApproveServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, NamingException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "staff_approve.jsp";
-        String searchValue = request.getParameter("txtSearchValue");
+        String realEstateID = request.getParameter("realEstateID");
+
+        String url = "MainController?action=viewPostRealEstate&id=" + realEstateID;
+
+        HttpSession session = request.getSession();
+        boolean result = false;
+
+        String accID = request.getParameter("accID");
+
+        long pricePaid = 0;
+        String pricePaidStr = request.getParameter("pricePaid");
+        pricePaid = Long.parseLong(pricePaidStr);
+
+        WalletDAO daoWallet = new WalletDAO();
+        long accountBalance = daoWallet.getAccountBalanceByAccID(accID);
         try {
-            RealEstateDAO dao = new RealEstateDAO();
-            if (searchValue == null || searchValue.trim().isEmpty()) {
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(0);
-                url = "staff_approve.jsp";
-                request.setAttribute("SEARCH_RESULT", listRealEstate);
+            if (accountBalance > (pricePaid + 5)) {
+                PurchaseRequestDAO dao = new PurchaseRequestDAO();
+                result = dao.sendRequestMuaNgay(accID, realEstateID, pricePaid);
+                if (result) {
+                    session.setAttribute("purchaseStatus", "Đang xét duyệt");
+                    request.setAttribute("Purchase_Request", "Đơn mua ngay gửi THÀNH CÔNG, vui lòng đợi hệ thống xét duyệt!!!");
+                }
             } else {
-                List<RealEstateInfo>  listRealEstate = dao.getAllRealEstate(0);
-                url = "staff_approve.jsp";
-                request.setAttribute("SEARCH_RESULT", listRealEstate);
+                request.setAttribute("Not_Request", "Số dư không đủ để thực hiện thao tác!!!");
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            // Lưu URL trước đó vào requestScope
+            request.setAttribute("previousUrl", request.getHeader("Referer"));
+            // Chuyển hướng đến trang JSP để hiển thị thông báo
+            request.getRequestDispatcher("detailRealEstate.jsp").forward(request, response);
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -80,9 +90,9 @@ public class SearchAuctionApproveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -100,9 +110,9 @@ public class SearchAuctionApproveServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(SearchAuctionApproveServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

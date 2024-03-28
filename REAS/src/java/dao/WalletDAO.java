@@ -89,19 +89,50 @@ public class WalletDAO {
         return result;
     }
 
-    public static boolean sendRequestNapTien(Integer walletID, Long price, String context) throws ClassNotFoundException, SQLException {
+    public long getAccountBalanceByAccID(String accID) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        long accountBalance = 0;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT AccountBalance FROM dbo.Wallet WHERE AccID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, accID);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    accountBalance = rs.getLong("AccountBalance");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return accountBalance;
+    }
+
+    public static boolean sendRequestNapTien(Integer walletID, Long price, String orderID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
 
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "INSERT INTO [dbo].[WalletHistory] ([WalletID], [Price], [DateAndTime], [StatusID], [Content]) VALUES (?, ?, ?, 1, ?);";
+                String sql = "INSERT INTO [dbo].[WalletHistory] ([WalletID], [Price], [DateAndTime], [StatusID], [OrderID]) VALUES (?, ?, ?, 1, ?);";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, walletID);
                 stm.setLong(2, price);
                 stm.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-                stm.setString(4, context);
+                stm.setString(4, orderID);
                 // Gán các giá trị cần thiết cho các tham số trong câu lệnh SQL
 
                 // Thực thi câu lệnh SQL
@@ -119,6 +150,7 @@ public class WalletDAO {
         return true;
     }
 // Lấy Request Nạp Tiền bằng Status
+
     public List<OrderWallet> getRequestNapTien(int statusID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -128,9 +160,9 @@ public class WalletDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "SELECT wh.OrderID, wh.WalletID, wh.Price, wh.DateAndTime, wh.StatusID, wh.Content, whs.StatusName\n"
+                String sql = "SELECT wh.OrderID, wh.WalletID, wh.Price, wh.DateAndTime, wh.StatusID, whs.StatusName\n"
                         + " FROM dbo.WalletHistory wh \n"
-                        + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n" 
+                        + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n"
                         + " WHERE wh.StatusID = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, statusID);
@@ -141,7 +173,7 @@ public class WalletDAO {
                     }
                     OrderWallet dto = new OrderWallet();
 
-                    dto.setOrderID(rs.getInt("OrderID"));
+                    dto.setOrderID(rs.getString("OrderID"));
                     dto.setWalletID(rs.getInt("WalletID"));
                     dto.setPrice(rs.getLong("Price"));
 
@@ -150,7 +182,6 @@ public class WalletDAO {
                     dto.setDate(date);
 
                     dto.setStatusName(rs.getString("StatusName"));
-                    dto.setContent(rs.getString("Content"));
 
                     result.add(dto);
                 }
@@ -169,7 +200,7 @@ public class WalletDAO {
         }
         return result;
     }
-    
+
     // Lấy Request nạp tiền = WalletID
     public List<OrderWallet> getRequestNapTienByWalletID(int walletID) throws ClassNotFoundException, SQLException {
         Connection con = null;
@@ -180,9 +211,9 @@ public class WalletDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "SELECT wh.OrderID, wh.WalletID, wh.Price, wh.DateAndTime, wh.StatusID, wh.Content, whs.StatusName\n"
+                String sql = "SELECT wh.OrderID, wh.WalletID, wh.Price, wh.DateAndTime, wh.StatusID, whs.StatusName\n"
                         + " FROM dbo.WalletHistory wh \n"
-                        + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n" 
+                        + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n"
                         + " WHERE wh.WalletID = ? \n"
                         + " ORDER BY wh.DateAndTime DESC";
                 stm = con.prepareStatement(sql);
@@ -194,7 +225,7 @@ public class WalletDAO {
                     }
                     OrderWallet dto = new OrderWallet();
 
-                    dto.setOrderID(rs.getInt("OrderID"));
+                    dto.setOrderID(rs.getString("OrderID"));
                     dto.setWalletID(rs.getInt("WalletID"));
                     dto.setPrice(rs.getLong("Price"));
 
@@ -203,7 +234,6 @@ public class WalletDAO {
                     dto.setDate(date);
 
                     dto.setStatusName(rs.getString("StatusName"));
-                    dto.setContent(rs.getString("Content"));
 
                     result.add(dto);
                 }
@@ -222,8 +252,8 @@ public class WalletDAO {
         }
         return result;
     }
-    
-    public boolean updateRequestNapTien(int orderID, int statusID) throws ClassNotFoundException, SQLException, NamingException {
+
+    public boolean updateRequestNapTien(String orderID, int statusID) throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
@@ -231,17 +261,17 @@ public class WalletDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "UPDATE [dbo].[WalletHistory] SET [StatusID] = ? WHERE [OrderID] = ?";
-                
+
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, statusID);
-                stm.setInt(2, orderID);
+                stm.setString(2, orderID);
                 int effectRows = stm.executeUpdate();
                 if (effectRows > 0) {
                     result = true;
                 }
             }
         } finally {
-            
+
             if (stm != null) {
                 stm.close();
             }
@@ -250,6 +280,28 @@ public class WalletDAO {
             }
         }
         return result;
+    }
+
+    public static boolean checkRequestOrderExists(String orderID) throws SQLException, ClassNotFoundException {
+        Connection cn = DBUtils.getConnection();
+        PreparedStatement pst = null;
+        if (cn != null) {
+            String sql = "select [OrderID] from [dbo].[WalletHistory] WHERE [OrderID] = ?";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, orderID);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String OrderID = rs.getString("orderID");
+                    if (OrderID != null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 //    public static void main(String[] args) {

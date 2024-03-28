@@ -230,33 +230,36 @@
                     <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
                         <div class="container-full-right-bellow">
                             <div>
-                                <p class="flex-center text-center" style="color: #000;font-1weight: bold;font-size: 26px !important;">
+
                                 <form action="StaffController" method="post">
                                     <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
-                                    <button style="color: #000 ; text-align: center" type="submit" value="updateStatusButton" name="action">Xác nhận</button>
+                                    <div class="container-full-right flex-center text-center">
+                                        <button style="color: #fff ; text-align: center" type="submit" value="updateStatusButton" name="action">
+                                            <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Xác nhận</p>
+                                        </button>
+                                    </div>
                                 </form>
-                                <p>
                             </div>
                         </div>
 
                         <div class="container-full-right-bellow">
                             <div>
-                                <p class="flex-center text-center" style="color: #000;font-weight: bold;font-size: 26px !important;">
+
                                 <form action="StaffController" method="post">
                                     <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}">
                                     <input type="hidden" name="auctionID" value="${dto.auctionID}">
                                     <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
-                                    <button style="color: #000 ; text-align: center"  type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
+                                    <div class="container-full-right flex-center text-center">
+                                        <button style="color: #fff ; text-align: center"  type="submit" value="deleteRealEstateButton" name="action">
+                                            <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Xóa</p>
+                                        </button>
+                                    </div>
                                 </form>
-                                <p>
                             </div>
                         </div>
                     </c:if>
                 </c:forEach>
-
             </div>
-
-
         </div>
 
 
@@ -319,18 +322,22 @@
             document.addEventListener("DOMContentLoaded", function () {
                 var startTimeElement = document.getElementById("startTime");
                 var endTimeElement = document.getElementById("endTime");
+                var dateAndTimeElement = document.getElementById("dateAndTime");
 
                 // Format start time
                 var startTime = new Date(startTimeElement.innerText);
                 var formattedStartTime = formatTime(startTime);
+                var dateAndTime = new Date(dateAndTimeElement.innerText);
 
                 // Format end time
                 var endTime = new Date(endTimeElement.innerText);
                 var formattedEndTime = formatTime(endTime);
+                var formattedDateAndTime = formatTime(dateAndTime);
 
                 // Update the HTML with the formatted time
                 startTimeElement.innerText = formattedStartTime;
                 endTimeElement.innerText = formattedEndTime;
+                dateAndTimeElement.innerText = formattedDateAndTime;
             });
 
             // Function to format the time

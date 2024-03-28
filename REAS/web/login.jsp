@@ -158,7 +158,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>
@@ -204,16 +204,16 @@
 
     <script>
         // Lấy giá trị của ggusername từ request
-        var ggusername = '<%= session.getAttribute("ggusername")%>';
+   <%--     var ggusername = '<%= session.getAttribute("ggusername")%>'; --%>
         var UsernameRegister = '<%= request.getAttribute("UsernameRegister")%>';
 
         // Đặt giá trị của ggusername vào trường input nếu có giá trị và khác null
-        document.addEventListener('DOMContentLoaded', function () {
-            var inputUsername = document.querySelector('.input-username');
-            if (inputUsername && ggusername !== null && ggusername !== 'null') {
-                inputUsername.value = ggusername;
-            }
-        });
+//        document.addEventListener('DOMContentLoaded', function () {
+//            var inputUsername = document.querySelector('.input-username');
+//            if (inputUsername && ggusername !== null && ggusername !== 'null') {
+//                inputUsername.value = ggusername;
+//            }
+//        });
         document.addEventListener('DOMContentLoaded', function () {
             var inputUsername = document.querySelector('.input-username');
             if (inputUsername && UsernameRegister !== null && UsernameRegister !== 'null') {

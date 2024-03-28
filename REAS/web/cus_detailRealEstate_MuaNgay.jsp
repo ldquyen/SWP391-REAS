@@ -1,4 +1,9 @@
-<%@page import="dao.PurchaseRequestDAO"%>
+<%-- 
+    Document   : staff_detailRealEstate
+    Created on : Mar 12, 2024, 11:13:52 AM
+    Author     : ADMIN
+--%>
+
 <%@page import="dto.Wallet"%>
 <%@page import="dao.WalletDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -7,32 +12,14 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dto.RealEstateInfo" %>
 
-
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>detailRealEstate</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
-        <script>
-            // Hàm hiển thị cửa sổ thông báo
-            function showErrorMessage(message) {
-                alert(message);
-            }
-            // Hiển thị thông báo nếu có
-            <c:if test="${not empty requestScope.Purchase_Request}">
-            showErrorMessage("${requestScope.Purchase_Request}");
-            // Sau khi hiển thị thông báo, chuyển hướng
-            window.location.href = "${requestScope.previousUrl}";
-            </c:if>
-            <c:if test="${not empty requestScope.Not_Request}">
-            showErrorMessage("${requestScope.Not_Request}");
-            // Sau khi hiển thị thông báo, chuyển hướng
-            window.location.href = "${requestScope.previousUrl}";
-            </c:if>
-        </script>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -298,12 +285,24 @@
                                 <h1 class="flex-center h1-text-left-right">Thông tin đấu giá cơ bản</h1>
                                 <div style="padding-top: 8px;">
                                     <p class="bold-text">Giá khởi điểm: <span>
-                                            ${realEstate.priceFirst} Xu</span></p></span></p>
-                                    <p class="bold-text">Giá mua ngay: <span class="test">${realEstate.pricePaid} Xu</span>
+                                            <script>
+                                                var number = ${realEstate.priceFirst}; // Assuming auctions.lamda contains the number
+                                                var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                document.write(formattedNumber);
+                                            </script> Xu</span></p></span></p>
+                                    <p class="bold-text">Giá mua ngay: <span class="test"><script>
+                                        var number = ${realEstate.pricePaid}; // Assuming auctions.lamda contains the number
+                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                        document.write(formattedNumber);
+                                            </script> Xu</span>
                                     <p class="bold-text">Bước giá: <span>
                                             <c:forEach var="Auctions" items="${requestScope.Auctions}"> 
                                                 <c:if test="${Auctions.realEstateID eq realEstate.realEstateID}">
-                                                    ${Auctions.lamda}
+                                                    <script>
+                                                        var number = ${Auctions.lamda}; // Assuming auctions.lamda contains the number
+                                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                                        document.write(formattedNumber);
+                                                    </script>
                                                 </c:if>
                                             </c:forEach>
                                             Xu</span></p>
@@ -322,69 +321,97 @@
                     </div>
                 </div>
 
-
             </div>
 
             <div class="column" style="padding-top: 30px">
-                <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
-                    <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
-                        <div class="container-full-right flex-center text-center">
-                            <div>
-                                <p class="h1-text-mid" style="color: #fff;">Đăng bởi</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.fullName}</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.phone}</p>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-
-                <div class="container-full-right-bellow">
-                    <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
-                        <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
-                            <div class="container-full-right flex-center text-center">
-                                <p class="h1-text-mid" style="color: #fff;">Giá mua ngay: <span class="test">${realEstate.pricePaid} Xu</span>
-                            </div>
-                            <div class="container-full-right flex-center text-center">
-                                <form id="purchaseForm" action="MainController" method="post">
-                                    <input type="hidden" name="realEstateID" value="${listRealEstate.realEstateID}">
-                                    <input type="hidden" name="accID" value="${sessionScope.member.accID}">
-                                    <input type="hidden" name="pricePaid" value="${listRealEstate.pricePaid}">
-                                    <input type="hidden" name="action" value="muangay">
-
-                                    <c:choose>
-                                        <c:when test="${purchaseStatus == 1}">
-                                            <!-- If purchaseStatus is 1 (Đang xét duyệt) -->
-                                            <button type="button" disabled>
-                                                <p class="h1-text-mid" style="color: #fff;">Đang xét duyệt</p>
-                                            </button>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <!-- For other cases -->
-                                            <button type="button" onclick="confirmAndSubmitForm()">
-                                                <p class="h1-text-mid" style="color: #fff;">Đăng Kí Mua Ngay</p>
-                                            </button>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </form>
-                            </div>
-                        </c:if>
-                    </c:forEach>
-                </div>
-                <div class="container-full-right-bellow">
-                    <div class="container-full-right flex-center text-center">
-                        <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
-
-                    </div>
-                    <div style="text-align: left; padding-left: 200px;">
-
-                        <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
-                            <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
-                        </c:forEach>
+                <div class="container-full-right flex-center text-center">
+                    <div>
+                        <button type="button">
+                            <p class="h1-text-mid" style="color: #fff;">Từ chối bán ngay</p>
+                        </button>
                     </div>
                 </div>
             </div>
+
         </div>
 
+        <div>
+            <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">DANH SÁCH ĐĂNG KÍ MUA NGAY</p>
+            <script>
+                window.onload = function () {
+                    // Kiểm tra xem trang đã được reload trước đó hay không
+                    if (!localStorage.getItem('pageReloaded')) {
+                        // Nếu chưa, thực hiện submit form
+                        document.forms['searchForm'].submit();
+                        // Đánh dấu rằng trang đã được reload
+                        localStorage.setItem('pageReloaded', 'true');
+                    } else {
+                        // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                        localStorage.removeItem('pageReloaded');
+                    }
+                };
+            </script>
+            <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+            <form id="searchForm" class="flex-center" action="MainController" method="post">
+                <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}" />
+                <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                <input type="hidden" value="cusSearchMuaNgayList" name="action" />   
+            </form>
+
+            <div style="text-align: center; border-radius: 45px;">
+                <c:set var="listRequestMuaNgay" value="${requestScope.LIST_REQUEST}"/>
+                <c:if test="${not empty listRequestMuaNgay}">
+                    <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Acc ID</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PricePaid</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date And Time</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <c:forEach items="${listRequestMuaNgay}" var="dto" varStatus="counter">
+                                <tr>                   
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.accID}
+                                    </td>
+                                    <td class="pricePaid" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.pricePaid}
+                                    </td>
+                                    <td class="dateAndTime" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.timeRequest}
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.requestStatusName}
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        <form id="purchaseForm" action="MemberController" method="post" onsubmit="return confirmSubmit()">
+                                            <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
+                                            <input type="hidden" name="accID" value="${dto.accID}">
+                                            <input type="hidden" name="pricePaid" value="${dto.pricePaid}">
+                                            <button id="submitButton" style="color: #fff" type="submit" value="xacNhanMuaNgay" name="action">Bán Ngay</button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                                </form> 
+                            </c:forEach>
+
+                        </tbody>
+                    </table>
+
+                </c:if>
+                <c:if test="${empty listRequestMuaNgay}">
+                    <h2>
+                        KHÔNG CÓ YÊU CẦU MUA NGAY!!!
+                    </h2>
+                </c:if>
+
+            </div>
+        </div>
 
         <footer class="footer" style="margin-top: 20px;position: initial"> 
             <div>
@@ -404,18 +431,16 @@
             </div>
         </footer>
 
-
-
         <script>
             let slideIndex = 1;
             showSlides(slideIndex);
 
-// Next/previous controls
+            // Next/previous controls
             function plusSlides(n) {
                 showSlides(slideIndex += n);
             }
 
-// Thumbnail image controls
+            // Thumbnail image controls
             function currentSlide(n) {
                 showSlides(slideIndex = n);
             }
@@ -479,32 +504,19 @@
             }
         </script>
         <script>
-            function confirmAndSubmitForm() {
-                if (confirm("Bạn có chắc chắn với quyết định Đăng Kí Mua Ngay không?")) {
-                    submitForm();
+            function confirmSubmit() {
+                // Hiển thị hộp thoại xác nhận và lưu kết quả vào biến confirmed
+                var confirmed = confirm("Bạn có xác nhận sẽ bán?");
+
+                // Nếu người dùng đã xác nhận
+                if (confirmed) {
+                    // Thay đổi văn bản của nút
+                    document.getElementById('submitButton').innerText = "Đã bán";
+                    // Vô hiệu hóa nút sau khi nhấn
+                    document.getElementById('submitButton').disabled = true;
                 }
-            }
-            function submitForm() {
-                // Thay đổi giá trị của action input
-                document.getElementById('purchaseForm').action = 'MainController';
-                // Gửi biểu mẫu
-                document.getElementById('purchaseForm').submit();
-                // Thay đổi văn bản của nút
-                event.target.innerText = "Đã yêu cầu";
-                event.target.disabled = true; // Vô hiệu hóa nút sau khi nhấn
-            }
-        </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                document.getElementById("purchaseForm").addEventListener("submit", function (event) {
-                    event.preventDefault(); // Ngăn chặn hành vi mặc định của biểu mẫu
-
-                    // Thực hiện gửi biểu mẫu bằng cách sử dụng AJAX hoặc gì đó tương tự ở đây
-
-                    // Sau khi xử lý yêu cầu gửi, tải lại trang
-                    location.reload();
-                });
-            });
+                // Trả về giá trị confirmed để xác định liệu form có nên gửi đi hay không
+                return confirmed;
         </script>
     </body>
 </html>
