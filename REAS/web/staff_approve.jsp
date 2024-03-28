@@ -148,7 +148,6 @@
                 </script>
 
                 <form id="searchForm" class="flex-center" action="StaffController">
-                    <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
                     <input type="hidden" name="action" value="searchAuctionApprove" />
                 </form>
 
@@ -246,7 +245,6 @@
                                                 <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
                                                 <input type="hidden" name="auctionID" value="${dto.auctionID}">
                                                 <input type="hidden" name="imageFolderID" value="${dto.imageFolderID}">
-                                                <input type="hidden" name="txtSearchValue" value="${searchValue}" />
                                                 <button style="color: #fff" type="submit" value="deleteRealEstateButton" name="action">Xóa</button>
                                             </form>
                                         </td>

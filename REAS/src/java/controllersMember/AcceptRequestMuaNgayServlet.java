@@ -3,30 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersStaff;
+package controllersMember;
 
+import dao.PurchaseRequestDAO;
 import dao.RealEstateDAO;
-import dto.RealEstate;
+import dao.TransactionDAO;
+import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name = "UpdateStatusServlet", urlPatterns = {"/UpdateStatusServlet"})
-public class UpdateStatusServlet extends HttpServlet {
+@WebServlet(name = "AcceptRequestMuaNgayServlet", urlPatterns = {"/AcceptRequestMuaNgayServlet"})
+public class AcceptRequestMuaNgayServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,25 +39,42 @@ public class UpdateStatusServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, NamingException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "staff_approve.jsp";
+        String url = "";
         String realEstateID = request.getParameter("realEstateID");
-        String searchValue = request.getParameter("txtSearchValue");
-      
+        String accID_nguoiMua = request.getParameter("accID");
+
+        long pricePaid = 0;
+        String pricePaidStr = request.getParameter("pricePaid");
+        if (pricePaidStr != null && !pricePaidStr.isEmpty()) {
+            pricePaidStr = pricePaidStr.replaceAll("[,.]", "");
+            pricePaid = Long.parseLong(pricePaidStr);
+        }
+
         try {
-            RealEstateDAO dao = new RealEstateDAO();
-            boolean result = dao.updateStatusID(realEstateID, 1);
-            if (result) {
-//                url="StaffController"
-//                    + "?action=searchAuctionApprove"
-//                    + "&txtSearchValue=" + searchValue;
-           url = "staff_approve.jsp";
+            HttpSession session = request.getSession(false);
+            if (session != null && session.getAttribute("member") != null) {
+                Account account = (Account) session.getAttribute("member");
+                String accID_nguoiBan = account.getAccID();
                 
-            } else {
-                // Cập nhật không thành công, chuyển hướng đến trang lỗi
-                url="rule.jsp";
+                RealEstateDAO dao = new RealEstateDAO();
+                boolean result = dao.updateStatusID(realEstateID, 6);
+
+                PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+                boolean result1 = dao1.updateStatus2(accID_nguoiMua,realEstateID);
+
+                TransactionDAO dao2 = new TransactionDAO();
+                boolean result2 = dao2.processTransaction(accID_nguoiMua, accID_nguoiBan, pricePaid);
+            
+                if (result && result1 && result2) {
+                    url = "MainController?action=cusViewMuaNgayListV2&id=" + realEstateID;
+                } else {
+                    // Cập nhật không thành công, chuyển hướng đến trang lỗi
+                    url = "rule.jsp";
+                }
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -79,9 +97,11 @@ public class UpdateStatusServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(UpdateStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -99,9 +119,11 @@ public class UpdateStatusServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(UpdateStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

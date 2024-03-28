@@ -148,7 +148,6 @@
                 </script>
 
                 <form id="searchForm" class="flex-center" action="StaffController">
-                    <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
                     <input type="hidden" name="action" value="searchAuctionApproved" />
                 </form>
 
@@ -187,7 +186,7 @@
                                 <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
                                     <tr>
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                            <a href="StaffController?action=viewPostRealEstate&id=${dto.realEstateID}">${dto.realEstateID}
+                                            <a href="StaffController?action=viewPostRealEstateStatus2&id=${dto.realEstateID}">${dto.realEstateID}
                                         </td>                               
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">
                                             ${dto.realEstateName}

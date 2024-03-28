@@ -51,8 +51,17 @@ public class FeedbackServlet extends HttpServlet {
 
             LocalDateTime currentTime = LocalDateTime.now();
 
+            int ratingValue = 0; // Or any other default value you prefer
+
+            // Check if rating is not empty before parsing
+            if (!rating.isEmpty()) {
+                ratingValue = Integer.parseInt(rating);
+            }
+
             FeedbackDAO feedbackDao = new FeedbackDAO();
-            feedbackDao.insertFeedback(feedbackID, feedbackaccID, auctionIDfeedback, currentTime, Integer.parseInt(rating), feedback);
+//            feedbackDao.insertFeedback(feedbackID, feedbackaccID, auctionIDfeedback, currentTime, Integer.parseInt(rating), feedback);
+
+            feedbackDao.insertFeedback(feedbackID, feedbackaccID, auctionIDfeedback, currentTime, ratingValue, feedback);
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching auctions");

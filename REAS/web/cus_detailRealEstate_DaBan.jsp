@@ -1,3 +1,9 @@
+<%-- 
+    Document   : staff_detailRealEstate
+    Created on : Mar 12, 2024, 11:13:52 AM
+    Author     : ADMIN
+--%>
+
 <%@page import="dto.Wallet"%>
 <%@page import="dao.WalletDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -6,12 +12,11 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dto.RealEstateInfo" %>
 
-
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>detailRealEstate</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
@@ -37,7 +42,7 @@
                 <div class="navbar-start">
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="homeindex" name="action">
+                            <button type="submit" value="homeindex_1" name="action">
                                 <span>TRANG CHỦ</span>
                             </button>
                         </form>
@@ -45,7 +50,7 @@
 
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="DN" name="action">
+                            <button type="submit" value="news" name="action">
                                 <span>TIN TỨC</span>
                             </button>
                         </form>
@@ -53,7 +58,7 @@
 
                     <a class="navbar-item">
                         <form action="MainController" method="post">
-                            <button type="submit" value="DN" name="action">
+                            <button type="submit" value="rule" name="action">
                                 <span>NỘI QUY</span>
                             </button>
                         </form>
@@ -62,23 +67,119 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <div class="buttons" >
+                        <div class="navbar-container-1">
                             <form action="MainController" method="post">
-                                <button class="button is-light" type="submit" value="DN" name="action">
-                                    <span>ĐĂNG NHẬP</span>
+                                <button class="navbar-1" type="submit" value="auctionList" name="action">
+                                    <span>DANH SÁCH ĐẤU GIÁ</span>
                                 </button>
                             </form>
+                        </div>
+                        <div class="navbar-container-1">
                             <form action="MainController" method="post">
-                                <button class="button is-light" type="submit" value="DK" name="action">
-                                    <span>ĐĂNG KÝ</span>
+                                <button class="navbar-1" type="submit" value="postNew" name="action">
+                                    <span>ĐĂNG TIN</span>
                                 </button>
                             </form>
+                        </div>
+                        <div class="navbar-container-1">
+                            <form action="MainController" method="post">
+                                <button class="navbar-1" type="submit" value="naptien" name="action">
+                                    <span>NẠP TIỀN</span>
+                                </button>
+                            </form>
+                        </div>
+                        <%
+                            List<Wallet> wallet = new WalletDAO().getWallet();
+                            pageContext.setAttribute("walletAccount", wallet);
+                        %>
+                        <div class="navbar-container-1">
+                            <a class="navbar-1">SỐ DƯ :
+                                <c:forEach var="wallet" items="${walletAccount}">
+                                    <c:if test="${wallet.accID eq member.accID}">
+                                        <span class="list-auction-p-1">${wallet.accountBalance}</span>
+                                    </c:if>
+                                </c:forEach>
+                                (xu)
+                            </a>                  
+                        </div>
+
+                        <div class="navbar-item hover-down has-dropdown is-hoverable">
+                            <a class="navbar-link navbar-1-list">
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.member}">
+                                        ${sessionScope.member.fullname}
+                                    </c:when>
+                                    <c:when test="${not empty sessionScope.userGoogle}">
+                                        ${sessionScope.userGoogle.given_name}
+                                    </c:when>
+                                    <c:otherwise>
+                                        Guest
+                                    </c:otherwise>
+                                </c:choose>
+                            </a>
+
+                            <div class="fake-div"></div>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="informationPage" name="action">
+                                            <span>Thông tin tài khoản</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Danh mục đã đăng kí</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="aboutus" name="action">
+                                            <span>Lịch sử đấu giá</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MemberController" method="post">
+                                        <button type="submit" value="mypost" name="action">
+                                            <input type="hidden" value="${sessionScope.member.accID}" name="mypostID">
+                                            <span>Quản lí tin đăng</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="changePass" name="action">
+                                            <span>Thay đổi mật khẩu</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="lichsunaptien" name="action">
+                                            <span>Lịch sử nạp tiền</span>
+                                        </button>
+                                    </form>
+                                </a>
+
+                                <hr class="navbar-divider">
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="Logout" name="action">
+                                            <span>Đăng xuất</span>
+                                        </button>
+                                    </form>
+                                </a>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-
 
         <div class="columns">
             <div class="column is-two-thirds" style="padding-top: 30px;display: flex;justify-content: end;">
@@ -105,34 +206,9 @@
 
                             </div>
                         </c:forEach>
-                        <!-- Full-width images with number text -->
-
-                        <!--
-                                                <div class="mySlides">
-                                                    <div class="numbertext">4 / 6</div>
-                                                    <img src="image/img_lights_wide.jpg" style="width:100%">
-                                                </div>
-                        
-                                                <div class="mySlides">
-                                                    <div class="numbertext">5 / 6</div>
-                                                    <img src="image/img_nature_wide.jpg" style="width:100%">
-                                                </div>
-                        
-                                                <div class="mySlides">
-                                                    <div class="numbertext">6 / 6</div>
-                                                    <img src="image/img_snow_wide.jpg" style="width:100%">
-                                                </div>-->
-
-                        <!-- Next and previous buttons -->
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-                        <!-- Image text -->
-                        <!--                        <div class="caption-container">
-                                                    <p id="caption"></p>
-                                                </div>-->
-
-                        <!-- Thumbnail images -->
                         <div class="row">
                             <c:forEach items="${requestScope.listimg}" var="i">
 
@@ -147,15 +223,6 @@
                                     <img class="demo cursor" src="data:image/jpeg;base64,${fn:escapeXml(i.base64Image3)}" style="width:100%; min-height: 100px;max-height: 100px;" onclick="currentSlide(3)" alt="Image">
                                 </div>
                             </c:forEach>
-                            <!--                            <div class="column">
-                                                            <img class="demo cursor" src="image/img_lights_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(4)" alt="Northern Lights">
-                                                        </div>
-                                                        <div class="column">
-                                                            <img class="demo cursor" src="image/img_nature_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(5)" alt="Nature and sunrise">
-                                                        </div>
-                                                        <div class="column">
-                                                            <img class="demo cursor" src="image/img_snow_wide.jpg" style="width:100%; min-height: 100px" onclick="currentSlide(6)" alt="Snowy Mountains">
-                                                        </div>-->
                         </div>
                     </div>
                     <div class="container-full-bellow">
@@ -217,34 +284,85 @@
                     </div>
                 </div>
 
-
             </div>
 
             <div class="column" style="padding-top: 30px">
-                <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
-                    <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
-                        <div class="container-full-right flex-center text-center">
-                            <div>
-                                <p class="h1-text-mid" style="color: #fff;">Đăng bởi</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.fullName}</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.phone}</p>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-
-                <div class="container-full-right-bellow">
-                    <div class="container-full-right flex-center text-center">
-                        <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
-
-                    </div>
-                    <div style="text-align: left; padding-left: 200px;">
-
-                        <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
-                            <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstateGuest&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
-                        </c:forEach>
+                <div class="container-full-right flex-center text-center">
+                    <div>
+                        <button type="button">
+                            <p class="h1-text-mid" style="color: #fff;">Từ chối bán ngay</p>
+                        </button>
                     </div>
                 </div>
+            </div>
+
+        </div>
+
+        <div>
+            <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">DANH SÁCH ĐĂNG KÍ MUA NGAY</p>
+            <script>
+                window.onload = function () {
+                    // Kiểm tra xem trang đã được reload trước đó hay không
+                    if (!localStorage.getItem('pageReloaded')) {
+                        // Nếu chưa, thực hiện submit form
+                        document.forms['searchForm'].submit();
+                        // Đánh dấu rằng trang đã được reload
+                        localStorage.setItem('pageReloaded', 'true');
+                    } else {
+                        // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                        localStorage.removeItem('pageReloaded');
+                    }
+                };
+            </script>
+            <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+            <form id="searchForm" class="flex-center" action="MainController" method="post">
+                <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}" />
+                <input type="hidden" value="cusSearchMuaNgayList" name="action" />   
+            </form>
+
+            <div style="text-align: center; border-radius: 45px;">
+                <c:set var="listRequestMuaNgay" value="${requestScope.LIST_REQUEST}"/>
+                <c:if test="${not empty listRequestMuaNgay}">
+                    <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Acc ID</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PricePaid</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date And Time</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <c:forEach items="${listRequestMuaNgay}" var="dto" varStatus="counter">
+                                <tr>                   
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.accID}
+                                    </td>
+                                    <td class="pricePaid" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.pricePaid}
+                                    </td>
+                                    <td class="dateAndTime" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.timeRequest}
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.requestStatusName}
+                                    </td>
+
+                                </tr>
+                                </form> 
+                            </c:forEach>
+
+                        </tbody>
+                    </table>
+
+                </c:if>
+                <c:if test="${empty listRequestMuaNgay}">
+                    <h2>
+                        KHÔNG CÓ YÊU CẦU MUA NGAY!
+                    </h2>
+                </c:if>
+
             </div>
         </div>
 
@@ -262,7 +380,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>
@@ -271,12 +389,12 @@
             let slideIndex = 1;
             showSlides(slideIndex);
 
-// Next/previous controls
+            // Next/previous controls
             function plusSlides(n) {
                 showSlides(slideIndex += n);
             }
 
-// Thumbnail image controls
+            // Thumbnail image controls
             function currentSlide(n) {
                 showSlides(slideIndex = n);
             }
@@ -339,5 +457,6 @@
                 return number < 10 ? '0' + number : number;
             }
         </script>
+      
     </body>
 </html>

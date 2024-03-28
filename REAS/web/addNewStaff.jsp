@@ -4,6 +4,9 @@
     Author     : ASUS
 --%>
 
+<%@page import="dto.Wallet"%>
+<%@page import="dao.WalletDAO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>  
 <!DOCTYPE html>
@@ -30,7 +33,7 @@
                 </a>
             </div>
 
-            <div id="navbarBasicExample" class="navbar-menu">
+             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <form action="AdminController" method="post" style="margin-top: 17px">
                         <button type="submit" value="adminjsp" name="action" >
@@ -42,10 +45,6 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
 
-                        <div class="navbar-container-1">
-                            <a class="navbar-1">10.000.000</a>                  
-                        </div>
-
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
                                 ${sessionScope.admin.fullname} (ADMIN)                
@@ -56,7 +55,7 @@
                             <div class="navbar-dropdown">
                                 <a class="navbar-item">
                                     <form action="AdminController" method="post">
-                                        <button type="submit" value="informationOfAdmin" name="action">
+                                        <button type="submit" value="adminInformationPage" name="action">
                                             <span>Thông tin tài khoản</span>
                                         </button>
                                     </form>
@@ -80,7 +79,6 @@
                 </div>
             </div>
         </nav>
-
 
         <div class="columns">
             <div class="column is-one-fifth" style="background-color: #D9D9D9; height: 100vh;">
@@ -223,8 +221,8 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Tổng doanh thu</span>
+                                            <button type="submit" value="revenue" name="action">
+                                                <span>Xem chi tiết</span>
                                             </button>
                                         </form>
                                     </a>

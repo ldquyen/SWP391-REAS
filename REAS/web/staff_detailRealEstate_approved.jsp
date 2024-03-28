@@ -1,3 +1,9 @@
+<%-- 
+    Document   : staff_detailRealEstate
+    Created on : Mar 12, 2024, 11:13:52 AM
+    Author     : ADMIN
+--%>
+
 <%@page import="dto.Wallet"%>
 <%@page import="dao.WalletDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -6,12 +12,11 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dto.RealEstateInfo" %>
 
-
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>detailRealEstate</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
@@ -35,49 +40,55 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="homeindex" name="action">
-                                <span>TRANG CHỦ</span>
-                            </button>
-                        </form>
-                    </a>
-
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="DN" name="action">
-                                <span>TIN TỨC</span>
-                            </button>
-                        </form>
-                    </a>
-
-                    <a class="navbar-item">
-                        <form action="MainController" method="post">
-                            <button type="submit" value="DN" name="action">
-                                <span>NỘI QUY</span>
-                            </button>
-                        </form>
-                    </a>
+                    <form action="StaffController" method="post" style="margin-top: 17px">
+                        <button type="submit" value="staffjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
+
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <div class="buttons" >
-                            <form action="MainController" method="post">
-                                <button class="button is-light" type="submit" value="DN" name="action">
-                                    <span>ĐĂNG NHẬP</span>
-                                </button>
-                            </form>
-                            <form action="MainController" method="post">
-                                <button class="button is-light" type="submit" value="DK" name="action">
-                                    <span>ĐĂNG KÝ</span>
-                                </button>
-                            </form>
+
+                        <div class="navbar-item hover-down has-dropdown is-hoverable">
+                            <a class="navbar-link navbar-1-list">
+                                ${sessionScope.staff.fullname} (STAFF)                
+                            </a>
+
+                            <div class="fake-div"></div>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item">
+                                    <form action="AdminController" method="post">
+                                        <button type="submit" value="informationOfAdmin" name="action">
+                                            <span>Thông tin tài khoản</span>
+                                        </button>
+                                    </form>
+                                </a>
+                                <hr class="navbar-divider">
+                                <a class="navbar-item">
+                                    <form action="MainController" method="post">
+                                        <button type="submit" value="Logout" name="action">
+                                            <span>Đăng xuất</span>
+                                        </button>
+                                    </form>
+                                </a>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
+
+        <!--        <button onclick="goBack()">Quay lại</button>
+        
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>-->
 
 
         <div class="columns">
@@ -105,23 +116,6 @@
 
                             </div>
                         </c:forEach>
-                        <!-- Full-width images with number text -->
-
-                        <!--
-                                                <div class="mySlides">
-                                                    <div class="numbertext">4 / 6</div>
-                                                    <img src="image/img_lights_wide.jpg" style="width:100%">
-                                                </div>
-                        
-                                                <div class="mySlides">
-                                                    <div class="numbertext">5 / 6</div>
-                                                    <img src="image/img_nature_wide.jpg" style="width:100%">
-                                                </div>
-                        
-                                                <div class="mySlides">
-                                                    <div class="numbertext">6 / 6</div>
-                                                    <img src="image/img_snow_wide.jpg" style="width:100%">
-                                                </div>-->
 
                         <!-- Next and previous buttons -->
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -202,11 +196,9 @@
                                                 </c:if>
                                             </c:forEach>
                                             Xu</span></p>
-<!--                                    <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${realEstate.timeUp}</span></p>
-                                    <p class="bold-text">Thời gian kết thúc: <span id="endTime">${realEstate.timeDown}</span></p>-->
-                                    <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-                                    <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
-                                        <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
+                                            <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+                                            <c:forEach items="${listRealEstate}" var="dto" varStatus="counter">
+                                                <c:if test="${dto.realEstateID eq realEstate.realEstateID}">
                                             <p class="bold-text">Thời gian bắt đầu: <span id="startTime">${dto.timeStart}</span></p>
                                             <p class="bold-text">Thời gian kết thúc: <span id="endTime">${dto.timeEnd}</span></p>
                                             </c:if>
@@ -221,30 +213,87 @@
             </div>
 
             <div class="column" style="padding-top: 30px">
-                <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
-                    <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
+                <c:forEach items="${requestScope.SEARCH_RESULT}" var="realEstateInfo">
+                    <c:if test="${realEstateInfo.realEstateID eq realEstate.realEstateID}">
                         <div class="container-full-right flex-center text-center">
                             <div>
                                 <p class="h1-text-mid" style="color: #fff;">Đăng bởi</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.fullName}</p>
-                                <p style="color: #D9AB73;font-size: 20px;">${listRealEstate.phone}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.fullName}</p>
+                                <p style="color: #D9AB73;font-size: 20px;">${realEstateInfo.phone}</p>
                             </div>
                         </div>
                     </c:if>
                 </c:forEach>
+            </div>
 
-                <div class="container-full-right-bellow">
-                    <div class="container-full-right flex-center text-center">
-                        <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
+        </div>
 
-                    </div>
-                    <div style="text-align: left; padding-left: 200px;">
+        <div>
+            <p style="text-align: center; font-size: 25px; color: #D9AB73; margin-top: 25px;margin-bottom: 10px; ">DANH SÁCH ĐĂNG KÍ MUA NGAY</p>
+            <script>
+                window.onload = function () {
+                    // Kiểm tra xem trang đã được reload trước đó hay không
+                    if (!localStorage.getItem('pageReloaded')) {
+                        // Nếu chưa, thực hiện submit form
+                        document.forms['searchForm'].submit();
+                        // Đánh dấu rằng trang đã được reload
+                        localStorage.setItem('pageReloaded', 'true');
+                    } else {
+                        // Nếu đã được reload trước đó, xóa dấu hiệu reload để cho lần reload tiếp theo
+                        localStorage.removeItem('pageReloaded');
+                    }
+                };
+            </script>
+            <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
+            <form id="searchForm" class="flex-center" action="StaffController" method="post">
+                <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}" />
+                <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
+                <input type="hidden" value="listRequestMuaNgay" name="action" />   
+            </form>
 
-                        <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
-                            <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstateGuest&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
-                        </c:forEach>
-                    </div>
-                </div>
+            <div style="text-align: center; border-radius: 45px;">
+                <c:set var="listRequestMuaNgay" value="${requestScope.LIST_REQUEST}"/>
+                <c:if test="${not empty listRequestMuaNgay}">
+                    <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Acc ID</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PricePaid</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date And Time</th>
+                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <c:forEach items="${listRequestMuaNgay}" var="dto" varStatus="counter">
+                                <tr>                   
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.accID}
+                                    </td>
+                                    <td class="pricePaid" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.pricePaid}
+                                    </td>
+                                    <td class="dateAndTime" style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.timeRequest}
+                                    </td>
+                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
+                                        ${dto.requestStatusName}
+                                    </td>
+
+                                </tr>
+                                </form> 
+                            </c:forEach>
+
+                        </tbody>
+                    </table>
+
+                </c:if>
+                <c:if test="${empty listRequestMuaNgay}">
+                    <h2>
+                        No record is matched!!!
+                    </h2>
+                </c:if>
+
             </div>
         </div>
 
@@ -308,18 +357,22 @@
             document.addEventListener("DOMContentLoaded", function () {
                 var startTimeElement = document.getElementById("startTime");
                 var endTimeElement = document.getElementById("endTime");
+                var dateAndTimeElement = document.getElementById("dateAndTime");
 
                 // Format start time
                 var startTime = new Date(startTimeElement.innerText);
                 var formattedStartTime = formatTime(startTime);
+                var dateAndTime = new Date(dateAndTimeElement.innerText);
 
                 // Format end time
                 var endTime = new Date(endTimeElement.innerText);
                 var formattedEndTime = formatTime(endTime);
+                var formattedDateAndTime = formatTime(dateAndTime);
 
                 // Update the HTML with the formatted time
                 startTimeElement.innerText = formattedStartTime;
                 endTimeElement.innerText = formattedEndTime;
+                dateAndTimeElement.innerText = formattedDateAndTime;
             });
 
             // Function to format the time

@@ -138,6 +138,14 @@ public class AdminController extends HttpServlet {
                 case "detailStatisticalJSP":
                     url = "detailStatistical.jsp";
                     break;
+                    
+                //xem doanh thu
+                case "revenue":
+                    url = "revenue.jsp";
+                    break;
+                case "searchRevenue":
+                        url = "revenueServlet";
+                        break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);

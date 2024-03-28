@@ -15,17 +15,6 @@
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
-        <script>
-            // Hàm hiển thị cửa sổ thông báo
-            function showErrorMessage(message) {
-                alert(message);
-            }
-            // Kiểm tra và hiển thị thông báo nếu có
-            <c:if test="${not empty requestScope.Purchase_Request}">
-            showErrorMessage("${requestScope.Purchase_Request}");
-            </c:if>
-
-        </script>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -342,40 +331,7 @@
                         </div>
                     </c:if>
                 </c:forEach>
-
-                <div class="container-full-right-bellow">
-                    <c:forEach items="${requestScope.SEARCH_RESULT}" var="listRealEstate">
-                        <c:if test="${listRealEstate.realEstateID eq realEstate.realEstateID}">
-                            <div class="container-full-right flex-center text-center">
-                                <p class="h1-text-mid" style="color: #fff;">Giá mua ngay: <span class="test"><script>
-                                    var number = ${realEstate.pricePaid}; // Assuming auctions.lamda contains the number
-                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                    document.write(formattedNumber);
-                                        </script> Xu</span>
-                            </div>
-                            <div class="container-full-right flex-center text-center">
-                                <form id="purchaseForm" action="MainController" method="post">
-                                    <input type="hidden" name="realEstateID" value="${listRealEstate.realEstateID}">
-                                    <input type="hidden" name="accID" value="${sessionScope.member.accID}">
-                                    <input type="hidden" name="pricePaid" value="${listRealEstate.pricePaid}">
-                                    <input type="hidden" name="action" value="muangay">
-                                    <c:choose>
-                                        <c:when test="${'Đang xét duyệt' eq sessionScope.purchaseStatus}">
-                                            <button type="button" disabled>
-                                                <p class="h1-text-mid" style="color: #fff;">Đang xét duyệt</p>
-                                            </button>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <button type="button" onclick="submitForm(this)">
-                                                <p class="h1-text-mid" style="color: #fff;">Đăng Kí Mua Ngay</p>
-                                            </button>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </form>
-                            </div>
-                        </c:if>
-                    </c:forEach>
-                </div>
+                
                 <div class="container-full-right-bellow">
                     <div class="container-full-right flex-center text-center">
                         <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
@@ -405,7 +361,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>
@@ -481,29 +437,6 @@
             function padZero(number) {
                 return number < 10 ? '0' + number : number;
             }
-        </script>
-        <script>
-            function submitForm() {
-                // Thay đổi giá trị của action input
-                document.getElementById('purchaseForm').action = 'MainController';
-                // Gửi biểu mẫu
-                document.getElementById('purchaseForm').submit();
-                // Thay đổi văn bản của nút
-                event.target.innerText = "Đã yêu cầu";
-                event.target.disabled = true; // Vô hiệu hóa nút sau khi nhấn
-            }
-        </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                document.getElementById("purchaseForm").addEventListener("submit", function (event) {
-                    event.preventDefault(); // Ngăn chặn hành vi mặc định của biểu mẫu
-
-                    // Thực hiện gửi biểu mẫu bằng cách sử dụng AJAX hoặc gì đó tương tự ở đây
-
-                    // Sau khi xử lý yêu cầu gửi, tải lại trang
-                    location.reload();
-                });
-            });
         </script>
     </body>
 </html>

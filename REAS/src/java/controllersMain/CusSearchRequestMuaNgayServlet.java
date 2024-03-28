@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersStaff;
+package controllersMain;
 
+import controllersStaff.*;
 import dao.AuctionDAO;
 import dao.CityDAO;
 import dao.ImageDAO;
@@ -35,8 +36,8 @@ import model.RealEstateVM;
  *
  * @author ADMIN
  */
-@WebServlet(name = "SearchRequestMuaNgayServlet", urlPatterns = {"/SearchRequestMuaNgayServlet"})
-public class SearchRequestMuaNgayServlet extends HttpServlet {
+@WebServlet(name = "CusSearchRequestMuaNgayServlet", urlPatterns = {"/CusSearchRequestMuaNgayServlet"})
+public class CusSearchRequestMuaNgayServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,7 +51,7 @@ public class SearchRequestMuaNgayServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, NamingException {
         String realEstateId = request.getParameter("realEstateID");
-        String url = "StaffController?action=viewPostRealEstate&id=" + realEstateId;
+        String url = "";
         
         String searchValue = request.getParameter("txtSearchValue");
         try {
@@ -92,7 +93,7 @@ public class SearchRequestMuaNgayServlet extends HttpServlet {
                     request.setAttribute("city", city);
                     request.setAttribute("listimg", listIMG);
 
-                    url = "staff_detailRealEstate_approved.jsp";
+                    url = "cus_detailRealEstate_MuaNgay.jsp";
                 } else {
                     System.out.println("RealEstateDetailServlet null exception");
                 }
@@ -120,9 +121,9 @@ public class SearchRequestMuaNgayServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CusSearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(SearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CusSearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -140,9 +141,9 @@ public class SearchRequestMuaNgayServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CusSearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(SearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CusSearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

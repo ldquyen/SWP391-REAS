@@ -230,18 +230,10 @@
                                     </c:forEach>
                                 </td>
                                 <td>
-                                    <script>
-                                        var number = ${listRE3.priceFirst}; // Assuming auctions.lamda contains the number
-                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                        document.write(formattedNumber);
-                                    </script>
+                                    ${listRE3.priceFirst} Xu
                                 </td>
                                 <td class="test">
-                                    <script>
-                                        var number = ${listRE3.pricePaid}; // Assuming auctions.lamda contains the number
-                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                        document.write(formattedNumber);
-                                    </script>
+                                    ${listRE3.pricePaid} Xu
                                 </td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
@@ -298,18 +290,10 @@
                                     </c:forEach>
                                 </td>
                                 <td>
-                                    <script>
-                                        var number = ${listRE2.priceFirst}; // Assuming auctions.lamda contains the number
-                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                        document.write(formattedNumber);
-                                    </script>
+                                    ${listRE2.priceFirst} Xu
                                 </td>
                                 <td class="test">
-                                    <script>
-                                        var number = ${listRE2.pricePaid}; // Assuming auctions.lamda contains the number
-                                        var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                        document.write(formattedNumber);
-                                    </script>
+                                    ${listRE2.pricePaid} Xu
                                 </td>
                                 <td class="auctionTimeStart">
                                     <c:forEach var="auctions" items="${requestScope.auctions}"> 
@@ -406,7 +390,7 @@
                         Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh<br/>
                         <br/>
                     </div>
-                    <img class="footer-right-content" src="image/bocongthuong.png" alt="" href="" width="100" height="28" />
+                    <img class="footer-right-content" src="image/logofu.png" alt="" href="" width="100" height="28" />
                 </div>
             </div>
         </footer>

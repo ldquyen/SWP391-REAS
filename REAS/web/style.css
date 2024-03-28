@@ -580,14 +580,16 @@ button {
     background-color: #000;
     color: #D9AB73;
     text-align: center;
+    padding-bottom: 5px;
 }
 
 .text-home-1 {
     color: white;
-    font-size: 22px;
+    font-size: 18px;
     font-family: Inter;
     font-weight: 800;
-    word-wrap: break-word
+    word-wrap: break-word;
+    margin-right: 5px;
 }
 
 .text-home-2 {
@@ -600,7 +602,7 @@ button {
 
 .text-home-3 {
     color: #D9AB73;
-    font-size: 22px;
+    font-size: 20px;
     font-family: Inter;
     font-weight: 800;
     word-wrap: break-word

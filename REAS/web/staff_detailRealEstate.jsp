@@ -260,62 +260,6 @@
                     </c:if>
                 </c:forEach>
             </div>
-
-        </div>
-
-        <div>
-
-            <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
-            <form id="searchForm" class="flex-center" action="StaffController" method="post">
-                <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}" />
-                <input type="hidden" name="txtSearchValue" value="${param.txtSearchValue}" />
-                <input type="submit" value="listRequestMuaNgay" name="action" />   
-            </form>
-
-            <div style="text-align: center; border-radius: 45px;">
-                <c:set var="listRequestMuaNgay" value="${requestScope.LIST_REQUEST}"/>
-                <c:if test="${not empty listRequestMuaNgay}">
-                    <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
-                        <thead>
-                            <tr>
-                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Acc ID</th>
-                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">PricePaid</th>
-                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Date And Time</th>
-                                <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <c:forEach items="${listRequestMuaNgay}" var="dto" varStatus="counter">
-                                <tr>                   
-                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                        ${dto.accID}
-                                    </td>
-                                    <td class="pricePaid" style="border: 1px solid #D9AB73; padding: 8px;">
-                                        ${dto.pricePaid}
-                                    </td>
-                                    <td class="dateAndTime" style="border: 1px solid #D9AB73; padding: 8px;">
-                                        ${dto.timeRequest}
-                                    </td>
-                                    <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                        ${dto.requestStatusName}
-                                    </td>
-
-                                </tr>
-                                </form> 
-                            </c:forEach>
-
-                        </tbody>
-                    </table>
-
-                </c:if>
-                <c:if test="${empty listRequestMuaNgay}">
-                    <h2>
-                        No record is matched!!!
-                    </h2>
-                </c:if>
-
-            </div>
         </div>
 
 

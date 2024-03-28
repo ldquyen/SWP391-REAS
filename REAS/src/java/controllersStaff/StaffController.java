@@ -48,6 +48,9 @@ public class StaffController extends HttpServlet {
                 case "viewPostRealEstate":
                     url = "REDetailServlet";
                     break;
+                case "viewPostRealEstateStatus2":
+                    url = "REDetailServlet_status2";
+                    break;
                 case "listRequestMuaNgay":
                     url = "SearchRequestMuaNgayServlet";
                     break;

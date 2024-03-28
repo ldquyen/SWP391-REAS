@@ -69,6 +69,9 @@ public class MemberController extends HttpServlet {
                 case "feedbackServlet":
                     url = "FeedbackServlet";
                     break;
+                case "xacNhanMuaNgay":
+                    url = "AcceptRequestMuaNgayServlet";
+                    break;
 
             }
             request.getRequestDispatcher(url).forward(request, response);

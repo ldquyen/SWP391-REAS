@@ -8,7 +8,7 @@ public class Account implements Serializable{
     private String roleID;
     private String userName;
     private String password;
-    private String fullname;
+    public String fullname;
     private boolean status;
     private String email;
     private String phone;
