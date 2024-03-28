@@ -1,0 +1,1147 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 18, 2024, 3:44:04 PM
+    Author     : tranl
+*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: none;
+    -webkit-text-fill-color: #fff;
+    /*-webkit-box-shadow: 0 0 0px 1000px #000 inset;*/
+    background-color: transparent;
+    color: #fff;
+    border: #fff 1px solid;
+    border-bottom: #D9AB73 3px solid;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+body {
+    font-family: Inter;
+}
+
+.table-container {
+    width: 100%;
+    color: #fff;
+    border-collapse: collapse;
+    border-radius: 10px; /* Adjust the value for the desired amount of rounding */
+    overflow: hidden; /* Ensure rounded corners are applied */
+    border-spacing: 0; /* Ensure borders are not affected by spacing */
+    margin-bottom: 10px;
+}
+
+.register-modal-container {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    /*width: 1000px;*/
+    /*height: 670px;*/
+    margin: auto;
+    border-radius: 26px;
+    border: 4px solid #D9AB73;
+    background: #000;
+    flex-shrink: 0;
+    animation: modalFadeIn ease 0.5s;
+
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 10px 10px;
+}
+
+button .button-xem {
+    color: #fff !important;
+}
+
+#button-dangki {
+    color: #D9AB73;
+    font-family: Inter;
+    font-size: 16px;
+    border: 3px #D9AB73 solid;
+    width: 80%;
+    padding: 2px 0;
+}
+
+#button-dangki:hover {
+    color: #fff;
+}
+
+#button-xem {
+    color: #D9AB73;
+    font-family: Inter;
+    font-size: 16px;
+    border: 3px #D9AB73 solid;
+    width: 80%;
+    padding: 2px 0;
+}
+
+#button-xem:hover {
+    color: #fff;
+}
+
+.list-auction-p-container {
+    width: 35%;
+    background: black;
+    border: 4px #D9AB73 solid;
+    border-top: 0px;
+}
+
+.list-auction-p-1 {
+    color: #fff;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 800;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.list-auction-p-2 {
+    color: #D9AB73;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 800;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.number-price-container {
+
+}
+
+th, td {
+    border: 1px solid #D9AB73;
+    padding: 8px;
+    text-align: left;
+}
+
+table th  {
+    color: #D9AB73 !important;
+}
+
+/*tr:nth-child(even) {
+    background-color: #f9f9f9;
+}*/
+
+/*tr:hover {
+    background-color: #f5f5f5;
+}*/
+
+.navbar {
+    background-color: black;
+}
+
+.navbar-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Inter;
+}
+
+.navbar-item img{
+    max-height: 45px;
+    max-width: 85%;
+}
+
+.navbar-start .navbar-item button{
+    color: #fff;
+    background-color: #000;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Inter;
+    font-size: 16px;
+}
+
+.navbar-start .navbar-item button:hover{
+    color: #D9AB73;
+    background-color: #000;
+}
+
+.navbar-start a{
+    color: #fff;
+}
+
+.navbar-start button{
+    /*    color: #fff;
+        background-color: #000;*/
+}
+
+a.navbar-item:hover{
+    color: #D9AB73;
+    background-color: #000;
+}
+
+.navbar-end .navbar-item .buttons button{
+    color: #D9AB73;
+    background-color: #000;
+    margin-right: 0px;
+    font-family: Inter;
+}
+
+.navbar-end .navbar-item .buttons button:hover{
+    color: #fff;
+}
+
+.navbar-container-1 {
+    padding: 0 5px;
+}
+
+.navbar-container-1  button{
+    /*padding: 0 5px;*/
+    background-color: #000;
+}
+
+.navbar-container-1  navbar-1{
+    padding: 5px 14px;
+    color: #D9AB73;
+    font-size: 18px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word;
+    border-radius: 30px; border: 3px #D9AB73 solid
+}
+
+.navbar-container-1  button:hover {
+    color: #fff;
+}
+
+.navbar-container-1 a:hover {
+    color: #fff;
+}
+
+.navbar-1{
+    padding: 5px 14px;
+    color: #D9AB73;
+    font-size: 18px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word;
+    border-radius: 30px; border: 3px #D9AB73 solid
+}
+
+.navbar-1-list {
+    padding: 5px 14px;
+    color: #D9AB73;
+    font-size: 18px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word;
+    border: 30px; border: 3px #D9AB73 solid;
+}
+
+.navbar-end .hover-down {
+    background-color: #000;
+    padding: 0 5px
+}
+
+.navbar-end .navbar-item .navbar-link:hover {
+    background-color: #fff;
+    color: #D9AB73;
+}
+
+.field {
+    padding: 8px 0 0 0;
+}
+
+.search-bar {
+    width: 80%;
+    border: 3px solid #D9AB73;
+    background: #FDF7FB;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: #000;
+}
+
+.select:not(.is-multiple):not(.is-loading):hover::after {
+    border-color: #D9AB73;
+}
+
+.field .button-search  {
+    background: #000;
+    width: 100%;
+    color: #D9AB73;
+    text-align: center;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.field .button-search:hover {
+    color: #fff;
+    background-color: #000;
+}
+
+.button-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    background: #000;
+    margin-left: 10px;
+    border: 2px solid #FFF;
+
+}
+
+.button-search-container:hover {
+    border: 2px solid #D9AB73;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.search-wrap {
+    width: 972px;
+    height: 115px;
+    flex-shrink: 0;
+    background-color: #000;
+    border: 2px solid #D9AB73;
+    border-radius: 15px ;
+    /*border-color: #D9AB73;*/
+}
+
+.search-detail-container {
+    display: flex;
+    justify-content: center;
+}
+
+.search-container .field {
+    display: flex;
+    justify-content: center;
+}
+
+.search-detail-container .control .select:after {
+    /*    content: '\25BC';  Unicode character for down arrow 
+                font-size: 16px;
+                color: #ff6600;  Change this to the desired arrow color 
+                position: absolute;
+                top: 50%;
+                right: 5px;
+                transform: translateY(-50%);*/
+}
+
+
+.realestate-quantity {
+    width: 230px;
+    height: 40px;
+    flex-shrink: 0;
+    color: #D9AB73;
+    text-align: right;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.footer {
+    position: fixed;
+    width: 1440px;
+    flex-shrink: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #000;
+    color: white;
+    padding: 15px 0 0 0
+}
+
+.footer-container{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 12px;
+    max-height: 90px;
+}
+
+.footer_content1 {
+    color: #D9AB73;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-align: center;
+}
+
+.footer-left-content {
+    flex-shrink: 0;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer-mid-content {
+    width: 424px;
+    flex-shrink: 0;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer-right-content {
+    width: 200px;
+    height: 65px;
+    flex-shrink: 0;
+    max-height: 50%;
+    background: lightgray 50% / cover no-repeat;
+}
+
+.buttons .button:not(:last-child):not(.is-fullwidth) {
+    margin-right: 0px;
+}
+
+.buttons button {
+    padding: 8px 10px;
+}
+
+
+/* login */
+.navbar-item .navbar-dropdown {
+    right:0;
+    left: initial
+}
+
+button {
+    background: initial;
+    border: initial;
+    color: initial;
+    cursor: pointer;
+}
+
+.navbar-dropdown .navbar-item:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.navbar-dropdown .navbar-item button:hover {
+    background-color: #000; 
+    color: #fff;
+}
+
+@media screen and (min-width: 1024px){
+    .navbar-dropdown a.navbar-item {
+        padding-right: 16px !important;
+        color: #fff;
+    }
+}
+
+.navbar-dropdown {
+    background-color: #000;
+    border: 2px solid #D9AB73;
+    margin-top: 5px;
+}
+
+.fake-div {
+    height: 10px;
+    width: 10px;
+    background-color: transparent;
+    font-size: .875rem;
+    left: 0;
+    min-width: 100%;
+    position: absolute;
+    top: 100%;
+    z-index: 20;
+}
+
+.navbar-dropdown .navbar-item span {
+    color: #fff;
+}
+
+.navbar-dropdown .navbar-item span:hover {
+    color: #D9AB73 !important;  
+}
+
+.navbar-item .navbar-link:focus {
+    background-color: #000;
+    color: #D9AB73;
+}
+
+.navbar-dropdown a.navbar-item:hover {
+    background-color: initial; 
+    color: #D9AB73 !important;  
+}
+
+.navbar-dropdown a.navbar-item:focus {
+    background-color: #000 !important;
+}
+
+.navbar-link:not(.is-arrowless)::after {
+    border-color: #D9AB73;; /* Default border color */
+}
+
+/* Styles when .navbar-link is focused */
+.navbar-item .navbar-link:focus {
+    background-color: #000;
+    color: #fff;
+}
+
+
+.navbar-divider  {
+    background-color: #323232;
+}
+
+.navbar-link:not(.is-arrowless) {
+    padding-right: 2.5em;
+    max-height: 36px;
+}
+
+
+
+/*                                                           login                                                      */
+.img-real-auction-room{
+    width: 40%;
+    height: 350px;
+    border-radius: 25px;
+}
+
+.text-auction-room-container {
+    text-align: left;
+}
+
+.text-auction-room-h1{
+    flex-shrink: 0;
+    color: #D9AB73;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.text-auction-room-container {
+    margin-left: 5%;
+    font-family: Inter;
+    font-size: 18px;
+}
+
+.number-price-container {
+    flex-shrink: 0;
+    color: #fff;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.number-price-container-bellow {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.number-price-container-bellow .number-price-bellow-2 {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-weight: bold;
+}
+
+.number-price-container-bellow .number-price-bellow-1 {
+    border: 3px #fff solid;
+    padding: 2px 10px;
+}
+
+.number-price-container p{
+    padding: 5px 0px;
+}
+
+#quantity-field {
+    width: 25%;
+    padding: 0px;
+}
+
+.background-register {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    /*max-height: calc(100vh - 125px);*/
+    min-height:  110vh;
+    margin: 0;
+    padding: 0;
+}
+
+.login-container {
+    position: absolute;
+    top: 13%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*background-color: rgba(0, 0, 0, 0.3);*/
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.regisre-modal-container header .navbar-item:hover {
+    color: #D9AB73;
+    background-color: initial;
+}
+
+.header-login {
+    text-align: center;
+    color: #D9AB73;
+    font-family: Inter;
+}
+.header-login a {
+    display: inline-block;
+}
+.header-login img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.register-if-dont-have-container {
+    display: flex;
+}
+
+.container login {
+    text-align: center; /* Căn giữa nội dung trong container */
+}
+
+.register-if-dont-have-container,
+.register-here {
+    display: inline-block;
+}
+
+.registration-form {
+    display: inline-block;
+}
+
+.submit-login-btn:hover {
+    color: #fff !important;
+    /*border-color: rgba(0, 0, 0, 0.70) !important;*/
+}
+
+.sign-up-in-login {
+    padding: 0;
+    height: unset;
+    background-color: transparent !important;
+    color: #fff !important;
+    line-height: 20px;
+}
+
+.sign-up-in-login:hover {
+    text-decoration: underline;
+}
+
+.input-username {
+    width: 30%;
+    background-color: transparent;
+    color: #fff;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-username::placeholder {
+    color: #fff;
+}
+
+.input-username:focus,
+.input-username:hover,
+.input-username:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-password {
+    width: 30%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-password:focus,
+.input-password:hover,
+.input-password:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-password::placeholder {
+    color: #fff;
+}
+
+.input-fullname {
+    width: 30%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-fullname:focus,
+.input-fullname:hover,
+.input-fullname:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-fullname::placeholder {
+    color: #fff;
+}
+
+.input-phone {
+    width: 20%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-phone:focus,
+.input-phone:hover,
+.input-phone:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-phone::placeholder {
+    color: #fff;
+}
+
+.input-email {
+    width: 20%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-email:focus,
+.input-email:hover,
+.input-email:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-email::placeholder {
+    color: #fff;
+}
+
+.input-address {
+    width: 20%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-address:focus,
+.input-address:hover,
+.input-address:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-address::placeholder {
+    color: #fff;
+}
+
+.input-cccd {
+    width: 20%;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: #D9AB73 3px solid;
+    margin-top: 16px;
+}
+
+.input-cccd:focus,
+.input-cccd:hover,
+.input-cccd:active{
+    border-color: #000;
+    border-bottom: #D9AB73 3px solid;
+    box-shadow: initial;
+}
+
+.input-cccd::placeholder {
+    color: #fff;
+}
+
+.submit-with-gg-btn {
+    color: #fff !important;
+}
+
+.submit-with-gg-btn:hover {
+    color: #333 !important;
+}
+.inline {
+    display: inline-block;
+    margin-right: 10px; /* Điều này giúp tạo khoảng cách giữa các đối tượng */
+}
+
+/* Customize the label (the container) */
+.container {
+    align-items: center; /* Canh chỉnh theo chiều dọc */
+    position: relative;
+    margin-bottom: 12px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 50%; /* Đặt top ở giữa container */
+    transform: translateY(-50%); /* Điều chỉnh để giữ checkbox chính giữa */
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 50%; /* Đặt top ở giữa container */
+    transform: translateY(-50%); /* Điều chỉnh để giữ checkmark chính giữa */
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.rule {
+    display: inline; /* Sử dụng flexbox để căn chỉnh văn bản và checkbox trên cùng một dòng */
+    align-items: center; /* Canh chỉnh theo chiều dọc */
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #000;
+    border: none;   
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.rule input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.img-auction-room-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.glow {
+    color: red; /* Green text color */
+    text-align: center;
+    animation: glowing 1.5s infinite alternate;
+}
+
+@keyframes glowing {
+    from {
+        color: red; /* Start with green */
+    }
+    to {
+        color: #e06969; /* Transition to a lighter shade of green */
+    }
+}
+
+
+/*slide*/
+
+.container-full-left {
+    width: 90%;
+    padding: 20px;
+    background-color: #D9AB73 !important;
+}
+
+.container-full-right{
+    width: 80%;
+    padding: 10px;
+    background-color: #000 !important;
+    border: 5px solid #D9AB73;
+}
+
+.container-full-right-bellow {
+    margin-top: 25px;
+    width: 80%;
+    background-color: #fff !important;
+    border: 10px solid #D9AB73;
+}
+
+.container-full-bellow {
+    width: 100%;
+    background-color: #fff !important;
+    padding-bottom: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.divider {
+    width: 1px;
+    background-color: black;
+    margin: 2% auto;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.h1-text-mid {
+    font-size: 22px !important;
+    font-weight: bold;
+    padding-top: 5px;
+    color: #D9AB73 !important;
+}
+
+.h1-text-left-right {
+    color: #000;
+    font-size: 18px !important;
+    font-weight: bold;
+    padding-top: 5px;
+    text-decoration: underline;
+}
+
+p-text-left-right-container {
+    padding-top: 5px !important;
+}
+
+.bold-text {
+    font-weight: bold;
+    font-size: 17px;
+    padding: 3px 0;
+    color: #000;
+    text-align: left;
+}
+
+.bold-text > span {
+    font-weight: normal; /* Loại bỏ font-weight: bold; cho thẻ span */
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+    position: relative !important;
+}
+
+/* Hide the images by default */
+.mySlides {
+    /*display: none !important;*/
+    position: relative;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+    cursor: pointer !important;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer !important;
+    position: absolute !important;
+    top: 36% !important;
+    width: auto !important;
+    padding: 16px !important;
+    margin-top: -5% !important;
+    color: white !important;
+    font-weight: bold !important;
+    font-size: 20px !important;
+    border-radius: 0 3px 3px 0 !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0 !important;
+    border-radius: 3px 0 0 3px !important;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2 !important;
+    font-size: 16px !important;
+    padding: 0px 6px !important;
+    position: absolute !important;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    bottom: 4%;
+    right: 1%;
+}
+
+/* Container for image text */
+.caption-container {
+    text-align: center !important;
+    background-color: #222 !important; 
+    padding: 2px 16px !important;
+    color: white !important;
+}
+
+.row:after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
+}
+
+/* Six columns side by side */
+.row .column {
+    float: left !important;
+    width: 33.33% !important;
+    padding: 0px;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+    opacity: 0.6 !important;
+}
+
+.active,
+.demo:hover {
+    opacity: 1 !important;
+}
+
+@-webkit-keyframes my {
+    0% { color: red; } 
+    50% { color: #000;  } 
+    100% { color: red;  } 
+}
+@-moz-keyframes my { 
+    0% { color: red;  } 
+    50% { color: #000;  }
+    100% { color: red;  } 
+}
+@-o-keyframes my { 
+    0% { color: red; } 
+    50% { color: #000; } 
+    100% { color: red;  } 
+}
+@keyframes my { 
+    0% { color: red;  } 
+    50% { color: #000;  }
+    100% { color: red;  } 
+} 
+.test {
+    font-weight:bold;
+    -webkit-animation: my 1000ms infinite;
+    -moz-animation: my 1000ms infinite; 
+    -o-animation: my 1000ms infinite; 
+    animation: my 1000ms infinite;
+}
+
+
+#text-price {
+    padding: 6px 0px 0px 0px;
+}
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+.mySlides img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.hover-effect button:hover {
+    color: green !important;
+}
