@@ -7,16 +7,12 @@ package controllersMember;
 
 import dao.AccountDAO;
 import dao.AuctionDAO;
-import dao.AuctionHistoryDAO;
 import dao.AuctionWinningHistoryDAO;
 import dao.RealEstateDAO;
 import dto.Account;
 import dto.Auction;
-import dto.AuctionHistory;
-import dto.AuctionWinningHistory;
 import dto.RealEstate;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -25,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.AuctionResultVM;
 
 /**
  *
@@ -57,9 +54,11 @@ public class ResultAuctionServlet extends HttpServlet {
             request.setAttribute("auctions", auctions);
 
             auctionDAO.setStatusTimeEndAuctions(4, idreal);
+            AuctionResultVM auctionResult = auctionDAO.getAuctionResult(idreal);
 
             ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(idreal);
             request.setAttribute("REGETBYID", REGETBYID);
+            request.setAttribute("AuctionResult", auctionResult);
 
             AuctionWinningHistoryDAO auctionwinning = new AuctionWinningHistoryDAO();
             List<Object> topPrices = auctionwinning.getPriceTop1();

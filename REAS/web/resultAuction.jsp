@@ -172,13 +172,13 @@
         <!-- BODY -->
 
 
-
+         <%-- --%>
         <c:if test="${not empty sessionScope.member.password }">
             <c:set var="m" value="${sessionScope.member}"></c:set>
                 <div style="background-color: black; border-radius: 40px;padding: 20px; text-align: center; border: 6px solid #D9AB73; color: #D9AB73; position: fixed; top: 45%; left: 50%; transform: translate(-50%, -50%);">
                     <form  style="text-align: center;display: inline-block"  action="MemberController" method="post">
                         <h1 style="font-weight: bold; margin-bottom: 5px; font-size: 20px">THÔNG BÁO ĐẤU GIÁ</h1>          
-                    <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                   <%-- <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
                         <p class="bold-text-2">Dự án: <span>
                                 ${REGETBYID.realEstateName}
                             </span></p>
@@ -214,12 +214,33 @@
 
                         <p class="bold-text-2">Giá trúng đấu giá: <span>${requestScope.priceLast} Xu</span></p>
                         <p class="bold-text-2">Đánh giá</p>
+                    </c:forEach> --%>
+
+                   <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                        <p class="bold-text-2">Dự án: <span>
+                                ${REGETBYID.realEstateName}
+                            </span></p>
+                        <p class="bold-text-2">Người trúng đấu giá: <span>${AuctionResult.userName}</span></p>
+                        <p class="bold-text-2">Số điện thoại người bán: <span>${AuctionResult.phone}</span></p>
+                        <p class="bold-text-2">Trạng thái đấu giá: <span>
+                                <c:if test="${AuctionResult.status == 4}">
+                                    Đã bán
+                                </c:if>
+                            </span></p>
+                        <p class="bold-text-2">Giá trúng đấu giá: <span>
+                                <script>
+                                    var number = ${AuctionResult.price}; // Assuming auctions.lamda contains the number
+                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
+                                    document.write(formattedNumber);
+                                </script> VND
+                            </span></p>
+                        <p class="bold-text-2">Đánh giá</p>
                     </c:forEach>
 
-                    <%--
+
+
+
             
-            
-                    --%>
 
                     <input type="hidden" name="accidmember" value="${m.accID}">
 
@@ -252,7 +273,11 @@
                 </form>
             </div>
         </c:if>
+                    
 
+                    
+                    
+                    
         <c:if test="${not empty auctions}">
             <c:forEach var="auctionwinningresult" items="${requestScope.auctionwinningresult}">
                 <c:forEach var="auctions" items="${requestScope.auctions}"> 

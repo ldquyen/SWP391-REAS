@@ -9,12 +9,12 @@ public class AuctionDepositHistory {
     private String walletID;
     private String auctionID;
     private LocalDateTime dateAndTime;
-    private long quantity;
+    private int quantity;
 
     public AuctionDepositHistory() {
     }
 
-    public AuctionDepositHistory(String auctionDepositHisID, String walletID, String auctionID, LocalDateTime dateAndTime, long quantity) {
+    public AuctionDepositHistory(String auctionDepositHisID, String walletID, String auctionID, LocalDateTime dateAndTime, int quantity) {
         this.auctionDepositHisID = auctionDepositHisID;
         this.walletID = walletID;
         this.auctionID = auctionID;
@@ -54,11 +54,11 @@ public class AuctionDepositHistory {
         this.dateAndTime = dateAndTime;
     }
 
-    public long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

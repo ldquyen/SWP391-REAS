@@ -53,7 +53,7 @@
                         <div class="navbar-container-1">
                             <a class="navbar-1">SỐ DƯ :
                                 <c:forEach var="wallet" items="${walletAccount}">
-                                    <c:if test="${wallet.accID eq admin.accID}">
+                                    <c:if test="${wallet.accID eq member.accID}">
                                         <span class="list-auction-p-1">${wallet.accountBalance}</span>
                                     </c:if>
                                 </c:forEach>
@@ -192,22 +192,6 @@
                     </ul>
                     <ul class="menu-list">
                         <li>
-                            <a class="">Thành viên</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="searchMember" name="action">
-                                                <span>Tìm kiếm</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>                                
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="menu-list">
-                        <li>
                             <a class="">Doanh thu</a>
                             <ul class="menu-list-subnav">
                                 <li>
@@ -220,6 +204,31 @@
                                     </a>
                                 </li>
 
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu-list">
+                        <li>
+                            <a class="">Đấu giá</a>
+                            <ul class="menu-list-subnav">
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Danh sách</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="navbar-item">
+                                        <form action="AdminController" method="post">
+                                            <button type="submit" value="aboutus" name="action">
+                                                <span>Kết quả</span>
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -245,43 +254,6 @@
                             </ul>
                         </li>
                     </ul>
-                    <p class="menu-label">
-                        Khác
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="">Luật lệ</a>
-                            <ul class="menu-list-subnav">
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="fixrule" name="action">
-                                                <span>Chỉnh sửa luật lệ</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="AdminController" method="post">
-                                            <button type="submit" value="addStaff" name="action">
-                                                <span>Danh sách luật chỉnh sửa</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-item">
-                                        <form action="MainController" method="post">
-                                            <button type="submit" value="rule" name="action">
-                                                <span>Xem luật lệ</span>
-                                            </button>
-                                        </form>
-                                    </a>
-                                </li>
-                            </ul>                           
-                        </li>
-                    </ul>
                 </aside>
             </div>
             <div class="column" style="height: 100vh;">
@@ -291,6 +263,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">WalletID</th>
                             <th scope="col">FullName</th>
                             <th scope="col">AccountBalance</th>
                             <th scope="col">Action</th>
@@ -301,6 +274,7 @@
                         <c:forEach items="${listUserWallet}" var="user" varStatus="loopStatus">
                             <tr>
                                 <th scope="row">${loopStatus.count}</th>
+                                <td>${user.walletId}</td>
                                 <td>${user.fullName}</td>
                                 <td>${user.accountBalance}</td>
                                 <td><a class="btn btn-success" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editWallet-${user.accID}" data-bs-whatever="@getbootstrap">Add fund</a></td>
@@ -393,3 +367,6 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
+
+
+

@@ -1,17 +1,17 @@
 package dao;
 
 import dto.Auction;
+import dto.AuctionDepositHistory;
 import dto.AuctionHistory;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import model.AuctionResultVM;
 import mylib.DBUtils;
 
 public class AuctionDAO {
@@ -487,5 +487,85 @@ public class AuctionDAO {
         }
         return 0;
     }
+    
+        public AuctionResultVM getAuctionResult(String idAuction) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        AuctionDepositHistory auctionValueHistory = new AuctionDepositHistory();
+        AuctionResultVM auctionResultVM = new AuctionResultVM();
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT Top(1) * FROM AuctionDepositHistory WHERE AuctionId = ? ORDER BY Quantity DESC";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, idAuction);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    auctionValueHistory.setAuctionDepositHisID(rs.getString("AuctionDepositHisID"));
+                    auctionValueHistory.setAuctionID(rs.getString("AuctionId"));
+                    auctionValueHistory.setWalletID(rs.getString("WalletID"));
+                    auctionValueHistory.setQuantity(rs.getInt("Quantity"));
+                    Timestamp time = rs.getTimestamp("DateAndTime");
+                    // Chuyển đổi Timestamp thành LocalDateTime
+                    LocalDateTime dateTime = time.toLocalDateTime();
+                    auctionValueHistory.setDateAndTime(dateTime);
+                }
+                // get user Wining ifo
+                sql = "SELECT * FROM Wallet w JOIN Account ac ON w.AccID = ac.AccID WHERE w.WalletID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, auctionValueHistory.getWalletID());
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    auctionResultVM.setAccountID(rs.getString("AccID"));
+                    auctionResultVM.setPhone(rs.getString("Phone"));
+                    auctionResultVM.setUserName(rs.getString("FullName"));
+                    auctionResultVM.setPrice(auctionValueHistory.getQuantity());
+                }
+                // get auction Infor
+                sql = "SELECT * FROM [Auction] WHERE AuctionID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, idAuction);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    auctionResultVM.setAuctionName(rs.getString("AuctionName"));
+
+                }
+                // Update PriceLast cua RealEstate
+                sql = "  UPDATE [dbo].[RealEstate] SET PriceLast = ? WHERE RealEstateID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, auctionValueHistory.getQuantity());
+                stm.setString(2, idAuction);
+
+                int affectedRow = stm.executeUpdate();
+                if (affectedRow == 0) {
+                    return null;
+                } else {
+                    sql = "SELECT * FROM [dbo].[RealEstate] WHERE RealEstateID = ? ";
+                    stm = con.prepareStatement(sql);
+                    stm.setString(1, idAuction);
+                    rs = stm.executeQuery();
+                    if (rs.next()) {
+                        auctionResultVM.setStatus(rs.getInt("StatusID"));
+                    }
+                }
+
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return auctionResultVM;
+    }
+    
 
 }

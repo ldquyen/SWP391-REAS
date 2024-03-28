@@ -13,11 +13,12 @@ public class UserVM {
     private String accID, roleID, fullName, email, phone, cCCD, address, placeOfReg, dateOfReg, bankName, bankCode;
     private long accountBalance;
     private boolean status;
+    private int walletId;
 
     public UserVM() {
     }
 
-    public UserVM(String accID, String roleID, String fullName, String email, String phone, String cCCD, String address, String placeOfReg, String dateOfReg, String bankName, String bankCode, long accountBalance, boolean status) {
+    public UserVM(String accID, String roleID, String fullName, String email, String phone, String cCCD, String address, String placeOfReg, String dateOfReg, String bankName, String bankCode, long accountBalance, boolean status, int walletId) {
         this.accID = accID;
         this.roleID = roleID;
         this.fullName = fullName;
@@ -31,58 +32,7 @@ public class UserVM {
         this.bankCode = bankCode;
         this.accountBalance = accountBalance;
         this.status = status;
-    }
-
-    public String getAccID() {
-        return accID;
-    }
-
-    public String getRoleID() {
-        return roleID;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getcCCD() {
-        return cCCD;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPlaceOfReg() {
-        return placeOfReg;
-    }
-
-    public String getDateOfReg() {
-        return dateOfReg;
-    }
-
-    public String getBankName() {
-        return bankName;
-    }
-
-    public String getBankCode() {
-        return bankCode;
-    }
-
-    public long getAccountBalance() {
-        return accountBalance;
-    }
-
-    public boolean isStatus() {
-        return status;
+        this.walletId = walletId;
     }
 
     public void setAccID(String accID) {
@@ -137,5 +87,64 @@ public class UserVM {
         this.status = status;
     }
 
-   
+    public void setWalletId(int walletId) {
+        this.walletId = walletId;
+    }
+
+    public String getAccID() {
+        return accID;
+    }
+
+    public String getRoleID() {
+        return roleID;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getcCCD() {
+        return cCCD;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPlaceOfReg() {
+        return placeOfReg;
+    }
+
+    public String getDateOfReg() {
+        return dateOfReg;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public String getBankCode() {
+        return bankCode;
+    }
+
+    public long getAccountBalance() {
+        return accountBalance;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public int getWalletId() {
+        return walletId;
+    }
+    
 }

@@ -87,6 +87,7 @@ public class AdminDAO {
                 if (rs != null) {
                     while (rs.next()) {
                         UserVM userVM = new UserVM();
+                        userVM.setWalletId(rs.getInt("WalletID"));
                         userVM.setAccID(rs.getString("AccID"));
                         userVM.setRoleID(rs.getString("RoleID"));
                         userVM.setFullName(rs.getString("FullName"));
