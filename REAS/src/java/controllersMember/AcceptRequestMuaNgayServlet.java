@@ -62,7 +62,7 @@ public class AcceptRequestMuaNgayServlet extends HttpServlet {
                 boolean result = dao.updateStatusID(realEstateID, 6);
 
                 PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
-                boolean result1 = dao1.updateStatus2(accID_nguoiMua);
+                boolean result1 = dao1.updateStatus2(accID_nguoiMua,realEstateID);
 
                 TransactionDAO dao2 = new TransactionDAO();
                 boolean result2 = dao2.processTransaction(accID_nguoiMua, accID_nguoiBan, pricePaid);

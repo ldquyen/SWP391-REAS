@@ -370,18 +370,7 @@
                         </c:if>
                     </c:forEach>
                 </div>
-                <div class="container-full-right-bellow">
-                    <div class="container-full-right flex-center text-center">
-                        <p class="flex-center text-center" style="color: #fff;font-weight: bold;font-size: 26px !important;">Các bài đăng khác<p>
-
-                    </div>
-                    <div style="text-align: left; padding-left: 200px;">
-
-                        <c:forEach items="${RANDOM_REAL_ESTATE}" var="realEstate">
-                            <a style="padding: 15px 10px;font-size: 18px;color: #000;" href="MainController?action=viewPostRealEstate&id=${realEstate.realEstateID}">${fn:toUpperCase(realEstate.realEstateName)}</a><br>
-                        </c:forEach>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
