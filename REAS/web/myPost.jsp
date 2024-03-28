@@ -226,7 +226,7 @@
                                         <c:when test="${r.statusID == 6}">
                                         <td style="border: 1px solid #fff; padding: 8px;">
                                             <!-- Thực hiện hành động tương ứng khi status là 6 -->
-                                            <a href="MainController?action=cusViewMuaNgayListV2&id=${r.realEstateID}">View
+                                            <a href="MainController?action=cusViewMuaNgayListV2&id=${r.realEstateID}">XEM DANH SÁCH
                                         </td>
                                     </c:when>
                                     <c:otherwise>
