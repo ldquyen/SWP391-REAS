@@ -18,8 +18,8 @@
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="admin.jsp">
-                    <img class="logo-header" src="image/logo.png" alt="" href="admin.jsp" width="100" height="28" />
+                <a class="navbar-item" href="staff.jsp">
+                    <img class="logo-header" src="image/logo.png" alt="" href="staff.jsp" width="100" height="28" />
                 </a>
 
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

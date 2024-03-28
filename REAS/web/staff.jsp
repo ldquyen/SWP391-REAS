@@ -18,8 +18,8 @@
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="admin.jsp">
-                    <img class="logo-header" src="image/logo.png" alt="" href="admin.jsp" width="100" height="28" />
+                <a class="navbar-item" href="staff.jsp">
+                    <img class="logo-header" src="image/logo.png" alt="" href="staff.jsp" width="100" height="28" />
                 </a>
 
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -31,19 +31,16 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <form action="AdminController" method="post" style="margin-top: 17px">
-                            <button type="submit" value="staffjsp" name="action" >
-                                <span style="color: white">TRANG CHỦ</span>
-                            </button>
-                        </form>
+                    <form action="StaffController" method="post" style="margin-top: 17px">
+                        <button type="submit" value="staffjsp" name="action" >
+                            <span style="color: white">TRANG CHỦ</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item">
 
-<!--                        <div class="navbar-container-1">
-                            <a class="navbar-1">10.000.000</a>                  
-                        </div>-->
 
                         <div class="navbar-item hover-down has-dropdown is-hoverable">
                             <a class="navbar-link navbar-1-list">
@@ -73,8 +70,6 @@
                             </div>
                         </div>
 
-
-
                     </div>
                 </div>
             </div>
@@ -95,7 +90,7 @@
                                     <a class="navbar-item">
                                         <form action="StaffController" method="post">
                                             <button type="submit" value="approve" name="action">
-                                                <span>Danh sách đợi xét duyệt</span>
+                                                <span>Danh sách đang xét duyệt</span>
                                             </button>
                                         </form>
                                     </a>
@@ -121,13 +116,13 @@
                                         </form>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
 
+
                 </aside>
-                
             </div>
             <div class="column" style="height: 100vh;">Xin chào ${sessionScope.staff.fullname} </div></br>
             
