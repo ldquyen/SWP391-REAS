@@ -89,6 +89,37 @@ public class WalletDAO {
         return result;
     }
 
+    public long getAccountBalanceByAccID(String accID) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        long accountBalance = 0;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "SELECT AccountBalance FROM dbo.Wallet WHERE AccID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, accID);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    accountBalance = rs.getLong("AccountBalance");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return accountBalance;
+    }
+
     public static boolean sendRequestNapTien(Integer walletID, Long price, String orderID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -119,6 +150,7 @@ public class WalletDAO {
         return true;
     }
 // Lấy Request Nạp Tiền bằng Status
+
     public List<OrderWallet> getRequestNapTien(int statusID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -130,7 +162,7 @@ public class WalletDAO {
             if (con != null) {
                 String sql = "SELECT wh.OrderID, wh.WalletID, wh.Price, wh.DateAndTime, wh.StatusID, whs.StatusName\n"
                         + " FROM dbo.WalletHistory wh \n"
-                        + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n" 
+                        + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n"
                         + " WHERE wh.StatusID = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, statusID);
@@ -168,7 +200,7 @@ public class WalletDAO {
         }
         return result;
     }
-    
+
     // Lấy Request nạp tiền = WalletID
     public List<OrderWallet> getRequestNapTienByWalletID(int walletID) throws ClassNotFoundException, SQLException {
         Connection con = null;
@@ -181,7 +213,7 @@ public class WalletDAO {
             if (con != null) {
                 String sql = "SELECT wh.OrderID, wh.WalletID, wh.Price, wh.DateAndTime, wh.StatusID, whs.StatusName\n"
                         + " FROM dbo.WalletHistory wh \n"
-                        + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n" 
+                        + " JOIN WalletHistoryStatus whs ON wh.StatusID = whs.StatusID \n"
                         + " WHERE wh.WalletID = ? \n"
                         + " ORDER BY wh.DateAndTime DESC";
                 stm = con.prepareStatement(sql);
@@ -220,7 +252,7 @@ public class WalletDAO {
         }
         return result;
     }
-    
+
     public boolean updateRequestNapTien(String orderID, int statusID) throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -229,7 +261,7 @@ public class WalletDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 String sql = "UPDATE [dbo].[WalletHistory] SET [StatusID] = ? WHERE [OrderID] = ?";
-                
+
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, statusID);
                 stm.setString(2, orderID);
@@ -239,7 +271,7 @@ public class WalletDAO {
                 }
             }
         } finally {
-            
+
             if (stm != null) {
                 stm.close();
             }
@@ -249,7 +281,7 @@ public class WalletDAO {
         }
         return result;
     }
-    
+
     public static boolean checkRequestOrderExists(String orderID) throws SQLException, ClassNotFoundException {
         Connection cn = DBUtils.getConnection();
         PreparedStatement pst = null;

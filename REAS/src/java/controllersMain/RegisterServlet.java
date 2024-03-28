@@ -10,6 +10,8 @@ import dao.StatisticalDAO;
 import dao.WalletDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RegisterServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
@@ -52,6 +54,9 @@ public class RegisterServlet extends HttpServlet {
             if (!fullname.isEmpty() && !username.isEmpty() && !email.isEmpty() && !phone.isEmpty() && !cccd.isEmpty() && !cccdregplace.isEmpty() && !cccdregdate.isEmpty() && !password.isEmpty() && !repassword.isEmpty() && !bankcode.isEmpty() && !bankname.isEmpty()) {
                 if (acc.checkUsername(username)) {
                     request.setAttribute("FAILUSERNAME", "Username đã tồn tại, vui lòng đăng kí lại");
+                    request.getRequestDispatcher("MainController?action=DK").forward(request, response);
+                } else if (!username.matches("^[\\p{L}0-9_-]+$")) {
+                    request.setAttribute("FAILUSERNAME", "Username chứa khoảng trắng hoặc kí tự có dấu, vui lòng đăng kí lại");
                     request.getRequestDispatcher("MainController?action=DK").forward(request, response);
                 } else if (!acc.containsOnlyLettersAndSpaces(fullname)) {
                     request.setAttribute("FAILFULLNAME", "Họ và tên sai định dạng, vui lòng đăng kí lại");
@@ -131,7 +136,11 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -145,7 +154,11 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

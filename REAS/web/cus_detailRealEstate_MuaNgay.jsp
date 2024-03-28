@@ -391,6 +391,7 @@
                                         <form id="purchaseForm" action="MemberController" method="post" onsubmit="return confirmSubmit()">
                                             <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
                                             <input type="hidden" name="accID" value="${dto.accID}">
+                                            <input type="hidden" name="pricePaid" value="${dto.pricePaid}">
                                             <button id="submitButton" style="color: #fff" type="submit" value="xacNhanMuaNgay" name="action">Bán Ngay</button>
                                         </form>
                                     </td>

@@ -6,6 +6,8 @@
 package controllersMain;
 
 import dao.PurchaseRequestDAO;
+import dao.WalletDAO;
+import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -36,25 +38,44 @@ public class MuaNgayServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
         
         String realEstateID = request.getParameter("realEstateID");
-        String accID = request.getParameter("accID");
+
+        String url = "MainController?action=viewPostRealEstateStatus2&id=" + realEstateID;
+
+        HttpSession session = request.getSession(false);
+        Account account = (Account) session.getAttribute("member");
+        String accID  = account.getAccID();
+        boolean result;
 
         long pricePaid = 0;
         String pricePaidStr = request.getParameter("pricePaid");
-        pricePaid = Long.parseLong(pricePaidStr);
+        if (pricePaidStr != null && !pricePaidStr.isEmpty()) {
+            pricePaidStr = pricePaidStr.replaceAll("[,.]", "");
+            pricePaid = Long.parseLong(pricePaidStr);
+        }
 
+        WalletDAO daoWallet = new WalletDAO();
+        long accountBalance = daoWallet.getAccountBalanceByAccID(accID);
+        
         try {
-            PurchaseRequestDAO dao = new PurchaseRequestDAO();
-            boolean result = dao.sendRequestMuaNgay(accID, realEstateID, pricePaid);
-            if (result) {
-                session.setAttribute("purchaseStatus", "Đang xét duyệt");
-                request.setAttribute("Purchase_Request", "Đơn mua ngay gửi THÀNH CÔNG, vui lòng đợi hệ thống xét duyệt!!!");
-                response.sendRedirect(request.getHeader("Referer"));
+            if (accountBalance > (pricePaid + 5)) {
+                PurchaseRequestDAO dao = new PurchaseRequestDAO();
+                result = dao.sendRequestMuaNgay(accID, realEstateID, pricePaid);
+                if (result) {
+                    session.setAttribute("purchaseStatus", "Đang xét duyệt");
+                    request.setAttribute("Purchase_Request", "Đơn mua ngay gửi THÀNH CÔNG, vui lòng đợi hệ thống xét duyệt!!!");
+                }
+            } else {
+                request.setAttribute("Not_Request", "Số dư không đủ để thực hiện thao tác!!!");
             }
+            // Lưu URL trước đó vào requestScope
+            request.setAttribute("previousUrl", request.getHeader("Referer"));
+            // Chuyển hướng đến trang JSP để hiển thị thông báo
+            request.getRequestDispatcher("detailRealEstate_status2.jsp").forward(request, response);
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -72,7 +93,13 @@ public class MuaNgayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -86,7 +113,13 @@ public class MuaNgayServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

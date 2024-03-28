@@ -208,7 +208,7 @@ public class PurchaseRequestDAO {
 //        }
 //        return result;
 //    }
-    public boolean updateStatus2(String accID) throws SQLException, ClassNotFoundException {
+    public boolean updateStatus2(String accID, String realEsteateID) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean result = false;
@@ -216,9 +216,10 @@ public class PurchaseRequestDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "UPDATE PurchaseRequests SET RequestStatusID = 2 WHERE accID = ?";
+                String sql = "UPDATE PurchaseRequests SET RequestStatusID = 2 WHERE AccID = ? AND RealEstateID = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, accID);
+                stm.setString(2, realEsteateID);
                 int effectRows = stm.executeUpdate();
                 if (effectRows > 0) {
                     result = true;
