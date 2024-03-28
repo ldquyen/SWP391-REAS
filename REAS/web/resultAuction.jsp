@@ -172,6 +172,7 @@
         <!-- BODY -->
 
 
+
         <c:if test="${not empty sessionScope.member.password }">
             <c:set var="m" value="${sessionScope.member}"></c:set>
                 <div style="background-color: black; border-radius: 40px;padding: 20px; text-align: center; border: 6px solid #D9AB73; color: #D9AB73; position: fixed; top: 45%; left: 50%; transform: translate(-50%, -50%);">
@@ -181,16 +182,37 @@
                         <p class="bold-text-2">Dự án: <span>
                                 ${REGETBYID.realEstateName}
                             </span></p>
-                        <p class="bold-text-2">Người trúng đấu giá: <span></span></p>
-                        <p class="bold-text-2">Số điện thoại người bán: <span></span></p>
-                        <p class="bold-text-2">Trạng thái đấu giá: <span></span></p>
-                        <p class="bold-text-2">Giá trúng đấu giá: <span>
-                                <script>
-                                    var number = ${REGETBYID.priceLast}; // Assuming auctions.lamda contains the number
-                                    var formattedNumber = number.toLocaleString('en-US').replace(/,/g, '.');
-                                    document.write(formattedNumber);
-                                </script> VND
-                            </span></p>
+                        <p class="bold-text-2">Người trúng đấu giá: <span>
+                                <c:forEach var="accountmember" items="${requestScope.accountmember}">
+                                    ${accountmember.fullname}
+                                </c:forEach>
+                            </span>
+                        </p>
+                        <p class="bold-text-2">Số điện thoại người bán: <span>
+                                <c:forEach var="REGETBYID" items="${requestScope.REGETBYID}">
+                                    <c:forEach var="accountfull" items="${requestScope.accountfull}"> 
+                                        <c:if test="${accountfull.accID eq REGETBYID.accID}">
+                                            ${accountfull.phone}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                            </span>
+                        </p>
+
+                        <p class="bold-text-2">Trạng thái: 
+                            <c:forEach var="accountmember" items="${requestScope.accountmember}">
+                                <c:choose>
+                                    <c:when test="${accountmember.fullname eq sessionScope.member.fullname}">
+                                        <span style="color: #02ff65">Chúc mừng bạn đã đấu giá thành công</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span style="color: Red;">Rất tiếc bạn đã đấu giá thất bại</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </p>
+
+                        <p class="bold-text-2">Giá trúng đấu giá: <span>${requestScope.priceLast} Xu</span></p>
                         <p class="bold-text-2">Đánh giá</p>
                     </c:forEach>
 
