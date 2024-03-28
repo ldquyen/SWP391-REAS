@@ -313,7 +313,7 @@ public class AuctionDAO {
         return 0;
     }
 
-    public int registerAuction(String auctionId, String accountId, double currentUserBalance, double requirmentPrice, int walletId, double auctionPriceNow) throws SQLException, ClassNotFoundException {
+    public int registerAuction(String auctionId, String accountId, double currentUserBalance, int requirmentPrice, int walletId, double auctionPriceNow) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -388,6 +388,7 @@ public class AuctionDAO {
                 }
             } else {
                 // not enough money code
+                 System.out.println("Bạn không đủ tiền đấu giá");
                 return 1;
             }
 
