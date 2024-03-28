@@ -345,13 +345,23 @@
             <div class="column" style="padding-top: 30px">
                 <div class="container-full-right flex-center text-center">
                     <div>
-                        <button type="button">
-                            <p class="h1-text-mid" style="color: #fff;">Từ chối bán ngay</p>
-                        </button>
+                        <form id="rejectForm" action="MainController" method="post">
+                            <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}" />
+                            <input type="hidden" name="action" value="rejectRequestMuaNgay">
+                            <button type="button" onclick="confirmReject()">
+                                <p class="h1-text-mid" style="color: #fff;">Từ chối bán ngay</p>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
-
+            <script>
+                function confirmReject() {
+                    if (confirm("Bạn có chắc chắn muốn từ chối bán ngay?")) {
+                        document.getElementById('rejectForm').submit();
+                    }
+                }
+            </script>
         </div>
 
         <div>

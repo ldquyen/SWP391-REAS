@@ -28,8 +28,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ADMIN
  */
-@WebServlet(name = "AcceptRequestMuaNgayServlet", urlPatterns = {"/AcceptRequestMuaNgayServlet"})
-public class AcceptRequestMuaNgayServlet extends HttpServlet {
+@WebServlet(name = "RejectRequestMuaNgayServlet", urlPatterns = {"/RejectRequestMuaNgayServlet"})
+public class RejectRequestMuaNgayServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,48 +45,13 @@ public class AcceptRequestMuaNgayServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = "";
         String realEstateID = request.getParameter("realEstateID");
-        String accID_nguoiMua = request.getParameter("accID");
-
-        long pricePaid = 0;
-        String pricePaidStr = request.getParameter("pricePaid");
-        if (pricePaidStr != null && !pricePaidStr.isEmpty()) {
-            pricePaidStr = pricePaidStr.replaceAll("[,.]", "");
-            pricePaid = Long.parseLong(pricePaidStr);
-        }
-        WalletDAO daoWallet = new WalletDAO();
-        long accountBalance = daoWallet.getAccountBalanceByAccID(accID_nguoiMua);
 
         try {
-            HttpSession session = request.getSession(false);
-            if (session != null && session.getAttribute("member") != null) {
-                if (accountBalance > (pricePaid + 5)) {
-                    Account account = (Account) session.getAttribute("member");
-                    String accID_nguoiBan = account.getAccID();
-
-                    RealEstateDAO dao = new RealEstateDAO();
-                    boolean result = dao.updateStatusID(realEstateID, 6);
-
-                    PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
-                    dao1.updateStatusForMultipleRequests();
-                    boolean result1 = dao1.updateStatus2(accID_nguoiMua, realEstateID);
-
-                    TransactionDAO dao2 = new TransactionDAO();
-                    boolean result2 = dao2.processTransaction(accID_nguoiMua, accID_nguoiBan, pricePaid);
-
-                    if (result && result1 && result2) {
-                        request.setAttribute("Purchase_Request", "Thành Công!!!");
-                        url = "MainController?action=cusViewMuaNgayListV2&id=" + realEstateID;
-                        response.sendRedirect(url);
-                    } else {
-                        // Cập nhật không thành công, chuyển hướng đến trang lỗi
-                        url = "rule.jsp";
-                    }
-                } else {
-                    request.setAttribute("Not_Request", "Số dư không đủ để thực hiện thao tác!!!");
-                    url = "MainController?action=cusViewMuaNgayList&id=" + realEstateID;
-                    response.sendRedirect(url);
-                }
-            }
+            PurchaseRequestDAO dao = new PurchaseRequestDAO();
+            dao.updateStatusForMultipleRequests();
+            request.setAttribute("Reject_Request", "Đã từ chối!!!");
+            url = "MainController?action=cusViewMuaNgayListV2&id=" + realEstateID;
+            response.sendRedirect(url);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -107,11 +72,11 @@ public class AcceptRequestMuaNgayServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RejectRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RejectRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RejectRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -129,11 +94,11 @@ public class AcceptRequestMuaNgayServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RejectRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RejectRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(AcceptRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RejectRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

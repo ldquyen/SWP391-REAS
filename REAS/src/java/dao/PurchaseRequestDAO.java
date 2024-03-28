@@ -143,13 +143,27 @@ public class PurchaseRequestDAO {
     }
 
     public void updateStatusForMultipleRequests() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT RealEstateID FROM PurchaseRequests GROUP BY RealEstateID HAVING COUNT(*) > 1";
+        String sql = "SELECT RealEstateID FROM PurchaseRequests WHERE RequestStatusID = 1 GROUP BY RealEstateID HAVING COUNT(*) > 0";
         Connection con = null;
-        try (PreparedStatement statement = con.prepareStatement(sql);
-                ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                String realEstateID = resultSet.getString("RealEstateID");
-                updateStatus3(realEstateID);
+        PreparedStatement statement = null;
+
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                statement = con.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    String realEstateID = resultSet.getString("RealEstateID");
+                    updateStatus3(realEstateID);
+                }
+            }
+        } finally {
+            // Đóng tài nguyên
+            if (statement != null) {
+                statement.close();
+            }
+            if (con != null) {
+                con.close();
             }
         }
     }
@@ -208,6 +222,7 @@ public class PurchaseRequestDAO {
 //        }
 //        return result;
 //    }
+
     public boolean updateStatus2(String accID, String realEsteateID) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;

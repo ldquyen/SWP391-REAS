@@ -119,6 +119,9 @@ public class MainController extends HttpServlet {
                 case "xacNhanMuaNgay":
                     url = "AcceptRequestMuaNgayServlet";
                     break;
+                case "rejectRequestMuaNgay":
+                    url = "RejectRequestMuaNgayServlet";
+                    break;
                 case "homeindex":
                     url = "HomeServletIndex";
                     break;
