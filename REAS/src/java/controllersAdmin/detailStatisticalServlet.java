@@ -6,8 +6,16 @@
 package controllersAdmin;
 
 import dao.StatisticalDAO;
+import dto.RealEstate;
+import dto.RealEstateInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +36,7 @@ public class detailStatisticalServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -40,6 +48,7 @@ public class detailStatisticalServlet extends HttpServlet {
             String registeryear = request.getParameter("registeryear");
             String registermonth = request.getParameter("registermonth");
             String registerday = request.getParameter("registerday");
+            String catid = request.getParameter("catid");
             if (year != null || month != null || day != null) {
                 int totalLoginYear = staDAO.getTotalLoginCount(year);
                 int totalLoginMonth = staDAO.getTotalLoginCountMonth(month);
@@ -61,12 +70,57 @@ public class detailStatisticalServlet extends HttpServlet {
                 request.setAttribute("totalRegisterDay", "Số lượt đăng ký trong ngày " + registerday + " là : " + totalRegisternDay);
                 request.setAttribute("totalRegisterDate", "Số lượt đăng nhập trong ngày " + registerday +" tháng "+ registermonth+" năm "+ registeryear +  " là : " + totalRegisterDate);  
                 request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
-            } else {
+            }             
+            if (catid != null) {
+                if(catid.equals("no")){
+                    ArrayList<RealEstate> realEstate = staDAO.getAllRealEstateByCatID("no");
+                    request.setAttribute("realEstate", realEstate);
+                    request.setAttribute("catid", "mem");
+                    request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
+                }
+                 if(catid.equals("cc")){
+                    ArrayList<RealEstate> realEstate = staDAO.getAllRealEstateByCatID("cc");                    
+                    request.setAttribute("realEstate", realEstate);
+                    request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
+                }
+                  if(catid.equals("bt")){
+                    ArrayList<RealEstate> realEstate = staDAO.getAllRealEstateByCatID("bt");
+                    request.setAttribute("realEstate", realEstate);
+                    request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
+                }
+                   if(catid.equals("dn")){
+                    ArrayList<RealEstate> realEstate = staDAO.getAllRealEstateByCatID("dn");
+                   request.setAttribute("realEstate", realEstate);
+                    request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
+                }              
+            }else {
+                request.setAttribute("ERROR", "ERROR");
                 request.getRequestDispatcher("AdminController?action=detailStatisticalJSP").forward(request, response);
             }
-        }
+            
+            
+            
+        }  
     }
-
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, NamingException {
+    StatisticalDAO staDAO = new StatisticalDAO();
+    ArrayList<RealEstate> realEstates = staDAO.getAllRealEstateByCatID("no");
+    
+    // Print each RealEstate object in the list
+    for (RealEstate realEstate : realEstates) {
+        System.out.println("RealEstate ID: " + realEstate.getRealEstateID());
+        System.out.println("Account ID: " + realEstate.getAccID());
+        System.out.println("Category ID: " + realEstate.getCatID());
+        System.out.println("City ID: " + realEstate.getCityID());
+        System.out.println("RealEstate Name: " + realEstate.getRealEstateName());
+        System.out.println("Price First: " + realEstate.getPriceFirst());
+        System.out.println("Price Paid: " + realEstate.getPricePaid());
+        System.out.println("Area: " + realEstate.getArea());
+        System.out.println("Address: " + realEstate.getAddress());
+        System.out.println("Detail: " + realEstate.getDetail());
+        System.out.println("---------------------------------");
+    }
+}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -79,7 +133,15 @@ public class detailStatisticalServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(detailStatisticalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(detailStatisticalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(detailStatisticalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -93,7 +155,15 @@ public class detailStatisticalServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(detailStatisticalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(detailStatisticalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(detailStatisticalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

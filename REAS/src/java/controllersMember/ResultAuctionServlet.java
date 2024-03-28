@@ -5,10 +5,12 @@
  */
 package controllersMember;
 
+import dao.AccountDAO;
 import dao.AuctionDAO;
 import dao.AuctionHistoryDAO;
 import dao.AuctionWinningHistoryDAO;
 import dao.RealEstateDAO;
+import dto.Account;
 import dto.Auction;
 import dto.AuctionHistory;
 import dto.AuctionWinningHistory;
@@ -59,17 +61,24 @@ public class ResultAuctionServlet extends HttpServlet {
             ArrayList<RealEstate> REGETBYID = RealEstateDAO.getRealEstateByID(idreal);
             request.setAttribute("REGETBYID", REGETBYID);
 
-//            AuctionWinningHistoryDAO auctionwinning = new AuctionWinningHistoryDAO();
-//            List<AuctionWinningHistory> auctionwinningresult = auctionwinning.getAuctionWinning2();
-//            System.out.println(auctionwinningresult);
-//            
-//            AuctionHistoryDAO auctionhistory = new AuctionHistoryDAO();
-//            AuctionHistory  auctionhisresult = auctionhistory.getAuctionHistory(idreal);
-//            
-//            System.out.println(auctionhisresult);
-//            
-//            request.setAttribute("auctionwinningresult", auctionwinningresult);
-//            request.setAttribute("auctionhisresult", auctionhisresult);
+            AuctionWinningHistoryDAO auctionwinning = new AuctionWinningHistoryDAO();
+            List<Object> topPrices = auctionwinning.getPriceTop1();
+            String idmemwin = topPrices.get(1).toString(); // Convert Object to String
+            int priceLast = (int) topPrices.get(0);
+
+            AccountDAO accDao = new AccountDAO();
+            Account accountmember = accDao.getAccountByID(idmemwin);
+            ArrayList<Account> accountfull = accDao.getAllAccount();
+
+// Create a list or an array to hold the account member
+            List<Account> accountMembers = new ArrayList<>();
+            accountMembers.add(accountmember); // Add the retrieved account to the list
+
+            request.setAttribute("accountmember", accountMembers); // Set the list as an attribute
+            request.setAttribute("accountfull", accountfull); // Set the list as an attribute
+
+            request.setAttribute("priceLast", priceLast);
+
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching auctions");

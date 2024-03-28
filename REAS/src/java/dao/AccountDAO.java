@@ -548,6 +548,40 @@ public class AccountDAO {
         }
         return list;
     }
+    
+    public static ArrayList<Account> getAllAccount() throws ClassNotFoundException, SQLException {
+        ArrayList<Account> list = new ArrayList<>();
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            String sql = "SELECT [AccID],[RoleID],[UserName],[Password],[FullName],[Status], [Email], [Phone], [CCCD], [Address], [PlaceOfReg], [DateOfReg], [BankName],[BankCode]\n"
+                    + "FROM Account";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    String accID = rs.getString("AccID");
+                    String roleID = rs.getString("RoleID");
+                    String userName = rs.getString("UserName");
+                    String password = rs.getString("Password");
+                    String fullname = rs.getString("FullName");
+                    boolean status = rs.getBoolean("Status");
+                    String email = rs.getString("Email");
+                    String phone = rs.getString("Phone");
+                    String cccd = rs.getString("CCCD");
+                    String address = rs.getString("Address");
+                    String placeOfReg = rs.getString("PlaceOfReg");
+                    String dateOfReg = rs.getString("DateOfReg");
+                    String bankName = rs.getString("BankName");
+                    String bankCode = rs.getString("BankCode");
+
+                    Account a = new Account(accID, roleID, userName, password, fullname, status, email, phone, cccd, address, placeOfReg, dateOfReg, bankName, bankCode);
+                    list.add(a);
+                }
+            }
+            cn.close();
+        }
+        return list;
+    }
 
     public static ArrayList<Account> getAllAccountByName(String roleid, String name) throws ClassNotFoundException, SQLException {
         ArrayList<Account> list = new ArrayList<>();

@@ -1,17 +1,15 @@
 <%-- 
-    Document   : staff_detailRealEstate
-    Created on : Mar 12, 2024, 11:13:52 AM
+    Document   : cus_detailRealEstate_DaBan
+    Created on : Mar 28, 2024, 8:41:16 PM
     Author     : ADMIN
 --%>
-
 <%@page import="dto.Wallet"%>
 <%@page import="dao.WalletDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="java.util.List" %>
 <%@ page import="dto.RealEstateInfo" %>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,6 +18,16 @@
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
+        <script>
+            // Hàm hiển thị cửa sổ thông báo
+            function showErrorMessage(message) {
+                alert(message);
+            }
+            // Hiển thị thông báo nếu có
+            <c:if test="${not empty requestScope.Purchase_Request}">
+            showErrorMessage("${requestScope.Purchase_Request}");
+            </c:if>
+        </script>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -317,7 +325,7 @@
             <c:set var="listRealEstate" value="${requestScope.SEARCH_RESULT}"/>
             <form id="searchForm" class="flex-center" action="MainController" method="post">
                 <input type="hidden" name="realEstateID" value="${realEstate.realEstateID}" />
-                <input type="hidden" value="cusSearchMuaNgayList" name="action" />   
+                <input type="hidden" value="cusSearchDaBanList" name="action" />   
             </form>
 
             <div style="text-align: center; border-radius: 45px;">
@@ -460,3 +468,4 @@
       
     </body>
 </html>
+
