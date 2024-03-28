@@ -405,31 +405,31 @@
                     </button>   
 
                 </form>
-                    <table style="margin-left: 35px; color: white">
+                    <table style="border-collapse: collapse; border: 6px solid #D9AB73;background-color: black; color: white; margin: auto;width: 90%">
                         <tr>
-                            <th>Real Estate ID</th>
-                            <th>Acc ID</th>
-                            <th>Cat ID</th>
-                            <th>City ID</th>
-                            <th>Real Estate Name</th>
-                            <th>Price First</th>
-                            <th>Price Paid</th>
-                            <th>Area</th>
-                            <th>Address</th>
-                            <th>Detail</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate ID</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Acc ID</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Cat ID</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">City ID</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Real Estate Name</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price First</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Price Paid</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Area</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Address</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Detail</th>
                         </tr>
                         <c:forEach var="realEstate" items="${realEstate}">
                             <tr>
-                                <td>${realEstate.realEstateID}</td>
-                                <td>${realEstate.accID}</td>
-                                <td>${realEstate.catID}</td>
-                                <td>${realEstate.cityID}</td>
-                                <td>${realEstate.realEstateName}</td>
-                                <td>${realEstate.priceFirst}</td>
-                                <td>${realEstate.pricePaid}</td>
-                                <td>${realEstate.area}</td>
-                                <td>${realEstate.address}</td>
-                                <td>${realEstate.detail}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.realEstateID}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.accID}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.catID}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.cityID}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.realEstateName}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.priceFirst}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.pricePaid}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.area}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.address}</td>
+                                <td style="border: 1px solid #D9AB73; padding: 8px;">${realEstate.detail}</td>
                             </tr>
                         </c:forEach>
                     </table>            
