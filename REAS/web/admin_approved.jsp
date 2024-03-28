@@ -242,8 +242,8 @@
                                 <li>
                                     <a class="navbar-item">
                                         <form action="AdminController" method="post">
-                                            <button type="submit" value="aboutus" name="action">
-                                                <span>Tổng doanh thu</span>
+                                            <button type="submit" value="revenue" name="action">
+                                                <span>Xem chi tiết</span>
                                             </button>
                                         </form>
                                     </a>
