@@ -207,7 +207,7 @@ public class AuctionDepositHistoryDAO {
                 while (rs.next()) {
                     AuctionDepositHistory adh = new AuctionDepositHistory();
                     String walletID = rs.getString("WalletID");
-                    long quantity = rs.getLong("Quantity");
+                    int quantity = rs.getInt("Quantity");
                     Timestamp time = rs.getTimestamp("DateAndTime");
                     LocalDateTime DateAndTime = time.toLocalDateTime();
                     adh.setWalletID(walletID);
@@ -242,7 +242,7 @@ public class AuctionDepositHistoryDAO {
                 while (rs.next()) {
                     AuctionDepositHistory adh = new AuctionDepositHistory();
                     String walletID = rs.getString("WalletID");
-                    long quantity = rs.getLong("TotalQuantity");
+                    int quantity = rs.getInt("TotalQuantity");
                     
                     adh.setWalletID(walletID);
                     
