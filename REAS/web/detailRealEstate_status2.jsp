@@ -478,8 +478,7 @@
                 document.getElementById('purchaseForm').action = 'MainController';
                 // Gửi biểu mẫu
                 document.getElementById('purchaseForm').submit();
-                // Thay đổi văn bản của nút
-                event.target.innerText = "Đã yêu cầu";
+                
                 event.target.disabled = true; // Vô hiệu hóa nút sau khi nhấn
             }
         </script>

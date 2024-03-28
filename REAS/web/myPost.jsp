@@ -199,7 +199,8 @@
                             <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Tên</th>                             
                             <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Ngày đăng</th>
                             <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Trạng thái</th>
-                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Mua Ngay</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Danh sách Mua Ngay</th>
+                            <th style="border: 1px solid #D9AB73; padding: 8px; color: #D9AB73">Danh sách Đã Bán</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -209,12 +210,25 @@
                                 <td class="endTimeNews" style="border: 1px solid #D9AB73; padding: 8px;">${r.timeUp}</td>
                                 <c:forEach var="s" items="${requestScope.listStatus}"> 
                                     <c:if test="${s.statusID eq r.statusID}">
-
                                         <td style="border: 1px solid #D9AB73; padding: 8px;">${s.statusName}</td>
                                     </c:if>
                                 </c:forEach>
                                 <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                <a href="MainController?action=cusViewMuaNgayList&id=${r.realEstateID}">Xem danh sách
+                                    <c:choose>
+                                        <c:when test="${r.statusID == 6}">
+                                        <td style="border: 1px solid #fff; padding: 8px;">
+                                            <!-- Thực hiện hành động tương ứng khi status là 6 -->
+                                            <a href="MainController?action=cusViewMuaNgayListV2&id=${r.realEstateID}">View
+                                        </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td style="border: 1px solid #fff; padding: 8px; text-align: center;">
+                                            <!-- Thực hiện hành động tương ứng khi status không phải là 6 -->
+                                            <a href="MainController?action=cusViewMuaNgayList&id=${r.realEstateID}">View
+
+                                        </td>
+                                    </c:otherwise>
+                                    </c:choose>
                                 </td>
 
                             </tr>

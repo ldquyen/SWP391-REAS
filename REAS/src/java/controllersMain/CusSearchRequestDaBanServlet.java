@@ -36,8 +36,8 @@ import model.RealEstateVM;
  *
  * @author ADMIN
  */
-@WebServlet(name = "CusSearchRequestMuaNgayServlet", urlPatterns = {"/CusSearchRequestMuaNgayServlet"})
-public class CusSearchRequestMuaNgayServlet extends HttpServlet {
+@WebServlet(name = "CusSearchRequestDaBanServlet", urlPatterns = {"/CusSearchRequestDaBanServlet"})
+public class CusSearchRequestDaBanServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -66,14 +66,14 @@ public class CusSearchRequestMuaNgayServlet extends HttpServlet {
                 PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
 
                 if (searchValue == null || searchValue.trim().isEmpty()) {
-                    List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(2);
+                    List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(6);
                     request.setAttribute("SEARCH_RESULT", listRealEstate);
 
                     List<PurchaseRequest> listRequestMuaNgay = dao1.getAllPurchaseRequests(realEstateId);
                     request.setAttribute("LIST_REQUEST", listRequestMuaNgay);
 
                 } else {
-                    List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(2);
+                    List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(6);
                     request.setAttribute("SEARCH_RESULT", listRealEstate);
 
                     List<PurchaseRequest> listRequestMuaNgay = dao1.getAllPurchaseRequests(realEstateId);
@@ -93,7 +93,7 @@ public class CusSearchRequestMuaNgayServlet extends HttpServlet {
                     request.setAttribute("city", city);
                     request.setAttribute("listimg", listIMG);
 
-                    url = "cus_detailRealEstate_MuaNgay.jsp";
+                    url = "cus_detailRealEstate_DaBan.jsp";
                 } else {
                     System.out.println("RealEstateDetailServlet null exception");
                 }
@@ -121,9 +121,9 @@ public class CusSearchRequestMuaNgayServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CusSearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CusSearchRequestDaBanServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(CusSearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CusSearchRequestDaBanServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -141,9 +141,9 @@ public class CusSearchRequestMuaNgayServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CusSearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CusSearchRequestDaBanServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
-            Logger.getLogger(CusSearchRequestMuaNgayServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CusSearchRequestDaBanServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

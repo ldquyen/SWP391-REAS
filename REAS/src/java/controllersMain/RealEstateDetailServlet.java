@@ -38,9 +38,8 @@ public class RealEstateDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-
+        String url = "";
         try {
-            String url = "";
             String realEstateId = request.getParameter("id");
 
             if (realEstateId != null) {
@@ -136,7 +135,7 @@ public class RealEstateDetailServlet extends HttpServlet {
 
                         //===
                         RealEstateDAO dao = new RealEstateDAO();
-                        List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
+                        List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(2);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
 
                         HttpSession session = request.getSession(false);
@@ -157,7 +156,7 @@ public class RealEstateDetailServlet extends HttpServlet {
 
                         //===
                         RealEstateDAO dao = new RealEstateDAO();
-                        List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(1);
+                        List<RealEstateInfo> listRealEstate = dao.getAllRealEstate(2);
                         request.setAttribute("SEARCH_RESULT", listRealEstate);
 
                         HttpSession session = request.getSession(false);
@@ -176,9 +175,10 @@ public class RealEstateDetailServlet extends HttpServlet {
             } else {
                 url = "home";
             }
-            request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllersMember;
+package controllersMain;
 
 import dao.PurchaseRequestDAO;
 import dao.RealEstateDAO;
 import dao.TransactionDAO;
+import dao.WalletDAO;
 import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,34 +53,42 @@ public class AcceptRequestMuaNgayServlet extends HttpServlet {
             pricePaidStr = pricePaidStr.replaceAll("[,.]", "");
             pricePaid = Long.parseLong(pricePaidStr);
         }
+        WalletDAO daoWallet = new WalletDAO();
+        long accountBalance = daoWallet.getAccountBalanceByAccID(accID_nguoiMua);
 
         try {
             HttpSession session = request.getSession(false);
             if (session != null && session.getAttribute("member") != null) {
-                Account account = (Account) session.getAttribute("member");
-                String accID_nguoiBan = account.getAccID();
-                
-                RealEstateDAO dao = new RealEstateDAO();
-                boolean result = dao.updateStatusID(realEstateID, 6);
+                if (accountBalance > (pricePaid + 5)) {
+                    Account account = (Account) session.getAttribute("member");
+                    String accID_nguoiBan = account.getAccID();
 
-                PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
-                boolean result1 = dao1.updateStatus2(accID_nguoiMua,realEstateID);
+                    RealEstateDAO dao = new RealEstateDAO();
+                    boolean result = dao.updateStatusID(realEstateID, 6);
 
-                TransactionDAO dao2 = new TransactionDAO();
-                boolean result2 = dao2.processTransaction(accID_nguoiMua, accID_nguoiBan, pricePaid);
-            
-                if (result && result1 && result2) {
-                    url = "MainController?action=cusViewMuaNgayListV2&id=" + realEstateID;
+                    PurchaseRequestDAO dao1 = new PurchaseRequestDAO();
+                    boolean result1 = dao1.updateStatus2(accID_nguoiMua, realEstateID);
+
+                    TransactionDAO dao2 = new TransactionDAO();
+                    boolean result2 = dao2.processTransaction(accID_nguoiMua, accID_nguoiBan, pricePaid);
+
+                    if (result && result1 && result2) {
+                        request.setAttribute("Purchase_Request", "Thành Công!!!");
+                        url = "MainController?action=cusViewMuaNgayListV2&id="+realEstateID;
+                        response.sendRedirect(url);
+                    } else {
+                        // Cập nhật không thành công, chuyển hướng đến trang lỗi
+                        url = "rule.jsp";
+                    }   
                 } else {
-                    // Cập nhật không thành công, chuyển hướng đến trang lỗi
-                    url = "rule.jsp";
+                    request.setAttribute("Not_Request", "Số dư không đủ để thực hiện thao tác!!!");
+                    // Lưu URL trước đó vào requestScope
+                    String previousUrl = request.getHeader("Referer");
+                    response.sendRedirect(previousUrl);
                 }
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            response.sendRedirect(url);
         }
     }
 

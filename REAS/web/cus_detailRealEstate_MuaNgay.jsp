@@ -20,6 +20,19 @@
         <link rel="icon" type="image/x-icon" href="image/logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="detailRealEstate.css" type="text/css" >
+        <script>
+            // Hàm hiển thị cửa sổ thông báo
+            function showErrorAlert(message) {
+                alert(message);
+            }
+        </script>
+
+        <c:if test="${not empty requestScope.Not_Request}">
+            <script>
+                // Gọi hàm hiển thị cửa sổ thông báo với thông điệp từ attribute "Not_Request"
+                showErrorAlert("${requestScope.Not_Request}");
+            </script>
+        </c:if>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -388,7 +401,7 @@
                                         ${dto.requestStatusName}
                                     </td>
                                     <td style="border: 1px solid #D9AB73; padding: 8px;">
-                                        <form id="purchaseForm" action="MemberController" method="post" onsubmit="return confirmSubmit()">
+                                        <form id="purchaseForm" action="MainController" method="post" onsubmit="return confirmSubmit()">
                                             <input type="hidden" name="realEstateID" value="${dto.realEstateID}">
                                             <input type="hidden" name="accID" value="${dto.accID}">
                                             <input type="hidden" name="pricePaid" value="${dto.pricePaid}">
@@ -507,16 +520,17 @@
             function confirmSubmit() {
                 // Hiển thị hộp thoại xác nhận và lưu kết quả vào biến confirmed
                 var confirmed = confirm("Bạn có xác nhận sẽ bán?");
-
                 // Nếu người dùng đã xác nhận
                 if (confirmed) {
                     // Thay đổi văn bản của nút
                     document.getElementById('submitButton').innerText = "Đã bán";
                     // Vô hiệu hóa nút sau khi nhấn
                     document.getElementById('submitButton').disabled = true;
+
                 }
                 // Trả về giá trị confirmed để xác định liệu form có nên gửi đi hay không
                 return confirmed;
+            }
         </script>
     </body>
 </html>
